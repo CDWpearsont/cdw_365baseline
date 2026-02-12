@@ -1,2 +1,2 @@
 # cdw_intunebaseline
-Set of baseline configuration for Intune
+Set of baseline configurations for Intune
