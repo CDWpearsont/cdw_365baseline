@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:48.3756008Z",
+  "CreationSource": null,
+  "Description": "",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "6e2eaa3b-2fb1-43bd-b2b5-d073a3f6a124",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:43:59.7934601Z",
+  "Name": "Win - CDW Baseline - ES - Local Group Membership - D - Local Administrators - v3.7",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 1,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": "Local user group membership",
+    "TemplateDisplayVersion": "Version 1",
+    "TemplateFamily": {},
+    "TemplateId": "22968f54-45fa-486c-848e-f8224aa69772_1"
+  },
+  "AdditionalProperties": {}
+}

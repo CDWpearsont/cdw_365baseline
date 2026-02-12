@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:59.1084423Z",
+  "CreationSource": null,
+  "Description": "",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "e1d6a26e-d687-4cc7-b5d0-70211dba25da",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:40:27.5682358Z",
+  "Name": "MacOS - CDW Baseline - Microsoft Edge - U - Updates - v1.0",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 3,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": null,
+    "TemplateDisplayVersion": null,
+    "TemplateFamily": {},
+    "TemplateId": ""
+  },
+  "AdditionalProperties": {}
+}

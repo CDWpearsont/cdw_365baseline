@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:49.0697695Z",
+  "CreationSource": null,
+  "Description": "",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "6e6eba5c-7abf-47e8-890b-915d6810e2de",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:44:00.4190904Z",
+  "Name": "Win - CDW Baseline - ES - Windows LAPS - D - LAPS Configuration - v3.1",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 5,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": "Local admin password solution (Windows LAPS)",
+    "TemplateDisplayVersion": "Version 1",
+    "TemplateFamily": {},
+    "TemplateId": "adc46e5a-f4aa-4ff6-aeff-4f27bc525796_1"
+  },
+  "AdditionalProperties": {}
+}

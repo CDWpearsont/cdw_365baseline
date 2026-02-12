@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:54.971882Z",
+  "CreationSource": null,
+  "Description": "",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "100bf3a6-914f-4a03-abf1-79566041f36b",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:44:06.1942912Z",
+  "Name": "Win - CDW Baseline - SC - Microsoft OneDrive - D - Configuration - v3.2",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 10,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": null,
+    "TemplateDisplayVersion": null,
+    "TemplateFamily": {},
+    "TemplateId": ""
+  },
+  "AdditionalProperties": {}
+}

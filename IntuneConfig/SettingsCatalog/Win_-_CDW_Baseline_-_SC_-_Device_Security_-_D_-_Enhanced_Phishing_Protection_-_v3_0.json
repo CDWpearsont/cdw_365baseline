@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:50.297848Z",
+  "CreationSource": null,
+  "Description": "",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "e7fc72c9-1a50-4a50-b1c9-7608ce5ebbe6",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:44:01.366587Z",
+  "Name": "Win - CDW Baseline - SC - Device Security - D - Enhanced Phishing Protection - v3.0",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 4,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": null,
+    "TemplateDisplayVersion": null,
+    "TemplateFamily": {},
+    "TemplateId": ""
+  },
+  "AdditionalProperties": {}
+}

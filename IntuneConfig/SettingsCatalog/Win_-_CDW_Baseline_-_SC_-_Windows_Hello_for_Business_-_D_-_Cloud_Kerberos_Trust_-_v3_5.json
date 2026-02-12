@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:55.9450017Z",
+  "CreationSource": null,
+  "Description": "NOTE: Requires setup of Cloud Kerberos Trust to function.\nhttps://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "cdfc99d7-34d8-4909-87cd-28960368751d",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:44:06.9039312Z",
+  "Name": "Win - CDW Baseline - SC - Windows Hello for Business - D - Cloud Kerberos Trust - v3.5",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 2,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": null,
+    "TemplateDisplayVersion": null,
+    "TemplateFamily": {},
+    "TemplateId": ""
+  },
+  "AdditionalProperties": {}
+}

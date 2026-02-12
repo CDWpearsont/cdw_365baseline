@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:56.0771036Z",
+  "CreationSource": null,
+  "Description": "",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "bfcf7ec1-4f0a-4918-890e-7a4c181464c5",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:44:07.0601896Z",
+  "Name": "Win - CDW Baseline - SC - Windows Update for Business - D - Delivery Optimisation - v3.0",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 12,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": null,
+    "TemplateDisplayVersion": null,
+    "TemplateFamily": {},
+    "TemplateId": ""
+  },
+  "AdditionalProperties": {}
+}

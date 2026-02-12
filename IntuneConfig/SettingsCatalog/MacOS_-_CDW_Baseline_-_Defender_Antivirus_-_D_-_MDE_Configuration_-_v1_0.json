@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:57.6902771Z",
+  "CreationSource": null,
+  "Description": "NOTE: This policy requires deployment of the Defender application and a valid Defender for Endpoint P1/P2 or Defender for Business license:\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/mac-install-with-intune",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "2321774a-e203-47fa-af46-03c467989c75",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:40:26.000724Z",
+  "Name": "MacOS - CDW Baseline - Defender Antivirus - D - MDE Configuration - v1.0",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 6,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": null,
+    "TemplateDisplayVersion": null,
+    "TemplateFamily": {},
+    "TemplateId": ""
+  },
+  "AdditionalProperties": {}
+}

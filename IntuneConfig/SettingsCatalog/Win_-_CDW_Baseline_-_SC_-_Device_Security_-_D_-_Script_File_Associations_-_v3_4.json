@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:51.2030032Z",
+  "CreationSource": null,
+  "Description": "WARNING: Deploying will break running any PowerShell scripts from Intune in the User context. Amend policy if this functionality is required.",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "f80a57d4-7fee-41ba-83f2-6375c361302d",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:44:02.5060572Z",
+  "Name": "Win - CDW Baseline - SC - Device Security - D - Script File Associations - v3.4",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 1,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": null,
+    "TemplateDisplayVersion": null,
+    "TemplateFamily": {},
+    "TemplateId": ""
+  },
+  "AdditionalProperties": {}
+}

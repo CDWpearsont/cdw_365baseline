@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:47.1273947Z",
+  "CreationSource": null,
+  "Description": "DO NOT ASSIGN THIS POLICY WITHOUT VALIDATING VIA AUDIT MODE FIRST!\nhttps://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-deployment-operationalize",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "fa125231-9732-4a35-8049-8308b7dea9c3",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:40:28.5774919Z",
+  "Name": "Win - CDW Baseline - ES - Attack Surface Reduction - D - ASR Rules (L2) - v3.7",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 2,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": "Attack Surface Reduction Rules",
+    "TemplateDisplayVersion": "Version 1",
+    "TemplateFamily": {},
+    "TemplateId": "e8c053d6-9f95-42b1-a7f1-ebfd71c67a4b_1"
+  },
+  "AdditionalProperties": {}
+}

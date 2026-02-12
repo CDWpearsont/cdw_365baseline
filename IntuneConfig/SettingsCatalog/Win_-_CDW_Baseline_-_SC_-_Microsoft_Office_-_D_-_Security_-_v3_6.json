@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:54.1901455Z",
+  "CreationSource": null,
+  "Description": "NOTE: These policies are only applicable to Microsoft 365 Apps for Enterprise (included with M365 E*/A*/F*), not Microsoft 365 Apps for Business (included with M365 Business Premium).",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "33f78e3d-49b6-4702-aa5a-ecc2fd5f6ab2",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:44:05.4133957Z",
+  "Name": "Win - CDW Baseline - SC - Microsoft Office - D - Security - v3.6",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 17,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": null,
+    "TemplateDisplayVersion": null,
+    "TemplateFamily": {},
+    "TemplateId": ""
+  },
+  "AdditionalProperties": {}
+}
