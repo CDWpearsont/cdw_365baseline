@@ -1,0 +1,197 @@
+name: CDW Intune Baseline Backup
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify PowerShell
+        shell: pwsh
+        run: |
+          $PSVersionTable.PSVersion
+
+      - name: Install Microsoft.Graph modules
+        shell: pwsh
+        run: |
+          Install-Module Microsoft.Graph.Authentication, Microsoft.Graph.DeviceManagement, Microsoft.Graph.Devices.CorporateManagement, Microsoft.Graph.Beta.DeviceManagement -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
+
+      - name: Export Intune Configurations to Repo (CDW Baseline only)
+        env:
+          CLIENT_ID:     ${{ secrets.CLIENT_ID }}
+          TENANT_ID:     ${{ secrets.TENANT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        shell: pwsh
+        run: |
+          try {
+            # ────────────────────────────────
+            # Authentication
+            # ────────────────────────────────
+            $body = @{
+                client_id     = $env:CLIENT_ID
+                scope         = "https://graph.microsoft.com/.default"
+                client_secret = $env:CLIENT_SECRET
+                grant_type    = "client_credentials"
+            }
+            $tokenResponse = Invoke-RestMethod -Method Post -Uri "https://login.microsoftonline.com/$env:TENANT_ID/oauth2/v2.0/token" -Body $body -ContentType "application/x-www-form-urlencoded" -ErrorAction Stop
+            $secureToken = ConvertTo-SecureString $tokenResponse.access_token -AsPlainText -Force
+
+            Connect-MgGraph -AccessToken $secureToken -NoWelcome -ErrorAction Stop
+            Write-Output "Connected. Scopes: $((Get-MgContext).Scopes -join ', ')"
+
+            $backupRoot = "./IntuneConfig"
+            if (-not (Test-Path $backupRoot)) {
+              New-Item -Path $backupRoot -ItemType Directory -Force | Out-Null
+            }
+
+            # Helper function to clean folder - remove files not matching current CDW Baseline policies
+            function Clean-FolderForCDW {
+              param (
+                [string]$FolderPath,
+                [string[]]$CurrentPolicyNames
+              )
+              if (-not (Test-Path $FolderPath)) { return }
+
+              $existingFiles = Get-ChildItem -Path $FolderPath -File -Filter "*.json"
+              foreach ($file in $existingFiles) {
+                $baseName = $file.BaseName
+                # Remove file if it doesn't match any current policy name
+                if ($CurrentPolicyNames -notcontains $baseName) {
+                  Write-Output "Removing obsolete policy file: $($file.Name)"
+                  Remove-Item $file.FullName -Force
+                }
+              }
+            }
+
+            # ────────────────────────────────────────────────
+            # Compliance Policies - only CDW Baseline
+            # ────────────────────────────────────────────────
+            try {
+              $compPath = "$backupRoot/CompliancePolicies"
+              New-Item -Path $compPath -ItemType Directory -Force | Out-Null
+
+              $allComp = Get-MgDeviceManagementDeviceCompliancePolicy -All
+              $cdwComp = $allComp | Where-Object { $_.DisplayName -like "*CDW Baseline*" }
+
+              # Export only matching
+              foreach ($policy in $cdwComp) {
+                $safeName = $policy.DisplayName -replace '[^a-zA-Z0-9-]', '_'
+                $policy | ConvertTo-Json -Depth 20 | Out-File "$compPath/$safeName.json" -Encoding UTF8
+              }
+
+              # Clean up obsolete files
+              Clean-FolderForCDW -FolderPath $compPath -CurrentPolicyNames ($cdwComp.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+
+              Write-Output "Exported $($cdwComp.Count) CDW Baseline compliance policies (kept only matching names)"
+            } catch {
+              Write-Error "Compliance export failed: $($_.Exception.Message)"
+            }
+
+            # ────────────────────────────────────────────────
+            # Device Configurations - only CDW Baseline
+            # ────────────────────────────────────────────────
+            try {
+              $configPath = "$backupRoot/DeviceConfigurations"
+              New-Item -Path $configPath -ItemType Directory -Force | Out-Null
+
+              $allConfigs = Get-MgDeviceManagementDeviceConfiguration -All
+              $cdwConfigs = $allConfigs | Where-Object { $_.DisplayName -like "*CDW Baseline*" }
+
+              foreach ($config in $cdwConfigs) {
+                $safeName = $config.DisplayName -replace '[^a-zA-Z0-9-]', '_'
+                $config | ConvertTo-Json -Depth 20 | Out-File "$configPath/$safeName.json" -Encoding UTF8
+              }
+
+              Clean-FolderForCDW -FolderPath $configPath -CurrentPolicyNames ($cdwConfigs.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+
+              Write-Output "Exported $($cdwConfigs.Count) CDW Baseline device configurations"
+            } catch {
+              Write-Error "Device Configurations export failed: $($_.Exception.Message)"
+            }
+
+            # ────────────────────────────────────────────────
+            # Endpoint Security + Settings Catalog - only CDW Baseline
+            # Both come from the same Graph API endpoint, so we fetch
+            # once and route each policy to the correct folder based
+            # on its TemplateReference.TemplateFamily value.
+            # ────────────────────────────────────────────────
+            try {
+              $esPath   = "$backupRoot/EndpointSecurity"
+              $scPath   = "$backupRoot/SettingsCatalog"
+              New-Item -Path $esPath -ItemType Directory -Force | Out-Null
+              New-Item -Path $scPath -ItemType Directory -Force | Out-Null
+
+              # Fetch all configurationPolicies once
+              $allBeta = Get-MgBetaDeviceManagementConfigurationPolicy -All -ErrorAction Stop
+
+              # Filter to CDW Baseline only
+              $cdwAll = $allBeta | Where-Object { $_.Name -like "*CDW Baseline*" }
+
+              # Endpoint Security families - extend this list if you add more ES policy types
+              $esFamilies = @(
+                'endpointSecurityAntivirus',
+                'endpointSecurityDiskEncryption',
+                'endpointSecurityFirewall',
+                'endpointSecurityEndpointDetectionAndResponse',
+                'endpointSecurityAttackSurfaceReduction',
+                'endpointSecurityAccountProtection',
+                'endpointSecurityApplicationControl'
+              )
+
+              $cdwES = $cdwAll | Where-Object { $esFamilies -contains $_.TemplateReference.TemplateFamily }
+              $cdwSC = $cdwAll | Where-Object { $esFamilies -notcontains $_.TemplateReference.TemplateFamily }
+
+              # Export Endpoint Security policies
+              foreach ($policy in $cdwES) {
+                $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
+                $policy | ConvertTo-Json -Depth 20 | Out-File "$esPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (EndpointSecurity): $($policy.Name)"
+              }
+              Clean-FolderForCDW -FolderPath $esPath -CurrentPolicyNames ($cdwES.Name | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+              Write-Output "Exported $($cdwES.Count) CDW Baseline endpoint security policies"
+
+              # Export Settings Catalog policies (includes Office Updates, etc.)
+              foreach ($policy in $cdwSC) {
+                $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
+                $policy | ConvertTo-Json -Depth 20 | Out-File "$scPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (SettingsCatalog): $($policy.Name)"
+              }
+              Clean-FolderForCDW -FolderPath $scPath -CurrentPolicyNames ($cdwSC.Name | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+              Write-Output "Exported $($cdwSC.Count) CDW Baseline settings catalog policies"
+
+            } catch {
+              Write-Error "Endpoint Security / Settings Catalog export failed: $($_.Exception.Message)"
+            }
+
+            # ────────────────────────────────────────────────
+            # Git commit & push
+            # ────────────────────────────────────────────────
+            git config --global user.name "Intune Backup Bot"
+            git config --global user.email "actions@github.com"
+
+            git add "$backupRoot/"
+            $commitMsg = "Automated CDW Baseline export - $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+            if (git diff --cached --quiet) {
+              Write-Output "No changes to commit"
+            } else {
+              git commit -m "$commitMsg"
+              git push origin HEAD
+              Write-Output "Committed and pushed changes (only CDW Baseline policies kept)"
+            }
+          }
+          catch {
+            Write-Error "Fatal error: $($_.Exception.Message)"
+            exit 1
+          }
