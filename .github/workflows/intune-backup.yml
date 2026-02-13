@@ -57,7 +57,8 @@ jobs:
             }
 
             # ────────────────────────────────────────────────
-            # Function: Remove tenant-specific / read-only fields
+            # Helper: remove tenant-specific / read-only fields
+            # (used for Compliance + Device Config)
             # ────────────────────────────────────────────────
             function Remove-TenantSpecificFields {
               param([object]$Policy)
@@ -71,7 +72,8 @@ jobs:
                 "assignments",
                 "@odata.context",
                 "@odata.type",
-                "supportsScopeTags"
+                "supportsScopeTags",
+                "isAssigned"
               )
 
               foreach ($field in $fieldsToRemove) {
@@ -83,7 +85,7 @@ jobs:
               return $Policy
             }
 
-            # Helper function to clean folder - remove files not matching current CDW Baseline policies
+            # Helper: clean folder of obsolete JSON files
             function Clean-FolderForCDW {
               param (
                 [string]$FolderPath,
@@ -102,7 +104,7 @@ jobs:
             }
 
             # ────────────────────────────────────────────────
-            # Compliance Policies
+            # Compliance Policies (v1.0) – cleaned, but schema‑compatible
             # ────────────────────────────────────────────────
             try {
               $compPath = "$backupRoot/CompliancePolicies"
@@ -125,7 +127,7 @@ jobs:
             }
 
             # ────────────────────────────────────────────────
-            # Device Configurations
+            # Device Configurations (v1.0) – cleaned
             # ────────────────────────────────────────────────
             try {
               $configPath = "$backupRoot/DeviceConfigurations"
@@ -149,6 +151,7 @@ jobs:
 
             # ────────────────────────────────────────────────
             # Endpoint Security + Settings Catalog
+            # Exported as Graph create‑ready payloads
             # ────────────────────────────────────────────────
             try {
               $esPath = "$backupRoot/EndpointSecurity"
@@ -172,21 +175,55 @@ jobs:
               $cdwES = $cdwAll | Where-Object { $esFamilies -contains $_.TemplateReference.TemplateFamily }
               $cdwSC = $cdwAll | Where-Object { $esFamilies -notcontains $_.TemplateReference.TemplateFamily }
 
+              # Endpoint Security – build minimal create payload
               foreach ($policy in $cdwES) {
                 $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
-                $clean = Remove-TenantSpecificFields -Policy $policy
-                $clean | ConvertTo-Json -Depth 20 | Out-File "$esPath/$safeName.json" -Encoding UTF8
+
+                # Fetch settings for this policy
+                $settings = Get-MgBetaDeviceManagementConfigurationPolicySetting -DeviceManagementConfigurationPolicyId $policy.Id -All
+
+                $platforms    = $policy.Platforms.ToString()
+                $technologies = $policy.Technologies.ToString()
+
+                $exportObject = [ordered]@{
+                  name        = $policy.Name
+                  description = $policy.Description
+                  platforms   = $platforms
+                  technologies = $technologies
+                  templateReference = @{
+                    templateId = $policy.TemplateReference.TemplateId
+                  }
+                  settings    = $settings
+                }
+
+                $exportObject | ConvertTo-Json -Depth 20 | Out-File "$esPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (EndpointSecurity create payload): $($policy.Name)"
               }
               Clean-FolderForCDW -FolderPath $esPath -CurrentPolicyNames ($cdwES.Name | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
 
+              # Settings Catalog – build minimal create payload
               foreach ($policy in $cdwSC) {
                 $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
-                $clean = Remove-TenantSpecificFields -Policy $policy
-                $clean | ConvertTo-Json -Depth 20 | Out-File "$scPath/$safeName.json" -Encoding UTF8
+
+                $settings = Get-MgBetaDeviceManagementConfigurationPolicySetting -DeviceManagementConfigurationPolicyId $policy.Id -All
+
+                $platforms    = $policy.Platforms.ToString()
+                $technologies = $policy.Technologies.ToString()
+
+                $exportObject = [ordered]@{
+                  name        = $policy.Name
+                  description = $policy.Description
+                  platforms   = $platforms
+                  technologies = $technologies
+                  settings    = $settings
+                }
+
+                $exportObject | ConvertTo-Json -Depth 20 | Out-File "$scPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (SettingsCatalog create payload): $($policy.Name)"
               }
               Clean-FolderForCDW -FolderPath $scPath -CurrentPolicyNames ($cdwSC.Name | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
 
-              Write-Output "Exported $($cdwES.Count) Endpoint Security and $($cdwSC.Count) Settings Catalog policies"
+              Write-Output "Exported $($cdwES.Count) Endpoint Security and $($cdwSC.Count) Settings Catalog policies as create-ready JSON"
             } catch {
               Write-Error "Endpoint Security / Settings Catalog export failed: $($_.Exception.Message)"
             }
