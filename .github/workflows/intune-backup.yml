@@ -1,4 +1,4 @@
-name: CDW Intune Baseline Backup
+name: CDW 365 Baseline Backup
 
 on:
   schedule:
