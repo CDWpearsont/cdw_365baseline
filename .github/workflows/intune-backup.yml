@@ -104,7 +104,39 @@ jobs:
             }
 
             # ────────────────────────────────────────────────
-            # Compliance Policies (v1.0) – cleaned, but schema‑compatible
+            # Settings Transformer (SC + ES)
+            # ────────────────────────────────────────────────
+            function Convert-ToCreateSetting {
+                param([object]$setting)
+
+                $instance = $setting.SettingInstance
+
+                # Extract @odata.type
+                $odataType = $instance.AdditionalProperties.'@odata.type'
+
+                $createInstance = [ordered]@{
+                    "@odata.type"        = $odataType
+                    settingDefinitionId  = $instance.SettingDefinitionId
+                }
+
+                # Map value types
+                if ($instance.choiceSettingValue) {
+                    $createInstance.choiceSettingValue = $instance.choiceSettingValue
+                }
+                elseif ($instance.simpleSettingValue) {
+                    $createInstance.simpleSettingValue = $instance.simpleSettingValue
+                }
+                elseif ($instance.collectionSettingValue) {
+                    $createInstance.collectionSettingValue = $instance.collectionSettingValue
+                }
+
+                return @{
+                    settingInstance = $createInstance
+                }
+            }
+
+            # ────────────────────────────────────────────────
+            # Compliance Policies (v1.0)
             # ────────────────────────────────────────────────
             try {
               $compPath = "$backupRoot/CompliancePolicies"
@@ -127,7 +159,7 @@ jobs:
             }
 
             # ────────────────────────────────────────────────
-            # Device Configurations (v1.0) – cleaned
+            # Device Configurations (v1.0)
             # ────────────────────────────────────────────────
             try {
               $configPath = "$backupRoot/DeviceConfigurations"
@@ -151,7 +183,7 @@ jobs:
 
             # ────────────────────────────────────────────────
             # Endpoint Security + Settings Catalog
-            # Exported as Graph create‑ready payloads
+            # Create‑ready JSON
             # ────────────────────────────────────────────────
             try {
               $esPath = "$backupRoot/EndpointSecurity"
@@ -175,25 +207,26 @@ jobs:
               $cdwES = $cdwAll | Where-Object { $esFamilies -contains $_.TemplateReference.TemplateFamily }
               $cdwSC = $cdwAll | Where-Object { $esFamilies -notcontains $_.TemplateReference.TemplateFamily }
 
-              # Endpoint Security – build minimal create payload
+              # Endpoint Security
               foreach ($policy in $cdwES) {
                 $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
 
-                # Fetch settings for this policy
                 $settings = Get-MgBetaDeviceManagementConfigurationPolicySetting -DeviceManagementConfigurationPolicyId $policy.Id -All
 
-                $platforms    = $policy.Platforms.ToString()
-                $technologies = $policy.Technologies.ToString()
+                $convertedSettings = @()
+                foreach ($s in $settings) {
+                    $convertedSettings += Convert-ToCreateSetting -setting $s
+                }
 
                 $exportObject = [ordered]@{
                   name        = $policy.Name
                   description = $policy.Description
-                  platforms   = $platforms
-                  technologies = $technologies
+                  platforms   = $policy.Platforms.ToString()
+                  technologies = $policy.Technologies.ToString()
                   templateReference = @{
                     templateId = $policy.TemplateReference.TemplateId
                   }
-                  settings    = $settings
+                  settings    = $convertedSettings
                 }
 
                 $exportObject | ConvertTo-Json -Depth 20 | Out-File "$esPath/$safeName.json" -Encoding UTF8
@@ -201,21 +234,23 @@ jobs:
               }
               Clean-FolderForCDW -FolderPath $esPath -CurrentPolicyNames ($cdwES.Name | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
 
-              # Settings Catalog – build minimal create payload
+              # Settings Catalog
               foreach ($policy in $cdwSC) {
                 $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
 
                 $settings = Get-MgBetaDeviceManagementConfigurationPolicySetting -DeviceManagementConfigurationPolicyId $policy.Id -All
 
-                $platforms    = $policy.Platforms.ToString()
-                $technologies = $policy.Technologies.ToString()
+                $convertedSettings = @()
+                foreach ($s in $settings) {
+                    $convertedSettings += Convert-ToCreateSetting -setting $s
+                }
 
                 $exportObject = [ordered]@{
                   name        = $policy.Name
                   description = $policy.Description
-                  platforms   = $platforms
-                  technologies = $technologies
-                  settings    = $settings
+                  platforms   = $policy.Platforms.ToString()
+                  technologies = $policy.Technologies.ToString()
+                  settings    = $convertedSettings
                 }
 
                 $exportObject | ConvertTo-Json -Depth 20 | Out-File "$scPath/$safeName.json" -Encoding UTF8
