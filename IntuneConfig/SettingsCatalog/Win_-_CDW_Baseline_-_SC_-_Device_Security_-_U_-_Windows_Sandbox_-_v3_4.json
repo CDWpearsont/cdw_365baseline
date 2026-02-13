@@ -1,0 +1,74 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - U - Windows Sandbox - v3.4",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "Id": "0",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowssandbox_allowaudioinput",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "1",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowssandbox_allowclipboardredirection",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "2",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowssandbox_allownetworking",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "3",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowssandbox_allowprinterredirection",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "4",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowssandbox_allowvgpu",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "5",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowssandbox_allowvideoinput",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    }
+  ]
+}

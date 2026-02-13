@@ -1,0 +1,77 @@
+{
+  "name": "Win - CDW Baseline - ES - Windows Firewall - D - Firewall Configuration - v3.1",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm,microsoftSense",
+  "templateReference": {
+    "templateId": "6078910e-d808-4a9f-a51d-1b8a7bacb7c0_1"
+  },
+  "settings": [
+    {
+      "Id": "0",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditfilteringplatformconnection",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "be9453a7-6348-4112-a49e-ad029d5d3548"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "1",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditfilteringplatformpacketdrop",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "43f5366a-7e27-47a9-be51-d14189d02a17"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "2",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "vendor_msft_firewall_mdmstore_global_disablestatefulftp",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "38329af6-2670-4a71-972d-482010ca97fc"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "3",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_enablefirewall",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "7714c373-a19a-4b64-ba6d-2e9db04a7684"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "4",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_enablefirewall",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "1c14f914-69bb-49f8-af5b-e29173a6ee95"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "5",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_enablefirewall",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "e2714734-708e-4286-8ae9-d56821e306a3"
+        }
+      },
+      "AdditionalProperties": {}
+    }
+  ]
+}

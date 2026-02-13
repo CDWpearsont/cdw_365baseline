@@ -1,0 +1,74 @@
+{
+  "name": "Win - CDW Baseline - SC - Windows User Experience - D - Feature Configuration - v3.1",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "Id": "0",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_filesystem_enabledevdrive",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "1",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_experience_configurechaticon",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "2",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_search_allowcloudsearch",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "3",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_search_allowindexingencryptedstoresoritems",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "4",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_search_disableremovabledriveindexing",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "5",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_newsandinterests_allownewsandinterests",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    }
+  ]
+}

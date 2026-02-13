@@ -1,0 +1,41 @@
+{
+  "name": "MacOS - CDW Baseline - Microsoft OneDrive - D - Service and Access - v1.0",
+  "description": "",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "Id": "0",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "com.apple.servicemanagement_com.apple.servicemanagement",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "1",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "com.apple.tcc.configuration-profile-policy_com.apple.tcc.configuration-profile-policy",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "2",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "com.apple.system-extension-policy_com.apple.system-extension-policy",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    }
+  ]
+}

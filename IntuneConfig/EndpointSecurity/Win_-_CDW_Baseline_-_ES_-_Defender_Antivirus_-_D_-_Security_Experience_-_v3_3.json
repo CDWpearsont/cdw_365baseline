@@ -1,0 +1,55 @@
+{
+  "name": "Win - CDW Baseline - ES - Defender Antivirus - D - Security Experience - v3.3",
+  "description": "NOTE: The \"Tamper Protection\" setting requires an active Defender for Endpoint P1/P2 or Defender for Business license.\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection",
+  "platforms": "windows10",
+  "technologies": "mdm,microsoftSense",
+  "templateReference": {
+    "templateId": "d948ff9b-99cb-4ee0-8012-1fbc09685377_1"
+  },
+  "settings": [
+    {
+      "Id": "0",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "vendor_msft_defender_configuration_tamperprotection_options",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "5655cab2-7e6b-4c49-9ce2-3865da05f7e6"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "1",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disablefamilyui",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "afcadc31-118d-4a5f-8a70-9f214389aa11"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "2",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disableenhancednotifications",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "90d71ec1-eace-4cf1-a2da-023962fac6c5"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "3",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_hidewindowssecuritynotificationareacontrol",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "3a9dc836-5f32-4428-a04a-1bad526d3c7b"
+        }
+      },
+      "AdditionalProperties": {}
+    }
+  ]
+}

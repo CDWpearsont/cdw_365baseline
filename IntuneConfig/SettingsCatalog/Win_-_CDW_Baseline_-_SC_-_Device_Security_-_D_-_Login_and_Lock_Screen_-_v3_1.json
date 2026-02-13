@@ -1,0 +1,118 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - D - Login and Lock Screen - v3.1",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "Id": "0",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_abovelock_allowcortanaabovelock",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "1",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_abovelock_allowtoasts",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "2",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_devicelock_preventenablinglockscreencamera",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "3",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_devicelock_preventlockscreenslideshow",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "4",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowslogon_disablelockscreenappnotifications",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "5",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "6",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowslogon_configautomaticrestartsignon",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "7",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_windowslogon_allowautomaticrestartsignon",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "8",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_authentication_allowaadpasswordreset",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "9",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_policy_config_privacy_letappsactivatewithvoiceabovelock",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": null
+        }
+      },
+      "AdditionalProperties": {}
+    }
+  ]
+}

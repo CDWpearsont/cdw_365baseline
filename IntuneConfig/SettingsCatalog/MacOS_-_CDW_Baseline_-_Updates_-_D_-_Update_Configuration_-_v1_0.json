@@ -1,0 +1,17 @@
+{
+  "name": "MacOS - CDW Baseline - Updates - D - Update Configuration - v1.0",
+  "description": "",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": {
+    "Id": "0",
+    "SettingDefinitions": null,
+    "SettingInstance": {
+      "SettingDefinitionId": "com.apple.softwareupdate_com.apple.softwareupdate",
+      "SettingInstanceTemplateReference": {
+        "SettingInstanceTemplateId": null
+      }
+    },
+    "AdditionalProperties": {}
+  }
+}
