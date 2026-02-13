@@ -36,9 +36,9 @@ jobs:
         shell: pwsh
         run: |
           try {
-            # ────────────────────────────────
+            # ────────────────────────────────────────────────
             # Authentication
-            # ────────────────────────────────
+            # ────────────────────────────────────────────────
             $body = @{
                 client_id     = $env:CLIENT_ID
                 scope         = "https://graph.microsoft.com/.default"
@@ -56,6 +56,33 @@ jobs:
               New-Item -Path $backupRoot -ItemType Directory -Force | Out-Null
             }
 
+            # ────────────────────────────────────────────────
+            # Function: Remove tenant-specific / read-only fields
+            # ────────────────────────────────────────────────
+            function Remove-TenantSpecificFields {
+              param([object]$Policy)
+
+              $fieldsToRemove = @(
+                "id",
+                "createdDateTime",
+                "lastModifiedDateTime",
+                "version",
+                "roleScopeTagIds",
+                "assignments",
+                "@odata.context",
+                "@odata.type",
+                "supportsScopeTags"
+              )
+
+              foreach ($field in $fieldsToRemove) {
+                if ($Policy.PSObject.Properties.Name -contains $field) {
+                  $Policy.PSObject.Properties.Remove($field)
+                }
+              }
+
+              return $Policy
+            }
+
             # Helper function to clean folder - remove files not matching current CDW Baseline policies
             function Clean-FolderForCDW {
               param (
@@ -67,7 +94,6 @@ jobs:
               $existingFiles = Get-ChildItem -Path $FolderPath -File -Filter "*.json"
               foreach ($file in $existingFiles) {
                 $baseName = $file.BaseName
-                # Remove file if it doesn't match any current policy name
                 if ($CurrentPolicyNames -notcontains $baseName) {
                   Write-Output "Removing obsolete policy file: $($file.Name)"
                   Remove-Item $file.FullName -Force
@@ -76,7 +102,7 @@ jobs:
             }
 
             # ────────────────────────────────────────────────
-            # Compliance Policies - only CDW Baseline
+            # Compliance Policies
             # ────────────────────────────────────────────────
             try {
               $compPath = "$backupRoot/CompliancePolicies"
@@ -85,22 +111,21 @@ jobs:
               $allComp = Get-MgDeviceManagementDeviceCompliancePolicy -All
               $cdwComp = $allComp | Where-Object { $_.DisplayName -like "*CDW Baseline*" }
 
-              # Export only matching
               foreach ($policy in $cdwComp) {
                 $safeName = $policy.DisplayName -replace '[^a-zA-Z0-9-]', '_'
-                $policy | ConvertTo-Json -Depth 20 | Out-File "$compPath/$safeName.json" -Encoding UTF8
+                $clean = Remove-TenantSpecificFields -Policy $policy
+                $clean | ConvertTo-Json -Depth 20 | Out-File "$compPath/$safeName.json" -Encoding UTF8
               }
 
-              # Clean up obsolete files
               Clean-FolderForCDW -FolderPath $compPath -CurrentPolicyNames ($cdwComp.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
 
-              Write-Output "Exported $($cdwComp.Count) CDW Baseline compliance policies (kept only matching names)"
+              Write-Output "Exported $($cdwComp.Count) CDW Baseline compliance policies"
             } catch {
               Write-Error "Compliance export failed: $($_.Exception.Message)"
             }
 
             # ────────────────────────────────────────────────
-            # Device Configurations - only CDW Baseline
+            # Device Configurations
             # ────────────────────────────────────────────────
             try {
               $configPath = "$backupRoot/DeviceConfigurations"
@@ -111,7 +136,8 @@ jobs:
 
               foreach ($config in $cdwConfigs) {
                 $safeName = $config.DisplayName -replace '[^a-zA-Z0-9-]', '_'
-                $config | ConvertTo-Json -Depth 20 | Out-File "$configPath/$safeName.json" -Encoding UTF8
+                $clean = Remove-TenantSpecificFields -Policy $config
+                $clean | ConvertTo-Json -Depth 20 | Out-File "$configPath/$safeName.json" -Encoding UTF8
               }
 
               Clean-FolderForCDW -FolderPath $configPath -CurrentPolicyNames ($cdwConfigs.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
@@ -122,24 +148,17 @@ jobs:
             }
 
             # ────────────────────────────────────────────────
-            # Endpoint Security + Settings Catalog - only CDW Baseline
-            # Both come from the same Graph API endpoint, so we fetch
-            # once and route each policy to the correct folder based
-            # on its TemplateReference.TemplateFamily value.
+            # Endpoint Security + Settings Catalog
             # ────────────────────────────────────────────────
             try {
-              $esPath   = "$backupRoot/EndpointSecurity"
-              $scPath   = "$backupRoot/SettingsCatalog"
+              $esPath = "$backupRoot/EndpointSecurity"
+              $scPath = "$backupRoot/SettingsCatalog"
               New-Item -Path $esPath -ItemType Directory -Force | Out-Null
               New-Item -Path $scPath -ItemType Directory -Force | Out-Null
 
-              # Fetch all configurationPolicies once
               $allBeta = Get-MgBetaDeviceManagementConfigurationPolicy -All -ErrorAction Stop
-
-              # Filter to CDW Baseline only
               $cdwAll = $allBeta | Where-Object { $_.Name -like "*CDW Baseline*" }
 
-              # Endpoint Security families - extend this list if you add more ES policy types
               $esFamilies = @(
                 'endpointSecurityAntivirus',
                 'endpointSecurityDiskEncryption',
@@ -153,24 +172,21 @@ jobs:
               $cdwES = $cdwAll | Where-Object { $esFamilies -contains $_.TemplateReference.TemplateFamily }
               $cdwSC = $cdwAll | Where-Object { $esFamilies -notcontains $_.TemplateReference.TemplateFamily }
 
-              # Export Endpoint Security policies
               foreach ($policy in $cdwES) {
                 $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
-                $policy | ConvertTo-Json -Depth 20 | Out-File "$esPath/$safeName.json" -Encoding UTF8
-                Write-Output "Exported (EndpointSecurity): $($policy.Name)"
+                $clean = Remove-TenantSpecificFields -Policy $policy
+                $clean | ConvertTo-Json -Depth 20 | Out-File "$esPath/$safeName.json" -Encoding UTF8
               }
               Clean-FolderForCDW -FolderPath $esPath -CurrentPolicyNames ($cdwES.Name | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
-              Write-Output "Exported $($cdwES.Count) CDW Baseline endpoint security policies"
 
-              # Export Settings Catalog policies (includes Office Updates, etc.)
               foreach ($policy in $cdwSC) {
                 $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
-                $policy | ConvertTo-Json -Depth 20 | Out-File "$scPath/$safeName.json" -Encoding UTF8
-                Write-Output "Exported (SettingsCatalog): $($policy.Name)"
+                $clean = Remove-TenantSpecificFields -Policy $policy
+                $clean | ConvertTo-Json -Depth 20 | Out-File "$scPath/$safeName.json" -Encoding UTF8
               }
               Clean-FolderForCDW -FolderPath $scPath -CurrentPolicyNames ($cdwSC.Name | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
-              Write-Output "Exported $($cdwSC.Count) CDW Baseline settings catalog policies"
 
+              Write-Output "Exported $($cdwES.Count) Endpoint Security and $($cdwSC.Count) Settings Catalog policies"
             } catch {
               Write-Error "Endpoint Security / Settings Catalog export failed: $($_.Exception.Message)"
             }
@@ -188,7 +204,7 @@ jobs:
             } else {
               git commit -m "$commitMsg"
               git push origin HEAD
-              Write-Output "Committed and pushed changes (only CDW Baseline policies kept)"
+              Write-Output "Committed and pushed changes"
             }
           }
           catch {
