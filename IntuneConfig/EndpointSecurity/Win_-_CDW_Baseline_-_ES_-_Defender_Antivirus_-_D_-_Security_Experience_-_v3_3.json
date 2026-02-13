@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:47.4216591Z",
+  "CreationSource": null,
+  "Description": "NOTE: The \"Tamper Protection\" setting requires an active Defender for Endpoint P1/P2 or Defender for Business license.\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "4cc1a738-6d17-43fc-bdc3-084ac3b7c25a",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:40:28.9001277Z",
+  "Name": "Win - CDW Baseline - ES - Defender Antivirus - D - Security Experience - v3.3",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 4,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": "Windows Security Experience",
+    "TemplateDisplayVersion": "Version 1",
+    "TemplateFamily": {},
+    "TemplateId": "d948ff9b-99cb-4ee0-8012-1fbc09685377_1"
+  },
+  "AdditionalProperties": {}
+}

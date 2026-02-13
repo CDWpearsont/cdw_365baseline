@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:48.7638601Z",
+  "CreationSource": null,
+  "Description": "",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "202b3968-da21-4917-a8b0-b92ff97ad8fb",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:44:00.1069849Z",
+  "Name": "Win - CDW Baseline - ES - Windows Hello for Business - D - WHfB Configuration - v3.2",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 2,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": "Account Protection",
+    "TemplateDisplayVersion": "Version 1",
+    "TemplateFamily": {},
+    "TemplateId": "fcef01f2-439d-4c3f-9184-823fd6e97646_1"
+  },
+  "AdditionalProperties": {}
+}

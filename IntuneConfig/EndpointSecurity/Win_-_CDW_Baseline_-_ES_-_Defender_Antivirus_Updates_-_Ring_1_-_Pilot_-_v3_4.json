@@ -1,0 +1,28 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:47.5805394Z",
+  "CreationSource": null,
+  "Description": "",
+  "DisableEntraGroupPolicyAssignment": null,
+  "Id": "9b943c28-9ca9-4819-8662-65b1690af325",
+  "IsAssigned": null,
+  "LastModifiedDateTime": "2026-02-12T12:40:29.0720148Z",
+  "Name": "Win - CDW Baseline - ES - Defender Antivirus Updates - Ring 1 - Pilot - v3.4",
+  "Platforms": {},
+  "PriorityMetaData": {
+    "Priority": null
+  },
+  "RoleScopeTagIds": [
+    "0"
+  ],
+  "SettingCount": 3,
+  "Settings": null,
+  "Technologies": {},
+  "TemplateReference": {
+    "TemplateDisplayName": "Defender Update controls",
+    "TemplateDisplayVersion": "Version 1",
+    "TemplateFamily": {},
+    "TemplateId": "e3f74c5a-a6de-411d-aef6-eb15628f3a0a_1"
+  },
+  "AdditionalProperties": {}
+}
