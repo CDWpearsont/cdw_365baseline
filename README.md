@@ -1,2 +1,2 @@
-# cdw_intunebaseline
-Set of baseline configurations for Intune
+# cdw_365baseline
+Set of baseline configurations for Microsoft 365
