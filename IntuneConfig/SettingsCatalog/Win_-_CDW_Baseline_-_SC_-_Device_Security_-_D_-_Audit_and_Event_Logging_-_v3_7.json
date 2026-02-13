@@ -1,0 +1,224 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - D - Audit and Event Logging - v3.7",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_auditsettings_includecmdline"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_eventlogservice_controleventlogbehavior"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_eventlogservice_specifymaximumfilesizeapplicationlog"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_eventlog_channel_log_retention_2"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_eventlogservice_specifymaximumfilesizesecuritylog"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_eventlog_channel_log_retention_3"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_eventlog_channel_logmaxsize_3"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_eventlog_channel_log_retention_4"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_eventlogservice_specifymaximumfilesizesystemlog"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogon_auditcredentialvalidation"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditaccountlockout"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditgroupmembership"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditlogoff"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditlogon"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountmanagement_auditapplicationgroupmanagement"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_policychange_auditauthenticationpolicychange"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_policychange_auditauthorizationpolicychange"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_policychange_auditpolicychange"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditfileshare"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditotherlogonlogoffevents"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountmanagement_auditsecuritygroupmanagement"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditsecuritysystemextension"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditspeciallogon"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountmanagement_audituseraccountmanagement"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_detailedtracking_auditpnpactivity"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_detailedtracking_auditprocesscreation"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditdetailedfileshare"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditotherobjectaccessevents"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditremovablestorage"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_policychange_auditmpssvcrulelevelpolicychange"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_policychange_auditotherpolicychangeevents"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditipsecdriver"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditothersystemevents"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditsecuritystatechange"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditsystemintegrity"
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "MacOS - CDW Baseline - Microsoft Edge - U - Profiles, Sign-In and Sync - v1.0",
+  "description": "",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_browsersignin"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_browseraddprofileenabled"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_forceephemeralprofiles"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_forcesync"
+      }
+    }
+  ]
+}

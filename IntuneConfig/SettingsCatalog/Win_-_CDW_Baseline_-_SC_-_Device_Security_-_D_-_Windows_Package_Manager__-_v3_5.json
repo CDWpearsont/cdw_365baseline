@@ -1,0 +1,38 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - D - Windows Package Manager  - v3.5",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_desktopappinstaller_enableexperimentalfeatures"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_desktopappinstaller_enablehashoverride"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_desktopappinstaller_enablelocalmanifestfiles"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_desktopappinstaller_enablemsappinstallerprotocol"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_desktopappinstaller_enablesettings"
+      }
+    }
+  ]
+}

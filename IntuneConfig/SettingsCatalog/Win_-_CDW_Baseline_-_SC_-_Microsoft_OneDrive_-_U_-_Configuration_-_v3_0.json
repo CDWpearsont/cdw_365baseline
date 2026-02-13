@@ -1,0 +1,32 @@
+{
+  "name": "Win - CDW Baseline - SC - Microsoft OneDrive - U - Configuration - v3.0",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_enableholdthefile"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablepersonalsync"
+      }
+    }
+  ]
+}

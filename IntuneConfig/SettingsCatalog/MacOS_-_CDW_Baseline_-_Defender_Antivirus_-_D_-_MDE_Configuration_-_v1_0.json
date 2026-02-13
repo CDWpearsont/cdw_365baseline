@@ -1,0 +1,44 @@
+{
+  "name": "MacOS - CDW Baseline - Defender Antivirus - D - MDE Configuration - v1.0",
+  "description": "NOTE: This policy requires deployment of the Defender application and a valid Defender for Endpoint P1/P2 or Defender for Business license:\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/mac-install-with-intune",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.servicemanagement_com.apple.servicemanagement"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_applicationssystem"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_com.apple.tcc.configuration-profile-policy"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.system-extension-policy_com.apple.system-extension-policy"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.notificationsettings_com.apple.notificationsettings"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.webcontent-filter_com.apple.webcontent-filter"
+      }
+    }
+  ]
+}

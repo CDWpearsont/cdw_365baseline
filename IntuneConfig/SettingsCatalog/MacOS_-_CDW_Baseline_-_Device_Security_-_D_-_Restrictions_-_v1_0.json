@@ -1,0 +1,20 @@
+{
+  "name": "MacOS - CDW Baseline - Device Security - D - Restrictions - v1.0",
+  "description": "",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.systempreferences_com.apple.systempreferences"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.applicationaccess_com.apple.applicationaccess"
+      }
+    }
+  ]
+}

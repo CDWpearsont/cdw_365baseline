@@ -1,0 +1,38 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - U - Windows Spotlight and Org Messages - v3.0",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowspotlightcollection"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlight"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlightonsettings"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_experience_disablecloudoptimizedcontent"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_experience_enableorganizationalmessages"
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - D - Windows Subsystem for Linux - v3.2",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_customkernelusersettingconfigurable"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_customnetworkingusersettingconfigurable"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_customsystemdistrousersettingconfigurable"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_customkernelcommandlineusersettingconfigurable"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_kerneldebugusersettingconfigurable"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_nestedvirtualizationusersettingconfigurable"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_allowdebugshell"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_allowinboxwsl"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_firewallusersettingconfigurable"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_allowwsl1"
+      }
+    }
+  ]
+}

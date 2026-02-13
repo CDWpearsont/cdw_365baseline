@@ -1,0 +1,80 @@
+{
+  "name": "MacOS - CDW Baseline - Microsoft AutoUpdate - D - MAU Configuration - v1.0",
+  "description": "",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.servicemanagement_com.apple.servicemanagement"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_acknowledgeddatacollectionpolicy"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_updatedeadline.daysbeforeforcedquit"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_manifestserver"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_disableinsidercheckbox"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_howtocheck"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_enablecheckforupdatesbutton"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_guardagainstappmodification"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_startdaemononapplaunch"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_updatecache"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_channelname"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_updateroptimization"
+      }
+    }
+  ]
+}

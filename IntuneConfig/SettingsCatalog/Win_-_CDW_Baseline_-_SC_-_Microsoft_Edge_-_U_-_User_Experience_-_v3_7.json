@@ -1,0 +1,80 @@
+{
+  "name": "Win - CDW Baseline - SC - Microsoft Edge - U - User Experience - v3.7",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev99~policy~microsoft_edge_allowgamesmenu"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev107~policy~microsoft_edge~edgeworkspaces_edgeworkspacesenabled"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev117~policy~microsoft_edge~edgegames_gamermodeenabled"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev111~policy~microsoft_edge_newpdfreaderenabled"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev87~policy~microsoft_edge_edgeshoppingassistantenabled"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev88~policy~microsoft_edge_showmicrosoftrewards"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev111~policy~microsoft_edge_showacrobatsubscriptionbutton"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev88~policy~microsoft_edge_recommended~performance_recommended_startupboostenabled_recommended"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev88~policy~microsoft_edge_recommended~sleepingtabs_recommended_sleepingtabsenabled_recommended"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_restoreonstartup_recommended"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev79diff~policy~microsoft_edge_recommended~startup_recommended_newtabpagemanagedquicklinks_recommended"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_showhomebutton_recommended"
+      }
+    }
+  ]
+}

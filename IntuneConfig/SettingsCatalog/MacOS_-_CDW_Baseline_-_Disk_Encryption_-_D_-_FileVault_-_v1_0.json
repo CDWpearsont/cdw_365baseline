@@ -1,0 +1,26 @@
+{
+  "name": "MacOS - CDW Baseline - Disk Encryption - D - FileVault - v1.0",
+  "description": "",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.mcx.filevault2_com.apple.mcx.filevault2"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.mcx_com.apple.mcx-fdefilevaultoptions"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.security.fderecoverykeyescrow_com.apple.security.fderecoverykeyescrow"
+      }
+    }
+  ]
+}

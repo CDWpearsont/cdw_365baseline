@@ -1,0 +1,122 @@
+{
+  "name": "MacOS - CDW Baseline - Defender Antivirus - D - Antivirus Configuration - v1.0",
+  "description": "NOTE: This policy requires deployment of the Defender application and a valid Defender for Endpoint P1/P2 or Defender for Business license:\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/mac-install-with-intune",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_disallowedthreatactions"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_enforcementlevel_antivirusengine"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_exclusionsmergepolicy"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_scanafterdefinitionupdate"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_scanarchives"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_threattypesettings"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_threattypesettingsmergepolicy"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_automaticdefinitionupdateenabled"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_cloudblocklevel"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_diagnosticlevel"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_automaticsamplesubmission"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_enabled"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_earlypreview"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_systemextensions"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_enforcementlevel"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_enforcementlevel_tamperprotection"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_exclusions_tamperprotection"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_consumerexperience"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_hidestatusmenuicon"
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Win - CDW Baseline - ES - Windows Firewall - D - Firewall Configuration - v3.1",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm,microsoftSense",
+  "templateReference": {
+    "templateId": "6078910e-d808-4a9f-a51d-1b8a7bacb7c0_1"
+  },
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditfilteringplatformconnection"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditfilteringplatformpacketdrop"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "vendor_msft_firewall_mdmstore_global_disablestatefulftp"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_enablefirewall"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_enablefirewall"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_enablefirewall"
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "name": "Win - CDW Baseline - ES - Encryption - D - BitLocker (OS Disk) - v3.7",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "templateReference": {
+    "templateId": "46ddfc50-d10f-4867-b852-9434254b3bff_1"
+  },
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesencryptiontype"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesrequirestartupauthentication"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesdisallowstandarduserscanchangepin"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesrecoveryoptions"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_bitlocker_encryptionmethodbydrivetype"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_bitlocker_requiredeviceencryption"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_bitlocker_allowwarningforotherdiskencryption"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_bitlocker_configurerecoverypasswordrotation"
+      }
+    }
+  ]
+}

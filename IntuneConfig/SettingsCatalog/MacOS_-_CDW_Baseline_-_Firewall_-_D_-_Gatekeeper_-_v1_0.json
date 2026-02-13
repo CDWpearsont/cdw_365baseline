@@ -1,0 +1,20 @@
+{
+  "name": "MacOS - CDW Baseline - Firewall - D - Gatekeeper - v1.0",
+  "description": "",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.security.firewall_com.apple.security.firewall"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.systempolicy.control_com.apple.systempolicy.control"
+      }
+    }
+  ]
+}

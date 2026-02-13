@@ -1,0 +1,23 @@
+{
+  "name": "Win - CDW Baseline - ES - Windows Hello for Business - D - WHfB Configuration - v3.2",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "templateReference": {
+    "templateId": "fcef01f2-439d-4c3f-9184-823fd6e97646_1"
+  },
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_passportforwork_biometrics_facialfeaturesuseenhancedantispoofing"
+      }
+    }
+  ]
+}

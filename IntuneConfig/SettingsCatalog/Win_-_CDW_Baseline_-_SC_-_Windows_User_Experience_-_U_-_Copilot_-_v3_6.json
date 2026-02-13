@@ -1,0 +1,14 @@
+{
+  "name": "Win - CDW Baseline - SC - Windows User Experience - U - Copilot - v3.6",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot"
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "Win - CDW Baseline - ES - Windows LAPS - D - LAPS Configuration - v3.1",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "templateReference": {
+    "templateId": "adc46e5a-f4aa-4ff6-aeff-4f27bc525796_1"
+  },
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_backupdirectory"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_passwordcomplexity"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_passwordlength"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationactions"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationresetdelay"
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Win - CDW Baseline - ES - Attack Surface Reduction - D - ASR Rules (L2) - v3.7",
+  "description": "DO NOT ASSIGN THIS POLICY WITHOUT VALIDATING VIA AUDIT MODE FIRST!\nhttps://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-deployment-operationalize",
+  "platforms": "windows10",
+  "technologies": "mdm,microsoftSense",
+  "templateReference": {
+    "templateId": "e8c053d6-9f95-42b1-a7f1-ebfd71c67a4b_1"
+  },
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_enablecontrolledfolderaccess"
+      }
+    }
+  ]
+}

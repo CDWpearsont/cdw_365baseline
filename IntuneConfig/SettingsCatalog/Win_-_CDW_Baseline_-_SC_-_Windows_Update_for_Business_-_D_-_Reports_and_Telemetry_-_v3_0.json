@@ -1,0 +1,38 @@
+{
+  "name": "Win - CDW Baseline - SC - Windows Update for Business - D - Reports and Telemetry - v3.0",
+  "description": "NOTE: Contains policies required for Windows Update for Business Reports. Further configuration required:\nhttps://learn.microsoft.com/en-us/windows/deployment/update/wufb-reports-enable",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_allowdevicenameindiagnosticdata"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_allowtelemetry"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_configuretelemetryoptinchangenotification"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_configuretelemetryoptinsettingsux"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_update_allowtemporaryenterprisefeaturecontrol"
+      }
+    }
+  ]
+}

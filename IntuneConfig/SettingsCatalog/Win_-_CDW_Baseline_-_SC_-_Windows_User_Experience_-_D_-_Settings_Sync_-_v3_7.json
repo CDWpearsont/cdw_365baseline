@@ -1,0 +1,26 @@
+{
+  "name": "Win - CDW Baseline - SC - Windows User Experience - D - Settings Sync - v3.7",
+  "description": "NOTE: This policy assumes you have Enabled the Windows Backup and Restore feature in the Devices > Windows > Enrollment page:\nhttps://techcommunity.microsoft.com/blog/windows-itpro-blog/windows-backup-for-organizations-is-now-available/4441655",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_settingsync_disablecredentialssettingsync"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_settingssync_enablewindowsbackup"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_windowsbackupandrestore_enablewindowsrestore"
+      }
+    }
+  ]
+}

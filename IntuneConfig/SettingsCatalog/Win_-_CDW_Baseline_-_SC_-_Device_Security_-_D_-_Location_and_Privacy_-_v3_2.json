@@ -1,0 +1,26 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - D - Location and Privacy - v3.2",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_privacy_letappsaccesslocation"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_privacy_letappsaccesslocation_forceallowtheseapps"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_allowlocation"
+      }
+    }
+  ]
+}

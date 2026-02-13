@@ -1,0 +1,32 @@
+{
+  "name": "MacOS - CDW Baseline - Microsoft Edge - U - Extensions - v1.0",
+  "description": "",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_extensioninstallallowlist"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_blockexternalextensions"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_extensioninstallforcelist"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.managedclient.preferences_extensioninstallblocklist"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Win - CDW Baseline - SC - Microsoft Store - U - Configuration - v3.3",
+  "description": "NOTE: The \"Turn off the Store application\" setting does not work on Windows Pro/Business SKU's:\nhttps://learn.microsoft.com/en-gb/windows/client-management/mdm/policy-csp-admx-windowsstore?WT.mc_id=Portal-fx#removewindowsstore_2",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_admx_taskbar_nopinningstoretotaskbar"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_admx_windowsstore_removewindowsstore_1"
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_applicationmanagement_msialwaysinstallwithelevatedprivileges"
+      }
+    }
+  ]
+}

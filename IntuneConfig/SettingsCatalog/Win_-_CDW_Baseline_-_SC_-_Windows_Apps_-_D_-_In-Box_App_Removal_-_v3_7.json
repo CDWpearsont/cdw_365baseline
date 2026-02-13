@@ -1,0 +1,14 @@
+{
+  "name": "Win - CDW Baseline - SC - Windows Apps - D - In-Box App Removal - v3.7",
+  "description": "NOTE: This policy will only apply to devices running Windows Enterprise",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages"
+      }
+    }
+  ]
+}
