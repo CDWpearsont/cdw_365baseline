@@ -1,0 +1,20 @@
+{
+  "name": "Win - CDW Baseline - ES - Local Group Membership - D - Local Administrators - v3.7",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "templateReference": {
+    "templateId": "22968f54-45fa-486c-848e-f8224aa69772_1"
+  },
+  "settings": {
+    "Id": "0",
+    "SettingDefinitions": null,
+    "SettingInstance": {
+      "SettingDefinitionId": "device_vendor_msft_policy_config_localusersandgroups_configure",
+      "SettingInstanceTemplateReference": {
+        "SettingInstanceTemplateId": "de06bec1-4852-48a0-9799-cf7b85992d45"
+      }
+    },
+    "AdditionalProperties": {}
+  }
+}

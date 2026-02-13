@@ -1,0 +1,66 @@
+{
+  "name": "Win - CDW Baseline - ES - Windows LAPS - D - LAPS Configuration - v3.1",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "templateReference": {
+    "templateId": "adc46e5a-f4aa-4ff6-aeff-4f27bc525796_1"
+  },
+  "settings": [
+    {
+      "Id": "0",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_laps_policies_backupdirectory",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "a3270f64-e493-499d-8900-90290f61ed8a"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "1",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_laps_policies_passwordcomplexity",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "8a7459e8-1d1c-458a-8906-7b27d216de52"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "2",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_laps_policies_passwordlength",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "da7a1dbd-caf7-4341-ab63-ece6f994ff02"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "3",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationactions",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "d9282eb1-d187-42ae-b366-7081f32dcfff"
+        }
+      },
+      "AdditionalProperties": {}
+    },
+    {
+      "Id": "4",
+      "SettingDefinitions": null,
+      "SettingInstance": {
+        "SettingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationresetdelay",
+        "SettingInstanceTemplateReference": {
+          "SettingInstanceTemplateId": "a9e21166-4055-4042-9372-efaf3ef41868"
+        }
+      },
+      "AdditionalProperties": {}
+    }
+  ]
+}
