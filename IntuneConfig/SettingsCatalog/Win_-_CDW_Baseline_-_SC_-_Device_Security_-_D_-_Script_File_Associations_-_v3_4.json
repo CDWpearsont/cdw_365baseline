@@ -1,0 +1,17 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - D - Script File Associations - v3.4",
+  "description": "WARNING: Deploying will break running any PowerShell scripts from Intune in the User context. Amend policy if this functionality is required.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": {
+    "Id": "0",
+    "SettingDefinitions": null,
+    "SettingInstance": {
+      "SettingDefinitionId": "device_vendor_msft_policy_config_applicationdefaults_defaultassociationsconfiguration",
+      "SettingInstanceTemplateReference": {
+        "SettingInstanceTemplateId": null
+      }
+    },
+    "AdditionalProperties": {}
+  }
+}

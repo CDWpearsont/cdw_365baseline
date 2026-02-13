@@ -1,0 +1,46 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:56.9332644Z",
+  "Description": null,
+  "DeviceSettingStateSummaries": null,
+  "DeviceStatusOverview": {
+    "ConfigurationVersion": null,
+    "ErrorCount": null,
+    "FailedCount": null,
+    "Id": null,
+    "LastUpdateDateTime": null,
+    "NotApplicableCount": null,
+    "PendingCount": null,
+    "SuccessCount": null
+  },
+  "DeviceStatuses": null,
+  "DisplayName": "MacOS - CDW Baseline - Compliance - U - Device Security - v1.0",
+  "Id": "7f7c6bdf-5568-47ed-a746-ca614bc4a025",
+  "LastModifiedDateTime": "2026-02-12T12:45:45.9360198Z",
+  "ScheduledActionsForRule": null,
+  "UserStatusOverview": {
+    "ConfigurationVersion": null,
+    "ErrorCount": null,
+    "FailedCount": null,
+    "Id": null,
+    "LastUpdateDateTime": null,
+    "NotApplicableCount": null,
+    "PendingCount": null,
+    "SuccessCount": null
+  },
+  "UserStatuses": null,
+  "Version": 2,
+  "AdditionalProperties": {
+    "@odata.type": "#microsoft.graph.macOSCompliancePolicy",
+    "passwordRequired": false,
+    "passwordBlockSimple": false,
+    "passwordRequiredType": "deviceDefault",
+    "systemIntegrityProtectionEnabled": false,
+    "deviceThreatProtectionEnabled": false,
+    "deviceThreatProtectionRequiredSecurityLevel": "unavailable",
+    "storageRequireEncryption": true,
+    "firewallEnabled": true,
+    "firewallBlockAllIncoming": true,
+    "firewallEnableStealthMode": false
+  }
+}
