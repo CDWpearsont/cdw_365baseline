@@ -1,0 +1,63 @@
+{
+  "name": "Win - CDW Baseline - SC - Microsoft Accounts - D - Configuration - v3.2",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_accounts_allowaddingnonmicrosoftaccountsmanually",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_accounts_allowaddingnonmicrosoftaccountsmanually_0",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_accounts_allowmicrosoftaccountconnection",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_accounts_allowmicrosoftaccountconnection_0",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_appruntime_allowmicrosoftaccountstobeoptional",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_appruntime_allowmicrosoftaccountstobeoptional_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_msapolicy_microsoftaccount_disableuserauth",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_admx_msapolicy_microsoftaccount_disableuserauth_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_blockmicrosoftaccounts",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_blockmicrosoftaccounts_3",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    }
+  ]
+}
