@@ -173,7 +173,7 @@ jobs:
                     # groupSettingCollectionValue is always an array — inject type on each element
                     $createInstance.groupSettingCollectionValue = Inject-ODataType `
                         -Value $ap.groupSettingCollectionValue `
-                        -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionValue'
+                        -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingValue'
                 }
                 elseif ($null -ne $ap.groupSettingValue) {
                     $createInstance.groupSettingValue = Inject-ODataType `
