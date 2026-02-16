@@ -54,15 +54,52 @@ jobs:
             # Remove tenant-specific read-only fields (Compliance + Device Config)
             function Remove-TenantSpecificFields {
               param([object]$Policy)
-              $fieldsToRemove = @("id","createdDateTime","lastModifiedDateTime","version",
-                "roleScopeTagIds","assignments","@odata.context","@odata.type",
-                "supportsScopeTags","isAssigned")
+              # Strip read-only fields (both camelCase and PascalCase variants from SDK)
+              $fieldsToRemove = @("id","Id","createdDateTime","CreatedDateTime",
+                "lastModifiedDateTime","LastModifiedDateTime","version","Version",
+                "roleScopeTagIds","RoleScopeTagIds","assignments","Assignments",
+                "@odata.context","@odata.type","@odata.etag",
+                "supportsScopeTags","SupportsScopeTags","isAssigned","IsAssigned",
+                "deviceStatuses","DeviceStatuses","userStatuses","UserStatuses",
+                "deviceStatusOverview","DeviceStatusOverview",
+                "userStatusOverview","UserStatusOverview",
+                "deviceSettingStateSummaries","DeviceSettingStateSummaries",
+                "scheduledActionsForRule","ScheduledActionsForRule",
+                "deviceCompliancePolicyScript","DeviceCompliancePolicyScript")
               foreach ($field in $fieldsToRemove) {
                 if ($Policy.PSObject.Properties.Name -contains $field) {
                   $Policy.PSObject.Properties.Remove($field)
                 }
               }
               return $Policy
+            }
+
+            # Flatten PowerShell SDK object (PascalCase + AdditionalProperties)
+            # into the flat camelCase format expected by Graph REST API.
+            # Used for DeviceConfigurations and CompliancePolicies.
+            function Convert-ToRestFormat {
+              param([object]$Policy)
+              $result = @{}
+              # Start with AdditionalProperties (contains @odata.type and type-specific props)
+              if ($Policy.AdditionalProperties) {
+                foreach ($key in $Policy.AdditionalProperties.Keys) {
+                  $result[$key] = $Policy.AdditionalProperties[$key]
+                }
+              }
+              # Overlay top-level SDK properties, converting PascalCase to camelCase
+              $skip = @("AdditionalProperties","Id","CreatedDateTime","LastModifiedDateTime",
+                "Version","Assignments","DeviceStatuses","UserStatuses",
+                "DeviceStatusOverview","UserStatusOverview",
+                "DeviceSettingStateSummaries","ScheduledActionsForRule",
+                "RoleScopeTagIds","SupportsScopeTags","IsAssigned",
+                "DeviceCompliancePolicyScript")
+              foreach ($prop in $Policy.PSObject.Properties) {
+                if ($skip -contains $prop.Name) { continue }
+                if ($null -eq $prop.Value) { continue }
+                $camelName = $prop.Name.Substring(0,1).ToLower() + $prop.Name.Substring(1)
+                $result[$camelName] = $prop.Value
+              }
+              return [PSCustomObject]$result
             }
 
             # Remove obsolete JSON files from a folder
@@ -113,14 +150,6 @@ jobs:
                     settingDefinitionId = $instance.SettingDefinitionId
                 }
 
-                # Preserve settingInstanceTemplateReference — required for template-based (ES) policies
-                if ($null -ne $instance.SettingInstanceTemplateReference -and
-                    $null -ne $instance.SettingInstanceTemplateReference.SettingInstanceTemplateId) {
-                    $createInstance.settingInstanceTemplateReference = @{
-                        settingInstanceTemplateId = $instance.SettingInstanceTemplateReference.SettingInstanceTemplateId
-                    }
-                }
-
                 if ($null -ne $ap.choiceSettingValue) {
                     $createInstance.choiceSettingValue = Inject-ODataType `
                         -Value $ap.choiceSettingValue `
@@ -141,12 +170,10 @@ jobs:
                         -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionValue'
                 }
                 elseif ($null -ne $ap.groupSettingCollectionValue) {
-                    # groupSettingCollectionValue must be an array of GroupSettingValue objects
-                    $gscv = $ap.groupSettingCollectionValue
-                    if ($gscv -isnot [System.Array]) { $gscv = @($gscv) }
-                    $createInstance.groupSettingCollectionValue = @($gscv | ForEach-Object {
-                        Inject-ODataType -Value $_ -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingValue'
-                    })
+                    # groupSettingCollectionValue is always an array — inject type on each element
+                    $createInstance.groupSettingCollectionValue = Inject-ODataType `
+                        -Value $ap.groupSettingCollectionValue `
+                        -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionValue'
                 }
                 elseif ($null -ne $ap.groupSettingValue) {
                     $createInstance.groupSettingValue = Inject-ODataType `
@@ -165,7 +192,7 @@ jobs:
               $cdwComp = Get-MgDeviceManagementDeviceCompliancePolicy -All | Where-Object { $_.DisplayName -like "*CDW Baseline*" }
               foreach ($policy in $cdwComp) {
                 $safeName = $policy.DisplayName -replace '[^a-zA-Z0-9-]', '_'
-                $clean = Remove-TenantSpecificFields -Policy $policy
+                $clean = Convert-ToRestFormat -Policy $policy
                 $clean | ConvertTo-Json -Depth 20 | Out-File "$compPath/$safeName.json" -Encoding UTF8
               }
               Clean-FolderForCDW -FolderPath $compPath -CurrentPolicyNames ($cdwComp.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
@@ -179,7 +206,7 @@ jobs:
               $cdwConfigs = Get-MgDeviceManagementDeviceConfiguration -All | Where-Object { $_.DisplayName -like "*CDW Baseline*" }
               foreach ($config in $cdwConfigs) {
                 $safeName = $config.DisplayName -replace '[^a-zA-Z0-9-]', '_'
-                $clean = Remove-TenantSpecificFields -Policy $config
+                $clean = Convert-ToRestFormat -Policy $config
                 $clean | ConvertTo-Json -Depth 20 | Out-File "$configPath/$safeName.json" -Encoding UTF8
               }
               Clean-FolderForCDW -FolderPath $configPath -CurrentPolicyNames ($cdwConfigs.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
