@@ -133,10 +133,13 @@ jobs:
                         -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionValue'
                 }
                 elseif ($null -ne $ap.groupSettingCollectionValue) {
-                    # groupSettingCollectionValue is always an array — inject type on each element
-                    $createInstance.groupSettingCollectionValue = Inject-ODataType `
-                        -Value $ap.groupSettingCollectionValue `
-                        -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionValueItem'
+                    # groupSettingCollectionValue must be an array of GroupSettingValue objects
+                    # (NOT GroupSettingCollectionValue — Graph rejects that type)
+                    $gscv = $ap.groupSettingCollectionValue
+                    if ($gscv -isnot [System.Array]) { $gscv = @($gscv) }
+                    $createInstance.groupSettingCollectionValue = @($gscv | ForEach-Object {
+                        Inject-ODataType -Value $_ -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingValue'
+                    })
                 }
                 elseif ($null -ne $ap.groupSettingValue) {
                     $createInstance.groupSettingValue = Inject-ODataType `
