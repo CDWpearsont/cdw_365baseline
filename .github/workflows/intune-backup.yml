@@ -1,4 +1,4 @@
-name: CDW 365 Baseline Backup
+name: CDW Intune Baseline Backup
 
 on:
   schedule:
@@ -36,9 +36,9 @@ jobs:
         shell: pwsh
         run: |
           try {
-            # ────────────────────────────────────────────────
+            # ────────────────────────────────
             # Authentication
-            # ────────────────────────────────────────────────
+            # ────────────────────────────────
             $body = @{
                 client_id     = $env:CLIENT_ID
                 scope         = "https://graph.microsoft.com/.default"
@@ -56,36 +56,7 @@ jobs:
               New-Item -Path $backupRoot -ItemType Directory -Force | Out-Null
             }
 
-            # ────────────────────────────────────────────────
-            # Helper: remove tenant-specific / read-only fields
-            # (used for Compliance + Device Config)
-            # ────────────────────────────────────────────────
-            function Remove-TenantSpecificFields {
-              param([object]$Policy)
-
-              $fieldsToRemove = @(
-                "id",
-                "createdDateTime",
-                "lastModifiedDateTime",
-                "version",
-                "roleScopeTagIds",
-                "assignments",
-                "@odata.context",
-                "@odata.type",
-                "supportsScopeTags",
-                "isAssigned"
-              )
-
-              foreach ($field in $fieldsToRemove) {
-                if ($Policy.PSObject.Properties.Name -contains $field) {
-                  $Policy.PSObject.Properties.Remove($field)
-                }
-              }
-
-              return $Policy
-            }
-
-            # Helper: clean folder of obsolete JSON files
+            # Helper function to clean folder - remove files not matching current CDW Baseline policies
             function Clean-FolderForCDW {
               param (
                 [string]$FolderPath,
@@ -96,6 +67,7 @@ jobs:
               $existingFiles = Get-ChildItem -Path $FolderPath -File -Filter "*.json"
               foreach ($file in $existingFiles) {
                 $baseName = $file.BaseName
+                # Remove file if it doesn't match any current policy name
                 if ($CurrentPolicyNames -notcontains $baseName) {
                   Write-Output "Removing obsolete policy file: $($file.Name)"
                   Remove-Item $file.FullName -Force
@@ -104,39 +76,7 @@ jobs:
             }
 
             # ────────────────────────────────────────────────
-            # Settings Transformer (SC + ES)
-            # ────────────────────────────────────────────────
-            function Convert-ToCreateSetting {
-                param([object]$setting)
-
-                $instance = $setting.SettingInstance
-
-                # Extract @odata.type
-                $odataType = $instance.AdditionalProperties.'@odata.type'
-
-                $createInstance = [ordered]@{
-                    "@odata.type"        = $odataType
-                    settingDefinitionId  = $instance.SettingDefinitionId
-                }
-
-                # Map value types
-                if ($instance.choiceSettingValue) {
-                    $createInstance.choiceSettingValue = $instance.choiceSettingValue
-                }
-                elseif ($instance.simpleSettingValue) {
-                    $createInstance.simpleSettingValue = $instance.simpleSettingValue
-                }
-                elseif ($instance.collectionSettingValue) {
-                    $createInstance.collectionSettingValue = $instance.collectionSettingValue
-                }
-
-                return @{
-                    settingInstance = $createInstance
-                }
-            }
-
-            # ────────────────────────────────────────────────
-            # Compliance Policies (v1.0)
+            # Compliance Policies - only CDW Baseline
             # ────────────────────────────────────────────────
             try {
               $compPath = "$backupRoot/CompliancePolicies"
@@ -145,21 +85,22 @@ jobs:
               $allComp = Get-MgDeviceManagementDeviceCompliancePolicy -All
               $cdwComp = $allComp | Where-Object { $_.DisplayName -like "*CDW Baseline*" }
 
+              # Export only matching
               foreach ($policy in $cdwComp) {
                 $safeName = $policy.DisplayName -replace '[^a-zA-Z0-9-]', '_'
-                $clean = Remove-TenantSpecificFields -Policy $policy
-                $clean | ConvertTo-Json -Depth 20 | Out-File "$compPath/$safeName.json" -Encoding UTF8
+                $policy | ConvertTo-Json -Depth 20 | Out-File "$compPath/$safeName.json" -Encoding UTF8
               }
 
+              # Clean up obsolete files
               Clean-FolderForCDW -FolderPath $compPath -CurrentPolicyNames ($cdwComp.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
 
-              Write-Output "Exported $($cdwComp.Count) CDW Baseline compliance policies"
+              Write-Output "Exported $($cdwComp.Count) CDW Baseline compliance policies (kept only matching names)"
             } catch {
               Write-Error "Compliance export failed: $($_.Exception.Message)"
             }
 
             # ────────────────────────────────────────────────
-            # Device Configurations (v1.0)
+            # Device Configurations - only CDW Baseline
             # ────────────────────────────────────────────────
             try {
               $configPath = "$backupRoot/DeviceConfigurations"
@@ -170,8 +111,7 @@ jobs:
 
               foreach ($config in $cdwConfigs) {
                 $safeName = $config.DisplayName -replace '[^a-zA-Z0-9-]', '_'
-                $clean = Remove-TenantSpecificFields -Policy $config
-                $clean | ConvertTo-Json -Depth 20 | Out-File "$configPath/$safeName.json" -Encoding UTF8
+                $config | ConvertTo-Json -Depth 20 | Out-File "$configPath/$safeName.json" -Encoding UTF8
               }
 
               Clean-FolderForCDW -FolderPath $configPath -CurrentPolicyNames ($cdwConfigs.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
@@ -182,18 +122,24 @@ jobs:
             }
 
             # ────────────────────────────────────────────────
-            # Endpoint Security + Settings Catalog
-            # Create‑ready JSON
+            # Endpoint Security + Settings Catalog - only CDW Baseline
+            # Both come from the same Graph API endpoint, so we fetch
+            # once and route each policy to the correct folder based
+            # on its TemplateReference.TemplateFamily value.
             # ────────────────────────────────────────────────
             try {
-              $esPath = "$backupRoot/EndpointSecurity"
-              $scPath = "$backupRoot/SettingsCatalog"
+              $esPath   = "$backupRoot/EndpointSecurity"
+              $scPath   = "$backupRoot/SettingsCatalog"
               New-Item -Path $esPath -ItemType Directory -Force | Out-Null
               New-Item -Path $scPath -ItemType Directory -Force | Out-Null
 
+              # Fetch all configurationPolicies once
               $allBeta = Get-MgBetaDeviceManagementConfigurationPolicy -All -ErrorAction Stop
+
+              # Filter to CDW Baseline only
               $cdwAll = $allBeta | Where-Object { $_.Name -like "*CDW Baseline*" }
 
+              # Endpoint Security families - extend this list if you add more ES policy types
               $esFamilies = @(
                 'endpointSecurityAntivirus',
                 'endpointSecurityDiskEncryption',
@@ -207,58 +153,24 @@ jobs:
               $cdwES = $cdwAll | Where-Object { $esFamilies -contains $_.TemplateReference.TemplateFamily }
               $cdwSC = $cdwAll | Where-Object { $esFamilies -notcontains $_.TemplateReference.TemplateFamily }
 
-              # Endpoint Security
+              # Export Endpoint Security policies
               foreach ($policy in $cdwES) {
                 $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
-
-                $settings = Get-MgBetaDeviceManagementConfigurationPolicySetting -DeviceManagementConfigurationPolicyId $policy.Id -All
-
-                $convertedSettings = @()
-                foreach ($s in $settings) {
-                    $convertedSettings += Convert-ToCreateSetting -setting $s
-                }
-
-                $exportObject = [ordered]@{
-                  name        = $policy.Name
-                  description = $policy.Description
-                  platforms   = $policy.Platforms.ToString()
-                  technologies = $policy.Technologies.ToString()
-                  templateReference = @{
-                    templateId = $policy.TemplateReference.TemplateId
-                  }
-                  settings    = $convertedSettings
-                }
-
-                $exportObject | ConvertTo-Json -Depth 20 | Out-File "$esPath/$safeName.json" -Encoding UTF8
-                Write-Output "Exported (EndpointSecurity create payload): $($policy.Name)"
+                $policy | ConvertTo-Json -Depth 20 | Out-File "$esPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (EndpointSecurity): $($policy.Name)"
               }
               Clean-FolderForCDW -FolderPath $esPath -CurrentPolicyNames ($cdwES.Name | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+              Write-Output "Exported $($cdwES.Count) CDW Baseline endpoint security policies"
 
-              # Settings Catalog
+              # Export Settings Catalog policies (includes Office Updates, etc.)
               foreach ($policy in $cdwSC) {
                 $safeName = $policy.Name -replace '[^a-zA-Z0-9-]', '_'
-
-                $settings = Get-MgBetaDeviceManagementConfigurationPolicySetting -DeviceManagementConfigurationPolicyId $policy.Id -All
-
-                $convertedSettings = @()
-                foreach ($s in $settings) {
-                    $convertedSettings += Convert-ToCreateSetting -setting $s
-                }
-
-                $exportObject = [ordered]@{
-                  name        = $policy.Name
-                  description = $policy.Description
-                  platforms   = $policy.Platforms.ToString()
-                  technologies = $policy.Technologies.ToString()
-                  settings    = $convertedSettings
-                }
-
-                $exportObject | ConvertTo-Json -Depth 20 | Out-File "$scPath/$safeName.json" -Encoding UTF8
-                Write-Output "Exported (SettingsCatalog create payload): $($policy.Name)"
+                $policy | ConvertTo-Json -Depth 20 | Out-File "$scPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (SettingsCatalog): $($policy.Name)"
               }
               Clean-FolderForCDW -FolderPath $scPath -CurrentPolicyNames ($cdwSC.Name | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+              Write-Output "Exported $($cdwSC.Count) CDW Baseline settings catalog policies"
 
-              Write-Output "Exported $($cdwES.Count) Endpoint Security and $($cdwSC.Count) Settings Catalog policies as create-ready JSON"
             } catch {
               Write-Error "Endpoint Security / Settings Catalog export failed: $($_.Exception.Message)"
             }
@@ -276,7 +188,7 @@ jobs:
             } else {
               git commit -m "$commitMsg"
               git push origin HEAD
-              Write-Output "Committed and pushed changes"
+              Write-Output "Committed and pushed changes (only CDW Baseline policies kept)"
             }
           }
           catch {
