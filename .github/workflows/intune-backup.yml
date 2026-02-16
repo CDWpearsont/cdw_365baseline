@@ -79,10 +79,23 @@ jobs:
 
             # Convert Graph SDK setting to create-ready format.
             # Covers all six value types — order matters (most specific first).
-            function Add-ODataType {
-                # Injects @odata.type onto a value container hashtable if missing.
-                # Graph requires it on every value container for configurationPolicies POST.
-                param([hashtable]$Value, [string]$Type)
+            function Inject-ODataType {
+                # Injects @odata.type into a value container object or array.
+                # Handles three shapes:
+                #   - Hashtable (single object)  -> inject directly
+                #   - PSCustomObject             -> convert to hashtable first
+                #   - Array                      -> inject into each element
+                param($Value, [string]$Type)
+
+                if ($Value -is [System.Array]) {
+                    return @($Value | ForEach-Object { Inject-ODataType -Value $_ -Type $Type })
+                }
+
+                # Ensure we have a mutable hashtable
+                if ($Value -isnot [hashtable]) {
+                    $Value = $Value | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
+                }
+
                 if (-not $Value.ContainsKey('@odata.type')) {
                     $Value['@odata.type'] = $Type
                 }
@@ -101,33 +114,34 @@ jobs:
                 }
 
                 if ($null -ne $ap.choiceSettingValue) {
-                    $v = $ap.choiceSettingValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
-                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingValue'
-                    $createInstance.choiceSettingValue = $v
+                    $createInstance.choiceSettingValue = Inject-ODataType `
+                        -Value $ap.choiceSettingValue `
+                        -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingValue'
                 }
                 elseif ($null -ne $ap.simpleSettingValue) {
-                    # simpleSettingValue @odata.type is set by the SDK — pass through as-is
+                    # simpleSettingValue carries @odata.type from the SDK — pass through
                     $createInstance.simpleSettingValue = $ap.simpleSettingValue
                 }
                 elseif ($null -ne $ap.simpleSettingCollectionValue) {
-                    $v = $ap.simpleSettingCollectionValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
-                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionValue'
-                    $createInstance.simpleSettingCollectionValue = $v
+                    $createInstance.simpleSettingCollectionValue = Inject-ODataType `
+                        -Value $ap.simpleSettingCollectionValue `
+                        -Type '#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionValue'
                 }
                 elseif ($null -ne $ap.choiceSettingCollectionValue) {
-                    $v = $ap.choiceSettingCollectionValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
-                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionValue'
-                    $createInstance.choiceSettingCollectionValue = $v
+                    $createInstance.choiceSettingCollectionValue = Inject-ODataType `
+                        -Value $ap.choiceSettingCollectionValue `
+                        -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionValue'
                 }
                 elseif ($null -ne $ap.groupSettingCollectionValue) {
-                    $v = $ap.groupSettingCollectionValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
-                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionValue'
-                    $createInstance.groupSettingCollectionValue = $v
+                    # groupSettingCollectionValue is always an array — inject type on each element
+                    $createInstance.groupSettingCollectionValue = Inject-ODataType `
+                        -Value $ap.groupSettingCollectionValue `
+                        -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionValue'
                 }
                 elseif ($null -ne $ap.groupSettingValue) {
-                    $v = $ap.groupSettingValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
-                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingValue'
-                    $createInstance.groupSettingValue = $v
+                    $createInstance.groupSettingValue = Inject-ODataType `
+                        -Value $ap.groupSettingValue `
+                        -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingValue'
                 }
                 else { Write-Warning "No value type matched for: $($instance.SettingDefinitionId)" }
 
