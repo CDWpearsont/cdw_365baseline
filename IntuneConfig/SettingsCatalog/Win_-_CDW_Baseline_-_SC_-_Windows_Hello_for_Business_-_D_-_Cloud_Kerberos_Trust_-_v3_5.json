@@ -30,7 +30,7 @@
               }
             }
           ],
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionValue"
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue"
         }
       }
     }
