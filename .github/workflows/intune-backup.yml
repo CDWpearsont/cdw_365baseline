@@ -1,4 +1,4 @@
-name: CDW Intune Baseline Backup
+name: Daily Intune Best Practices Backup - CDW Baseline only
 
 on:
   schedule:
