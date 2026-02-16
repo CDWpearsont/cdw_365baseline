@@ -1,0 +1,94 @@
+{
+  "name": "Win - CDW Baseline - ES - Windows LAPS - D - LAPS Configuration - v3.1",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "templateReference": {
+    "templateFamily": "endpointSecurityAccountProtection",
+    "templateId": "adc46e5a-f4aa-4ff6-aeff-4f27bc525796_1"
+  },
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_backupdirectory",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_laps_policies_backupdirectory_1",
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "4d90f03d-e14c-43c4-86da-681da96a2f92",
+            "useTemplateDefault": false
+          },
+          "children": [
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+              "settingDefinitionId": "device_vendor_msft_laps_policies_passwordagedays_aad",
+              "simpleSettingValue": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                "value": 7
+              }
+            }
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_passwordcomplexity",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_laps_policies_passwordcomplexity_5",
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "aa883ab5-625e-4e3b-b830-a37a4bb8ce01",
+            "useTemplateDefault": false
+          },
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_passwordlength",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 21,
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "d08f1266-5345-4f53-8ae1-4c20e6cb5ec9",
+            "useTemplateDefault": false
+          }
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationactions",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_laps_policies_postauthenticationactions_3",
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "68ff4f78-baa8-4b32-bf3d-5ad5566d8142",
+            "useTemplateDefault": false
+          },
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationresetdelay",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 1,
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "0deb6aee-8dac-40c4-a9dd-c3718e5c1d52",
+            "useTemplateDefault": false
+          }
+        }
+      }
+    }
+  ]
+}
