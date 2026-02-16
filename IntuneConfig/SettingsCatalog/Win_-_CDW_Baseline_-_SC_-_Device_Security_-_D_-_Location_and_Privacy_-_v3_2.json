@@ -1,0 +1,46 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - D - Location and Privacy - v3.2",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_privacy_letappsaccesslocation",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_privacy_letappsaccesslocation_0",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_privacy_letappsaccesslocation_forceallowtheseapps",
+        "simpleSettingCollectionValue": [
+          {
+            "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+            "value": "windows.immersivecontrolpanel_cw5n1h2txyewy"
+          },
+          {
+            "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+            "value": "Microsoft.OutlookForWindows_8wekyb3d8bbwe"
+          }
+        ]
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_allowlocation",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_system_allowlocation_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    }
+  ]
+}
