@@ -150,6 +150,14 @@ jobs:
                     settingDefinitionId = $instance.SettingDefinitionId
                 }
 
+                # Export settingInstanceTemplateReference (required for ES template-based policies)
+                if ($null -ne $instance.SettingInstanceTemplateReference -and
+                    $null -ne $instance.SettingInstanceTemplateReference.SettingInstanceTemplateId) {
+                    $createInstance.settingInstanceTemplateReference = @{
+                        settingInstanceTemplateId = $instance.SettingInstanceTemplateReference.SettingInstanceTemplateId
+                    }
+                }
+
                 if ($null -ne $ap.choiceSettingValue) {
                     $createInstance.choiceSettingValue = Inject-ODataType `
                         -Value $ap.choiceSettingValue `
