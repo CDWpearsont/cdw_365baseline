@@ -1,0 +1,46 @@
+{
+  "Assignments": null,
+  "CreatedDateTime": "2026-02-12T12:29:44.4989006Z",
+  "Description": null,
+  "DeviceSettingStateSummaries": null,
+  "DeviceStatusOverview": {
+    "ConfigurationVersion": null,
+    "ErrorCount": null,
+    "FailedCount": null,
+    "Id": null,
+    "LastUpdateDateTime": null,
+    "NotApplicableCount": null,
+    "PendingCount": null,
+    "SuccessCount": null
+  },
+  "DeviceStatuses": null,
+  "DisplayName": "Win - CDW Baseline - Compliance - U - Device Security - v3.1",
+  "Id": "11323ee5-7ed3-4f6c-8189-addaea3a3ce4",
+  "LastModifiedDateTime": "2026-02-12T12:45:44.8598764Z",
+  "ScheduledActionsForRule": null,
+  "UserStatusOverview": {
+    "ConfigurationVersion": null,
+    "ErrorCount": null,
+    "FailedCount": null,
+    "Id": null,
+    "LastUpdateDateTime": null,
+    "NotApplicableCount": null,
+    "PendingCount": null,
+    "SuccessCount": null
+  },
+  "UserStatuses": null,
+  "Version": 2,
+  "AdditionalProperties": {
+    "@odata.type": "#microsoft.graph.windows10CompliancePolicy",
+    "passwordRequired": false,
+    "passwordBlockSimple": false,
+    "passwordRequiredToUnlockFromIdle": false,
+    "passwordRequiredType": "deviceDefault",
+    "requireHealthyDeviceReport": false,
+    "earlyLaunchAntiMalwareDriverEnabled": false,
+    "bitLockerEnabled": false,
+    "secureBootEnabled": false,
+    "codeIntegrityEnabled": false,
+    "storageRequireEncryption": false
+  }
+}
