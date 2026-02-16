@@ -79,6 +79,16 @@ jobs:
 
             # Convert Graph SDK setting to create-ready format.
             # Covers all six value types — order matters (most specific first).
+            function Add-ODataType {
+                # Injects @odata.type onto a value container hashtable if missing.
+                # Graph requires it on every value container for configurationPolicies POST.
+                param([hashtable]$Value, [string]$Type)
+                if (-not $Value.ContainsKey('@odata.type')) {
+                    $Value['@odata.type'] = $Type
+                }
+                return $Value
+            }
+
             function Convert-ToCreateSetting {
                 param([object]$setting)
                 $instance  = $setting.SettingInstance
@@ -90,12 +100,35 @@ jobs:
                     settingDefinitionId = $instance.SettingDefinitionId
                 }
 
-                if ($null -ne $ap.choiceSettingValue)             { $createInstance.choiceSettingValue            = $ap.choiceSettingValue }
-                elseif ($null -ne $ap.simpleSettingValue)         { $createInstance.simpleSettingValue            = $ap.simpleSettingValue }
-                elseif ($null -ne $ap.simpleSettingCollectionValue){ $createInstance.simpleSettingCollectionValue  = $ap.simpleSettingCollectionValue }
-                elseif ($null -ne $ap.choiceSettingCollectionValue){ $createInstance.choiceSettingCollectionValue  = $ap.choiceSettingCollectionValue }
-                elseif ($null -ne $ap.groupSettingCollectionValue) { $createInstance.groupSettingCollectionValue   = $ap.groupSettingCollectionValue }
-                elseif ($null -ne $ap.groupSettingValue)           { $createInstance.groupSettingValue             = $ap.groupSettingValue }
+                if ($null -ne $ap.choiceSettingValue) {
+                    $v = $ap.choiceSettingValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
+                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingValue'
+                    $createInstance.choiceSettingValue = $v
+                }
+                elseif ($null -ne $ap.simpleSettingValue) {
+                    # simpleSettingValue @odata.type is set by the SDK — pass through as-is
+                    $createInstance.simpleSettingValue = $ap.simpleSettingValue
+                }
+                elseif ($null -ne $ap.simpleSettingCollectionValue) {
+                    $v = $ap.simpleSettingCollectionValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
+                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionValue'
+                    $createInstance.simpleSettingCollectionValue = $v
+                }
+                elseif ($null -ne $ap.choiceSettingCollectionValue) {
+                    $v = $ap.choiceSettingCollectionValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
+                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionValue'
+                    $createInstance.choiceSettingCollectionValue = $v
+                }
+                elseif ($null -ne $ap.groupSettingCollectionValue) {
+                    $v = $ap.groupSettingCollectionValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
+                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionValue'
+                    $createInstance.groupSettingCollectionValue = $v
+                }
+                elseif ($null -ne $ap.groupSettingValue) {
+                    $v = $ap.groupSettingValue | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
+                    $v = Add-ODataType -Value $v -Type '#microsoft.graph.deviceManagementConfigurationGroupSettingValue'
+                    $createInstance.groupSettingValue = $v
+                }
                 else { Write-Warning "No value type matched for: $($instance.SettingDefinitionId)" }
 
                 return @{ settingInstance = $createInstance }
