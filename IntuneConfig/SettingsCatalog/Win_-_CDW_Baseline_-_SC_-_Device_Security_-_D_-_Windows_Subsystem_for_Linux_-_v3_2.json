@@ -1,0 +1,108 @@
+{
+  "name": "Win - CDW Baseline - SC - Device Security - D - Windows Subsystem for Linux - v3.2",
+  "description": "",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_customkernelusersettingconfigurable",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_customkernelusersettingconfigurable_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_customnetworkingusersettingconfigurable",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_customnetworkingusersettingconfigurable_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_customsystemdistrousersettingconfigurable",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_customsystemdistrousersettingconfigurable_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_customkernelcommandlineusersettingconfigurable",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_customkernelcommandlineusersettingconfigurable_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_kerneldebugusersettingconfigurable",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_kerneldebugusersettingconfigurable_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_nestedvirtualizationusersettingconfigurable",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_nestedvirtualizationusersettingconfigurable_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_allowdebugshell",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_allowdebugshell_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_allowinboxwsl",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_allowinboxwsl_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_firewallusersettingconfigurable",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_firewallusersettingconfigurable_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_wslv1~policy~wsl_allowwsl1",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_wslv1~policy~wsl_allowwsl1_0",
+          "children": []
+        }
+      }
+    }
+  ]
+}
