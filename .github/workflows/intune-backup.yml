@@ -168,9 +168,21 @@ jobs:
                     $createInstance.simpleSettingValue = $ap.simpleSettingValue
                 }
                 elseif ($null -ne $ap.simpleSettingCollectionValue) {
-                    $createInstance.simpleSettingCollectionValue = Inject-ODataType `
-                        -Value $ap.simpleSettingCollectionValue `
-                        -Type '#microsoft.graph.deviceManagementConfigurationSimpleSettingValue'
+                    # simpleSettingCollectionValue elements need the concrete type (String/Integer),
+                    # not the abstract SimpleSettingValue
+                    $fixed = @($ap.simpleSettingCollectionValue | ForEach-Object {
+                        $elem = $_
+                        if ($elem -isnot [hashtable]) {
+                            $elem = $elem | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
+                        }
+                        if ($null -ne $elem.value -and $elem.value -is [int]) {
+                            $elem['@odata.type'] = '#microsoft.graph.deviceManagementConfigurationIntegerSettingValue'
+                        } else {
+                            $elem['@odata.type'] = '#microsoft.graph.deviceManagementConfigurationStringSettingValue'
+                        }
+                        $elem
+                    })
+                    $createInstance.simpleSettingCollectionValue = $fixed
                 }
                 elseif ($null -ne $ap.choiceSettingCollectionValue) {
                     $createInstance.choiceSettingCollectionValue = Inject-ODataType `
