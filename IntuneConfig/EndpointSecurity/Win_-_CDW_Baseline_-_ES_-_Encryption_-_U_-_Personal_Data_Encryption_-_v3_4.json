@@ -1,0 +1,55 @@
+{
+  "name": "Win - CDW Baseline - ES - Encryption - U - Personal Data Encryption - v3.4",
+  "description": "NOTE: PDE is only applicable to Windows 11 22H2 or higher, Entra-Joined devices and does not work on Windows Pro/Business SKU's:\nhttps://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/personal-data-encryption/",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "templateReference": {
+    "templateFamily": "endpointSecurityDiskEncryption",
+    "templateId": "0b5708d9-9bc2-49a9-b4f7-ec463fcc41e0_1"
+  },
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_pde_enablepersonaldataencryption",
+        "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "1ba5dce6-3ba0-40f3-bde3-811ed766c14a"
+        },
+        "choiceSettingValue": {
+          "value": "user_vendor_msft_pde_enablepersonaldataencryption_1",
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "c3620b1d-8ddc-4ca7-a7b5-2a4e7d985be7",
+            "useTemplateDefault": false
+          },
+          "children": [
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+              "settingDefinitionId": "user_vendor_msft_pde_protectfolders_protectpictures",
+              "choiceSettingValue": {
+                "value": "user_vendor_msft_pde_protectfolders_protectpictures_1",
+                "children": []
+              }
+            },
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+              "settingDefinitionId": "user_vendor_msft_pde_protectfolders_protectdocuments",
+              "choiceSettingValue": {
+                "value": "user_vendor_msft_pde_protectfolders_protectdocuments_1",
+                "children": []
+              }
+            },
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+              "settingDefinitionId": "user_vendor_msft_pde_protectfolders_protectdesktop",
+              "choiceSettingValue": {
+                "value": "user_vendor_msft_pde_protectfolders_protectdesktop_1",
+                "children": []
+              }
+            }
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    }
+  ]
+}
