@@ -1,0 +1,382 @@
+name: CDW Defender for Endpoint Backup
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify PowerShell
+        shell: pwsh
+        run: |
+          $PSVersionTable.PSVersion
+
+      - name: Export Defender for Endpoint Configurations
+        env:
+          CLIENT_ID:     ${{ secrets.CLIENT_ID }}
+          TENANT_ID:     ${{ secrets.TENANT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        shell: pwsh
+        run: |
+          try {
+            # ═══════════════════════════════════════════════════════════
+            # Authenticate to MDE API (WindowsDefenderATP resource)
+            # Uses the same app registration — ensure it has
+            # WindowsDefenderATP API permissions:
+            #   - Ti.ReadWrite.All          (Indicators)
+            #   - AdvancedQuery.Read.All    (Custom Detection Rules)
+            #   - Machine.Read.All          (general)
+            #
+            # Required App Permissions on WindowsDefenderATP:
+            #   Ti.ReadWrite.All, AdvancedQuery.Read.All
+            #
+            # Also needs Microsoft Graph application permissions:
+            #   - CustomDetections.ReadWrite.All (for custom detection rules via Graph)
+            # ═══════════════════════════════════════════════════════════
+            $mdeBody = @{
+                client_id     = $env:CLIENT_ID
+                scope         = "https://api.securitycenter.microsoft.com/.default"
+                client_secret = $env:CLIENT_SECRET
+                grant_type    = "client_credentials"
+            }
+            $mdeToken = (Invoke-RestMethod -Method Post `
+                -Uri "https://login.microsoftonline.com/$env:TENANT_ID/oauth2/v2.0/token" `
+                -Body $mdeBody -ContentType "application/x-www-form-urlencoded" `
+                -ErrorAction Stop).access_token
+
+            $mdeHeaders = @{
+                Authorization  = "Bearer $mdeToken"
+                'Content-Type' = 'application/json'
+            }
+
+            # Also get a Graph token for custom detection rules (Graph endpoint)
+            $graphBody = @{
+                client_id     = $env:CLIENT_ID
+                scope         = "https://graph.microsoft.com/.default"
+                client_secret = $env:CLIENT_SECRET
+                grant_type    = "client_credentials"
+            }
+            $graphToken = (Invoke-RestMethod -Method Post `
+                -Uri "https://login.microsoftonline.com/$env:TENANT_ID/oauth2/v2.0/token" `
+                -Body $graphBody -ContentType "application/x-www-form-urlencoded" `
+                -ErrorAction Stop).access_token
+
+            $graphHeaders = @{
+                Authorization  = "Bearer $graphToken"
+                'Content-Type' = 'application/json'
+            }
+
+            Write-Output "Authenticated to MDE API and Graph API."
+
+            $backupRoot = "./DefenderConfig/DefenderEndpoint"
+            if (-not (Test-Path $backupRoot)) { New-Item -Path $backupRoot -ItemType Directory -Force | Out-Null }
+
+            $MDE_BASE = "https://api.securitycenter.microsoft.com/api"
+            $GRAPH_BETA = "https://graph.microsoft.com/beta"
+
+            # Helper: page through MDE API results
+            function Get-MdeAll {
+                param([string]$Url, [hashtable]$Headers)
+                $results = @()
+                $next = $Url
+                while ($next) {
+                    $resp = Invoke-RestMethod -Method Get -Uri $next -Headers $Headers -ErrorAction Stop
+                    if ($resp.value) { $results += $resp.value }
+                    $next = $resp.'@odata.nextLink'
+                }
+                return $results
+            }
+
+            # Helper: sanitize file names
+            function Safe-Name {
+                param([string]$Name)
+                return ($Name -replace '[^a-zA-Z0-9-]', '_')
+            }
+
+            # Helper: remove obsolete JSON files
+            function Clean-Folder {
+                param([string]$FolderPath, [string[]]$CurrentNames)
+                if (-not (Test-Path $FolderPath)) { return }
+                Get-ChildItem -Path $FolderPath -File -Filter "*.json" | ForEach-Object {
+                    if ($CurrentNames -notcontains $_.BaseName) {
+                        Write-Output "  Removing obsolete: $($_.Name)"
+                        Remove-Item $_.FullName -Force
+                    }
+                }
+            }
+
+            # ═══════════════════════════════════════════════════════════
+            # 1. INDICATORS (file hashes, IPs, URLs, certificates)
+            #    MDE API: GET /api/indicators
+            #    Filter: CDW Baseline only (by title prefix)
+            # ═══════════════════════════════════════════════════════════
+            try {
+                $indPath = "$backupRoot/Indicators"
+                New-Item -Path $indPath -ItemType Directory -Force | Out-Null
+
+                $allIndicators = Get-MdeAll -Url "$MDE_BASE/indicators" -Headers $mdeHeaders
+                # Filter to CDW Baseline indicators (by title convention)
+                $cdwIndicators = $allIndicators | Where-Object {
+                    $_.title -like "*CDW Baseline*" -or $_.description -like "*CDW Baseline*"
+                }
+
+                # If no CDW-prefixed indicators, export ALL for reference
+                if ($cdwIndicators.Count -eq 0 -and $allIndicators.Count -gt 0) {
+                    Write-Output "  No CDW-prefixed indicators found. Exporting all $($allIndicators.Count) indicators."
+                    $cdwIndicators = $allIndicators
+                }
+
+                $indicatorNames = @()
+                foreach ($ind in $cdwIndicators) {
+                    $safeName = Safe-Name -Name ($ind.title ?? "indicator_$($ind.id)")
+                    $indicatorNames += $safeName
+
+                    # Strip read-only / tenant-specific fields
+                    $clean = [ordered]@{
+                        indicatorType    = $ind.indicatorType
+                        indicatorValue   = $ind.indicatorValue
+                        action           = $ind.action
+                        title            = $ind.title
+                        description      = $ind.description
+                        severity         = $ind.severity
+                        recommendedActions = $ind.recommendedActions
+                        generateAlert    = $ind.generateAlert
+                        expirationTime   = $ind.expirationTime
+                        application      = $ind.application
+                    }
+                    # Remove null values
+                    $keysToRemove = @($clean.Keys | Where-Object { $null -eq $clean[$_] })
+                    foreach ($k in $keysToRemove) { $clean.Remove($k) }
+
+                    $clean | ConvertTo-Json -Depth 10 | Out-File "$indPath/$safeName.json" -Encoding UTF8
+                }
+                Clean-Folder -FolderPath $indPath -CurrentNames $indicatorNames
+                Write-Output "Exported $($cdwIndicators.Count) indicators"
+            } catch {
+                Write-Error "Indicators export failed: $($_.Exception.Message)"
+            }
+
+            # ═══════════════════════════════════════════════════════════
+            # 2. CUSTOM DETECTION RULES
+            #    Graph Beta: GET /beta/security/rules/detectionRules
+            #    MDE API doesn't expose these well — Graph is the way
+            # ═══════════════════════════════════════════════════════════
+            try {
+                $cdrPath = "$backupRoot/CustomDetectionRules"
+                New-Item -Path $cdrPath -ItemType Directory -Force | Out-Null
+
+                $cdrUrl = "$GRAPH_BETA/security/rules/detectionRules"
+                $allRules = @()
+                $next = $cdrUrl
+                while ($next) {
+                    $resp = Invoke-RestMethod -Method Get -Uri $next -Headers $graphHeaders -ErrorAction Stop
+                    if ($resp.value) { $allRules += $resp.value }
+                    $next = $resp.'@odata.nextLink'
+                }
+
+                # Filter to CDW Baseline rules (by displayName convention)
+                $cdwRules = $allRules | Where-Object {
+                    $_.displayName -like "*CDW Baseline*"
+                }
+
+                # If no CDW-prefixed rules, export ALL for reference
+                if ($cdwRules.Count -eq 0 -and $allRules.Count -gt 0) {
+                    Write-Output "  No CDW-prefixed custom detection rules found. Exporting all $($allRules.Count) rules."
+                    $cdwRules = $allRules
+                }
+
+                $ruleNames = @()
+                foreach ($rule in $cdwRules) {
+                    $safeName = Safe-Name -Name $rule.displayName
+                    $ruleNames += $safeName
+
+                    $clean = [ordered]@{
+                        displayName         = $rule.displayName
+                        isEnabled           = $rule.isEnabled
+                        queryCondition      = $rule.queryCondition
+                        schedule            = $rule.schedule
+                        detectionAction     = $rule.detectionAction
+                        lastRunDetails      = $null  # exclude — runtime state
+                    }
+                    $clean.Remove('lastRunDetails')
+
+                    $clean | ConvertTo-Json -Depth 20 | Out-File "$cdrPath/$safeName.json" -Encoding UTF8
+                }
+                Clean-Folder -FolderPath $cdrPath -CurrentNames $ruleNames
+                Write-Output "Exported $($cdwRules.Count) custom detection rules"
+            } catch {
+                Write-Error "Custom Detection Rules export failed: $($_.Exception.Message)"
+            }
+
+            # ═══════════════════════════════════════════════════════════
+            # 3. WEB CONTENT FILTERING POLICIES
+            #    MDE API: GET /api/webcontentfiltering/policies
+            # ═══════════════════════════════════════════════════════════
+            try {
+                $wcfPath = "$backupRoot/WebContentFiltering"
+                New-Item -Path $wcfPath -ItemType Directory -Force | Out-Null
+
+                $wcfPolicies = Get-MdeAll -Url "$MDE_BASE/webcontentfiltering/policies" -Headers $mdeHeaders
+
+                # Filter to CDW Baseline policies
+                $cdwWcf = $wcfPolicies | Where-Object {
+                    $_.policyName -like "*CDW Baseline*"
+                }
+
+                if ($cdwWcf.Count -eq 0 -and $wcfPolicies.Count -gt 0) {
+                    Write-Output "  No CDW-prefixed WCF policies found. Exporting all $($wcfPolicies.Count) policies."
+                    $cdwWcf = $wcfPolicies
+                }
+
+                $wcfNames = @()
+                foreach ($pol in $cdwWcf) {
+                    $safeName = Safe-Name -Name $pol.policyName
+                    $wcfNames += $safeName
+
+                    $clean = [ordered]@{
+                        policyName             = $pol.policyName
+                        blockedCategories      = $pol.blockedCategories
+                        auditCategories        = $pol.auditCategories
+                        deviceGroupIds         = $pol.deviceGroupIds
+                        isEnabled              = $pol.isEnabled
+                    }
+
+                    $clean | ConvertTo-Json -Depth 10 | Out-File "$wcfPath/$safeName.json" -Encoding UTF8
+                }
+                Clean-Folder -FolderPath $wcfPath -CurrentNames $wcfNames
+                Write-Output "Exported $($cdwWcf.Count) web content filtering policies"
+            } catch {
+                Write-Error "Web Content Filtering export failed: $($_.Exception.Message)"
+            }
+
+            # ═══════════════════════════════════════════════════════════
+            # 4. ALERT SUPPRESSION RULES
+            #    MDE API: GET /api/alertsuppressrules (undocumented but functional)
+            #    Alternative: Graph Beta /beta/security/alertsSuppressionRules
+            # ═══════════════════════════════════════════════════════════
+            try {
+                $asrPath = "$backupRoot/AlertSuppressionRules"
+                New-Item -Path $asrPath -ItemType Directory -Force | Out-Null
+
+                $suppressRules = Get-MdeAll -Url "$MDE_BASE/alertsSuppressionRules" -Headers $mdeHeaders
+
+                # Filter to CDW Baseline rules
+                $cdwSuppress = $suppressRules | Where-Object {
+                    $_.ruleName -like "*CDW Baseline*"
+                }
+
+                if ($cdwSuppress.Count -eq 0 -and $suppressRules.Count -gt 0) {
+                    Write-Output "  No CDW-prefixed suppression rules found. Exporting all $($suppressRules.Count) rules."
+                    $cdwSuppress = $suppressRules
+                }
+
+                $suppressNames = @()
+                foreach ($rule in $cdwSuppress) {
+                    $safeName = Safe-Name -Name $rule.ruleName
+                    $suppressNames += $safeName
+
+                    $clean = [ordered]@{
+                        ruleName        = $rule.ruleName
+                        isEnabled       = $rule.isEnabled
+                        action          = $rule.action
+                        alertTitle      = $rule.alertTitle
+                        alertCategory   = $rule.alertCategory
+                        conditions      = $rule.conditions
+                        comment         = $rule.comment
+                        expirationTime  = $rule.expirationTime
+                    }
+                    $keysToRemove = @($clean.Keys | Where-Object { $null -eq $clean[$_] })
+                    foreach ($k in $keysToRemove) { $clean.Remove($k) }
+
+                    $clean | ConvertTo-Json -Depth 10 | Out-File "$asrPath/$safeName.json" -Encoding UTF8
+                }
+                Clean-Folder -FolderPath $asrPath -CurrentNames $suppressNames
+                Write-Output "Exported $($cdwSuppress.Count) alert suppression rules"
+            } catch {
+                Write-Error "Alert Suppression Rules export failed: $($_.Exception.Message)"
+            }
+
+            # ═══════════════════════════════════════════════════════════
+            # 5. ADVANCED FEATURES — Reference Checklist (manual)
+            #    These are NOT API-accessible. We maintain a reference
+            #    JSON in the repo that documents the CDW recommended
+            #    settings. This file is NOT auto-generated — it is
+            #    maintained manually and committed once.
+            #    The deployer shows it as a visual checklist.
+            # ═══════════════════════════════════════════════════════════
+            $afPath = "$backupRoot/AdvancedFeatures"
+            if (-not (Test-Path $afPath)) { New-Item -Path $afPath -ItemType Directory -Force | Out-Null }
+
+            $afFile = "$afPath/CDW_Baseline_Advanced_Features.json"
+            if (-not (Test-Path $afFile)) {
+                Write-Output "Creating initial Advanced Features reference checklist..."
+                $advancedFeatures = [ordered]@{
+                    '_meta' = [ordered]@{
+                        type        = 'advancedFeaturesChecklist'
+                        description = 'CDW Baseline recommended Defender for Endpoint Advanced Features. These settings are NOT API-accessible and must be configured manually in the Microsoft Defender portal at Settings > Endpoints > Advanced features.'
+                        portalUrl   = 'https://security.microsoft.com/preferences2/integration'
+                        lastReviewed = (Get-Date -Format 'yyyy-MM-dd')
+                    }
+                    features = @(
+                        [ordered]@{ name = 'Automated Investigation';         recommended = $true;  notes = 'Enable automated inspection algorithms for breach remediation' }
+                        [ordered]@{ name = 'Auto-resolve alerts';             recommended = $true;  notes = 'Automatically resolve alerts where threats are remediated' }
+                        [ordered]@{ name = 'EDR in Block Mode';               recommended = $true;  notes = 'Block malicious artifacts even when AV is in passive mode' }
+                        [ordered]@{ name = 'Automatically resolve alerts';    recommended = $true;  notes = 'Clean alerts when no threats found or threats remediated' }
+                        [ordered]@{ name = 'Allow or block file';             recommended = $true;  notes = 'Enable custom file hash indicators' }
+                        [ordered]@{ name = 'Hide potential duplicate devices'; recommended = $true; notes = 'Deduplicate device records in inventory' }
+                        [ordered]@{ name = 'Custom network indicators';       recommended = $true;  notes = 'Allow IP/URL/domain indicators for block/allow' }
+                        [ordered]@{ name = 'Tamper protection';               recommended = $true;  notes = 'Prevent changes to Defender settings on endpoints' }
+                        [ordered]@{ name = 'Show user details';               recommended = $true;  notes = 'Show AAD user details in alerts and device pages' }
+                        [ordered]@{ name = 'Skype for Business integration';  recommended = $false; notes = 'Optional — depends on org Skype/Teams usage' }
+                        [ordered]@{ name = 'Web content filtering';           recommended = $true;  notes = 'Enable web content filtering feature (policies configured separately)' }
+                        [ordered]@{ name = 'Unified audit log';               recommended = $true;  notes = 'Send data to Microsoft Purview audit log' }
+                        [ordered]@{ name = 'Device discovery';                recommended = $true;  notes = 'Discover unmanaged devices on the network' }
+                        [ordered]@{ name = 'Download quarantined files';      recommended = $true;  notes = 'Allow downloading quarantined files for analysis' }
+                        [ordered]@{ name = 'Streamlined connectivity';        recommended = $true;  notes = 'Use streamlined onboarding package as default' }
+                        [ordered]@{ name = 'Live response';                   recommended = $true;  notes = 'Enable remote shell for incident response' }
+                        [ordered]@{ name = 'Live response for servers';       recommended = $true;  notes = 'Extend live response to server devices' }
+                        [ordered]@{ name = 'Live response unsigned script execution'; recommended = $false; notes = 'CDW recommends OFF unless specifically needed' }
+                        [ordered]@{ name = 'Deception';                       recommended = $false; notes = 'Preview feature — evaluate before enabling' }
+                        [ordered]@{ name = 'Share endpoint alerts with Microsoft Compliance Center'; recommended = $true; notes = 'Forward alerts to Purview for insider risk' }
+                        [ordered]@{ name = 'Microsoft Intune connection';     recommended = $true;  notes = 'Required for Intune-based onboarding and compliance' }
+                        [ordered]@{ name = 'Authenticated telemetry';         recommended = $true;  notes = 'Prevent spoofed telemetry in the dashboard' }
+                        [ordered]@{ name = 'Preview features';                recommended = $false; notes = 'CDW recommends OFF for production tenants' }
+                    )
+                }
+                $advancedFeatures | ConvertTo-Json -Depth 10 | Out-File $afFile -Encoding UTF8
+                Write-Output "Created Advanced Features reference checklist"
+            } else {
+                Write-Output "Advanced Features reference file already exists — skipping (edit manually)"
+            }
+
+            # ═══════════════════════════════════════════════════════════
+            # Git commit & push
+            # ═══════════════════════════════════════════════════════════
+            git config --global user.name "CDW Baseline Bot"
+            git config --global user.email "actions@github.com"
+            git add "./DefenderConfig/"
+            $commitMsg = "Automated CDW Defender export - $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+            if (git diff --cached --quiet) {
+                Write-Output "No changes to commit"
+            } else {
+                git commit -m "$commitMsg"
+                git push origin HEAD
+                Write-Output "Committed and pushed"
+            }
+          }
+          catch {
+            Write-Error "Fatal error: $($_.Exception.Message)"
+            exit 1
+          }
