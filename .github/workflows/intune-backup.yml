@@ -170,12 +170,12 @@ jobs:
                 elseif ($null -ne $ap.simpleSettingCollectionValue) {
                     $createInstance.simpleSettingCollectionValue = Inject-ODataType `
                         -Value $ap.simpleSettingCollectionValue `
-                        -Type '#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionValue'
+                        -Type '#microsoft.graph.deviceManagementConfigurationSimpleSettingValue'
                 }
                 elseif ($null -ne $ap.choiceSettingCollectionValue) {
                     $createInstance.choiceSettingCollectionValue = Inject-ODataType `
                         -Value $ap.choiceSettingCollectionValue `
-                        -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionValue'
+                        -Type '#microsoft.graph.deviceManagementConfigurationChoiceSettingValue'
                 }
                 elseif ($null -ne $ap.groupSettingCollectionValue) {
                     # groupSettingCollectionValue is always an array — inject type on each element
