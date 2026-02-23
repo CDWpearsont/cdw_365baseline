@@ -96,15 +96,30 @@ jobs:
             }
 
             # ─── Helper: Convert Graph SDK object to clean hashtable ──
-            # The SDK returns objects with nested PSCustomObject layers.
-            # We convert everything to ordered hashtables recursively
+            # The SDK / Invoke-RestMethod returns objects with nested
+            # PSCustomObject layers. We convert to ordered hashtables
             # so ConvertTo-Json produces clean, portable JSON.
+            # IMPORTANT: Check for primitives (string, bool, number)
+            # BEFORE PSCustomObject — PowerShell strings are objects
+            # with properties like Length, Chars etc.
             function ConvertTo-CleanHashtable {
               param([object]$Object)
               if ($null -eq $Object) { return $null }
+              # Primitives — return as-is (must come before PSCustomObject check)
+              if ($Object -is [string])    { return $Object }
+              if ($Object -is [bool])      { return $Object }
+              if ($Object -is [int])       { return $Object }
+              if ($Object -is [long])      { return $Object }
+              if ($Object -is [double])    { return $Object }
+              if ($Object -is [decimal])   { return $Object }
+              if ($Object -is [datetime])  { return $Object.ToString('o') }
+              if ($Object.GetType().IsEnum) { return $Object.ToString() }
+              if ($Object.GetType().IsPrimitive) { return $Object }
+              # Arrays
               if ($Object -is [System.Collections.IList]) {
                 return @($Object | ForEach-Object { ConvertTo-CleanHashtable -Object $_ })
               }
+              # Hashtables
               if ($Object -is [hashtable]) {
                 $result = [ordered]@{}
                 foreach ($key in $Object.Keys) {
@@ -112,6 +127,7 @@ jobs:
                 }
                 return $result
               }
+              # PSCustomObject (complex objects only — primitives already handled above)
               if ($Object -is [PSCustomObject]) {
                 $result = [ordered]@{}
                 foreach ($prop in $Object.PSObject.Properties) {
@@ -121,8 +137,7 @@ jobs:
                 }
                 return $result
               }
-              # Primitive / enum — return as-is (convert enums to string)
-              if ($Object.GetType().IsEnum) { return $Object.ToString() }
+              # Fallback — return as-is
               return $Object
             }
 
