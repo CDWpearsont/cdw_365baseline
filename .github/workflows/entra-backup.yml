@@ -184,8 +184,9 @@ jobs:
               foreach ($policy in $cdwCA) {
                 $safeName = $policy.displayName -replace '[^a-zA-Z0-9-]', '_'
 
-                # Convert to clean hashtable for processing
-                $clean = ConvertTo-CleanHashtable -Object $policy
+                # Round-trip through JSON to get a clean hashtable that preserves
+                # arrays correctly (ConvertTo-CleanHashtable can unwrap single-element arrays)
+                $clean = $policy | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
                 $clean = Remove-ReadOnlyFields -Policy $clean
 
                 $clean | ConvertTo-Json -Depth 20 | Out-File "$caPath/$safeName.json" -Encoding UTF8
@@ -216,7 +217,7 @@ jobs:
               foreach ($location in $cdwNL) {
                 $safeName = $location.displayName -replace '[^a-zA-Z0-9-]', '_'
 
-                $clean = ConvertTo-CleanHashtable -Object $location
+                $clean = $location | ConvertTo-Json -Depth 20 | ConvertFrom-Json -AsHashtable
                 # Remove read-only fields
                 $clean.Remove("id") | Out-Null
                 $clean.Remove("createdDateTime") | Out-Null
