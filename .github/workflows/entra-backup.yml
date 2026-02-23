@@ -147,8 +147,19 @@ jobs:
 
               # Use direct Graph REST call to get full policy JSON
               # (the SDK cmdlets can lose nested property structure)
+              # Requires Application permission: Policy.Read.All (with admin consent)
               $headers = @{ Authorization = "Bearer $($tokenResponse.access_token)" }
-              $caResponse = Invoke-RestMethod -Method Get -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies" -Headers $headers -ErrorAction Stop
+              try {
+                $caResponse = Invoke-RestMethod -Method Get -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies" -Headers $headers -ErrorAction Stop
+              } catch {
+                $statusCode = $_.Exception.Response.StatusCode.value__
+                if ($statusCode -eq 403) {
+                  Write-Error "403 Forbidden — the app registration is missing the 'Policy.Read.All' APPLICATION permission (with admin consent). Add it in Azure Portal → Entra ID → App registrations → API permissions."
+                  throw
+                }
+                Write-Error "Graph API call failed ($statusCode): $($_.Exception.Message)"
+                throw
+              }
               $allCA = $caResponse.value
 
               # Filter to CDW Baseline prefixed policies
@@ -169,7 +180,8 @@ jobs:
               Clean-FolderForCDW -FolderPath $caPath -CurrentPolicyNames ($cdwCA.displayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
               Write-Output "Exported $($cdwCA.Count) Conditional Access policies"
             } catch {
-              Write-Error "Conditional Access export failed: $($_.Exception.Message)"
+              Write-Warning "Conditional Access export failed: $($_.Exception.Message)"
+              Write-Warning "Ensure the app registration has 'Policy.Read.All' APPLICATION permission with admin consent."
             }
 
             # ═════════════════════════════════════════════════════════
@@ -202,7 +214,7 @@ jobs:
               Clean-FolderForCDW -FolderPath $nlPath -CurrentPolicyNames ($cdwNL.displayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
               Write-Output "Exported $($cdwNL.Count) Named Locations"
             } catch {
-              Write-Error "Named Locations export failed: $($_.Exception.Message)"
+              Write-Warning "Named Locations export failed: $($_.Exception.Message)"
             }
 
             # ═════════════════════════════════════════════════════════
