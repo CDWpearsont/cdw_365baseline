@@ -1,0 +1,226 @@
+name: CDW Entra Baseline Backup
+
+# Required App Registration permissions (Application, not Delegated):
+#   - Policy.Read.All                      (read CA policies & named locations)
+#   - Policy.ReadWrite.ConditionalAccess   (if you also want write access)
+#
+# Secrets required: CLIENT_ID, TENANT_ID, CLIENT_SECRET
+
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify PowerShell
+        shell: pwsh
+        run: |
+          $PSVersionTable.PSVersion
+
+      - name: Install Microsoft.Graph modules
+        shell: pwsh
+        run: |
+          Install-Module Microsoft.Graph.Authentication, Microsoft.Graph.Identity.SignIns -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
+
+      - name: Export Entra Configurations to Repo (CDW Baseline only)
+        env:
+          CLIENT_ID:     ${{ secrets.CLIENT_ID }}
+          TENANT_ID:     ${{ secrets.TENANT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        shell: pwsh
+        run: |
+          try {
+            # ─── Authentication ──────────────────────────────────────
+            $body = @{
+                client_id     = $env:CLIENT_ID
+                scope         = "https://graph.microsoft.com/.default"
+                client_secret = $env:CLIENT_SECRET
+                grant_type    = "client_credentials"
+            }
+            $tokenResponse = Invoke-RestMethod -Method Post -Uri "https://login.microsoftonline.com/$env:TENANT_ID/oauth2/v2.0/token" -Body $body -ContentType "application/x-www-form-urlencoded" -ErrorAction Stop
+            $secureToken = ConvertTo-SecureString $tokenResponse.access_token -AsPlainText -Force
+            Connect-MgGraph -AccessToken $secureToken -NoWelcome -ErrorAction Stop
+            Write-Output "Connected to Microsoft Graph."
+
+            $backupRoot = "./EntraConfig"
+            if (-not (Test-Path $backupRoot)) { New-Item -Path $backupRoot -ItemType Directory -Force | Out-Null }
+
+            # ─── Helper: Remove read-only / tenant-specific fields ───
+            # Strips fields that Graph rejects on POST so the exported
+            # JSON is ready to deploy directly via the web frontend.
+            function Remove-ReadOnlyFields {
+              param([hashtable]$Policy)
+              $fieldsToRemove = @(
+                "id", "createdDateTime", "modifiedDateTime",
+                "templateId", "authenticationStrength@odata.context"
+              )
+              foreach ($field in $fieldsToRemove) {
+                $Policy.Remove($field) | Out-Null
+              }
+
+              # Recursively clean conditions — remove servicePrincipal
+              # read-only computed properties
+              if ($Policy.ContainsKey("conditions")) {
+                $cond = $Policy["conditions"]
+                if ($cond -is [hashtable]) {
+                  # Remove empty/null condition blocks that Graph rejects on POST
+                  $condKeys = @($cond.Keys)
+                  foreach ($ck in $condKeys) {
+                    $cv = $cond[$ck]
+                    if ($null -eq $cv) { $cond.Remove($ck) | Out-Null; continue }
+                    # Remove empty include/exclude arrays within condition blocks
+                    if ($cv -is [hashtable]) {
+                      if ($cv.ContainsKey("includeUsers") -and $cv["includeUsers"] -is [array] -and $cv["includeUsers"].Count -eq 0 -and
+                          $cv.ContainsKey("excludeUsers") -and $cv["excludeUsers"] -is [array] -and $cv["excludeUsers"].Count -eq 0 -and
+                          $cv.Keys.Count -le 2) {
+                        # Skip removing users block — it's usually required
+                      }
+                    }
+                  }
+                }
+              }
+
+              return $Policy
+            }
+
+            # ─── Helper: Convert Graph SDK object to clean hashtable ──
+            # The SDK returns objects with nested PSCustomObject layers.
+            # We convert everything to ordered hashtables recursively
+            # so ConvertTo-Json produces clean, portable JSON.
+            function ConvertTo-CleanHashtable {
+              param([object]$Object)
+              if ($null -eq $Object) { return $null }
+              if ($Object -is [System.Collections.IList]) {
+                return @($Object | ForEach-Object { ConvertTo-CleanHashtable -Object $_ })
+              }
+              if ($Object -is [hashtable]) {
+                $result = [ordered]@{}
+                foreach ($key in $Object.Keys) {
+                  $result[$key] = ConvertTo-CleanHashtable -Object $Object[$key]
+                }
+                return $result
+              }
+              if ($Object -is [PSCustomObject]) {
+                $result = [ordered]@{}
+                foreach ($prop in $Object.PSObject.Properties) {
+                  if ($null -ne $prop.Value) {
+                    $result[$prop.Name] = ConvertTo-CleanHashtable -Object $prop.Value
+                  }
+                }
+                return $result
+              }
+              # Primitive / enum — return as-is (convert enums to string)
+              if ($Object.GetType().IsEnum) { return $Object.ToString() }
+              return $Object
+            }
+
+            # ─── Helper: Remove obsolete JSON files ──────────────────
+            function Clean-FolderForCDW {
+              param([string]$FolderPath, [string[]]$CurrentPolicyNames)
+              if (-not (Test-Path $FolderPath)) { return }
+              Get-ChildItem -Path $FolderPath -File -Filter "*.json" | ForEach-Object {
+                if ($CurrentPolicyNames -notcontains $_.BaseName) {
+                  Write-Output "Removing obsolete: $($_.Name)"
+                  Remove-Item $_.FullName -Force
+                }
+              }
+            }
+
+            # ═════════════════════════════════════════════════════════
+            # CONDITIONAL ACCESS POLICIES
+            # ═════════════════════════════════════════════════════════
+            try {
+              $caPath = "$backupRoot/ConditionalAccess"
+              New-Item -Path $caPath -ItemType Directory -Force | Out-Null
+
+              # Use direct Graph REST call to get full policy JSON
+              # (the SDK cmdlets can lose nested property structure)
+              $headers = @{ Authorization = "Bearer $($tokenResponse.access_token)" }
+              $caResponse = Invoke-RestMethod -Method Get -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies" -Headers $headers -ErrorAction Stop
+              $allCA = $caResponse.value
+
+              # Filter to CDW Baseline prefixed policies
+              $cdwCA = $allCA | Where-Object { $_.displayName -like "CDW*" }
+              Write-Output "Found $($cdwCA.Count) CDW Conditional Access policies"
+
+              foreach ($policy in $cdwCA) {
+                $safeName = $policy.displayName -replace '[^a-zA-Z0-9-]', '_'
+
+                # Convert to clean hashtable for processing
+                $clean = ConvertTo-CleanHashtable -Object $policy
+                $clean = Remove-ReadOnlyFields -Policy $clean
+
+                $clean | ConvertTo-Json -Depth 20 | Out-File "$caPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (CA): $($policy.displayName)"
+              }
+
+              Clean-FolderForCDW -FolderPath $caPath -CurrentPolicyNames ($cdwCA.displayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+              Write-Output "Exported $($cdwCA.Count) Conditional Access policies"
+            } catch {
+              Write-Error "Conditional Access export failed: $($_.Exception.Message)"
+            }
+
+            # ═════════════════════════════════════════════════════════
+            # NAMED LOCATIONS
+            # ═════════════════════════════════════════════════════════
+            try {
+              $nlPath = "$backupRoot/NamedLocations"
+              New-Item -Path $nlPath -ItemType Directory -Force | Out-Null
+
+              $nlResponse = Invoke-RestMethod -Method Get -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations" -Headers $headers -ErrorAction Stop
+              $allNL = $nlResponse.value
+
+              # Filter to CDW prefixed named locations
+              $cdwNL = $allNL | Where-Object { $_.displayName -like "CDW*" }
+              Write-Output "Found $($cdwNL.Count) CDW Named Locations"
+
+              foreach ($location in $cdwNL) {
+                $safeName = $location.displayName -replace '[^a-zA-Z0-9-]', '_'
+
+                $clean = ConvertTo-CleanHashtable -Object $location
+                # Remove read-only fields
+                $clean.Remove("id") | Out-Null
+                $clean.Remove("createdDateTime") | Out-Null
+                $clean.Remove("modifiedDateTime") | Out-Null
+
+                $clean | ConvertTo-Json -Depth 20 | Out-File "$nlPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (NL): $($location.displayName)"
+              }
+
+              Clean-FolderForCDW -FolderPath $nlPath -CurrentPolicyNames ($cdwNL.displayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+              Write-Output "Exported $($cdwNL.Count) Named Locations"
+            } catch {
+              Write-Error "Named Locations export failed: $($_.Exception.Message)"
+            }
+
+            # ═════════════════════════════════════════════════════════
+            # GIT COMMIT & PUSH
+            # ═════════════════════════════════════════════════════════
+            git config --global user.name "CDW Baseline Bot"
+            git config --global user.email "actions@github.com"
+            git add "$backupRoot/"
+            $commitMsg = "Automated CDW Entra Baseline export - $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+            if (git diff --cached --quiet) {
+              Write-Output "No changes to commit"
+            } else {
+              git commit -m "$commitMsg"
+              git push origin HEAD
+              Write-Output "Committed and pushed"
+            }
+          }
+          catch {
+            Write-Error "Fatal error: $($_.Exception.Message)"
+            exit 1
+          }
