@@ -1,7 +1,6 @@
 {
   "displayName": "CDW001: Require multifactor authentication for admins",
   "state": "disabled",
-  "deletedDateTime": null,
   "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],

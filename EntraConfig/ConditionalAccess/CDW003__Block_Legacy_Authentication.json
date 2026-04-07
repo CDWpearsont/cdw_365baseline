@@ -1,7 +1,6 @@
 {
   "displayName": "CDW003: Block Legacy Authentication",
   "state": "enabledForReportingButNotEnforced",
-  "deletedDateTime": null,
   "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
