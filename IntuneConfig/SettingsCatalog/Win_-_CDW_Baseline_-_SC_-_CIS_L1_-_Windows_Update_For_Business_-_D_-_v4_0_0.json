@@ -18,22 +18,20 @@
     {
       "settingInstance": {
         "settingDefinitionId": "device_vendor_msft_policy_config_update_deferfeatureupdatesperiodindays",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_update_deferfeatureupdatesperiodindays_1",
-          "children": []
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 180
         }
       }
     },
     {
       "settingInstance": {
         "settingDefinitionId": "device_vendor_msft_policy_config_update_deferqualityupdatesperiodindays",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_update_deferqualityupdatesperiodindays_1",
-          "children": []
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 0
         }
       }
     },
@@ -51,11 +49,10 @@
     {
       "settingInstance": {
         "settingDefinitionId": "device_vendor_msft_policy_config_update_scheduledinstallday",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_update_scheduledinstallday_1",
-          "children": []
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 0
         }
       }
     }

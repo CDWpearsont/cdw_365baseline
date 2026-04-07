@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L1 - System Services - D - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: System Services. Auto-generated from CIS PDF. 4 settings.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: System Services. Auto-generated from CIS PDF. 2 settings (some removed due to catalog incompatibility).",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [
@@ -10,29 +10,7 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "choiceSettingValue": {
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_systemservices_configurexboxaccessorymanagementservicestartupmode_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_configurexboxliveauthmanagerstartupmode",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_systemservices_configurexboxliveauthmanagerstartupmode_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_configurexboxlivegamesavestartupmode",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_systemservices_configurexboxlivegamesavestartupmode_0",
+          "value": "device_vendor_msft_policy_config_systemservices_configurexboxaccessorymanagementservicestartupmode_4",
           "children": []
         }
       }
@@ -43,7 +21,7 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "choiceSettingValue": {
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_systemservices_configurexboxlivenetworkingservicestartupmode_0",
+          "value": "device_vendor_msft_policy_config_systemservices_configurexboxlivenetworkingservicestartupmode_4",
           "children": []
         }
       }

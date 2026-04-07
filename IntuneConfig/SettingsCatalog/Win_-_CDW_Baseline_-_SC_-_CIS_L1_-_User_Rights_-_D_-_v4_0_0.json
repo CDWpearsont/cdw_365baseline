@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L1 - User Rights - D - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: User Rights. Auto-generated from CIS PDF. 34 settings.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: User Rights. Auto-generated from CIS PDF. 33 settings (some removed due to catalog incompatibility).",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [
@@ -134,13 +134,9 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_denyaccessfromnetwork",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_userrights_denyaccessfromnetwork_1",
-          "children": []
-        }
+        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_denylogonasaservice",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+        "simpleSettingCollectionValue": []
       }
     },
     {
@@ -163,13 +159,6 @@
           "value": "device_vendor_msft_policy_config_userrights_denylogonasbatchjob_1",
           "children": []
         }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_denyaccessfromnetwork",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
-        "simpleSettingCollectionValue": []
       }
     },
     {
