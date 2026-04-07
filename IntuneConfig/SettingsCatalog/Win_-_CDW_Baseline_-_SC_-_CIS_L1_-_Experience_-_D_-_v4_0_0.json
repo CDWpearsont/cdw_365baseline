@@ -1,0 +1,56 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L1 - Experience - D - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: Experience. Auto-generated from CIS PDF. 4 settings.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowcortana",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_experience_allowcortana_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 34.1 \u2014 Ensure 'Allow Cortana' is set to 'Block"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_experience_allowspotlightcollectionuser",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_experience_allowspotlightcollectionuser_0",
+          "children": []
+        }
+      },
+      "_comment": "CIS 34.2 \u2014 Ensure 'Allow Spotlight Collection (User)' is set to '0"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_experience_disableconsumeraccountstatecontent",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_experience_disableconsumeraccountstatecontent_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 34.4 \u2014 Ensure 'Disable Consumer Account State Content' is set to 'Enabled"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_experience_donotshowfeedbacknotifications",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_experience_donotshowfeedbacknotifications_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 34.5 \u2014 Ensure 'Do not show feedback notifications' is set to 'Feedback notifications ar"
+    }
+  ]
+}

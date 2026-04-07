@@ -1,0 +1,80 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L1 - Microsoft App Store - D - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: Microsoft App Store. Auto-generated from CIS PDF. 6 settings.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_microsoftappstore_allowappsfromthemicrosoftappstoretoautoupdate",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_microsoftappstore_allowappsfromthemicrosoftappstoretoautoupdate_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 55.1 \u2014 Ensure 'Allow apps from the Microsoft app store to auto update' is set to 'Allow"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_microsoftappstore_allowgamedvr",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_microsoftappstore_allowgamedvr_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 55.2 \u2014 Ensure 'Allow Game DVR' is set to 'Block"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_microsoftappstore_blocknonadminuserinstall",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_microsoftappstore_blocknonadminuserinstall_0",
+          "children": []
+        }
+      },
+      "_comment": "CIS 55.4 \u2014 Ensure 'Block Non Admin User Install' is set to 'Allow"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_microsoftappstore_msiallowusercontroloverinstalls",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_microsoftappstore_msiallowusercontroloverinstalls_0",
+          "children": []
+        }
+      },
+      "_comment": "CIS 55.6 \u2014 Ensure 'MSI Allow user control over installs' is set to 'Disabled"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_microsoftappstore_msialwaysinstallwithelevatedprivileges",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_microsoftappstore_msialwaysinstallwithelevatedprivileges_0",
+          "children": []
+        }
+      },
+      "_comment": "CIS 55.7 \u2014 Ensure 'MSI Always install with elevated privileges' is set to 'Disabled"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_microsoftappstore_msialwaysinstallwithelevatedprivilegesuser",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_microsoftappstore_msialwaysinstallwithelevatedprivilegesuser_0",
+          "children": []
+        }
+      },
+      "_comment": "CIS 55.8 \u2014 Ensure 'MSI Always install with elevated privileges (User)' is set to 'Disabled"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L1 - Virtualization Based Technology - D - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: Virtualization Based Technology. Auto-generated from CIS PDF. 2 settings.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_virtualizationbasedtechnology_hypervisorenforcedcodeintegrity",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_virtualizationbasedtechnology_hypervisorenforcedcodeintegrity_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 90.1 \u2014 Ensure 'Hypervisor Enforced Code Integrity' is set to 'Enabled with UEFI lock"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_virtualizationbasedtechnology_requireuefimemoryattributestable",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_virtualizationbasedtechnology_requireuefimemoryattributestable_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 90.2 \u2014 Ensure 'Require UEFI Memory Attributes Table' is set to 'Require UEFI Memory Att"
+    }
+  ]
+}

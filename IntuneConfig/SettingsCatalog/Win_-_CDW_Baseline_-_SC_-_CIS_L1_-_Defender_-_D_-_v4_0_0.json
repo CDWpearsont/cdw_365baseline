@@ -1,0 +1,344 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L1 - Defender - D - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: Defender. Auto-generated from CIS PDF. 28 settings.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowbehaviormonitoring",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_allowbehaviormonitoring_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.1 \u2014 Ensure 'Allow Behavior Monitoring' is set to 'Allowed"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowemailscanning",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_allowemailscanning_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.2 \u2014 Ensure 'Allow Email Scanning' is set to 'Allowed"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowfullscanremovabledrivescanning",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_allowfullscanremovabledrivescanning_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.3 \u2014 Ensure 'Allow Full Scan Removable Drive Scanning' is set to 'Allowed"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowrealtimemonitoring",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_allowrealtimemonitoring_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.4 \u2014 Ensure 'Allow Realtime Monitoring' is set to 'Allowed"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowscanningofalldownloadedfilesandattachments",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_allowscanningofalldownloadedfilesandattachments_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.5 \u2014 Ensure 'Allow scanning of all downloaded files and attachments' is set to 'Allow"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowscriptscanning",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_allowscriptscanning_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.6 \u2014 Ensure 'Allow Script Scanning' is set to 'Allowed"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockabuseofexploitedvulnerablesigneddriversdevice",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockabuseofexploitedvulnerablesigneddriversdevice_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.7 \u2014 Ensure 'ASR: Block abuse of exploited vulnerable signed drivers' is set to 'Bloc"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockadobereaderfromcreatingchildprocesses",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockadobereaderfromcreatingchildprocesses_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.8 \u2014 Ensure 'ASR: Block Adobe Reader from creating child processes' is set to 'Block"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockallofficeapplicationsfromcreatingchildprocesses",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockallofficeapplicationsfromcreatingchildprocesses_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.9 \u2014 Ensure 'ASR: Block all Office applications from creating child processes' is set"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockcredentialstealingfromthewindowslocalsecurityauthoritysubsystem",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockcredentialstealingfromthewindowslocalsecurityauthoritysubsystem_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.10 \u2014 Ensure 'ASR: Block credential stealing from the Windows local security authority"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockexecutablecontentfromemailclientandwebmail",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockexecutablecontentfromemailclientandwebmail_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.11 \u2014 Ensure 'ASR: Block executable content from email client and webmail' is set to '"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockexecutablefilesfromrunningunlesstheymeetaprevalenceageortrustedlistcriterion",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockexecutablefilesfromrunningunlesstheymeetaprevalenceageortrustedlistcriterion_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.12 \u2014 Ensure 'ASR: Block executable files from running unless they meet a prevalence, "
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockexecutionofpotentiallyobfuscatedscripts",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockexecutionofpotentiallyobfuscatedscripts_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.13 \u2014 Ensure 'ASR: Block execution of potentially obfuscated scripts' is set to 'Audit"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockjavascriptorvbscriptfromlaunchingdownloadedexecutablecontent",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockjavascriptorvbscriptfromlaunchingdownloadedexecutablecontent_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.14 \u2014 Ensure 'ASR: Block JavaScript or VBScript from launching downloaded executable c"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockofficeapplicationsfromcreatingexecutablecontent",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockofficeapplicationsfromcreatingexecutablecontent_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.15 \u2014 Ensure 'ASR: Block Office applications from creating executable content' is set "
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockofficeapplicationsfrominjectingcodeintootherprocesses",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockofficeapplicationsfrominjectingcodeintootherprocesses_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.16 \u2014 Ensure 'ASR: Block Office applications from injecting code into other processes'"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockofficecommunicationapplicationfromcreatingchildprocesses",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockofficecommunicationapplicationfromcreatingchildprocesses_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.17 \u2014 Ensure 'ASR: Block Office communication application from creating child processe"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockpersistencethroughwmieventsubscription",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockpersistencethroughwmieventsubscription_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.18 \u2014 Ensure 'ASR: Block persistence through WMI event subscription' is set to 'Block"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockprocesscreationsoriginatingfrompsexecandwmicommands",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockprocesscreationsoriginatingfrompsexecandwmicommands_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.19 \u2014 Ensure 'ASR: Block process creations originating from PSExec and WMI commands' i"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockuntrustedandunsignedprocessesthatrunfromusb",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockuntrustedandunsignedprocessesthatrunfromusb_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.20 \u2014 Ensure 'ASR: Block untrusted and unsigned processes that run from USB' is set to"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_blockwin32apicallsfromofficemacros",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_blockwin32apicallsfromofficemacros_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.21 \u2014 Ensure 'ASR: Block Win32 API calls from Office macros' is set to 'Block"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_useadvancedprotectionagainstransomware",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_useadvancedprotectionagainstransomware_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.22 \u2014 Ensure 'ASR: Use advanced protection against ransomware' is set to 'Audit' or hi"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_daysuntilaggressivecatchupquickscan",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_daysuntilaggressivecatchupquickscan_7",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.23 \u2014 Ensure 'Days Until Aggressive Catchup Quick Scan' is set to '7 days' or fewer"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_enablenetworkprotection",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_enablenetworkprotection_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.26 \u2014 Ensure 'Enable Network Protection' is set to 'Enabled (block mode)"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_hideexclusionsfromlocalusers",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_hideexclusionsfromlocalusers_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.27 \u2014 Ensure 'Hide Exclusions From Local Users' is set to 'Enabled"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_oobeenablertpandsigupdate",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_oobeenablertpandsigupdate_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.28 \u2014 Ensure 'Oobe Enable Rtp And Sig Update' is set to 'Enabled"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_quickscanincludeexclusions",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_quickscanincludeexclusions_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.30 \u2014 Ensure 'Quick Scan Include Exclusions' is set to '1"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_remoteencryptionprotectionconfiguredstate",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_remoteencryptionprotectionconfiguredstate_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 22.32 \u2014 Ensure 'Remote Encryption Protection Configured State' is set to 'Audit: Generat"
+    }
+  ]
+}

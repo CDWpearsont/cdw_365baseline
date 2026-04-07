@@ -1,0 +1,332 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L1 - Auditing - D - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: Auditing. Auto-generated from CIS PDF. 27 settings.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_accountlogonauditcredentialvalidation",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_accountlogonauditcredentialvalidation_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.1 \u2014 Ensure 'Account Logon Audit Credential Validation' is set to 'Success and Failur"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_accountlogonlogoffauditaccountlockout",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_accountlogonlogoffauditaccountlockout_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.2 \u2014 Ensure 'Account Logon Logoff Audit Account Lockout' is set to include 'Failure"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_accountlogonlogoffauditgroupmembership",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_accountlogonlogoffauditgroupmembership_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.3 \u2014 Ensure 'Account Logon Logoff Audit Group Membership' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_accountlogonlogoffauditlogoff",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_accountlogonlogoffauditlogoff_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.4 \u2014 Ensure 'Account Logon Logoff Audit Logoff' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_accountlogonlogoffauditlogon",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_accountlogonlogoffauditlogon_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.5 \u2014 Ensure 'Account Logon Logoff Audit Logon' is set to 'Success and Failure"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_accountmanagementauditapplicationgroupmanagement",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_accountmanagementauditapplicationgroupmanagement_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.6 \u2014 Ensure 'Account Management Audit Application Group Management' is set to 'Succes"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_auditauthenticationpolicychange",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_auditauthenticationpolicychange_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.7 \u2014 Ensure 'Audit Authentication Policy Change' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_auditauthorizationpolicychange",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_auditauthorizationpolicychange_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.8 \u2014 Ensure 'Audit Authorization Policy Change' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_auditchangestoauditpolicy",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_auditchangestoauditpolicy_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.9 \u2014 Ensure 'Audit Changes to Audit Policy' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_auditfileshareaccess",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_auditfileshareaccess_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.10 \u2014 Ensure 'Audit File Share Access' is set to 'Success and Failure"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_auditotherlogonlogoffevents",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_auditotherlogonlogoffevents_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.11 \u2014 Ensure 'Audit Other Logon Logoff Events' is set to 'Success and Failure"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_auditsecuritygroupmanagement",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_auditsecuritygroupmanagement_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.12 \u2014 Ensure 'Audit Security Group Management' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_auditsecuritysystemextension",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_auditsecuritysystemextension_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.13 \u2014 Ensure 'Audit Security System Extension' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_auditspeciallogon",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_auditspeciallogon_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.14 \u2014 Ensure 'Audit Special Logon' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_audituseraccountmanagement",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_audituseraccountmanagement_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.15 \u2014 Ensure 'Audit User Account Management' is set to 'Success and Failure"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_detailedtrackingauditpnpactivity",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_detailedtrackingauditpnpactivity_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.16 \u2014 Ensure 'Detailed Tracking Audit PNP Activity' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_detailedtrackingauditprocesscreation",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_detailedtrackingauditprocesscreation_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.17 \u2014 Ensure 'Detailed Tracking Audit Process Creation' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_objectaccessauditdetailedfileshare",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_objectaccessauditdetailedfileshare_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.18 \u2014 Ensure 'Object Access Audit Detailed File Share' is set to include 'Failure"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_objectaccessauditotherobjectaccessevents",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_objectaccessauditotherobjectaccessevents_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.19 \u2014 Ensure 'Object Access Audit Other Object Access Events' is set to 'Success and F"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_objectaccessauditremovablestorage",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_objectaccessauditremovablestorage_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.20 \u2014 Ensure 'Object Access Audit Removable Storage' is set to 'Success and Failure"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_policychangeauditmpssvcrulelevelpolicychange",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_policychangeauditmpssvcrulelevelpolicychange_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.21 \u2014 Ensure 'Policy Change Audit MPSSVC Rule Level Policy Change' is set to 'Success "
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_policychangeauditotherpolicychangeevents",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_policychangeauditotherpolicychangeevents_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.22 \u2014 Ensure 'Policy Change Audit Other Policy Change Events' is set to include 'Failu"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_privilegeuseauditsensitiveprivilegeuse",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_privilegeuseauditsensitiveprivilegeuse_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.23 \u2014 Ensure 'Privilege Use Audit Sensitive Privilege Use' is set to 'Success and Fail"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_systemauditipsecdriver",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_systemauditipsecdriver_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.24 \u2014 Ensure 'System Audit I Psec Driver' is set to 'Success and Failure"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_systemauditothersystemevents",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_systemauditothersystemevents_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.25 \u2014 Ensure 'System Audit Other System Events' is set to 'Success and Failure"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_systemauditsecuritystatechange",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_systemauditsecuritystatechange_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.26 \u2014 Ensure 'System Audit Security State Change' is set to include 'Success"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_auditing_systemauditsystemintegrity",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_auditing_systemauditsystemintegrity_1",
+          "children": []
+        }
+      },
+      "_comment": "CIS 6.27 \u2014 Ensure 'System Audit System Integrity' is set to 'Success and Failure"
+    }
+  ]
+}

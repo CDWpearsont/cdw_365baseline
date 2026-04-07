@@ -1,0 +1,56 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L1 - System Services - D - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: System Services. Auto-generated from CIS PDF. 4 settings.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_xboxaccessorymanagementservice",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_systemservices_xboxaccessorymanagementservice_0",
+          "children": []
+        }
+      },
+      "_comment": "CIS 81.39 \u2014 Ensure 'Xbox Accessory Management Service (XboxGipSvc)' is set to 'Disabled"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_xboxliveauthmanager",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_systemservices_xboxliveauthmanager_0",
+          "children": []
+        }
+      },
+      "_comment": "CIS 81.40 \u2014 Ensure 'Xbox Live Auth Manager (XblAuthManager)' is set to 'Disabled"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_xboxlivegamesave",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_systemservices_xboxlivegamesave_0",
+          "children": []
+        }
+      },
+      "_comment": "CIS 81.41 \u2014 Ensure 'Xbox Live Game Save (XblGameSave)' is set to 'Disabled"
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_xboxlivenetworkingservice",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_systemservices_xboxlivenetworkingservice_0",
+          "children": []
+        }
+      },
+      "_comment": "CIS 81.42 \u2014 Ensure 'Xbox Live Networking Service (XboxNetApiSvc)' is set to 'Disabled"
+    }
+  ]
+}
