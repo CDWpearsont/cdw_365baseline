@@ -6,13 +6,6 @@
   "settings": [
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_accesscredentialmanagerastrustedcaller",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
-        "simpleSettingCollectionValue": []
-      }
-    },
-    {
-      "settingInstance": {
         "settingDefinitionId": "device_vendor_msft_policy_config_userrights_accessfromnetwork",
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "choiceSettingValue": {
@@ -101,9 +94,14 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_createsymboliclinks",
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
-        "simpleSettingCollectionValue": []
+        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_createsymboliclinks",
+        "simpleSettingCollectionValue": [
+          {
+            "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+            "value": "*S-1-5-32-544"
+          }
+        ]
       }
     },
     {
@@ -196,9 +194,18 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_increaseschedulingpriority",
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
-        "simpleSettingCollectionValue": []
+        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_increaseschedulingpriority",
+        "simpleSettingCollectionValue": [
+          {
+            "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+            "value": "*S-1-5-32-544"
+          },
+          {
+            "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+            "value": "*S-1-5-90-0"
+          }
+        ]
       }
     },
     {
@@ -276,13 +283,6 @@
           "value": "device_vendor_msft_policy_config_userrights_profilesingleprocess_1",
           "children": []
         }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_profilesystemperformance",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
-        "simpleSettingCollectionValue": []
       }
     },
     {
