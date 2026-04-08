@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L1 - User Rights - D - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. User Rights assignments using proven SID-based values. 27 settings. Settings requiring \"No One\" (empty assignment) omitted \u2014 API does not accept empty collections.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. User Rights assignments using proven SID-based values. 26 settings.",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [
@@ -376,18 +376,6 @@
           {
             "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
             "value": "*S-1-5-20"
-          }
-        ]
-      }
-    },
-    {
-      "settingInstance": {
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
-        "settingDefinitionId": "device_vendor_msft_policy_config_userrights_denylogonasservice",
-        "simpleSettingCollectionValue": [
-          {
-            "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-            "value": "*S-1-5-32-546"
           }
         ]
       }
