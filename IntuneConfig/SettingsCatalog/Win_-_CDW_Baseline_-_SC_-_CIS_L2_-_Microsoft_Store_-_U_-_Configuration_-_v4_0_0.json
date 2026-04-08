@@ -1,0 +1,41 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - U - Configuration - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 2. Microsoft Store (U) lockdown.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_admx_taskbar_nopinningstoretotaskbar",
+        "choiceSettingValue": {
+          "value": "user_vendor_msft_policy_config_admx_taskbar_nopinningstoretotaskbar_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_admx_windowsstore_removewindowsstore_1",
+        "choiceSettingValue": {
+          "value": "user_vendor_msft_policy_config_admx_windowsstore_removewindowsstore_1_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_applicationmanagement_msialwaysinstallwithelevatedprivileges",
+        "choiceSettingValue": {
+          "value": "user_vendor_msft_policy_config_applicationmanagement_msialwaysinstallwithelevatedprivileges_0",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    }
+  ]
+}

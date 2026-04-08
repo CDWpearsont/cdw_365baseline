@@ -1,0 +1,94 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L2 - Defender Antivirus - Additional Configuration - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 2. Defender Antivirus additional hardening settings.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowarchivescanning",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_allowarchivescanning_1",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_cloudblockinglevel",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_cloudblockinglevel_2",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowcloudprotection",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_allowcloudprotection_1",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_submitsamplesconsent",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_submitsamplesconsent_1",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_puaprotection",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_puaprotection_1",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_scheduledscantypes",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_scheduledscantypes_1",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_schedulequickscantime",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 120
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_signatureupdateinterval",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 8
+        }
+      }
+    }
+  ]
+}

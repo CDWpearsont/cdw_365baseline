@@ -1,0 +1,50 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - Settings Sync - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 2. Disable Windows settings sync to cloud.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_settingsync_disablecredentialssettingsync",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_admx_settingsync_disablecredentialssettingsync_1",
+          "children": [
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+              "settingDefinitionId": "device_vendor_msft_policy_config_admx_settingsync_disablecredentialssettingsync_checkbox_useroverride",
+              "choiceSettingValue": {
+                "value": "device_vendor_msft_policy_config_admx_settingsync_disablecredentialssettingsync_checkbox_useroverride_0",
+                "children": []
+              }
+            }
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_settingssync_enablewindowsbackup",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_settingssync_enablewindowsbackup_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_windowsbackupandrestore_enablewindowsrestore",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_windowsbackupandrestore_enablewindowsrestore_true",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    }
+  ]
+}

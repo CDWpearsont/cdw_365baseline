@@ -1,0 +1,63 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L2 - Windows Update for Business - Reports and Telemetry - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 2. Windows Update diagnostics, telemetry and reporting.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_allowdevicenameindiagnosticdata",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_system_allowdevicenameindiagnosticdata_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_allowtelemetry",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_system_allowtelemetry_3",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_configuretelemetryoptinchangenotification",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_system_configuretelemetryoptinchangenotification_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_system_configuretelemetryoptinsettingsux",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_system_configuretelemetryoptinsettingsux_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_update_allowtemporaryenterprisefeaturecontrol",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_update_allowtemporaryenterprisefeaturecontrol_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    }
+  ]
+}
