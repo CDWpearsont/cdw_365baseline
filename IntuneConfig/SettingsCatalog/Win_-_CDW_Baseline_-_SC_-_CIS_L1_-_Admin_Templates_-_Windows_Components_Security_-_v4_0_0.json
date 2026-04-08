@@ -1,0 +1,63 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L1 - Admin Templates - Windows Components Security - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. Administrative Templates: Windows Explorer SmartScreen, Microsoft Store controls, File Explorer policies, and miscellaneous Windows component restrictions. 5 settings.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_configurewindowsdefendersmartscreen",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_configurewindowsdefendersmartscreen_1",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_turnoffdataexecutionpreventionforexplorer",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_turnoffdataexecutionpreventionforexplorer_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_turnoffheapterminationoncorruption",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_turnoffheapterminationoncorruption_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_turnoffshellprotocolprotectedmode",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_turnoffshellprotocolprotectedmode_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsstore_turnofftheoffertoupdatetothelatestversionofwindows",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_admx_windowscomponentsstore_turnofftheoffertoupdatetothelatestversionofwindows_1",
+          "children": []
+        }
+      }
+    }
+  ]
+}
