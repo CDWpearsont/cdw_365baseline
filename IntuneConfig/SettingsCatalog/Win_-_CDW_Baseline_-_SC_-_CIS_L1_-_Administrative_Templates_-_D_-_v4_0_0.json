@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L1 - Administrative Templates - D - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Administrative Templates. 92 settings using proven Settings Catalog IDs.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Administrative Templates. 66 settings using proven Settings Catalog IDs.",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [
@@ -59,17 +59,6 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_systemdeviceinstallation_preventdevicemetadataretrievalfromtheinternet",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_systemdeviceinstallation_preventdevicemetadataretrievalfromtheinternet_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_system_bootstartdriverinitialization",
         "choiceSettingValue": {
@@ -101,17 +90,6 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_systemgrouppolicy_turnoffbackgroundrefreshofgroup",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_systemgrouppolicy_turnoffbackgroundrefreshofgroup_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_disabledownloadingofprintdriversoverhttp",
         "choiceSettingValue": {
@@ -129,72 +107,6 @@
           "value": "device_vendor_msft_policy_config_connectivity_disableinternetdownloadforwebpublishingandonlineorderingwizards_1",
           "children": [],
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_systemlogon_blockuserfromshowingaccountdetailsonsignin",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_systemlogon_blockuserfromshowingaccountdetailsonsignin_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_systemlogon_donotdisplaynetworkselectionui",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_systemlogon_donotdisplaynetworkselectionui_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_systemlogon_donotenumerateconnectedusersondomainjoinedcomputers",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_systemlogon_donotenumerateconnectedusersondomainjoinedcomputers_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_systemlogon_enumeratelocalusersondomainjoinedcomputers",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_systemlogon_enumeratelocalusersondomainjoinedcomputers_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_systemlogon_turnoffpicturepasswordsignin",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_systemlogon_turnoffpicturepasswordsignin_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_systemlogon_turnonconveniencepinsignin",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_systemlogon_turnonconveniencepinsignin_0",
-          "children": []
         }
       }
     },
@@ -286,45 +198,12 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_systemwindowstimeservicetimeproviders_enablewindowsntpserver",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_systemwindowstimeservicetimeproviders_enablewindowsntpserver_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_appruntime_allowmicrosoftaccountstobeoptional",
         "choiceSettingValue": {
           "value": "device_vendor_msft_policy_config_appruntime_allowmicrosoftaccountstobeoptional_1",
           "children": [],
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsattachmentmanager_donotpreservezoneinformationinfileattachmentsuser",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentsattachmentmanager_donotpreservezoneinformationinfileattachmentsuser_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsattachmentmanager_notifyantivirusprogramswhenopeningattachmentsuser",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentsattachmentmanager_notifyantivirusprogramswhenopeningattachmentsuser_1",
-          "children": []
         }
       }
     },
@@ -403,17 +282,6 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentscredentialuserinterface_prevent",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentscredentialuserinterface_prevent_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_desktopappinstaller_enableexperimentalfeatures",
         "choiceSettingValue": {
@@ -458,17 +326,6 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentseventlogserviceapplication_specifythemaximumlogfilesizekb",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentseventlogserviceapplication_specifythemaximumlogfilesizekb_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_eventlog_channel_log_retention_3",
         "choiceSettingValue": {
@@ -480,56 +337,12 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentseventlogservicesecurity_specifythemaximumlogfilesizekb",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentseventlogservicesecurity_specifythemaximumlogfilesizekb_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_eventlog_channel_log_retention_4",
         "choiceSettingValue": {
           "value": "device_vendor_msft_policy_config_admx_eventlog_channel_log_retention_4_0",
           "children": [],
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentseventlogservicesetup_specify",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentseventlogservicesetup_specify_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentseventlogservicesystem_controleventlogbehaviorwhenthelogfilereachesitsmaximumsize",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentseventlogservicesystem_controleventlogbehaviorwhenthelogfilereachesitsmaximumsize_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentseventlogservicesystem_specify",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentseventlogservicesystem_specify_1",
-          "children": []
         }
       }
     },
@@ -577,45 +390,12 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_turnoffshellprotocolprotectedmode",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentsfileexplorer_turnoffshellprotocolprotectedmode_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_blockmicrosoftaccounts",
         "choiceSettingValue": {
           "value": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_blockmicrosoftaccounts_3",
           "children": [],
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsmicrosoftdefenderantivirusmaps_configurelocalsettingoverrideforreportingtomicrosoftmaps",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentsmicrosoftdefenderantivirusmaps_configurelocalsettingoverrideforreportingtomicrosoftmaps_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsnetworksharing_preventusersfromsharingfileswithintheirprofileuser",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentsnetworksharing_preventusersfromsharingfileswithintheirprofileuser_1",
-          "children": []
         }
       }
     },
@@ -665,28 +445,6 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsremotedesktopservicesremotedesktopsessionhostsecurity_requireuseofspecificsecuritylayerforremoterdpconnections",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentsremotedesktopservicesremotedesktopsessionhostsecurity_requireuseofspecificsecuritylayerforremoterdpconnections_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsremotedesktopservicesremotedesktopsessionhostsecurity_requireuserauthenticationforremoteconnectionsbyusingnetworklevelauthentication",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentsremotedesktopservicesremotedesktopsessionhostsecurity_requireuserauthenticationforremoteconnectionsbyusingnetworklevelauthentication_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_remotedesktopservices_clientconnectionencryptionlevel",
         "choiceSettingValue": {
@@ -707,56 +465,12 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsremotedesktopservicesremotedesktopsessionhosttemporaryfolders_donotdeletetempfoldersuponexit",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentsremotedesktopservicesremotedesktopsessionhosttemporaryfolders_donotdeletetempfoldersuponexit_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableenclosuredownloading",
         "choiceSettingValue": {
           "value": "device_vendor_msft_policy_config_internetexplorer_disableenclosuredownloading_1",
           "children": [],
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentsstore_turnofftheoffertoupdatetothelatestversionofwindows",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentsstore_turnofftheoffertoupdatetothelatestversionofwindows_1",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentswindowslogonoptions_enablemprnotificationsforthesystem",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentswindowslogonoptions_enablemprnotificationsforthesystem_0",
-          "children": []
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowscomponentswindowslogonoptions_signinandlocklastinteractiveuserautomaticallyafterarestart",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_admx_windowscomponentswindowslogonoptions_signinandlocklastinteractiveuserautomaticallyafterarestart_0",
-          "children": []
         }
       }
     },

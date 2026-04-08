@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - ES - CIS L1 - Windows Hello for Business - D - WHfB Configuration - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. WHfB enabled, TPM required, minimum PIN 6 chars, enhanced anti-spoofing for facial recognition, ESS enabled.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. WHfB enabled, TPM required, minimum PIN 6 chars, enhanced anti-spoofing for facial recognition. ESS peripheral setting excluded (not in this tenant catalog).",
   "platforms": "windows10",
   "technologies": "mdm",
   "templateReference": {
@@ -65,15 +65,6 @@
               "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_enablepinrecovery",
               "choiceSettingValue": {
                 "value": "device_vendor_msft_passportforwork_{tenantid}_policies_enablepinrecovery_true",
-                "children": []
-              }
-            },
-            {
-              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-              "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_enableesswithsupportedperipherals",
-              "choiceSettingValue": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                "value": "device_vendor_msft_passportforwork_{tenantid}_policies_enableesswithsupportedperipherals_1",
                 "children": []
               }
             }

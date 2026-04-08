@@ -116,11 +116,10 @@
     {
       "settingInstance": {
         "settingDefinitionId": "device_vendor_msft_policy_config_defender_cloudextendedtimeout",
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_defender_cloudextendedtimeout_1",
-          "children": []
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 50
         }
       }
     }
