@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - ES - CIS L1 - Defender Antivirus - D - Antivirus Configuration - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. Tamper Protection, Windows Security Center hardening, PUA block mode. Note: Tamper Protection requires Defender for Endpoint P1/P2 or Defender for Business license.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. Tamper Protection and Windows Security Center hardening. Note: Tamper Protection requires Defender for Endpoint P1/P2 or Defender for Business license.",
   "platforms": "windows10",
   "technologies": "mdm,microsoftSense",
   "templateReference": {
@@ -77,24 +77,6 @@
           },
           "children": [],
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
-        }
-      }
-    },
-    {
-      "settingInstance": {
-        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "settingDefinitionId": "device_vendor_msft_policy_config_defender_puaprotection",
-        "settingInstanceTemplateReference": {
-          "settingInstanceTemplateId": "c7af1f43-a0a1-44f0-9a36-b9cbdc94b8ab"
-        },
-        "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_defender_puaprotection_1",
-          "settingValueTemplateReference": {
-            "settingValueTemplateId": "5d6c9ca4-9c5d-4ae0-9f84-c3b9e13a7d05",
-            "useTemplateDefault": false
-          },
-          "children": []
         }
       }
     }
