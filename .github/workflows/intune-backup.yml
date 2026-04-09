@@ -293,7 +293,8 @@ jobs:
               $erPath = "$backupRoot/EnrolmentRestrictions"
               New-Item -Path $erPath -ItemType Directory -Force | Out-Null
               $cdwER = Get-MgDeviceManagementDeviceEnrollmentConfiguration -All |
-                       Where-Object { $_.DisplayName -like "*CDW Baseline*" }
+                       Where-Object { $_.DisplayName -like "*CDW Baseline*" } |
+                       Sort-Object Id -Unique
               foreach ($policy in $cdwER) {
                 $safeName = $policy.DisplayName -replace '[^a-zA-Z0-9-]', '_'
                 # Use REST directly — SDK flattens platform restriction subtypes poorly
@@ -308,9 +309,10 @@ jobs:
               }
               Clean-FolderForCDW -FolderPath $erPath -CurrentPolicyNames ($cdwER.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
               Write-Output "Exported $($cdwER.Count) enrolment restriction policies"
-            } catch { Write-Error "Enrolment Restrictions export failed: $($_.Exception.Message)" }
+            } catch { Write-Warning "Enrolment Restrictions export failed: $($_.Exception.Message)" }
 
             # MAM App Protection Policies (Android + iOS)
+            # Requires DeviceManagementApps.Read.All on the app registration.
             # The top-level policy object does not include the apps list — requires a separate child call.
             try {
               $mamPath = "$backupRoot/AppProtectionPolicies"
@@ -324,11 +326,11 @@ jobs:
               $allMAMNames = @()
               $totalMAM    = 0
               foreach ($ep in $mamEndpoints) {
-                $response  = Invoke-MgGraphRequest -Method GET -Uri $ep.Uri -ErrorAction Stop
+                $response    = Invoke-MgGraphRequest -Method GET -Uri $ep.Uri -ErrorAction Stop
                 $mamPolicies = $response.value | Where-Object { $_.displayName -like "*CDW Baseline*" }
 
                 foreach ($policy in $mamPolicies) {
-                  $safeName = $policy.displayName -replace '[^a-zA-Z0-9-]', '_'
+                  $safeName     = $policy.displayName -replace '[^a-zA-Z0-9-]', '_'
                   $allMAMNames += $safeName
 
                   # Fetch apps list — separate child resource, not present on parent object
@@ -341,7 +343,7 @@ jobs:
                     'roleScopeTagIds','deployedAppCount','isAssigned','@odata.context','@odata.type')
                   foreach ($f in $removePolicy) { $policy.Remove($f) }
 
-                  # Strip read-only fields from each app entry and re-add @odata.type
+                  # Strip read-only fields from each app entry
                   $cleanApps = @($appsList | ForEach-Object {
                     $app = $_
                     @('id','version') | ForEach-Object { $app.Remove($_) }
@@ -356,9 +358,10 @@ jobs:
               }
               Clean-FolderForCDW -FolderPath $mamPath -CurrentPolicyNames $allMAMNames
               Write-Output "Exported $totalMAM MAM app protection policies"
-            } catch { Write-Error "MAM App Protection export failed: $($_.Exception.Message)" }
+            } catch { Write-Warning "MAM App Protection export failed: $($_.Exception.Message)" }
 
             # Conditional Access Policies
+            # Requires Policy.Read.All on the app registration.
             try {
               $caPath = "$backupRoot/ConditionalAccess"
               New-Item -Path $caPath -ItemType Directory -Force | Out-Null
@@ -377,7 +380,7 @@ jobs:
               }
               Clean-FolderForCDW -FolderPath $caPath -CurrentPolicyNames ($cdwCA.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
               Write-Output "Exported $($cdwCA.Count) Conditional Access policies"
-            } catch { Write-Error "Conditional Access export failed: $($_.Exception.Message)" }
+            } catch { Write-Warning "Conditional Access export failed: $($_.Exception.Message)" }
 
             # Git commit & push
             git config --global user.name "CDW Baseline Bot"
