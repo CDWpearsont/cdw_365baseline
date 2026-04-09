@@ -1,7 +1,7 @@
 {
   "@odata.type": "#microsoft.graph.iosManagedAppProtection",
-  "displayName": "iOS - CDW Baseline - MAM - M365 App Protection - v1.0",
-  "description": "App Protection Policy for Microsoft 365 applications on iOS/iPadOS. Applies to unmanaged (BYOD) personal devices only. Enforces PIN, encryption, data transfer restrictions, FaceID/TouchID, and conditional launch checks.",
+  "displayName": "iOS - CDW Baseline - MAM - BYOD App Protection - v1.0",
+  "description": "App Protection Policy for applications on iOS/iPadOS. Applies to unmanaged (BYOD) personal devices only. Enforces PIN, encryption, data transfer restrictions, FaceID/TouchID, and conditional launch checks.",
   "targetedAppManagementLevels": "unmanaged",
   "periodOfflineBeforeAccessCheck": "PT12H",
   "periodOnlineBeforeAccessCheck": "PT30M",
