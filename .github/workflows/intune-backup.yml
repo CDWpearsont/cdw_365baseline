@@ -26,7 +26,7 @@ jobs:
       - name: Install Microsoft.Graph modules
         shell: pwsh
         run: |
-          Install-Module Microsoft.Graph.Authentication, Microsoft.Graph.DeviceManagement, Microsoft.Graph.Devices.CorporateManagement, Microsoft.Graph.Beta.DeviceManagement -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
+          Install-Module Microsoft.Graph.Authentication, Microsoft.Graph.DeviceManagement, Microsoft.Graph.Devices.CorporateManagement, Microsoft.Graph.Beta.DeviceManagement, Microsoft.Graph.Beta.Devices.CorporateManagement, Microsoft.Graph.Identity.SignIns -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
 
       - name: Export Intune Configurations to Repo (CDW Baseline only)
         env:
@@ -287,6 +287,97 @@ jobs:
 
               Write-Output "Exported $($cdwES.Count) ES and $($cdwSC.Count) SC policies"
             } catch { Write-Error "ES/SC export failed: $($_.Exception.Message)" }
+
+            # Enrolment Restrictions
+            try {
+              $erPath = "$backupRoot/EnrolmentRestrictions"
+              New-Item -Path $erPath -ItemType Directory -Force | Out-Null
+              $cdwER = Get-MgDeviceManagementDeviceEnrollmentConfiguration -All |
+                       Where-Object { $_.DisplayName -like "*CDW Baseline*" }
+              foreach ($policy in $cdwER) {
+                $safeName = $policy.DisplayName -replace '[^a-zA-Z0-9-]', '_'
+                # Use REST directly — SDK flattens platform restriction subtypes poorly
+                $detail = Invoke-MgGraphRequest -Method GET `
+                  -Uri "https://graph.microsoft.com/beta/deviceManagement/deviceEnrollmentConfigurations/$($policy.Id)" `
+                  -ErrorAction Stop
+                $removeFields = @('id','createdDateTime','lastModifiedDateTime','version',
+                  'roleScopeTagIds','assignments','priorityMetaData','@odata.context')
+                foreach ($f in $removeFields) { $detail.Remove($f) }
+                $detail | ConvertTo-Json -Depth 20 | Out-File "$erPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (ER): $($policy.DisplayName)"
+              }
+              Clean-FolderForCDW -FolderPath $erPath -CurrentPolicyNames ($cdwER.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+              Write-Output "Exported $($cdwER.Count) enrolment restriction policies"
+            } catch { Write-Error "Enrolment Restrictions export failed: $($_.Exception.Message)" }
+
+            # MAM App Protection Policies (Android + iOS)
+            # The top-level policy object does not include the apps list — requires a separate child call.
+            try {
+              $mamPath = "$backupRoot/AppProtectionPolicies"
+              New-Item -Path $mamPath -ItemType Directory -Force | Out-Null
+
+              $mamEndpoints = @(
+                @{ Uri = "https://graph.microsoft.com/beta/deviceAppManagement/androidManagedAppProtections"; Platform = "Android" },
+                @{ Uri = "https://graph.microsoft.com/beta/deviceAppManagement/iosManagedAppProtections";     Platform = "iOS" }
+              )
+
+              $allMAMNames = @()
+              $totalMAM    = 0
+              foreach ($ep in $mamEndpoints) {
+                $response  = Invoke-MgGraphRequest -Method GET -Uri $ep.Uri -ErrorAction Stop
+                $mamPolicies = $response.value | Where-Object { $_.displayName -like "*CDW Baseline*" }
+
+                foreach ($policy in $mamPolicies) {
+                  $safeName = $policy.displayName -replace '[^a-zA-Z0-9-]', '_'
+                  $allMAMNames += $safeName
+
+                  # Fetch apps list — separate child resource, not present on parent object
+                  $appsUri      = "$($ep.Uri)/$($policy.id)/apps"
+                  $appsResponse = Invoke-MgGraphRequest -Method GET -Uri $appsUri -ErrorAction SilentlyContinue
+                  $appsList     = if ($appsResponse) { $appsResponse.value } else { @() }
+
+                  # Strip read-only fields from policy
+                  $removePolicy = @('id','createdDateTime','lastModifiedDateTime','version',
+                    'roleScopeTagIds','deployedAppCount','isAssigned','@odata.context','@odata.type')
+                  foreach ($f in $removePolicy) { $policy.Remove($f) }
+
+                  # Strip read-only fields from each app entry and re-add @odata.type
+                  $cleanApps = @($appsList | ForEach-Object {
+                    $app = $_
+                    @('id','version') | ForEach-Object { $app.Remove($_) }
+                    $app
+                  })
+
+                  $policy['apps'] = $cleanApps
+                  $policy | ConvertTo-Json -Depth 20 | Out-File "$mamPath/$safeName.json" -Encoding UTF8
+                  Write-Output "Exported (MAM/$($ep.Platform)): $($policy.displayName)"
+                  $totalMAM++
+                }
+              }
+              Clean-FolderForCDW -FolderPath $mamPath -CurrentPolicyNames $allMAMNames
+              Write-Output "Exported $totalMAM MAM app protection policies"
+            } catch { Write-Error "MAM App Protection export failed: $($_.Exception.Message)" }
+
+            # Conditional Access Policies
+            try {
+              $caPath = "$backupRoot/ConditionalAccess"
+              New-Item -Path $caPath -ItemType Directory -Force | Out-Null
+              $cdwCA = Get-MgIdentityConditionalAccessPolicy -All |
+                       Where-Object { $_.DisplayName -like "*CDW Baseline*" }
+              foreach ($policy in $cdwCA) {
+                $safeName = $policy.DisplayName -replace '[^a-zA-Z0-9-]', '_'
+                # Use REST directly — SDK omits nested grantControls/sessionControls properties
+                $detail = Invoke-MgGraphRequest -Method GET `
+                  -Uri "https://graph.microsoft.com/v1.0/identity/conditionalAccess/policies/$($policy.Id)" `
+                  -ErrorAction Stop
+                $removeFields = @('id','createdDateTime','modifiedDateTime','@odata.context')
+                foreach ($f in $removeFields) { $detail.Remove($f) }
+                $detail | ConvertTo-Json -Depth 20 | Out-File "$caPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (CA): $($policy.DisplayName)"
+              }
+              Clean-FolderForCDW -FolderPath $caPath -CurrentPolicyNames ($cdwCA.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
+              Write-Output "Exported $($cdwCA.Count) Conditional Access policies"
+            } catch { Write-Error "Conditional Access export failed: $($_.Exception.Message)" }
 
             # Git commit & push
             git config --global user.name "CDW Baseline Bot"
