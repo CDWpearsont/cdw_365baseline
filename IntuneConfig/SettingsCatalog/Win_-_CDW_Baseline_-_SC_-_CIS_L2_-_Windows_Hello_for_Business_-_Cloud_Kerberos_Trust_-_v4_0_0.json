@@ -1,0 +1,38 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L2 - Windows Hello for Business - Cloud Kerberos Trust - v4.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 2. Windows Hello for Business Cloud Kerberos Trust.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_kerberos_cloudkerberosticketretrievalenabled",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_kerberos_cloudkerberosticketretrievalenabled_1",
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}",
+        "groupSettingCollectionValue": {
+          "children": [
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+              "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_usecloudtrustforonpremauth",
+              "choiceSettingValue": {
+                "value": "device_vendor_msft_passportforwork_{tenantid}_policies_usecloudtrustforonpremauth_true",
+                "children": []
+              }
+            }
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue"
+        }
+      }
+    }
+  ]
+}
