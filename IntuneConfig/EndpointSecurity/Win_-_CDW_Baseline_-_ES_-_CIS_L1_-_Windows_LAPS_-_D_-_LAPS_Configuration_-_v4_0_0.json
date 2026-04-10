@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - ES - CIS L1 - Windows LAPS - D - LAPS Configuration - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. LAPS backup to Azure AD, password age 30 days, large+small+numbers+special complexity, min length 15, post-auth reset and logoff, 8 hour delay.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. LAPS backup to Azure AD, password age 30 days, large+small+numbers+special complexity, min length 15, post-auth reset and logoff, 8 hour delay.",
   "platforms": "windows10",
   "technologies": "mdm",
   "templateReference": {

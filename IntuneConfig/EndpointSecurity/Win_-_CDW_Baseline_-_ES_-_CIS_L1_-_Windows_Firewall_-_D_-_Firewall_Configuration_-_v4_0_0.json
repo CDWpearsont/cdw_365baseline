@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - ES - CIS L1 - Windows Firewall - D - Firewall Configuration - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. Firewall enabled on all three profiles, stateful FTP disabled, filtering platform connection auditing. Additional CIS firewall settings (default inbound action, logging) require template refs not available via API.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Firewall enabled on all three profiles, stateful FTP disabled, filtering platform connection auditing. Additional CIS firewall settings (default inbound action, logging) require template refs not available via API.",
   "platforms": "windows10",
   "technologies": "mdm,microsoftSense",
   "templateReference": {
@@ -16,9 +16,13 @@
           "settingInstanceTemplateId": "38329af6-2670-4a71-972d-482010ca97fc"
         },
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "vendor_msft_firewall_mdmstore_global_disablestatefulftp_true",
-          "children": []
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "559f6e01-53a9-4c10-9f10-d09d8fe7f903",
+            "useTemplateDefault": false
+          },
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -30,9 +34,13 @@
           "settingInstanceTemplateId": "7714c373-a19a-4b64-ba6d-2e9db04a7684"
         },
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "vendor_msft_firewall_mdmstore_domainprofile_enablefirewall_true",
-          "children": []
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "120c5dbe-0c88-46f0-b897-2c996d3e5277",
+            "useTemplateDefault": false
+          },
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -44,9 +52,13 @@
           "settingInstanceTemplateId": "1c14f914-69bb-49f8-af5b-e29173a6ee95"
         },
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "vendor_msft_firewall_mdmstore_privateprofile_enablefirewall_true",
-          "children": []
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "9d55dfae-d55f-4f2a-af03-9a9524f61e76",
+            "useTemplateDefault": false
+          },
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -58,9 +70,13 @@
           "settingInstanceTemplateId": "e2714734-708e-4286-8ae9-d56821e306a3"
         },
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "vendor_msft_firewall_mdmstore_publicprofile_enablefirewall_true",
-          "children": []
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "c38694c7-51a4-4a35-8f64-b10866a04776",
+            "useTemplateDefault": false
+          },
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -72,9 +88,13 @@
           "settingInstanceTemplateId": "be9453a7-6348-4112-a49e-ad029d5d3548"
         },
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_audit_objectaccess_auditfilteringplatformconnection_2",
-          "children": []
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "f5e48ffe-d924-4ee1-a1a1-677e259952fa",
+            "useTemplateDefault": false
+          },
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -86,9 +106,13 @@
           "settingInstanceTemplateId": "43f5366a-7e27-47a9-be51-d14189d02a17"
         },
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_audit_objectaccess_auditfilteringplatformpacketdrop_2",
-          "children": []
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "bf48ef86-73e5-4a66-a693-24ff8e4be799",
+            "useTemplateDefault": false
+          },
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     }

@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L1 - User Rights - D - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. User Rights assignments using proven SID-based values. 26 settings.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. User Rights assignments using proven SID-based values. 26 settings.",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [

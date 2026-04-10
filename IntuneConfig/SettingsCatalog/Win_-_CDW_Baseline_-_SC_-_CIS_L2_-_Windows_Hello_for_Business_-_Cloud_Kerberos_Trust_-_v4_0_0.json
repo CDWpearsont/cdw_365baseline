@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L2 - Windows Hello for Business - Cloud Kerberos Trust - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 2. Windows Hello for Business Cloud Kerberos Trust.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Windows Hello for Business Cloud Kerberos Trust.",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [

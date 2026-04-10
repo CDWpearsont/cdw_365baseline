@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L1 - Microsoft Office - Device Security - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. Microsoft Office Device Security.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Office Device Security.",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [

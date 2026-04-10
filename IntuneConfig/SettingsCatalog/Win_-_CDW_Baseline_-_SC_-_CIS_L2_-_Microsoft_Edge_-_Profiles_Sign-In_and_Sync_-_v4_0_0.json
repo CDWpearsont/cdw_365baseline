@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L2 - Microsoft Edge - Profiles Sign-In and Sync - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 2. Microsoft Edge profile, sign-in and sync controls.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Microsoft Edge profile, sign-in and sync controls.",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [

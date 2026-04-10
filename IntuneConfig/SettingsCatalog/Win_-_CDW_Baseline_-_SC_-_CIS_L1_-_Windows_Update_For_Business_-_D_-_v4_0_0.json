@@ -1,24 +1,24 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L1 - Windows Update For Business - D - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Settings Catalog policy for: Windows Update For Business. Auto-generated from CIS PDF. 5 settings.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Windows Update For Business. Auto-generated from CIS PDF. 5 settings.",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_update_allowautoupdate",
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_update_allowautoupdate",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_update_allowautoupdate_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_update_deferfeatureupdatesperiodindays",
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_update_deferfeatureupdatesperiodindays",
         "simpleSettingValue": {
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
           "value": 180
@@ -27,8 +27,8 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_update_deferqualityupdatesperiodindays",
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_update_deferqualityupdatesperiodindays",
         "simpleSettingValue": {
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
           "value": 0
@@ -37,23 +37,23 @@
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_update_managepreviewbuilds",
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_update_managepreviewbuilds",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_update_managepreviewbuilds_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_update_scheduledinstallday",
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_update_scheduledinstallday",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_update_scheduledinstallday_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     }

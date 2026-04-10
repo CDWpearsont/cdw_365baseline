@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - ES - CIS L1 - Windows Hello for Business - D - WHfB Configuration - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. WHfB enabled, TPM required, minimum PIN 6 chars, enhanced anti-spoofing. (ESS peripheral setting excluded \u2014 not in tenant catalog.)",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. WHfB enabled, TPM required, minimum PIN 6 chars, enhanced anti-spoofing. (ESS peripheral setting excluded — not in tenant catalog.)",
   "platforms": "windows10",
   "technologies": "mdm",
   "templateReference": {

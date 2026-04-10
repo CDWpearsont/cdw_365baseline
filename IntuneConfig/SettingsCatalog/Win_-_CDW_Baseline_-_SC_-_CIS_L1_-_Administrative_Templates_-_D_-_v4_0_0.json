@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L1 - Administrative Templates - D - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1 Administrative Templates. 66 settings using proven Settings Catalog IDs.",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Administrative Templates. 66 settings using proven Settings Catalog IDs.",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [

@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - ES - CIS L1 - Encryption - D - BitLocker (OS Disk) - v4.0.0",
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 \u2014 Level 1. BitLocker OS drive encryption enforced with XTS-AES 256, TPM required, recovery key backed to AAD, standard user encryption allowed (silent enablement).",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. BitLocker OS drive encryption enforced with XTS-AES 256, TPM required, recovery key backed to AAD, standard user encryption allowed (silent enablement).",
   "platforms": "windows10",
   "technologies": "mdm",
   "templateReference": {
