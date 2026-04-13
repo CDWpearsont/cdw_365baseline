@@ -1,0 +1,42 @@
+{
+  "displayName": "CA1000-Developers-BaseProtection-AllApps-AnyPlatform-ForwardToDefenderforCloudApps",
+  "state": "disabled",
+  "deletedDateTime": null,
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [
+        "All"
+      ],
+      "excludeApplications": [
+        "d4ebce55-015a-49b5-a083-c84d1797ae8c",
+        "<YOURAPP:CMG-ServerApp>"
+      ],
+      "includeUserActions": [],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [],
+      "excludeUsers": [],
+      "includeGroups": [
+        "<YOURGROUP:CA-Persona-Developers>"
+      ],
+      "excludeGroups": [
+        "<YOURGROUP:CA-BreakGlassAccounts>",
+        "<YOURGROUP:CA-Persona-Developers-BaseProtection-Exclusions>"
+      ],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "excludeGuestsOrExternalUsers": null
+    }
+  },
+  "grantControls": null,
+  "sessionControls": null
+}

@@ -1,0 +1,52 @@
+{
+  "displayName": "CA403-Guests-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+  "state": "disabled",
+  "deletedDateTime": null,
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "exchangeActiveSync",
+      "other"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [
+        "All"
+      ],
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [],
+      "excludeUsers": [],
+      "includeGroups": [],
+      "excludeGroups": [
+        "<YOURGROUP:CA-BreakGlassAccounts>",
+        "<YOURGROUP:CA-Persona-Guests-IdentityProtection-Exclusions>"
+      ],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": {
+        "guestOrExternalUserTypes": "internalGuest,b2bCollaborationGuest,b2bCollaborationMember,b2bDirectConnectUser,otherExternalUser,serviceProvider",
+        "externalTenants": {
+          "@odata.type": "#microsoft.graph.conditionalAccessAllExternalTenants",
+          "membershipKind": "all"
+        }
+      },
+      "excludeGuestsOrExternalUsers": null
+    }
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [
+      "block"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  },
+  "sessionControls": null
+}

@@ -1,0 +1,53 @@
+{
+  "displayName": "CA103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
+  "state": "disabled",
+  "deletedDateTime": null,
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [
+      "high",
+      "medium"
+    ],
+    "clientAppTypes": [
+      "all"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [
+        "All"
+      ],
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [],
+      "excludeUsers": [],
+      "includeGroups": [
+        "<YOURGROUP:CA-Persona-Admins>"
+      ],
+      "excludeGroups": [
+        "<YOURGROUP:CA-BreakGlassAccounts>",
+        "<YOURGROUP:CA-Persona-Microsoft365ServiceAccounts>",
+        "<YOURGROUP:CA-Persona-AzureServiceAccounts>",
+        "<YOURGROUP:CA-Persona-CorpServiceAccounts>",
+        "<YOURGROUP:CA-Persona-Admins-IdentityProtection-Exclusions>"
+      ],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "excludeGuestsOrExternalUsers": null
+    }
+  },
+  "grantControls": {
+    "operator": "AND",
+    "builtInControls": [
+      "mfa"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  },
+  "sessionControls": null
+}
