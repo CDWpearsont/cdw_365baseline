@@ -1,53 +1,73 @@
 {
-  "displayName": "CA502-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
-  "state": "disabled",
-  "deletedDateTime": null,
-  "conditions": {
-    "userRiskLevels": [
-      "high",
-      "medium"
-    ],
-    "signInRiskLevels": [
-      "high",
-      "medium"
-    ],
-    "clientAppTypes": [
-      "all"
-    ],
-    "servicePrincipalRiskLevels": [],
-    "applications": {
-      "includeApplications": [
-        "All"
-      ],
-      "excludeApplications": [],
-      "includeUserActions": [],
-      "includeAuthenticationContextClassReferences": [],
-      "applicationFilter": null
-    },
-    "users": {
-      "includeUsers": [],
-      "excludeUsers": [],
-      "includeGroups": [
-        "<YOURGROUP:CA-Persona-GuestAdmins>"
-      ],
-      "excludeGroups": [
-        "<YOURGROUP:CA-BreakGlassAccounts>",
-        "<YOURGROUP:CA-Persona-GuestAdmins-IdentityProtection-Exclusions>"
-      ],
-      "includeRoles": [],
-      "excludeRoles": [],
-      "includeGuestsOrExternalUsers": null,
-      "excludeGuestsOrExternalUsers": null
-    }
-  },
-  "grantControls": {
-    "operator": "OR",
-    "builtInControls": [
-      "mfa"
-    ],
-    "customAuthenticationFactors": [],
-    "termsOfUse": [],
-    "authenticationStrength": null
-  },
-  "sessionControls": null
+    "displayName":  "CDW502-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
+    "state":  "disabled",
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "userRiskLevels":  [
+                                              "high",
+                                              "medium"
+                                          ],
+                       "signInRiskLevels":  [
+                                                "high",
+                                                "medium"
+                                            ],
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "servicePrincipalRiskLevels":  [
+
+                                                      ],
+                       "applications":  {
+                                            "includeApplications":  [
+                                                                        "All"
+                                                                    ],
+                                            "excludeApplications":  [
+
+                                                                    ],
+                                            "includeUserActions":  [
+
+                                                                   ],
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "applicationFilter":  null
+                                        },
+                       "users":  {
+                                     "includeUsers":  [
+
+                                                      ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+                                                           "\u003cYOURGROUP:CA-Persona-GuestAdmins\u003e"
+                                                       ],
+                                     "excludeGroups":  [
+                                                           "\u003cYOURGROUP:CA-BreakGlassAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-GuestAdmins-IdentityProtection-Exclusions\u003e"
+                                                       ],
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  null,
+                                     "excludeGuestsOrExternalUsers":  null
+                                 }
+                   },
+    "grantControls":  {
+                          "operator":  "OR",
+                          "builtInControls":  [
+                                                  "mfa"
+                                              ],
+                          "customAuthenticationFactors":  [
+
+                                                          ],
+                          "termsOfUse":  [
+
+                                         ],
+                          "authenticationStrength":  null
+                      },
+    "sessionControls":  null
 }

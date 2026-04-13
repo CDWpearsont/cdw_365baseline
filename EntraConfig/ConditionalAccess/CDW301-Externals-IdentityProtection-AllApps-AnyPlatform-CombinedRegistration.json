@@ -1,48 +1,72 @@
 {
-  "displayName": "CA301-Externals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
-  "state": "disabled",
-  "deletedDateTime": null,
-  "conditions": {
-    "userRiskLevels": [],
-    "signInRiskLevels": [],
-    "clientAppTypes": [
-      "all"
-    ],
-    "servicePrincipalRiskLevels": [],
-    "applications": {
-      "includeApplications": [],
-      "excludeApplications": [],
-      "includeUserActions": [
-        "urn:user:registersecurityinfo"
-      ],
-      "includeAuthenticationContextClassReferences": [],
-      "applicationFilter": null
-    },
-    "users": {
-      "includeUsers": [],
-      "excludeUsers": [],
-      "includeGroups": [
-        "<YOURGROUP:CA-Persona-Externals>"
-      ],
-      "excludeGroups": [
-        "<YOURGROUP:CA-BreakGlassAccounts>",
-        "<YOURGROUP:CA-Persona-Externals-BaseProtection-Exclusions>"
-      ],
-      "includeRoles": [],
-      "excludeRoles": [],
-      "includeGuestsOrExternalUsers": null,
-      "excludeGuestsOrExternalUsers": null
-    }
-  },
-  "grantControls": {
-    "operator": "OR",
-    "builtInControls": [
-      "compliantDevice",
-      "domainJoinedDevice"
-    ],
-    "customAuthenticationFactors": [],
-    "termsOfUse": [],
-    "authenticationStrength": null
-  },
-  "sessionControls": null
+    "displayName":  "CDW301-Externals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
+    "state":  "disabled",
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "userRiskLevels":  [
+
+                                          ],
+                       "signInRiskLevels":  [
+
+                                            ],
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "servicePrincipalRiskLevels":  [
+
+                                                      ],
+                       "applications":  {
+                                            "includeApplications":  [
+
+                                                                    ],
+                                            "excludeApplications":  [
+
+                                                                    ],
+                                            "includeUserActions":  [
+                                                                       "urn:user:registersecurityinfo"
+                                                                   ],
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "applicationFilter":  null
+                                        },
+                       "users":  {
+                                     "includeUsers":  [
+
+                                                      ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+                                                           "\u003cYOURGROUP:CA-Persona-Externals\u003e"
+                                                       ],
+                                     "excludeGroups":  [
+                                                           "\u003cYOURGROUP:CA-BreakGlassAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Externals-BaseProtection-Exclusions\u003e"
+                                                       ],
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  null,
+                                     "excludeGuestsOrExternalUsers":  null
+                                 }
+                   },
+    "grantControls":  {
+                          "operator":  "OR",
+                          "builtInControls":  [
+                                                  "compliantDevice",
+                                                  "domainJoinedDevice"
+                                              ],
+                          "customAuthenticationFactors":  [
+
+                                                          ],
+                          "termsOfUse":  [
+
+                                         ],
+                          "authenticationStrength":  null
+                      },
+    "sessionControls":  null
 }

@@ -1,58 +1,78 @@
 {
-  "displayName": "CA107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy",
-  "state": "disabled",
-  "deletedDateTime": null,
-  "conditions": {
-    "userRiskLevels": [],
-    "signInRiskLevels": [],
-    "clientAppTypes": [
-      "all"
-    ],
-    "servicePrincipalRiskLevels": [],
-    "applications": {
-      "includeApplications": [
-        "All"
-      ],
-      "excludeApplications": [],
-      "includeUserActions": [],
-      "includeAuthenticationContextClassReferences": [],
-      "applicationFilter": null
-    },
-    "users": {
-      "includeUsers": [],
-      "excludeUsers": [],
-      "includeGroups": [
-        "<YOURGROUP:CA-Persona-Admins>"
-      ],
-      "excludeGroups": [
-        "<YOURGROUP:CA-BreakGlassAccounts>",
-        "<YOURGROUP:CA-Persona-Microsoft365ServiceAccounts>",
-        "<YOURGROUP:CA-Persona-AzureServiceAccounts>",
-        "<YOURGROUP:CA-Persona-CorpServiceAccounts>",
-        "<YOURGROUP:CA-Persona-Admins-DataProtection-Exclusions>"
-      ],
-      "includeRoles": [],
-      "excludeRoles": [],
-      "includeGuestsOrExternalUsers": null,
-      "excludeGuestsOrExternalUsers": null
-    }
-  },
-  "grantControls": null,
-  "sessionControls": {
-    "signInFrequency": {
-      "value": 1,
-      "type": "hours",
-      "authenticationType": "primaryAndSecondaryAuthentication",
-      "frequencyInterval": "timeBased",
-      "isEnabled": true
-    },
-    "persistentBrowser": {
-      "mode": "never",
-      "isEnabled": true
-    },
-    "disableResilienceDefaults": null,
-    "applicationEnforcedRestrictions": null,
-    "cloudAppSecurity": null,
-    "secureSignInSession": null
-  }
+    "displayName":  "CDW107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy",
+    "state":  "disabled",
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "userRiskLevels":  [
+
+                                          ],
+                       "signInRiskLevels":  [
+
+                                            ],
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "servicePrincipalRiskLevels":  [
+
+                                                      ],
+                       "applications":  {
+                                            "includeApplications":  [
+                                                                        "All"
+                                                                    ],
+                                            "excludeApplications":  [
+
+                                                                    ],
+                                            "includeUserActions":  [
+
+                                                                   ],
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "applicationFilter":  null
+                                        },
+                       "users":  {
+                                     "includeUsers":  [
+
+                                                      ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+                                                           "\u003cYOURGROUP:CA-Persona-Admins\u003e"
+                                                       ],
+                                     "excludeGroups":  [
+                                                           "\u003cYOURGROUP:CA-BreakGlassAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Microsoft365ServiceAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-AzureServiceAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-CorpServiceAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Admins-DataProtection-Exclusions\u003e"
+                                                       ],
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  null,
+                                     "excludeGuestsOrExternalUsers":  null
+                                 }
+                   },
+    "grantControls":  null,
+    "sessionControls":  {
+                            "signInFrequency":  {
+                                                    "value":  1,
+                                                    "type":  "hours",
+                                                    "authenticationType":  "primaryAndSecondaryAuthentication",
+                                                    "frequencyInterval":  "timeBased",
+                                                    "isEnabled":  true
+                                                },
+                            "persistentBrowser":  {
+                                                      "mode":  "never",
+                                                      "isEnabled":  true
+                                                  },
+                            "disableResilienceDefaults":  null,
+                            "applicationEnforcedRestrictions":  null,
+                            "cloudAppSecurity":  null,
+                            "secureSignInSession":  null
+                        }
 }

@@ -1,52 +1,78 @@
 {
-  "displayName": "CA901-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockHighRisk",
-  "state": "disabled",
-  "deletedDateTime": null,
-  "conditions": {
-    "userRiskLevels": [],
-    "signInRiskLevels": [],
-    "clientAppTypes": [
-      "all"
-    ],
-    "servicePrincipalRiskLevels": [],
-    "applications": {
-      "includeApplications": [
-        "All"
-      ],
-      "excludeApplications": [],
-      "includeUserActions": [],
-      "includeAuthenticationContextClassReferences": [],
-      "applicationFilter": null
-    },
-    "users": {
-      "includeUsers": [
-        "All"
-      ],
-      "excludeUsers": [],
-      "includeGroups": [],
-      "excludeGroups": [],
-      "includeRoles": [],
-      "excludeRoles": [],
-      "includeGuestsOrExternalUsers": null,
-      "excludeGuestsOrExternalUsers": null
-    },
-    "locations": {
-      "includeLocations": [
-        "All"
-      ],
-      "excludeLocations": [
-        "<YOURLOCATION:Named Locations for workload identities if available>"
-      ]
-    }
-  },
-  "grantControls": {
-    "operator": "OR",
-    "builtInControls": [
-      "block"
-    ],
-    "customAuthenticationFactors": [],
-    "termsOfUse": [],
-    "authenticationStrength": null
-  },
-  "sessionControls": null
+    "displayName":  "CDW901-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockHighRisk",
+    "state":  "disabled",
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "userRiskLevels":  [
+
+                                          ],
+                       "signInRiskLevels":  [
+
+                                            ],
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "servicePrincipalRiskLevels":  [
+
+                                                      ],
+                       "applications":  {
+                                            "includeApplications":  [
+                                                                        "All"
+                                                                    ],
+                                            "excludeApplications":  [
+
+                                                                    ],
+                                            "includeUserActions":  [
+
+                                                                   ],
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "applicationFilter":  null
+                                        },
+                       "users":  {
+                                     "includeUsers":  [
+                                                          "All"
+                                                      ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+
+                                                       ],
+                                     "excludeGroups":  [
+
+                                                       ],
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  null,
+                                     "excludeGuestsOrExternalUsers":  null
+                                 },
+                       "locations":  {
+                                         "includeLocations":  [
+                                                                  "All"
+                                                              ],
+                                         "excludeLocations":  [
+                                                                  "\u003cYOURLOCATION:Named Locations for workload identities if available\u003e"
+                                                              ]
+                                     }
+                   },
+    "grantControls":  {
+                          "operator":  "OR",
+                          "builtInControls":  [
+                                                  "block"
+                                              ],
+                          "customAuthenticationFactors":  [
+
+                                                          ],
+                          "termsOfUse":  [
+
+                                         ],
+                          "authenticationStrength":  null
+                      },
+    "sessionControls":  null
 }

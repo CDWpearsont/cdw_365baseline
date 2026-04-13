@@ -1,55 +1,75 @@
 {
-  "displayName": "CA406-Guests-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
-  "state": "disabled",
-  "deletedDateTime": null,
-  "conditions": {
-    "userRiskLevels": [],
-    "signInRiskLevels": [],
-    "clientAppTypes": [
-      "all"
-    ],
-    "servicePrincipalRiskLevels": [],
-    "applications": {
-      "includeApplications": [
-        "All"
-      ],
-      "excludeApplications": [],
-      "includeUserActions": [],
-      "includeAuthenticationContextClassReferences": [],
-      "applicationFilter": null
-    },
-    "users": {
-      "includeUsers": [],
-      "excludeUsers": [],
-      "includeGroups": [
-        "<YOURGROUP:CA-Persona-Guests>"
-      ],
-      "excludeGroups": [
-        "<YOURGROUP:CA-BreakGlassAccounts>",
-        "<YOURGROUP:CA-Persona-Guests-DataProtection-Exclusions>"
-      ],
-      "includeRoles": [],
-      "excludeRoles": [],
-      "includeGuestsOrExternalUsers": null,
-      "excludeGuestsOrExternalUsers": null
-    }
-  },
-  "grantControls": null,
-  "sessionControls": {
-    "signInFrequency": {
-      "value": 1,
-      "type": "hours",
-      "authenticationType": "primaryAndSecondaryAuthentication",
-      "frequencyInterval": "timeBased",
-      "isEnabled": true
-    },
-    "persistentBrowser": {
-      "mode": "never",
-      "isEnabled": true
-    },
-    "disableResilienceDefaults": null,
-    "applicationEnforcedRestrictions": null,
-    "cloudAppSecurity": null,
-    "secureSignInSession": null
-  }
+    "displayName":  "CDW406-Guests-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
+    "state":  "disabled",
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "userRiskLevels":  [
+
+                                          ],
+                       "signInRiskLevels":  [
+
+                                            ],
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "servicePrincipalRiskLevels":  [
+
+                                                      ],
+                       "applications":  {
+                                            "includeApplications":  [
+                                                                        "All"
+                                                                    ],
+                                            "excludeApplications":  [
+
+                                                                    ],
+                                            "includeUserActions":  [
+
+                                                                   ],
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "applicationFilter":  null
+                                        },
+                       "users":  {
+                                     "includeUsers":  [
+
+                                                      ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+                                                           "\u003cYOURGROUP:CA-Persona-Guests\u003e"
+                                                       ],
+                                     "excludeGroups":  [
+                                                           "\u003cYOURGROUP:CA-BreakGlassAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Guests-DataProtection-Exclusions\u003e"
+                                                       ],
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  null,
+                                     "excludeGuestsOrExternalUsers":  null
+                                 }
+                   },
+    "grantControls":  null,
+    "sessionControls":  {
+                            "signInFrequency":  {
+                                                    "value":  1,
+                                                    "type":  "hours",
+                                                    "authenticationType":  "primaryAndSecondaryAuthentication",
+                                                    "frequencyInterval":  "timeBased",
+                                                    "isEnabled":  true
+                                                },
+                            "persistentBrowser":  {
+                                                      "mode":  "never",
+                                                      "isEnabled":  true
+                                                  },
+                            "disableResilienceDefaults":  null,
+                            "applicationEnforcedRestrictions":  null,
+                            "cloudAppSecurity":  null,
+                            "secureSignInSession":  null
+                        }
 }

@@ -1,57 +1,81 @@
 {
-  "displayName": "CA001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
-  "state": "disabled",
-  "deletedDateTime": null,
-  "conditions": {
-    "userRiskLevels": [],
-    "signInRiskLevels": [],
-    "clientAppTypes": [
-      "all"
-    ],
-    "servicePrincipalRiskLevels": [],
-    "applications": {
-      "includeApplications": [
-        "All"
-      ],
-      "excludeApplications": [],
-      "includeUserActions": [],
-      "includeAuthenticationContextClassReferences": [],
-      "applicationFilter": null
-    },
-    "users": {
-      "includeUsers": [
-        "All"
-      ],
-      "excludeUsers": [],
-      "includeGroups": [],
-      "excludeGroups": [
-        "<YOURGROUP:CA-BreakglassAccounts>",
-        "<YOURGROUP:CA-Persona-Admins>",
-        "<YOURGROUP:CA-Persona-Internals>",
-        "<YOURGROUP:CA-Persona-Externals>",
-        "<YOURGROUP:CA-Persona-Guests>",
-        "<YOURGROUP:CA-Persona-GuestAdmins>",
-        "<YOURGROUP:CA-Persona-Microsoft365ServiceAccounts>",
-        "<YOURGROUP:CA-Persona-AzureServiceAccounts>",
-        "<YOURGROUP:CA-Persona-CorpServiceAccounts>",
-        "<YOURGROUP:CA-Persona-Global-BaseProtection-Exclusions>",
-        "<YOURGROUP:CA-Persona-Developers>",
-        "<YOURGROUP:CA-Persona-WorkloadIdentities>"
-      ],
-      "includeRoles": [],
-      "excludeRoles": [],
-      "includeGuestsOrExternalUsers": null,
-      "excludeGuestsOrExternalUsers": null
-    }
-  },
-  "grantControls": {
-    "operator": "OR",
-    "builtInControls": [
-      "block"
-    ],
-    "customAuthenticationFactors": [],
-    "termsOfUse": [],
-    "authenticationStrength": null
-  },
-  "sessionControls": null
+    "displayName":  "CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
+    "state":  "disabled",
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "userRiskLevels":  [
+
+                                          ],
+                       "signInRiskLevels":  [
+
+                                            ],
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "servicePrincipalRiskLevels":  [
+
+                                                      ],
+                       "applications":  {
+                                            "includeApplications":  [
+                                                                        "All"
+                                                                    ],
+                                            "excludeApplications":  [
+
+                                                                    ],
+                                            "includeUserActions":  [
+
+                                                                   ],
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "applicationFilter":  null
+                                        },
+                       "users":  {
+                                     "includeUsers":  [
+                                                          "All"
+                                                      ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+
+                                                       ],
+                                     "excludeGroups":  [
+                                                           "\u003cYOURGROUP:CA-BreakglassAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Admins\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Internals\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Externals\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Guests\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-GuestAdmins\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Microsoft365ServiceAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-AzureServiceAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-CorpServiceAccounts\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Global-BaseProtection-Exclusions\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-Developers\u003e",
+                                                           "\u003cYOURGROUP:CA-Persona-WorkloadIdentities\u003e"
+                                                       ],
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  null,
+                                     "excludeGuestsOrExternalUsers":  null
+                                 }
+                   },
+    "grantControls":  {
+                          "operator":  "OR",
+                          "builtInControls":  [
+                                                  "block"
+                                              ],
+                          "customAuthenticationFactors":  [
+
+                                                          ],
+                          "termsOfUse":  [
+
+                                         ],
+                          "authenticationStrength":  null
+                      },
+    "sessionControls":  null
 }
