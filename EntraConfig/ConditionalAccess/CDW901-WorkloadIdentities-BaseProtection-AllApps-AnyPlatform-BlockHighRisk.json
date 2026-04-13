@@ -55,9 +55,6 @@
                        "locations":  {
                                          "includeLocations":  [
                                                                   "All"
-                                                              ],
-                                         "excludeLocations":  [
-                                                                  "\u003cYOURLOCATION:Named Locations for workload identities if available\u003e"
                                                               ]
                                      }
                    },

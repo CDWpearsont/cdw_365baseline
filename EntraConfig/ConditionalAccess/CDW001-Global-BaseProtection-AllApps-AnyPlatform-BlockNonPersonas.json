@@ -41,18 +41,7 @@
 
                                                        ],
                                      "excludeGroups":  [
-                                                           "\u003cYOURGROUP:CA-BreakglassAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Admins\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Internals\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Externals\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Guests\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-GuestAdmins\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Microsoft365ServiceAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-AzureServiceAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-CorpServiceAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Global-BaseProtection-Exclusions\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Developers\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-WorkloadIdentities\u003e"
+
                                                        ],
                                      "includeRoles":  [
 

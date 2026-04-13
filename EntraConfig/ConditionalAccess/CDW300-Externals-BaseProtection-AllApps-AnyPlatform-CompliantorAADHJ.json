@@ -20,8 +20,7 @@
                                                                         "All"
                                                                     ],
                                             "excludeApplications":  [
-                                                                        "d4ebce55-015a-49b5-a083-c84d1797ae8c",
-                                                                        "\u003cYOURAPP:CMG-ServerApp\u003e"
+                                                                        "d4ebce55-015a-49b5-a083-c84d1797ae8c"
                                                                     ],
                                             "includeUserActions":  [
 
@@ -33,17 +32,16 @@
                                         },
                        "users":  {
                                      "includeUsers":  [
-
+                                                          "None"
                                                       ],
                                      "excludeUsers":  [
 
                                                       ],
                                      "includeGroups":  [
-                                                           "\u003cYOURGROUP:CA-Persona-Externals\u003e"
+
                                                        ],
                                      "excludeGroups":  [
-                                                           "\u003cYOURGROUP:CA-BreakGlassAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Externals-BaseProtection-Exclusions\u003e"
+
                                                        ],
                                      "includeRoles":  [
 

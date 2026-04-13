@@ -41,9 +41,7 @@
 
                                                        ],
                                      "excludeGroups":  [
-                                                           "\u003cYOURGROUP:CA-BreakGlassAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Guests-BaseProtection-Exclusions\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-GuestAdmins\u003e"
+
                                                        ],
                                      "includeRoles":  [
 

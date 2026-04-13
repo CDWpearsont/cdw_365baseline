@@ -32,21 +32,16 @@
                                         },
                        "users":  {
                                      "includeUsers":  [
-
+                                                          "None"
                                                       ],
                                      "excludeUsers":  [
 
                                                       ],
                                      "includeGroups":  [
-                                                           "\u003cYOURGROUP:CA-Persona-Admins\u003e"
+
                                                        ],
                                      "excludeGroups":  [
-                                                           "\u003cYOURGROUP:CA-BreakGlassAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Microsoft365ServiceAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-AzureServiceAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-CorpServiceAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Admins-DataProtection-Exclusions\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Admins-AppProtection-Exclusions\u003e"
+
                                                        ],
                                      "includeRoles":  [
 

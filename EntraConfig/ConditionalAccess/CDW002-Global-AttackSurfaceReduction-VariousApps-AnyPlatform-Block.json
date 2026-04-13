@@ -41,8 +41,7 @@
 
                                                        ],
                                      "excludeGroups":  [
-                                                           "\u003cYOURGROUP:CA-BreakGlassAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-Global-BaseProtection-Exclusions\u003e"
+
                                                        ],
                                      "includeRoles":  [
 

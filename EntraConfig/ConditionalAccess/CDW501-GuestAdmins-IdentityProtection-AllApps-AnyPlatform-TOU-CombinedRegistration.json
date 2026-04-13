@@ -32,17 +32,16 @@
                                         },
                        "users":  {
                                      "includeUsers":  [
-
+                                                          "None"
                                                       ],
                                      "excludeUsers":  [
 
                                                       ],
                                      "includeGroups":  [
-                                                           "\u003cYOURGROUP:CA-Persona-GuestAdmins\u003e"
+
                                                        ],
                                      "excludeGroups":  [
-                                                           "\u003cYOURGROUP:CA-BreakGlassAccounts\u003e",
-                                                           "\u003cYOURGROUP:CA-Persona-GuestAdmins-IdentityProtection-Exclusions\u003e"
+
                                                        ],
                                      "includeRoles":  [
 
