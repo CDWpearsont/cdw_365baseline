@@ -1,71 +1,45 @@
 {
-    "displayName":  "CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration",
-    "state":  "disabled",
-    "deletedDateTime":  null,
-    "conditions":  {
-                       "userRiskLevels":  [
-
-                                          ],
-                       "signInRiskLevels":  [
-
-                                            ],
-                       "clientAppTypes":  [
-                                              "all"
-                                          ],
-                       "servicePrincipalRiskLevels":  [
-
-                                                      ],
-                       "applications":  {
-                                            "includeApplications":  [
-
-                                                                    ],
-                                            "excludeApplications":  [
-
-                                                                    ],
-                                            "includeUserActions":  [
-                                                                       "urn:user:registersecurityinfo"
-                                                                   ],
-                                            "includeAuthenticationContextClassReferences":  [
-
-                                                                                            ],
-                                            "applicationFilter":  null
-                                        },
-                       "users":  {
-                                     "includeUsers":  [
-                                                          "None"
-                                                      ],
-                                     "excludeUsers":  [
-
-                                                      ],
-                                     "includeGroups":  [
-
-                                                       ],
-                                     "excludeGroups":  [
-
-                                                       ],
-                                     "includeRoles":  [
-
-                                                      ],
-                                     "excludeRoles":  [
-
-                                                      ],
-                                     "includeGuestsOrExternalUsers":  null,
-                                     "excludeGuestsOrExternalUsers":  null
-                                 }
-                   },
-    "grantControls":  {
-                          "operator":  "OR",
-                          "builtInControls":  [
-                                                  "compliantDevice",
-                                                  "domainJoinedDevice"
-                                              ],
-                          "customAuthenticationFactors":  [
-
-                                                          ],
-                          "termsOfUse":  [
-
-                                         ],
-                          "authenticationStrength":  null
-                      },
-    "sessionControls":  null
+  "displayName": "CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration",
+  "state": "disabled",
+  "deletedDateTime": null,
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [],
+      "excludeApplications": [],
+      "includeUserActions": [
+        "urn:user:registersecurityinfo"
+      ],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [
+        "None"
+      ],
+      "excludeUsers": [],
+      "includeGroups": [],
+      "excludeGroups": [],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "excludeGuestsOrExternalUsers": null
+    }
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [
+      "compliantDevice",
+      "domainJoinedDevice"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  },
+  "sessionControls": null
 }

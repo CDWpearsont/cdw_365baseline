@@ -1,58 +1,48 @@
 {
-    "displayName":  "CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-ForwardToDefenderforCloudApps",
-    "state":  "disabled",
-    "deletedDateTime":  null,
-    "conditions":  {
-                       "userRiskLevels":  [
-
-                                          ],
-                       "signInRiskLevels":  [
-
-                                            ],
-                       "clientAppTypes":  [
-                                              "all"
-                                          ],
-                       "servicePrincipalRiskLevels":  [
-
-                                                      ],
-                       "applications":  {
-                                            "includeApplications":  [
-                                                                        "All"
-                                                                    ],
-                                            "excludeApplications":  [
-                                                                        "d4ebce55-015a-49b5-a083-c84d1797ae8c"
-                                                                    ],
-                                            "includeUserActions":  [
-
-                                                                   ],
-                                            "includeAuthenticationContextClassReferences":  [
-
-                                                                                            ],
-                                            "applicationFilter":  null
-                                        },
-                       "users":  {
-                                     "includeUsers":  [
-                                                          "None"
-                                                      ],
-                                     "excludeUsers":  [
-
-                                                      ],
-                                     "includeGroups":  [
-
-                                                       ],
-                                     "excludeGroups":  [
-
-                                                       ],
-                                     "includeRoles":  [
-
-                                                      ],
-                                     "excludeRoles":  [
-
-                                                      ],
-                                     "includeGuestsOrExternalUsers":  null,
-                                     "excludeGuestsOrExternalUsers":  null
-                                 }
-                   },
-    "grantControls":  null,
-    "sessionControls":  null
+  "displayName": "CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-ForwardToDefenderforCloudApps",
+  "state": "disabled",
+  "deletedDateTime": null,
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [
+        "All"
+      ],
+      "excludeApplications": [
+        "d4ebce55-015a-49b5-a083-c84d1797ae8c"
+      ],
+      "includeUserActions": [],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [
+        "None"
+      ],
+      "excludeUsers": [],
+      "includeGroups": [],
+      "excludeGroups": [],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "excludeGuestsOrExternalUsers": null
+    }
+  },
+  "grantControls": null,
+  "sessionControls": {
+    "disableResilienceDefaults": null,
+    "applicationEnforcedRestrictions": null,
+    "cloudAppSecurity": {
+      "cloudAppSecurityType": "monitorOnly",
+      "isEnabled": true
+    },
+    "secureSignInSession": null,
+    "signInFrequency": null,
+    "persistentBrowser": null
+  }
 }

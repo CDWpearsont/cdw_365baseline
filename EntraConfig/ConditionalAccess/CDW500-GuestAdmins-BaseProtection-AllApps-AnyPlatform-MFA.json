@@ -1,70 +1,44 @@
 {
-    "displayName":  "CDW500-GuestAdmins-BaseProtection-AllApps-AnyPlatform-MFA",
-    "state":  "disabled",
-    "deletedDateTime":  null,
-    "conditions":  {
-                       "userRiskLevels":  [
-
-                                          ],
-                       "signInRiskLevels":  [
-
-                                            ],
-                       "clientAppTypes":  [
-                                              "all"
-                                          ],
-                       "servicePrincipalRiskLevels":  [
-
-                                                      ],
-                       "applications":  {
-                                            "includeApplications":  [
-                                                                        "All"
-                                                                    ],
-                                            "excludeApplications":  [
-
-                                                                    ],
-                                            "includeUserActions":  [
-
-                                                                   ],
-                                            "includeAuthenticationContextClassReferences":  [
-
-                                                                                            ],
-                                            "applicationFilter":  null
-                                        },
-                       "users":  {
-                                     "includeUsers":  [
-                                                          "None"
-                                                      ],
-                                     "excludeUsers":  [
-
-                                                      ],
-                                     "includeGroups":  [
-
-                                                       ],
-                                     "excludeGroups":  [
-
-                                                       ],
-                                     "includeRoles":  [
-
-                                                      ],
-                                     "excludeRoles":  [
-
-                                                      ],
-                                     "includeGuestsOrExternalUsers":  null,
-                                     "excludeGuestsOrExternalUsers":  null
-                                 }
-                   },
-    "grantControls":  {
-                          "operator":  "OR",
-                          "builtInControls":  [
-                                                  "mfa"
-                                              ],
-                          "customAuthenticationFactors":  [
-
-                                                          ],
-                          "termsOfUse":  [
-
-                                         ],
-                          "authenticationStrength":  null
-                      },
-    "sessionControls":  null
+  "displayName": "CDW500-GuestAdmins-BaseProtection-AllApps-AnyPlatform-MFA",
+  "state": "disabled",
+  "deletedDateTime": null,
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [
+        "All"
+      ],
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [
+        "None"
+      ],
+      "excludeUsers": [],
+      "includeGroups": [],
+      "excludeGroups": [],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "excludeGuestsOrExternalUsers": null
+    }
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [
+      "mfa"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  },
+  "sessionControls": null
 }

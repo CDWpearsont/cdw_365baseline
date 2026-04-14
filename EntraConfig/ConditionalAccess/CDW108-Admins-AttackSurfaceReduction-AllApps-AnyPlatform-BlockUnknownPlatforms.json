@@ -1,82 +1,56 @@
 {
-    "displayName":  "CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
-    "state":  "disabled",
-    "deletedDateTime":  null,
-    "conditions":  {
-                       "userRiskLevels":  [
-
-                                          ],
-                       "signInRiskLevels":  [
-
-                                            ],
-                       "clientAppTypes":  [
-                                              "all"
-                                          ],
-                       "servicePrincipalRiskLevels":  [
-
-                                                      ],
-                       "applications":  {
-                                            "includeApplications":  [
-                                                                        "All"
-                                                                    ],
-                                            "excludeApplications":  [
-
-                                                                    ],
-                                            "includeUserActions":  [
-
-                                                                   ],
-                                            "includeAuthenticationContextClassReferences":  [
-
-                                                                                            ],
-                                            "applicationFilter":  null
-                                        },
-                       "users":  {
-                                     "includeUsers":  [
-                                                          "None"
-                                                      ],
-                                     "excludeUsers":  [
-
-                                                      ],
-                                     "includeGroups":  [
-
-                                                       ],
-                                     "excludeGroups":  [
-
-                                                       ],
-                                     "includeRoles":  [
-
-                                                      ],
-                                     "excludeRoles":  [
-
-                                                      ],
-                                     "includeGuestsOrExternalUsers":  null,
-                                     "excludeGuestsOrExternalUsers":  null
-                                 },
-                       "platforms":  {
-                                         "includePlatforms":  [
-                                                                  "all"
-                                                              ],
-                                         "excludePlatforms":  [
-                                                                  "android",
-                                                                  "iOS",
-                                                                  "windows",
-                                                                  "macOS",
-                                                                  "linux"
-                                                              ]
-                                     }
-                   },
-    "grantControls":  {
-                          "operator":  "OR",
-                          "builtInControls":  [
-                                                  "block"
-                                              ],
-                          "customAuthenticationFactors":  [
-
-                                                          ],
-                          "termsOfUse":  [
-
-                                         ],
-                          "authenticationStrength":  null
-                      },
-    "sessionControls":  null
+  "displayName": "CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+  "state": "disabled",
+  "deletedDateTime": null,
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [
+        "All"
+      ],
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [
+        "None"
+      ],
+      "excludeUsers": [],
+      "includeGroups": [],
+      "excludeGroups": [],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "excludeGuestsOrExternalUsers": null
+    },
+    "platforms": {
+      "includePlatforms": [
+        "all"
+      ],
+      "excludePlatforms": [
+        "android",
+        "iOS",
+        "windows",
+        "macOS",
+        "linux"
+      ]
+    }
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [
+      "block"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  },
+  "sessionControls": null
 }
