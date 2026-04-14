@@ -1,12 +1,13 @@
 {
-  "displayName": "CDW100: Mobile BYOD - Require Compliant Device or Approved App - v1.0",
-  "state": "enabledForReportingButNotEnforced",
+  "displayName": "CDW100: Mobile BYOD - Require Approved Apps - v1.0",
+  "state": "disabled",
   "deletedDateTime": null,
   "conditions": {
     "userRiskLevels": [],
     "signInRiskLevels": [],
     "clientAppTypes": [
-      "all"
+      "browser",
+      "mobileAppsAndDesktopClients"
     ],
     "servicePrincipalRiskLevels": [],
     "applications": {
