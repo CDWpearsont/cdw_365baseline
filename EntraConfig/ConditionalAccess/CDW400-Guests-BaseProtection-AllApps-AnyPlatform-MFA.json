@@ -1,0 +1,76 @@
+{
+    "displayName":  "CDW400-Guests-BaseProtection-AllApps-AnyPlatform-MFA",
+    "state":  "disabled",
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "userRiskLevels":  [
+
+                                          ],
+                       "signInRiskLevels":  [
+
+                                            ],
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "servicePrincipalRiskLevels":  [
+
+                                                      ],
+                       "applications":  {
+                                            "includeApplications":  [
+                                                                        "All"
+                                                                    ],
+                                            "excludeApplications":  [
+
+                                                                    ],
+                                            "includeUserActions":  [
+
+                                                                   ],
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "applicationFilter":  null
+                                        },
+                       "users":  {
+                                     "includeUsers":  [
+
+                                                      ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+
+                                                       ],
+                                     "excludeGroups":  [
+
+                                                       ],
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  {
+                                                                          "guestOrExternalUserTypes":  "internalGuest,b2bCollaborationGuest,b2bCollaborationMember,b2bDirectConnectUser,otherExternalUser,serviceProvider",
+                                                                          "externalTenants":  {
+                                                                                                  "@odata.type":  "#microsoft.graph.conditionalAccessAllExternalTenants",
+                                                                                                  "membershipKind":  "all"
+                                                                                              }
+                                                                      },
+                                     "excludeGuestsOrExternalUsers":  null
+                                 }
+                   },
+    "grantControls":  {
+                          "operator":  "OR",
+                          "builtInControls":  [
+                                                  "mfa"
+                                              ],
+                          "customAuthenticationFactors":  [
+
+                                                          ],
+                          "termsOfUse":  [
+
+                                         ],
+                          "authenticationStrength":  null
+                      },
+    "sessionControls":  null
+}

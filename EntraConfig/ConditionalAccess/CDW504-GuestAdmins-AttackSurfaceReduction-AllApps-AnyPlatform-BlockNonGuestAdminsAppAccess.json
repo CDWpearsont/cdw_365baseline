@@ -1,0 +1,72 @@
+{
+    "displayName":  "CDW504-GuestAdmins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAdminsAppAccess",
+    "state":  "disabled",
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "userRiskLevels":  [
+
+                                          ],
+                       "signInRiskLevels":  [
+
+                                            ],
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "servicePrincipalRiskLevels":  [
+
+                                                      ],
+                       "applications":  {
+                                            "includeApplications":  [
+                                                                        "All"
+                                                                    ],
+                                            "excludeApplications":  [
+                                                                        "Office365",
+                                                                        "2793995e-0a7d-40d7-bd35-6968ba142197",
+                                                                        "797f4846-ba00-4fd7-ba43-dac1f8f63013"
+                                                                    ],
+                                            "includeUserActions":  [
+
+                                                                   ],
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "applicationFilter":  null
+                                        },
+                       "users":  {
+                                     "includeUsers":  [
+                                                          "None"
+                                                      ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+
+                                                       ],
+                                     "excludeGroups":  [
+
+                                                       ],
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  null,
+                                     "excludeGuestsOrExternalUsers":  null
+                                 }
+                   },
+    "grantControls":  {
+                          "operator":  "OR",
+                          "builtInControls":  [
+                                                  "block"
+                                              ],
+                          "customAuthenticationFactors":  [
+
+                                                          ],
+                          "termsOfUse":  [
+
+                                         ],
+                          "authenticationStrength":  null
+                      },
+    "sessionControls":  null
+}

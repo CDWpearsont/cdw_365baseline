@@ -1,0 +1,71 @@
+{
+    "displayName":  "CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandMFA",
+    "state":  "disabled",
+    "deletedDateTime":  null,
+    "conditions":  {
+                       "userRiskLevels":  [
+
+                                          ],
+                       "signInRiskLevels":  [
+
+                                            ],
+                       "clientAppTypes":  [
+                                              "all"
+                                          ],
+                       "servicePrincipalRiskLevels":  [
+
+                                                      ],
+                       "applications":  {
+                                            "includeApplications":  [
+                                                                        "All"
+                                                                    ],
+                                            "excludeApplications":  [
+                                                                        "d4ebce55-015a-49b5-a083-c84d1797ae8c"
+                                                                    ],
+                                            "includeUserActions":  [
+
+                                                                   ],
+                                            "includeAuthenticationContextClassReferences":  [
+
+                                                                                            ],
+                                            "applicationFilter":  null
+                                        },
+                       "users":  {
+                                     "includeUsers":  [
+                                                          "None"
+                                                      ],
+                                     "excludeUsers":  [
+
+                                                      ],
+                                     "includeGroups":  [
+
+                                                       ],
+                                     "excludeGroups":  [
+
+                                                       ],
+                                     "includeRoles":  [
+
+                                                      ],
+                                     "excludeRoles":  [
+
+                                                      ],
+                                     "includeGuestsOrExternalUsers":  null,
+                                     "excludeGuestsOrExternalUsers":  null
+                                 }
+                   },
+    "grantControls":  {
+                          "operator":  "AND",
+                          "builtInControls":  [
+                                                  "mfa",
+                                                  "compliantDevice"
+                                              ],
+                          "customAuthenticationFactors":  [
+
+                                                          ],
+                          "termsOfUse":  [
+
+                                         ],
+                          "authenticationStrength":  null
+                      },
+    "sessionControls":  null
+}
