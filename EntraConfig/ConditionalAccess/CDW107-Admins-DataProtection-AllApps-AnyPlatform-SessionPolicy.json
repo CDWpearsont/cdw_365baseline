@@ -2,6 +2,7 @@
   "displayName": "CDW107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy",
   "state": "disabled",
   "deletedDateTime": null,
+  "grantControls": null,
   "conditions": {
     "userRiskLevels": [],
     "signInRiskLevels": [],
@@ -31,8 +32,11 @@
       "excludeGuestsOrExternalUsers": null
     }
   },
-  "grantControls": null,
   "sessionControls": {
+    "disableResilienceDefaults": null,
+    "applicationEnforcedRestrictions": null,
+    "cloudAppSecurity": null,
+    "secureSignInSession": null,
     "signInFrequency": {
       "value": 1,
       "type": "hours",
@@ -43,10 +47,6 @@
     "persistentBrowser": {
       "mode": "never",
       "isEnabled": true
-    },
-    "disableResilienceDefaults": null,
-    "applicationEnforcedRestrictions": null,
-    "cloudAppSecurity": null,
-    "secureSignInSession": null
+    }
   }
 }

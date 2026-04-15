@@ -2,6 +2,7 @@
   "displayName": "CDW502-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [
       "high",
@@ -44,7 +45,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('1bcb4525-03f1-4c2b-825e-932d108348c3')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }

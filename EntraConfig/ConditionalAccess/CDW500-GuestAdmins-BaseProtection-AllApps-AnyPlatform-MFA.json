@@ -2,6 +2,7 @@
   "displayName": "CDW500-GuestAdmins-BaseProtection-AllApps-AnyPlatform-MFA",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
     "signInRiskLevels": [],
@@ -38,7 +39,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('2e21649f-3ded-4866-b5d1-2d6487a4eb01')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }

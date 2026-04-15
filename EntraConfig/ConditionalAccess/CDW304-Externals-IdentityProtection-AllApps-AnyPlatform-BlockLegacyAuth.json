@@ -2,6 +2,7 @@
   "displayName": "CDW304-Externals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
     "signInRiskLevels": [],
@@ -39,7 +40,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('c9d8a3ff-64f7-4831-a6a6-0aa140ff476c')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }

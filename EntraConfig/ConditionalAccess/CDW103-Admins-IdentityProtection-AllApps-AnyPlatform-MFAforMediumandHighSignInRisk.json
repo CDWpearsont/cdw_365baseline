@@ -2,6 +2,7 @@
   "displayName": "CDW103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
     "signInRiskLevels": [
@@ -35,13 +36,13 @@
     }
   },
   "grantControls": {
-    "operator": "AND",
+    "operator": "OR",
     "builtInControls": [
       "mfa"
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('1ef05d8d-ab0a-433a-bf9e-3def303d37d2')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }

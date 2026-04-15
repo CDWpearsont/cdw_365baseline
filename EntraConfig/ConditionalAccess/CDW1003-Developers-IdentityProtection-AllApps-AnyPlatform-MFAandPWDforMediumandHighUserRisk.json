@@ -2,6 +2,7 @@
   "displayName": "CDW1003-Developers-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [
       "high",
@@ -42,7 +43,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('49e9de25-a7f1-4d28-a30f-d79109dc6aea')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }

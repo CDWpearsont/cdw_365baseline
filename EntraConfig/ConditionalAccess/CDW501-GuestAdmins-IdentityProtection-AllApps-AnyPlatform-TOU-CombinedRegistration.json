@@ -2,6 +2,7 @@
   "displayName": "CDW501-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
     "signInRiskLevels": [],
@@ -38,7 +39,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('e5b1077a-a0c8-447d-b834-cf41f3b2eeac')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }

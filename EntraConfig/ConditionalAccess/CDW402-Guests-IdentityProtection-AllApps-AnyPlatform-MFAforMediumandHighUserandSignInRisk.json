@@ -2,6 +2,7 @@
   "displayName": "CDW402-Guests-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [
       "high",
@@ -31,14 +32,14 @@
       "excludeGroups": [],
       "includeRoles": [],
       "excludeRoles": [],
+      "excludeGuestsOrExternalUsers": null,
       "includeGuestsOrExternalUsers": {
         "guestOrExternalUserTypes": "internalGuest,b2bCollaborationGuest,b2bCollaborationMember,b2bDirectConnectUser,otherExternalUser,serviceProvider",
         "externalTenants": {
           "@odata.type": "#microsoft.graph.conditionalAccessAllExternalTenants",
           "membershipKind": "all"
         }
-      },
-      "excludeGuestsOrExternalUsers": null
+      }
     }
   },
   "grantControls": {
@@ -48,7 +49,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('0545125f-5a15-4112-92bb-204132b0e64d')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }

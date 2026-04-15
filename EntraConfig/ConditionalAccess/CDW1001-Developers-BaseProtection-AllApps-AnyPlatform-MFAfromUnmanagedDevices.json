@@ -2,6 +2,7 @@
   "displayName": "CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
     "signInRiskLevels": [],
@@ -38,7 +39,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('74df6ac2-7f0e-4c65-a60a-15c9b3818dc0')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }

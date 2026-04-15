@@ -2,6 +2,7 @@
   "displayName": "CDW302-Externals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [
       "high"
@@ -41,7 +42,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('115575a8-01da-4015-8a43-6ca1bc0a682a')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }

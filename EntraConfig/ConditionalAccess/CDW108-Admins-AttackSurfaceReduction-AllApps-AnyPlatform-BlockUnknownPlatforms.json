@@ -2,6 +2,7 @@
   "displayName": "CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
   "state": "disabled",
   "deletedDateTime": null,
+  "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
     "signInRiskLevels": [],
@@ -50,7 +51,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('3558b4b8-e9d6-4203-aaa8-e1ef1bad1476')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
-  },
-  "sessionControls": null
+  }
 }
