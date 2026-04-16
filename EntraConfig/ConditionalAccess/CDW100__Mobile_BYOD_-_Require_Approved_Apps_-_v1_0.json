@@ -37,11 +37,17 @@
         "iOS"
       ],
       "excludePlatforms": [
-        "android",
-        "iOS",
+        "windows",
+        "windowsPhone",
         "macOS",
         "linux"
       ]
+    },
+    "devices": {
+      "deviceFilter": {
+        "mode": "include",
+        "rule": "device.deviceOwnership -eq \"Personal\""
+      }
     }
   },
   "grantControls": {
