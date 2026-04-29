@@ -1,0 +1,94 @@
+{
+  "displayName": "CDW Baseline - Cross Tenant Access Policy Default",
+  "description": "CDW CIS L1 baseline cross-tenant access default. Sets default to block all inbound/outbound B2B collaboration except where explicitly configured via Organisational settings. Note this also satisfies CIS 8.2.4 (Teams external trial tenants) when paired with Teams external access policy. After deployment, customer-specific allowlist tenants must be added via Organisational settings.",
+  "isServiceDefault": false,
+  "b2bCollaborationOutbound": {
+    "usersAndGroups": {
+      "accessType": "blocked",
+      "targets": [
+        {
+          "target": "AllUsers",
+          "targetType": "user"
+        }
+      ]
+    },
+    "applications": {
+      "accessType": "blocked",
+      "targets": [
+        {
+          "target": "AllApplications",
+          "targetType": "application"
+        }
+      ]
+    }
+  },
+  "b2bCollaborationInbound": {
+    "usersAndGroups": {
+      "accessType": "blocked",
+      "targets": [
+        {
+          "target": "AllUsers",
+          "targetType": "user"
+        }
+      ]
+    },
+    "applications": {
+      "accessType": "blocked",
+      "targets": [
+        {
+          "target": "AllApplications",
+          "targetType": "application"
+        }
+      ]
+    }
+  },
+  "b2bDirectConnectOutbound": {
+    "usersAndGroups": {
+      "accessType": "blocked",
+      "targets": [
+        {
+          "target": "AllUsers",
+          "targetType": "user"
+        }
+      ]
+    },
+    "applications": {
+      "accessType": "blocked",
+      "targets": [
+        {
+          "target": "AllApplications",
+          "targetType": "application"
+        }
+      ]
+    }
+  },
+  "b2bDirectConnectInbound": {
+    "usersAndGroups": {
+      "accessType": "blocked",
+      "targets": [
+        {
+          "target": "AllUsers",
+          "targetType": "user"
+        }
+      ]
+    },
+    "applications": {
+      "accessType": "blocked",
+      "targets": [
+        {
+          "target": "AllApplications",
+          "targetType": "application"
+        }
+      ]
+    }
+  },
+  "inboundTrust": {
+    "isMfaAccepted": true,
+    "isCompliantDeviceAccepted": true,
+    "isHybridAzureADJoinedDeviceAccepted": true
+  },
+  "automaticUserConsentSettings": {
+    "inboundAllowed": false,
+    "outboundAllowed": false
+  }
+}

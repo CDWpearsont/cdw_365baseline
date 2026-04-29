@@ -1,0 +1,31 @@
+{
+  "displayName": "CDW Baseline - Device Registration Policy",
+  "description": "CDW CIS L1 baseline device registration policy. Restricts Entra device join to specific groups, limits devices per user, prevents Global Admin auto-add as local admin, controls local admin assignment during Entra join. Covers CIS 5.1.4.1, 5.1.4.2, 5.1.4.3, 5.1.4.4. NOTE: azureADJoin and azureADRegistration use 'all' by default and require allowedGroups/allowedUsers to be populated with customer-specific group IDs to scope to a subset. Adjust to suit customer requirements.",
+  "userDeviceQuota": 10,
+  "multiFactorAuthConfiguration": "required",
+  "azureADRegistration": {
+    "isAdminConfigurable": true,
+    "allowedToRegister": {
+      "@odata.type": "#microsoft.graph.allDeviceRegistrationMembership"
+    }
+  },
+  "azureADJoin": {
+    "isAdminConfigurable": true,
+    "allowedToJoin": {
+      "@odata.type": "#microsoft.graph.enumeratedDeviceRegistrationMembership",
+      "users": [],
+      "groups": []
+    },
+    "localAdmins": {
+      "enableGlobalAdmins": false,
+      "registeringUsers": {
+        "@odata.type": "#microsoft.graph.enumeratedDeviceRegistrationMembership",
+        "users": [],
+        "groups": []
+      }
+    }
+  },
+  "localAdminPassword": {
+    "isEnabled": true
+  }
+}

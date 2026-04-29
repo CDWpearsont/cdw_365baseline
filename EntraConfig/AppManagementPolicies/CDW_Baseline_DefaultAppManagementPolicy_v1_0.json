@@ -1,0 +1,71 @@
+{
+  "displayName": "CDW Baseline - Default App Management Policy",
+  "description": "CDW CIS L1 baseline default tenant app management policy. Restricts password lifetime, password creation, and certificate lifetime for application registrations and service principals. Covers CDW 12.2.8, 12.2.9, 12.2.10, 12.2.11.",
+  "isEnabled": true,
+  "applicationRestrictions": {
+    "passwordCredentials": [
+      {
+        "restrictionType": "passwordAddition",
+        "maxLifetime": null,
+        "restrictForAppsCreatedAfterDateTime": "2025-01-01T00:00:00Z",
+        "state": "enabled"
+      },
+      {
+        "restrictionType": "passwordLifetime",
+        "maxLifetime": "P180D",
+        "restrictForAppsCreatedAfterDateTime": "2025-01-01T00:00:00Z",
+        "state": "enabled"
+      },
+      {
+        "restrictionType": "symmetricKeyAddition",
+        "maxLifetime": null,
+        "restrictForAppsCreatedAfterDateTime": "2025-01-01T00:00:00Z",
+        "state": "enabled"
+      },
+      {
+        "restrictionType": "symmetricKeyLifetime",
+        "maxLifetime": "P180D",
+        "restrictForAppsCreatedAfterDateTime": "2025-01-01T00:00:00Z",
+        "state": "enabled"
+      },
+      {
+        "restrictionType": "customPasswordAddition",
+        "maxLifetime": null,
+        "restrictForAppsCreatedAfterDateTime": "2025-01-01T00:00:00Z",
+        "state": "enabled"
+      }
+    ],
+    "keyCredentials": [
+      {
+        "restrictionType": "asymmetricKeyLifetime",
+        "maxLifetime": "P730D",
+        "restrictForAppsCreatedAfterDateTime": "2025-01-01T00:00:00Z",
+        "state": "enabled"
+      }
+    ]
+  },
+  "servicePrincipalRestrictions": {
+    "passwordCredentials": [
+      {
+        "restrictionType": "passwordAddition",
+        "maxLifetime": null,
+        "restrictForAppsCreatedAfterDateTime": "2025-01-01T00:00:00Z",
+        "state": "enabled"
+      },
+      {
+        "restrictionType": "passwordLifetime",
+        "maxLifetime": "P180D",
+        "restrictForAppsCreatedAfterDateTime": "2025-01-01T00:00:00Z",
+        "state": "enabled"
+      }
+    ],
+    "keyCredentials": [
+      {
+        "restrictionType": "asymmetricKeyLifetime",
+        "maxLifetime": "P730D",
+        "restrictForAppsCreatedAfterDateTime": "2025-01-01T00:00:00Z",
+        "state": "enabled"
+      }
+    ]
+  }
+}

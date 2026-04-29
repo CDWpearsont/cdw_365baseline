@@ -1,0 +1,19 @@
+{
+  "displayName": "CDW Baseline - Authorization Policy",
+  "description": "CDW CIS L1 baseline tenant authorization policy. Restricts non-admin tenant creation, app consent, guest invitations, and default user permissions. Covers CIS 5.1.2.3, 5.1.2.6, 5.1.5.1, 5.1.6.2, 5.1.6.3, CDW 12.1.5.",
+  "allowInvitesFrom": "adminsAndGuestInviters",
+  "allowedToSignUpEmailBasedSubscriptions": false,
+  "allowedToUseSSPR": true,
+  "allowEmailVerifiedUsersToJoinOrganization": false,
+  "allowUserConsentForRiskyApps": false,
+  "blockMsolPowerShell": true,
+  "defaultUserRolePermissions": {
+    "allowedToCreateApps": false,
+    "allowedToCreateSecurityGroups": false,
+    "allowedToCreateTenants": false,
+    "allowedToReadBitlockerKeysForOwnedDevice": false,
+    "allowedToReadOtherUsers": true,
+    "permissionGrantPoliciesAssigned": []
+  },
+  "guestUserRoleId": "2af84b1e-32c8-42b7-82bc-daa82404023b"
+}

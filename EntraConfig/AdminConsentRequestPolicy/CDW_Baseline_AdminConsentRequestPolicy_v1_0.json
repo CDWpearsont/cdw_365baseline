@@ -1,0 +1,16 @@
+{
+  "displayName": "CDW Baseline - Admin Consent Request Policy",
+  "description": "CDW CIS L1 baseline admin consent workflow. Enables the admin consent workflow so users can request access to apps that require admin consent rather than being blocked silently. Covers CIS 5.1.5.2. NOTE: notifyReviewers and reminders require at least one reviewer in the reviewers array. The reviewers array uses placeholder GUIDs that MUST be replaced with the customer tenant's actual Global Administrator role template ID, group ID, or user ID before deployment.",
+  "isEnabled": true,
+  "notifyReviewers": true,
+  "remindersEnabled": true,
+  "requestDurationInDays": 30,
+  "version": 1,
+  "reviewers": [
+    {
+      "query": "/v1.0/directoryRoles/roleTemplateId=62e90394-69f5-4237-9190-012177145e10/members",
+      "queryType": "MicrosoftGraph",
+      "queryRoot": null
+    }
+  ]
+}
