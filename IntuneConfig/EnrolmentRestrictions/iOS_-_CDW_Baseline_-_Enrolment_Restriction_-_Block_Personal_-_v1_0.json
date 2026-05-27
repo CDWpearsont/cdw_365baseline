@@ -1,16 +1,16 @@
 {
-  "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestrictionConfiguration",
   "platformRestriction": {
-    "osMaximumVersion": null,
-    "personalDeviceEnrollmentBlocked": true,
-    "platformBlocked": false,
-    "osMinimumVersion": "16.0",
     "blockedManufacturers": [],
-    "blockedSkus": []
+    "osMinimumVersion": "16.0",
+    "osMaximumVersion": null,
+    "platformBlocked": false,
+    "blockedSkus": [],
+    "personalDeviceEnrollmentBlocked": true
   },
-  "platformType": "ios",
-  "priority": 1,
-  "deviceEnrollmentConfigurationType": "singlePlatformRestriction",
   "description": "Blocks personal (BYOD) iOS/iPadOS device enrolment. Allows corporate-owned supervised devices only. Personal devices are managed via MAM/App Protection rather than MDM enrolment.",
+  "deviceEnrollmentConfigurationType": "singlePlatformRestriction",
+  "platformType": "ios",
+  "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestrictionConfiguration",
+  "priority": 1,
   "displayName": "iOS - CDW Baseline - Enrolment Restriction - Block Personal - v1.0"
 }
