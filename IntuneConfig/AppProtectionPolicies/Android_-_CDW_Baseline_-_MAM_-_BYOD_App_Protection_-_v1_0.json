@@ -1,999 +1,999 @@
 {
-  "minimumWarningPatchVersion": "0000-00-00",
-  "minimumRequiredOsVersion": "10.0",
-  "allowedAndroidDeviceModels": [],
-  "protectedMessagingRedirectAppType": "anyApp",
-  "allowedDataStorageLocations": [
-    "oneDriveForBusiness",
-    "sharePoint"
+  "appActionIfAccountIsClockedOut": null,
+  "maximumPinRetries": 5,
+  "appActionIfSamsungKnoxAttestationRequired": null,
+  "maximumWarningOsVersion": null,
+  "apps": [
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "app.officemail.go"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "ch.unique.moments"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "cloud.myq.roger"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "co.switchapp"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.achievers.client"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.adobe.reader"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.aegismobility.guardian"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.akumina.exp"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.appian.android.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.arlanto.atomedge"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.asana.app"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.avalution.catalystportalmobile"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.avenza.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.avinside"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.bluechilli.spaceconnectapp"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.bluejeansnet.base"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.box.android"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.buildingrobotics.comfy"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.cbrain.f2touchapp.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.celltrust.sl2_intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.cerby"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.cisco.im.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.cisco.wx2.android.msintune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.citrix.sharefile.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.civi.heydanforintune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.condecosoftware.condeco"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.datadog.app.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.datasite.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.dealcloud.mobileapp"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.deepl.mobiletranslator.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.dooray.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.eprintitsaas.mobile"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.esri.indoors.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.factset.wireless"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.fileorbisv2intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.fourcee.connect"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.foxit.mobile.pdf.lite"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.freshservice.helpdesk.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.fuze.fuzeappmdm"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.globalrelay.message.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.hearsaysocial.messages.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.hibob"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.hownow.gethownow"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.hp.mobileconnector.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.inax.ixarmav6"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.inkscreen.captor.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.intapp.pma"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.isec7.android.med.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.jumpapp.mobile.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.leapxpert.leap.work.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.lexisnexis.newsdesk"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.lrs.vpsxprint.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.lumapps.android.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.manageengine.apm.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.meetingdecisions.androidapp"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.mentorcliq"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.mfiles.mfms"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.azure"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.cortana"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.crm.crmphone"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.crm.crmphone.fieldservices"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.crm.crmphone.sales"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.crm.crmtablet"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.designer"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.dynamics.invoice"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.emmx"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.flow"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.ipviewer"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.launcher"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.loop"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.mobile.polymer"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.msapps"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.excel"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.lync15"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.officehub"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.officehubhl"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.officehubrow"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.officelens"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.onenote"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.outlook"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.powerpoint"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.office.word"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.planner"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.powerbim"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.rdc.androidx"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.scmx"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.sharepoint"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.skydrive"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.teams"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.todos"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.whiteboard.publicpreview"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.microsoft.workfolders"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.mobilehelix.link.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.moveinsync.ets"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.moviuscorp.multilineforintune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.ms.engage"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.ms.office365admin"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.ms.portal"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.mural"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.myitops.asiapp.msint"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.omega365.omega365"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.omnipresence.live"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.pagerduty.android.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.penlink.penpoint"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.printeron.droid.phone.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.printeron.print"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.qlik.qliksense.mobile"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.qlik.qsm"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.recruitment.exchange"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.rego.clarity.express.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.ricohspaces.app"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.ringcentral.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.seismic.doccenter"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.servicenow.fulfiller.mam.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.servicenow.requestor.mam.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.shafersystems.notate.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.slack.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.symphony.android.messaging.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.synigo.pulse.app"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.tableau.tableauapp.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.talent.exchange"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.technip.inspectionlist"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.telmediq.smartpager"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.totaltriage.totaltriage"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.uberconference"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.varicent"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.vbrick.rev"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.voltage.mobile.securemail.ui"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.workvivo.android"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.yammer.v1"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "com.zoho.projects.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "intraactiveapp.proactive.dk.intraactiveapp"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "io.beakon"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "io.island.island.intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "io.outreach.sales"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "jp.andpad.android"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "jp.andpad.android.andpadchat"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "jp.andpad.android.andpadinspection2nd"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "jp.co.cegb.archxtractforstore"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "jp.co.hitachi_solutions.hibun.hibundp"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "nl.intus.myswisio"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "no.bldngai.mybldng"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "ols.microsoft.com.shiftr"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "se.evoko.naso.mobile"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "sg.com.trustedsource.boardvision"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "so.rework.app.enterprise"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "uk.co.applymobile.idenprotectgo"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "us.zoom.videomeetings4intune"
+      }
+    },
+    {
+      "mobileAppIdentifier": {
+        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier",
+        "packageId": "za.co.onlineintelligence.mobile.ciims.ciimsgo"
+      }
+    }
   ],
-  "appActionIfDevicePasscodeComplexityLessThanLow": null,
+  "appActionIfAndroidDeviceManufacturerNotAllowed": "block",
+  "minimumPinLength": 6,
+  "biometricAuthenticationBlocked": false,
+  "notificationRestriction": "blockOrganizationalData",
+  "previousPinBlockCount": 0,
+  "pinRequired": true,
+  "connectToVpnOnLaunch": false,
+  "requiredAndroidSafetyNetDeviceAttestationType": "basicIntegrity",
+  "deviceComplianceRequired": false,
+  "appActionIfDeviceComplianceRequired": "block",
+  "requiredAndroidSafetyNetAppsVerificationType": "enabled",
+  "fingerprintAndBiometricEnabled": null,
+  "blockAfterCompanyPortalUpdateDeferralInDays": 0,
+  "customBrowserDisplayName": "",
+  "minimumRequiredOsVersion": "10.0",
+  "appActionIfDeviceLockNotSet": "block",
+  "dialerRestrictionLevel": "allApps",
+  "periodOnlineBeforeAccessCheck": "PT30M",
+  "messagingRedirectAppPackageId": "",
+  "allowedOutboundClipboardSharingLevel": "managedAppsWithPasteIn",
+  "wipeAfterCompanyPortalUpdateDeferralInDays": 0,
+  "requireClass3Biometrics": false,
+  "displayName": "Android - CDW Baseline - MAM - BYOD App Protection - v1.0",
+  "pinRequiredInsteadOfBiometricTimeout": "PT30M",
+  "dataBackupBlocked": true,
+  "appActionIfAndroidSafetyNetDeviceAttestationFailed": "block",
+  "maximumAllowedDeviceThreatLevel": "notConfigured",
+  "appActionIfDevicePasscodeComplexityLessThanMedium": null,
+  "requirePinAfterBiometricChange": false,
+  "appActionIfMaximumPinRetriesExceeded": "block",
+  "periodOfflineBeforeWipeIsEnforced": "P30D",
+  "allowedAndroidDeviceModels": [],
+  "minimumWipeAppVersion": null,
+  "approvedKeyboards": [],
+  "mobileThreatDefensePartnerPriority": null,
+  "targetedAppManagementLevels": "unmanaged",
+  "requiredAndroidSafetyNetEvaluationType": "basic",
+  "customDialerAppPackageId": "",
+  "maximumWipeOsVersion": null,
+  "simplePinBlocked": false,
+  "saveAsBlocked": true,
+  "minimumWarningPatchVersion": "0000-00-00",
+  "contactSyncBlocked": false,
+  "allowedInboundDataTransferSources": "managedApps",
+  "periodOfflineBeforeAccessCheck": "PT12H",
+  "organizationalCredentialsRequired": false,
+  "keyboardsRestricted": false,
   "exemptedAppPackages": [
     {
       "name": "Default",
       "value": ""
     }
   ],
-  "appActionIfUnableToAuthenticateUser": null,
-  "simplePinBlocked": false,
-  "appActionIfAndroidDeviceModelNotAllowed": "block",
-  "deviceComplianceRequired": false,
-  "appActionIfMaximumPinRetriesExceeded": "block",
-  "wipeAfterCompanyPortalUpdateDeferralInDays": 0,
-  "minimumWarningCompanyPortalVersion": null,
-  "requirePinAfterBiometricChange": false,
-  "notificationRestriction": "blockOrganizationalData",
-  "messagingRedirectAppPackageId": "",
-  "pinRequired": true,
-  "disableAppPinIfDevicePinIsSet": true,
-  "maximumRequiredOsVersion": null,
-  "deviceLockRequired": true,
   "allowedOutboundDataTransferDestinations": "managedApps",
-  "appActionIfDeviceLockNotSet": "block",
-  "allowedInboundDataTransferSources": "managedApps",
-  "connectToVpnOnLaunch": false,
-  "maximumWarningOsVersion": null,
-  "minimumRequiredCompanyPortalVersion": null,
-  "fingerprintBlocked": false,
-  "contactSyncBlocked": false,
-  "previousPinBlockCount": 0,
-  "keyboardsRestricted": false,
-  "saveAsBlocked": true,
-  "requiredAndroidSafetyNetEvaluationType": "basic",
-  "minimumWipeAppVersion": null,
-  "allowedOutboundClipboardSharingExceptionLength": 0,
-  "warnAfterCompanyPortalUpdateDeferralInDays": 0,
-  "minimumPinLength": 6,
-  "periodOfflineBeforeWipeIsEnforced": "P30D",
-  "screenCaptureBlocked": false,
-  "requiredAndroidSafetyNetDeviceAttestationType": "basicIntegrity",
-  "apps": [
-    {
-      "mobileAppIdentifier": {
-        "packageId": "app.officemail.go",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "ch.unique.moments",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "cloud.myq.roger",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "co.switchapp",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.achievers.client",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.adobe.reader",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.aegismobility.guardian",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.akumina.exp",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.appian.android.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.arlanto.atomedge",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.asana.app",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.avalution.catalystportalmobile",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.avenza.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.avinside",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.bluechilli.spaceconnectapp",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.bluejeansnet.base",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.box.android",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.buildingrobotics.comfy",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.cbrain.f2touchapp.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.celltrust.sl2_intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.cerby",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.cisco.im.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.cisco.wx2.android.msintune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.citrix.sharefile.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.civi.heydanforintune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.condecosoftware.condeco",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.datadog.app.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.datasite.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.dealcloud.mobileapp",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.deepl.mobiletranslator.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.dooray.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.eprintitsaas.mobile",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.esri.indoors.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.factset.wireless",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.fileorbisv2intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.fourcee.connect",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.foxit.mobile.pdf.lite",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.freshservice.helpdesk.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.fuze.fuzeappmdm",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.globalrelay.message.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.hearsaysocial.messages.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.hibob",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.hownow.gethownow",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.hp.mobileconnector.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.inax.ixarmav6",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.inkscreen.captor.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.intapp.pma",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.isec7.android.med.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.jumpapp.mobile.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.leapxpert.leap.work.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.lexisnexis.newsdesk",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.lrs.vpsxprint.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.lumapps.android.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.manageengine.apm.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.meetingdecisions.androidapp",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.mentorcliq",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.mfiles.mfms",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.azure",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.cortana",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.crm.crmphone",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.crm.crmphone.fieldservices",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.crm.crmphone.sales",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.crm.crmtablet",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.designer",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.dynamics.invoice",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.emmx",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.flow",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.ipviewer",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.launcher",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.loop",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.mobile.polymer",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.msapps",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.excel",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.lync15",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.officehub",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.officehubhl",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.officehubrow",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.officelens",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.onenote",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.outlook",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.powerpoint",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.office.word",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.planner",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.powerbim",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.rdc.androidx",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.scmx",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.sharepoint",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.skydrive",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.teams",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.todos",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.whiteboard.publicpreview",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.microsoft.workfolders",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.mobilehelix.link.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.moveinsync.ets",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.moviuscorp.multilineforintune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.ms.engage",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.ms.office365admin",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.ms.portal",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.mural",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.myitops.asiapp.msint",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.omega365.omega365",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.omnipresence.live",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.pagerduty.android.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.penlink.penpoint",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.printeron.droid.phone.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.printeron.print",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.qlik.qliksense.mobile",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.qlik.qsm",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.recruitment.exchange",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.rego.clarity.express.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.ricohspaces.app",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.ringcentral.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.seismic.doccenter",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.servicenow.fulfiller.mam.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.servicenow.requestor.mam.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.shafersystems.notate.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.slack.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.symphony.android.messaging.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.synigo.pulse.app",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.tableau.tableauapp.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.talent.exchange",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.technip.inspectionlist",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.telmediq.smartpager",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.totaltriage.totaltriage",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.uberconference",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.varicent",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.vbrick.rev",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.voltage.mobile.securemail.ui",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.workvivo.android",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.yammer.v1",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "com.zoho.projects.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "intraactiveapp.proactive.dk.intraactiveapp",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "io.beakon",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "io.island.island.intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "io.outreach.sales",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "jp.andpad.android",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "jp.andpad.android.andpadchat",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "jp.andpad.android.andpadinspection2nd",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "jp.co.cegb.archxtractforstore",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "jp.co.hitachi_solutions.hibun.hibundp",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "nl.intus.myswisio",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "no.bldngai.mybldng",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "ols.microsoft.com.shiftr",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "se.evoko.naso.mobile",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "sg.com.trustedsource.boardvision",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "so.rework.app.enterprise",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "uk.co.applymobile.idenprotectgo",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "us.zoom.videomeetings4intune",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    },
-    {
-      "mobileAppIdentifier": {
-        "packageId": "za.co.onlineintelligence.mobile.ciims.ciimsgo",
-        "@odata.type": "#microsoft.graph.androidMobileAppIdentifier"
-      }
-    }
-  ],
-  "biometricAuthenticationBlocked": false,
-  "minimumWarningOsVersion": "10.0",
-  "appActionIfDevicePasscodeComplexityLessThanHigh": null,
-  "targetedAppManagementLevels": "unmanaged",
-  "allowedOutboundClipboardSharingLevel": "managedAppsWithPasteIn",
-  "description": "App Protection Policy for applications on Android. Applies to unmanaged (BYOD) personal devices only. Enforces PIN, encryption, data transfer restrictions, and conditional launch checks.",
-  "minimumRequiredAppVersion": null,
-  "minimumWipeCompanyPortalVersion": null,
   "periodBeforePinReset": "PT0S",
-  "minimumWipePatchVersion": "0000-00-00",
-  "appActionIfDeviceComplianceRequired": "block",
-  "blockAfterCompanyPortalUpdateDeferralInDays": 0,
-  "appActionIfAndroidSafetyNetDeviceAttestationFailed": "block",
-  "appActionIfAccountIsClockedOut": null,
-  "requireClass3Biometrics": false,
-  "mobileThreatDefensePartnerPriority": null,
-  "appGroupType": "allApps",
-  "dialerRestrictionLevel": "allApps",
-  "periodOfflineBeforeAccessCheck": "PT12H",
-  "minimumRequiredPatchVersion": "0000-00-00",
-  "pinCharacterSet": "numeric",
-  "appActionIfDevicePasscodeComplexityLessThanMedium": null,
-  "blockDataIngestionIntoOrganizationDocuments": false,
-  "appActionIfAndroidSafetyNetAppsVerificationFailed": "block",
-  "appActionIfAndroidDeviceManufacturerNotAllowed": "block",
-  "maximumAllowedDeviceThreatLevel": "notConfigured",
-  "fingerprintAndBiometricEnabled": null,
-  "managedBrowser": "notConfigured",
-  "customBrowserDisplayName": "",
-  "dataBackupBlocked": true,
-  "pinRequiredInsteadOfBiometricTimeout": "PT30M",
-  "mobileThreatDefenseRemediationAction": "block",
-  "minimumWipeOsVersion": null,
+  "appActionIfDevicePasscodeComplexityLessThanLow": null,
+  "allowedOutboundClipboardSharingExceptionLength": 0,
+  "minimumWarningOsVersion": "10.0",
+  "minimumWipeCompanyPortalVersion": null,
   "allowedAndroidDeviceManufacturers": null,
-  "organizationalCredentialsRequired": false,
-  "requiredAndroidSafetyNetAppsVerificationType": "enabled",
-  "minimumWarningAppVersion": null,
-  "displayName": "Android - CDW Baseline - MAM - BYOD App Protection - v1.0",
-  "messagingRedirectAppDisplayName": "",
-  "gracePeriodToBlockAppsDuringOffClockHours": null,
-  "maximumPinRetries": 5,
-  "allowedDataIngestionLocations": [],
-  "maximumWipeOsVersion": null,
-  "customDialerAppPackageId": "",
   "disableAppEncryptionIfDeviceEncryptionIsEnabled": true,
-  "customBrowserPackageId": "",
+  "minimumRequiredCompanyPortalVersion": null,
+  "protectedMessagingRedirectAppType": "anyApp",
   "managedBrowserToOpenLinksRequired": false,
-  "customDialerAppDisplayName": "",
-  "appActionIfSamsungKnoxAttestationRequired": null,
+  "gracePeriodToBlockAppsDuringOffClockHours": null,
   "encryptAppData": true,
-  "approvedKeyboards": [],
+  "managedBrowser": "notConfigured",
+  "minimumWarningCompanyPortalVersion": null,
+  "minimumWipePatchVersion": "0000-00-00",
+  "deviceLockRequired": true,
+  "blockDataIngestionIntoOrganizationDocuments": false,
+  "appActionIfUnableToAuthenticateUser": null,
+  "pinCharacterSet": "numeric",
+  "minimumWarningAppVersion": null,
+  "minimumRequiredAppVersion": null,
+  "messagingRedirectAppDisplayName": "",
+  "customDialerAppDisplayName": "",
+  "appGroupType": "allApps",
+  "appActionIfAndroidSafetyNetAppsVerificationFailed": "block",
+  "screenCaptureBlocked": false,
+  "appActionIfAndroidDeviceModelNotAllowed": "block",
+  "minimumWipeOsVersion": null,
+  "allowedDataIngestionLocations": [],
+  "disableAppPinIfDevicePinIsSet": true,
+  "description": "App Protection Policy for applications on Android. Applies to unmanaged (BYOD) personal devices only. Enforces PIN, encryption, data transfer restrictions, and conditional launch checks.",
+  "warnAfterCompanyPortalUpdateDeferralInDays": 0,
+  "fingerprintBlocked": false,
+  "customBrowserPackageId": "",
   "printBlocked": false,
-  "periodOnlineBeforeAccessCheck": "PT30M"
+  "minimumRequiredPatchVersion": "0000-00-00",
+  "maximumRequiredOsVersion": null,
+  "mobileThreatDefenseRemediationAction": "block",
+  "allowedDataStorageLocations": [
+    "oneDriveForBusiness",
+    "sharePoint"
+  ],
+  "appActionIfDevicePasscodeComplexityLessThanHigh": null
 }
