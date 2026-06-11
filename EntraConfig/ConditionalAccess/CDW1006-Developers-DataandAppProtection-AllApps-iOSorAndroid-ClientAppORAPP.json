@@ -42,7 +42,6 @@
   "grantControls": {
     "operator": "OR",
     "builtInControls": [
-      "approvedApplication",
       "compliantApplication"
     ],
     "customAuthenticationFactors": [],
