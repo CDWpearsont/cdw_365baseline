@@ -1,0 +1,14 @@
+{
+  "_comment": "Bulk Download Monitoring from the design doc. This MDCA policy is derived from the 'Mass download by a single user' template; flagged apiCreatable:false so the runner reports it as needing a portal/template step rather than silently failing.",
+  "workload": "mdca",
+  "type": "activityPolicy",
+  "identity": "Bulk Download Monitoring",
+  "apiCreatable": false,
+  "parameters": {
+    "name": "Bulk Download Monitoring",
+    "severity": "high",
+    "category": "threatDetection",
+    "description": "Sends an email alert when a user performs a bulk-download of data.",
+    "dailyAlertLimit": 5
+  }
+}

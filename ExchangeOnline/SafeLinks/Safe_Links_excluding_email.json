@@ -1,0 +1,27 @@
+{
+  "_comment": "One file = one selectable policy. Parameters are passed straight to New-/Set-SafeLinksPolicy as a splat — to support a new EXO/MDO policy type, just create another file with a different 'type'.",
+  "workload": "exo",
+  "type": "SafeLinksPolicy",
+  "identity": "Safe Links excluding email",
+  "parameters": {
+    "EnableSafeLinksForEmail": false,
+    "EnableSafeLinksForTeams": true,
+    "EnableSafeLinksForOffice": true,
+    "TrackClicks": true,
+    "AllowClickThrough": false,
+    "EnableOrganizationBranding": false,
+    "ScanUrls": false,
+    "DeliverMessageAfterScan": false,
+    "DisableUrlRewrite": true,
+    "AdminDisplayName": "Enables Safe Links for all M365 workloads excluding email"
+  },
+  "rule": {
+    "type": "SafeLinksRule",
+    "identity": "Safe Links excluding email",
+    "parameters": {
+      "SafeLinksPolicy": "Safe Links excluding email",
+      "RecipientDomainIs": [],
+      "Priority": 0
+    }
+  }
+}
