@@ -1,14 +1,14 @@
 {
-  "passwordRequiredType": "deviceDefault",
-  "storageRequireEncryption": false,
+  "passwordRequiredToUnlockFromIdle": false,
+  "displayName": "Win - CDW Baseline - Compliance - U - Device Health - v3.1",
+  "earlyLaunchAntiMalwareDriverEnabled": false,
+  "secureBootEnabled": true,
   "@odata.type": "#microsoft.graph.windows10CompliancePolicy",
+  "passwordRequiredType": "deviceDefault",
+  "requireHealthyDeviceReport": false,
   "bitLockerEnabled": true,
   "passwordBlockSimple": false,
-  "passwordRequiredToUnlockFromIdle": false,
-  "passwordRequired": false,
-  "secureBootEnabled": true,
-  "requireHealthyDeviceReport": false,
-  "earlyLaunchAntiMalwareDriverEnabled": false,
+  "storageRequireEncryption": false,
   "codeIntegrityEnabled": true,
-  "displayName": "Win - CDW Baseline - Compliance - U - Device Health - v3.1"
+  "passwordRequired": false
 }
