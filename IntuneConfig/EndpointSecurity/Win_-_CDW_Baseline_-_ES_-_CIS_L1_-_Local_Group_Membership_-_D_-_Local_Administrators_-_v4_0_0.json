@@ -4,8 +4,8 @@
   "platforms": "windows10",
   "technologies": "mdm",
   "templateReference": {
-    "templateFamily": "endpointSecurityAccountProtection",
-    "templateId": "22968f54-45fa-486c-848e-f8224aa69772_1"
+    "templateId": "22968f54-45fa-486c-848e-f8224aa69772_1",
+    "templateFamily": "endpointSecurityAccountProtection"
   },
   "settings": [
     {

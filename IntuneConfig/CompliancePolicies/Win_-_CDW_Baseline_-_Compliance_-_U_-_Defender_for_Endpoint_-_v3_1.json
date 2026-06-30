@@ -1,14 +1,14 @@
 {
-  "codeIntegrityEnabled": false,
-  "passwordRequired": false,
+  "bitLockerEnabled": false,
+  "passwordRequiredToUnlockFromIdle": false,
+  "requireHealthyDeviceReport": false,
+  "@odata.type": "#microsoft.graph.windows10CompliancePolicy",
+  "earlyLaunchAntiMalwareDriverEnabled": false,
+  "secureBootEnabled": false,
   "passwordBlockSimple": false,
   "passwordRequiredType": "deviceDefault",
-  "bitLockerEnabled": false,
   "storageRequireEncryption": false,
-  "requireHealthyDeviceReport": false,
   "displayName": "Win - CDW Baseline - Compliance - U - Defender for Endpoint - v3.1",
-  "secureBootEnabled": false,
-  "passwordRequiredToUnlockFromIdle": false,
-  "earlyLaunchAntiMalwareDriverEnabled": false,
-  "@odata.type": "#microsoft.graph.windows10CompliancePolicy"
+  "passwordRequired": false,
+  "codeIntegrityEnabled": false
 }
