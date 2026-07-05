@@ -4,8 +4,8 @@
   "platforms": "windows10",
   "technologies": "mdm,microsoftSense",
   "templateReference": {
-    "templateFamily": "endpointSecurityAntivirus",
-    "templateId": "d948ff9b-99cb-4ee0-8012-1fbc09685377_1"
+    "templateId": "d948ff9b-99cb-4ee0-8012-1fbc09685377_1",
+    "templateFamily": "endpointSecurityAntivirus"
   },
   "settings": [
     {
