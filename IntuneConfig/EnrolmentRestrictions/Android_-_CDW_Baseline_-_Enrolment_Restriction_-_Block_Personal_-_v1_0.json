@@ -1,16 +1,16 @@
 {
-  "displayName": "Android - CDW Baseline - Enrolment Restriction - Block Personal - v1.0",
-  "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestrictionConfiguration",
   "priority": 1,
-  "platformRestriction": {
-    "personalDeviceEnrollmentBlocked": true,
-    "blockedManufacturers": [],
-    "blockedSkus": [],
-    "osMinimumVersion": "10.0",
-    "osMaximumVersion": null,
-    "platformBlocked": false
-  },
-  "description": "Blocks personal (BYOD) Android device enrolment. Allows Android Enterprise corporate-owned devices only. Personal Work Profile (BYOD) is managed via MAM/App Protection rather than MDM enrolment.",
   "deviceEnrollmentConfigurationType": "singlePlatformRestriction",
-  "platformType": "androidForWork"
+  "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestrictionConfiguration",
+  "platformType": "androidForWork",
+  "displayName": "Android - CDW Baseline - Enrolment Restriction - Block Personal - v1.0",
+  "platformRestriction": {
+    "blockedManufacturers": [],
+    "personalDeviceEnrollmentBlocked": true,
+    "osMaximumVersion": null,
+    "platformBlocked": false,
+    "blockedSkus": [],
+    "osMinimumVersion": "10.0"
+  },
+  "description": "Blocks personal (BYOD) Android device enrolment. Allows Android Enterprise corporate-owned devices only. Personal Work Profile (BYOD) is managed via MAM/App Protection rather than MDM enrolment."
 }
