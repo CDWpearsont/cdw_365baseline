@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<title>Signing in…</title>
+<script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js" crossorigin="anonymous"></script>
+<style>
+  body{font-family:'Segoe UI',system-ui,sans-serif;display:flex;align-items:center;
+       justify-content:center;height:100vh;margin:0;color:#6b6b73;background:#f7f7f8}
+</style>
+</head>
+<body>
+<p id="msg">Completing sign-in…</p>
+<script>
+// MSAL lands here after Entra. This route is anonymous in staticwebapp.config.json
+// so the SWA gate cannot 302 it — a 302 would destroy the #code fragment before
+// any script runs. We consume the fragment here, then navigate to the app, which
+// is a same-site request and therefore carries the SWA auth cookie normally.
+(async () => {
+  try {
+    const app = new msal.PublicClientApplication({
+      auth: {
+        clientId:    'c89cd498-eba7-43de-9a70-2a59d6feb655',
+        authority:   'https://login.microsoftonline.com/common',
+        redirectUri: window.location.origin + '/auth-redirect.html',
+        navigateToLoginRequestUrl: false
+      },
+      cache: { cacheLocation: 'sessionStorage' }
+    });
+    await app.initialize();
+    await app.handleRedirectPromise();
+  } catch (e) {
+    console.error('Redirect handling failed:', e);
+    document.getElementById('msg').textContent = 'Sign-in failed: ' + e.message;
+    return;
+  }
+  window.location.replace('/');
+})();
+</script>
+</body>
+</html>
