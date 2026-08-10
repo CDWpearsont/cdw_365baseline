@@ -1,0 +1,3843 @@
+{
+  "schemaVersion": 1,
+  "generated": "2026-08-10T08:09:33Z",
+  "count": 212,
+  "enrichedCount": 4,
+  "entries": [
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-attack-surface-reduction-d-asr-rules-audit-mode",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Attack_Surface_Reduction_-_D_-_ASR_Rules__Audit_Mode__-_v3_1.json",
+      "sha": "867797c3147b0412",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAttackSurfaceReduction",
+      "displayName": "Win - CDW Baseline - ES - Attack Surface Reduction - D - ASR Rules (Audit Mode) - v3.1",
+      "baseName": "Win - CDW Baseline - ES - Attack Surface Reduction - D - ASR Rules (Audit Mode)",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.1",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "audit-mode"
+      ],
+      "templateId": "e8c053d6-9f95-42b1-a7f1-ebfd71c67a4b_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-attack-surface-reduction-d-asr-rules-l2",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Attack_Surface_Reduction_-_D_-_ASR_Rules__L2__-_v3_7.json",
+      "sha": "dc0fbf8a315ae80d",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAttackSurfaceReduction",
+      "displayName": "Win - CDW Baseline - ES - Attack Surface Reduction - D - ASR Rules (L2) - v3.7",
+      "baseName": "Win - CDW Baseline - ES - Attack Surface Reduction - D - ASR Rules (L2)",
+      "description": "DO NOT ASSIGN THIS POLICY WITHOUT VALIDATING VIA AUDIT MODE FIRST!\nhttps://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-deployment-operationalize",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "do-not-assign"
+      ],
+      "templateId": "e8c053d6-9f95-42b1-a7f1-ebfd71c67a4b_1",
+      "licence": [
+        "E3"
+      ],
+      "notes": "Reference only - description marks it DO NOT ASSIGN. Excluded from all blocks deliberately; retained for design comparison."
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-attack-surface-reduction-d-asr-rules",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Attack_Surface_Reduction_-_D_-_ASR_Rules_-_v4_0_0.json",
+      "sha": "4d207b5a51ccd598",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAttackSurfaceReduction",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Attack Surface Reduction - D - ASR Rules - v4.0.0",
+      "baseName": "Win - CDW Baseline - ES - CIS L1 - Attack Surface Reduction - D - ASR Rules",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. 16 ASR rules set to Block; obfuscated scripts and ransomware protection set to Audit per CIS guidance. Controlled Folder Access in Audit mode.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "e8c053d6-9f95-42b1-a7f1-ebfd71c67a4b_1",
+      "blocks": [
+        "intune.win.cis-l1"
+      ],
+      "requires": [
+        "intune.groups.win-corporate-devices"
+      ],
+      "assignTo": "intune.groups.win-corporate-devices",
+      "licence": [
+        "E3"
+      ],
+      "lldSection": "4.3",
+      "lldSummary": "Enables the CIS Level 1 Attack Surface Reduction rule set in block mode, preventing common initial-access and execution techniques such as Office child-process creation, obfuscated script execution and credential theft from LSASS."
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-defender-antivirus-d-antivirus-configuration",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Defender_Antivirus_-_D_-_Antivirus_Configuration_-_v4_0_0.json",
+      "sha": "77b1026363f5a444",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAntivirus",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Defender Antivirus - D - Antivirus Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - ES - CIS L1 - Defender Antivirus - D - Antivirus Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Tamper Protection and Windows Security Center hardening. Note: Tamper Protection requires Defender for Endpoint P1/P2 or Defender for Business license.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "d948ff9b-99cb-4ee0-8012-1fbc09685377_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-defender-antivirus-d-security-experience",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Defender_Antivirus_-_D_-_Security_Experience_-_v4_0_0.json",
+      "sha": "44dc4e19469b0e7e",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAntivirus",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Defender Antivirus - D - Security Experience - v4.0.0",
+      "baseName": "Win - CDW Baseline - ES - CIS L1 - Defender Antivirus - D - Security Experience",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Tamper Protection and Windows Security Center hardening. Note: Tamper Protection requires Defender for Endpoint P1/P2 or Defender for Business license.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "d948ff9b-99cb-4ee0-8012-1fbc09685377_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-encryption-d-bitlocker-os-disk",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v4_0_0.json",
+      "sha": "167e34a5113f5a3b",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityDiskEncryption",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Encryption - D - BitLocker (OS Disk) - v4.0.0",
+      "baseName": "Win - CDW Baseline - ES - CIS L1 - Encryption - D - BitLocker (OS Disk)",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. BitLocker OS drive encryption enforced with XTS-AES 256, TPM required, recovery key backed to AAD, standard user encryption allowed (silent enablement).",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 8,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "46ddfc50-d10f-4867-b852-9434254b3bff_1",
+      "blocks": [
+        "intune.win.cis-l1"
+      ],
+      "requires": [
+        "intune.groups.win-corporate-devices"
+      ],
+      "assignTo": "intune.groups.win-corporate-devices",
+      "licence": [
+        "E3"
+      ],
+      "lldSection": "4.5",
+      "lldSummary": "Enforces BitLocker full-disk encryption on the operating system volume with recovery keys escrowed to Entra ID, ensuring data at rest is protected and recoverable without local key storage."
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-local-group-membership-d-local-administrators",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Local_Group_Membership_-_D_-_Local_Administrators_-_v4_0_0.json",
+      "sha": "8755e9e39e400b1f",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAccountProtection",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Local Group Membership - D - Local Administrators - v4.0.0",
+      "baseName": "Win - CDW Baseline - ES - CIS L1 - Local Group Membership - D - Local Administrators",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Restricts Local Administrators group membership. Update the WLapsAdmin user value to match your LAPS-managed account name before deploying.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "22968f54-45fa-486c-848e-f8224aa69772_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-firewall-d-firewall-configuration",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v4_0_0.json",
+      "sha": "1a2ab9495d41e185",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityFirewall",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Firewall - D - Firewall Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - ES - CIS L1 - Windows Firewall - D - Firewall Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Firewall enabled on all three profiles, stateful FTP disabled, filtering platform connection auditing. Additional CIS firewall settings (default inbound action, logging) require template refs not available via API.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 6,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "6078910e-d808-4a9f-a51d-1b8a7bacb7c0_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-hello-for-business-d-whfb-configuration",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v4_0_0.json",
+      "sha": "e0fd4e5abc2e0b3f",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAccountProtection",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Hello for Business - D - WHfB Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - ES - CIS L1 - Windows Hello for Business - D - WHfB Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. WHfB enabled, TPM required, minimum PIN 6 chars, enhanced anti-spoofing. (ESS peripheral setting excluded — not in tenant catalog.)",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "fcef01f2-439d-4c3f-9184-823fd6e97646_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-laps-d-laps-configuration",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v4_0_0.json",
+      "sha": "ca2434dd3ac2706f",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAccountProtection",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows LAPS - D - LAPS Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - ES - CIS L1 - Windows LAPS - D - LAPS Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. LAPS backup to Azure AD, password age 30 days, large+small+numbers+special complexity, min length 15, post-auth reset and logoff, 8 hour delay.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "adc46e5a-f4aa-4ff6-aeff-4f27bc525796_1",
+      "blocks": [
+        "intune.win.cis-l1"
+      ],
+      "assignTo": "intune.groups.win-corporate-devices",
+      "licence": [
+        "E3"
+      ],
+      "lldSection": "4.6",
+      "lldSummary": "Configures Windows LAPS to rotate the local administrator password automatically and back it up to Entra ID, removing shared local credentials as a lateral-movement path."
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-defender-antivirus-d-av-configuration",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Defender_Antivirus_-_D_-_AV_Configuration_-_v3_3.json",
+      "sha": "2c21c158ff1b5360",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAntivirus",
+      "displayName": "Win - CDW Baseline - ES - Defender Antivirus - D - AV Configuration - v3.3",
+      "baseName": "Win - CDW Baseline - ES - Defender Antivirus - D - AV Configuration",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.3",
+      "settingCount": 27,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "804339ad-1553-4478-a742-138fb5807418_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-defender-antivirus-d-security-experience",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Defender_Antivirus_-_D_-_Security_Experience_-_v3_3.json",
+      "sha": "8b2be0f981cd01af",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAntivirus",
+      "displayName": "Win - CDW Baseline - ES - Defender Antivirus - D - Security Experience - v3.3",
+      "baseName": "Win - CDW Baseline - ES - Defender Antivirus - D - Security Experience",
+      "description": "NOTE: The \"Tamper Protection\" setting requires an active Defender for Endpoint P1/P2 or Defender for Business license.\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/prevent-changes-to-security-settings-with-tamper-protection",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.3",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "d948ff9b-99cb-4ee0-8012-1fbc09685377_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-defender-antivirus-updates-ring-1-pilot",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Defender_Antivirus_Updates_-_Ring_1_-_Pilot_-_v3_4.json",
+      "sha": "29033e03c8586650",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAntivirus",
+      "displayName": "Win - CDW Baseline - ES - Defender Antivirus Updates - Ring 1 - Pilot - v3.4",
+      "baseName": "Win - CDW Baseline - ES - Defender Antivirus Updates - Ring 1 - Pilot",
+      "platforms": [
+        "windows"
+      ],
+      "version": "3.4",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ],
+      "templateId": "e3f74c5a-a6de-411d-aef6-eb15628f3a0a_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-defender-antivirus-updates-ring-2-uat",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Defender_Antivirus_Updates_-_Ring_2_-_UAT_-_v3_4.json",
+      "sha": "4fdab8e0330874c8",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAntivirus",
+      "displayName": "Win - CDW Baseline - ES - Defender Antivirus Updates - Ring 2 - UAT - v3.4",
+      "baseName": "Win - CDW Baseline - ES - Defender Antivirus Updates - Ring 2 - UAT",
+      "platforms": [
+        "windows"
+      ],
+      "version": "3.4",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ],
+      "templateId": "e3f74c5a-a6de-411d-aef6-eb15628f3a0a_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-defender-antivirus-updates-ring-3-production",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Defender_Antivirus_Updates_-_Ring_3_-_Production_-_v3_4.json",
+      "sha": "c24b8628e7a00277",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAntivirus",
+      "displayName": "Win - CDW Baseline - ES - Defender Antivirus Updates - Ring 3 - Production - v3.4",
+      "baseName": "Win - CDW Baseline - ES - Defender Antivirus Updates - Ring 3 - Production",
+      "platforms": [
+        "windows"
+      ],
+      "version": "3.4",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ],
+      "templateId": "e3f74c5a-a6de-411d-aef6-eb15628f3a0a_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-encryption-d-bitlocker-os-disk",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v3_7.json",
+      "sha": "2f00fa63030bea3d",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityDiskEncryption",
+      "displayName": "Win - CDW Baseline - ES - Encryption - D - BitLocker (OS Disk) - v3.7",
+      "baseName": "Win - CDW Baseline - ES - Encryption - D - BitLocker (OS Disk)",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 8,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "46ddfc50-d10f-4867-b852-9434254b3bff_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-encryption-u-personal-data-encryption",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_U_-_Personal_Data_Encryption_-_v3_4.json",
+      "sha": "b18bfc102609e8e0",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityDiskEncryption",
+      "displayName": "Win - CDW Baseline - ES - Encryption - U - Personal Data Encryption - v3.4",
+      "baseName": "Win - CDW Baseline - ES - Encryption - U - Personal Data Encryption",
+      "description": "NOTE: PDE is only applicable to Windows 11 22H2 or higher, Entra-Joined devices and does not work on Windows Pro/Business SKU's:\nhttps://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/personal-data-encryption/",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.4",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "0b5708d9-9bc2-49a9-b4f7-ec463fcc41e0_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-local-group-membership-d-local-administrators",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Local_Group_Membership_-_D_-_Local_Administrators_-_v3_7.json",
+      "sha": "91c7b1d336620daa",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAccountProtection",
+      "displayName": "Win - CDW Baseline - ES - Local Group Membership - D - Local Administrators - v3.7",
+      "baseName": "Win - CDW Baseline - ES - Local Group Membership - D - Local Administrators",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "22968f54-45fa-486c-848e-f8224aa69772_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-windows-firewall-d-firewall-configuration",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v3_1.json",
+      "sha": "50302625bf8829b2",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityFirewall",
+      "displayName": "Win - CDW Baseline - ES - Windows Firewall - D - Firewall Configuration - v3.1",
+      "baseName": "Win - CDW Baseline - ES - Windows Firewall - D - Firewall Configuration",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.1",
+      "settingCount": 6,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "6078910e-d808-4a9f-a51d-1b8a7bacb7c0_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-windows-hello-for-business-d-whfb-configuration",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v3_2.json",
+      "sha": "f5b40a8f07fca522",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAccountProtection",
+      "displayName": "Win - CDW Baseline - ES - Windows Hello for Business - D - WHfB Configuration - v3.2",
+      "baseName": "Win - CDW Baseline - ES - Windows Hello for Business - D - WHfB Configuration",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.2",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "fcef01f2-439d-4c3f-9184-823fd6e97646_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-windows-laps-d-laps-configuration",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v3_1.json",
+      "sha": "5e27b20a64870436",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAccountProtection",
+      "displayName": "Win - CDW Baseline - ES - Windows LAPS - D - LAPS Configuration - v3.1",
+      "baseName": "Win - CDW Baseline - ES - Windows LAPS - D - LAPS Configuration",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.1",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "adc46e5a-f4aa-4ff6-aeff-4f27bc525796_1"
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-windows-laps-d-laps-configuration-24h2",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Windows_LAPS_-_D_-_LAPS_Configuration__24H2___-_v3_6.json",
+      "sha": "30b4ac6f46ee5fe6",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityAccountProtection",
+      "displayName": "Win - CDW Baseline - ES - Windows LAPS - D - LAPS Configuration (24H2+) - v3.6",
+      "baseName": "Win - CDW Baseline - ES - Windows LAPS - D - LAPS Configuration (24H2+)",
+      "description": "NOTE: For 24H2+ devices only.",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.6",
+      "settingCount": 6,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "adc46e5a-f4aa-4ff6-aeff-4f27bc525796_1"
+    },
+    {
+      "id": "intune.settingscatalog.android-cdw-baseline-sc-restrictions-d",
+      "file": "IntuneConfig/SettingsCatalog/Android_-_CDW_Baseline_-_SC_-_Restrictions_-_D_-_v1_0__TEST_.json",
+      "sha": "75601a0228b422ec",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Android - CDW Baseline - SC - Restrictions - D - v1.0 (TEST)",
+      "baseName": "Android - CDW Baseline - SC - Restrictions - D",
+      "platforms": [
+        "android"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 7,
+      "deployVia": "graph",
+      "isDraft": true,
+      "flags": [
+        "draft"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-authentication-d-platform-sso",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Authentication_-_D_-_Platform_SSO_-_v1_0.json",
+      "sha": "f0118e0904199ee7",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Authentication - D - Platform SSO - v1.0",
+      "baseName": "MacOS - CDW Baseline - Authentication - D - Platform SSO",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-defender-antivirus-d-antivirus-configuration",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Defender_Antivirus_-_D_-_Antivirus_Configuration_-_v1_0.json",
+      "sha": "a1bfbf5f1a0227c1",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Defender Antivirus - D - Antivirus Configuration - v1.0",
+      "baseName": "MacOS - CDW Baseline - Defender Antivirus - D - Antivirus Configuration",
+      "description": "NOTE: This policy requires deployment of the Defender application and a valid Defender for Endpoint P1/P2 or Defender for Business license:\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/mac-install-with-intune",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 19,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-defender-antivirus-d-mde-configuration",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Defender_Antivirus_-_D_-_MDE_Configuration_-_v1_0.json",
+      "sha": "7ad201572f64d925",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Defender Antivirus - D - MDE Configuration - v1.0",
+      "baseName": "MacOS - CDW Baseline - Defender Antivirus - D - MDE Configuration",
+      "description": "NOTE: This policy requires deployment of the Defender application and a valid Defender for Endpoint P1/P2 or Defender for Business license:\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/mac-install-with-intune",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 6,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-device-security-d-accounts-and-login",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Device_Security_-_D_-_Accounts_and_Login_-_v1_0.json",
+      "sha": "01522039c01e739d",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Device Security - D - Accounts and Login - v1.0",
+      "baseName": "MacOS - CDW Baseline - Device Security - D - Accounts and Login",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-device-security-d-restrictions",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Device_Security_-_D_-_Restrictions_-_v1_0.json",
+      "sha": "7853b63c297c33de",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Device Security - D - Restrictions - v1.0",
+      "baseName": "MacOS - CDW Baseline - Device Security - D - Restrictions",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-disk-encryption-d-filevault",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Disk_Encryption_-_D_-_FileVault_-_v1_0.json",
+      "sha": "4b06e91ed6627a10",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Disk Encryption - D - FileVault - v1.0",
+      "baseName": "MacOS - CDW Baseline - Disk Encryption - D - FileVault",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-firewall-d-gatekeeper",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Firewall_-_D_-_Gatekeeper_-_v1_0.json",
+      "sha": "422b8ce29327c7df",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Firewall - D - Gatekeeper - v1.0",
+      "baseName": "MacOS - CDW Baseline - Firewall - D - Gatekeeper",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-microsoft-autoupdate-d-mau-configuration",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_AutoUpdate_-_D_-_MAU_Configuration_-_v1_0.json",
+      "sha": "eeab3ff9247ab308",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Microsoft AutoUpdate - D - MAU Configuration - v1.0",
+      "baseName": "MacOS - CDW Baseline - Microsoft AutoUpdate - D - MAU Configuration",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 12,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-microsoft-edge-d-password-management",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_Edge_-_D_-_Password_Management_-_v1_0.json",
+      "sha": "4756aab878da22b1",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Microsoft Edge - D - Password Management - v1.0",
+      "baseName": "MacOS - CDW Baseline - Microsoft Edge - D - Password Management",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-microsoft-edge-d-security",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_Edge_-_D_-_Security_-_v1_0.json",
+      "sha": "8d6c9c746d28d874",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Microsoft Edge - D - Security - v1.0",
+      "baseName": "MacOS - CDW Baseline - Microsoft Edge - D - Security",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 29,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-microsoft-edge-u-extensions",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_Edge_-_U_-_Extensions_-_v1_0.json",
+      "sha": "40345d8504a05fe3",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Microsoft Edge - U - Extensions - v1.0",
+      "baseName": "MacOS - CDW Baseline - Microsoft Edge - U - Extensions",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "user",
+      "version": "1.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-microsoft-edge-u-profiles-sign-in-and-sync",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v1_0.json",
+      "sha": "d9c0121e161ba670",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Microsoft Edge - U - Profiles, Sign-In and Sync - v1.0",
+      "baseName": "MacOS - CDW Baseline - Microsoft Edge - U - Profiles, Sign-In and Sync",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "user",
+      "version": "1.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-microsoft-edge-u-updates",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_Edge_-_U_-_Updates_-_v1_0.json",
+      "sha": "531fc64aaec20650",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Microsoft Edge - U - Updates - v1.0",
+      "baseName": "MacOS - CDW Baseline - Microsoft Edge - U - Updates",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "user",
+      "version": "1.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-microsoft-office-d-office-configuration",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_Office_-_D_-_Office_Configuration_-_v1_0.json",
+      "sha": "92a4653c2e82067d",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Microsoft Office - D - Office Configuration - v1.0",
+      "baseName": "MacOS - CDW Baseline - Microsoft Office - D - Office Configuration",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-microsoft-onedrive-d-service-and-access",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_OneDrive_-_D_-_Service_and_Access_-_v1_0.json",
+      "sha": "0240d88c92962745",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Microsoft OneDrive - D - Service and Access - v1.0",
+      "baseName": "MacOS - CDW Baseline - Microsoft OneDrive - D - Service and Access",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-microsoft-onedrive-u-known-folder-move",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_OneDrive_-_U_-_Known_Folder_Move_-_v1_0.json",
+      "sha": "65d4dd9fab243871",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Microsoft OneDrive - U - Known Folder Move - v1.0",
+      "baseName": "MacOS - CDW Baseline - Microsoft OneDrive - U - Known Folder Move",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "user",
+      "version": "1.0",
+      "settingCount": 15,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-updates-d-update-configuration",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Updates_-_D_-_Update_Configuration_-_v1_0.json",
+      "sha": "3953a34118d4d199",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Updates - D - Update Configuration - v1.0",
+      "baseName": "MacOS - CDW Baseline - Updates - D - Update Configuration",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-above-lock-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Above_Lock_-_D_-_v4_0_0.json",
+      "sha": "9aeb10a91d626cad",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Above Lock - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Above Lock - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Above Lock. Auto-generated from CIS PDF. 1 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-administrative-templates-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Administrative_Templates_-_D_-_v4_0_0.json",
+      "sha": "8e90524b4458a73c",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Administrative Templates - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Administrative Templates - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Administrative Templates. 66 settings using proven Settings Catalog IDs.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 66,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-auditing-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Auditing_-_D_-_v4_0_0.json",
+      "sha": "97a545126eb814f8",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Auditing - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Auditing - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Auditing. Auto-generated from CIS PDF. 27 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 27,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-defender-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Defender_-_D_-_v4_0_0.json",
+      "sha": "9df0fb8da56d5cb6",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Defender - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Defender - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Defender. Auto-generated from CIS PDF. 12 settings (some removed due to catalog incompatibility).",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 11,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-delivery-optimization-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Delivery_Optimization_-_D_-_v4_0_0.json",
+      "sha": "62ada529ac75665c",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Delivery Optimization - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Delivery Optimization - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Delivery Optimization. Auto-generated from CIS PDF. 1 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-delivery-optimization",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Delivery_Optimization_-_v4_0_0.json",
+      "sha": "6f174b412422d6a2",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Delivery Optimization - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Delivery Optimization",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Delivery Optimization download mode.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-guard-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Guard_-_D_-_v4_0_0.json",
+      "sha": "893b5565af62d25b",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Guard - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Guard - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Device Guard. Auto-generated from CIS PDF. 4 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-lock-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Lock_-_D_-_v4_0_0.json",
+      "sha": "59aabcceea777264",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Lock - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Lock - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Device Lock. Auto-generated from CIS PDF. 9 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 9,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-enhanced-phishing-protection",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Enhanced_Phishing_Protection_-_v4_0_0.json",
+      "sha": "7dc9b04b826d7899",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Enhanced Phishing Protection - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Enhanced Phishing Protection",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Enhanced Phishing Protection (WebThreatDefense).",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-experience-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Experience_-_D_-_v4_0_0.json",
+      "sha": "6e349faaa1b1252a",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Experience - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Experience - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Experience. Auto-generated from CIS PDF. 3 settings (some removed due to catalog incompatibility).",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-lanman-workstation-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Lanman_Workstation_-_D_-_v4_0_0.json",
+      "sha": "6c1bd3167c9e473b",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Lanman Workstation - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Lanman Workstation - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Lanman Workstation. Auto-generated from CIS PDF. 1 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-local-security-authority-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Local_Security_Authority_-_D_-_v4_0_0.json",
+      "sha": "0d755d6cb109b71b",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Local Security Authority - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Local Security Authority - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Local Security Authority. Auto-generated from CIS PDF. 1 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-local-security-policies-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Local_Security_Policies_-_D_-_v4_0_0.json",
+      "sha": "4239f12f799aa1e0",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Local Security Policies - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Local Security Policies - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Local Policies Security Options: guest account, blank passwords, SMB signing, LAN Manager auth, UAC behaviour, network access restrictions. 23 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 23,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-app-store-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_App_Store_-_D_-_v4_0_0.json",
+      "sha": "48d6353358ad13cf",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft App Store - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft App Store - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Microsoft App Store. Auto-generated from CIS PDF. 4 settings (some removed due to catalog incompatibility).",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-extensions",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_Extensions_-_v4_0_0.json",
+      "sha": "ef2e48f677699f85",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Extensions - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Extensions",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Edge Extensions.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-password-management",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_Password_Management_-_v4_0_0.json",
+      "sha": "fa3ce399a7168049",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Password Management - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Password Management",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Edge Password Management.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-security",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_Security_-_v4_0_0.json",
+      "sha": "a1d407ea9fa8ddbf",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Security - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Security",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Edge Security.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 44,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-updates",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_Updates_-_v4_0_0.json",
+      "sha": "21bfc5910310b3d7",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Updates - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Updates",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Edge Updates.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 13,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-user-experience",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_User_Experience_-_v4_0_0.json",
+      "sha": "5fe0d91b84e4f8e3",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - User Experience - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - User Experience",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Edge User Experience.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 12,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-office-config-and-experience",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Office_-_Config_and_Experience_-_v4_0_0.json",
+      "sha": "67320517d57394b0",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Office - Config and Experience - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Office - Config and Experience",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Office Config and Experience.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 25,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-office-device-security",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Office_-_Device_Security_-_v4_0_0.json",
+      "sha": "65aff1e6760e0bb4",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Office - Device Security - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Office - Device Security",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Office Device Security.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 17,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-office-security",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Office_-_Security_-_v4_0_0.json",
+      "sha": "42e5163e7bb51345",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Office - Security - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Office - Security",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Office Security.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 108,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-office-updates",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Office_-_Updates_-_v4_0_0.json",
+      "sha": "716537d6bb1cbab8",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Office - Updates - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Office - Updates",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft Office Updates.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-onedrive-d-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_OneDrive_-_D_-_Configuration_-_v4_0_0.json",
+      "sha": "b6554dd57dbac0ae",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft OneDrive - D - Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft OneDrive - D - Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft OneDrive (D) Configuration.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 10,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-onedrive-u-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_OneDrive_-_U_-_Configuration_-_v4_0_0.json",
+      "sha": "7a063dfd4880edb9",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft OneDrive - U - Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft OneDrive - U - Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Microsoft OneDrive (U) Configuration.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "user",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-privacy-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Privacy_-_D_-_v4_0_0.json",
+      "sha": "31b326f41ca68820",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Privacy - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Privacy - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Privacy. Auto-generated from CIS PDF. 2 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-search-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Search_-_D_-_v4_0_0.json",
+      "sha": "0e15b62e0a2ce30b",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Search - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Search - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Search. Auto-generated from CIS PDF. 2 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-smart-screen-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Smart_Screen_-_D_-_v4_0_0.json",
+      "sha": "8fca4dff0f409ef4",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Smart Screen - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Smart Screen - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Smart Screen. Auto-generated from CIS PDF. 4 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-sudo-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Sudo_-_D_-_v4_0_0.json",
+      "sha": "395a02a7d618c1de",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Sudo - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Sudo - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Sudo. Auto-generated from CIS PDF. 1 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-system-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_System_-_D_-_v4_0_0.json",
+      "sha": "770cb2d9253dd89d",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - System - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - System - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: System. Auto-generated from CIS PDF. 4 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-system-services-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_System_Services_-_D_-_v4_0_0.json",
+      "sha": "3f424526ef415c66",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - System Services - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - System Services - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: System Services. Auto-generated from CIS PDF. 2 settings (some removed due to catalog incompatibility).",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-user-rights-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_User_Rights_-_D_-_v4_0_0.json",
+      "sha": "ec6d44816d560577",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - User Rights - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - User Rights - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. User Rights assignments using proven SID-based values. 26 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 26,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-virtualization-based-technology-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Virtualization_Based_Technology_-_D_-_v4_0_0.json",
+      "sha": "d4d5e6fb89b5dcab",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Virtualization Based Technology - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Virtualization Based Technology - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Virtualization Based Technology. Auto-generated from CIS PDF. 2 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-widgets-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Widgets_-_D_-_v4_0_0.json",
+      "sha": "f45a6913fca08d02",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Widgets - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Widgets - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Widgets. Auto-generated from CIS PDF. 1 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-apps-d-in-box-app-removal",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Apps_-_D_-_In-Box_App_Removal_-_v4_0_0.json",
+      "sha": "98578f16a3061a08",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Apps - D - In-Box App Removal - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Apps - D - In-Box App Removal",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Removal of default in-box Microsoft Store apps.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-defender-security-center-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Defender_Security_Center_-_D_-_v4_0_0.json",
+      "sha": "909ef1ff6d8639f2",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Defender Security Center - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Defender Security Center - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Windows Defender Security Center. Auto-generated from CIS PDF. 1 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-ink-workspace-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Ink_Workspace_-_D_-_v4_0_0.json",
+      "sha": "4ef2bda823911715",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Ink Workspace - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Ink Workspace - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Windows Ink Workspace. Auto-generated from CIS PDF. 1 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-sandbox-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Sandbox_-_D_-_v4_0_0.json",
+      "sha": "316c3eb62eceac4a",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Sandbox - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Sandbox - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Windows Sandbox. Auto-generated from CIS PDF. 2 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-update-for-business-d",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_For_Business_-_D_-_v4_0_0.json",
+      "sha": "56e5764c155b0f1c",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update For Business - D - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Update For Business - D",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1 Settings Catalog policy for: Windows Update For Business. Auto-generated from CIS PDF. 5 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-update-for-business-delivery-optimisation",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_Delivery_Optimisation_-_v4_0_0.json",
+      "sha": "a5a5994f537c9b15",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - Delivery Optimisation - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - Delivery Optimisation",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Windows Update for Business Delivery Optimisation.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 12,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-user-experience-feature-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_Feature_Configuration_-_v4_0_0.json",
+      "sha": "77373c9deb712324",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - Feature Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - Feature Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Windows User Experience Feature Configuration.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "version": "4.0.0",
+      "settingCount": 6,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-defender-antivirus-additional-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Defender_Antivirus_-_Additional_Configuration_-_v4_0_0.json",
+      "sha": "cb7b53d9d4891b33",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Defender Antivirus - Additional Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Defender Antivirus - Additional Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Defender Antivirus additional hardening settings. 6 settings.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "version": "4.0.0",
+      "settingCount": 6,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-edge-profiles-sign-in-and-sync",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_Profiles_Sign-In_and_Sync_-_v4_0_0.json",
+      "sha": "4e79dff44128ef75",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Edge - Profiles Sign-In and Sync - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Edge - Profiles Sign-In and Sync",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Microsoft Edge profile, sign-in and sync controls.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "version": "4.0.0",
+      "settingCount": 8,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-store-d-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_D_-_Configuration_-_v4_0_0.json",
+      "sha": "8627d80ef6716fb6",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - D - Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - D - Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Microsoft Store (D) lockdown.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "4.0.0",
+      "settingCount": 7,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-store-u-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_U_-_Configuration_-_v4_0_0.json",
+      "sha": "f3df3669f8fc8a10",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - U - Configuration - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - U - Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Microsoft Store (U) lockdown.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "user",
+      "version": "4.0.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-hello-for-business-cloud-kerberos-trust",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Hello_for_Business_-_Cloud_Kerberos_Trust_-_v4_0_0.json",
+      "sha": "69d61ee60077ae5c",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows Hello for Business - Cloud Kerberos Trust - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Windows Hello for Business - Cloud Kerberos Trust",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Windows Hello for Business Cloud Kerberos Trust.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "version": "4.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-update-for-business-reports-and-telemetry",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Update_for_Business_-_Reports_and_Telemetry_-_v4_0_0.json",
+      "sha": "a2420eb0b7063488",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows Update for Business - Reports and Telemetry - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Windows Update for Business - Reports and Telemetry",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Windows Update diagnostics, telemetry and reporting.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "version": "4.0.0",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-user-experience-copilot",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_Copilot_-_v4_0_0.json",
+      "sha": "a3792abd4b9b69d6",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - Copilot - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - Copilot",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Disable Windows Copilot AI features.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "version": "4.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-user-experience-settings-sync",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_Settings_Sync_-_v4_0_0.json",
+      "sha": "3888ea928e94f846",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - Settings Sync - v4.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - Settings Sync",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Disable Windows settings sync to cloud.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "version": "4.0.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-credential-management-d-passwordless",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Credential_Management_-_D_-_Passwordless_-_v3_3.json",
+      "sha": "0bc755e459eed639",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Credential Management - D - Passwordless - v3.3",
+      "baseName": "Win - CDW Baseline - SC - Credential Management - D - Passwordless",
+      "description": "NOTE: Applying this policy can cause issues with UAC and elevation if not using Windows LAPS and the built-in Administrator account.",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.3",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-defender-antivirus-d-additional-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Defender_Antivirus_-_D_-_Additional_Configuration_-_v3_6.json",
+      "sha": "23be025a17024c9c",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Defender Antivirus - D - Additional Configuration - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Defender Antivirus - D - Additional Configuration",
+      "description": "NOTE: Some of these settings require the device to be onboarded to Defender for Endpoint.",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.6",
+      "settingCount": 10,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-administrator-protection",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Administrator_Protection_-_v3_7.json",
+      "sha": "aa0d13ffffe9407e",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Administrator Protection - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Administrator Protection",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-audit-and-event-logging",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Audit_and_Event_Logging_-_v3_7.json",
+      "sha": "42fd1a8e5c77390d",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Audit and Event Logging - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Audit and Event Logging",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 36,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-config-refresh",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Config_Refresh_-_v3_2.json",
+      "sha": "55778cf1faf66499",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Config Refresh - v3.2",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Config Refresh",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.2",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-enhanced-phishing-protection",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Enhanced_Phishing_Protection_-_v3_0.json",
+      "sha": "e05f4fce2d609745",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Enhanced Phishing Protection - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Enhanced Phishing Protection",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-local-security-policies",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Local_Security_Policies_-_v3_0.json",
+      "sha": "f88a8d1fc60058f2",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Local Security Policies - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Local Security Policies",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.0",
+      "settingCount": 23,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-local-security-policies-24h2",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Local_Security_Policies__24H2___-_v3_6.json",
+      "sha": "8d73016c7bd4706c",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Local Security Policies (24H2+) - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Local Security Policies (24H2+)",
+      "description": "NOTE: For 24H2+ devices only. Disables built-in Administrator account.",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.6",
+      "settingCount": 23,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-location-and-privacy",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Location_and_Privacy_-_v3_2.json",
+      "sha": "79a867792bd3aa18",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Location and Privacy - v3.2",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Location and Privacy",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.2",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-login-and-lock-screen",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Login_and_Lock_Screen_-_v3_1.json",
+      "sha": "8b858fa00026db3a",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Login and Lock Screen - v3.1",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Login and Lock Screen",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.1",
+      "settingCount": 10,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-printing",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Printing_-_v3_7.json",
+      "sha": "bfc13e4a3b432f23",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Printing - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Printing",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 8,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-remote-desktop-services-and-rpc",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Remote_Desktop_Services_and_RPC_-_v3_0.json",
+      "sha": "57af8e78b84cba19",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Remote Desktop Services and RPC - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Remote Desktop Services and RPC",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.0",
+      "settingCount": 9,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-script-file-associations",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Script_File_Associations_-_v3_4.json",
+      "sha": "d49abafe5b248ec7",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Script File Associations - v3.4",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Script File Associations",
+      "description": "WARNING: Deploying will break running any PowerShell scripts from Intune in the User context. Amend policy if this functionality is required.",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.4",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-security-hardening",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Security_Hardening_-_v3_7.json",
+      "sha": "60abb9345ee18b12",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Security Hardening - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Security Hardening",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 80,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-timezone",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Timezone_-_v3_4.json",
+      "sha": "f33353abcdea1b35",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Timezone - v3.4",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Timezone",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.4",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-user-rights",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_User_Rights_-_v3_7.json",
+      "sha": "f8b5c04abf53c294",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - User Rights - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - User Rights",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 25,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-windows-package-manager",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Windows_Package_Manager__-_v3_5.json",
+      "sha": "6dac8fac98fba2f2",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Windows Package Manager  - v3.5",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Windows Package Manager",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.5",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-d-windows-subsystem-for-linux",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Windows_Subsystem_for_Linux_-_v3_2.json",
+      "sha": "64b46c2b69d34da6",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - D - Windows Subsystem for Linux - v3.2",
+      "baseName": "Win - CDW Baseline - SC - Device Security - D - Windows Subsystem for Linux",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.2",
+      "settingCount": 10,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-u-device-guard-credential-guard-and-hvci",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_U_-_Device_Guard__Credential_Guard_and_HVCI_-_v3_7.json",
+      "sha": "d98461416e3eae62",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - U - Device Guard, Credential Guard and HVCI - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Device Security - U - Device Guard, Credential Guard and HVCI",
+      "description": "WARNING: Applying this policy to Devices will cause a reboot between Device and User ESP phases!\nNOTE: These features are automatically enabled on a fresh Win11 22H2 or above install, however they require Windows Enterprise to function correctly. They also require hardware support: \nhttps://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-vbs",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.7",
+      "settingCount": 8,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-u-power-and-device-lock",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_U_-_Power_and_Device_Lock_-_v3_6.json",
+      "sha": "2176a68bc0eda490",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - U - Power and Device Lock - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Device Security - U - Power and Device Lock",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.6",
+      "settingCount": 8,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-u-windows-sandbox",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_U_-_Windows_Sandbox_-_v3_4.json",
+      "sha": "44c364ff4e5ed39a",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - U - Windows Sandbox - v3.4",
+      "baseName": "Win - CDW Baseline - SC - Device Security - U - Windows Sandbox",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.4",
+      "settingCount": 6,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-device-security-u-windows-spotlight-and-org-messages",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_U_-_Windows_Spotlight_and_Org_Messages_-_v3_0.json",
+      "sha": "c0bcbb0f84315909",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Device Security - U - Windows Spotlight and Org Messages - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Device Security - U - Windows Spotlight and Org Messages",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.0",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-internet-explorer-legacy-d-security",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Internet_Explorer__Legacy__-_D_-_Security_-_v3_1_1.json",
+      "sha": "751c250c49f375d9",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Internet Explorer (Legacy) - D - Security - v3.1.1",
+      "baseName": "Win - CDW Baseline - SC - Internet Explorer (Legacy) - D - Security",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.1.1",
+      "settingCount": 118,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-accounts-d-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Accounts_-_D_-_Configuration_-_v3_2.json",
+      "sha": "043dd4498234fa43",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Accounts - D - Configuration - v3.2",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Accounts - D - Configuration",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.2",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-d-security",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Security_-_v3_7.json",
+      "sha": "b3d14626fe6c5e3b",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - D - Security - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - D - Security",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 44,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-d-updates",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Updates_-_v3_6.json",
+      "sha": "61fb41d2472ada36",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - D - Updates - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - D - Updates",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.6",
+      "settingCount": 13,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-u-extensions",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Extensions_-_v3_1.json",
+      "sha": "f7b7a26508c29df3",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Extensions - v3.1",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - U - Extensions",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.1",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-u-password-management",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Password_Management_-_v3_0.json",
+      "sha": "7189cc8661c96db4",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Password Management - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - U - Password Management",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-u-profiles-sign-in-and-sync",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v3_0.json",
+      "sha": "f011fe114a032efa",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Profiles, Sign-In and Sync - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - U - Profiles, Sign-In and Sync",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.0",
+      "settingCount": 8,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-u-user-experience",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_User_Experience_-_v3_7.json",
+      "sha": "5792cb4fd747abec",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - User Experience - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - U - User Experience",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.7",
+      "settingCount": 12,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-office-d-security",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Office_-_D_-_Security_-_v3_6.json",
+      "sha": "1406c78771ab325a",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Office - D - Security - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Office - D - Security",
+      "description": "NOTE: These policies are only applicable to Microsoft 365 Apps for Enterprise (included with M365 E*/A*/F*), not Microsoft 365 Apps for Business (included with M365 Business Premium).",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.6",
+      "settingCount": 17,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-office-d-updates",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Office_-_D_-_Updates_-_v3_0.json",
+      "sha": "a1635c6f4fee9d47",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Office - D - Updates - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Office - D - Updates",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-office-u-config-and-experience",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Office_-_U_-_Config_and_Experience_-_v3_6.json",
+      "sha": "cbecf9c3abf0887e",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Office - U - Config and Experience - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Office - U - Config and Experience",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.6",
+      "settingCount": 25,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-office-u-security",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Office_-_U_-_Security_-_v3_6.json",
+      "sha": "a9a7444e42edf9b4",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Office - U - Security - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Office - U - Security",
+      "description": "NOTE: These policies are only applicable to Microsoft 365 Apps for Enterprise (included with M365 E*/A*/F*), not Microsoft 365 Apps for Business (included with M365 Business Premium).",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.6",
+      "settingCount": 108,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-onedrive-d-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_OneDrive_-_D_-_Configuration_-_v3_2.json",
+      "sha": "02a892813097e93a",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft OneDrive - D - Configuration - v3.2",
+      "baseName": "Win - CDW Baseline - SC - Microsoft OneDrive - D - Configuration",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.2",
+      "settingCount": 10,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-onedrive-u-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_OneDrive_-_U_-_Configuration_-_v3_0.json",
+      "sha": "ddf494b50fa0c30f",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft OneDrive - U - Configuration - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Microsoft OneDrive - U - Configuration",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-store-d-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Store_-_D_-_Configuration_-_v3_4.json",
+      "sha": "bc6a92d8e5949174",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Store - D - Configuration - v3.4",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Store - D - Configuration",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.4",
+      "settingCount": 7,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-store-u-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Store_-_U_-_Configuration_-_v3_3.json",
+      "sha": "369a7ff033723b60",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Store - U - Configuration - v3.3",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Store - U - Configuration",
+      "description": "NOTE: The \"Turn off the Store application\" setting does not work on Windows Pro/Business SKU's:\nhttps://learn.microsoft.com/en-gb/windows/client-management/mdm/policy-csp-admx-windowsstore?WT.mc_id=Portal-fx#removewindowsstore_2",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.3",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-windows-apps-d-in-box-app-removal",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Windows_Apps_-_D_-_In-Box_App_Removal_-_v3_7.json",
+      "sha": "409013ffb7f8139e",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Windows Apps - D - In-Box App Removal - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Windows Apps - D - In-Box App Removal",
+      "description": "NOTE: This policy will only apply to devices running Windows Enterprise",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-windows-hello-for-business-d-cloud-kerberos-trust",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Windows_Hello_for_Business_-_D_-_Cloud_Kerberos_Trust_-_v3_5.json",
+      "sha": "d2806d6aae8aac3c",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Windows Hello for Business - D - Cloud Kerberos Trust - v3.5",
+      "baseName": "Win - CDW Baseline - SC - Windows Hello for Business - D - Cloud Kerberos Trust",
+      "description": "NOTE: Requires setup of Cloud Kerberos Trust to function.\nhttps://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/deploy/hybrid-cloud-kerberos-trust",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.5",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-windows-update-for-business-d-delivery-optimisation",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Windows_Update_for_Business_-_D_-_Delivery_Optimisation_-_v3_0.json",
+      "sha": "1ff37ff79062857e",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Windows Update for Business - D - Delivery Optimisation - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Windows Update for Business - D - Delivery Optimisation",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.0",
+      "settingCount": 12,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-windows-update-for-business-d-reports-and-telemetry",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Windows_Update_for_Business_-_D_-_Reports_and_Telemetry_-_v3_0.json",
+      "sha": "dad3a4eb33d11d0f",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Windows Update for Business - D - Reports and Telemetry - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Windows Update for Business - D - Reports and Telemetry",
+      "description": "NOTE: Contains policies required for Windows Update for Business Reports. Further configuration required:\nhttps://learn.microsoft.com/en-us/windows/deployment/update/wufb-reports-enable",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.0",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-windows-user-experience-d-feature-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Windows_User_Experience_-_D_-_Feature_Configuration_-_v3_1.json",
+      "sha": "6ac547f9b29293ec",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Windows User Experience - D - Feature Configuration - v3.1",
+      "baseName": "Win - CDW Baseline - SC - Windows User Experience - D - Feature Configuration",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.1",
+      "settingCount": 6,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-windows-user-experience-d-settings-sync",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Windows_User_Experience_-_D_-_Settings_Sync_-_v3_7.json",
+      "sha": "8f1d01579df21181",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Windows User Experience - D - Settings Sync - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Windows User Experience - D - Settings Sync",
+      "description": "NOTE: This policy assumes you have Enabled the Windows Backup and Restore feature in the Devices > Windows > Enrollment page:\nhttps://techcommunity.microsoft.com/blog/windows-itpro-blog/windows-backup-for-organizations-is-now-available/4441655",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-windows-user-experience-u-copilot",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Windows_User_Experience_-_U_-_Copilot_-_v3_6.json",
+      "sha": "40cb73fc326e6943",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Windows User Experience - U - Copilot - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Windows User Experience - U - Copilot",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.6",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.ios-cdw-baseline-sc-restrictions-d",
+      "file": "IntuneConfig/SettingsCatalog/iOS_-_CDW_Baseline_-_SC_-_Restrictions_-_D_-_v1_0__TEST_.json",
+      "sha": "58618595afb605b9",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "iOS - CDW Baseline - SC - Restrictions - D - v1.0 (TEST)",
+      "baseName": "iOS - CDW Baseline - SC - Restrictions - D",
+      "platforms": [
+        "ios"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": true,
+      "flags": [
+        "draft"
+      ]
+    },
+    {
+      "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-device-health",
+      "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v1_0.json",
+      "sha": "5b895052b305a413",
+      "workload": "intune",
+      "category": "CompliancePolicies",
+      "objectType": "macOSCompliancePolicy",
+      "displayName": "MacOS - CDW Baseline - Compliance - U - Device Health - v1.0",
+      "baseName": "MacOS - CDW Baseline - Compliance - U - Device Health",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "user",
+      "version": "1.0",
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-device-security",
+      "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Security_-_v1_0.json",
+      "sha": "3b3e219d49e4eb2f",
+      "workload": "intune",
+      "category": "CompliancePolicies",
+      "objectType": "macOSCompliancePolicy",
+      "displayName": "MacOS - CDW Baseline - Compliance - U - Device Security - v1.0",
+      "baseName": "MacOS - CDW Baseline - Compliance - U - Device Security",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "user",
+      "version": "1.0",
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-password",
+      "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Password_-_v1_0.json",
+      "sha": "340a21412b860976",
+      "workload": "intune",
+      "category": "CompliancePolicies",
+      "objectType": "macOSCompliancePolicy",
+      "displayName": "MacOS - CDW Baseline - Compliance - U - Password - v1.0",
+      "baseName": "MacOS - CDW Baseline - Compliance - U - Password",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "user",
+      "version": "1.0",
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-defender-for-endpoint",
+      "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Defender_for_Endpoint_-_v3_1.json",
+      "sha": "e1f095a7e6a1bcb5",
+      "workload": "intune",
+      "category": "CompliancePolicies",
+      "objectType": "windows10CompliancePolicy",
+      "displayName": "Win - CDW Baseline - Compliance - U - Defender for Endpoint - v3.1",
+      "baseName": "Win - CDW Baseline - Compliance - U - Defender for Endpoint",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.1",
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-device-health",
+      "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v3_1.json",
+      "sha": "4aaa461d9a169510",
+      "workload": "intune",
+      "category": "CompliancePolicies",
+      "objectType": "windows10CompliancePolicy",
+      "displayName": "Win - CDW Baseline - Compliance - U - Device Health - v3.1",
+      "baseName": "Win - CDW Baseline - Compliance - U - Device Health",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.1",
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-device-security",
+      "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Device_Security_-_v3_1.json",
+      "sha": "6f6de430a962d14c",
+      "workload": "intune",
+      "category": "CompliancePolicies",
+      "objectType": "windows10CompliancePolicy",
+      "displayName": "Win - CDW Baseline - Compliance - U - Device Security - v3.1",
+      "baseName": "Win - CDW Baseline - Compliance - U - Device Security",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.1",
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-password",
+      "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Password_-_v3_1.json",
+      "sha": "92c0b0f7b1ffd76a",
+      "workload": "intune",
+      "category": "CompliancePolicies",
+      "objectType": "windows10CompliancePolicy",
+      "displayName": "Win - CDW Baseline - Compliance - U - Password - v3.1",
+      "baseName": "Win - CDW Baseline - Compliance - U - Password",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.1",
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-1-pilot",
+      "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_1_-_Pilot_-_v3_0.json",
+      "sha": "eb00a23aa0894968",
+      "workload": "intune",
+      "category": "DeviceConfigurations",
+      "objectType": "windowsUpdateForBusinessConfiguration",
+      "displayName": "Win - CDW Baseline - WUfB - Ring 1 - Pilot - v3.0",
+      "baseName": "Win - CDW Baseline - WUfB - Ring 1 - Pilot",
+      "description": "Devices in this ring recieve updates immediately after release with 1 day grace period before a forced reboot.",
+      "platforms": [
+        "windows"
+      ],
+      "version": "3.0",
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-2-uat",
+      "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_2_-_UAT_-_v3_0.json",
+      "sha": "ddc8b76928f3a10b",
+      "workload": "intune",
+      "category": "DeviceConfigurations",
+      "objectType": "windowsUpdateForBusinessConfiguration",
+      "displayName": "Win - CDW Baseline - WUfB - Ring 2 - UAT - v3.0",
+      "baseName": "Win - CDW Baseline - WUfB - Ring 2 - UAT",
+      "description": "Devices in this ring receive updates 3 days after release and have a 0-day deadline on install with 2 day grace period before a forced reboot.",
+      "platforms": [
+        "windows"
+      ],
+      "version": "3.0",
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-3-production",
+      "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_3_-_Production_-_v3_0.json",
+      "sha": "f84b9607e82cb187",
+      "workload": "intune",
+      "category": "DeviceConfigurations",
+      "objectType": "windowsUpdateForBusinessConfiguration",
+      "displayName": "Win - CDW Baseline - WUfB - Ring 3 - Production - v3.0",
+      "baseName": "Win - CDW Baseline - WUfB - Ring 3 - Production",
+      "description": "Devices in this ring receive updates 10 days after release and have a 2-day deadline on install with 1 day grace period before a forced reboot.",
+      "platforms": [
+        "windows"
+      ],
+      "version": "3.0",
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.enrolmentrestrictions.android-cdw-baseline-enrolment-restriction-block-personal",
+      "file": "IntuneConfig/EnrolmentRestrictions/Android_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
+      "sha": "0c7d79d630f5c42c",
+      "workload": "intune",
+      "category": "EnrolmentRestrictions",
+      "objectType": "deviceEnrollmentPlatformRestrictionConfiguration",
+      "displayName": "Android - CDW Baseline - Enrolment Restriction - Block Personal - v1.0",
+      "baseName": "Android - CDW Baseline - Enrolment Restriction - Block Personal",
+      "description": "Blocks personal (BYOD) Android device enrolment. Allows Android Enterprise corporate-owned devices only. Personal Work Profile (BYOD) is managed via MAM/App Protection rather than MDM enrolment.",
+      "platforms": [
+        "android"
+      ],
+      "version": "1.0",
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.enrolmentrestrictions.ios-cdw-baseline-enrolment-restriction-block-personal",
+      "file": "IntuneConfig/EnrolmentRestrictions/iOS_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
+      "sha": "d45c6062d25509e0",
+      "workload": "intune",
+      "category": "EnrolmentRestrictions",
+      "objectType": "deviceEnrollmentPlatformRestrictionConfiguration",
+      "displayName": "iOS - CDW Baseline - Enrolment Restriction - Block Personal - v1.0",
+      "baseName": "iOS - CDW Baseline - Enrolment Restriction - Block Personal",
+      "description": "Blocks personal (BYOD) iOS/iPadOS device enrolment. Allows corporate-owned supervised devices only. Personal devices are managed via MAM/App Protection rather than MDM enrolment.",
+      "platforms": [
+        "ios"
+      ],
+      "version": "1.0",
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.appprotectionpolicies.android-cdw-baseline-mam-byod-app-protection",
+      "file": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
+      "sha": "cf85a581a5099d82",
+      "workload": "intune",
+      "category": "AppProtectionPolicies",
+      "objectType": "appProtectionPolicies",
+      "displayName": "Android - CDW Baseline - MAM - BYOD App Protection - v1.0",
+      "baseName": "Android - CDW Baseline - MAM - BYOD App Protection",
+      "description": "App Protection Policy for applications on Android. Applies to unmanaged (BYOD) personal devices only. Enforces PIN, encryption, data transfer restrictions, and conditional launch checks.",
+      "platforms": [
+        "android"
+      ],
+      "version": "1.0",
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "intune.appprotectionpolicies.ios-cdw-baseline-mam-byod-app-protection",
+      "file": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
+      "sha": "7a010dfc1505c944",
+      "workload": "intune",
+      "category": "AppProtectionPolicies",
+      "objectType": "appProtectionPolicies",
+      "displayName": "iOS - CDW Baseline - MAM - BYOD App Protection - v1.0",
+      "baseName": "iOS - CDW Baseline - MAM - BYOD App Protection",
+      "description": "App Protection Policy for applications on iOS/iPadOS. Applies to unmanaged (BYOD) personal devices only. Enforces PIN, encryption, data transfer restrictions, FaceID/TouchID, and conditional launch checks.",
+      "platforms": [
+        "ios"
+      ],
+      "version": "1.0",
+      "deployVia": "graph",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "entra.conditionalaccess.cdw001-global-baseprotection-allapps-anyplatform-blocknonpersonas",
+      "file": "EntraConfig/ConditionalAccess/CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas.json",
+      "sha": "6a9a0f8287240fb6",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
+      "baseName": "CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw001-require-multifactor-authentication-for-admins",
+      "file": "EntraConfig/ConditionalAccess/CDW001__Require_multifactor_authentication_for_admins.json",
+      "sha": "82f4d0f6245ab68a",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW001: Require multifactor authentication for admins",
+      "baseName": "CDW001: Require multifactor authentication for admins",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled",
+      "caNumber": "CDW001",
+      "blocks": [
+        "entra.ca-starter"
+      ],
+      "requires": [
+        "entra.groups.break-glass-exclusion"
+      ],
+      "licence": [
+        "E3"
+      ],
+      "lldSection": "5.1",
+      "lldSummary": "Requires multi-factor authentication for all administrative role holders, with the break-glass accounts excluded, mitigating credential compromise of privileged identities."
+    },
+    {
+      "id": "entra.conditionalaccess.cdw002-global-attacksurfacereduction-variousapps-anyplatform-block",
+      "file": "EntraConfig/ConditionalAccess/CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block.json",
+      "sha": "9363e7b57622dfe6",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block",
+      "baseName": "CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw002-require-password-change-for-high-risk-users",
+      "file": "EntraConfig/ConditionalAccess/CDW002__Require_password_change_for_high-risk_users.json",
+      "sha": "11396cc6ec705972",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW002: Require password change for high-risk users",
+      "baseName": "CDW002: Require password change for high-risk users",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "enabledForReportingButNotEnforced",
+      "caNumber": "CDW002"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw003-block-legacy-authentication",
+      "file": "EntraConfig/ConditionalAccess/CDW003__Block_Legacy_Authentication.json",
+      "sha": "b380baa23c300219",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW003: Block Legacy Authentication",
+      "baseName": "CDW003: Block Legacy Authentication",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "enabledForReportingButNotEnforced",
+      "caNumber": "CDW003"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw1001-developers-baseprotection-allapps-anyplatform-mfafromunmanageddevices",
+      "file": "EntraConfig/ConditionalAccess/CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices.json",
+      "sha": "781a5a15065dc7d7",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices",
+      "baseName": "CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw1002-developers-baseprotection-allapps-anyplatform-combinedregistration",
+      "file": "EntraConfig/ConditionalAccess/CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration.json",
+      "sha": "6b659f5509d11c43",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration",
+      "baseName": "CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw1003-developers-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW1003-Developers-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk.json",
+      "sha": "cc7e0998110cb583",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW1003-Developers-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
+      "baseName": "CDW1003-Developers-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw1004-developers-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW1004-Developers-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk.json",
+      "sha": "ad48d0eeef1aa161",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW1004-Developers-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
+      "baseName": "CDW1004-Developers-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw1005-developers-identityprotection-allapps-anyplatform-blocklegacyauth",
+      "file": "EntraConfig/ConditionalAccess/CDW1005-Developers-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "sha": "68b380c64e08bec0",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW1005-Developers-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "baseName": "CDW1005-Developers-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw1006-developers-dataandappprotection-allapps-iosorandroid-clientapporapp",
+      "file": "EntraConfig/ConditionalAccess/CDW1006-Developers-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP.json",
+      "sha": "dd6c76ee256ef902",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW1006-Developers-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
+      "baseName": "CDW1006-Developers-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw1007-developers-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms",
+      "file": "EntraConfig/ConditionalAccess/CDW1007-Developers-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms.json",
+      "sha": "fb9bfb4dd85ea7c8",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW1007-Developers-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "baseName": "CDW1007-Developers-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw100-mobile-byod-require-approved-apps",
+      "file": "EntraConfig/ConditionalAccess/CDW100__Mobile_BYOD_-_Require_Approved_Apps_-_v1_0.json",
+      "sha": "150448ce5b804153",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW100: Mobile BYOD - Require Approved Apps - v1.0",
+      "baseName": "CDW100: Mobile BYOD - Require Approved Apps",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled",
+      "caNumber": "CDW100"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw101-admins-identityprotection-allapps-anyplatform-combinedregistration",
+      "file": "EntraConfig/ConditionalAccess/CDW101-Admins-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration.json",
+      "sha": "ab47e9a2f0df9f73",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW101-Admins-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
+      "baseName": "CDW101-Admins-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw102-admins-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW102-Admins-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk.json",
+      "sha": "4b063eef65e226f8",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW102-Admins-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
+      "baseName": "CDW102-Admins-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw103-admins-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk.json",
+      "sha": "88c2f90afa945db4",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
+      "baseName": "CDW103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw104-admins-identityprotection-allapps-anyplatform-blocklegacyauth",
+      "file": "EntraConfig/ConditionalAccess/CDW104-Admins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "sha": "2d9a1cd6555a1e11",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW104-Admins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "baseName": "CDW104-Admins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw106-admins-dataandappprotection-allapps-iosorandroid-clientappandapp",
+      "file": "EntraConfig/ConditionalAccess/CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP.json",
+      "sha": "1db1cb87f96e48db",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP",
+      "baseName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw107-admins-dataprotection-allapps-anyplatform-sessionpolicy",
+      "file": "EntraConfig/ConditionalAccess/CDW107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy.json",
+      "sha": "ca7e8e24ca5b2203",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy",
+      "baseName": "CDW107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms",
+      "file": "EntraConfig/ConditionalAccess/CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms.json",
+      "sha": "b58ed508cea855e5",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "baseName": "CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw201-internals-identityprotection-allapps-anyplatform-combinedregistration",
+      "file": "EntraConfig/ConditionalAccess/CDW201-Internals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration.json",
+      "sha": "f0155163cd309960",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW201-Internals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
+      "baseName": "CDW201-Internals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw202-internals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW202-Internals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk.json",
+      "sha": "aa40ad7703109ce3",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW202-Internals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
+      "baseName": "CDW202-Internals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw203-internals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW203-Internals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk.json",
+      "sha": "b802e035fe9d6663",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW203-Internals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
+      "baseName": "CDW203-Internals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw204-internals-identityprotection-allapps-anyplatform-blocklegacyauth",
+      "file": "EntraConfig/ConditionalAccess/CDW204-Internals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "sha": "9493049bd48d0192",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW204-Internals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "baseName": "CDW204-Internals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw206-internals-dataandappprotection-allapps-iosorandroid-clientapporapp",
+      "file": "EntraConfig/ConditionalAccess/CDW206-Internals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP.json",
+      "sha": "e43cafc324eb8579",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW206-Internals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
+      "baseName": "CDW206-Internals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw207-internals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms",
+      "file": "EntraConfig/ConditionalAccess/CDW207-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms.json",
+      "sha": "aad66d6a6f9f3723",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW207-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "baseName": "CDW207-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw301-externals-identityprotection-allapps-anyplatform-combinedregistration",
+      "file": "EntraConfig/ConditionalAccess/CDW301-Externals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration.json",
+      "sha": "c92e8b7a3ad38a2e",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW301-Externals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
+      "baseName": "CDW301-Externals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw302-externals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW302-Externals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk.json",
+      "sha": "cc6de2157992c7d2",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW302-Externals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
+      "baseName": "CDW302-Externals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw303-externals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW303-Externals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk.json",
+      "sha": "e918b16552141ce7",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW303-Externals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
+      "baseName": "CDW303-Externals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw304-externals-identityprotection-allapps-anyplatform-blocklegacyauth",
+      "file": "EntraConfig/ConditionalAccess/CDW304-Externals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "sha": "9cfcf3bb7f5c4f19",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW304-Externals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "baseName": "CDW304-Externals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw306-externals-dataandappprotection-allapps-iosorandroid-clientapporapp",
+      "file": "EntraConfig/ConditionalAccess/CDW306-Externals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP.json",
+      "sha": "383557a2fae00588",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW306-Externals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
+      "baseName": "CDW306-Externals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw307-externals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms",
+      "file": "EntraConfig/ConditionalAccess/CDW307-Externals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms.json",
+      "sha": "f66a5e7f807f7f82",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW307-Externals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "baseName": "CDW307-Externals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw400-guests-baseprotection-allapps-anyplatform-mfa",
+      "file": "EntraConfig/ConditionalAccess/CDW400-Guests-BaseProtection-AllApps-AnyPlatform-MFA.json",
+      "sha": "f684c87b6b646eb0",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW400-Guests-BaseProtection-AllApps-AnyPlatform-MFA",
+      "baseName": "CDW400-Guests-BaseProtection-AllApps-AnyPlatform-MFA",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw401-guests-identityprotection-allapps-anyplatform-tou-combinedregistration",
+      "file": "EntraConfig/ConditionalAccess/CDW401-Guests-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration.json",
+      "sha": "9882a4ea0cac063b",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW401-Guests-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
+      "baseName": "CDW401-Guests-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw402-guests-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW402-Guests-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk.json",
+      "sha": "8f64b970e24a0d9d",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW402-Guests-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
+      "baseName": "CDW402-Guests-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw403-guests-identityprotection-allapps-anyplatform-blocklegacyauth",
+      "file": "EntraConfig/ConditionalAccess/CDW403-Guests-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "sha": "1f81980415f7df4e",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW403-Guests-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "baseName": "CDW403-Guests-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw404-guests-attacksurfacereduction-allapps-anyplatform-blocknonguestappaccess",
+      "file": "EntraConfig/ConditionalAccess/CDW404-Guests-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAppAccess.json",
+      "sha": "287215dd1fc7b9cc",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW404-Guests-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAppAccess",
+      "baseName": "CDW404-Guests-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAppAccess",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw405-guests-complianceprotection-allapps-anyplatform-requiretou",
+      "file": "EntraConfig/ConditionalAccess/CDW405-Guests-ComplianceProtection-AllApps-AnyPlatform-RequireTOU.json",
+      "sha": "8258cf1ae14c25bf",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW405-Guests-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
+      "baseName": "CDW405-Guests-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw406-guests-dataprotection-allapps-anyplatform-signinsessionpolicy",
+      "file": "EntraConfig/ConditionalAccess/CDW406-Guests-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy.json",
+      "sha": "a8a8d8015805c069",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW406-Guests-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
+      "baseName": "CDW406-Guests-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw500-guestadmins-baseprotection-allapps-anyplatform-mfa",
+      "file": "EntraConfig/ConditionalAccess/CDW500-GuestAdmins-BaseProtection-AllApps-AnyPlatform-MFA.json",
+      "sha": "92d2c7a1d1bc8e83",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW500-GuestAdmins-BaseProtection-AllApps-AnyPlatform-MFA",
+      "baseName": "CDW500-GuestAdmins-BaseProtection-AllApps-AnyPlatform-MFA",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw501-guestadmins-identityprotection-allapps-anyplatform-tou-combinedregistration",
+      "file": "EntraConfig/ConditionalAccess/CDW501-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration.json",
+      "sha": "4e6aaeb7f307f5b9",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW501-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
+      "baseName": "CDW501-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw502-guestadmins-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW502-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk.json",
+      "sha": "78438f81a7ceae08",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW502-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
+      "baseName": "CDW502-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw503-guestadmins-identityprotection-allapps-anyplatform-blocklegacyauth",
+      "file": "EntraConfig/ConditionalAccess/CDW503-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "sha": "e2fa86125a432513",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW503-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "baseName": "CDW503-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw504-guestadmins-attacksurfacereduction-allapps-anyplatform-blocknonguestadminsappaccess",
+      "file": "EntraConfig/ConditionalAccess/CDW504-GuestAdmins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAdminsAppAccess.json",
+      "sha": "5f34ec0da67df3dc",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW504-GuestAdmins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAdminsAppAccess",
+      "baseName": "CDW504-GuestAdmins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAdminsAppAccess",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw505-guestadmins-complianceprotection-allapps-anyplatform-requiretou",
+      "file": "EntraConfig/ConditionalAccess/CDW505-GuestAdmins-ComplianceProtection-AllApps-AnyPlatform-RequireTOU.json",
+      "sha": "d57d08c78990c15d",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW505-GuestAdmins-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
+      "baseName": "CDW505-GuestAdmins-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw506-guestadmins-dataprotection-allapps-anyplatform-signinsessionpolicy",
+      "file": "EntraConfig/ConditionalAccess/CDW506-GuestAdmins-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy.json",
+      "sha": "d3954adfc658ddc0",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW506-GuestAdmins-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
+      "baseName": "CDW506-GuestAdmins-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw600-microsoft365serviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations",
+      "file": "EntraConfig/ConditionalAccess/CDW600-Microsoft365ServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations.json",
+      "sha": "cd3febe3add918fa",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW600-Microsoft365ServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
+      "baseName": "CDW600-Microsoft365ServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw601-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth",
+      "file": "EntraConfig/ConditionalAccess/CDW601-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "sha": "4dedaf3ff9a3c6f4",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW601-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "baseName": "CDW601-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw602-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW602-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk.json",
+      "sha": "e805d05d65032c17",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW602-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
+      "baseName": "CDW602-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw603-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW603-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk.json",
+      "sha": "9708b8d5bcf8c8a7",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW603-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
+      "baseName": "CDW603-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw604-microsoft365serviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365",
+      "file": "EntraConfig/ConditionalAccess/CDW604-Microsoft365ServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365.json",
+      "sha": "a60ae25e6e1c3abb",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW604-Microsoft365ServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
+      "baseName": "CDW604-Microsoft365ServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw700-azureserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations",
+      "file": "EntraConfig/ConditionalAccess/CDW700-AzureServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations.json",
+      "sha": "ca480c88d32a1f81",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW700-AzureServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
+      "baseName": "CDW700-AzureServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw701-azureserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth",
+      "file": "EntraConfig/ConditionalAccess/CDW701-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "sha": "df3eb6d34cfd6b47",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW701-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "baseName": "CDW701-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw702-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW702-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk.json",
+      "sha": "0eff4f5c23c13b92",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW702-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
+      "baseName": "CDW702-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw703-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW703-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk.json",
+      "sha": "86520dd30b103ee9",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW703-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
+      "baseName": "CDW703-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw704-azureserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365",
+      "file": "EntraConfig/ConditionalAccess/CDW704-AzureServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365.json",
+      "sha": "88a1111762275953",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW704-AzureServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
+      "baseName": "CDW704-AzureServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw800-corpserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations",
+      "file": "EntraConfig/ConditionalAccess/CDW800-CorpServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations.json",
+      "sha": "03926c4904716691",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW800-CorpServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
+      "baseName": "CDW800-CorpServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw801-corpserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth",
+      "file": "EntraConfig/ConditionalAccess/CDW801-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "sha": "b90388371f9de600",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW801-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "baseName": "CDW801-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw802-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW802-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk.json",
+      "sha": "acd91b1bc7cb13e4",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW802-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
+      "baseName": "CDW802-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw803-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW803-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk.json",
+      "sha": "ecdc33433b348c44",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW803-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
+      "baseName": "CDW803-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw804-corpserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365andazure",
+      "file": "EntraConfig/ConditionalAccess/CDW804-CorpServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365andAzure.json",
+      "sha": "b3c0676814b25b7e",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW804-CorpServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365andAzure",
+      "baseName": "CDW804-CorpServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365andAzure",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw900-workloadidentities-baseprotection-allapps-anyplatform-blockuntrustedlocations",
+      "file": "EntraConfig/ConditionalAccess/CDW900-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations.json",
+      "sha": "095082ba93040d68",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW900-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
+      "baseName": "CDW900-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    },
+    {
+      "id": "entra.conditionalaccess.cdw901-workloadidentities-baseprotection-allapps-anyplatform-blockhighrisk",
+      "file": "EntraConfig/ConditionalAccess/CDW901-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockHighRisk.json",
+      "sha": "6027c74db2e420ce",
+      "workload": "entra",
+      "category": "ConditionalAccess",
+      "objectType": "conditionalAccessPolicy",
+      "displayName": "CDW901-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockHighRisk",
+      "baseName": "CDW901-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockHighRisk",
+      "platforms": [],
+      "deployVia": "graph",
+      "isDraft": false,
+      "caState": "disabled"
+    }
+  ]
+}
