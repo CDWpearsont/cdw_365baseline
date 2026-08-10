@@ -1,0 +1,90 @@
+name: Build policy manifest
+
+# Regenerates manifest.base.json and manifest.json whenever a policy JSON or
+# the human overlay changes. On main it commits the result; on pull requests it
+# only validates, so a PR that forgets to regenerate fails rather than silently
+# shipping a stale manifest.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'IntuneConfig/**/*.json'
+      - 'EntraConfig/**/*.json'
+      - 'DefenderConfig/**/*.json'
+      - 'ExchangeConfig/**/*.json'
+      - 'SharePointConfig/**/*.json'
+      - 'TeamsConfig/**/*.json'
+      - 'PurviewConfig/**/*.json'
+      - 'manifest.overlay.json'
+      - 'scripts/generate-manifest.py'
+  pull_request:
+    paths:
+      - '**/*.json'
+      - 'scripts/generate-manifest.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: manifest-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Pull requests: validate only. Fails if the committed manifest is stale
+      # or if two policies resolve to the same stable ID.
+      - name: Validate manifest is current
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/generate-manifest.py --repo . --check
+
+      - name: Generate manifest
+        if: github.event_name != 'pull_request'
+        run: python3 scripts/generate-manifest.py --repo .
+
+      - name: Commit if changed
+        if: github.event_name != 'pull_request'
+        run: |
+          if [ -z "$(git status --porcelain manifest.base.json manifest.json)" ]; then
+            echo "Manifest unchanged."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest.base.json manifest.json
+          git commit -m "chore: regenerate policy manifest [skip ci]"
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          if [ -f manifest.json ]; then
+            python3 - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import json, collections
+          m = json.load(open('manifest.json'))
+          e = m['entries']
+          print('## Policy manifest\n')
+          print(f"- **{m['count']}** objects")
+          print(f"- **{m.get('enrichedCount', 0)}** enriched, "
+                f"**{m['count'] - m.get('enrichedCount', 0)}** awaiting overlay\n")
+          wl = collections.Counter(x['workload'] for x in e)
+          print('| Workload | Objects |')
+          print('|---|---|')
+          for k, v in sorted(wl.items()):
+              print(f'| {k} | {v} |')
+          flags = collections.Counter(f for x in e for f in x.get('flags', []))
+          if flags:
+              print('\n### Flags\n')
+              for k, v in flags.most_common():
+                  print(f'- `{k}`: {v}')
+          EOF
+          fi

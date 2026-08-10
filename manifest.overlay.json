@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "_comment": [
+    "Human judgement only. Everything else is derived by scripts/generate-manifest.py.",
+    "Keyed by stable id. Version bumps do NOT change the id, so entries survive them.",
+    "Edited via the tool's Settings page; AI drafts the values, a consultant approves."
+  ],
+  "entries": [
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-attack-surface-reduction-d-asr-rules",
+      "blocks": [
+        "intune.win.cis-l1"
+      ],
+      "requires": [
+        "intune.groups.win-corporate-devices"
+      ],
+      "supersedes": [],
+      "licence": [
+        "E3"
+      ],
+      "assignTo": "intune.groups.win-corporate-devices",
+      "lldSection": "4.3",
+      "lldSummary": "Enables the CIS Level 1 Attack Surface Reduction rule set in block mode, preventing common initial-access and execution techniques such as Office child-process creation, obfuscated script execution and credential theft from LSASS."
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-encryption-d-bitlocker-os-disk",
+      "blocks": [
+        "intune.win.cis-l1"
+      ],
+      "requires": [
+        "intune.groups.win-corporate-devices"
+      ],
+      "licence": [
+        "E3"
+      ],
+      "assignTo": "intune.groups.win-corporate-devices",
+      "lldSection": "4.5",
+      "lldSummary": "Enforces BitLocker full-disk encryption on the operating system volume with recovery keys escrowed to Entra ID, ensuring data at rest is protected and recoverable without local key storage."
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-laps-d-laps-configuration",
+      "blocks": [
+        "intune.win.cis-l1"
+      ],
+      "licence": [
+        "E3"
+      ],
+      "assignTo": "intune.groups.win-corporate-devices",
+      "lldSection": "4.6",
+      "lldSummary": "Configures Windows LAPS to rotate the local administrator password automatically and back it up to Entra ID, removing shared local credentials as a lateral-movement path."
+    },
+    {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-attack-surface-reduction-d-asr-rules-l2",
+      "blocks": [],
+      "licence": [
+        "E3"
+      ],
+      "notes": "Reference only - description marks it DO NOT ASSIGN. Excluded from all blocks deliberately; retained for design comparison."
+    },
+    {
+      "id": "entra.conditionalaccess.cdw001-require-multifactor-authentication-for-admins",
+      "blocks": [
+        "entra.ca-starter"
+      ],
+      "requires": [
+        "entra.groups.break-glass-exclusion"
+      ],
+      "licence": [
+        "E3"
+      ],
+      "lldSection": "5.1",
+      "lldSummary": "Requires multi-factor authentication for all administrative role holders, with the break-glass accounts excluded, mitigating credential compromise of privileged identities."
+    }
+  ]
+}
