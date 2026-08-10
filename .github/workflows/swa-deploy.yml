@@ -1,0 +1,51 @@
+name: Deploy static web app
+
+on:
+  push:
+    branches: [main, test]
+    paths:
+      - 'site/**'
+      - '.github/workflows/swa-deploy.yml'
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [main]
+
+jobs:
+  build_and_deploy:
+    if: github.event_name != 'pull_request' || github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    name: Build and deploy
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Stamp build
+        shell: bash
+        run: |
+          ENV=$([ "${{ github.ref_name }}" = "main" ] && echo prod || echo "${{ github.ref_name }}")
+          sed -i "s/env:     '[a-z]*'/env:     '$ENV'/" site/index.html
+          sed -i "s/date:    '[0-9-]*'/date:    '$(date +%Y-%m-%d)'/" site/index.html
+          grep -n "env:\|version:\|date:" site/index.html | head -3
+
+      - name: Deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: "site"
+          api_location: ""
+          output_location: ""
+          skip_app_build: true
+
+  close_pull_request:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close pull request
+    steps:
+      - name: Close
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: close
