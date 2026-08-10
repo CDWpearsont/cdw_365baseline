@@ -8,20 +8,18 @@ name: Build policy manifest
 on:
   push:
     branches: [main]
-    paths:
-      - 'IntuneConfig/**/*.json'
-      - 'EntraConfig/**/*.json'
-      - 'DefenderConfig/**/*.json'
-      - 'ExchangeConfig/**/*.json'
-      - 'SharePointConfig/**/*.json'
-      - 'TeamsConfig/**/*.json'
-      - 'PurviewConfig/**/*.json'
-      - 'manifest.overlay.json'
-      - 'scripts/generate-manifest.py'
+    paths-ignore:
+      - 'site/**'
+      - 'docs/**'
+      - '.github/**'
+      - 'manifest.base.json'
+      - 'manifest.json'
   pull_request:
-    paths:
-      - '**/*.json'
-      - 'scripts/generate-manifest.py'
+    paths-ignore:
+      - 'site/**'
+      - 'docs/**'
+      - 'manifest.base.json'
+      - 'manifest.json'
   workflow_dispatch:
 
 permissions:

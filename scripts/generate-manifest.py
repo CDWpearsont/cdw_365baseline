@@ -21,28 +21,69 @@ from datetime import datetime, timezone
 
 SCHEMA_VERSION = 1
 
-# ── Repo layout ──────────────────────────────────────────────────────────
-# Mirrors the WORKLOADS constant in index.html. Keep the two in step.
-FOLDERS = [
-    ("IntuneConfig/EndpointSecurity",     "intune",   "EndpointSecurity",      "graph"),
-    ("IntuneConfig/SettingsCatalog",      "intune",   "SettingsCatalog",       "graph"),
-    ("IntuneConfig/CompliancePolicies",   "intune",   "CompliancePolicies",    "graph"),
-    ("IntuneConfig/DeviceConfigurations", "intune",   "DeviceConfigurations",  "graph"),
-    ("IntuneConfig/EnrolmentRestrictions","intune",   "EnrolmentRestrictions", "graph"),
-    ("IntuneConfig/AppProtectionPolicies","intune",   "AppProtectionPolicies", "graph"),
-    ("IntuneConfig/Groups",               "intune",   "Groups",                "graph"),
-    ("IntuneConfig/Filters",              "intune",   "Filters",               "graph"),
-    ("EntraConfig/ConditionalAccess",     "entra",    "ConditionalAccess",     "graph"),
-    ("EntraConfig/NamedLocations",        "entra",    "NamedLocations",        "graph"),
-    ("EntraConfig/AuthMethods",           "entra",    "AuthMethods",           "graph"),
-    ("EntraConfig/Groups",                "entra",    "Groups",                "graph"),
-    ("DefenderConfig/DefenderEndpoint",   "defender", "DefenderEndpoint",      "graph"),
-    ("DefenderConfig/DefenderOffice",     "defender", "DefenderOffice",        "powershell"),
-    ("ExchangeConfig",                    "exchange", "Exchange",              "powershell"),
-    ("SharePointConfig",                  "sharepoint", "SharePoint",          "powershell"),
-    ("TeamsConfig",                       "teams",    "Teams",                 "powershell"),
-    ("PurviewConfig",                     "purview",  "Purview",               "powershell"),
-]
+# ── Repo layout ────────────────────────────────────────────────
+# Folders are DISCOVERED, not listed: any directory containing .json files is
+# treated as a policy folder. This means new workloads and categories appear in
+# the manifest automatically, without editing this script.
+#
+#   <TopLevelFolder>/<Category>/...   ->  workload = mapped from top level
+#                                         category = remaining path segments
+#
+# Only the workload mapping below needs maintaining, and an unmapped top-level
+# folder is reported as a warning rather than silently skipped.
+
+SKIP_DIRS = {
+    '.git', '.github', 'docs', 'scripts', 'runner', 'site',
+    'node_modules', 'templates', '.vscode', 'swa-db-connections',
+}
+
+WORKLOADS = {
+    'intuneconfig':      ('intune',      'graph'),
+    'entraconfig':       ('entra',       'graph'),
+    'defenderconfig':    ('defender',    'graph'),
+    'defenderendpoint':  ('defender',    'graph'),
+    'defendercloudapps': ('mdca',        'powershell'),
+    'defenderoffice':    ('mdo',         'powershell'),
+    'exchangeonline':    ('exchange',    'powershell'),
+    'exchangeconfig':    ('exchange',    'powershell'),
+    'sharepointconfig':  ('sharepoint',  'powershell'),
+    'onedriveconfig':    ('onedrive',    'powershell'),
+    'teamsconfig':       ('teams',       'powershell'),
+    'purviewconfig':     ('purview',     'powershell'),
+}
+
+
+def classify(top):
+    """Map a top-level folder to (workload, deployVia). None if unknown."""
+    return WORKLOADS.get(top.lower().replace('-', '').replace('_', ''))
+
+
+def discover(repo):
+    """Yield (relpath, workload, category, deployVia) for every policy JSON."""
+    unknown = set()
+    for dirpath, dirnames, filenames in os.walk(repo):
+        dirnames[:] = [d for d in dirnames
+                       if d not in SKIP_DIRS and not d.startswith('.')]
+        rel = os.path.relpath(dirpath, repo)
+        if rel == '.':
+            continue
+        jsons = [f for f in filenames if f.lower().endswith('.json')]
+        if not jsons:
+            continue
+        parts = rel.replace('\\', '/').split('/')
+        hit = classify(parts[0])
+        if not hit:
+            unknown.add(parts[0])
+            continue
+        workload, deploy_via = hit
+        category = '/'.join(parts[1:]) if len(parts) > 1 else parts[0]
+        for fn in sorted(jsons):
+            yield (os.path.join(rel, fn).replace('\\', '/'),
+                   workload, category, deploy_via)
+    for u in sorted(unknown):
+        print('WARNING: unmapped top-level folder %r \u2014 add it to WORKLOADS '
+              'in scripts/generate-manifest.py' % u)
+
 
 PLATFORM_MAP = {
     "windows10": "windows", "windows81": "windows", "windows": "windows",
@@ -227,19 +268,13 @@ def build_entry(repo, relpath, workload, category, deploy_via):
 
 def scan(repo):
     entries, warnings = [], []
-    for folder, workload, category, deploy_via in FOLDERS:
-        d = os.path.join(repo, folder)
-        if not os.path.isdir(d):
-            continue
-        for fn in sorted(os.listdir(d)):
-            if not fn.lower().endswith(".json"):
-                continue
-            entry, err = build_entry(repo, os.path.join(folder, fn),
-                                     workload, category, deploy_via)
-            if err:
-                warnings.append(err)
-            else:
-                entries.append(entry)
+    for relpath, workload, category, deploy_via in discover(repo):
+        entry, err = build_entry(repo, relpath, workload, category, deploy_via)
+        if err:
+            warnings.append(err)
+        else:
+            entries.append(entry)
+    entries.sort(key=lambda e: e['id'])
     return entries, warnings
 
 
