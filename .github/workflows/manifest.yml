@@ -8,20 +8,18 @@ name: Build policy manifest
 on:
   push:
     branches: [main]
-    # Folders are discovered by the script, so this filter is deliberately
-    # broad: any JSON outside the excluded paths may be a policy.
-    paths:
-      - '**/*.json'
-      - 'scripts/generate-manifest.py'
+    paths-ignore:
+      - 'site/**'
+      - 'docs/**'
+      - '.github/**'
+      - 'manifest.base.json'
+      - 'manifest.json'
+  pull_request:
     paths-ignore:
       - 'site/**'
       - 'docs/**'
       - 'manifest.base.json'
       - 'manifest.json'
-  pull_request:
-    paths:
-      - '**/*.json'
-      - 'scripts/generate-manifest.py'
   workflow_dispatch:
 
 permissions:
