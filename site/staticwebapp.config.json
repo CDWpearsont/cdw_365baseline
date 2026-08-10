@@ -18,10 +18,15 @@
     { "route": "/*", "allowedRoles": ["authenticated"] }
   ],
 
+  "responseOverrides": {
+    "401": { "statusCode": 302, "redirect": "/.auth/login/aad" }
+  },
+
 
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": [
+      "/.auth/*",
       "/templates/*",
       "/api/*",
       "*.{docx,json,png,jpg,jpeg,svg,ico,css,js,woff,woff2}"
