@@ -24,6 +24,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: manifest-${{ github.ref }}
@@ -49,18 +50,18 @@ jobs:
         if: github.event_name != 'pull_request'
         run: python3 scripts/generate-manifest.py --repo .
 
-      - name: Commit if changed
+      - name: Open PR if changed
         if: github.event_name != 'pull_request'
-        run: |
-          if [ -z "$(git status --porcelain manifest.base.json manifest.json)" ]; then
-            echo "Manifest unchanged."
-            exit 0
-          fi
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add manifest.base.json manifest.json
-          git commit -m "chore: regenerate policy manifest [skip ci]"
-          git push
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore: regenerate policy manifest"
+          title: "chore: regenerate policy manifest"
+          body: "Automated regeneration from scripts/generate-manifest.py"
+          branch: chore/manifest-update
+          delete-branch: true
+          add-paths: |
+            manifest.base.json
+            manifest.json
 
       - name: Summary
         if: always()
