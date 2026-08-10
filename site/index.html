@@ -1578,8 +1578,9 @@ const MSAL_CFG = {
     clientId:    'c89cd498-eba7-43de-9a70-2a59d6feb655',
     authority:   'https://login.microsoftonline.com/common',
     redirectUri: window.location.origin,
+    navigateToLoginRequestUrl: false,
   },
-  cache: { cacheLocation: 'localStorage' }
+  cache: { cacheLocation: 'sessionStorage' }
 };
 
 const SCOPES = [
