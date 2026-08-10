@@ -1,0 +1,42 @@
+{
+  "auth": {
+    "identityProviders": {
+      "azureActiveDirectory": {
+        "registration": {
+          "openIdIssuer": "https://login.microsoftonline.com/organizations/v2.0",
+          "clientIdSettingName": "AZURE_CLIENT_ID",
+          "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+        }
+      }
+    }
+  },
+
+  "routes": [
+    { "route": "/.auth/login/github", "statusCode": 404 },
+    { "route": "/.auth/login/twitter", "statusCode": 404 },
+    { "route": "/*", "allowedRoles": ["authenticated"] }
+  ],
+
+  "responseOverrides": {
+    "401": { "statusCode": 302, "redirect": "/.auth/login/aad" }
+  },
+
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/templates/*",
+      "/api/*",
+      "*.{docx,json,png,jpg,jpeg,svg,ico,css,js,woff,woff2}"
+    ]
+  },
+
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+
+  "mimeTypes": {
+    ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ".json": "application/json"
+  }
+}
