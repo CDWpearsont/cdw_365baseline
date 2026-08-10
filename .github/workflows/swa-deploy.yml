@@ -23,9 +23,10 @@ jobs:
       - name: Stamp build
         shell: bash
         run: |
-          ENV=$([ "${{ github.ref_name }}" = "main" ] && echo prod || echo "${{ github.ref_name }}")
-          sed -i "s/env:     '[a-z]*'/env:     '$ENV'/" site/index.html
-          sed -i "s/date:    '[0-9-]*'/date:    '$(date +%Y-%m-%d)'/" site/index.html
+          RAW="${{ github.ref_name }}"
+          if [ "$RAW" = "main" ]; then ENV=prod; else ENV=$(echo "$RAW" | tr -c 'a-z0-9' '-'); fi
+          sed -i "s|env:     '[a-z]*'|env:     '$ENV'|" site/index.html
+          sed -i "s|date:    '[0-9-]*'|date:    '$(date +%Y-%m-%d)'|" site/index.html
           grep -n "env:\|version:\|date:" site/index.html | head -3
 
       - name: Deploy
