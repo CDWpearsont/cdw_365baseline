@@ -21,8 +21,12 @@ jobs:
         shell: bash
         run: |
           RAW="${{ github.ref_name }}"
-          if [ "$RAW" = "main" ]; then ENV=prod; else ENV=$(echo "$RAW" | tr -c 'a-z0-9' '-'); fi
-          sed -i "s|env:     '[a-z]*'|env:     '$ENV'|" site/index.html
+          if [ "$RAW" = "main" ]; then
+            ENV=prod
+          else
+            ENV=$(printf '%s' "$RAW" | tr -c 'a-z0-9' '-' | sed 's/-*$//')
+          fi
+          sed -i "s|env:     '[a-z0-9-]*'|env:     '$ENV'|" site/index.html
           sed -i "s|date:    '[0-9-]*'|date:    '$(date +%Y-%m-%d)'|" site/index.html
           grep -n "env:\|version:\|date:" site/index.html | head -3
 
