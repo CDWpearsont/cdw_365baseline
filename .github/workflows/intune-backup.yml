@@ -26,7 +26,7 @@ jobs:
       - name: Install Microsoft.Graph modules
         shell: pwsh
         run: |
-          Install-Module Microsoft.Graph.Authentication, Microsoft.Graph.DeviceManagement, Microsoft.Graph.DeviceManagement.Enrollment, Microsoft.Graph.Devices.CorporateManagement, Microsoft.Graph.Beta.DeviceManagement, Microsoft.Graph.Beta.Devices.CorporateManagement, Microsoft.Graph.Identity.SignIns -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
+          Install-Module Microsoft.Graph.Authentication, Microsoft.Graph.DeviceManagement, Microsoft.Graph.DeviceManagement.Enrollment, Microsoft.Graph.Devices.CorporateManagement, Microsoft.Graph.Beta.DeviceManagement, Microsoft.Graph.Beta.Devices.CorporateManagement -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
 
       - name: Export Intune Configurations to Repo (CDW Baseline only)
         env:
@@ -360,3 +360,20 @@ jobs:
               Write-Output "Exported $totalMAM MAM app protection policies"
             } catch { Write-Warning "MAM App Protection export failed: $($_.Exception.Message)" }
 
+            # Git commit & push
+            git config --global user.name "CDW Baseline Bot"
+            git config --global user.email "actions@github.com"
+            git add "$backupRoot/"
+            $commitMsg = "Automated CDW Baseline export - $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+            if (git diff --cached --quiet) {
+              Write-Output "No changes to commit"
+            } else {
+              git commit -m "$commitMsg"
+              git push origin HEAD
+              Write-Output "Committed and pushed"
+            }
+          }
+          catch {
+            Write-Error "Fatal error: $($_.Exception.Message)"
+            exit 1
+          }
