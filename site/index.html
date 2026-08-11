@@ -867,6 +867,60 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
 .sb-flag-danger{background:rgba(200,16,46,.10);color:#c8102e;border:1px solid rgba(200,16,46,.22)}
 .sb-flag-warn  {background:rgba(217,119,6,.10);color:#b45309;border:1px solid rgba(217,119,6,.22)}
 .sb-flag-info  {background:rgba(100,116,139,.10);color:#475569;border:1px solid rgba(100,116,139,.22)}
+/* Settings / manifest enrichment */
+#settings-screen{display:none;max-width:1180px;margin:0 auto;padding:20px 24px 100px}
+.set-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+.set-head h2{margin:0;font-size:19px;font-weight:600;color:var(--text)}
+.set-head .set-sub{margin:2px 0 0;font-size:12px;color:var(--muted);line-height:1.5;max-width:760px}
+.set-stats{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.set-stat{padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:#fff;min-width:110px}
+.set-stat .k{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--dim)}
+.set-stat .v{font-size:20px;font-weight:600;color:var(--text);margin-top:2px}
+.set-stat.warn .v{color:#b45309}
+.set-stat.ok   .v{color:#059669}
+.set-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.set-toolbar input[type=text]{flex:1;min-width:200px;padding:8px 11px;border:1px solid var(--border);
+  border-radius:8px;font-family:var(--fbody);font-size:13px}
+.set-toolbar select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;
+  font-family:var(--fbody);font-size:13px;background:#fff}
+.set-split{display:flex;gap:16px;align-items:flex-start}
+.set-list{flex:0 0 400px;max-height:62vh;overflow-y:auto;border:1px solid var(--border);
+  border-radius:10px;background:#fff}
+.set-row{padding:9px 12px;border-bottom:1px solid var(--border);cursor:pointer;font-size:12px;
+  display:flex;align-items:center;gap:8px}
+.set-row:last-child{border-bottom:none}
+.set-row:hover{background:rgba(124,58,237,.04)}
+.set-row.active{background:rgba(124,58,237,.08);border-left:3px solid #7c3aed;padding-left:9px}
+.set-row .set-row-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+.set-row .set-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.set-dot.on {background:#059669}
+.set-dot.off{background:var(--border)}
+.set-dot.edited{background:#b45309;box-shadow:0 0 0 3px rgba(217,119,6,.18)}
+.set-editor{flex:1;min-width:0;border:1px solid var(--border);border-radius:10px;background:#fff;padding:18px}
+.set-editor .set-empty{color:var(--muted);font-size:13px;text-align:center;padding:60px 20px}
+.set-editor h3{margin:0 0 2px;font-size:15px;font-weight:600;color:var(--text)}
+.set-meta{font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.6}
+.set-meta code{background:rgba(0,0,0,.04);padding:1px 5px;border-radius:4px;font-size:10.5px}
+.set-field{margin-bottom:12px}
+.set-field label{display:block;font-size:11.5px;font-weight:500;color:var(--text);margin-bottom:4px}
+.set-field .set-hint{font-size:10.5px;color:var(--muted);font-weight:400}
+.set-field input[type=text],.set-field textarea{width:100%;padding:8px 10px;border:1px solid var(--border);
+  border-radius:7px;font-family:var(--fbody);font-size:12.5px;color:var(--text);background:#fff;resize:vertical}
+.set-field textarea{min-height:96px;line-height:1.5}
+.set-field input:focus,.set-field textarea:focus{outline:none;border-color:rgba(124,58,237,.45)}
+.set-row2{display:flex;gap:10px}
+.set-row2 .set-field{flex:1;min-width:0}
+.set-actions{display:flex;gap:8px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.set-savebar{position:sticky;bottom:0;margin-top:16px;padding:12px 16px;border:1px solid var(--border);
+  border-radius:10px;background:#fff;display:flex;align-items:center;gap:12px;
+  box-shadow:0 -2px 12px rgba(0,0,0,.05)}
+.set-savebar .set-dirty{font-size:12px;color:var(--muted)}
+.set-savebar .set-dirty b{color:#b45309}
+.set-spacer{flex:1}
+.icon-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:5px 9px;
+  cursor:pointer;font-size:13px;color:var(--muted);line-height:1}
+.icon-btn:hover{background:rgba(0,0,0,.03);color:var(--text)}
+
 </style>
 </head>
 <body>
@@ -880,6 +934,7 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
       365 Baseline
     </div>
     <span class="build-pill" id="build-pill"></span>
+    <button class="icon-btn" id="settings-btn" title="Manifest settings" onclick="openSettings()" style="display:none">⚙</button>
     <div class="topbar-right" id="topbar-right">
       <!-- populated after auth -->
     </div>
@@ -1019,6 +1074,50 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
             Continue to policy selection
           </button>
         </div>
+      </div>
+    </div>
+
+
+    <!-- Manifest enrichment (settings) -->
+    <div id="settings-screen">
+      <div class="set-head">
+        <div>
+          <h2>Manifest enrichment</h2>
+          <p class="set-sub">Human judgement that cannot be derived from the policy JSON. <b>lldSummary</b> is
+          used verbatim in Low Level Designs, replacing the AI rationale for that policy — so approved prose
+          here makes every future export faster, cheaper and consistent. Edits are staged locally and written to
+          <code>manifest.overlay.json</code> only when you save.</p>
+        </div>
+      </div>
+
+      <div class="set-stats" id="set-stats"></div>
+
+      <div class="set-toolbar">
+        <input type="text" id="set-search" placeholder="Search policies…" autocomplete="off"/>
+        <select id="set-filter-state">
+          <option value="all">All policies</option>
+          <option value="unenriched" selected>Awaiting enrichment</option>
+          <option value="enriched">Enriched</option>
+          <option value="edited">Edited (unsaved)</option>
+        </select>
+        <select id="set-filter-workload">
+          <option value="all">All workloads</option>
+        </select>
+      </div>
+
+      <div class="set-split">
+        <div class="set-list" id="set-list"></div>
+        <div class="set-editor" id="set-editor">
+          <div class="set-empty">Select a policy from the list to add or edit its overlay entry.</div>
+        </div>
+      </div>
+
+      <div class="set-savebar">
+        <span class="set-dirty" id="set-dirty">No unsaved changes</span>
+        <div class="set-spacer"></div>
+        <button class="btn btn-ghost" onclick="closeSettings()">Back</button>
+        <button class="btn btn-ghost" onclick="discardOverlayEdits()" id="set-discard" disabled>Discard changes</button>
+        <button class="btn btn-doc" onclick="saveOverlay()" id="set-save" disabled>Save to GitHub</button>
       </div>
     </div>
 
@@ -1371,7 +1470,7 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.1.8.6',
+  version: '3.1.8.7',
   date:    '2026-08-11'
 };
 
@@ -1408,6 +1507,342 @@ function setAppMode(mode) {
   document.getElementById('docgen-btn').style.display   = mode === 'document' ? '' : 'none';
   document.getElementById('tpl-bar').style.display      = mode === 'document' ? '' : 'none';
   updateDeployBar();
+}
+
+// ── Manifest enrichment (settings page) ──────────────────────────
+// The overlay holds the fields a machine cannot derive: which blocks a policy
+// belongs to, its licence requirement, and the approved LLD prose. Edits are
+// staged in memory and committed to GitHub in one write, so a half-finished
+// session never reaches the repository.
+
+const OVERLAY_RAW_URL = `${RAW_BASE}/manifest.overlay.json`;
+const OVERLAY_API_URL =
+  `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/manifest.overlay.json?ref=${REPO_BRANCH}`;
+const SAVE_OVERLAY_URL = '/api/save-overlay';
+
+// Overlay fields the editor manages, in display order.
+const OVERLAY_TEXT_FIELDS  = ['lldSummary', 'notes'];
+const OVERLAY_LINE_FIELDS  = ['lldSection', 'assignTo'];
+const OVERLAY_LIST_FIELDS  = ['blocks', 'licence', 'requires', 'conflictsWith', 'supersedes'];
+
+let overlayEntries = {};   // id -> entry, as loaded from GitHub
+let overlayEdits   = {};   // id -> entry, staged changes not yet saved
+let overlaySha     = null; // git sha of the file we loaded, for concurrency
+let setSelectedId  = null;
+
+function csvToList(v) {
+  return String(v || '').split(',').map(x => x.trim()).filter(Boolean);
+}
+function listToCsv(v) {
+  return Array.isArray(v) ? v.join(', ') : (v || '');
+}
+
+// Effective entry = saved overlay with any staged edit applied on top.
+function effectiveEntry(id) {
+  if (Object.prototype.hasOwnProperty.call(overlayEdits, id)) return overlayEdits[id];
+  return overlayEntries[id] || null;
+}
+function isEnriched(id) {
+  const e = effectiveEntry(id);
+  return !!(e && (e.lldSummary || (e.blocks && e.blocks.length)));
+}
+function isEdited(id) {
+  return Object.prototype.hasOwnProperty.call(overlayEdits, id);
+}
+
+async function openSettings() {
+  if (!manifest) {
+    showToast('Manifest not loaded \u2014 cannot edit the overlay', 'warn');
+    return;
+  }
+  document.getElementById('auth-screen').style.display     = 'none';
+  document.getElementById('deployer').style.display        = 'none';
+  document.getElementById('tabbar').style.display          = 'none';
+  const wiz = document.getElementById('wizard-screen');
+  if (wiz) wiz.style.display = 'none';
+  document.getElementById('settings-screen').style.display = 'block';
+
+  if (overlaySha === null) await loadOverlay();
+  populateWorkloadFilter();
+  renderSettingsStats();
+  renderSettingsList();
+}
+
+function closeSettings() {
+  if (Object.keys(overlayEdits).length &&
+      !confirm('You have unsaved overlay changes. Leave without saving?')) return;
+  document.getElementById('settings-screen').style.display = 'none';
+  if (appMode === 'deploy' || appMode === 'document') {
+    document.getElementById('deployer').style.display = '';
+    document.getElementById('tabbar').style.display   = '';
+  } else {
+    document.getElementById('auth-screen').style.display = '';
+  }
+}
+
+// Load the overlay plus its git sha. The sha is what lets the save endpoint
+// detect that someone else has edited the file since we read it.
+async function loadOverlay() {
+  overlayEntries = {};
+  overlaySha = null;
+  try {
+    const r = await fetch(`${OVERLAY_RAW_URL}?t=${Date.now()}`);
+    if (r.ok) {
+      const doc = await r.json();
+      (doc.entries || []).forEach(e => { if (e && e.id) overlayEntries[e.id] = e; });
+    } else if (r.status !== 404) {
+      throw new Error(`HTTP ${r.status}`);
+    }
+  } catch (e) {
+    showToast(`Could not load the overlay: ${e.message}`, 'err');
+  }
+  try {
+    const a = await fetch(OVERLAY_API_URL, { headers: { Accept: 'application/vnd.github+json' } });
+    if (a.ok) overlaySha = (await a.json()).sha || null;
+  } catch { /* sha is optional; save falls back to create */ }
+  console.log(`[Overlay] ${Object.keys(overlayEntries).length} entries, sha ${overlaySha || 'none'}`);
+}
+
+function populateWorkloadFilter() {
+  const sel = document.getElementById('set-filter-workload');
+  if (!sel || sel.options.length > 1) return;
+  const wls = [...new Set(manifest.entries.map(e => e.workload))].sort();
+  wls.forEach(w => {
+    const o = document.createElement('option');
+    o.value = w; o.textContent = w;
+    sel.appendChild(o);
+  });
+}
+
+function renderSettingsStats() {
+  const total     = manifest.entries.length;
+  const enriched  = manifest.entries.filter(e => isEnriched(e.id)).length;
+  const edited    = Object.keys(overlayEdits).length;
+  const el = document.getElementById('set-stats');
+  el.innerHTML = `
+    <div class="set-stat"><div class="k">Objects</div><div class="v">${total}</div></div>
+    <div class="set-stat ok"><div class="k">Enriched</div><div class="v">${enriched}</div></div>
+    <div class="set-stat warn"><div class="k">Awaiting</div><div class="v">${total - enriched}</div></div>
+    <div class="set-stat"><div class="k">Unsaved</div><div class="v">${edited}</div></div>`;
+
+  const dirty = document.getElementById('set-dirty');
+  const save  = document.getElementById('set-save');
+  const disc  = document.getElementById('set-discard');
+  if (edited) {
+    dirty.innerHTML = `<b>${edited}</b> polic${edited === 1 ? 'y' : 'ies'} edited and not yet saved`;
+    save.disabled = false; disc.disabled = false;
+  } else {
+    dirty.textContent = 'No unsaved changes';
+    save.disabled = true; disc.disabled = true;
+  }
+}
+
+function settingsVisibleEntries() {
+  const q  = (document.getElementById('set-search').value || '').toLowerCase().trim();
+  const st = document.getElementById('set-filter-state').value;
+  const wl = document.getElementById('set-filter-workload').value;
+  return manifest.entries.filter(e => {
+    if (wl !== 'all' && e.workload !== wl) return false;
+    if (st === 'unenriched' && isEnriched(e.id)) return false;
+    if (st === 'enriched'  && !isEnriched(e.id)) return false;
+    if (st === 'edited'    && !isEdited(e.id))   return false;
+    if (q && !(e.displayName || '').toLowerCase().includes(q) && !e.id.includes(q)) return false;
+    return true;
+  });
+}
+
+function renderSettingsList() {
+  const list = settingsVisibleEntries();
+  const el = document.getElementById('set-list');
+  if (!list.length) {
+    el.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted);font-size:12px">No policies match these filters.</div>';
+    return;
+  }
+  el.innerHTML = list.map(e => {
+    const cls = isEdited(e.id) ? 'edited' : (isEnriched(e.id) ? 'on' : 'off');
+    const sel = e.id === setSelectedId ? ' active' : '';
+    return `<div class="set-row${sel}" onclick="selectOverlayEntry('${e.id}')">
+      <span class="set-dot ${cls}"></span>
+      <span class="set-row-name" title="${e.displayName.replace(/"/g, '&quot;')}">${e.displayName}</span>
+    </div>`;
+  }).join('');
+}
+
+function selectOverlayEntry(id) {
+  setSelectedId = id;
+  const m = manifest.entries.find(e => e.id === id);
+  if (!m) return;
+  const e = effectiveEntry(id) || {};
+
+  const listField = (k, label, hint) => `
+    <div class="set-field">
+      <label for="ov-${k}">${label} <span class="set-hint">${hint}</span></label>
+      <input type="text" id="ov-${k}" value="${listToCsv(e[k]).replace(/"/g, '&quot;')}"/>
+    </div>`;
+
+  document.getElementById('set-editor').innerHTML = `
+    <h3>${m.displayName}</h3>
+    <div class="set-meta">
+      <code>${m.id}</code><br>
+      ${m.workload} \u00b7 ${m.category} \u00b7 ${m.objectType}
+      ${m.version ? ' \u00b7 v' + m.version : ''}
+      ${m.tier ? ' \u00b7 ' + m.tier.toUpperCase() : ''}
+      ${(m.flags || []).length ? '<br><b>Flags:</b> ' + m.flags.join(', ') : ''}
+    </div>
+
+    <div class="set-field">
+      <label for="ov-lldSummary">LLD summary
+        <span class="set-hint">\u2014 British English, one or two sentences on what this enforces and why. Used verbatim in the design document.</span>
+      </label>
+      <textarea id="ov-lldSummary">${(e.lldSummary || '').replace(/</g, '&lt;')}</textarea>
+      <div class="set-actions">
+        <button class="btn btn-ghost btn-sm" onclick="aiDraftSummary('${m.id}')" id="ov-ai-btn">\u2728 Draft with AI</button>
+        <span class="set-hint" id="ov-ai-status"></span>
+      </div>
+    </div>
+
+    ${listField('blocks',   'Blocks',   '\u2014 comma separated, e.g. intune.win.cis-l1')}
+    <div class="set-row2">
+      ${listField('licence', 'Licence', '\u2014 E3, E5, BP')}
+      <div class="set-field">
+        <label for="ov-lldSection">LLD section <span class="set-hint">\u2014 e.g. 4.3</span></label>
+        <input type="text" id="ov-lldSection" value="${(e.lldSection || '').replace(/"/g, '&quot;')}"/>
+      </div>
+    </div>
+    <div class="set-row2">
+      ${listField('requires', 'Requires', '\u2014 ids that must deploy first')}
+      <div class="set-field">
+        <label for="ov-assignTo">Assign to <span class="set-hint">\u2014 default group id</span></label>
+        <input type="text" id="ov-assignTo" value="${(e.assignTo || '').replace(/"/g, '&quot;')}"/>
+      </div>
+    </div>
+    <div class="set-row2">
+      ${listField('conflictsWith', 'Conflicts with', '')}
+      ${listField('supersedes',    'Supersedes',     '\u2014 older ids this replaces')}
+    </div>
+
+    <div class="set-field">
+      <label for="ov-notes">Internal notes <span class="set-hint">\u2014 never appears in customer output</span></label>
+      <textarea id="ov-notes" style="min-height:56px">${(e.notes || '').replace(/</g, '&lt;')}</textarea>
+    </div>
+
+    <div class="set-actions">
+      <button class="btn btn-doc btn-sm" onclick="stageOverlayEntry('${m.id}')">Apply to staged changes</button>
+      <button class="btn btn-ghost btn-sm" onclick="clearOverlayEntry('${m.id}')">Clear this entry</button>
+    </div>`;
+
+  renderSettingsList();
+}
+
+// Read the form into the staged edits. Entries that end up empty are recorded
+// as a deletion so the save removes them from the overlay.
+function stageOverlayEntry(id) {
+  const entry = { id };
+  OVERLAY_TEXT_FIELDS.concat(OVERLAY_LINE_FIELDS).forEach(k => {
+    const el = document.getElementById('ov-' + k);
+    if (el && el.value.trim()) entry[k] = el.value.trim();
+  });
+  OVERLAY_LIST_FIELDS.forEach(k => {
+    const el = document.getElementById('ov-' + k);
+    if (el) {
+      const list = csvToList(el.value);
+      if (list.length) entry[k] = list;
+    }
+  });
+
+  const meaningful = Object.keys(entry).filter(k => k !== 'id').length > 0;
+  overlayEdits[id] = meaningful ? entry : { id, _delete: true };
+  showToast(meaningful ? 'Staged \u2014 remember to save' : 'Staged for removal', 'ok');
+  renderSettingsStats();
+  renderSettingsList();
+}
+
+function clearOverlayEntry(id) {
+  overlayEdits[id] = { id, _delete: true };
+  selectOverlayEntry(id);
+  renderSettingsStats();
+}
+
+function discardOverlayEdits() {
+  if (!confirm('Discard all staged overlay changes?')) return;
+  overlayEdits = {};
+  if (setSelectedId) selectOverlayEntry(setSelectedId);
+  renderSettingsStats();
+  renderSettingsList();
+  showToast('Staged changes discarded', 'ok');
+}
+
+// Draft the LLD summary with AI. Fetches the policy JSON so the model sees the
+// actual settings rather than just the name. The consultant reviews and applies.
+async function aiDraftSummary(id) {
+  const m = manifest.entries.find(e => e.id === id);
+  if (!m) return;
+  const btn = document.getElementById('ov-ai-btn');
+  const st  = document.getElementById('ov-ai-status');
+  btn.disabled = true; st.textContent = 'Reading policy\u2026';
+
+  try {
+    const wl = WORKLOAD_TAB[m.workload];
+    const p  = wl && policies[wl] ? policies[wl].find(x => x.mId === id) : null;
+    const url = p ? p.raw_url : `${RAW_BASE}/${m.file.split('/').map(encodeURIComponent).join('/')}`;
+    const r = await fetch(`${url}?t=${Date.now()}`);
+    if (!r.ok) throw new Error(`policy fetch ${r.status}`);
+    const json = await r.json();
+
+    st.textContent = 'Drafting\u2026';
+    const rows = extractSettings(json, m.category);
+    const res  = await generateRationale(
+      m.displayName, json.description || m.description || '', rows, true, 'the customer');
+
+    if (res && res.rationale) {
+      document.getElementById('ov-lldSummary').value = res.rationale.trim();
+      st.textContent = 'Draft ready \u2014 review before applying';
+    } else {
+      st.textContent = 'No draft returned';
+    }
+  } catch (e) {
+    console.warn('[Overlay] AI draft failed', e);
+    st.textContent = 'Draft failed: ' + e.message;
+  }
+  btn.disabled = false;
+}
+
+// Merge staged edits into the loaded overlay and commit the whole file.
+async function saveOverlay() {
+  const merged = Object.assign({}, overlayEntries);
+  Object.entries(overlayEdits).forEach(([id, e]) => {
+    if (e._delete) delete merged[id];
+    else merged[id] = e;
+  });
+
+  const doc = {
+    schemaVersion: 1,
+    entries: Object.values(merged).sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
+  };
+
+  const btn = document.getElementById('set-save');
+  btn.disabled = true; btn.textContent = 'Saving\u2026';
+  try {
+    const r = await fetch(SAVE_OVERLAY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ overlay: doc, sha: overlaySha }),
+    });
+    const out = await r.json().catch(() => ({}));
+    if (!r.ok || !out.ok) {
+      throw new Error(out.error || `HTTP ${r.status}`);
+    }
+    overlayEntries = merged;
+    overlayEdits   = {};
+    overlaySha     = out.sha || null;
+    showToast(`Overlay saved \u2014 ${out.entries} entries committed`, 'ok');
+    renderSettingsStats();
+    renderSettingsList();
+  } catch (e) {
+    showToast(`Save failed: ${e.message}`, 'err');
+    console.error('[Overlay] save failed', e);
+  }
+  btn.disabled = false; btn.textContent = 'Save to GitHub';
 }
 
 // Doc-mode wizard \u2014 step 1. Collects engagement details before the policy
@@ -1909,6 +2344,9 @@ async function loadAllWorkloads() {
   // Preferred path: one manifest fetch supplies the whole catalogue.
   manifest = await loadManifest();
   if (manifest && buildFromManifest(manifest)) {
+    // Overlay editing is only meaningful when the manifest loaded.
+    const sb = document.getElementById('settings-btn');
+    if (sb) sb.style.display = '';
     Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
     await afterCatalogueLoaded();
     return;
@@ -5621,6 +6059,21 @@ document.getElementById('deploy-btn').addEventListener('click', deploy);
 document.getElementById('remove-btn').addEventListener('click', removeSelected);
 document.getElementById('docgen-btn').addEventListener('click', generateDocument);
 document.getElementById('doc-continue-btn').addEventListener('click', openDocWizard);
+
+// Settings page filters
+['set-search'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', renderSettingsList);
+});
+['set-filter-state','set-filter-workload'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', renderSettingsList);
+});
+
+// Warn before losing staged overlay edits on tab close
+window.addEventListener('beforeunload', (e) => {
+  if (Object.keys(overlayEdits).length) { e.preventDefault(); e.returnValue = ''; }
+});
 
 // Wizard field validation
 ['wiz-customer', 'wiz-oppnum', 'wiz-oppname'].forEach(id => {
