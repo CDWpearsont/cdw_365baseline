@@ -1509,6 +1509,206 @@ function setAppMode(mode) {
   updateDeployBar();
 }
 
+// Doc-mode wizard \u2014 step 1. Collects engagement details before the policy
+// grid loads, so customer / opportunity are known up front rather than being
+// remembered at export time.
+function openDocWizard() {
+  document.getElementById('auth-screen').style.display   = 'none';
+  document.getElementById('deployer').style.display      = 'none';
+  document.getElementById('tabbar').style.display        = 'none';
+  document.getElementById('wizard-screen').style.display = '';
+  document.getElementById('topbar-right').innerHTML      = '';
+
+  // Restore previous values on an "Edit details" round-trip
+  document.getElementById('wiz-customer').value = docMeta.customer;
+  document.getElementById('wiz-oppnum').value   = docMeta.oppNumber;
+  document.getElementById('wiz-oppname').value  = docMeta.oppName;
+  validateDocWizard();
+
+  if (!templateBuffer) loadTemplateFromSource();
+}
+
+// Back to the mode-selection screen
+function exitDocWizard() {
+  document.getElementById('wizard-screen').style.display = 'none';
+  document.getElementById('auth-screen').style.display   = '';
+  selectAuthMode('document');
+}
+
+// Re-open from the summary bar without losing the policy selection
+function reopenDocWizard() { openDocWizard(); }
+
+// Fetch the LLD template from blob storage. Falls back to manual upload if it
+// is missing \u2014 export still works, it just needs a file.
+async function loadTemplateFromSource() {
+  const box  = document.getElementById('wiz-tpl-status');
+  const icon = document.getElementById('wiz-tpl-icon');
+  const name = document.getElementById('wiz-tpl-name');
+  const meta = document.getElementById('wiz-tpl-meta');
+  if (box) {
+    box.className    = 'wiz-tpl';
+    icon.textContent = '\u23f3';
+    name.textContent = 'Loading template\u2026';
+    meta.textContent = 'Fetching the CDW LLD template';
+  }
+
+  try {
+    const r = await fetch(TEMPLATE_URL + '?t=' + Date.now());
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const buf = await r.arrayBuffer();
+    const testZip = await JSZip.loadAsync(buf);
+    if (!testZip.file('word/document.xml')) throw new Error('not a valid .docx');
+
+    templateBuffer = buf;
+    docMeta.templateSource = TEMPLATE_NAME;
+    const sizeMB = (buf.byteLength / 1024 / 1024).toFixed(1);
+    if (box) {
+      box.className    = 'wiz-tpl ok';
+      icon.textContent = '\u2705';
+      name.textContent = TEMPLATE_NAME;
+      meta.textContent = sizeMB + ' MB \u00b7 Loaded automatically from storage';
+    }
+  } catch(e) {
+    templateBuffer = null;
+    docMeta.templateSource = null;
+    if (box) {
+      box.className    = 'wiz-tpl warn';
+      icon.textContent = '\u26a0\ufe0f';
+      name.textContent = 'Template not found';
+      meta.textContent = 'Could not load ' + TEMPLATE_URL + ' (' + e.message +
+                         '). Upload one manually to continue.';
+    }
+  }
+  validateDocWizard();
+  renderEngagementBar();
+}
+
+// Continue is enabled only when required fields and a template are present
+function validateDocWizard() {
+  const c = (document.getElementById('wiz-customer') || {}).value || '';
+  const n = (document.getElementById('wiz-oppnum')   || {}).value || '';
+  const o = (document.getElementById('wiz-oppname')  || {}).value || '';
+  const btn = document.getElementById('wiz-continue');
+  if (btn) btn.disabled = !(c.trim() && n.trim() && o.trim() && templateBuffer);
+
+  const prev = document.getElementById('wiz-filename-preview');
+  if (prev) {
+    prev.textContent = (c.trim() && n.trim() && o.trim())
+      ? 'Will export as: ' + buildLldFilename(c.trim(), n.trim(), o.trim())
+      : '';
+  }
+}
+
+// LowLevelDesign-[OppNumber]-[CustomerName]-[OppName]-[YYYYMMDD]-v0.1.docx
+function buildLldFilename(customer, oppNumber, oppName) {
+  const clean = v => String(v || '').replace(/[^a-zA-Z0-9-]+/g, '_').replace(/^_+|_+$/g, '');
+  const d = new Date();
+  const dateStr = d.getFullYear() +
+                  String(d.getMonth() + 1).padStart(2, '0') +
+                  String(d.getDate()).padStart(2, '0');
+  return 'LowLevelDesign-' + clean(oppNumber) + '-' + clean(customer) + '-' +
+         clean(oppName) + '-' + dateStr + '-v0.1.docx';
+}
+
+// Commit wizard values and move on to the policy grid
+function submitDocWizard() {
+  docMeta.customer  = document.getElementById('wiz-customer').value.trim();
+  docMeta.oppNumber = document.getElementById('wiz-oppnum').value.trim();
+  docMeta.oppName   = document.getElementById('wiz-oppname').value.trim();
+  document.getElementById('wizard-screen').style.display = 'none';
+  enterDocMode();
+}
+
+// Summary chip above the policy grid in doc mode
+function renderEngagementBar() {
+  const set = (id, val, muted) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = val;
+    el.classList.toggle('eng-muted', !!muted);
+  };
+  set('eng-customer', docMeta.customer || '\u2014', !docMeta.customer);
+  const opp = [docMeta.oppNumber, docMeta.oppName].filter(Boolean).join(' \u00b7 ');
+  set('eng-opp', opp || '\u2014', !opp);
+  set('eng-tpl', docMeta.templateSource || 'Not loaded', !docMeta.templateSource);
+  const aiEl = document.getElementById('ai-enabled-toggle');
+  const aiOn = aiEl ? aiEl.checked : true;
+  set('eng-ai', aiOn ? 'On' : 'Off', !aiOn);
+}
+
+function enterDocMode() {
+  appMode = 'document';
+  document.body.dataset.appmode = 'document';
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('deployer').style.display    = '';
+  document.getElementById('tabbar').style.display      = 'flex';
+
+  document.getElementById('topbar-right').innerHTML = `
+    <div class="mode-toggle">
+      <button class="mode-btn" onclick="switchToDeployMode()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+        Deploy
+      </button>
+      <button class="mode-btn active" onclick="setAppMode('document')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Document
+      </button>
+    </div>
+    <button class="btn btn-ghost btn-sm" id="refresh-btn" onclick="refresh()">
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+      Refresh
+    </button>
+    <span class="mode-pill mode-pill-doc">📄 Doc Mode</span>`;
+
+  setAppMode('document');
+  renderEngagementBar();
+  loadAllWorkloads(); // Uses the same tree-based loader; skips Graph checks in doc mode
+}
+
+function switchToDeployMode() {
+  document.getElementById('deployer').style.display    = 'none';
+  document.getElementById('tabbar').style.display      = 'none';
+  document.getElementById('auth-screen').style.display = '';
+  document.getElementById('topbar-right').innerHTML    = '';
+  selectAuthMode('deploy');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// MSAL — multi-tenant app registered in CDW's Azure tenant
+// ═══════════════════════════════════════════════════════════════════
+const MSAL_CFG = {
+  auth: {
+    clientId:    'c89cd498-eba7-43de-9a70-2a59d6feb655',
+    authority:   'https://login.microsoftonline.com/common',
+    redirectUri: window.location.origin + '/auth-redirect.html',
+    navigateToLoginRequestUrl: false,
+  },
+  cache: { cacheLocation: 'sessionStorage' }
+};
+
+const SCOPES = [
+  'DeviceManagementConfiguration.ReadWrite.All',
+  'DeviceManagementManagedDevices.ReadWrite.All',
+  'DeviceManagementApps.ReadWrite.All',
+  'DeviceManagementServiceConfig.ReadWrite.All',
+  'Policy.ReadWrite.ConditionalAccess',
+  'Policy.Read.All',
+  'Application.Read.All',
+];
+
+// ═══════════════════════════════════════════════════════════════════
+// REPO
+// ═══════════════════════════════════════════════════════════════════
+const REPO_OWNER  = 'CDWpearsont';
+const REPO_NAME   = 'cdw_365baseline';
+const REPO_BRANCH = 'main';
+const RAW_BASE    = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}`;
+
+// Generated by scripts/generate-manifest.py on every policy commit. Supplies
+// displayName, platform, tier, category and flags for the whole library in a
+// single request, replacing a GitHub tree walk plus one fetch per policy.
+const MANIFEST_URL = `${RAW_BASE}/manifest.json`;
+
 // ── Manifest enrichment (settings page) ──────────────────────────
 // The overlay holds the fields a machine cannot derive: which blocks a policy
 // belongs to, its licence requirement, and the approved LLD prose. Edits are
@@ -1845,205 +2045,6 @@ async function saveOverlay() {
   btn.disabled = false; btn.textContent = 'Save to GitHub';
 }
 
-// Doc-mode wizard \u2014 step 1. Collects engagement details before the policy
-// grid loads, so customer / opportunity are known up front rather than being
-// remembered at export time.
-function openDocWizard() {
-  document.getElementById('auth-screen').style.display   = 'none';
-  document.getElementById('deployer').style.display      = 'none';
-  document.getElementById('tabbar').style.display        = 'none';
-  document.getElementById('wizard-screen').style.display = '';
-  document.getElementById('topbar-right').innerHTML      = '';
-
-  // Restore previous values on an "Edit details" round-trip
-  document.getElementById('wiz-customer').value = docMeta.customer;
-  document.getElementById('wiz-oppnum').value   = docMeta.oppNumber;
-  document.getElementById('wiz-oppname').value  = docMeta.oppName;
-  validateDocWizard();
-
-  if (!templateBuffer) loadTemplateFromSource();
-}
-
-// Back to the mode-selection screen
-function exitDocWizard() {
-  document.getElementById('wizard-screen').style.display = 'none';
-  document.getElementById('auth-screen').style.display   = '';
-  selectAuthMode('document');
-}
-
-// Re-open from the summary bar without losing the policy selection
-function reopenDocWizard() { openDocWizard(); }
-
-// Fetch the LLD template from blob storage. Falls back to manual upload if it
-// is missing \u2014 export still works, it just needs a file.
-async function loadTemplateFromSource() {
-  const box  = document.getElementById('wiz-tpl-status');
-  const icon = document.getElementById('wiz-tpl-icon');
-  const name = document.getElementById('wiz-tpl-name');
-  const meta = document.getElementById('wiz-tpl-meta');
-  if (box) {
-    box.className    = 'wiz-tpl';
-    icon.textContent = '\u23f3';
-    name.textContent = 'Loading template\u2026';
-    meta.textContent = 'Fetching the CDW LLD template';
-  }
-
-  try {
-    const r = await fetch(TEMPLATE_URL + '?t=' + Date.now());
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const buf = await r.arrayBuffer();
-    const testZip = await JSZip.loadAsync(buf);
-    if (!testZip.file('word/document.xml')) throw new Error('not a valid .docx');
-
-    templateBuffer = buf;
-    docMeta.templateSource = TEMPLATE_NAME;
-    const sizeMB = (buf.byteLength / 1024 / 1024).toFixed(1);
-    if (box) {
-      box.className    = 'wiz-tpl ok';
-      icon.textContent = '\u2705';
-      name.textContent = TEMPLATE_NAME;
-      meta.textContent = sizeMB + ' MB \u00b7 Loaded automatically from storage';
-    }
-  } catch(e) {
-    templateBuffer = null;
-    docMeta.templateSource = null;
-    if (box) {
-      box.className    = 'wiz-tpl warn';
-      icon.textContent = '\u26a0\ufe0f';
-      name.textContent = 'Template not found';
-      meta.textContent = 'Could not load ' + TEMPLATE_URL + ' (' + e.message +
-                         '). Upload one manually to continue.';
-    }
-  }
-  validateDocWizard();
-  renderEngagementBar();
-}
-
-// Continue is enabled only when required fields and a template are present
-function validateDocWizard() {
-  const c = (document.getElementById('wiz-customer') || {}).value || '';
-  const n = (document.getElementById('wiz-oppnum')   || {}).value || '';
-  const o = (document.getElementById('wiz-oppname')  || {}).value || '';
-  const btn = document.getElementById('wiz-continue');
-  if (btn) btn.disabled = !(c.trim() && n.trim() && o.trim() && templateBuffer);
-
-  const prev = document.getElementById('wiz-filename-preview');
-  if (prev) {
-    prev.textContent = (c.trim() && n.trim() && o.trim())
-      ? 'Will export as: ' + buildLldFilename(c.trim(), n.trim(), o.trim())
-      : '';
-  }
-}
-
-// LowLevelDesign-[OppNumber]-[CustomerName]-[OppName]-[YYYYMMDD]-v0.1.docx
-function buildLldFilename(customer, oppNumber, oppName) {
-  const clean = v => String(v || '').replace(/[^a-zA-Z0-9-]+/g, '_').replace(/^_+|_+$/g, '');
-  const d = new Date();
-  const dateStr = d.getFullYear() +
-                  String(d.getMonth() + 1).padStart(2, '0') +
-                  String(d.getDate()).padStart(2, '0');
-  return 'LowLevelDesign-' + clean(oppNumber) + '-' + clean(customer) + '-' +
-         clean(oppName) + '-' + dateStr + '-v0.1.docx';
-}
-
-// Commit wizard values and move on to the policy grid
-function submitDocWizard() {
-  docMeta.customer  = document.getElementById('wiz-customer').value.trim();
-  docMeta.oppNumber = document.getElementById('wiz-oppnum').value.trim();
-  docMeta.oppName   = document.getElementById('wiz-oppname').value.trim();
-  document.getElementById('wizard-screen').style.display = 'none';
-  enterDocMode();
-}
-
-// Summary chip above the policy grid in doc mode
-function renderEngagementBar() {
-  const set = (id, val, muted) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = val;
-    el.classList.toggle('eng-muted', !!muted);
-  };
-  set('eng-customer', docMeta.customer || '\u2014', !docMeta.customer);
-  const opp = [docMeta.oppNumber, docMeta.oppName].filter(Boolean).join(' \u00b7 ');
-  set('eng-opp', opp || '\u2014', !opp);
-  set('eng-tpl', docMeta.templateSource || 'Not loaded', !docMeta.templateSource);
-  const aiEl = document.getElementById('ai-enabled-toggle');
-  const aiOn = aiEl ? aiEl.checked : true;
-  set('eng-ai', aiOn ? 'On' : 'Off', !aiOn);
-}
-
-function enterDocMode() {
-  appMode = 'document';
-  document.body.dataset.appmode = 'document';
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('deployer').style.display    = '';
-  document.getElementById('tabbar').style.display      = 'flex';
-
-  document.getElementById('topbar-right').innerHTML = `
-    <div class="mode-toggle">
-      <button class="mode-btn" onclick="switchToDeployMode()">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-        Deploy
-      </button>
-      <button class="mode-btn active" onclick="setAppMode('document')">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        Document
-      </button>
-    </div>
-    <button class="btn btn-ghost btn-sm" id="refresh-btn" onclick="refresh()">
-      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-      Refresh
-    </button>
-    <span class="mode-pill mode-pill-doc">📄 Doc Mode</span>`;
-
-  setAppMode('document');
-  renderEngagementBar();
-  loadAllWorkloads(); // Uses the same tree-based loader; skips Graph checks in doc mode
-}
-
-function switchToDeployMode() {
-  document.getElementById('deployer').style.display    = 'none';
-  document.getElementById('tabbar').style.display      = 'none';
-  document.getElementById('auth-screen').style.display = '';
-  document.getElementById('topbar-right').innerHTML    = '';
-  selectAuthMode('deploy');
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// MSAL — multi-tenant app registered in CDW's Azure tenant
-// ═══════════════════════════════════════════════════════════════════
-const MSAL_CFG = {
-  auth: {
-    clientId:    'c89cd498-eba7-43de-9a70-2a59d6feb655',
-    authority:   'https://login.microsoftonline.com/common',
-    redirectUri: window.location.origin + '/auth-redirect.html',
-    navigateToLoginRequestUrl: false,
-  },
-  cache: { cacheLocation: 'sessionStorage' }
-};
-
-const SCOPES = [
-  'DeviceManagementConfiguration.ReadWrite.All',
-  'DeviceManagementManagedDevices.ReadWrite.All',
-  'DeviceManagementApps.ReadWrite.All',
-  'DeviceManagementServiceConfig.ReadWrite.All',
-  'Policy.ReadWrite.ConditionalAccess',
-  'Policy.Read.All',
-  'Application.Read.All',
-];
-
-// ═══════════════════════════════════════════════════════════════════
-// REPO
-// ═══════════════════════════════════════════════════════════════════
-const REPO_OWNER  = 'CDWpearsont';
-const REPO_NAME   = 'cdw_365baseline';
-const REPO_BRANCH = 'main';
-const RAW_BASE    = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}`;
-
-// Generated by scripts/generate-manifest.py on every policy commit. Supplies
-// displayName, platform, tier, category and flags for the whole library in a
-// single request, replacing a GitHub tree walk plus one fetch per policy.
-const MANIFEST_URL = `${RAW_BASE}/manifest.json`;
 
 // Maps a manifest workload to a UI tab. Workloads with no tab (exchange,
 // sharepoint, teams, purview) are counted and reported, not silently dropped —
