@@ -1768,9 +1768,14 @@ async function openSettings() {
   renderSettingsList();
 }
 
-function closeSettings() {
-  if (Object.keys(overlayEdits).length &&
-      !confirm('You have unsaved overlay changes. Leave without saving?')) return;
+// True if the settings screen is currently the visible view.
+function settingsOpen() {
+  const el = document.getElementById('settings-screen');
+  return !!el && el.style.display !== 'none' && el.style.display !== '';
+}
+
+// Hide settings and restore whatever the user was on before.
+function hideSettingsScreen() {
   document.getElementById('settings-screen').style.display = 'none';
   if (appMode === 'deploy' || appMode === 'document') {
     document.getElementById('deployer').style.display = '';
@@ -1779,6 +1784,57 @@ function closeSettings() {
     document.getElementById('auth-screen').style.display = '';
   }
 }
+
+// Resolve staged edits before leaving. Returns a promise for whether the
+// caller may proceed. Offered as save / discard / stay, because losing an
+// afternoon of enrichment to a stray click would be miserable.
+async function confirmLeaveSettings() {
+  const n = Object.keys(overlayEdits).length;
+  if (!n) return true;
+
+  if (confirm(`You have ${n} unsaved overlay change${n === 1 ? '' : 's'}.\n\n`
+            + `OK  \u2014 save them to GitHub now\n`
+            + `Cancel \u2014 choose to discard or stay`)) {
+    await saveOverlay();
+    // saveOverlay clears overlayEdits on success; if it failed, stay put.
+    return Object.keys(overlayEdits).length === 0;
+  }
+  return confirm('Discard your unsaved overlay changes and leave?');
+}
+
+async function closeSettings() {
+  if (!(await confirmLeaveSettings())) return;
+  overlayEdits = {};
+  hideSettingsScreen();
+  renderSettingsStats();
+}
+
+// Any click outside the settings screen counts as navigating away. Captured
+// before the target's own handler so the app cannot end up showing two screens
+// at once, which is what happened when the mode and tab buttons were clicked.
+let _leavingSettings = false;
+document.addEventListener('click', (ev) => {
+  if (!settingsOpen() || _leavingSettings) return;
+  const setEl = document.getElementById('settings-screen');
+  if (setEl.contains(ev.target)) return;                 // inside the page
+  if (ev.target.closest && ev.target.closest('#settings-btn')) return;
+
+  ev.preventDefault();
+  ev.stopPropagation();
+  const target = ev.target.closest('button, a, .wtab, .mode-card') || ev.target;
+
+  (async () => {
+    if (!(await confirmLeaveSettings())) return;         // stay put
+    overlayEdits = {};
+    hideSettingsScreen();
+    renderSettingsStats();
+    // Replay the click now the settings screen is closed, so a single click
+    // navigates rather than only dismissing.
+    _leavingSettings = true;
+    try { if (target && target.click) target.click(); }
+    finally { _leavingSettings = false; }
+  })();
+}, true);
 
 // Load the overlay plus its git sha. The sha is what lets the save endpoint
 // detect that someone else has edited the file since we read it.
