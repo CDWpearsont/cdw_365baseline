@@ -4553,7 +4553,9 @@ function buildPolicyTableXml(policyName, description, platform, settingsRows, sh
 // ═══════════════════════════════════════════════════════════════════
 // AI RATIONALE GENERATION
 // ═══════════════════════════════════════════════════════════════════
-const AI_FUNCTION_URL = 'https://cdw-baseline-functions-gbbhhrg7dzbcbhga.northcentralus-01.azurewebsites.net/api/generate-rationale?code=cjkYZd3Z7sF2C1UvqX2StyCVwd3a9OoZaBWgDHyB8aIEAzFuLxLvXA==';
+// Proxied by the Static Web App's linked backend (cdw-baseline-functions).
+// Relative path means no function key in client-side JavaScript.
+const AI_FUNCTION_URL = '/api/generate-rationale';
 
 function toggleAiConfig() { /* URL is hardcoded — nothing to show/hide */ }
 
