@@ -1,14 +1,14 @@
 {
-  "displayName": "MacOS - CDW Baseline - Compliance - U - Device Security - v1.0",
   "firewallBlockAllIncoming": true,
-  "passwordRequiredType": "deviceDefault",
-  "@odata.type": "#microsoft.graph.macOSCompliancePolicy",
-  "deviceThreatProtectionEnabled": false,
-  "systemIntegrityProtectionEnabled": false,
-  "passwordRequired": false,
-  "firewallEnableStealthMode": false,
-  "passwordBlockSimple": false,
-  "storageRequireEncryption": true,
   "firewallEnabled": true,
-  "deviceThreatProtectionRequiredSecurityLevel": "unavailable"
+  "systemIntegrityProtectionEnabled": false,
+  "deviceThreatProtectionRequiredSecurityLevel": "unavailable",
+  "@odata.type": "#microsoft.graph.macOSCompliancePolicy",
+  "firewallEnableStealthMode": false,
+  "passwordRequired": false,
+  "passwordBlockSimple": false,
+  "displayName": "MacOS - CDW Baseline - Compliance - U - Device Security - v1.0",
+  "deviceThreatProtectionEnabled": false,
+  "passwordRequiredType": "deviceDefault",
+  "storageRequireEncryption": true
 }
