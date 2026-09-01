@@ -1,12 +1,44 @@
 {
-  "pinCharacterSet": "numeric",
-  "appActionIfMaximumPinRetriesExceeded": "block",
+  "dialerRestrictionLevel": "allApps",
+  "minimumRequiredOsVersion": "16.0",
+  "mobileThreatDefenseRemediationAction": "block",
+  "allowedOutboundClipboardSharingExceptionLength": 0,
+  "purviewContentEvaluationRequired": "notRequired",
+  "minimumWipeAppVersion": null,
+  "appGroupType": "allApps",
+  "mobileThreatDefensePartnerPriority": null,
+  "managedBrowserToOpenLinksRequired": false,
+  "minimumWarningSdkVersion": null,
+  "minimumRequiredSdkVersion": null,
+  "exemptedUniversalLinks": [
+    "http://maps.apple.com",
+    "https://maps.apple.com",
+    "http://facetime.apple.com",
+    "https://facetime.apple.com"
+  ],
+  "deviceComplianceRequired": false,
+  "allowedIosDeviceModels": null,
+  "genmojiConfigurationState": "blocked",
+  "appActionIfIosDeviceModelNotAllowed": "block",
+  "protectInboundDataFromUnknownSources": false,
+  "maximumAllowedDeviceThreatLevel": "notConfigured",
+  "simplePinBlocked": false,
+  "periodBeforePinReset": "PT0S",
+  "periodOfflineBeforeWipeIsEnforced": "P30D",
+  "pinRequired": true,
   "notificationRestriction": "blockOrganizationalData",
-  "appDataEncryptionType": "whenDeviceLocked",
+  "organizationalCredentialsRequired": false,
+  "customDialerAppProtocol": "",
+  "exemptedAppProtocols": [
+    {
+      "value": "msauth;msauthv2;msauthv3",
+      "name": "Default"
+    }
+  ],
+  "disableProtectionOfManagedOutboundOpenInData": false,
+  "maximumRequiredOsVersion": null,
+  "fingerprintBlocked": false,
   "periodOnlineBeforeAccessCheck": "PT30M",
-  "allowedDataIngestionLocations": [],
-  "filterOpenInToOnlyManagedApps": false,
-  "maximumWipeOsVersion": null,
   "managedUniversalLinks": [
     "http://*.sharepoint.com/*",
     "http://*.sharepoint-df.com/*",
@@ -59,1230 +91,1198 @@
     "https://*.zoom.us/*",
     "https://zoom.us/*"
   ],
-  "mobileThreatDefensePartnerPriority": null,
-  "minimumPinLength": 6,
-  "minimumWipeAppVersion": null,
+  "targetedAppManagementLevels": "unspecified",
+  "minimumRequiredAppVersion": null,
+  "minimumWipeSdkVersion": null,
+  "periodOfflineBeforeAccessCheck": "PT12H",
+  "faceIdBlocked": false,
+  "appActionIfAccountIsClockedOut": null,
   "gracePeriodToBlockAppsDuringOffClockHours": null,
+  "filterOpenInToOnlyManagedApps": false,
+  "saveAsBlocked": true,
+  "previousPinBlockCount": 0,
+  "customBrowserProtocol": "",
+  "appDataEncryptionType": "whenDeviceLocked",
+  "maximumPinRetries": 5,
+  "dataBackupBlocked": true,
+  "contactSyncBlocked": false,
+  "blockDataIngestionIntoOrganizationDocuments": false,
+  "allowedDataIngestionLocations": [],
+  "thirdPartyKeyboardsBlocked": false,
+  "minimumWarningAppVersion": null,
+  "appActionIfUnableToAuthenticateUser": null,
+  "minimumWipeOsVersion": null,
+  "allowWidgetContentSync": false,
+  "allowedOutboundDataTransferDestinations": "managedApps",
+  "disableAppPinIfDevicePinIsSet": true,
+  "minimumPinLength": 6,
+  "maximumWarningOsVersion": null,
+  "protectedMessagingRedirectAppType": "anyApp",
+  "writingToolsConfigurationState": "blocked",
+  "pinRequiredInsteadOfBiometricTimeout": "PT30M",
+  "description": "App Protection Policy for applications on iOS/iPadOS. Enforces PIN, encryption, data transfer restrictions, FaceID/TouchID, and conditional launch checks.",
   "allowedInboundDataTransferSources": "managedApps",
-  "fingerprintBlocked": false,
   "apps": [
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "--.liquidtext-pdf"
+        "bundleId": "--.liquidtext-pdf",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "ch.unique.moments"
+        "bundleId": "ch.unique.moments",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "cloud.myq.roger"
+        "bundleId": "cloud.myq.roger",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "co.fellow.app"
+        "bundleId": "co.fellow.app",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "co.lumenati.cinebody"
+        "bundleId": "co.lumenati.cinebody",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "co.mural.ios"
+        "bundleId": "co.mural.ios",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "co.spaceconnect.app"
+        "bundleId": "co.spaceconnect.app",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "co.switch.switch"
+        "bundleId": "co.switch.switch",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.365rm.365pay"
+        "bundleId": "com.365rm.365pay",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.4cee.connect"
+        "bundleId": "com.4cee.connect",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.achievers.native.achievers"
+        "bundleId": "com.achievers.native.achievers",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.adobe.adobe-reader"
+        "bundleId": "com.adobe.adobe-reader",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.aegismobility.fleetsafer"
+        "bundleId": "com.aegismobility.fleetsafer",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.akumina.exp"
+        "bundleId": "com.akumina.exp",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.align.assetscanforintune"
+        "bundleId": "com.align.assetscanforintune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.apleona.apleonaoneintune.production"
+        "bundleId": "com.apleona.apleonaoneintune.production",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.appian.tempo.intune"
+        "bundleId": "com.appian.tempo.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.arlanto.atomedge"
+        "bundleId": "com.arlanto.atomedge",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.asana.asana"
+        "bundleId": "com.asana.asana",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.avalution.catalystportalmobile"
+        "bundleId": "com.avalution.catalystportalmobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.avenza.avios.intune"
+        "bundleId": "com.avenza.avios.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.bluejeansnet.blue-jeans"
+        "bundleId": "com.bluejeansnet.blue-jeans",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.boardbooks.boardbooks"
+        "bundleId": "com.boardbooks.boardbooks",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.box.mdmios"
+        "bundleId": "com.box.mdmios",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.branchfire.ia4c.office365"
+        "bundleId": "com.branchfire.ia4c.office365",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.breezy.intune.ios"
+        "bundleId": "com.breezy.intune.ios",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.brother.nbs.buddyboard"
+        "bundleId": "com.brother.nbs.buddyboard",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.buildingrobotics.comfy"
+        "bundleId": "com.buildingrobotics.comfy",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.cbrain.f2-manager.intune"
+        "bundleId": "com.cbrain.f2-manager.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.cbrain.intune.f2touchapp"
+        "bundleId": "com.cbrain.intune.f2touchapp",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.celltrust.securelinegen2.securelinegen2-intune"
+        "bundleId": "com.celltrust.securelinegen2.securelinegen2-intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.cerby.mobile"
+        "bundleId": "com.cerby.mobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.cisco.jabberimintune"
+        "bundleId": "com.cisco.jabberimintune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.cisco.squared.intune"
+        "bundleId": "com.cisco.squared.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.civi.heydanforintune"
+        "bundleId": "com.civi.heydanforintune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.clipchamp.go"
+        "bundleId": "com.clipchamp.go",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.condecosoftware.condeco"
+        "bundleId": "com.condecosoftware.condeco",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.critigen.lemur.pro.intune"
+        "bundleId": "com.critigen.lemur.pro.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.datadog.flagship-intune"
+        "bundleId": "com.datadog.flagship-intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.datasite.intune"
+        "bundleId": "com.datasite.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.dealcloud.mobileapp"
+        "bundleId": "com.dealcloud.mobileapp",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.deepl.mobiletranslator-intune-public"
+        "bundleId": "com.deepl.mobiletranslator-intune-public",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.dooray.intune"
+        "bundleId": "com.dooray.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.egnyte.intune.egnyte"
+        "bundleId": "com.egnyte.intune.egnyte",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.eprintitsaas.mobile"
+        "bundleId": "com.eprintitsaas.mobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.esri.indoors.intune"
+        "bundleId": "com.esri.indoors.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.factset.mobile"
+        "bundleId": "com.factset.mobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.fileorbisv2intune"
+        "bundleId": "com.fileorbisv2intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.firespotter.uberconference"
+        "bundleId": "com.firespotter.uberconference",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.foxitcorporation.reader"
+        "bundleId": "com.foxitcorporation.reader",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.freshworks.freshservice.intune"
+        "bundleId": "com.freshworks.freshservice.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.fuze.fuzeappmdm"
+        "bundleId": "com.fuze.fuzeappmdm",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.globalrelay.gr-app-im"
+        "bundleId": "com.globalrelay.gr-app-im",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.gonitro.nitropdfpro.ios"
+        "bundleId": "com.gonitro.nitropdfpro.ios",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.goodnotesapp.x"
+        "bundleId": "com.goodnotesapp.x",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.groupkom.evalarm"
+        "bundleId": "com.groupkom.evalarm",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.hcss.mobile.appstore"
+        "bundleId": "com.hcss.mobile.appstore",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.hcss.plans"
+        "bundleId": "com.hcss.plans",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.hibob.hibob"
+        "bundleId": "com.hibob.hibob",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.hp.mobileconnecter.intune"
+        "bundleId": "com.hp.mobileconnecter.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.iaipl.dfintune"
+        "bundleId": "com.iaipl.dfintune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.imanage.work3intune"
+        "bundleId": "com.imanage.work3intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.inax.ixarma.2"
+        "bundleId": "com.inax.ixarma.2",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.inboxzero.zeroprointune"
+        "bundleId": "com.inboxzero.zeroprointune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.incorta.mobile.bestbuy"
+        "bundleId": "com.incorta.mobile.bestbuy",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.indegene.omnipresenceprodapp"
+        "bundleId": "com.indegene.omnipresenceprodapp",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.inkscreen.captor.intune"
+        "bundleId": "com.inkscreen.captor.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.intapp.pma"
+        "bundleId": "com.intapp.pma",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.isec7.med"
+        "bundleId": "com.isec7.med",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.isec7.med.intune"
+        "bundleId": "com.isec7.med.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.jumpapp.mobile"
+        "bundleId": "com.jumpapp.mobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.keepassium.intune"
+        "bundleId": "com.keepassium.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.klaxoon.app.intune"
+        "bundleId": "com.klaxoon.app.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.kofax.power.pdf"
+        "bundleId": "com.kofax.power.pdf",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.leapxpert.leap.work.intune"
+        "bundleId": "com.leapxpert.leap.work.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.lexisnexis.newsdesk"
+        "bundleId": "com.lexisnexis.newsdesk",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.lrs.vpsxprint.intune"
+        "bundleId": "com.lrs.vpsxprint.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.lumapps.intune"
+        "bundleId": "com.lumapps.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.m-files.mfms.m-files"
+        "bundleId": "com.m-files.mfms.m-files",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.mackeyllc.mackeyrms"
+        "bundleId": "com.mackeyllc.mackeyrms",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.manageengine.apm.intune"
+        "bundleId": "com.manageengine.apm.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.mangospring.engage"
+        "bundleId": "com.mangospring.engage",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.mangospring.myportal"
+        "bundleId": "com.mangospring.myportal",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.mazrica.senses"
+        "bundleId": "com.mazrica.senses",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.meetingdecisions.decisions"
+        "bundleId": "com.meetingdecisions.decisions",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.mentorcliq.app.ios"
+        "bundleId": "com.mentorcliq.app.ios",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.mfbtech.align.intune"
+        "bundleId": "com.mfbtech.align.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.azure"
+        "bundleId": "com.microsoft.azure",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.bing.halseyassistant"
+        "bundleId": "com.microsoft.bing.halseyassistant",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.designer"
+        "bundleId": "com.microsoft.designer",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.dynamics"
+        "bundleId": "com.microsoft.dynamics",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.dynamics.invoice"
+        "bundleId": "com.microsoft.dynamics.invoice",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.dynamics.iphone.moca"
+        "bundleId": "com.microsoft.dynamics.iphone.moca",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.dynamics.iphone.moca.fieldservices"
+        "bundleId": "com.microsoft.dynamics.iphone.moca.fieldservices",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.dynamics.iphone.moca.sales"
+        "bundleId": "com.microsoft.dynamics.iphone.moca.sales",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.loop"
+        "bundleId": "com.microsoft.loop",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.lync2013.iphone"
+        "bundleId": "com.microsoft.lync2013.iphone",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.mobile.polymer"
+        "bundleId": "com.microsoft.mobile.polymer",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.msapps"
+        "bundleId": "com.microsoft.msapps",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.msedge"
+        "bundleId": "com.microsoft.msedge",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.o365shdmobileapp"
+        "bundleId": "com.microsoft.o365shdmobileapp",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.office.excel"
+        "bundleId": "com.microsoft.office.excel",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.office.outlook"
+        "bundleId": "com.microsoft.office.outlook",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.office.powerpoint"
+        "bundleId": "com.microsoft.office.powerpoint",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.office.word"
+        "bundleId": "com.microsoft.office.word",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.officelens"
+        "bundleId": "com.microsoft.officelens",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.officemobile"
+        "bundleId": "com.microsoft.officemobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.onenote"
+        "bundleId": "com.microsoft.onenote",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.plannermobile"
+        "bundleId": "com.microsoft.plannermobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.powerbimobile"
+        "bundleId": "com.microsoft.powerbimobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.procsimo"
+        "bundleId": "com.microsoft.procsimo",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.rdc.ios"
+        "bundleId": "com.microsoft.rdc.ios",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.rms-sharing"
+        "bundleId": "com.microsoft.rms-sharing",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.scmx"
+        "bundleId": "com.microsoft.scmx",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.sharepoint"
+        "bundleId": "com.microsoft.sharepoint",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.shiftr"
+        "bundleId": "com.microsoft.shiftr",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.skydrive"
+        "bundleId": "com.microsoft.skydrive",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.skype.teams"
+        "bundleId": "com.microsoft.skype.teams",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.to-do"
+        "bundleId": "com.microsoft.to-do",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.whiteboard"
+        "bundleId": "com.microsoft.whiteboard",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.microsoft.workfolders"
+        "bundleId": "com.microsoft.workfolders",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.mobilehelix.link.intune"
+        "bundleId": "com.mobilehelix.link.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.moveinsync.ets"
+        "bundleId": "com.moveinsync.ets",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.moviuscorp.multilineintune"
+        "bundleId": "com.moviuscorp.multilineintune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.myitops.asiapp.msint"
+        "bundleId": "com.myitops.asiapp.msint",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.omega365.omega365"
+        "bundleId": "com.omega365.omega365",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.pagerduty.pagerduty.intune"
+        "bundleId": "com.pagerduty.pagerduty.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.penlink.penpoint"
+        "bundleId": "com.penlink.penpoint",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.pervasent.boardpapers"
+        "bundleId": "com.pervasent.boardpapers",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.pervasent.boardpapers.intune"
+        "bundleId": "com.pervasent.boardpapers.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.pervasent.teampapers.intune"
+        "bundleId": "com.pervasent.teampapers.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.pkware.smartcrypt.intune"
+        "bundleId": "com.pkware.smartcrypt.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.printeron.print"
+        "bundleId": "com.printeron.print",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.printeron.printeron.microsoft"
+        "bundleId": "com.printeron.printeron.microsoft",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.qlik.qliksense.mobile"
+        "bundleId": "com.qlik.qliksense.mobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.qlik.qsm"
+        "bundleId": "com.qlik.qsm",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.recruitment.exchange"
+        "bundleId": "com.recruitment.exchange",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.rego.clarity.express.ios.intune"
+        "bundleId": "com.rego.clarity.express.ios.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.rework.app.enterprise"
+        "bundleId": "com.rework.app.enterprise",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.ricohspaces.app"
+        "bundleId": "com.ricohspaces.app",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.ringcentral.intune"
+        "bundleId": "com.ringcentral.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.seismic.doccenterintune"
+        "bundleId": "com.seismic.doccenterintune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.servicenow.intune.fulfiller"
+        "bundleId": "com.servicenow.intune.fulfiller",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.servicenow.intune.requestor"
+        "bundleId": "com.servicenow.intune.requestor",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.shafersystems.notate.intune"
+        "bundleId": "com.shafersystems.notate.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.sharefile.mobile.intune"
+        "bundleId": "com.sharefile.mobile.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.singletrack.singletrack-mobile-for-intune"
+        "bundleId": "com.singletrack.singletrack-mobile-for-intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.slack.slackintune"
+        "bundleId": "com.slack.slackintune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.smarttech.teamworks4"
+        "bundleId": "com.smarttech.teamworks4",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.socialchorus.jfac.ios.appstore"
+        "bundleId": "com.socialchorus.jfac.ios.appstore",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.stratospherix.enterpriseit"
+        "bundleId": "com.stratospherix.enterpriseit",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.strsoftware.aventxmobile"
+        "bundleId": "com.strsoftware.aventxmobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.symphony.intune"
+        "bundleId": "com.symphony.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.synchrotab.intune"
+        "bundleId": "com.synchrotab.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.synigopulse.app"
+        "bundleId": "com.synigopulse.app",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.tableausoftware.tableau.intune"
+        "bundleId": "com.tableausoftware.tableau.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.talent.exchange"
+        "bundleId": "com.talent.exchange",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.tier1crm.msauth"
+        "bundleId": "com.tier1crm.msauth",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.totaltriage.totaltriage"
+        "bundleId": "com.totaltriage.totaltriage",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.varicent.varicent"
+        "bundleId": "com.varicent.varicent",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.vbrick.rev"
+        "bundleId": "com.vbrick.rev",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.veeva.vaultcrmapp"
+        "bundleId": "com.veeva.vaultcrmapp",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.veradocs.ios.appstore.intune"
+        "bundleId": "com.veradocs.ios.appstore.intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.voltage.securemail"
+        "bundleId": "com.voltage.securemail",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.wonderush.gethownow"
+        "bundleId": "com.wonderush.gethownow",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "com.workvivo.ios.production"
+        "bundleId": "com.workvivo.ios.production",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "de.provectus.securecontacts22"
+        "bundleId": "de.provectus.securecontacts22",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "dk.proactive.intraactiveapp"
+        "bundleId": "dk.proactive.intraactiveapp",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "io.beakon"
+        "bundleId": "io.beakon",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "io.island.island"
+        "bundleId": "io.island.island",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "io.outreach.sales"
+        "bundleId": "io.outreach.sales",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "jp.co.cegb.archxtractforstore"
+        "bundleId": "jp.co.cegb.archxtractforstore",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "jp.co.hitachi-solutions.hibun.hibundp"
+        "bundleId": "jp.co.hitachi-solutions.hibun.hibundp",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "jp.reformpad.ios.production"
+        "bundleId": "jp.reformpad.ios.production",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "jp.reformpad.ios.production.blueprint"
+        "bundleId": "jp.reformpad.ios.production.blueprint",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "jp.reformpad.ios.production.chat"
+        "bundleId": "jp.reformpad.ios.production.chat",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "jp.reformpad.ios.production.inspection2nd"
+        "bundleId": "jp.reformpad.ios.production.inspection2nd",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "net.box.boxnet"
+        "bundleId": "net.box.boxnet",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "net.smartpager.ios"
+        "bundleId": "net.smartpager.ios",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "nl.intus.myswisio"
+        "bundleId": "nl.intus.myswisio",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "nl.msi.ibabspro.it"
+        "bundleId": "nl.msi.ibabspro.it",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "no.bldngai.mybldng"
+        "bundleId": "no.bldngai.mybldng",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "nz.co.beweb.speakingemail"
+        "bundleId": "nz.co.beweb.speakingemail",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "public.hearsaysocial.hearsay-messages-for-microsoft"
+        "bundleId": "public.hearsaysocial.hearsay-messages-for-microsoft",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "se.evoko.naso.mobile"
+        "bundleId": "se.evoko.naso.mobile",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "sg.com.trustedservices.bvassistant"
+        "bundleId": "sg.com.trustedservices.bvassistant",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "sg.com.trustedsource.boardvision"
+        "bundleId": "sg.com.trustedsource.boardvision",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "uk.co.applymobile.idenprotect-for-intune"
+        "bundleId": "uk.co.applymobile.idenprotect-for-intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "us.zoom.videomeetings4intune"
+        "bundleId": "us.zoom.videomeetings4intune",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "wefwef"
+        "bundleId": "wefwef",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     },
     {
       "mobileAppIdentifier": {
-        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier",
-        "bundleId": "za.co.onlineintelligence.mobile.ciims"
+        "bundleId": "za.co.onlineintelligence.mobile.ciims",
+        "@odata.type": "#microsoft.graph.iosMobileAppIdentifier"
       }
     }
   ],
-  "protectInboundDataFromUnknownSources": false,
-  "allowedOutboundClipboardSharingExceptionLength": 0,
-  "maximumRequiredOsVersion": null,
-  "appActionIfDeviceComplianceRequired": "block",
-  "messagingRedirectAppUrlScheme": "",
-  "disableProtectionOfManagedOutboundOpenInData": false,
-  "purviewContentEvaluationRequired": "notRequired",
-  "minimumWarningOsVersion": "16.0",
-  "maximumPinRetries": 5,
-  "pinRequired": true,
-  "disableAppPinIfDevicePinIsSet": true,
-  "deviceComplianceRequired": false,
-  "writingToolsConfigurationState": "blocked",
-  "printBlocked": false,
-  "minimumWipeOsVersion": null,
-  "periodOfflineBeforeAccessCheck": "PT12H",
-  "previousPinBlockCount": 0,
-  "screenCaptureConfigurationState": "blocked",
-  "appActionIfUnableToAuthenticateUser": null,
-  "simplePinBlocked": false,
-  "minimumWipeSdkVersion": null,
-  "periodBeforePinReset": "PT0S",
-  "managedBrowserToOpenLinksRequired": false,
-  "dataBackupBlocked": true,
-  "genmojiConfigurationState": "blocked",
-  "appActionIfAccountIsClockedOut": null,
-  "managedBrowser": "notConfigured",
-  "targetedAppManagementLevels": "unspecified",
-  "faceIdBlocked": false,
-  "maximumWarningOsVersion": null,
-  "exemptedAppProtocols": [
-    {
-      "value": "msauth;msauthv2;msauthv3",
-      "name": "Default"
-    }
-  ],
-  "organizationalCredentialsRequired": false,
-  "contactSyncBlocked": false,
-  "allowWidgetContentSync": false,
-  "appActionIfIosDeviceModelNotAllowed": "block",
   "allowedDataStorageLocations": [
     "oneDriveForBusiness",
     "sharePoint"
   ],
-  "minimumRequiredSdkVersion": null,
-  "saveAsBlocked": true,
-  "maximumAllowedDeviceThreatLevel": "notConfigured",
-  "customDialerAppProtocol": "",
-  "description": "App Protection Policy for applications on iOS/iPadOS. Enforces PIN, encryption, data transfer restrictions, FaceID/TouchID, and conditional launch checks.",
-  "appGroupType": "allApps",
-  "thirdPartyKeyboardsBlocked": false,
-  "allowedIosDeviceModels": null,
-  "minimumWarningAppVersion": null,
-  "protectedMessagingRedirectAppType": "anyApp",
-  "allowedOutboundDataTransferDestinations": "managedApps",
-  "mobileThreatDefenseRemediationAction": "block",
-  "dialerRestrictionLevel": "allApps",
-  "minimumRequiredOsVersion": "16.0",
+  "minimumWarningOsVersion": "16.0",
   "displayName": "iOS - CDW Baseline - MAM - BYOD App Protection - v1.0",
-  "exemptedUniversalLinks": [
-    "http://maps.apple.com",
-    "https://maps.apple.com",
-    "http://facetime.apple.com",
-    "https://facetime.apple.com"
-  ],
-  "periodOfflineBeforeWipeIsEnforced": "P30D",
+  "messagingRedirectAppUrlScheme": "",
+  "pinCharacterSet": "numeric",
   "allowedOutboundClipboardSharingLevel": "managedAppsWithPasteIn",
-  "minimumRequiredAppVersion": null,
-  "minimumWarningSdkVersion": null,
-  "customBrowserProtocol": "",
-  "blockDataIngestionIntoOrganizationDocuments": false,
-  "pinRequiredInsteadOfBiometricTimeout": "PT30M"
+  "appActionIfMaximumPinRetriesExceeded": "block",
+  "screenCaptureConfigurationState": "blocked",
+  "appActionIfDeviceComplianceRequired": "block",
+  "managedBrowser": "notConfigured",
+  "printBlocked": false,
+  "maximumWipeOsVersion": null
 }
