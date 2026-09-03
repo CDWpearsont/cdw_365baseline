@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "_comment": "A bundle is either a rule (membership computed from derived attributes, so new policies join automatically) or curated (an explicit list, for opinionated sets like Autopilot MVP). A bundle can be both: rule matches are unioned with 'include' and then 'exclude' is subtracted. 'path' drives the Building Blocks wizard drill-down.",
+  "bundles": [
+    {
+      "id": "intune-win-cis-l1",
+      "name": "Windows - CIS Level 1",
+      "description": "Every Windows policy aligned to CIS Microsoft Intune for Windows 11 Benchmark Level 1. New CIS L1 policies join automatically on commit.",
+      "path": ["Intune", "Windows", "Security Baselines", "CIS L1"],
+      "rule": { "workload": "Intune", "platform": "Windows", "framework": "CIS L1" },
+      "include": [],
+      "exclude": [],
+      "order": 10
+    },
+    {
+      "id": "intune-win-cis-l2",
+      "name": "Windows - CIS Level 2",
+      "description": "Windows policies aligned to CIS Level 2. Layer on top of L1; expect higher user impact.",
+      "path": ["Intune", "Windows", "Security Baselines", "CIS L2"],
+      "rule": { "workload": "Intune", "platform": "Windows", "framework": "CIS L2" },
+      "include": [],
+      "exclude": [],
+      "order": 20
+    },
+    {
+      "id": "intune-win-cdw-standard",
+      "name": "Windows - CDW Standard Baseline",
+      "description": "The CDW-authored Windows baseline. Everything not tagged to an external framework.",
+      "path": ["Intune", "Windows", "Security Baselines", "CDW Standard"],
+      "rule": { "workload": "Intune", "platform": "Windows", "framework": null },
+      "include": [],
+      "exclude": [],
+      "order": 30
+    },
+    {
+      "id": "intune-win-defender-av",
+      "name": "Windows - Defender Antivirus",
+      "description": "All Windows antivirus and Defender configuration, regardless of framework.",
+      "path": ["Intune", "Windows", "Security", "Antivirus"],
+      "rule": {
+        "workload": "Intune",
+        "platform": "Windows",
+        "area": ["Defender", "Defender Antivirus", "Defender Antivirus Updates", "Attack Surface Reduction"]
+      },
+      "include": [],
+      "exclude": [],
+      "order": 40
+    },
+    {
+      "id": "intune-macos-cdw-standard",
+      "name": "macOS - CDW Standard Baseline",
+      "description": "The CDW-authored macOS baseline.",
+      "path": ["Intune", "macOS", "Security Baselines", "CDW Standard"],
+      "rule": { "workload": "Intune", "platform": "macOS" },
+      "include": [],
+      "exclude": [],
+      "order": 50
+    },
+    {
+      "id": "entra-ca-core",
+      "name": "Entra - Core Conditional Access",
+      "description": "The baseline Conditional Access set: admin MFA, risk-based password change, legacy auth block.",
+      "path": ["Entra", "Identity", "Conditional Access", "Core"],
+      "rule": { "workload": "Entra", "policyType": "Conditional Access" },
+      "include": [],
+      "exclude": [],
+      "order": 60
+    },
+    {
+      "id": "intune-win-autopilot-mvp",
+      "name": "Windows - Autopilot Minimum Viable",
+      "description": "The smallest policy set required to stand up Windows Autopilot enrolment for a new customer. Curated by the practice, not derived. Review at each benchmark release.",
+      "path": ["Intune", "Windows", "Deployment", "Autopilot MVP"],
+      "rule": null,
+      "include": [
+        "intune-windows-settings-catalog-device-security-security-hardening-device",
+        "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
+        "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device",
+        "intune-windows-endpoint-security-windows-laps-laps-configuration-device",
+        "intune-windows-endpoint-security-local-group-membership-local-administrators-device"
+      ],
+      "exclude": [],
+      "order": 70
+    }
+  ]
+}

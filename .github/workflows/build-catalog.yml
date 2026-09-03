@@ -1,0 +1,54 @@
+name: Build policy catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'IntuneConfig/**/*.json'
+      - 'EntraConfig/**/*.json'
+      - 'metadata/**'
+      - 'bundles.json'
+      - 'tools/build_catalog.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Structural problems should stop the build. Missing or stale enrichment
+      # should not, or every new policy would fail CI before it can be enriched.
+      - name: Build catalog
+        run: |
+          python tools/build_catalog.py \
+            --root . \
+            --policy-dirs IntuneConfig EntraConfig \
+            --out catalog.json \
+            --fail-on duplicateId unreadable danglingBundleMember
+
+      - name: Summary
+        run: python tools/build_catalog.py --root . --policy-dirs IntuneConfig EntraConfig --report >> $GITHUB_STEP_SUMMARY
+
+      # Stage 2 slots in here: read catalog.json, find issues of type
+      # missingEnrichment or staleEnrichment, call GPT-4o for each, write the
+      # sidecar, then re-run the build so catalog.json picks them up.
+
+      - name: Commit catalog
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog.json metadata/
+          if git diff --staged --quiet; then
+            echo "No catalog changes"
+          else
+            git commit -m "chore: rebuild policy catalog [skip ci]"
+            git push
+          fi
