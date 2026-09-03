@@ -58,7 +58,34 @@ POLICY_TYPE_TOKENS = {
     "SC": "Settings Catalog",
     "ES": "Endpoint Security",
     "CP": "Compliance Policy",
+    "Compliance": "Compliance Policy",
     "CA": "Conditional Access",
+    "MAM": "App Protection",
+    "App Protection": "App Protection",
+    "WUfB": "Update Ring",
+    "Update Ring": "Update Ring",
+    "Enrolment Restriction": "Enrolment Restriction",
+    "Enrollment Restriction": "Enrolment Restriction",
+    "DirectorySetting": "Directory Setting",
+}
+
+# Where a policy type has an unambiguous scope, the filename need not say so.
+DEFAULT_SCOPE_BY_TYPE = {
+    "Conditional Access": "User",
+    "App Protection": "User",
+    "Compliance Policy": "Device",
+    "Update Ring": "Device",
+    "Enrolment Restriction": "Device",
+    "Directory Setting": "Tenant",
+    "Tenant Policy": "Tenant",
+}
+
+# Body @odata.type fragment -> policy type. Checked case-insensitively.
+ODATA_TYPE_HINTS = {
+    "managedappprotection": "App Protection",
+    "compliancepolicy": "Compliance Policy",
+    "windowsupdateforbusiness": "Update Ring",
+    "deviceenrollment": "Enrolment Restriction",
 }
 
 FRAMEWORK_TOKENS = {
@@ -74,6 +101,7 @@ SCOPE_TOKENS = {"D": "Device", "U": "User"}
 IGNORED_TOKENS = {"CDW Baseline", "CDW", "Baseline", "TEST"}
 
 VERSION_RE = re.compile(r"^v\s?(\d+(?:[._ ]\d+)*)$", re.IGNORECASE)
+UNDERSCORE_NAME_RE = re.compile(r"^CDW Baseline (.+?) (v\d+(?:[. ]\d+)*)$", re.IGNORECASE)
 
 # Folder (relative to repo root) -> workload. Longest prefix wins.
 FOLDER_WORKLOAD = {
@@ -110,7 +138,25 @@ def split_segments(stem: str) -> list[str]:
     text = re.sub(r"\s+", " ", text).strip()
     text = re.sub(r"\(\s*TEST\s*\)\s*$", "", text, flags=re.IGNORECASE).strip()
     parts = [p.strip(" -") for p in text.split(" - ")]
-    return [p for p in parts if p]
+    parts = [p for p in parts if p]
+    # Entra tenant objects use underscores throughout rather than " - ", so the
+    # split above yields a single blob. Re-split those on the known shape.
+    if len(parts) == 1:
+        m = UNDERSCORE_NAME_RE.match(parts[0])
+        if m:
+            head, version = m.group(1), m.group(2)
+            head_parts = head.split(" ", 1)
+            if head_parts[0] in POLICY_TYPE_TOKENS and len(head_parts) > 1:
+                parts = ["CDW Baseline", head_parts[0], split_camel(head_parts[1]), version]
+            else:
+                parts = ["CDW Baseline", split_camel(head), version]
+    return parts
+
+
+def split_camel(text: str) -> str:
+    """AdminConsentRequestPolicy -> Admin Consent Request Policy."""
+    out = re.sub(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])", " ", text)
+    return re.sub(r"\s+", " ", out).strip()
 
 
 def normalise_version(raw: str) -> str | None:
@@ -166,6 +212,14 @@ def detect_workload_from_body(body: dict) -> str | None:
 def detect_policy_type_from_body(body: dict) -> str | None:
     if "grantControls" in body:
         return "Conditional Access"
+    odata = str(body.get("@odata.type", "")).lower()
+    for fragment, ptype in ODATA_TYPE_HINTS.items():
+        if fragment in odata:
+            return ptype
+    if "scheduledActionsForRule" in body:
+        return "Compliance Policy"
+    if body.get("deviceEnrollmentConfigurationType"):
+        return "Enrolment Restriction"
     tmpl = body.get("templateReference") or {}
     if isinstance(tmpl, dict) and tmpl.get("templateId"):
         return "Endpoint Security"
@@ -272,8 +326,13 @@ def derive(rel_path: str, abs_path: str) -> dict:
         sc = detect_scope_from_body(setting_ids)
         if sc:
             rec["scope"], source["scope"] = sc, "body"
-        elif rec["policyType"] == "Conditional Access":
-            rec["scope"], source["scope"] = "User", "inferred"
+        elif rec["policyType"] in DEFAULT_SCOPE_BY_TYPE:
+            rec["scope"], source["scope"] = DEFAULT_SCOPE_BY_TYPE[rec["policyType"]], "inferred"
+
+    if not rec["policyType"] and rec["workload"] == "Entra":
+        rec["policyType"], source["policyType"] = "Tenant Policy", "inferred"
+        if not rec["scope"]:
+            rec["scope"], source["scope"] = "Tenant", "inferred"
 
     # Area and sub-area come from whatever the token pass did not claim.
     if leftovers:
