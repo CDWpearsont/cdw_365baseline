@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "_comment": "A bundle is either a rule (membership computed from derived attributes, so new policies join automatically) or curated (an explicit list, for opinionated sets like Autopilot MVP). A bundle can be both: rule matches are unioned with 'include' and then 'exclude' is subtracted. 'path' drives the Building Blocks wizard drill-down.",
+  "_comment": "A bundle is either a rule (membership computed from derived attributes, so new policies join automatically) or curated (an explicit list, for opinionated sets like Autopilot MVP). A bundle can be both: rule matches are unioned with 'include', then 'exclude' is subtracted. Rule semantics are AND across keys, OR within a key; list-valued attributes such as 'frameworks' and 'tags' match on intersection. Use 'frameworks' for positive framework membership and the scalar 'framework': null to mean no framework at all. 'path' drives the Building Blocks wizard drill-down.",
   "bundles": [
     {
       "id": "intune-win-cis-l1",
       "name": "Windows - CIS Level 1",
       "description": "Every Windows policy aligned to CIS Microsoft Intune for Windows 11 Benchmark Level 1. New CIS L1 policies join automatically on commit.",
       "path": ["Intune", "Windows", "Security Baselines", "CIS L1"],
-      "rule": { "workload": "Intune", "platform": "Windows", "framework": "CIS L1" },
+      "rule": { "workload": "Intune", "platform": "Windows", "frameworks": "CIS L1" },
       "include": [],
       "exclude": [],
       "order": 10
@@ -17,7 +17,7 @@
       "name": "Windows - CIS Level 2",
       "description": "Windows policies aligned to CIS Level 2. Layer on top of L1; expect higher user impact.",
       "path": ["Intune", "Windows", "Security Baselines", "CIS L2"],
-      "rule": { "workload": "Intune", "platform": "Windows", "framework": "CIS L2" },
+      "rule": { "workload": "Intune", "platform": "Windows", "frameworks": "CIS L2" },
       "include": [],
       "exclude": [],
       "order": 20
@@ -47,26 +47,6 @@
       "order": 40
     },
     {
-      "id": "intune-macos-cdw-standard",
-      "name": "macOS - CDW Standard Baseline",
-      "description": "The CDW-authored macOS baseline.",
-      "path": ["Intune", "macOS", "Security Baselines", "CDW Standard"],
-      "rule": { "workload": "Intune", "platform": "macOS" },
-      "include": [],
-      "exclude": [],
-      "order": 50
-    },
-    {
-      "id": "entra-ca-core",
-      "name": "Entra - Core Conditional Access",
-      "description": "The baseline Conditional Access set: admin MFA, risk-based password change, legacy auth block.",
-      "path": ["Entra", "Identity", "Conditional Access", "Core"],
-      "rule": { "workload": "Entra", "policyType": "Conditional Access" },
-      "include": [],
-      "exclude": [],
-      "order": 60
-    },
-    {
       "id": "intune-win-autopilot-mvp",
       "name": "Windows - Autopilot Minimum Viable",
       "description": "The smallest policy set required to stand up Windows Autopilot enrolment for a new customer. Curated by the practice, not derived. Review at each benchmark release.",
@@ -79,6 +59,89 @@
         "intune-windows-endpoint-security-windows-laps-laps-configuration-device",
         "intune-windows-endpoint-security-local-group-membership-local-administrators-device"
       ],
+      "exclude": [],
+      "order": 45
+    },
+    {
+      "id": "intune-macos-cdw-standard",
+      "name": "macOS - CDW Standard Baseline",
+      "description": "The CDW-authored macOS baseline.",
+      "path": ["Intune", "macOS", "Security Baselines", "CDW Standard"],
+      "rule": { "workload": "Intune", "platform": "macOS" },
+      "include": [],
+      "exclude": [],
+      "order": 50
+    },
+    {
+      "id": "intune-mobile-byod",
+      "name": "Mobile - BYOD Baseline",
+      "description": "iOS and Android app protection, restrictions and enrolment controls for BYOD.",
+      "path": ["Intune", "Mobile", "BYOD"],
+      "rule": { "workload": "Intune", "platform": ["iOS", "Android"] },
+      "include": [],
+      "exclude": [
+        "intune-android-settings-catalog-restrictions-v1-0-test-device",
+        "intune-ios-settings-catalog-restrictions-v1-0-test-device"
+      ],
+      "order": 55
+    },
+    {
+      "id": "entra-ca-endpoint-security",
+      "name": "Entra - CDW Endpoint Security",
+      "description": "Device-based Conditional Access: compliant device, hybrid join, app protection and platform conditions. Membership is derived from the policy body, not tagged.",
+      "path": ["Entra", "Conditional Access", "CDW Endpoint Security"],
+      "rule": { "policyType": "Conditional Access", "securityDomain": "Endpoint Security" },
+      "include": [],
+      "exclude": [],
+      "order": 60
+    },
+    {
+      "id": "entra-ca-identity-security",
+      "name": "Entra - CDW Identity Security",
+      "description": "User-focused Conditional Access: MFA, risk-based controls, legacy authentication and authentication strength. Membership is derived from the policy body, not tagged.",
+      "path": ["Entra", "Conditional Access", "CDW Identity Security"],
+      "rule": { "policyType": "Conditional Access", "securityDomain": "Identity Security" },
+      "include": [],
+      "exclude": [],
+      "order": 61
+    },
+    {
+      "id": "entra-ca-cis-l1",
+      "name": "Entra - Conditional Access CIS L1",
+      "description": "Conditional Access policies mapped to CIS Level 1. Requires the 'cis-l1' tag on the policy sidecar.",
+      "path": ["Entra", "Conditional Access", "CIS L1"],
+      "rule": { "policyType": "Conditional Access", "frameworks": "CIS L1" },
+      "include": [],
+      "exclude": [],
+      "order": 62
+    },
+    {
+      "id": "entra-ca-cis-l2",
+      "name": "Entra - Conditional Access CIS L2",
+      "description": "Conditional Access policies mapped to CIS Level 2. Requires the 'cis-l2' tag on the policy sidecar.",
+      "path": ["Entra", "Conditional Access", "CIS L2"],
+      "rule": { "policyType": "Conditional Access", "frameworks": "CIS L2" },
+      "include": [],
+      "exclude": [],
+      "order": 63
+    },
+    {
+      "id": "entra-ca-zero-trust",
+      "name": "Entra - Zero Trust Framework",
+      "description": "Conditional Access policies forming the Zero Trust reference architecture. Requires the 'zero-trust' tag on the policy sidecar.",
+      "path": ["Entra", "Conditional Access", "Zero Trust"],
+      "rule": { "policyType": "Conditional Access", "frameworks": "Zero Trust" },
+      "include": [],
+      "exclude": [],
+      "order": 64
+    },
+    {
+      "id": "entra-tenant-config",
+      "name": "Entra - Tenant Configuration",
+      "description": "Tenant-level Entra objects: authorization policy, device registration, cross-tenant access, admin consent requests and directory settings.",
+      "path": ["Entra", "Tenant", "Configuration"],
+      "rule": { "workload": "Entra", "policyType": ["Tenant Policy", "Directory Setting"] },
+      "include": [],
       "exclude": [],
       "order": 70
     }

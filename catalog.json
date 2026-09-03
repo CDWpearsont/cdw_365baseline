@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-03T11:52:48+00:00",
+  "generatedAt": "2026-09-03T12:22:11+00:00",
   "sourceCommit": null,
   "counts": {
     "policies": 217,
-    "bundles": 7,
-    "issues": 230,
+    "bundles": 13,
+    "issues": 222,
     "byConfidence": {
       "medium": 114,
       "high": 103
@@ -37,6 +37,10 @@
     "frameworks": [
       "CIS L1",
       "CIS L2"
+    ],
+    "securityDomains": [
+      "Endpoint Security",
+      "Identity Security"
     ],
     "scopes": [
       "Device",
@@ -187,6 +191,7 @@
       "version": "1.0",
       "area": "Admin Consent Request Policy",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:14580e4259b76d6d2c6e6f7e33b23598cbb4134768485d74ce8c549690a71c58",
       "derivedFrom": {
@@ -201,8 +206,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-tenant-config"
+      ]
     },
     {
       "id": "entra-cross-platform-tenant-policy-default-app-management-policy-tenant",
@@ -217,6 +225,7 @@
       "version": "1.0",
       "area": "Default App Management Policy",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:d6a48b5d3d0ce3b8c65d34606c62525ad9d62407742813eaa10f6f9524973367",
       "derivedFrom": {
@@ -231,8 +240,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-tenant-config"
+      ]
     },
     {
       "id": "entra-cross-platform-tenant-policy-authorization-policy-tenant",
@@ -247,6 +259,7 @@
       "version": "1.0",
       "area": "Authorization Policy",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:e8a8707ce360881ce35b034c4e3a0331dedc781af561c6f92d444b8805e8b6cb",
       "derivedFrom": {
@@ -261,8 +274,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-tenant-config"
+      ]
     },
     {
       "id": "entra-cross-platform-conditional-access-cdw001-global-baseprotection-allapps-anyplatform-blocknonpersonas-user",
@@ -277,6 +293,7 @@
       "version": null,
       "area": "CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:d241362dd857101ccfdf68a1f1a068d53bcbbdc9569d0fb3f4f3bb3a8459fc1e",
       "derivedFrom": {
@@ -284,15 +301,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -308,6 +327,7 @@
       "version": null,
       "area": "CDW001 Require multifactor authentication for admins",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:0d16a4cc58062b803d37935253ec8ce740171ecd3d02feeafef760efdc92e929",
       "derivedFrom": {
@@ -315,15 +335,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -339,6 +361,7 @@
       "version": null,
       "area": "CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:c4daeb1f30de6691e4c7735ea76094a88b7a942a125317d3b84366eb95b73756",
       "derivedFrom": {
@@ -346,15 +369,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -370,6 +395,7 @@
       "version": null,
       "area": "CDW002 Require password change for high-risk users",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:c96191b7fb20b2d4e90d621c60e3f4820427e33ce0b8df4774562d0b3c84cb76",
       "derivedFrom": {
@@ -377,15 +403,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -401,6 +429,7 @@
       "version": null,
       "area": "CDW003 Block Legacy Authentication",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:261fc5dc3850b3d333e6f8b4a6c6052821c9e7d36daf1ccffdd45ab8462e5339",
       "derivedFrom": {
@@ -408,15 +437,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -432,6 +463,7 @@
       "version": null,
       "area": "CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:f84658731ece9aa5adb88e64916fcbe43ee30bfe12d7eeb3cc21e4e0c365d452",
       "derivedFrom": {
@@ -439,15 +471,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -463,6 +497,7 @@
       "version": null,
       "area": "CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:8a071c9093eb8c79d624a9c034bfdf8d8ca05d4a52ad1aaa38e4af9113979378",
       "derivedFrom": {
@@ -470,15 +505,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -494,6 +531,7 @@
       "version": null,
       "area": "CDW1003-Developers-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:d067209e9571ec916594c4f9578427f78e68fac6bb9cd19eb89e98678a83fa2d",
       "derivedFrom": {
@@ -501,15 +539,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -525,6 +565,7 @@
       "version": null,
       "area": "CDW1004-Developers-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:cd799eaad316093a073c61f2593783e722a36ef178d02492b614bcc2896aaa6f",
       "derivedFrom": {
@@ -532,15 +573,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -556,6 +599,7 @@
       "version": null,
       "area": "CDW1005-Developers-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:b81b7f62de1f575fd0dbf3fb35efce88efd2527728c50b6e0e6c8788fc711cbf",
       "derivedFrom": {
@@ -563,15 +607,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -587,6 +633,7 @@
       "version": null,
       "area": "CDW1006-Developers-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:50afdd467406885ebcff48b6f003e36d3f7f28f7114d5898f270ed598015a03c",
       "derivedFrom": {
@@ -594,15 +641,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -618,6 +667,7 @@
       "version": null,
       "area": "CDW1007-Developers-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:8cef6a6c47256f7c3d7d0107c35dcf69ff8c21940f892b8b98a4897feb4d2bb6",
       "derivedFrom": {
@@ -625,15 +675,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -649,6 +701,7 @@
       "version": null,
       "area": "CDW101-Admins-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:b449678d8e632aa60cc41304ab7d7c16ebc867fa724c78eed2565cc89298d476",
       "derivedFrom": {
@@ -656,15 +709,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -680,6 +735,7 @@
       "version": null,
       "area": "CDW102-Admins-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:b75f79db4f7edc62f233a05fc1baed19549216adf6ff44718724cac8ce7ff0b0",
       "derivedFrom": {
@@ -687,15 +743,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -711,6 +769,7 @@
       "version": null,
       "area": "CDW103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:8c6cf2ee27c179f7689325252e0806f3560a2b70ee7190e8ef526323cfd91177",
       "derivedFrom": {
@@ -718,15 +777,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -742,6 +803,7 @@
       "version": null,
       "area": "CDW104-Admins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:a4e1f6d1d243c607f077617d18c4b574b9c21afbdc9231ec1b9e0942058d08f7",
       "derivedFrom": {
@@ -749,15 +811,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -773,6 +837,7 @@
       "version": null,
       "area": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:512dc3231f159bec60693e1aa5949334dd299adc8aac922a8decdba551ff1cbc",
       "derivedFrom": {
@@ -780,15 +845,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -804,6 +871,7 @@
       "version": null,
       "area": "CDW107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:174db182cf441f9915a142ac1d7fba192db9e2d119b481705051b5b266b8e348",
       "derivedFrom": {
@@ -811,15 +879,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -835,6 +905,7 @@
       "version": null,
       "area": "CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:af1270e5f10aa1ad8e99a0a7c35b5c0f6cbffce0713cc799c2b38ef09d297428",
       "derivedFrom": {
@@ -842,15 +913,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -866,6 +939,7 @@
       "version": null,
       "area": "CDW201-Internals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:274baaac48de6611276a42774c3e589800dc9d853b69e2f24f33007a490bbae1",
       "derivedFrom": {
@@ -873,15 +947,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -897,6 +973,7 @@
       "version": null,
       "area": "CDW202-Internals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:4f345ad37e54ee1f1464edd7b94ee4effce469bf732bb0f82e79a13cd725f816",
       "derivedFrom": {
@@ -904,15 +981,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -928,6 +1007,7 @@
       "version": null,
       "area": "CDW203-Internals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:394ef1c217563d30fe7d665c2e18fd4615bd2dc7c92f11c4ca7e041eaa217adf",
       "derivedFrom": {
@@ -935,15 +1015,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -959,6 +1041,7 @@
       "version": null,
       "area": "CDW204-Internals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:1051c2bbc55178ad9e2aecea769e64cb1795e068273cf672cdf32f895f22cb91",
       "derivedFrom": {
@@ -966,15 +1049,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -990,6 +1075,7 @@
       "version": null,
       "area": "CDW206-Internals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:e59c876c7103a39133c9d9914e8d01d32085251b60a3e838b5d6644c97e583eb",
       "derivedFrom": {
@@ -997,15 +1083,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1021,6 +1109,7 @@
       "version": null,
       "area": "CDW207-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:22dced7e7732d602819ff6546a6fd282ac87864ae067aef2f5b5327d297d835f",
       "derivedFrom": {
@@ -1028,15 +1117,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1052,6 +1143,7 @@
       "version": null,
       "area": "CDW301-Externals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:7fa5d7498832cd4bcc337cc07df07885f23980ff533bab5fd47127e2fb8844f2",
       "derivedFrom": {
@@ -1059,15 +1151,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1083,6 +1177,7 @@
       "version": null,
       "area": "CDW302-Externals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:0ebd7287d2f1b68107926f404f2ed8dd92ead19c51d0ebb05a70fe9741f75000",
       "derivedFrom": {
@@ -1090,15 +1185,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1114,6 +1211,7 @@
       "version": null,
       "area": "CDW303-Externals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:78d36895b5c2f06e590cbae94503f78359f1c1a14143fe17a61af1f8097237b7",
       "derivedFrom": {
@@ -1121,15 +1219,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1145,6 +1245,7 @@
       "version": null,
       "area": "CDW304-Externals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:d9e457e71fcac4beb15bec0978f475246f592c3ee35eee80582383a61f654deb",
       "derivedFrom": {
@@ -1152,15 +1253,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1176,6 +1279,7 @@
       "version": null,
       "area": "CDW306-Externals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:6c56daf9ebf178f945cd8871328779111307c836c7c37475cbd79bc844c7cf6a",
       "derivedFrom": {
@@ -1183,15 +1287,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1207,6 +1313,7 @@
       "version": null,
       "area": "CDW307-Externals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
       "subArea": null,
+      "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:4493395577ac17540fbb1550ad91e2628393d0ce5b5a148b67a05e0a058167aa",
       "derivedFrom": {
@@ -1214,15 +1321,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1238,6 +1347,7 @@
       "version": null,
       "area": "CDW400-Guests-BaseProtection-AllApps-AnyPlatform-MFA",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:da8eef1532d9cd55c6e6f13a2cba05d375b20a61022af2be83d7219654752fe3",
       "derivedFrom": {
@@ -1245,15 +1355,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1269,6 +1381,7 @@
       "version": null,
       "area": "CDW401-Guests-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:970dada944dd8e9b4d77bcc72a0ad42c77b43a2392ec498be3956d83ae7d1169",
       "derivedFrom": {
@@ -1276,15 +1389,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1300,6 +1415,7 @@
       "version": null,
       "area": "CDW402-Guests-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:50b81a042548998be07b46fde47410edb9d6b3f172aa92a652b1c815922cf3ed",
       "derivedFrom": {
@@ -1307,15 +1423,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1331,6 +1449,7 @@
       "version": null,
       "area": "CDW403-Guests-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:619c535e874cc8017aa231b5a24251a5976fed908d77766e0e29c911f56abd94",
       "derivedFrom": {
@@ -1338,15 +1457,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1362,6 +1483,7 @@
       "version": null,
       "area": "CDW404-Guests-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAppAccess",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:152e23e483e3294b3aea0487d268331e81ac9fca4b5baf409e567bf09e68823e",
       "derivedFrom": {
@@ -1369,15 +1491,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1393,6 +1517,7 @@
       "version": null,
       "area": "CDW405-Guests-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:278af25de2b1e9825eeeb3a78fdc3aec5e788b3008ca55b218c4be4c2c924b3f",
       "derivedFrom": {
@@ -1400,15 +1525,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1424,6 +1551,7 @@
       "version": null,
       "area": "CDW406-Guests-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:a43d9dd8545b92216e60e711ea0a786694c233b27392db2283f31cc971bcae7d",
       "derivedFrom": {
@@ -1431,15 +1559,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1455,6 +1585,7 @@
       "version": null,
       "area": "CDW500-GuestAdmins-BaseProtection-AllApps-AnyPlatform-MFA",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:5b55bb8805222b291896498af4cd738f9d8bc51df2656cf2aaa21ee2928714b8",
       "derivedFrom": {
@@ -1462,15 +1593,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1486,6 +1619,7 @@
       "version": null,
       "area": "CDW501-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:c41371175a9f313f6dbf85c0221d21b7d97b882ea506eec7bb07f16aafb2218a",
       "derivedFrom": {
@@ -1493,15 +1627,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1517,6 +1653,7 @@
       "version": null,
       "area": "CDW502-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:cff180dadd649bdcc06e9fef999d5f220507e3cc203c9a40ecad399e7d2fdd39",
       "derivedFrom": {
@@ -1524,15 +1661,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1548,6 +1687,7 @@
       "version": null,
       "area": "CDW503-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:1f39ebff9009b34b41d6bd44b8fe1e9a05f5dd38055aba4a94a980c295226c77",
       "derivedFrom": {
@@ -1555,15 +1695,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1579,6 +1721,7 @@
       "version": null,
       "area": "CDW504-GuestAdmins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAdminsAppAccess",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:a5af810b61ac1960eec88c24ab325d02637de84bbe8f3eded4b54f5f5c1990ce",
       "derivedFrom": {
@@ -1586,15 +1729,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1610,6 +1755,7 @@
       "version": null,
       "area": "CDW505-GuestAdmins-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:8a97b0a36f6be0a48784ee0b6bed60dbff2e30a51daa2408a675d7f6bcb365cb",
       "derivedFrom": {
@@ -1617,15 +1763,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1641,6 +1789,7 @@
       "version": null,
       "area": "CDW506-GuestAdmins-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:fbc37e9d391570a8110e05f4ff50839cf5df2c545500d64d27f3b9e293844ecb",
       "derivedFrom": {
@@ -1648,15 +1797,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1672,6 +1823,7 @@
       "version": null,
       "area": "CDW600-Microsoft365ServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:e45c054628c7e7dbceb3a4d01ad83078e9a34a3d2d6263af4611be4ab5bf94e9",
       "derivedFrom": {
@@ -1679,15 +1831,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1703,6 +1857,7 @@
       "version": null,
       "area": "CDW601-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:3561b6edbc68bc31628da5f0fc3f506dcf748730f05d1cb2a515e55b6e8893bc",
       "derivedFrom": {
@@ -1710,15 +1865,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1734,6 +1891,7 @@
       "version": null,
       "area": "CDW602-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:a18215668046d624ff1b5289a5a4c35e3e96f209416604d02c47233839b772fe",
       "derivedFrom": {
@@ -1741,15 +1899,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1765,6 +1925,7 @@
       "version": null,
       "area": "CDW603-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:f83c886dadf76cbe41f9906c6b6d9fe8372c3878124b55342d8c2432ba97579d",
       "derivedFrom": {
@@ -1772,15 +1933,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1796,6 +1959,7 @@
       "version": null,
       "area": "CDW604-Microsoft365ServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:69894e79b4f4d1dcf3809fe53a7a365052a9dd903b26b434380ef4f8352b2bbc",
       "derivedFrom": {
@@ -1803,15 +1967,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1827,6 +1993,7 @@
       "version": null,
       "area": "CDW700-AzureServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:be7a421d675342016218f7530c0d6a454255b54ee298465edb47f1c8cc75e4ed",
       "derivedFrom": {
@@ -1834,15 +2001,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1858,6 +2027,7 @@
       "version": null,
       "area": "CDW701-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:12d2bdf5afddd6f79b0f5cc27e729368b798b16071710a581b48e96d55cbf708",
       "derivedFrom": {
@@ -1865,15 +2035,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1889,6 +2061,7 @@
       "version": null,
       "area": "CDW702-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:d138c42c198fe10a4ce6ded91a75cf7bb42e48c399fee778a8147f2c20fd01a4",
       "derivedFrom": {
@@ -1896,15 +2069,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1920,6 +2095,7 @@
       "version": null,
       "area": "CDW703-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:31bfb84c5f0330326df96eef2018464e7b6704ef4e6a81f2ebb4e722fe7bc70d",
       "derivedFrom": {
@@ -1927,15 +2103,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1951,6 +2129,7 @@
       "version": null,
       "area": "CDW704-AzureServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:73abc8f92e3bc5a392113df3d9f2a26184ae96e615fe0d7e7f2e0d89367a49da",
       "derivedFrom": {
@@ -1958,15 +2137,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1982,6 +2163,7 @@
       "version": null,
       "area": "CDW800-CorpServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:f428a54ccac526afb1d394fe98213352a91a1204c60688d9f4aeeea098ed9ee3",
       "derivedFrom": {
@@ -1989,15 +2171,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2013,6 +2197,7 @@
       "version": null,
       "area": "CDW801-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:fcd50e0fcbb986f282cfc8fb322878c27e87c264a95860bebf64b7e126aee4d3",
       "derivedFrom": {
@@ -2020,15 +2205,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2044,6 +2231,7 @@
       "version": null,
       "area": "CDW802-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:9518d0864c8bd2f19688ede960b4c379dd890755fe9a5f93bcf992722ebcb939",
       "derivedFrom": {
@@ -2051,15 +2239,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2075,6 +2265,7 @@
       "version": null,
       "area": "CDW803-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:af19601d741ba3eace49bc3171fb35f21482d6219578747d4255f81b2011e21c",
       "derivedFrom": {
@@ -2082,15 +2273,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2106,6 +2299,7 @@
       "version": null,
       "area": "CDW804-CorpServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365andAzure",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:a6f4e2e3cc86f877faefe95505031c2300f9b8f47d156a61360f633a0efab425",
       "derivedFrom": {
@@ -2113,15 +2307,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2137,6 +2333,7 @@
       "version": null,
       "area": "CDW900-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:3afb9cb44471b5ec215d99963f145ac2401eea68be4b7be5684f5b6b79f9dad5",
       "derivedFrom": {
@@ -2144,15 +2341,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2168,6 +2367,7 @@
       "version": null,
       "area": "CDW901-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockHighRisk",
       "subArea": null,
+      "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:3a95faf7b4e1b3d6df3a190e6a3d1a907e1e91a1f94a84097e8dc0eb2a45b81b",
       "derivedFrom": {
@@ -2175,15 +2375,17 @@
         "platform": "inferred",
         "policyType": "body",
         "scope": "inferred",
-        "area": "filename"
+        "area": "filename",
+        "securityDomain": "body"
       },
       "unresolved": [],
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-core"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2199,6 +2401,7 @@
       "version": "1.0",
       "area": "Cross Tenant Access Policy Default",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:0be0454c1ac600a9d3ad07dccda7332bea7ea6d449a33a9e50df163a96d12149",
       "derivedFrom": {
@@ -2213,8 +2416,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-tenant-config"
+      ]
     },
     {
       "id": "entra-cross-platform-tenant-policy-device-registration-policy-tenant",
@@ -2229,6 +2435,7 @@
       "version": "1.0",
       "area": "Device Registration Policy",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:f3bda803b2dec1c77b9e98991df65c5d7666fb17cf5dcc27e84c5fe4c1fd2457",
       "derivedFrom": {
@@ -2243,8 +2450,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-tenant-config"
+      ]
     },
     {
       "id": "entra-cross-platform-directory-setting-group-unified-tenant",
@@ -2259,6 +2469,7 @@
       "version": "1.0",
       "area": "Group Unified",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:35cfe2cd375f26226a880db29dfd04f096c91aa33892792ea4dff0311c5804a3",
       "derivedFrom": {
@@ -2273,8 +2484,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-tenant-config"
+      ]
     },
     {
       "id": "entra-cross-platform-directory-setting-password-rule-settings-tenant",
@@ -2289,6 +2503,7 @@
       "version": "1.0",
       "area": "Password Rule Settings",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:4c18fd1ed42deaabdfba53b95792d30d99cd4a45d2e07a26db7cceb9dcc99aa5",
       "derivedFrom": {
@@ -2303,8 +2518,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-tenant-config"
+      ]
     },
     {
       "id": "intune-android-app-protection-byod-app-protection-user",
@@ -2319,6 +2537,7 @@
       "version": "1.0",
       "area": "BYOD App Protection",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:797643265b6f2d15195582a7f3f641450c2a015a719bc349a8aa51622fe437e7",
       "derivedFrom": {
@@ -2333,8 +2552,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "intune-mobile-byod"
+      ]
     },
     {
       "id": "intune-ios-app-protection-byod-app-protection-user",
@@ -2349,6 +2571,7 @@
       "version": "1.0",
       "area": "BYOD App Protection",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:f9f409429ebc42fa8fe927be91be595891493d56cb4d05afdf04553af8851450",
       "derivedFrom": {
@@ -2363,8 +2586,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "intune-mobile-byod"
+      ]
     },
     {
       "id": "intune-macos-compliance-policy-device-health-user",
@@ -2379,6 +2605,7 @@
       "version": "1.0",
       "area": "Device Health",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:4618d652fe9a25d5840e35ea970354a2ce4c290c1ba5390e7de5f1d4192bcbd6",
       "derivedFrom": {
@@ -2393,6 +2620,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -2411,6 +2639,7 @@
       "version": "1.0",
       "area": "Device Security",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:ebc0ea22c237bfe3eb9979d85f93427bcbb1f5470db0022ad75bfee36b10ece0",
       "derivedFrom": {
@@ -2425,6 +2654,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -2443,6 +2673,7 @@
       "version": "1.0",
       "area": "Password",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:06771f467665037736679dc0350c8b657b56ca823b9757a5de8e46f18ec2c411",
       "derivedFrom": {
@@ -2457,6 +2688,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -2475,6 +2707,7 @@
       "version": "3.1",
       "area": "Defender for Endpoint",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:2f580ad34dc4108d980026523def104dfdac6f71207a4a8080c8fc0aca751bcc",
       "derivedFrom": {
@@ -2489,6 +2722,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -2507,6 +2741,7 @@
       "version": "3.1",
       "area": "Device Health",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:bd101913dd004e32742d218030520d8963509a765c0a3dd1368ec984819af725",
       "derivedFrom": {
@@ -2521,6 +2756,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -2539,6 +2775,7 @@
       "version": "3.1",
       "area": "Device Security",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:c7c7cb08f2543cf910506a043d8e8a5a3010a331f0ad99a2a6eec944b62300d4",
       "derivedFrom": {
@@ -2553,6 +2790,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -2571,6 +2809,7 @@
       "version": "3.1",
       "area": "Password",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:c2e59bf593dbfee1141b1c5f45f85f50fd90058027a7a62e96ab2c3b9b127081",
       "derivedFrom": {
@@ -2585,6 +2824,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -2603,6 +2843,7 @@
       "version": "3.0",
       "area": "Ring 1",
       "subArea": "Pilot",
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:448a0e122514834c60517d5d0deca8f723f7673bb83158597e65ce4c3e394904",
       "derivedFrom": {
@@ -2618,6 +2859,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -2636,6 +2878,7 @@
       "version": "3.0",
       "area": "Ring 2",
       "subArea": "UAT",
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:5d0ecc20f6a927fe89ee064a8e0b3f44f444ffbbffd4def1f508e6990e57e7d4",
       "derivedFrom": {
@@ -2651,6 +2894,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -2669,6 +2913,7 @@
       "version": "3.0",
       "area": "Ring 3",
       "subArea": "Production",
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:d9b19f57aa6b0f5e2dbedcad23695f0360d40b7a4e1f430337a7a6b77fbecab7",
       "derivedFrom": {
@@ -2684,6 +2929,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -2702,6 +2948,7 @@
       "version": "3.1",
       "area": "Attack Surface Reduction",
       "subArea": "ASR Rules Audit Mode",
+      "securityDomain": null,
       "settingCount": 20,
       "policyHash": "sha256:e1742c2c52fe98bc6659ffb663d0a7410419160d6f53a67fab3679f468745758",
       "derivedFrom": {
@@ -2717,6 +2964,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -2736,6 +2984,7 @@
       "version": "3.7",
       "area": "Attack Surface Reduction",
       "subArea": "ASR Rules L2",
+      "securityDomain": null,
       "settingCount": 20,
       "policyHash": "sha256:62172569e7445d6854f7c6dfb1ed27083e43c14c9a2b630fceda1cff56a1a3ff",
       "derivedFrom": {
@@ -2751,6 +3000,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -2770,6 +3020,7 @@
       "version": "4.0.0",
       "area": "Attack Surface Reduction",
       "subArea": "ASR Rules",
+      "securityDomain": null,
       "settingCount": 20,
       "policyHash": "sha256:cb237b7cd9ea6eb348fc4d12b91be6115ebe1c4414c80441138ea6e37e060100",
       "derivedFrom": {
@@ -2786,6 +3037,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1",
@@ -2805,6 +3059,7 @@
       "version": "4.0.0",
       "area": "Defender Antivirus",
       "subArea": "Antivirus Configuration",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:7f2948057e1af14422ea4bbddcfa85ea4de9d240ce5367974eb93749cdfdfa36",
       "derivedFrom": {
@@ -2821,6 +3076,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1",
@@ -2840,6 +3098,7 @@
       "version": "4.0.0",
       "area": "Defender Antivirus",
       "subArea": "Security Experience",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:c0e09b9df9e908faa12533a0398c412e52ade02f83d78605585055a174715cfc",
       "derivedFrom": {
@@ -2856,6 +3115,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1",
@@ -2875,6 +3137,7 @@
       "version": "4.0.0",
       "area": "Encryption",
       "subArea": "BitLocker OS Disk",
+      "securityDomain": null,
       "settingCount": 25,
       "policyHash": "sha256:d14e2d30512921d5eed9dc9dc8b5660da97e25547dd9041c390c2cc78937ac94",
       "derivedFrom": {
@@ -2891,6 +3154,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -2909,6 +3175,7 @@
       "version": "4.0.0",
       "area": "Local Group Membership",
       "subArea": "Local Administrators",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:1171f0196e9e6f72933165dc84eeeb4ab56602aeadf63ac69b87da0d11bb4666",
       "derivedFrom": {
@@ -2925,6 +3192,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -2943,6 +3213,7 @@
       "version": "4.0.0",
       "area": "Windows Firewall",
       "subArea": "Firewall Configuration",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:6bf0ff3b6a0f7c70224c871e71f8c00f5b43be8f06b5adabc485c2d0b9ff6ff7",
       "derivedFrom": {
@@ -2959,6 +3230,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -2977,6 +3251,7 @@
       "version": "4.0.0",
       "area": "Windows Hello for Business",
       "subArea": "WHfB Configuration",
+      "securityDomain": null,
       "settingCount": 7,
       "policyHash": "sha256:d8646d7e9fd98cd2dd873454dd7d85392ba279d3d9d2404bbab9a85e87ac2bd4",
       "derivedFrom": {
@@ -2993,6 +3268,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -3011,6 +3289,7 @@
       "version": "4.0.0",
       "area": "Windows LAPS",
       "subArea": "LAPS Configuration",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:6583885744b24bb54b3f01e860612fc85a5ead450832e26bae7225e38df93ad6",
       "derivedFrom": {
@@ -3027,6 +3306,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -3045,6 +3327,7 @@
       "version": "3.3",
       "area": "Defender Antivirus",
       "subArea": "AV Configuration",
+      "securityDomain": null,
       "settingCount": 31,
       "policyHash": "sha256:ca591633107c02df3b3422adc1de8e1f7e3f89f3565f1ef7c0c2f595eb318b61",
       "derivedFrom": {
@@ -3060,6 +3343,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -3079,6 +3363,7 @@
       "version": "3.3",
       "area": "Defender Antivirus",
       "subArea": "Security Experience",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:407f966e8deb0b62da2f82963f22b4d58f4238a6075a5d645d19348a193c94f9",
       "derivedFrom": {
@@ -3094,6 +3379,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -3113,6 +3399,7 @@
       "version": "3.4",
       "area": "Defender Antivirus Updates",
       "subArea": "Ring 1 - Pilot",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:7b25573eed9fbf91c8d0c58d746f4789b5938a9b1d8af14d99a9bac8b90923d2",
       "derivedFrom": {
@@ -3128,6 +3415,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -3147,6 +3435,7 @@
       "version": "3.4",
       "area": "Defender Antivirus Updates",
       "subArea": "Ring 2 - UAT",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:3314eb9937df70938fbe1325f64c60b596ff27880206ea0f0725956f0b2b64b8",
       "derivedFrom": {
@@ -3162,6 +3451,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -3181,6 +3471,7 @@
       "version": "3.4",
       "area": "Defender Antivirus Updates",
       "subArea": "Ring 3 - Production",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:54b863ed67116af46459454ceba18182ca875be7ec89317d66c398f504be9f01",
       "derivedFrom": {
@@ -3196,6 +3487,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -3215,6 +3507,7 @@
       "version": "3.7",
       "area": "Encryption",
       "subArea": "BitLocker OS Disk",
+      "securityDomain": null,
       "settingCount": 25,
       "policyHash": "sha256:7d0394ccf063f5934d50cd8399b6d9b43dce3664eb2c2b8298b430e40ed9d016",
       "derivedFrom": {
@@ -3230,6 +3523,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -3249,6 +3543,7 @@
       "version": "3.4",
       "area": "Encryption",
       "subArea": "Personal Data Encryption",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:0416612319c6fa004c22602034a04633ac126fca289281ee35035f3ad9e999ac",
       "derivedFrom": {
@@ -3264,6 +3559,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -3282,6 +3578,7 @@
       "version": "3.7",
       "area": "Local Group Membership",
       "subArea": "Local Administrators",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:e0b3a2218b383b3494f6d537f041fe5300c9c005ca15b170b854056fc4948509",
       "derivedFrom": {
@@ -3297,6 +3594,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -3316,6 +3614,7 @@
       "version": "3.1",
       "area": "Windows Firewall",
       "subArea": "Firewall Configuration",
+      "securityDomain": null,
       "settingCount": 31,
       "policyHash": "sha256:949157ac5a5443edaf2bdcb4a0d2b30c13b425a525a86ba61f29dbbe11521cf7",
       "derivedFrom": {
@@ -3331,6 +3630,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -3349,6 +3649,7 @@
       "version": "3.2",
       "area": "Windows Hello for Business",
       "subArea": "WHfB Configuration",
+      "securityDomain": null,
       "settingCount": 7,
       "policyHash": "sha256:c6269f2dc21c79e92f570154a87d0dfe61bd6b5138939857f36ecffa2f02d31f",
       "derivedFrom": {
@@ -3364,6 +3665,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -3382,6 +3684,7 @@
       "version": "3.1",
       "area": "Windows LAPS",
       "subArea": "LAPS Configuration",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:6c77522736888740b5d4ecc4242880405538b2659f74c14211a6fba2f2bbc419",
       "derivedFrom": {
@@ -3397,6 +3700,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -3416,6 +3720,7 @@
       "version": "3.6",
       "area": "Windows LAPS",
       "subArea": "LAPS Configuration 24H2",
+      "securityDomain": null,
       "settingCount": 12,
       "policyHash": "sha256:2b2a6f4daec61d40b3e0461f0216229fad10b2e493e2ad983a5488a2053afe9c",
       "derivedFrom": {
@@ -3431,6 +3736,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -3449,6 +3755,7 @@
       "version": "1.0",
       "area": "Block Personal",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:8989dcf29f3d8f5237a4b95074ccdfb8a6fd2978702d556499620c1d2533a3ee",
       "derivedFrom": {
@@ -3463,8 +3770,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "intune-mobile-byod"
+      ]
     },
     {
       "id": "intune-ios-enrolment-restriction-block-personal-device",
@@ -3479,6 +3789,7 @@
       "version": "1.0",
       "area": "Block Personal",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 0,
       "policyHash": "sha256:1a65a2d09e17ff82942a7a77bd08f11fecf105951da9638e24f127061e15b4b8",
       "derivedFrom": {
@@ -3493,8 +3804,11 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "intune-mobile-byod"
+      ]
     },
     {
       "id": "intune-android-settings-catalog-restrictions-v1-0-test-device",
@@ -3509,6 +3823,7 @@
       "version": null,
       "area": "Restrictions",
       "subArea": "v1 0 TEST",
+      "securityDomain": null,
       "settingCount": 7,
       "policyHash": "sha256:853e4641187c52e496bde382410afb4db6c746e32a5dbd62dcc6a32e8b9906cb",
       "derivedFrom": {
@@ -3523,6 +3838,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": []
     },
@@ -3539,6 +3855,7 @@
       "version": "1.0",
       "area": "Authentication",
       "subArea": "Platform SSO",
+      "securityDomain": null,
       "settingCount": 28,
       "policyHash": "sha256:f4611259ceeb2dbec1c0b070ac1efebd7725962936ad750f051bceebc17bc756",
       "derivedFrom": {
@@ -3554,6 +3871,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3572,6 +3890,7 @@
       "version": "1.0",
       "area": "Defender Antivirus",
       "subArea": "Antivirus Configuration",
+      "securityDomain": null,
       "settingCount": 26,
       "policyHash": "sha256:2b5433e53cad61039c28e3d25159dd04501a6b8e5ddc0a86f3d239daaee80da0",
       "derivedFrom": {
@@ -3587,6 +3906,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3605,6 +3925,7 @@
       "version": "1.0",
       "area": "Defender Antivirus",
       "subArea": "MDE Configuration",
+      "securityDomain": null,
       "settingCount": 69,
       "policyHash": "sha256:cd4ebda1650bd3f67ba2c19063c9efffa7836e26055f5f5a7f8970f061879116",
       "derivedFrom": {
@@ -3620,6 +3941,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3638,6 +3960,7 @@
       "version": "1.0",
       "area": "Device Security",
       "subArea": "Accounts and Login",
+      "securityDomain": null,
       "settingCount": 8,
       "policyHash": "sha256:797861970e7e3c324d13727ef7360fefc349141217072ffb548a7a4d3526ab26",
       "derivedFrom": {
@@ -3653,6 +3976,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3671,6 +3995,7 @@
       "version": "1.0",
       "area": "Device Security",
       "subArea": "Restrictions",
+      "securityDomain": null,
       "settingCount": 39,
       "policyHash": "sha256:c2ca70a2e778a5944d969658946957917598f7b6a94bb3a65e640cb48168f9f8",
       "derivedFrom": {
@@ -3686,6 +4011,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3704,6 +4030,7 @@
       "version": "1.0",
       "area": "Disk Encryption",
       "subArea": "FileVault",
+      "securityDomain": null,
       "settingCount": 8,
       "policyHash": "sha256:cc2a99f08f93878f9d8d92d39aebcb3d7aad57b498668050a8d1c5724e118199",
       "derivedFrom": {
@@ -3719,6 +4046,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3737,6 +4065,7 @@
       "version": "1.0",
       "area": "Firewall",
       "subArea": "Gatekeeper",
+      "securityDomain": null,
       "settingCount": 9,
       "policyHash": "sha256:47c2883bc58188f82189cb5c509640b942d623c9920905e5ea5267f32789ef9c",
       "derivedFrom": {
@@ -3752,6 +4081,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3770,6 +4100,7 @@
       "version": "1.0",
       "area": "Microsoft AutoUpdate",
       "subArea": "MAU Configuration",
+      "securityDomain": null,
       "settingCount": 16,
       "policyHash": "sha256:1d344ba58ff66000101318c1640cbac8eef2fd1c3f00fce30ef5befa597bcee0",
       "derivedFrom": {
@@ -3785,6 +4116,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3803,6 +4135,7 @@
       "version": "1.0",
       "area": "Microsoft Edge",
       "subArea": "Password Management",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:0a1145538ef3da00f8e25ba5d237486739e743634ce045c8fc111317bf74128c",
       "derivedFrom": {
@@ -3818,6 +4151,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3836,6 +4170,7 @@
       "version": "1.0",
       "area": "Microsoft Edge",
       "subArea": "Security",
+      "securityDomain": null,
       "settingCount": 29,
       "policyHash": "sha256:3f34955d6bf0dd15cab439fe19e072d1d74e233ec8f4281822e687a30c19e6e5",
       "derivedFrom": {
@@ -3851,6 +4186,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3869,6 +4205,7 @@
       "version": "1.0",
       "area": "Microsoft Edge",
       "subArea": "Extensions",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:d39d01d82bb556a5170d5fcf905f5d2dbd8d87919ab8ac273c43f1e02b6f5efa",
       "derivedFrom": {
@@ -3884,6 +4221,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3902,6 +4240,7 @@
       "version": "1.0",
       "area": "Microsoft Edge",
       "subArea": "Profiles Sign-In and Sync",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:be712c8f026b8bc611eb20299d0a1b68e14e53257a53722dc335af8f72a2aad4",
       "derivedFrom": {
@@ -3917,6 +4256,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3935,6 +4275,7 @@
       "version": "1.0",
       "area": "Microsoft Edge",
       "subArea": "Updates",
+      "securityDomain": null,
       "settingCount": 7,
       "policyHash": "sha256:6d6128085330842358fb5465865c0f12e60993f706dea28502fc154986b28b3f",
       "derivedFrom": {
@@ -3950,6 +4291,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -3968,6 +4310,7 @@
       "version": "1.0",
       "area": "Microsoft Office",
       "subArea": "Office Configuration",
+      "securityDomain": null,
       "settingCount": 7,
       "policyHash": "sha256:2201844705a071624a687699fed6c06cfe295e6772bbb5ec2be21df49f84c6e1",
       "derivedFrom": {
@@ -3983,6 +4326,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -4001,6 +4345,7 @@
       "version": "1.0",
       "area": "Microsoft OneDrive",
       "subArea": "Service and Access",
+      "securityDomain": null,
       "settingCount": 21,
       "policyHash": "sha256:1904588fc8828498074df997af21b036123b8106aa5adc6c06b8f875e33682bb",
       "derivedFrom": {
@@ -4016,6 +4361,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -4034,6 +4380,7 @@
       "version": "1.0",
       "area": "Microsoft OneDrive",
       "subArea": "Known Folder Move",
+      "securityDomain": null,
       "settingCount": 15,
       "policyHash": "sha256:95f1bea07009e58a7dfaffa2ff9fc702b10cd81cad613f3e79e547d4accc8da1",
       "derivedFrom": {
@@ -4049,6 +4396,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -4067,6 +4415,7 @@
       "version": "1.0",
       "area": "Updates",
       "subArea": "Update Configuration",
+      "securityDomain": null,
       "settingCount": 8,
       "policyHash": "sha256:a6ba91daa1060d24af3981bafdbc47184412d0b4462f38e0fc2af97a3932163f",
       "derivedFrom": {
@@ -4082,6 +4431,7 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
@@ -4100,6 +4450,7 @@
       "version": "4.0.0",
       "area": "Above Lock",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:3e847205864c1bd6abec1aed310408c9f32d9cc24e4d29a94fde5c53292c3c57",
       "derivedFrom": {
@@ -4115,6 +4466,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4133,6 +4487,7 @@
       "version": "4.0.0",
       "area": "Administrative Templates",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 90,
       "policyHash": "sha256:469e2c63472c11266da8a741112911870bc2cd7e9fe181714aa88ad60d773973",
       "derivedFrom": {
@@ -4148,6 +4503,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4166,6 +4524,7 @@
       "version": "4.0.0",
       "area": "Auditing",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 27,
       "policyHash": "sha256:6c4b78c640ca841234b83f8fc6c44758b7146bfc404d3908c9459ce33d87fd89",
       "derivedFrom": {
@@ -4181,6 +4540,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4199,6 +4561,7 @@
       "version": "4.0.0",
       "area": "Defender",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 11,
       "policyHash": "sha256:22aab2cb365d41a10cd2ab105afd1de8cad720b7ed89c4ef28a9087d5e13edc4",
       "derivedFrom": {
@@ -4214,6 +4577,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1",
@@ -4233,6 +4599,7 @@
       "version": "4.0.0",
       "area": "Delivery Optimisation",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:bad02103844ea58c29051ccbe3ffda12442539bb7f8c9bb69a486f62d8f9bcb9",
       "derivedFrom": {
@@ -4248,6 +4615,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4266,6 +4636,7 @@
       "version": "4.0.0",
       "area": "Device Guard",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:63417cf7b4805293e4852d05c31ad4866f4a4d7751884c717754932ddbc49b81",
       "derivedFrom": {
@@ -4281,6 +4652,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4299,6 +4673,7 @@
       "version": "4.0.0",
       "area": "Device Lock",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 9,
       "policyHash": "sha256:e6a826bbef8b21c920d985470f4e517e4aac29628493d5f11ddc6bedc8d41d9e",
       "derivedFrom": {
@@ -4314,6 +4689,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4332,6 +4710,7 @@
       "version": "4.0.0",
       "area": "Enhanced Phishing Protection",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:ca1c01a61cc29be0745eb10d3b59bc19cb94232895e33a6fa7e59c938a4bdf90",
       "derivedFrom": {
@@ -4347,6 +4726,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4365,6 +4747,7 @@
       "version": "4.0.0",
       "area": "Experience",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:41dfcac62ba3b997bb5058179832373a2f0349244ad47b4dd95a8fa9f5a1d368",
       "derivedFrom": {
@@ -4380,6 +4763,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4398,6 +4784,7 @@
       "version": "4.0.0",
       "area": "Lanman Workstation",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:45e76c49944d20a8266bd16a470f2f8994679b1914416ff40038d228bca4d28b",
       "derivedFrom": {
@@ -4413,6 +4800,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4431,6 +4821,7 @@
       "version": "4.0.0",
       "area": "Local Security Authority",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:6681d25ab99d2b3fd0f1c877be9e5ac6c8a721837b1a625eb15b3d409769a2c6",
       "derivedFrom": {
@@ -4446,6 +4837,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4464,6 +4858,7 @@
       "version": "4.0.0",
       "area": "Local Security Policies",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 23,
       "policyHash": "sha256:f2e53ae63fc05f453927378d9501df54cde78ea637968f25eab08ae8cd406237",
       "derivedFrom": {
@@ -4479,6 +4874,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4497,6 +4895,7 @@
       "version": "4.0.0",
       "area": "Microsoft App Store",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:4311ca756e11e86b8a3c8e720c359869fdc5ee5cafb2b010b3f8e133bbfc5343",
       "derivedFrom": {
@@ -4512,6 +4911,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4530,6 +4932,7 @@
       "version": "4.0.0",
       "area": "Microsoft Edge",
       "subArea": "Extensions",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:dcce1cac2a813634b06e575051908c0ece258fea17d305e0f664c9eedb885304",
       "derivedFrom": {
@@ -4546,6 +4949,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4564,6 +4970,7 @@
       "version": "4.0.0",
       "area": "Microsoft Edge",
       "subArea": "Password Management",
+      "securityDomain": null,
       "settingCount": 5,
       "policyHash": "sha256:28e3eba401773308d846eefb826d04c6022dade63a267aecec837f22c4e63488",
       "derivedFrom": {
@@ -4580,6 +4987,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4598,6 +5008,7 @@
       "version": "4.0.0",
       "area": "Microsoft Edge",
       "subArea": "Security",
+      "securityDomain": null,
       "settingCount": 51,
       "policyHash": "sha256:8921bd096c9b8c3826f0f653e6f37aa68bed523adbd3839f7264d584b6dced42",
       "derivedFrom": {
@@ -4614,6 +5025,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4632,6 +5046,7 @@
       "version": "4.0.0",
       "area": "Microsoft Edge",
       "subArea": "Updates",
+      "securityDomain": null,
       "settingCount": 22,
       "policyHash": "sha256:d463fd5e168f4002f1384be24fae8fc28ba8696651f8054ba74890c1b81050ee",
       "derivedFrom": {
@@ -4648,6 +5063,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4666,6 +5084,7 @@
       "version": "4.0.0",
       "area": "Microsoft Edge",
       "subArea": "User Experience",
+      "securityDomain": null,
       "settingCount": 13,
       "policyHash": "sha256:ffd86e76c96af448612a2dde722ed2e545ee351032eb5f8dd005e40918133022",
       "derivedFrom": {
@@ -4682,6 +5101,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4700,6 +5122,7 @@
       "version": "4.0.0",
       "area": "Microsoft Office",
       "subArea": "Config and Experience",
+      "securityDomain": null,
       "settingCount": 29,
       "policyHash": "sha256:5053d162825a0b2b62f34449eeb793f177e521b792f0d3d20e0184d49ad05c9d",
       "derivedFrom": {
@@ -4716,6 +5139,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4734,6 +5160,7 @@
       "version": "4.0.0",
       "area": "Microsoft Office",
       "subArea": "Device Security",
+      "securityDomain": null,
       "settingCount": 209,
       "policyHash": "sha256:579c3dfb77b0dfa17b0b7554450fa0ffa5eb44aede36f673e00a49350b3305a1",
       "derivedFrom": {
@@ -4750,6 +5177,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4768,6 +5198,7 @@
       "version": "4.0.0",
       "area": "Microsoft Office",
       "subArea": "Security",
+      "securityDomain": null,
       "settingCount": 221,
       "policyHash": "sha256:dd9a80cf1d81517e4235ec6d936e6db290f7d52c10848cbe282a480e1377094e",
       "derivedFrom": {
@@ -4784,6 +5215,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4802,6 +5236,7 @@
       "version": "4.0.0",
       "area": "Microsoft Office",
       "subArea": "Updates",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:6792eda45ade56734c8701e07fae0baff3f9678bc1ba979cdb725aab4293d33d",
       "derivedFrom": {
@@ -4818,6 +5253,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4836,6 +5274,7 @@
       "version": "4.0.0",
       "area": "Microsoft OneDrive",
       "subArea": "Configuration",
+      "securityDomain": null,
       "settingCount": 18,
       "policyHash": "sha256:ea4a7b8305007a65a61c118ba642f1d53e4f559fd2bf7b3689e3a8c69fc28b5d",
       "derivedFrom": {
@@ -4852,6 +5291,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4870,6 +5312,7 @@
       "version": "4.0.0",
       "area": "Microsoft OneDrive",
       "subArea": "Configuration",
+      "securityDomain": null,
       "settingCount": 7,
       "policyHash": "sha256:2b14c9d3d020a7a7fbf128de2e0d908913fc71180a7012b1fe7d933430498d46",
       "derivedFrom": {
@@ -4886,6 +5329,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4904,6 +5350,7 @@
       "version": "4.0.0",
       "area": "Privacy",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 2,
       "policyHash": "sha256:4e43f89904148784503721bde452ba16dc7c0d969c89d75cf1b9fbacacc053bf",
       "derivedFrom": {
@@ -4919,6 +5366,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4937,6 +5387,7 @@
       "version": "4.0.0",
       "area": "Search",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 2,
       "policyHash": "sha256:e1501aa2a5865b5b17570921ab8a93e34325209bdd17436767170c0d4f3f71cb",
       "derivedFrom": {
@@ -4952,6 +5403,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -4970,6 +5424,7 @@
       "version": "4.0.0",
       "area": "Smart Screen",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:1fe16ffe15eaa9c0325450b714e6089d557763414cffdd6d0cd4162d4ac1df58",
       "derivedFrom": {
@@ -4985,6 +5440,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5003,6 +5461,7 @@
       "version": "4.0.0",
       "area": "Sudo",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:2ff47d09b45035ced5a21631589ff75bbc7830d0d245315fb09e4b1d9cf9dec1",
       "derivedFrom": {
@@ -5018,6 +5477,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5036,6 +5498,7 @@
       "version": "4.0.0",
       "area": "System",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:9dc9fd9fecce59559d6e457306f34f3a41201556beab9babe97b35c587d5b425",
       "derivedFrom": {
@@ -5051,6 +5514,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5069,6 +5535,7 @@
       "version": "4.0.0",
       "area": "System Services",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 2,
       "policyHash": "sha256:9708903a3ca0a83a395509c385213c66ff1120db6b79875da9d227af29f67d92",
       "derivedFrom": {
@@ -5084,6 +5551,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5102,6 +5572,7 @@
       "version": "4.0.0",
       "area": "User Rights",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 26,
       "policyHash": "sha256:cb69fcb81828e34e78e4996b62a9a90081ef3f5bb6c065ee7c9a0c6fb7433f23",
       "derivedFrom": {
@@ -5117,6 +5588,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5135,6 +5609,7 @@
       "version": "4.0.0",
       "area": "Virtualization Based Technology",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 2,
       "policyHash": "sha256:e01217aa84d192fd572bcb93364fa6a0ba5363729f3ad6702c302c90bb02a1d6",
       "derivedFrom": {
@@ -5150,6 +5625,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5168,6 +5646,7 @@
       "version": "4.0.0",
       "area": "Widgets",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:551ed5b48de19b52d5f08bd4be6bbf12652de1a7596de1637343f7560a220c51",
       "derivedFrom": {
@@ -5183,6 +5662,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5201,6 +5683,7 @@
       "version": "4.0.0",
       "area": "Windows Apps",
       "subArea": "In-Box App Removal",
+      "securityDomain": null,
       "settingCount": 26,
       "policyHash": "sha256:65fba4bd584d35d540d3ac817b9893455fc801fdf87028615b649c89a77cc2e6",
       "derivedFrom": {
@@ -5217,6 +5700,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5235,6 +5721,7 @@
       "version": "4.0.0",
       "area": "Windows Defender Security Center",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:1a9a0fee45e065d44afe52a54d7203e806473b74a07a4662d13d87d97ef78790",
       "derivedFrom": {
@@ -5250,6 +5737,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5268,6 +5758,7 @@
       "version": "4.0.0",
       "area": "Windows Ink Workspace",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:09fc19f61bafa7be0d8c8127afe6caa9165bc1b759ee990325b83659acdc2ca7",
       "derivedFrom": {
@@ -5283,6 +5774,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5301,6 +5795,7 @@
       "version": "4.0.0",
       "area": "Windows Sandbox",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 2,
       "policyHash": "sha256:5925f6d6dae04006dd0bca13ed9b5adbc935307f123f5939a608d7e15ea06375",
       "derivedFrom": {
@@ -5316,6 +5811,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5334,6 +5832,7 @@
       "version": "4.0.0",
       "area": "Windows Update for Business",
       "subArea": null,
+      "securityDomain": null,
       "settingCount": 5,
       "policyHash": "sha256:a40e2e330f0e5f56e87d8be813646b9cd9f0eedd89f3981d485564b84ac5b8df",
       "derivedFrom": {
@@ -5349,6 +5848,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5367,6 +5869,7 @@
       "version": "4.0.0",
       "area": "Windows Update for Business",
       "subArea": "Delivery Optimisation",
+      "securityDomain": null,
       "settingCount": 12,
       "policyHash": "sha256:9d8e97b1bab8d67b3268663c821079d299633f9c0d817a9a6a2fb66da5707d9f",
       "derivedFrom": {
@@ -5383,6 +5886,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5401,6 +5907,7 @@
       "version": "4.0.0",
       "area": "Windows User Experience",
       "subArea": "Feature Configuration",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:987abe2f6da0d2c440621f02b114255fff3068b498d605b4519eed4f07191afe",
       "derivedFrom": {
@@ -5417,6 +5924,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l1"
@@ -5435,6 +5945,7 @@
       "version": "4.0.0",
       "area": "Defender Antivirus",
       "subArea": "Additional Configuration",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:d3fb94190c0afbb16d3cb6e5feac2f05cd8714d22e4569789c810a3d6fd10518",
       "derivedFrom": {
@@ -5451,6 +5962,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l2",
@@ -5470,6 +5984,7 @@
       "version": "4.0.0",
       "area": "Microsoft Edge",
       "subArea": "Profiles Sign-In and Sync",
+      "securityDomain": null,
       "settingCount": 9,
       "policyHash": "sha256:5d2e830035a070e25a24182fe54964c03fb5d50e2e1c7c45ac3f7beedab15dd1",
       "derivedFrom": {
@@ -5486,6 +6001,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l2"
@@ -5504,6 +6022,7 @@
       "version": "4.0.0",
       "area": "Microsoft Store",
       "subArea": "Configuration",
+      "securityDomain": null,
       "settingCount": 7,
       "policyHash": "sha256:77e42ab1714afcb294e30157e653e07db0d00d7ef2fcaad1076977e50078453a",
       "derivedFrom": {
@@ -5520,6 +6039,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l2"
@@ -5538,6 +6060,7 @@
       "version": "4.0.0",
       "area": "Microsoft Store",
       "subArea": "Configuration",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:af353c286bb35e6e6d553146f46051d4f29545363297db044ee9a4028c348888",
       "derivedFrom": {
@@ -5554,6 +6077,9 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l2"
@@ -5572,6 +6098,7 @@
       "version": "4.0.0",
       "area": "Windows Hello for Business",
       "subArea": "Cloud Kerberos Trust",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:2d775af99447a7e1a8dc0a063584b9505a03819669cfd5490ebe8e7ef483a4cf",
       "derivedFrom": {
@@ -5588,6 +6115,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l2"
@@ -5606,6 +6136,7 @@
       "version": "4.0.0",
       "area": "Windows Update for Business",
       "subArea": "Reports and Telemetry",
+      "securityDomain": null,
       "settingCount": 5,
       "policyHash": "sha256:48d974d580acb08fae6cb383e9e1a62bd5f61af7a14de1cd4fde60efe6e18eec",
       "derivedFrom": {
@@ -5622,6 +6153,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l2"
@@ -5640,6 +6174,7 @@
       "version": "4.0.0",
       "area": "Windows User Experience",
       "subArea": "Copilot",
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:e26671613f6ef31f02d666dea8b0c6e8dca103e4286c32a9e095804e826ebcc0",
       "derivedFrom": {
@@ -5656,6 +6191,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l2"
@@ -5674,6 +6212,7 @@
       "version": "4.0.0",
       "area": "Windows User Experience",
       "subArea": "Settings Sync",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:8c002f9ca978ccb18a744e810232318558bb801b7f8cd1b42a398a2a9a126e91",
       "derivedFrom": {
@@ -5690,6 +6229,9 @@
       "confidence": "medium",
       "enrichment": null,
       "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
       "notes": null,
       "bundles": [
         "intune-win-cis-l2"
@@ -5708,6 +6250,7 @@
       "version": "3.3",
       "area": "Credential Management",
       "subArea": "Passwordless",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:6114da6aa63c41a5d44f193e5ff72772274f197f4531e4812f214ccedb2b25cb",
       "derivedFrom": {
@@ -5723,6 +6266,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -5741,6 +6285,7 @@
       "version": "3.6",
       "area": "Defender Antivirus",
       "subArea": "Additional Configuration",
+      "securityDomain": null,
       "settingCount": 10,
       "policyHash": "sha256:d26d2955a3429ae4335758d6b914decc1e5d3652f68f64c209d39fd823c1d0f5",
       "derivedFrom": {
@@ -5756,6 +6301,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -5775,6 +6321,7 @@
       "version": "3.7",
       "area": "Device Security",
       "subArea": "Administrator Protection",
+      "securityDomain": null,
       "settingCount": 2,
       "policyHash": "sha256:91d9ff4527016639339acae3b9bad0b91f3962c4861465a3fb248d9a536736e3",
       "derivedFrom": {
@@ -5790,6 +6337,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -5808,6 +6356,7 @@
       "version": "3.7",
       "area": "Device Security",
       "subArea": "Audit and Event Logging",
+      "securityDomain": null,
       "settingCount": 40,
       "policyHash": "sha256:87a34e0449ea900803247b72466f71e9789c4c125193bbf923def130c9172eba",
       "derivedFrom": {
@@ -5823,6 +6372,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -5841,6 +6391,7 @@
       "version": "3.2",
       "area": "Device Security",
       "subArea": "Config Refresh",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:306248b28767e84ce549060fb20b1d27a603ab6552266a9d321fa47355ec9fe5",
       "derivedFrom": {
@@ -5856,6 +6407,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -5874,6 +6426,7 @@
       "version": "3.0",
       "area": "Device Security",
       "subArea": "Enhanced Phishing Protection",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:096222a0feba59e4bd62ee122349819e3f244f57bd61677e601f81a525dab435",
       "derivedFrom": {
@@ -5889,6 +6442,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -5907,6 +6461,7 @@
       "version": "3.0",
       "area": "Device Security",
       "subArea": "Local Security Policies",
+      "securityDomain": null,
       "settingCount": 23,
       "policyHash": "sha256:5ab57088e7bb1697599cb007913d077dee3e0d8665549be15e9b2308928903d3",
       "derivedFrom": {
@@ -5922,6 +6477,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -5940,6 +6496,7 @@
       "version": "3.6",
       "area": "Device Security",
       "subArea": "Local Security Policies 24H2",
+      "securityDomain": null,
       "settingCount": 23,
       "policyHash": "sha256:bd2a1b47451db7574c8878292fd4ffda261d84f1a898a5f0c1b4266ce1691531",
       "derivedFrom": {
@@ -5955,6 +6512,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -5973,6 +6531,7 @@
       "version": "3.2",
       "area": "Device Security",
       "subArea": "Location and Privacy",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:0b04cf0a31641b2f44d7d6546dffbcb831c135b31f54e92d1d6dafd0453bb01d",
       "derivedFrom": {
@@ -5988,6 +6547,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6006,6 +6566,7 @@
       "version": "3.1",
       "area": "Device Security",
       "subArea": "Login and Lock Screen",
+      "securityDomain": null,
       "settingCount": 11,
       "policyHash": "sha256:378fbe561bef103067670abe00a5e0d7c06b115240bdb28a6ce185407dbfa699",
       "derivedFrom": {
@@ -6021,6 +6582,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6039,6 +6601,7 @@
       "version": "3.7",
       "area": "Device Security",
       "subArea": "Printing",
+      "securityDomain": null,
       "settingCount": 20,
       "policyHash": "sha256:1b3481af6a9be234fefe7a6811224573129ef44d791a342707066a378c982abf",
       "derivedFrom": {
@@ -6054,6 +6617,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6072,6 +6636,7 @@
       "version": "3.0",
       "area": "Device Security",
       "subArea": "Remote Desktop Services and RPC",
+      "securityDomain": null,
       "settingCount": 12,
       "policyHash": "sha256:974bf74b81c626b97fa9bec1fcf88c8d27491fd6785e426b5547387ca7a6abc2",
       "derivedFrom": {
@@ -6087,6 +6652,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6105,6 +6671,7 @@
       "version": "3.4",
       "area": "Device Security",
       "subArea": "Script File Associations",
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:0a8676839533b3aaac1de60098f29d9d1c8bbdd4ad96c7f71e77547f1af496ef",
       "derivedFrom": {
@@ -6120,6 +6687,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6138,6 +6706,7 @@
       "version": "3.7",
       "area": "Device Security",
       "subArea": "Security Hardening",
+      "securityDomain": null,
       "settingCount": 96,
       "policyHash": "sha256:91572a7474fc9c8d66ad1bff9ecad449cedbe5090873ae99022209b7c137eb9b",
       "derivedFrom": {
@@ -6153,6 +6722,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -6172,6 +6742,7 @@
       "version": "3.4",
       "area": "Device Security",
       "subArea": "Timezone",
+      "securityDomain": null,
       "settingCount": 10,
       "policyHash": "sha256:45dd2f2067567a0188bb26bfa437c451ffd451fe71507d81976cb7508d5e37a2",
       "derivedFrom": {
@@ -6187,6 +6758,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6205,6 +6777,7 @@
       "version": "3.7",
       "area": "Device Security",
       "subArea": "User Rights",
+      "securityDomain": null,
       "settingCount": 25,
       "policyHash": "sha256:d57aeb28f8f36366fca8e1ffd43da985bf62ac88f2d5070921a0bd05aba4ea4a",
       "derivedFrom": {
@@ -6220,6 +6793,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6238,6 +6812,7 @@
       "version": "3.5",
       "area": "Device Security",
       "subArea": "Windows Package Manager",
+      "securityDomain": null,
       "settingCount": 5,
       "policyHash": "sha256:e85390d667987f73eb22bc75c9a017d4a86f6c1dbe09baf6d036be87f9309be8",
       "derivedFrom": {
@@ -6253,6 +6828,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6271,6 +6847,7 @@
       "version": "3.2",
       "area": "Device Security",
       "subArea": "Windows Subsystem for Linux",
+      "securityDomain": null,
       "settingCount": 10,
       "policyHash": "sha256:61cd0cecd42628c90bf0f325126d0286816ca910cfe991b9876e252332aaeca3",
       "derivedFrom": {
@@ -6286,6 +6863,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6304,6 +6882,7 @@
       "version": "3.7",
       "area": "Device Security",
       "subArea": "Device Guard Credential Guard and HVCI",
+      "securityDomain": null,
       "settingCount": 8,
       "policyHash": "sha256:994a993752e4354e05d2a88db150f21dc4857b769ca56e494bfd7ff32b401dca",
       "derivedFrom": {
@@ -6319,6 +6898,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6337,6 +6917,7 @@
       "version": "3.6",
       "area": "Device Security",
       "subArea": "Power and Device Lock",
+      "securityDomain": null,
       "settingCount": 12,
       "policyHash": "sha256:32e39401a2effe9170af24981c1700a819d82b8443b71cf1e893c5aa5528ef05",
       "derivedFrom": {
@@ -6352,6 +6933,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6370,6 +6952,7 @@
       "version": "3.4",
       "area": "Device Security",
       "subArea": "Windows Sandbox",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:f6b74487a208125493b91b6dab18403baede69ffad11b8cd19e1bc85ebce3a63",
       "derivedFrom": {
@@ -6385,6 +6968,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6403,6 +6987,7 @@
       "version": "3.0",
       "area": "Device Security",
       "subArea": "Windows Spotlight and Org Messages",
+      "securityDomain": null,
       "settingCount": 12,
       "policyHash": "sha256:6b79e87c77120f01693d4431b17ae2baf470c89968558d6bc61e3f4e17779b24",
       "derivedFrom": {
@@ -6418,6 +7003,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6436,6 +7022,7 @@
       "version": "3.1.1",
       "area": "Internet Explorer Legacy",
       "subArea": "Security",
+      "securityDomain": null,
       "settingCount": 207,
       "policyHash": "sha256:66aa09813857a9f6a8921b7f65075cd38091c9fb44dd1d00933ee2bff2322c32",
       "derivedFrom": {
@@ -6451,6 +7038,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6469,6 +7057,7 @@
       "version": "3.2",
       "area": "Microsoft Accounts",
       "subArea": "Configuration",
+      "securityDomain": null,
       "settingCount": 5,
       "policyHash": "sha256:0bbe584c37d8b04c8fc14e794e9e8540927030e687d8130d99d939603486e503",
       "derivedFrom": {
@@ -6484,6 +7073,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6502,6 +7092,7 @@
       "version": "3.7",
       "area": "Microsoft Edge",
       "subArea": "Security",
+      "securityDomain": null,
       "settingCount": 51,
       "policyHash": "sha256:030d9dda190c4e1337b29d2e60661e44c7cf3cebef327007786dc497123dde41",
       "derivedFrom": {
@@ -6517,6 +7108,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6535,6 +7127,7 @@
       "version": "3.6",
       "area": "Microsoft Edge",
       "subArea": "Updates",
+      "securityDomain": null,
       "settingCount": 22,
       "policyHash": "sha256:b3dfaa8e3633b94d46a0e8155d68d30ffc8d1b3ff658ce203a824e5b0c40a567",
       "derivedFrom": {
@@ -6550,6 +7143,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6568,6 +7162,7 @@
       "version": "3.1",
       "area": "Microsoft Edge",
       "subArea": "Extensions",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:038b130e69c9ce47cba451a6b8b098e7ff43b9e6f86fd30511430e4baa704417",
       "derivedFrom": {
@@ -6583,6 +7178,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6601,6 +7197,7 @@
       "version": "3.0",
       "area": "Microsoft Edge",
       "subArea": "Password Management",
+      "securityDomain": null,
       "settingCount": 5,
       "policyHash": "sha256:362e5a06614adbb460ec5ded10b58830a70125bc2d3010b4ac5914595309624b",
       "derivedFrom": {
@@ -6616,6 +7213,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6634,6 +7232,7 @@
       "version": "3.0",
       "area": "Microsoft Edge",
       "subArea": "Profiles Sign-In and Sync",
+      "securityDomain": null,
       "settingCount": 9,
       "policyHash": "sha256:1837e4174cd84af42f256db041cd11cd49aac3cbeadbdff307dca6f8948f49c7",
       "derivedFrom": {
@@ -6649,6 +7248,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6667,6 +7267,7 @@
       "version": "3.7",
       "area": "Microsoft Edge",
       "subArea": "User Experience",
+      "securityDomain": null,
       "settingCount": 13,
       "policyHash": "sha256:cb39bc9c848622caf5c8663fcf432d8026c20f780113fcb84f890ba50dcda289",
       "derivedFrom": {
@@ -6682,6 +7283,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6700,6 +7302,7 @@
       "version": "3.6",
       "area": "Microsoft Office",
       "subArea": "Security",
+      "securityDomain": null,
       "settingCount": 209,
       "policyHash": "sha256:116cc00f656d8f28c1c40d2585cd075af54d231bdfe5f73a3d3662122b544e55",
       "derivedFrom": {
@@ -6715,6 +7318,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6733,6 +7337,7 @@
       "version": "3.0",
       "area": "Microsoft Office",
       "subArea": "Updates",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:7444f7e4ccbd35425bf2533c62208308478972acdd8914e24629cd2fa209cb87",
       "derivedFrom": {
@@ -6748,6 +7353,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6766,6 +7372,7 @@
       "version": "3.6",
       "area": "Microsoft Office",
       "subArea": "Config and Experience",
+      "securityDomain": null,
       "settingCount": 29,
       "policyHash": "sha256:376549c7d7086378a87ec3221a01bb895bb58787ea7cbf6fa189ba041f76ed12",
       "derivedFrom": {
@@ -6781,6 +7388,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6799,6 +7407,7 @@
       "version": "3.6",
       "area": "Microsoft Office",
       "subArea": "Security",
+      "securityDomain": null,
       "settingCount": 221,
       "policyHash": "sha256:2c0758ffa2b73f060f096ed50ae8e1105126713ccf53aec1bdec09df588d3073",
       "derivedFrom": {
@@ -6814,6 +7423,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6832,6 +7442,7 @@
       "version": "3.2",
       "area": "Microsoft OneDrive",
       "subArea": "Configuration",
+      "securityDomain": null,
       "settingCount": 18,
       "policyHash": "sha256:b803fc22871e9d99243bc5f6d6622a38421c051ac4408a60d7c566440198d997",
       "derivedFrom": {
@@ -6847,6 +7458,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6865,6 +7477,7 @@
       "version": "3.0",
       "area": "Microsoft OneDrive",
       "subArea": "Configuration",
+      "securityDomain": null,
       "settingCount": 7,
       "policyHash": "sha256:e119a1a339fd23fe17702f845f3a5db6464547bbb3bc68e243ab5b02ce9ecacb",
       "derivedFrom": {
@@ -6880,6 +7493,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6898,6 +7512,7 @@
       "version": "3.4",
       "area": "Microsoft Store",
       "subArea": "Configuration",
+      "securityDomain": null,
       "settingCount": 7,
       "policyHash": "sha256:445d15768f140cca3f08688be290367518d6371de4b6fedb63c0e88718cac45e",
       "derivedFrom": {
@@ -6913,6 +7528,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6931,6 +7547,7 @@
       "version": "3.3",
       "area": "Microsoft Store",
       "subArea": "Configuration",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:f3dd8715bb85b34eb842b8ae6c83fe28e663f42eed7f77dfbf3641dfef3dbcdc",
       "derivedFrom": {
@@ -6946,6 +7563,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6964,6 +7582,7 @@
       "version": "3.7",
       "area": "Windows Apps",
       "subArea": "In-Box App Removal",
+      "securityDomain": null,
       "settingCount": 26,
       "policyHash": "sha256:f8fabff34d96acff1a1c35d09135959901ca8b8e464d191557aa0f4d561a64d4",
       "derivedFrom": {
@@ -6979,6 +7598,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -6997,6 +7617,7 @@
       "version": "3.5",
       "area": "Windows Hello for Business",
       "subArea": "Cloud Kerberos Trust",
+      "securityDomain": null,
       "settingCount": 3,
       "policyHash": "sha256:9401bd63aeefd0bed4058c21476a4192eaf28ea341d4b3738627e15c05fafff3",
       "derivedFrom": {
@@ -7012,6 +7633,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
@@ -7031,6 +7653,7 @@
       "version": "3.0",
       "area": "Windows Update for Business",
       "subArea": "Delivery Optimisation",
+      "securityDomain": null,
       "settingCount": 12,
       "policyHash": "sha256:b697f0d9874d55bb83578e5d5b82471b7a7e1f49209981e3f60ee7ca67ae40e4",
       "derivedFrom": {
@@ -7046,6 +7669,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -7064,6 +7688,7 @@
       "version": "3.0",
       "area": "Windows Update for Business",
       "subArea": "Reports and Telemetry",
+      "securityDomain": null,
       "settingCount": 5,
       "policyHash": "sha256:a933423801dc22f28917c601930f7e373a518f2650de4f73feafc3ee26b16e2f",
       "derivedFrom": {
@@ -7079,6 +7704,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -7097,6 +7723,7 @@
       "version": "3.1",
       "area": "Windows User Experience",
       "subArea": "Feature Configuration",
+      "securityDomain": null,
       "settingCount": 6,
       "policyHash": "sha256:a481261b7c9296374be59a789325ba2b715f82c340623c60d4607ae325183c42",
       "derivedFrom": {
@@ -7112,6 +7739,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -7130,6 +7758,7 @@
       "version": "3.7",
       "area": "Windows User Experience",
       "subArea": "Settings Sync",
+      "securityDomain": null,
       "settingCount": 4,
       "policyHash": "sha256:4ac85b2963731a54bccedd2c58891388125cc3d3ed818437c6acdddef91a160d",
       "derivedFrom": {
@@ -7145,6 +7774,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -7163,6 +7793,7 @@
       "version": "3.6",
       "area": "Windows User Experience",
       "subArea": "Copilot",
+      "securityDomain": null,
       "settingCount": 1,
       "policyHash": "sha256:f32c25114009037a936cb70e5767af656729712626a6f051b368ddcde338253e",
       "derivedFrom": {
@@ -7178,6 +7809,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
@@ -7196,6 +7828,7 @@
       "version": null,
       "area": "Restrictions",
       "subArea": "v1 0 TEST",
+      "securityDomain": null,
       "settingCount": 9,
       "policyHash": "sha256:a740b98232c477849481085853061f01fb54062d9b0b8f26e7bd302d4927e573",
       "derivedFrom": {
@@ -7210,6 +7843,7 @@
       "confidence": "high",
       "enrichment": null,
       "tags": [],
+      "frameworks": [],
       "notes": null,
       "bundles": []
     }
@@ -7228,7 +7862,7 @@
       "rule": {
         "workload": "Intune",
         "platform": "Windows",
-        "framework": "CIS L1"
+        "frameworks": "CIS L1"
       },
       "include": [],
       "exclude": [],
@@ -7298,7 +7932,7 @@
       "rule": {
         "workload": "Intune",
         "platform": "Windows",
-        "framework": "CIS L2"
+        "frameworks": "CIS L2"
       },
       "include": [],
       "exclude": [],
@@ -7444,6 +8078,35 @@
       "memberCount": 13
     },
     {
+      "id": "intune-win-autopilot-mvp",
+      "name": "Windows - Autopilot Minimum Viable",
+      "description": "The smallest policy set required to stand up Windows Autopilot enrolment for a new customer. Curated by the practice, not derived. Review at each benchmark release.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Deployment",
+        "Autopilot MVP"
+      ],
+      "rule": null,
+      "include": [
+        "intune-windows-settings-catalog-device-security-security-hardening-device",
+        "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
+        "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device",
+        "intune-windows-endpoint-security-windows-laps-laps-configuration-device",
+        "intune-windows-endpoint-security-local-group-membership-local-administrators-device"
+      ],
+      "exclude": [],
+      "order": 45,
+      "members": [
+        "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
+        "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
+        "intune-windows-endpoint-security-windows-laps-laps-configuration-device",
+        "intune-windows-settings-catalog-device-security-security-hardening-device",
+        "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device"
+      ],
+      "memberCount": 5
+    },
+    {
       "id": "intune-macos-cdw-standard",
       "name": "macOS - CDW Standard Baseline",
       "description": "The CDW-authored macOS baseline.",
@@ -7485,22 +8148,82 @@
       "memberCount": 20
     },
     {
-      "id": "entra-ca-core",
-      "name": "Entra - Core Conditional Access",
-      "description": "The baseline Conditional Access set: admin MFA, risk-based password change, legacy auth block.",
+      "id": "intune-mobile-byod",
+      "name": "Mobile - BYOD Baseline",
+      "description": "iOS and Android app protection, restrictions and enrolment controls for BYOD.",
       "path": [
-        "Entra",
-        "Identity",
-        "Conditional Access",
-        "Core"
+        "Intune",
+        "Mobile",
+        "BYOD"
       ],
       "rule": {
-        "workload": "Entra",
-        "policyType": "Conditional Access"
+        "workload": "Intune",
+        "platform": [
+          "iOS",
+          "Android"
+        ]
+      },
+      "include": [],
+      "exclude": [
+        "intune-android-settings-catalog-restrictions-v1-0-test-device",
+        "intune-ios-settings-catalog-restrictions-v1-0-test-device"
+      ],
+      "order": 55,
+      "members": [
+        "intune-android-app-protection-byod-app-protection-user",
+        "intune-android-enrolment-restriction-block-personal-device",
+        "intune-ios-app-protection-byod-app-protection-user",
+        "intune-ios-enrolment-restriction-block-personal-device"
+      ],
+      "memberCount": 4
+    },
+    {
+      "id": "entra-ca-endpoint-security",
+      "name": "Entra - CDW Endpoint Security",
+      "description": "Device-based Conditional Access: compliant device, hybrid join, app protection and platform conditions. Membership is derived from the policy body, not tagged.",
+      "path": [
+        "Entra",
+        "Conditional Access",
+        "CDW Endpoint Security"
+      ],
+      "rule": {
+        "policyType": "Conditional Access",
+        "securityDomain": "Endpoint Security"
       },
       "include": [],
       "exclude": [],
       "order": 60,
+      "members": [
+        "entra-cross-platform-conditional-access-cdw1002-developers-baseprotection-allapps-anyplatform-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw1006-developers-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
+        "entra-cross-platform-conditional-access-cdw101-admins-identityprotection-allapps-anyplatform-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-clientappandapp-user",
+        "entra-cross-platform-conditional-access-cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
+        "entra-cross-platform-conditional-access-cdw201-internals-identityprotection-allapps-anyplatform-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw206-internals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
+        "entra-cross-platform-conditional-access-cdw207-internals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
+        "entra-cross-platform-conditional-access-cdw301-externals-identityprotection-allapps-anyplatform-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw306-externals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
+        "entra-cross-platform-conditional-access-cdw307-externals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user"
+      ],
+      "memberCount": 11
+    },
+    {
+      "id": "entra-ca-identity-security",
+      "name": "Entra - CDW Identity Security",
+      "description": "User-focused Conditional Access: MFA, risk-based controls, legacy authentication and authentication strength. Membership is derived from the policy body, not tagged.",
+      "path": [
+        "Entra",
+        "Conditional Access",
+        "CDW Identity Security"
+      ],
+      "rule": {
+        "policyType": "Conditional Access",
+        "securityDomain": "Identity Security"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 61,
       "members": [
         "entra-cross-platform-conditional-access-cdw001-global-baseprotection-allapps-anyplatform-blocknonpersonas-user",
         "entra-cross-platform-conditional-access-cdw001-require-multifactor-authentication-for-admins-user",
@@ -7508,31 +8231,20 @@
         "entra-cross-platform-conditional-access-cdw002-require-password-change-for-high-risk-users-user",
         "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user",
         "entra-cross-platform-conditional-access-cdw1001-developers-baseprotection-allapps-anyplatform-mfafromunmanageddevices-user",
-        "entra-cross-platform-conditional-access-cdw1002-developers-baseprotection-allapps-anyplatform-combinedregistration-user",
         "entra-cross-platform-conditional-access-cdw1003-developers-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
         "entra-cross-platform-conditional-access-cdw1004-developers-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
         "entra-cross-platform-conditional-access-cdw1005-developers-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw1006-developers-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
         "entra-cross-platform-conditional-access-cdw1007-developers-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw101-admins-identityprotection-allapps-anyplatform-combinedregistration-user",
         "entra-cross-platform-conditional-access-cdw102-admins-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
         "entra-cross-platform-conditional-access-cdw103-admins-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
         "entra-cross-platform-conditional-access-cdw104-admins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-clientappandapp-user",
         "entra-cross-platform-conditional-access-cdw107-admins-dataprotection-allapps-anyplatform-sessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw201-internals-identityprotection-allapps-anyplatform-combinedregistration-user",
         "entra-cross-platform-conditional-access-cdw202-internals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
         "entra-cross-platform-conditional-access-cdw203-internals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk-user",
         "entra-cross-platform-conditional-access-cdw204-internals-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw206-internals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
-        "entra-cross-platform-conditional-access-cdw207-internals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw301-externals-identityprotection-allapps-anyplatform-combinedregistration-user",
         "entra-cross-platform-conditional-access-cdw302-externals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
         "entra-cross-platform-conditional-access-cdw303-externals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk-user",
         "entra-cross-platform-conditional-access-cdw304-externals-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw306-externals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
-        "entra-cross-platform-conditional-access-cdw307-externals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
         "entra-cross-platform-conditional-access-cdw400-guests-baseprotection-allapps-anyplatform-mfa-user",
         "entra-cross-platform-conditional-access-cdw401-guests-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
         "entra-cross-platform-conditional-access-cdw402-guests-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
@@ -7565,36 +8277,94 @@
         "entra-cross-platform-conditional-access-cdw900-workloadidentities-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
         "entra-cross-platform-conditional-access-cdw901-workloadidentities-baseprotection-allapps-anyplatform-blockhighrisk-user"
       ],
-      "memberCount": 62
+      "memberCount": 51
     },
     {
-      "id": "intune-win-autopilot-mvp",
-      "name": "Windows - Autopilot Minimum Viable",
-      "description": "The smallest policy set required to stand up Windows Autopilot enrolment for a new customer. Curated by the practice, not derived. Review at each benchmark release.",
+      "id": "entra-ca-cis-l1",
+      "name": "Entra - Conditional Access CIS L1",
+      "description": "Conditional Access policies mapped to CIS Level 1. Requires the 'cis-l1' tag on the policy sidecar.",
       "path": [
-        "Intune",
-        "Windows",
-        "Deployment",
-        "Autopilot MVP"
+        "Entra",
+        "Conditional Access",
+        "CIS L1"
       ],
-      "rule": null,
-      "include": [
-        "intune-windows-settings-catalog-device-security-security-hardening-device",
-        "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
-        "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device",
-        "intune-windows-endpoint-security-windows-laps-laps-configuration-device",
-        "intune-windows-endpoint-security-local-group-membership-local-administrators-device"
+      "rule": {
+        "policyType": "Conditional Access",
+        "frameworks": "CIS L1"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 62,
+      "members": [],
+      "memberCount": 0
+    },
+    {
+      "id": "entra-ca-cis-l2",
+      "name": "Entra - Conditional Access CIS L2",
+      "description": "Conditional Access policies mapped to CIS Level 2. Requires the 'cis-l2' tag on the policy sidecar.",
+      "path": [
+        "Entra",
+        "Conditional Access",
+        "CIS L2"
       ],
+      "rule": {
+        "policyType": "Conditional Access",
+        "frameworks": "CIS L2"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 63,
+      "members": [],
+      "memberCount": 0
+    },
+    {
+      "id": "entra-ca-zero-trust",
+      "name": "Entra - Zero Trust Framework",
+      "description": "Conditional Access policies forming the Zero Trust reference architecture. Requires the 'zero-trust' tag on the policy sidecar.",
+      "path": [
+        "Entra",
+        "Conditional Access",
+        "Zero Trust"
+      ],
+      "rule": {
+        "policyType": "Conditional Access",
+        "frameworks": "Zero Trust"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 64,
+      "members": [],
+      "memberCount": 0
+    },
+    {
+      "id": "entra-tenant-config",
+      "name": "Entra - Tenant Configuration",
+      "description": "Tenant-level Entra objects: authorization policy, device registration, cross-tenant access, admin consent requests and directory settings.",
+      "path": [
+        "Entra",
+        "Tenant",
+        "Configuration"
+      ],
+      "rule": {
+        "workload": "Entra",
+        "policyType": [
+          "Tenant Policy",
+          "Directory Setting"
+        ]
+      },
+      "include": [],
       "exclude": [],
       "order": 70,
       "members": [
-        "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
-        "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
-        "intune-windows-endpoint-security-windows-laps-laps-configuration-device",
-        "intune-windows-settings-catalog-device-security-security-hardening-device",
-        "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device"
+        "entra-cross-platform-directory-setting-group-unified-tenant",
+        "entra-cross-platform-directory-setting-password-rule-settings-tenant",
+        "entra-cross-platform-tenant-policy-admin-consent-request-policy-tenant",
+        "entra-cross-platform-tenant-policy-authorization-policy-tenant",
+        "entra-cross-platform-tenant-policy-cross-tenant-access-policy-default-tenant",
+        "entra-cross-platform-tenant-policy-default-app-management-policy-tenant",
+        "entra-cross-platform-tenant-policy-device-registration-policy-tenant"
       ],
-      "memberCount": 5
+      "memberCount": 7
     }
   ],
   "issues": [
@@ -8901,70 +9671,22 @@
       "detail": "No enrichment authored"
     },
     {
-      "policyId": "entra-cross-platform-tenant-policy-admin-consent-request-policy-tenant",
-      "path": "EntraConfig/AdminConsentRequestPolicy/CDW_Baseline_AdminConsentRequestPolicy_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
+      "policyId": null,
+      "path": null,
+      "type": "emptyBundle",
+      "detail": "Bundle 'entra-ca-cis-l1' matched no policies"
     },
     {
-      "policyId": "entra-cross-platform-tenant-policy-default-app-management-policy-tenant",
-      "path": "EntraConfig/AppManagementPolicies/CDW_Baseline_DefaultAppManagementPolicy_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
+      "policyId": null,
+      "path": null,
+      "type": "emptyBundle",
+      "detail": "Bundle 'entra-ca-cis-l2' matched no policies"
     },
     {
-      "policyId": "entra-cross-platform-tenant-policy-authorization-policy-tenant",
-      "path": "EntraConfig/AuthorizationPolicy/CDW_Baseline_AuthorizationPolicy_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "entra-cross-platform-tenant-policy-cross-tenant-access-policy-default-tenant",
-      "path": "EntraConfig/CrossTenantAccessPolicy/CDW_Baseline_CrossTenantAccessPolicyDefault_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "entra-cross-platform-tenant-policy-device-registration-policy-tenant",
-      "path": "EntraConfig/DeviceRegistrationPolicy/CDW_Baseline_DeviceRegistrationPolicy_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "entra-cross-platform-directory-setting-group-unified-tenant",
-      "path": "EntraConfig/DirectorySettings/CDW_Baseline_DirectorySetting_GroupUnified_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "entra-cross-platform-directory-setting-password-rule-settings-tenant",
-      "path": "EntraConfig/DirectorySettings/CDW_Baseline_DirectorySetting_PasswordRuleSettings_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "intune-android-app-protection-byod-app-protection-user",
-      "path": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "intune-ios-app-protection-byod-app-protection-user",
-      "path": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "intune-android-enrolment-restriction-block-personal-device",
-      "path": "IntuneConfig/EnrolmentRestrictions/Android_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "intune-ios-enrolment-restriction-block-personal-device",
-      "path": "IntuneConfig/EnrolmentRestrictions/iOS_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
+      "policyId": null,
+      "path": null,
+      "type": "emptyBundle",
+      "detail": "Bundle 'entra-ca-zero-trust' matched no policies"
     },
     {
       "policyId": "intune-android-settings-catalog-restrictions-v1-0-test-device",

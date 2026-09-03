@@ -114,6 +114,20 @@ FOLDER_WORKLOAD = {
     "PurviewConfig": "Purview",
 }
 
+# Conditional Access grant controls and conditions that make a policy
+# device-centric rather than identity-centric.
+CA_ENDPOINT_CONTROLS = {
+    "compliantdevice", "domainjoineddevice", "compliantapplication",
+    "approvedapplication", "unknownfuturevalue_compliantdevice",
+}
+
+# Sidecar tags that denote framework membership, folded into `frameworks`.
+FRAMEWORK_TAGS = {
+    "cis-l1": "CIS L1",
+    "cis-l2": "CIS L2",
+    "zero-trust": "Zero Trust",
+}
+
 # Areas that are written inconsistently across the store. Canonical form on
 # the right. Extend as they surface; the report flags near-duplicates.
 AREA_ALIASES = {
@@ -239,6 +253,24 @@ def detect_scope_from_body(setting_ids: list[str]) -> str | None:
     return prefixes.most_common(1)[0][0]
 
 
+def detect_security_domain(body: dict) -> str | None:
+    """Endpoint vs Identity for a Conditional Access policy.
+
+    Device posture, app protection and platform conditions make a policy
+    endpoint-centric. Everything else is identity-centric.
+    """
+    if "grantControls" not in body and "conditions" not in body:
+        return None
+    grant = body.get("grantControls") or {}
+    conditions = body.get("conditions") or {}
+    controls = {str(c).lower() for c in (grant.get("builtInControls") or [])}
+    if controls & CA_ENDPOINT_CONTROLS:
+        return "Endpoint Security"
+    if conditions.get("devices") or conditions.get("platforms"):
+        return "Endpoint Security"
+    return "Identity Security"
+
+
 def file_hash(path: str) -> str:
     h = hashlib.sha256()
     with open(path, "rb") as fh:
@@ -276,6 +308,7 @@ def derive(rel_path: str, abs_path: str) -> dict:
         "version": None,
         "area": None,
         "subArea": None,
+        "securityDomain": None,
     }
     source: dict[str, str] = {}
     leftovers: list[str] = []
@@ -345,6 +378,11 @@ def derive(rel_path: str, abs_path: str) -> dict:
         rec["area"] = str(body.get("displayName") or body.get("name"))[:80]
         source["area"] = "body"
 
+    if rec["policyType"] == "Conditional Access":
+        domain = detect_security_domain(body)
+        if domain:
+            rec["securityDomain"], source["securityDomain"] = domain, "body"
+
     unresolved = [k for k in ("workload", "platform", "policyType", "scope", "area") if not rec[k]]
     if not unresolved:
         confidence = "high" if all(
@@ -404,6 +442,12 @@ def apply_sidecar(policy: dict, meta: dict) -> dict:
         enrichment = {**enrichment, "stale": stale}
     policy["enrichment"] = enrichment or None
     policy["tags"] = meta.get("tags") or []
+    frameworks = [policy["framework"]] if policy.get("framework") else []
+    for tag in policy["tags"]:
+        name = FRAMEWORK_TAGS.get(tag)
+        if name and name not in frameworks:
+            frameworks.append(name)
+    policy["frameworks"] = frameworks
     policy["notes"] = meta.get("notes")
     return policy
 
@@ -419,8 +463,8 @@ def rule_matches(rule: dict, policy: dict) -> bool:
     for key, expected in rule.items():
         actual = policy.get(key)
         wanted = expected if isinstance(expected, list) else [expected]
-        if key == "tags":
-            if not set(wanted) & set(policy.get("tags") or []):
+        if isinstance(actual, list):
+            if not set(wanted) & set(actual):
                 return False
         elif actual not in wanted:
             return False
@@ -539,7 +583,8 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
             "workloads": distinct("workload"),
             "platforms": distinct("platform"),
             "policyTypes": distinct("policyType"),
-            "frameworks": distinct("framework"),
+            "frameworks": sorted({f for p in policies for f in (p.get("frameworks") or [])}),
+            "securityDomains": distinct("securityDomain"),
             "scopes": distinct("scope"),
             "areas": distinct("area"),
         },
