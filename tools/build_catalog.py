@@ -683,7 +683,11 @@ def main() -> int:
         with open(out_path, "w", encoding="utf-8") as fh:
             json.dump(catalog, fh, indent=2, ensure_ascii=False)
         print(f"Wrote {out_path}: {catalog['counts']['policies']} policies, "
-              f"{catalog['counts']['bundles']} bundles, {catalog['counts']['issues']} issues")
+              f"{catalog['counts']['bundles']} bundles, "
+              f"{len(catalog.get('towers', []))} towers, "
+              f"{len(catalog.get('goals', []))} goals, "
+              f"{len(catalog.get('scenarios', []))} scenarios, "
+              f"{catalog['counts']['issues']} issues")
 
     blocking = [i for i in catalog["issues"] if i["type"] in set(args.fail_on)]
     if blocking:
