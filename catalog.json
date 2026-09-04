@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-03T12:22:11+00:00",
-  "sourceCommit": null,
+  "generatedAt": "2026-09-04T10:27:39+00:00",
+  "sourceCommit": "4dedcfc7e1589d8534be1769c3be1d87e1e31235",
   "counts": {
     "policies": 217,
-    "bundles": 13,
+    "bundles": 14,
     "issues": 222,
     "byConfidence": {
       "medium": 114,
@@ -177,6 +177,293 @@
       "Windows User Experience"
     ]
   },
+  "towers": [
+    {
+      "id": "Intune",
+      "name": "Microsoft Intune",
+      "icon": "device",
+      "blurb": "Device configuration, compliance and enrolment"
+    },
+    {
+      "id": "Entra",
+      "name": "Microsoft Entra ID",
+      "icon": "key",
+      "blurb": "Identity, Conditional Access and tenant settings"
+    },
+    {
+      "id": "Defender",
+      "name": "Microsoft Defender",
+      "icon": "shield",
+      "blurb": "Endpoint and Office threat protection"
+    },
+    {
+      "id": "Purview",
+      "name": "Microsoft Purview",
+      "icon": "file-lock",
+      "blurb": "Data classification, DLP and retention"
+    },
+    {
+      "id": "Exchange Online",
+      "name": "Exchange Online",
+      "icon": "mail",
+      "blurb": "Mail flow, anti-spam and mailbox policy"
+    }
+  ],
+  "goals": [
+    {
+      "id": "harden-endpoints",
+      "tower": "Intune",
+      "icon": "shield",
+      "title": "Harden devices to a security baseline",
+      "outcome": "Applies the CIS-aligned hardened device configuration: Defender, firewall, encryption, credential protection and attack surface reduction.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "CIS Level 1",
+          "bundles": [
+            "intune-win-cis-l1"
+          ]
+        },
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11 (strict)",
+          "note": "CIS Level 1 + Level 2",
+          "bundles": [
+            "intune-win-cis-l1",
+            "intune-win-cis-l2"
+          ]
+        },
+        {
+          "platform": "macOS",
+          "label": "macOS",
+          "note": "CDW standard",
+          "bundles": [
+            "intune-macos-cdw-standard"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cdw-standard",
+      "tower": "Intune",
+      "icon": "layers",
+      "title": "Apply the full CDW standard baseline",
+      "outcome": "The complete CDW-authored device baseline, covering security, user experience, browser, Office and update management.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "All CDW standard policies",
+          "bundles": [
+            "intune-win-cdw-standard"
+          ]
+        },
+        {
+          "platform": "macOS",
+          "label": "macOS",
+          "note": "All CDW standard policies",
+          "bundles": [
+            "intune-macos-cdw-standard"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enrolment",
+      "tower": "Intune",
+      "icon": "rocket",
+      "title": "Stand up modern device enrolment",
+      "outcome": "The minimum viable set to bring new devices into management with Autopilot: hardening, encryption, LAPS, local admin control and passwordless sign-in.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows Autopilot",
+          "note": "Minimum viable product",
+          "bundles": [
+            "intune-win-autopilot-mvp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "antivirus",
+      "tower": "Intune",
+      "icon": "virus",
+      "title": "Deploy antivirus and threat protection",
+      "outcome": "Microsoft Defender Antivirus configuration, update rings and attack surface reduction rules.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "Defender AV and ASR",
+          "bundles": [
+            "intune-win-defender-av"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "byod",
+      "tower": "Intune",
+      "icon": "mobile",
+      "title": "Protect company data on personal devices",
+      "outcome": "App protection and enrolment restrictions so corporate data stays contained on unmanaged iOS and Android devices.",
+      "options": [
+        {
+          "platform": "Mobile",
+          "label": "iOS and Android",
+          "note": "BYOD app protection",
+          "bundles": [
+            "intune-mobile-byod"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ca-starter",
+      "tower": "Entra",
+      "icon": "key",
+      "title": "Establish core Conditional Access",
+      "outcome": "The three-policy minimum every tenant should have: multifactor authentication for administrators, risk-based password change, and legacy authentication blocked.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "All platforms",
+          "note": "Core starter",
+          "bundles": [
+            "entra-ca-core-starter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "identity",
+      "tower": "Entra",
+      "icon": "key",
+      "title": "Secure user and administrator sign-in",
+      "outcome": "Conditional Access covering multifactor authentication, risk-based controls and blocking of legacy authentication.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "All platforms",
+          "note": "Identity Conditional Access",
+          "bundles": [
+            "entra-ca-identity-security"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "managed-devices",
+      "tower": "Entra",
+      "icon": "device-check",
+      "title": "Require managed or compliant devices",
+      "outcome": "Device-based Conditional Access so corporate resources are only reachable from compliant, managed or app-protected devices.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "All platforms",
+          "note": "Device Conditional Access",
+          "bundles": [
+            "entra-ca-endpoint-security"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tenant-hardening",
+      "tower": "Entra",
+      "icon": "building",
+      "title": "Harden tenant-wide identity settings",
+      "outcome": "Tenant configuration: authorization policy, device registration, cross-tenant access, admin consent and directory settings.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "All platforms",
+          "note": "Tenant configuration",
+          "bundles": [
+            "entra-tenant-config"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zero-trust",
+      "tower": "Entra",
+      "icon": "target",
+      "title": "Apply a Zero Trust identity framework",
+      "outcome": "The Conditional Access set forming a Zero Trust reference architecture. Populated by tagging policies in Policy Management.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "All platforms",
+          "note": "Zero Trust framework",
+          "bundles": [
+            "entra-ca-zero-trust"
+          ]
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "new-tenant",
+      "icon": "rocket",
+      "title": "New tenant foundation",
+      "outcome": "Everything needed to stand up a greenfield tenant: core Conditional Access, tenant-wide identity hardening, and Windows Autopilot enrolment.",
+      "includes": [
+        {
+          "goal": "ca-starter",
+          "platform": "Cross-platform"
+        },
+        {
+          "goal": "tenant-hardening",
+          "platform": "Cross-platform"
+        },
+        {
+          "goal": "enrolment",
+          "platform": "Windows"
+        }
+      ]
+    },
+    {
+      "id": "secure-windows",
+      "icon": "shield",
+      "title": "Secure the Windows estate",
+      "outcome": "Hardens Windows devices to CIS Level 1, deploys Defender antivirus and attack surface reduction, and requires managed devices for access.",
+      "includes": [
+        {
+          "goal": "harden-endpoints",
+          "platform": "Windows"
+        },
+        {
+          "goal": "antivirus",
+          "platform": "Windows"
+        },
+        {
+          "goal": "managed-devices",
+          "platform": "Cross-platform"
+        }
+      ]
+    },
+    {
+      "id": "enable-byod",
+      "icon": "mobile",
+      "title": "Enable bring-your-own-device",
+      "outcome": "Lets staff use personal phones safely: app protection on iOS and Android, enrolment restrictions, and device-based Conditional Access.",
+      "includes": [
+        {
+          "goal": "byod",
+          "platform": "Mobile"
+        },
+        {
+          "goal": "managed-devices",
+          "platform": "Cross-platform"
+        }
+      ]
+    }
+  ],
   "policies": [
     {
       "id": "entra-cross-platform-tenant-policy-admin-consent-request-policy-tenant",
@@ -295,7 +582,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:d241362dd857101ccfdf68a1f1a068d53bcbbdc9569d0fb3f4f3bb3a8459fc1e",
+      "policyHash": "sha256:6a9a0f8287240fb67a4c6b1fd450c4b897c6d1f34627aeb669794bad1bb97a3e",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -329,7 +616,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:0d16a4cc58062b803d37935253ec8ce740171ecd3d02feeafef760efdc92e929",
+      "policyHash": "sha256:82f4d0f6245ab68a4a00755aff6b866ccf59c509fd79fe7ace9663667b4fe9a7",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -345,7 +632,8 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-identity-security"
+        "entra-ca-identity-security",
+        "entra-ca-core-starter"
       ]
     },
     {
@@ -363,7 +651,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:c4daeb1f30de6691e4c7735ea76094a88b7a942a125317d3b84366eb95b73756",
+      "policyHash": "sha256:9363e7b57622dfe66485613cf4eb4ef2cc96298c37a64161e960fb4f2455a71e",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -397,7 +685,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:c96191b7fb20b2d4e90d621c60e3f4820427e33ce0b8df4774562d0b3c84cb76",
+      "policyHash": "sha256:11396cc6ec705972af60092af422be9eae18583ca5d865ccc6efb7d609e5b5ef",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -413,7 +701,8 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-identity-security"
+        "entra-ca-identity-security",
+        "entra-ca-core-starter"
       ]
     },
     {
@@ -431,7 +720,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:261fc5dc3850b3d333e6f8b4a6c6052821c9e7d36daf1ccffdd45ab8462e5339",
+      "policyHash": "sha256:b380baa23c30021942275149350308eca885b9832cb66e9ec022147c6dbce15f",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -447,7 +736,8 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-identity-security"
+        "entra-ca-identity-security",
+        "entra-ca-core-starter"
       ]
     },
     {
@@ -465,7 +755,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:f84658731ece9aa5adb88e64916fcbe43ee30bfe12d7eeb3cc21e4e0c365d452",
+      "policyHash": "sha256:781a5a15065dc7d749db50b4ed83ffecb04d4811fc2b4e5e8bcae60c55162a8b",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -499,7 +789,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:8a071c9093eb8c79d624a9c034bfdf8d8ca05d4a52ad1aaa38e4af9113979378",
+      "policyHash": "sha256:6b659f5509d11c4348bb1513314304ed23fde01699942408c37a45c204de0424",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -533,7 +823,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:d067209e9571ec916594c4f9578427f78e68fac6bb9cd19eb89e98678a83fa2d",
+      "policyHash": "sha256:cc7e0998110cb58335bc70923ead16465a5b2ad2d06914e659193d0637969ed5",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -567,7 +857,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:cd799eaad316093a073c61f2593783e722a36ef178d02492b614bcc2896aaa6f",
+      "policyHash": "sha256:ad48d0eeef1aa16167a65218a644c4c5c46ae56d85886f9095eeeec22e75427c",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -601,7 +891,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:b81b7f62de1f575fd0dbf3fb35efce88efd2527728c50b6e0e6c8788fc711cbf",
+      "policyHash": "sha256:68b380c64e08bec00fce1cb124e0eab75bdb023d1cc830f0e4ab6e85fb6fda2a",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -635,7 +925,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:50afdd467406885ebcff48b6f003e36d3f7f28f7114d5898f270ed598015a03c",
+      "policyHash": "sha256:dd6c76ee256ef902db051a13c1f4aa60d6b3bccaa7f5a06755d8634f8185c8a7",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -669,7 +959,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:8cef6a6c47256f7c3d7d0107c35dcf69ff8c21940f892b8b98a4897feb4d2bb6",
+      "policyHash": "sha256:fb9bfb4dd85ea7c848c0803ff2acd3aacf35250c2da2d4f73d8a7d2bc53fdf2a",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -703,7 +993,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:b449678d8e632aa60cc41304ab7d7c16ebc867fa724c78eed2565cc89298d476",
+      "policyHash": "sha256:ab47e9a2f0df9f739222f5836149f1863776df31cce77b88a15b8b714317c808",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -737,7 +1027,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:b75f79db4f7edc62f233a05fc1baed19549216adf6ff44718724cac8ce7ff0b0",
+      "policyHash": "sha256:4b063eef65e226f8fa26a24e3eb364a1e4eac369489c54d9bf16d82e573a621b",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -771,7 +1061,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:8c6cf2ee27c179f7689325252e0806f3560a2b70ee7190e8ef526323cfd91177",
+      "policyHash": "sha256:88c2f90afa945db4d4fb8032fc1088f00d1b8889e684acafcec603f47a643da7",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -805,7 +1095,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:a4e1f6d1d243c607f077617d18c4b574b9c21afbdc9231ec1b9e0942058d08f7",
+      "policyHash": "sha256:2d9a1cd6555a1e1151b23fbd114bc74d30b5c96cbbf0d29c1839b46b74688c5f",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -839,7 +1129,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:512dc3231f159bec60693e1aa5949334dd299adc8aac922a8decdba551ff1cbc",
+      "policyHash": "sha256:1db1cb87f96e48dbf0a4b9bf13219e00c3e74013161c82de293e3c709df5c2fd",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -873,7 +1163,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:174db182cf441f9915a142ac1d7fba192db9e2d119b481705051b5b266b8e348",
+      "policyHash": "sha256:ca7e8e24ca5b2203d921cad937587c266a5d324b66e249ffc4bfd0080132daca",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -907,7 +1197,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:af1270e5f10aa1ad8e99a0a7c35b5c0f6cbffce0713cc799c2b38ef09d297428",
+      "policyHash": "sha256:b58ed508cea855e589e0f594d8ec9cd120d9de6e64b20677d81f60962bb9e478",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -941,7 +1231,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:274baaac48de6611276a42774c3e589800dc9d853b69e2f24f33007a490bbae1",
+      "policyHash": "sha256:f0155163cd309960a1dd405b64c6944ac7838f15120e2bd5346e9af927539841",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -975,7 +1265,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:4f345ad37e54ee1f1464edd7b94ee4effce469bf732bb0f82e79a13cd725f816",
+      "policyHash": "sha256:aa40ad7703109ce3460a085ab69457156cc7714582524ac84b3a1117c754af75",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1009,7 +1299,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:394ef1c217563d30fe7d665c2e18fd4615bd2dc7c92f11c4ca7e041eaa217adf",
+      "policyHash": "sha256:b802e035fe9d6663a3d234b8e6f64ed5324c760d30eec2de66537c7039eea1bd",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1043,7 +1333,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:1051c2bbc55178ad9e2aecea769e64cb1795e068273cf672cdf32f895f22cb91",
+      "policyHash": "sha256:9493049bd48d0192300effb699691b8b288ae81b98d17b490e852b08904c0067",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1077,7 +1367,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:e59c876c7103a39133c9d9914e8d01d32085251b60a3e838b5d6644c97e583eb",
+      "policyHash": "sha256:e43cafc324eb85793dde7b262edd80abe2f04abe27865d97d200980edc8a688c",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1111,7 +1401,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:22dced7e7732d602819ff6546a6fd282ac87864ae067aef2f5b5327d297d835f",
+      "policyHash": "sha256:aad66d6a6f9f3723ce59b9e1beaab4acb1a68598645117079af801ae0a873f07",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1145,7 +1435,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:7fa5d7498832cd4bcc337cc07df07885f23980ff533bab5fd47127e2fb8844f2",
+      "policyHash": "sha256:c92e8b7a3ad38a2e724340797cb4dd054f54da8b4295872059ef9cadedc2557b",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1179,7 +1469,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:0ebd7287d2f1b68107926f404f2ed8dd92ead19c51d0ebb05a70fe9741f75000",
+      "policyHash": "sha256:cc6de2157992c7d29289571f083c60e275c946c4e23eebabca777dce510d6bfe",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1213,7 +1503,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:78d36895b5c2f06e590cbae94503f78359f1c1a14143fe17a61af1f8097237b7",
+      "policyHash": "sha256:e918b16552141ce7303822c35ed404a0a7d1d618cfc4f9bf73c1728d227c1ffb",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1247,7 +1537,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:d9e457e71fcac4beb15bec0978f475246f592c3ee35eee80582383a61f654deb",
+      "policyHash": "sha256:9cfcf3bb7f5c4f19f36a78cbbe847250ae36c44de556cbe3c45d613badb35ae1",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1281,7 +1571,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:6c56daf9ebf178f945cd8871328779111307c836c7c37475cbd79bc844c7cf6a",
+      "policyHash": "sha256:383557a2fae0058856757b6a5538e2b13a8a7294b892e67a353b9785c77ebfd2",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1315,7 +1605,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:4493395577ac17540fbb1550ad91e2628393d0ce5b5a148b67a05e0a058167aa",
+      "policyHash": "sha256:f66a5e7f807f7f82f585249945aa7e377ca1ccfc1e2e3a8e0e0e5721f3cba417",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1349,7 +1639,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:da8eef1532d9cd55c6e6f13a2cba05d375b20a61022af2be83d7219654752fe3",
+      "policyHash": "sha256:f684c87b6b646eb011606d02fdd2d8c6650793c1436486b6b632e55d59d9504f",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1383,7 +1673,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:970dada944dd8e9b4d77bcc72a0ad42c77b43a2392ec498be3956d83ae7d1169",
+      "policyHash": "sha256:9882a4ea0cac063bc4dcc355fa6a3ef0f71d519d35e10b49244ba8ad4755c069",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1417,7 +1707,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:50b81a042548998be07b46fde47410edb9d6b3f172aa92a652b1c815922cf3ed",
+      "policyHash": "sha256:8f64b970e24a0d9dbbf0da4838bcedc5c763c736106f1c908a658025a298bd96",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1451,7 +1741,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:619c535e874cc8017aa231b5a24251a5976fed908d77766e0e29c911f56abd94",
+      "policyHash": "sha256:1f81980415f7df4ebc9edaa42888942f0fbaf2ebe610c75bb3594cd653a14936",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1485,7 +1775,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:152e23e483e3294b3aea0487d268331e81ac9fca4b5baf409e567bf09e68823e",
+      "policyHash": "sha256:287215dd1fc7b9ccc49d3d96e6570fa03a9fec61eb5bb4b10e6b4e496ed84a73",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1519,7 +1809,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:278af25de2b1e9825eeeb3a78fdc3aec5e788b3008ca55b218c4be4c2c924b3f",
+      "policyHash": "sha256:8258cf1ae14c25bf39ca7a85527f65619d7fd5a4316611ce1541f4de7e346c7d",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1553,7 +1843,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:a43d9dd8545b92216e60e711ea0a786694c233b27392db2283f31cc971bcae7d",
+      "policyHash": "sha256:a8a8d8015805c0694d389bae8f888b8e9cdc647c42b1f5fd594d7bed0bfbf739",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1587,7 +1877,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:5b55bb8805222b291896498af4cd738f9d8bc51df2656cf2aaa21ee2928714b8",
+      "policyHash": "sha256:92d2c7a1d1bc8e838e05c56d73bbc74962a60e5de2d53b773c156f6367844f80",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1621,7 +1911,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:c41371175a9f313f6dbf85c0221d21b7d97b882ea506eec7bb07f16aafb2218a",
+      "policyHash": "sha256:4e6aaeb7f307f5b92ca1867847299dd48a4daac0bfb061ceee4cf6b60f6e3cc3",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1655,7 +1945,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:cff180dadd649bdcc06e9fef999d5f220507e3cc203c9a40ecad399e7d2fdd39",
+      "policyHash": "sha256:78438f81a7ceae08919d2f99f819b95e280f3b69006335a8e910712906200fba",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1689,7 +1979,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:1f39ebff9009b34b41d6bd44b8fe1e9a05f5dd38055aba4a94a980c295226c77",
+      "policyHash": "sha256:e2fa86125a432513949e74c431df4d2caeff4f9b9ddffaac58ea0bae65a567eb",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1723,7 +2013,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:a5af810b61ac1960eec88c24ab325d02637de84bbe8f3eded4b54f5f5c1990ce",
+      "policyHash": "sha256:5f34ec0da67df3dcba391ec2bb919620319058ab30e2dab79e2f2416c0068549",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1757,7 +2047,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:8a97b0a36f6be0a48784ee0b6bed60dbff2e30a51daa2408a675d7f6bcb365cb",
+      "policyHash": "sha256:d57d08c78990c15df41b8e589dc26461c2046d13cb70eb295acb19c549476b3b",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1791,7 +2081,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:fbc37e9d391570a8110e05f4ff50839cf5df2c545500d64d27f3b9e293844ecb",
+      "policyHash": "sha256:d3954adfc658ddc02e0f9a2dcac4c6f55c607cf090fe8e5f1f0ca3555808875a",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1825,7 +2115,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:e45c054628c7e7dbceb3a4d01ad83078e9a34a3d2d6263af4611be4ab5bf94e9",
+      "policyHash": "sha256:cd3febe3add918fadb452a5ee762d37f322c1c19187d786b3453625d78305ba4",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1859,7 +2149,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:3561b6edbc68bc31628da5f0fc3f506dcf748730f05d1cb2a515e55b6e8893bc",
+      "policyHash": "sha256:4dedaf3ff9a3c6f4d913270f61ab09df6c21a8d55830b30af9e54ba1c87614f7",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1893,7 +2183,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:a18215668046d624ff1b5289a5a4c35e3e96f209416604d02c47233839b772fe",
+      "policyHash": "sha256:e805d05d65032c176499f27d37566120d4acb4ebd6ff46c6c89beaff0a90c2ba",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1927,7 +2217,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:f83c886dadf76cbe41f9906c6b6d9fe8372c3878124b55342d8c2432ba97579d",
+      "policyHash": "sha256:9708b8d5bcf8c8a7b1e5b683bb54e495a11a95d4aae548ae267d183fe29e4209",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1961,7 +2251,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:69894e79b4f4d1dcf3809fe53a7a365052a9dd903b26b434380ef4f8352b2bbc",
+      "policyHash": "sha256:a60ae25e6e1c3abbe5fa05c6051361bdc7b2a96826712c62f1f3cbc763313507",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1995,7 +2285,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:be7a421d675342016218f7530c0d6a454255b54ee298465edb47f1c8cc75e4ed",
+      "policyHash": "sha256:ca480c88d32a1f81c09f3b421a2fecbd78d896b3e2ca2f739c296e95a20faeb1",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2029,7 +2319,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:12d2bdf5afddd6f79b0f5cc27e729368b798b16071710a581b48e96d55cbf708",
+      "policyHash": "sha256:df3eb6d34cfd6b4725bfac9baeae19ef8cec43d48da4fe8af830780806abc887",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2063,7 +2353,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:d138c42c198fe10a4ce6ded91a75cf7bb42e48c399fee778a8147f2c20fd01a4",
+      "policyHash": "sha256:0eff4f5c23c13b926a320783e63328bf50d953ff319ee765321230dc74ab736c",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2097,7 +2387,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:31bfb84c5f0330326df96eef2018464e7b6704ef4e6a81f2ebb4e722fe7bc70d",
+      "policyHash": "sha256:86520dd30b103ee900055011c5675720198561092fe919f29415794438c06b79",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2131,7 +2421,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:73abc8f92e3bc5a392113df3d9f2a26184ae96e615fe0d7e7f2e0d89367a49da",
+      "policyHash": "sha256:88a11117622759538c16d1338354a7e43af4c18f2369dd62c93d3e599cc5f60e",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2165,7 +2455,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:f428a54ccac526afb1d394fe98213352a91a1204c60688d9f4aeeea098ed9ee3",
+      "policyHash": "sha256:03926c49047166916f16dabb9c51a532dc1aafe00166315393667f7507dd0518",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2199,7 +2489,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:fcd50e0fcbb986f282cfc8fb322878c27e87c264a95860bebf64b7e126aee4d3",
+      "policyHash": "sha256:b90388371f9de600d98ca9c4102b18d273ff4458d4e26ea85a4d33453320ed67",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2233,7 +2523,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:9518d0864c8bd2f19688ede960b4c379dd890755fe9a5f93bcf992722ebcb939",
+      "policyHash": "sha256:acd91b1bc7cb13e4be0ace8fbd02dd7f319a05d1e0449593ae45e1a489066ba4",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2267,7 +2557,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:af19601d741ba3eace49bc3171fb35f21482d6219578747d4255f81b2011e21c",
+      "policyHash": "sha256:ecdc33433b348c44db8e02b33c8b04e7fec858b3cc2b59c501a9e161d9e7a078",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2301,7 +2591,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:a6f4e2e3cc86f877faefe95505031c2300f9b8f47d156a61360f633a0efab425",
+      "policyHash": "sha256:b3c0676814b25b7e031d69c9a4b5eca20722d84275090a38d131e29c72862d8b",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2335,7 +2625,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:3afb9cb44471b5ec215d99963f145ac2401eea68be4b7be5684f5b6b79f9dad5",
+      "policyHash": "sha256:095082ba93040d68329356f2e1eedc76792882fa0585e27bd7ac343bc0acdd22",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2369,7 +2659,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:3a95faf7b4e1b3d6df3a190e6a3d1a907e1e91a1f94a84097e8dc0eb2a45b81b",
+      "policyHash": "sha256:6027c74db2e420ced00cef8cfd5413064f7e4e1e07ef57a675149071b7376c45",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2539,7 +2829,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:797643265b6f2d15195582a7f3f641450c2a015a719bc349a8aa51622fe437e7",
+      "policyHash": "sha256:cf1a598d43e5ce4f7b1ebfe27a5db443cdffd8b486a22e07746f78db5deb6e56",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2573,7 +2863,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:f9f409429ebc42fa8fe927be91be595891493d56cb4d05afdf04553af8851450",
+      "policyHash": "sha256:290765fe9cf458903eb0167e8a436165700cb08fd1683337d112e104b7257049",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2607,7 +2897,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:4618d652fe9a25d5840e35ea970354a2ce4c290c1ba5390e7de5f1d4192bcbd6",
+      "policyHash": "sha256:c63799d54f63fe5c62b10406a3020c33de307f2b61eb7d5a607123033e8159f2",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2641,7 +2931,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:ebc0ea22c237bfe3eb9979d85f93427bcbb1f5470db0022ad75bfee36b10ece0",
+      "policyHash": "sha256:58652ce80ad1e0c5552cffe068f7ed6aaf4d947abd8dd4ebf14784beea022b1d",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2675,7 +2965,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:06771f467665037736679dc0350c8b657b56ca823b9757a5de8e46f18ec2c411",
+      "policyHash": "sha256:3adf75c7e573e7d024a122f058bd3da580b7a8108744e0e557ec42f2e7318a84",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2709,7 +2999,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:2f580ad34dc4108d980026523def104dfdac6f71207a4a8080c8fc0aca751bcc",
+      "policyHash": "sha256:8bbf1eed943e80544a9634960e7f22b5dca8320b11b747442180d3556bb949a3",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2743,7 +3033,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:bd101913dd004e32742d218030520d8963509a765c0a3dd1368ec984819af725",
+      "policyHash": "sha256:bb46743a26ae4af6df0504f3eff4cf1881eaf8275e106809717a32c7fbb3f849",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2777,7 +3067,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c7c7cb08f2543cf910506a043d8e8a5a3010a331f0ad99a2a6eec944b62300d4",
+      "policyHash": "sha256:20f47cd1fa568562ecfbd1319c2a848da77f2be15914998f0da016db7c34f6a0",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2811,7 +3101,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c2e59bf593dbfee1141b1c5f45f85f50fd90058027a7a62e96ab2c3b9b127081",
+      "policyHash": "sha256:bff3c75786a427b8aff7980857b6cebba092bbe690b7488c936cf4800c709681",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2845,7 +3135,7 @@
       "subArea": "Pilot",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:448a0e122514834c60517d5d0deca8f723f7673bb83158597e65ce4c3e394904",
+      "policyHash": "sha256:8892fe246484bfa03acf6d60403dc0f2389096807d3ab3da6924d6a6d1a00a88",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2880,7 +3170,7 @@
       "subArea": "UAT",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:5d0ecc20f6a927fe89ee064a8e0b3f44f444ffbbffd4def1f508e6990e57e7d4",
+      "policyHash": "sha256:bb8f20cddb31a86d78619c58611c22870b15d9052af04f7647cdd372444be17f",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2915,7 +3205,7 @@
       "subArea": "Production",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:d9b19f57aa6b0f5e2dbedcad23695f0360d40b7a4e1f430337a7a6b77fbecab7",
+      "policyHash": "sha256:f0a80d714c4fbcf4f3710da98ee359a81dc4f1035a21b496f0cf83d09b5a9345",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2950,7 +3240,7 @@
       "subArea": "ASR Rules Audit Mode",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:e1742c2c52fe98bc6659ffb663d0a7410419160d6f53a67fab3679f468745758",
+      "policyHash": "sha256:867797c3147b04127e01b0d34aa704e30ac4e634919485873b2663758e41372c",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2986,7 +3276,7 @@
       "subArea": "ASR Rules L2",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:62172569e7445d6854f7c6dfb1ed27083e43c14c9a2b630fceda1cff56a1a3ff",
+      "policyHash": "sha256:dc0fbf8a315ae80d0dc142c0d863689b4e43978a10e79afdbbc1cbb365930733",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3022,7 +3312,7 @@
       "subArea": "ASR Rules",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:cb237b7cd9ea6eb348fc4d12b91be6115ebe1c4414c80441138ea6e37e060100",
+      "policyHash": "sha256:4d207b5a51ccd5983afad5b343c162d03091de05ce73c5549e942b26d11bc91d",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3061,7 +3351,7 @@
       "subArea": "Antivirus Configuration",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:7f2948057e1af14422ea4bbddcfa85ea4de9d240ce5367974eb93749cdfdfa36",
+      "policyHash": "sha256:77b1026363f5a444154ea1079ee518df303c2bde4884fa4cc81bf6802f1de7e8",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3100,7 +3390,7 @@
       "subArea": "Security Experience",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:c0e09b9df9e908faa12533a0398c412e52ade02f83d78605585055a174715cfc",
+      "policyHash": "sha256:44dc4e19469b0e7ed6cae28f6bf27dbc1e4a1552673acaf58344f6af77f47497",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3139,7 +3429,7 @@
       "subArea": "BitLocker OS Disk",
       "securityDomain": null,
       "settingCount": 25,
-      "policyHash": "sha256:d14e2d30512921d5eed9dc9dc8b5660da97e25547dd9041c390c2cc78937ac94",
+      "policyHash": "sha256:167e34a5113f5a3bcd56a15c5837fe8f2ca1e72a4bbb5e816bb13dd18d5ed1d6",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3177,7 +3467,7 @@
       "subArea": "Local Administrators",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:1171f0196e9e6f72933165dc84eeeb4ab56602aeadf63ac69b87da0d11bb4666",
+      "policyHash": "sha256:8755e9e39e400b1f8bac4dd85a7f93c4208ca55efe0fb436dd7ba11df72c8899",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3215,7 +3505,7 @@
       "subArea": "Firewall Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:6bf0ff3b6a0f7c70224c871e71f8c00f5b43be8f06b5adabc485c2d0b9ff6ff7",
+      "policyHash": "sha256:1a2ab9495d41e185b56c1465d71919f01d53ced00d289f731d43aff4e371cbde",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3253,7 +3543,7 @@
       "subArea": "WHfB Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:d8646d7e9fd98cd2dd873454dd7d85392ba279d3d9d2404bbab9a85e87ac2bd4",
+      "policyHash": "sha256:e0fd4e5abc2e0b3f0a2e43be836b26a19684478d4d0e96e061f705d053e05814",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3291,7 +3581,7 @@
       "subArea": "LAPS Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:6583885744b24bb54b3f01e860612fc85a5ead450832e26bae7225e38df93ad6",
+      "policyHash": "sha256:ca2434dd3ac2706fa9b37a33370a295d2a096edcb853e2e9f060b8db89257a5b",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3329,7 +3619,7 @@
       "subArea": "AV Configuration",
       "securityDomain": null,
       "settingCount": 31,
-      "policyHash": "sha256:ca591633107c02df3b3422adc1de8e1f7e3f89f3565f1ef7c0c2f595eb318b61",
+      "policyHash": "sha256:2c21c158ff1b5360494cd451e9eba31b508d52b660297173689c6e7ad4f0de66",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3365,7 +3655,7 @@
       "subArea": "Security Experience",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:407f966e8deb0b62da2f82963f22b4d58f4238a6075a5d645d19348a193c94f9",
+      "policyHash": "sha256:8b2be0f981cd01af38d9fa456fd1847ce007a4f6d262d7356715a32f10f49d2e",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3401,7 +3691,7 @@
       "subArea": "Ring 1 - Pilot",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:7b25573eed9fbf91c8d0c58d746f4789b5938a9b1d8af14d99a9bac8b90923d2",
+      "policyHash": "sha256:29033e03c8586650ec2452f7bf7cf58ad48bbccbedfeb3202e5aa70fe6a89687",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3437,7 +3727,7 @@
       "subArea": "Ring 2 - UAT",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:3314eb9937df70938fbe1325f64c60b596ff27880206ea0f0725956f0b2b64b8",
+      "policyHash": "sha256:4fdab8e0330874c859a8b85140ed72a318f2a0558a2a3e02812fe713e7413f04",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3473,7 +3763,7 @@
       "subArea": "Ring 3 - Production",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:54b863ed67116af46459454ceba18182ca875be7ec89317d66c398f504be9f01",
+      "policyHash": "sha256:c24b8628e7a002771c4f682513ff5cc2365fba8a9e992b5e98659b4727d6a2e6",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3509,7 +3799,7 @@
       "subArea": "BitLocker OS Disk",
       "securityDomain": null,
       "settingCount": 25,
-      "policyHash": "sha256:7d0394ccf063f5934d50cd8399b6d9b43dce3664eb2c2b8298b430e40ed9d016",
+      "policyHash": "sha256:2f00fa63030bea3df8038cd18ab6205e3de15381e6a65186774bd1d68ea13839",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3545,7 +3835,7 @@
       "subArea": "Personal Data Encryption",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:0416612319c6fa004c22602034a04633ac126fca289281ee35035f3ad9e999ac",
+      "policyHash": "sha256:b18bfc102609e8e0a1cd6c568f17cc47d4124cef222d2a7951f1ab30b2de6009",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3580,7 +3870,7 @@
       "subArea": "Local Administrators",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:e0b3a2218b383b3494f6d537f041fe5300c9c005ca15b170b854056fc4948509",
+      "policyHash": "sha256:91c7b1d336620daa3320d49c4fb0c051bd6da1bdc207ca650f91e7c0511229be",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3616,7 +3906,7 @@
       "subArea": "Firewall Configuration",
       "securityDomain": null,
       "settingCount": 31,
-      "policyHash": "sha256:949157ac5a5443edaf2bdcb4a0d2b30c13b425a525a86ba61f29dbbe11521cf7",
+      "policyHash": "sha256:50302625bf8829b26502ba5ab0412124f0d0f0af87cdaf67dd7d55775cc075cb",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3651,7 +3941,7 @@
       "subArea": "WHfB Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:c6269f2dc21c79e92f570154a87d0dfe61bd6b5138939857f36ecffa2f02d31f",
+      "policyHash": "sha256:f5b40a8f07fca52271567ed6994cb9072602b1db062b3d397638def206e6b73e",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3686,7 +3976,7 @@
       "subArea": "LAPS Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:6c77522736888740b5d4ecc4242880405538b2659f74c14211a6fba2f2bbc419",
+      "policyHash": "sha256:5e27b20a648704365e460f82d30ca4a298ae5d3e2aaa1a42009b05d1154b4ab9",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3722,7 +4012,7 @@
       "subArea": "LAPS Configuration 24H2",
       "securityDomain": null,
       "settingCount": 12,
-      "policyHash": "sha256:2b2a6f4daec61d40b3e0461f0216229fad10b2e493e2ad983a5488a2053afe9c",
+      "policyHash": "sha256:30b4ac6f46ee5fe695111a018710aea1ebf625f2baa25b7856ea2799723b162c",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3757,7 +4047,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:8989dcf29f3d8f5237a4b95074ccdfb8a6fd2978702d556499620c1d2533a3ee",
+      "policyHash": "sha256:fc90b61efc50a42ab78f922e408779d6090139a13259043286fe1c401aae3cc0",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3791,7 +4081,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:1a65a2d09e17ff82942a7a77bd08f11fecf105951da9638e24f127061e15b4b8",
+      "policyHash": "sha256:c258e9e4524f16e97e222c2246e4087506ac62d9061598d229e232330351c51d",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3825,7 +4115,7 @@
       "subArea": "v1 0 TEST",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:853e4641187c52e496bde382410afb4db6c746e32a5dbd62dcc6a32e8b9906cb",
+      "policyHash": "sha256:75601a0228b422ecb939d8a7896501ffef5ff4bbdc4e4268135209d8029f6e90",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3857,7 +4147,7 @@
       "subArea": "Platform SSO",
       "securityDomain": null,
       "settingCount": 28,
-      "policyHash": "sha256:f4611259ceeb2dbec1c0b070ac1efebd7725962936ad750f051bceebc17bc756",
+      "policyHash": "sha256:f0118e0904199ee734ba6ba2d52b20b33b4b7276dc74f38487dc65bc649be658",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -3892,7 +4182,7 @@
       "subArea": "Antivirus Configuration",
       "securityDomain": null,
       "settingCount": 26,
-      "policyHash": "sha256:2b5433e53cad61039c28e3d25159dd04501a6b8e5ddc0a86f3d239daaee80da0",
+      "policyHash": "sha256:a1bfbf5f1a0227c1f81c6632c6b4b10abf11e5e8bc786c93f47b0582621a3079",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -3927,7 +4217,7 @@
       "subArea": "MDE Configuration",
       "securityDomain": null,
       "settingCount": 69,
-      "policyHash": "sha256:cd4ebda1650bd3f67ba2c19063c9efffa7836e26055f5f5a7f8970f061879116",
+      "policyHash": "sha256:7ad201572f64d925877999056806a60ce64458c5b7f94fdfd336d184b4727cea",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -3962,7 +4252,7 @@
       "subArea": "Accounts and Login",
       "securityDomain": null,
       "settingCount": 8,
-      "policyHash": "sha256:797861970e7e3c324d13727ef7360fefc349141217072ffb548a7a4d3526ab26",
+      "policyHash": "sha256:01522039c01e739d2336d58387403cd90b8bfeee675967a4b4f8b208577df173",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -3997,7 +4287,7 @@
       "subArea": "Restrictions",
       "securityDomain": null,
       "settingCount": 39,
-      "policyHash": "sha256:c2ca70a2e778a5944d969658946957917598f7b6a94bb3a65e640cb48168f9f8",
+      "policyHash": "sha256:7853b63c297c33dee54a96b8fab7a6c39b6022a7d4875363dd72150739e7aa8e",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4032,7 +4322,7 @@
       "subArea": "FileVault",
       "securityDomain": null,
       "settingCount": 8,
-      "policyHash": "sha256:cc2a99f08f93878f9d8d92d39aebcb3d7aad57b498668050a8d1c5724e118199",
+      "policyHash": "sha256:4b06e91ed6627a100f792bf8f2ec35cd0c26ee8338f39037252d8c0a298475d9",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4067,7 +4357,7 @@
       "subArea": "Gatekeeper",
       "securityDomain": null,
       "settingCount": 9,
-      "policyHash": "sha256:47c2883bc58188f82189cb5c509640b942d623c9920905e5ea5267f32789ef9c",
+      "policyHash": "sha256:422b8ce29327c7df2527f596bb914f51935a3a253c405dfc20917cae0a7db506",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4102,7 +4392,7 @@
       "subArea": "MAU Configuration",
       "securityDomain": null,
       "settingCount": 16,
-      "policyHash": "sha256:1d344ba58ff66000101318c1640cbac8eef2fd1c3f00fce30ef5befa597bcee0",
+      "policyHash": "sha256:eeab3ff9247ab308f2abcc2cff3a4822faee67758b77f191e2004d201ab4c8cd",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4137,7 +4427,7 @@
       "subArea": "Password Management",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:0a1145538ef3da00f8e25ba5d237486739e743634ce045c8fc111317bf74128c",
+      "policyHash": "sha256:4756aab878da22b131f5afe35263544e1d3e0e6f90ed0a768b39e9ffe9be7470",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4172,7 +4462,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 29,
-      "policyHash": "sha256:3f34955d6bf0dd15cab439fe19e072d1d74e233ec8f4281822e687a30c19e6e5",
+      "policyHash": "sha256:8d6c9c746d28d874223e6a40b8301a52033e5d2b3ae367498f988cd16d3178ed",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4207,7 +4497,7 @@
       "subArea": "Extensions",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:d39d01d82bb556a5170d5fcf905f5d2dbd8d87919ab8ac273c43f1e02b6f5efa",
+      "policyHash": "sha256:40345d8504a05fe3ec85d5956a9a1aaab9661fd19ec8821503ae8a8e6de340f4",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4242,7 +4532,7 @@
       "subArea": "Profiles Sign-In and Sync",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:be712c8f026b8bc611eb20299d0a1b68e14e53257a53722dc335af8f72a2aad4",
+      "policyHash": "sha256:d9c0121e161ba670d144f194dd568e026d25cf44355b60fd76ae9003d865b2fe",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4277,7 +4567,7 @@
       "subArea": "Updates",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:6d6128085330842358fb5465865c0f12e60993f706dea28502fc154986b28b3f",
+      "policyHash": "sha256:531fc64aaec20650584ef4b52032e48cb62f8ffe9596a2feefc68c3f1fd290dc",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4312,7 +4602,7 @@
       "subArea": "Office Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:2201844705a071624a687699fed6c06cfe295e6772bbb5ec2be21df49f84c6e1",
+      "policyHash": "sha256:92a4653c2e82067ddbe19ac4c507b28adb407187c7bad5b9ab9e1351685c1c26",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4347,7 +4637,7 @@
       "subArea": "Service and Access",
       "securityDomain": null,
       "settingCount": 21,
-      "policyHash": "sha256:1904588fc8828498074df997af21b036123b8106aa5adc6c06b8f875e33682bb",
+      "policyHash": "sha256:0240d88c929627454a6d158508f48bd63867bfa2f4e1ef831ecf481d3d855d7e",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4382,7 +4672,7 @@
       "subArea": "Known Folder Move",
       "securityDomain": null,
       "settingCount": 15,
-      "policyHash": "sha256:95f1bea07009e58a7dfaffa2ff9fc702b10cd81cad613f3e79e547d4accc8da1",
+      "policyHash": "sha256:65d4dd9fab243871c2dbb410819a234309b48f012ca4772410e2f21bbebbed7d",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4417,7 +4707,7 @@
       "subArea": "Update Configuration",
       "securityDomain": null,
       "settingCount": 8,
-      "policyHash": "sha256:a6ba91daa1060d24af3981bafdbc47184412d0b4462f38e0fc2af97a3932163f",
+      "policyHash": "sha256:3953a34118d4d199c7514896f4fd765164117d0154b1bda7e1c489d151caa658",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4452,7 +4742,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:3e847205864c1bd6abec1aed310408c9f32d9cc24e4d29a94fde5c53292c3c57",
+      "policyHash": "sha256:9aeb10a91d626cad534351b76632b12c8a1fcfa86e8be44afea46dd97aca0cef",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4489,7 +4779,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 90,
-      "policyHash": "sha256:469e2c63472c11266da8a741112911870bc2cd7e9fe181714aa88ad60d773973",
+      "policyHash": "sha256:8e90524b4458a73c430ad6d846102e8e749e36aaa53ea77ad65b6dbe2aa1baff",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4526,7 +4816,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 27,
-      "policyHash": "sha256:6c4b78c640ca841234b83f8fc6c44758b7146bfc404d3908c9459ce33d87fd89",
+      "policyHash": "sha256:97a545126eb814f86932f9a14abc8cdb2e1bf84034481fc4e41b1d3e98a612c2",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4563,7 +4853,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 11,
-      "policyHash": "sha256:22aab2cb365d41a10cd2ab105afd1de8cad720b7ed89c4ef28a9087d5e13edc4",
+      "policyHash": "sha256:9df0fb8da56d5cb6fd5347d2abe8f0bae620794605c844c3e10d91da25ab81e5",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4601,7 +4891,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:bad02103844ea58c29051ccbe3ffda12442539bb7f8c9bb69a486f62d8f9bcb9",
+      "policyHash": "sha256:62ada529ac75665c9f1328c2e35aca7b4f0b1f1326eb61a4a077f984186038a6",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4638,7 +4928,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:63417cf7b4805293e4852d05c31ad4866f4a4d7751884c717754932ddbc49b81",
+      "policyHash": "sha256:893b5565af62d25b8fea6f4eb01319f3ed7b00c8d0f16ebdd95d8a8d83c90853",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4675,7 +4965,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 9,
-      "policyHash": "sha256:e6a826bbef8b21c920d985470f4e517e4aac29628493d5f11ddc6bedc8d41d9e",
+      "policyHash": "sha256:59aabcceea7772642bfaa1defbe66c6cd866954a6070bd48d9f799848bdee7c4",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4712,7 +5002,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:ca1c01a61cc29be0745eb10d3b59bc19cb94232895e33a6fa7e59c938a4bdf90",
+      "policyHash": "sha256:7dc9b04b826d7899f4bdbccb33198697292c5c131b80db5ef7892ac2148c4950",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4749,7 +5039,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:41dfcac62ba3b997bb5058179832373a2f0349244ad47b4dd95a8fa9f5a1d368",
+      "policyHash": "sha256:6e349faaa1b1252af1f3b2dd80b2ed8821e0335d98446cda6cebe7e495330b60",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4786,7 +5076,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:45e76c49944d20a8266bd16a470f2f8994679b1914416ff40038d228bca4d28b",
+      "policyHash": "sha256:6c1bd3167c9e473b2d6556337d7380d57d4071ea11f5ac71f47628e7a270bc96",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4823,7 +5113,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:6681d25ab99d2b3fd0f1c877be9e5ac6c8a721837b1a625eb15b3d409769a2c6",
+      "policyHash": "sha256:0d755d6cb109b71ba3d95502846303ae4e91c5e7ec00cdc7eae6e396759bd54f",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4860,7 +5150,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 23,
-      "policyHash": "sha256:f2e53ae63fc05f453927378d9501df54cde78ea637968f25eab08ae8cd406237",
+      "policyHash": "sha256:4239f12f799aa1e0e48ac90d81aecd44a4ef72b7b12bc7f3f644f4f0a347d9c9",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4897,7 +5187,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:4311ca756e11e86b8a3c8e720c359869fdc5ee5cafb2b010b3f8e133bbfc5343",
+      "policyHash": "sha256:48d6353358ad13cf36cfd51e5e8ec2a5db14592080c49b3c81360f07cece02fe",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4934,7 +5224,7 @@
       "subArea": "Extensions",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:dcce1cac2a813634b06e575051908c0ece258fea17d305e0f664c9eedb885304",
+      "policyHash": "sha256:ef2e48f677699f852dafb7c4d6481fc7c66d608e6ebd1f766d8265c3597d7224",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4972,7 +5262,7 @@
       "subArea": "Password Management",
       "securityDomain": null,
       "settingCount": 5,
-      "policyHash": "sha256:28e3eba401773308d846eefb826d04c6022dade63a267aecec837f22c4e63488",
+      "policyHash": "sha256:fa3ce399a7168049f1b3010df989a794250b22b80034a3df9e5681fbbc9f7451",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5010,7 +5300,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 51,
-      "policyHash": "sha256:8921bd096c9b8c3826f0f653e6f37aa68bed523adbd3839f7264d584b6dced42",
+      "policyHash": "sha256:a1d407ea9fa8ddbf8f62a5a788435cd882302d09c74a7db3cafd207637218cae",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5048,7 +5338,7 @@
       "subArea": "Updates",
       "securityDomain": null,
       "settingCount": 22,
-      "policyHash": "sha256:d463fd5e168f4002f1384be24fae8fc28ba8696651f8054ba74890c1b81050ee",
+      "policyHash": "sha256:21bfc5910310b3d7a64a5e2c1ffbced562df54067c8bdb105be73dac9f74d0f5",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5086,7 +5376,7 @@
       "subArea": "User Experience",
       "securityDomain": null,
       "settingCount": 13,
-      "policyHash": "sha256:ffd86e76c96af448612a2dde722ed2e545ee351032eb5f8dd005e40918133022",
+      "policyHash": "sha256:5fe0d91b84e4f8e37050c5513779e1730747b59903ff5224db8da447660347f6",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5124,7 +5414,7 @@
       "subArea": "Config and Experience",
       "securityDomain": null,
       "settingCount": 29,
-      "policyHash": "sha256:5053d162825a0b2b62f34449eeb793f177e521b792f0d3d20e0184d49ad05c9d",
+      "policyHash": "sha256:67320517d57394b085470bb69e9bc12db8719e27af6bc00ce98573d52f9c13e2",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5162,7 +5452,7 @@
       "subArea": "Device Security",
       "securityDomain": null,
       "settingCount": 209,
-      "policyHash": "sha256:579c3dfb77b0dfa17b0b7554450fa0ffa5eb44aede36f673e00a49350b3305a1",
+      "policyHash": "sha256:65aff1e6760e0bb46b09c6c4ff0bfacfba8d1f9aeea1f0983fbbfa254e3245fc",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5200,7 +5490,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 221,
-      "policyHash": "sha256:dd9a80cf1d81517e4235ec6d936e6db290f7d52c10848cbe282a480e1377094e",
+      "policyHash": "sha256:42e5163e7bb51345b23496251c5678272229eed9082953130289eb192eba8d29",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5238,7 +5528,7 @@
       "subArea": "Updates",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:6792eda45ade56734c8701e07fae0baff3f9678bc1ba979cdb725aab4293d33d",
+      "policyHash": "sha256:716537d6bb1cbab8207f88e5f0510dbfdceddccaf991f2bb0770c94fd9b71443",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5276,7 +5566,7 @@
       "subArea": "Configuration",
       "securityDomain": null,
       "settingCount": 18,
-      "policyHash": "sha256:ea4a7b8305007a65a61c118ba642f1d53e4f559fd2bf7b3689e3a8c69fc28b5d",
+      "policyHash": "sha256:b6554dd57dbac0ae99bd49627bbee453023bff4272d1ec68084de2c53fbe09ae",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5314,7 +5604,7 @@
       "subArea": "Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:2b14c9d3d020a7a7fbf128de2e0d908913fc71180a7012b1fe7d933430498d46",
+      "policyHash": "sha256:7a063dfd4880edb932421ea83e73360fdd700f6789efbd597bb4a25405427616",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5352,7 +5642,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 2,
-      "policyHash": "sha256:4e43f89904148784503721bde452ba16dc7c0d969c89d75cf1b9fbacacc053bf",
+      "policyHash": "sha256:31b326f41ca688201e05b49f7e02aa1639874ebbd9d013cefa96e9a20469aeba",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5389,7 +5679,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 2,
-      "policyHash": "sha256:e1501aa2a5865b5b17570921ab8a93e34325209bdd17436767170c0d4f3f71cb",
+      "policyHash": "sha256:0e15b62e0a2ce30bdadc43d57eb043ff1faedebe94b383b1ce9ec65e14ce5c74",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5426,7 +5716,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:1fe16ffe15eaa9c0325450b714e6089d557763414cffdd6d0cd4162d4ac1df58",
+      "policyHash": "sha256:8fca4dff0f409ef4d9c797a6b91d81c55cec9698ce839d86830bd742fedf860c",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5463,7 +5753,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:2ff47d09b45035ced5a21631589ff75bbc7830d0d245315fb09e4b1d9cf9dec1",
+      "policyHash": "sha256:395a02a7d618c1de1c3e23495021b4aa2ac697b556af8fdc2bc7b6e44412e737",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5500,7 +5790,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:9dc9fd9fecce59559d6e457306f34f3a41201556beab9babe97b35c587d5b425",
+      "policyHash": "sha256:770cb2d9253dd89d26017587e02d310bc744c7efc58d2e1670564568a9709646",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5537,7 +5827,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 2,
-      "policyHash": "sha256:9708903a3ca0a83a395509c385213c66ff1120db6b79875da9d227af29f67d92",
+      "policyHash": "sha256:3f424526ef415c66e80e26c4d25f2d15c20e8ad343ea4c6026099cd23217ae7b",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5574,7 +5864,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 26,
-      "policyHash": "sha256:cb69fcb81828e34e78e4996b62a9a90081ef3f5bb6c065ee7c9a0c6fb7433f23",
+      "policyHash": "sha256:ec6d44816d5605774964bde5e458acd985bde6dec52573984dd74aa782127e6b",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5611,7 +5901,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 2,
-      "policyHash": "sha256:e01217aa84d192fd572bcb93364fa6a0ba5363729f3ad6702c302c90bb02a1d6",
+      "policyHash": "sha256:d4d5e6fb89b5dcab720de7b78a0255de7879cf3dcb5dc06f95914e1bc47a7d02",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5648,7 +5938,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:551ed5b48de19b52d5f08bd4be6bbf12652de1a7596de1637343f7560a220c51",
+      "policyHash": "sha256:f45a6913fca08d02202e8255ec011d4880477e679cd37d0e02bf0232d1875b5d",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5685,7 +5975,7 @@
       "subArea": "In-Box App Removal",
       "securityDomain": null,
       "settingCount": 26,
-      "policyHash": "sha256:65fba4bd584d35d540d3ac817b9893455fc801fdf87028615b649c89a77cc2e6",
+      "policyHash": "sha256:98578f16a3061a0820daf7b01596210a9cd71f85640a19e73d2789716dcdcd23",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5723,7 +6013,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:1a9a0fee45e065d44afe52a54d7203e806473b74a07a4662d13d87d97ef78790",
+      "policyHash": "sha256:909ef1ff6d8639f2c5a79bceea1bd7616cf58fd9dc1b1fe9b7735f9b5330ac21",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5760,7 +6050,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:09fc19f61bafa7be0d8c8127afe6caa9165bc1b759ee990325b83659acdc2ca7",
+      "policyHash": "sha256:4ef2bda82391171559e2ee239bd70dcfcc574c20b0ddf0bc3b3feb6a78e9d21b",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5797,7 +6087,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 2,
-      "policyHash": "sha256:5925f6d6dae04006dd0bca13ed9b5adbc935307f123f5939a608d7e15ea06375",
+      "policyHash": "sha256:316c3eb62eceac4a67134eb2904eaa438f257bf14353e1f3929da9b59e4b6a65",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5834,7 +6124,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 5,
-      "policyHash": "sha256:a40e2e330f0e5f56e87d8be813646b9cd9f0eedd89f3981d485564b84ac5b8df",
+      "policyHash": "sha256:56e5764c155b0f1c66e781944f2d2bce597db569ce05c6887ed1e4b1d3f25dac",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5871,7 +6161,7 @@
       "subArea": "Delivery Optimisation",
       "securityDomain": null,
       "settingCount": 12,
-      "policyHash": "sha256:9d8e97b1bab8d67b3268663c821079d299633f9c0d817a9a6a2fb66da5707d9f",
+      "policyHash": "sha256:a5a5994f537c9b15ddfa86e24d2b1590eb35d0819929ca98d9ef1229f3e0d0bb",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5909,7 +6199,7 @@
       "subArea": "Feature Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:987abe2f6da0d2c440621f02b114255fff3068b498d605b4519eed4f07191afe",
+      "policyHash": "sha256:77373c9deb712324a9b4762b2c8d3787ac17940ffaedce79de772fc6abc6d2db",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5947,7 +6237,7 @@
       "subArea": "Additional Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:d3fb94190c0afbb16d3cb6e5feac2f05cd8714d22e4569789c810a3d6fd10518",
+      "policyHash": "sha256:cb7b53d9d4891b33693778543f5eea1cea2b7e1e4d2e80c605f0c60489e3dbdd",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5986,7 +6276,7 @@
       "subArea": "Profiles Sign-In and Sync",
       "securityDomain": null,
       "settingCount": 9,
-      "policyHash": "sha256:5d2e830035a070e25a24182fe54964c03fb5d50e2e1c7c45ac3f7beedab15dd1",
+      "policyHash": "sha256:4e79dff44128ef75357251775dcae065754bca2e13d71d597b492b36f6ec5e0b",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6024,7 +6314,7 @@
       "subArea": "Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:77e42ab1714afcb294e30157e653e07db0d00d7ef2fcaad1076977e50078453a",
+      "policyHash": "sha256:8627d80ef6716fb60fc5a5c78e88de57a357ef3f4692e36119ef6689472f9781",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6062,7 +6352,7 @@
       "subArea": "Configuration",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:af353c286bb35e6e6d553146f46051d4f29545363297db044ee9a4028c348888",
+      "policyHash": "sha256:f3df3669f8fc8a10a1643fabb37092c0bde49dde10a3ebc03350813bad075d59",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6100,7 +6390,7 @@
       "subArea": "Cloud Kerberos Trust",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:2d775af99447a7e1a8dc0a063584b9505a03819669cfd5490ebe8e7ef483a4cf",
+      "policyHash": "sha256:69d61ee60077ae5ceb36778ece19828ef745d8bae6ac18907525b90b48373d6a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6138,7 +6428,7 @@
       "subArea": "Reports and Telemetry",
       "securityDomain": null,
       "settingCount": 5,
-      "policyHash": "sha256:48d974d580acb08fae6cb383e9e1a62bd5f61af7a14de1cd4fde60efe6e18eec",
+      "policyHash": "sha256:a2420eb0b70634881cde3225fce97cbeed42b52cf0c9f059978af15ce4f22a37",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6176,7 +6466,7 @@
       "subArea": "Copilot",
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:e26671613f6ef31f02d666dea8b0c6e8dca103e4286c32a9e095804e826ebcc0",
+      "policyHash": "sha256:a3792abd4b9b69d6f3e53ad0348099e56c353ea1fe0f9674d1027354406764f6",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6214,7 +6504,7 @@
       "subArea": "Settings Sync",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:8c002f9ca978ccb18a744e810232318558bb801b7f8cd1b42a398a2a9a126e91",
+      "policyHash": "sha256:3888ea928e94f846e1faf9729ac58f1c91befa9362f729370f97b91ebc39f922",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6252,7 +6542,7 @@
       "subArea": "Passwordless",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:6114da6aa63c41a5d44f193e5ff72772274f197f4531e4812f214ccedb2b25cb",
+      "policyHash": "sha256:0bc755e459eed639f0eda0b29cd3177ed3150629a61d97c9c383c9423f8d7028",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6287,7 +6577,7 @@
       "subArea": "Additional Configuration",
       "securityDomain": null,
       "settingCount": 10,
-      "policyHash": "sha256:d26d2955a3429ae4335758d6b914decc1e5d3652f68f64c209d39fd823c1d0f5",
+      "policyHash": "sha256:23be025a17024c9c78d28377dca438419b2ab94c479950906b0104558395c087",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6323,7 +6613,7 @@
       "subArea": "Administrator Protection",
       "securityDomain": null,
       "settingCount": 2,
-      "policyHash": "sha256:91d9ff4527016639339acae3b9bad0b91f3962c4861465a3fb248d9a536736e3",
+      "policyHash": "sha256:aa0d13ffffe9407eba496118007e1e6338e075c1fa538ac8d922cabc6d1f8d05",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6358,7 +6648,7 @@
       "subArea": "Audit and Event Logging",
       "securityDomain": null,
       "settingCount": 40,
-      "policyHash": "sha256:87a34e0449ea900803247b72466f71e9789c4c125193bbf923def130c9172eba",
+      "policyHash": "sha256:42fd1a8e5c77390d456bf7b013df7c34a86321e10ed6736d39ee3444fa45c1ee",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6393,7 +6683,7 @@
       "subArea": "Config Refresh",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:306248b28767e84ce549060fb20b1d27a603ab6552266a9d321fa47355ec9fe5",
+      "policyHash": "sha256:55778cf1faf66499c93f6214c589b7dae4b602944c98e9a6621e6feb31b4b8f5",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6428,7 +6718,7 @@
       "subArea": "Enhanced Phishing Protection",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:096222a0feba59e4bd62ee122349819e3f244f57bd61677e601f81a525dab435",
+      "policyHash": "sha256:e05f4fce2d60974556e8ae879bd98123800447b2ceb08326e6455ca20762b253",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6463,7 +6753,7 @@
       "subArea": "Local Security Policies",
       "securityDomain": null,
       "settingCount": 23,
-      "policyHash": "sha256:5ab57088e7bb1697599cb007913d077dee3e0d8665549be15e9b2308928903d3",
+      "policyHash": "sha256:f88a8d1fc60058f2a47ef5aca3311fea243b2163cd654d4cd8c9bf76000abff8",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6498,7 +6788,7 @@
       "subArea": "Local Security Policies 24H2",
       "securityDomain": null,
       "settingCount": 23,
-      "policyHash": "sha256:bd2a1b47451db7574c8878292fd4ffda261d84f1a898a5f0c1b4266ce1691531",
+      "policyHash": "sha256:8d73016c7bd4706c178e56f8d9e48411382e30899fe53fd3824cd8249ce61b46",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6533,7 +6823,7 @@
       "subArea": "Location and Privacy",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:0b04cf0a31641b2f44d7d6546dffbcb831c135b31f54e92d1d6dafd0453bb01d",
+      "policyHash": "sha256:79a867792bd3aa18eb0ecf1510725a26851166fb986a878df4d04c48c02b9416",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6568,7 +6858,7 @@
       "subArea": "Login and Lock Screen",
       "securityDomain": null,
       "settingCount": 11,
-      "policyHash": "sha256:378fbe561bef103067670abe00a5e0d7c06b115240bdb28a6ce185407dbfa699",
+      "policyHash": "sha256:8b858fa00026db3a76836947e8df60a5aa7caeb905bc5245438ae2d452c3bf38",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6603,7 +6893,7 @@
       "subArea": "Printing",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:1b3481af6a9be234fefe7a6811224573129ef44d791a342707066a378c982abf",
+      "policyHash": "sha256:bfc13e4a3b432f23f6e5f661ffe625f451aa077e68fbe1be8c61dac5ded6e07e",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6638,7 +6928,7 @@
       "subArea": "Remote Desktop Services and RPC",
       "securityDomain": null,
       "settingCount": 12,
-      "policyHash": "sha256:974bf74b81c626b97fa9bec1fcf88c8d27491fd6785e426b5547387ca7a6abc2",
+      "policyHash": "sha256:57af8e78b84cba19402a638ac1e81136ec88c9619864b9ad43076871f19873cd",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6673,7 +6963,7 @@
       "subArea": "Script File Associations",
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:0a8676839533b3aaac1de60098f29d9d1c8bbdd4ad96c7f71e77547f1af496ef",
+      "policyHash": "sha256:d49abafe5b248ec74bf0b462596509cc4d55886572c805a5eef7695f14b75db8",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6708,7 +6998,7 @@
       "subArea": "Security Hardening",
       "securityDomain": null,
       "settingCount": 96,
-      "policyHash": "sha256:91572a7474fc9c8d66ad1bff9ecad449cedbe5090873ae99022209b7c137eb9b",
+      "policyHash": "sha256:60abb9345ee18b124738dbe8b035d41dd50184ba5402e1ca09eb1368d9fe21d3",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6744,7 +7034,7 @@
       "subArea": "Timezone",
       "securityDomain": null,
       "settingCount": 10,
-      "policyHash": "sha256:45dd2f2067567a0188bb26bfa437c451ffd451fe71507d81976cb7508d5e37a2",
+      "policyHash": "sha256:f33353abcdea1b352fe52b142991b0e28125bde3f3f012a7f427e5384c2ec3ed",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6779,7 +7069,7 @@
       "subArea": "User Rights",
       "securityDomain": null,
       "settingCount": 25,
-      "policyHash": "sha256:d57aeb28f8f36366fca8e1ffd43da985bf62ac88f2d5070921a0bd05aba4ea4a",
+      "policyHash": "sha256:f8b5c04abf53c2943d79e8fa61368875a112c78b8dddc630daf5102fd42dd8e8",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6814,7 +7104,7 @@
       "subArea": "Windows Package Manager",
       "securityDomain": null,
       "settingCount": 5,
-      "policyHash": "sha256:e85390d667987f73eb22bc75c9a017d4a86f6c1dbe09baf6d036be87f9309be8",
+      "policyHash": "sha256:6dac8fac98fba2f255b10d4a76ef3a70f1cd0c4e91b1cc8d405f94681a30317a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6849,7 +7139,7 @@
       "subArea": "Windows Subsystem for Linux",
       "securityDomain": null,
       "settingCount": 10,
-      "policyHash": "sha256:61cd0cecd42628c90bf0f325126d0286816ca910cfe991b9876e252332aaeca3",
+      "policyHash": "sha256:64b46c2b69d34da650d842eddd1b87b2fb94e43bdd340fb38345579f51d27b25",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6884,7 +7174,7 @@
       "subArea": "Device Guard Credential Guard and HVCI",
       "securityDomain": null,
       "settingCount": 8,
-      "policyHash": "sha256:994a993752e4354e05d2a88db150f21dc4857b769ca56e494bfd7ff32b401dca",
+      "policyHash": "sha256:d98461416e3eae62db20165122d1087b8540c69075daeb4ac7e2bd55c76633e7",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6919,7 +7209,7 @@
       "subArea": "Power and Device Lock",
       "securityDomain": null,
       "settingCount": 12,
-      "policyHash": "sha256:32e39401a2effe9170af24981c1700a819d82b8443b71cf1e893c5aa5528ef05",
+      "policyHash": "sha256:2176a68bc0eda49068a75b42f968ab922fe5bb7d010dcda893cac122d623963b",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6954,7 +7244,7 @@
       "subArea": "Windows Sandbox",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:f6b74487a208125493b91b6dab18403baede69ffad11b8cd19e1bc85ebce3a63",
+      "policyHash": "sha256:44c364ff4e5ed39a4760f0e14173d6e0cd99b8b4e1cf929a1b5b0b756dda2627",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6989,7 +7279,7 @@
       "subArea": "Windows Spotlight and Org Messages",
       "securityDomain": null,
       "settingCount": 12,
-      "policyHash": "sha256:6b79e87c77120f01693d4431b17ae2baf470c89968558d6bc61e3f4e17779b24",
+      "policyHash": "sha256:c0bcbb0f8431590945b687aeb360abe24842b3a3a01fde1f2e1302899a68c4d4",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7024,7 +7314,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 207,
-      "policyHash": "sha256:66aa09813857a9f6a8921b7f65075cd38091c9fb44dd1d00933ee2bff2322c32",
+      "policyHash": "sha256:751c250c49f375d90335d88aa0c9b95d109791c58844257e14cc1d2d762fa962",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7059,7 +7349,7 @@
       "subArea": "Configuration",
       "securityDomain": null,
       "settingCount": 5,
-      "policyHash": "sha256:0bbe584c37d8b04c8fc14e794e9e8540927030e687d8130d99d939603486e503",
+      "policyHash": "sha256:043dd4498234fa43b0503fdef17f20550253a75fa6a876a1ebc8ccc08acdad9a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7094,7 +7384,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 51,
-      "policyHash": "sha256:030d9dda190c4e1337b29d2e60661e44c7cf3cebef327007786dc497123dde41",
+      "policyHash": "sha256:b3d14626fe6c5e3b08505effd3b24e2016aa337bd8fa90d088838b56ced660ab",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7129,7 +7419,7 @@
       "subArea": "Updates",
       "securityDomain": null,
       "settingCount": 22,
-      "policyHash": "sha256:b3dfaa8e3633b94d46a0e8155d68d30ffc8d1b3ff658ce203a824e5b0c40a567",
+      "policyHash": "sha256:61fb41d2472ada36742a5327004cb10132d2028b4fd1c5ada1fce6ec5adbb207",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7164,7 +7454,7 @@
       "subArea": "Extensions",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:038b130e69c9ce47cba451a6b8b098e7ff43b9e6f86fd30511430e4baa704417",
+      "policyHash": "sha256:f7b7a26508c29df3dd1cf9d220fea4fb7ed96140bfccc59a69bd92628c87ae2c",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7199,7 +7489,7 @@
       "subArea": "Password Management",
       "securityDomain": null,
       "settingCount": 5,
-      "policyHash": "sha256:362e5a06614adbb460ec5ded10b58830a70125bc2d3010b4ac5914595309624b",
+      "policyHash": "sha256:7189cc8661c96db4276a96aea8b8f207d0d82551e4b784a0145d37b0be41fff4",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7234,7 +7524,7 @@
       "subArea": "Profiles Sign-In and Sync",
       "securityDomain": null,
       "settingCount": 9,
-      "policyHash": "sha256:1837e4174cd84af42f256db041cd11cd49aac3cbeadbdff307dca6f8948f49c7",
+      "policyHash": "sha256:f011fe114a032efaaec0836b48bb0a148ae5c88fd52ad18184b0391356356426",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7269,7 +7559,7 @@
       "subArea": "User Experience",
       "securityDomain": null,
       "settingCount": 13,
-      "policyHash": "sha256:cb39bc9c848622caf5c8663fcf432d8026c20f780113fcb84f890ba50dcda289",
+      "policyHash": "sha256:5792cb4fd747abecad2b73dd61c7449ba47afe8ef9cd1e1445ed224b3588cabd",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7304,7 +7594,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 209,
-      "policyHash": "sha256:116cc00f656d8f28c1c40d2585cd075af54d231bdfe5f73a3d3662122b544e55",
+      "policyHash": "sha256:1406c78771ab325aad9bf43af9c434363f0054ae166c24abf797c33d21aaea6a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7339,7 +7629,7 @@
       "subArea": "Updates",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:7444f7e4ccbd35425bf2533c62208308478972acdd8914e24629cd2fa209cb87",
+      "policyHash": "sha256:a1635c6f4fee9d47c7cd2a3bd8a5b91fcdba4836c07a884e3a07c69cd39d1562",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7374,7 +7664,7 @@
       "subArea": "Config and Experience",
       "securityDomain": null,
       "settingCount": 29,
-      "policyHash": "sha256:376549c7d7086378a87ec3221a01bb895bb58787ea7cbf6fa189ba041f76ed12",
+      "policyHash": "sha256:cbecf9c3abf0887ed40e37e8396f427a8820f91a01465c27be862317baf5ea12",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7409,7 +7699,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 221,
-      "policyHash": "sha256:2c0758ffa2b73f060f096ed50ae8e1105126713ccf53aec1bdec09df588d3073",
+      "policyHash": "sha256:a9a7444e42edf9b4fc140d1a4c9d1b5d7e024337cfac959e9760bf602cf558a5",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7444,7 +7734,7 @@
       "subArea": "Configuration",
       "securityDomain": null,
       "settingCount": 18,
-      "policyHash": "sha256:b803fc22871e9d99243bc5f6d6622a38421c051ac4408a60d7c566440198d997",
+      "policyHash": "sha256:02a892813097e93a42764fa7de53646a4a2f92f83ec8ec4373f44d26fd358f62",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7479,7 +7769,7 @@
       "subArea": "Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:e119a1a339fd23fe17702f845f3a5db6464547bbb3bc68e243ab5b02ce9ecacb",
+      "policyHash": "sha256:ddf494b50fa0c30fcee3479c9d91811c75a1b79c2e7fc69aa2f7b8e674346a44",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7514,7 +7804,7 @@
       "subArea": "Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:445d15768f140cca3f08688be290367518d6371de4b6fedb63c0e88718cac45e",
+      "policyHash": "sha256:bc6a92d8e5949174fcb18c4e288a37f5e24e32130924a53aae773a9ed8dd2df2",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7549,7 +7839,7 @@
       "subArea": "Configuration",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:f3dd8715bb85b34eb842b8ae6c83fe28e663f42eed7f77dfbf3641dfef3dbcdc",
+      "policyHash": "sha256:369a7ff033723b60c389e23e6772e751e427e8a95b7c9fd638eb8463201ea0d4",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7584,7 +7874,7 @@
       "subArea": "In-Box App Removal",
       "securityDomain": null,
       "settingCount": 26,
-      "policyHash": "sha256:f8fabff34d96acff1a1c35d09135959901ca8b8e464d191557aa0f4d561a64d4",
+      "policyHash": "sha256:409013ffb7f8139e801c64666d4ef50041a7bd631a061914498a2e1b00338f0e",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7619,7 +7909,7 @@
       "subArea": "Cloud Kerberos Trust",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:9401bd63aeefd0bed4058c21476a4192eaf28ea341d4b3738627e15c05fafff3",
+      "policyHash": "sha256:d2806d6aae8aac3c3e327edd2e5a68ba31ec26d4f82ccf8b688a2451f9e1e003",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7655,7 +7945,7 @@
       "subArea": "Delivery Optimisation",
       "securityDomain": null,
       "settingCount": 12,
-      "policyHash": "sha256:b697f0d9874d55bb83578e5d5b82471b7a7e1f49209981e3f60ee7ca67ae40e4",
+      "policyHash": "sha256:1ff37ff79062857e6a4447110affc6a858bd1f3c34e5a7c338c77368e6030b46",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7690,7 +7980,7 @@
       "subArea": "Reports and Telemetry",
       "securityDomain": null,
       "settingCount": 5,
-      "policyHash": "sha256:a933423801dc22f28917c601930f7e373a518f2650de4f73feafc3ee26b16e2f",
+      "policyHash": "sha256:dad3a4eb33d11d0fd0eb2d536283df747e9659fce309c74093445e0eb0dcfad7",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7725,7 +8015,7 @@
       "subArea": "Feature Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:a481261b7c9296374be59a789325ba2b715f82c340623c60d4607ae325183c42",
+      "policyHash": "sha256:6ac547f9b29293ec9403f49c307cf376453fbeab5262f67770a6b015a8d799e0",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7760,7 +8050,7 @@
       "subArea": "Settings Sync",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:4ac85b2963731a54bccedd2c58891388125cc3d3ed818437c6acdddef91a160d",
+      "policyHash": "sha256:8f1d01579df21181a29d422b42d89d7f859218dd9e7234dbfe57523c7f094f3a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7795,7 +8085,7 @@
       "subArea": "Copilot",
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:f32c25114009037a936cb70e5767af656729712626a6f051b368ddcde338253e",
+      "policyHash": "sha256:40cb73fc326e6943ecdf2a6d0e37273b5f763a4ba8682ed7396724c0434826f1",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7830,7 +8120,7 @@
       "subArea": "v1 0 TEST",
       "securityDomain": null,
       "settingCount": 9,
-      "policyHash": "sha256:a740b98232c477849481085853061f01fb54062d9b0b8f26e7bd302d4927e573",
+      "policyHash": "sha256:58618595afb605b9a82d41f37f12fef46a9124aeba69a63ad60be6d95f1eb4a0",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -8365,6 +8655,30 @@
         "entra-cross-platform-tenant-policy-device-registration-policy-tenant"
       ],
       "memberCount": 7
+    },
+    {
+      "id": "entra-ca-core-starter",
+      "name": "Entra - Core Conditional Access Starter",
+      "description": "The three-policy minimum for a new tenant: admin MFA, risk-based password change, legacy authentication block.",
+      "path": [
+        "Entra",
+        "Conditional Access",
+        "Core Starter"
+      ],
+      "rule": null,
+      "include": [
+        "entra-cross-platform-conditional-access-cdw001-require-multifactor-authentication-for-admins-user",
+        "entra-cross-platform-conditional-access-cdw002-require-password-change-for-high-risk-users-user",
+        "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user"
+      ],
+      "exclude": [],
+      "order": 59,
+      "members": [
+        "entra-cross-platform-conditional-access-cdw001-require-multifactor-authentication-for-admins-user",
+        "entra-cross-platform-conditional-access-cdw002-require-password-change-for-high-risk-users-user",
+        "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user"
+      ],
+      "memberCount": 3
     }
   ],
   "issues": [
