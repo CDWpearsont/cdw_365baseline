@@ -557,13 +557,29 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
     # untouched: the builder resolves membership, it does not author outcomes.
     towers = bundle_doc.get("towers", [])
     goals = bundle_doc.get("goals", [])
-    known = {b["id"] for b in bundles}
+    scenarios = bundle_doc.get("scenarios", [])
+
+    known_bundles = {b["id"] for b in bundles}
     for g in goals:
         for opt in g.get("options", []):
             for bid in opt.get("bundles", []):
-                if bid not in known:
+                if bid not in known_bundles:
                     issues.append({"policyId": None, "path": None, "type": "danglingGoalBundle",
                                    "detail": f"Goal '{g.get('id')}' references unknown bundle '{bid}'"})
+
+    # A scenario composes goals, so both the goal and the platform it asks for
+    # must exist or the wizard silently drops part of the package.
+    goal_by_id = {g.get("id"): g for g in goals}
+    for sc in scenarios:
+        for inc in sc.get("includes", []):
+            g = goal_by_id.get(inc.get("goal"))
+            if g is None:
+                issues.append({"policyId": None, "path": None, "type": "danglingScenarioGoal",
+                               "detail": f"Scenario '{sc.get('id')}' references unknown goal '{inc.get('goal')}'"})
+            elif not any(o.get("platform") == inc.get("platform") for o in g.get("options", [])):
+                issues.append({"policyId": None, "path": None, "type": "danglingScenarioGoal",
+                               "detail": f"Scenario '{sc.get('id')}' wants goal '{inc.get('goal')}' "
+                                         f"on platform '{inc.get('platform')}', which it does not offer"})
 
     for b in bundles:
         if b.get("missing"):
@@ -602,6 +618,7 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
         },
         "towers": towers,
         "goals": goals,
+        "scenarios": scenarios,
         "policies": sorted(policies, key=lambda p: p["path"]),
         "bundles": bundles,
         "issues": issues,
@@ -616,6 +633,7 @@ def report(catalog: dict) -> None:
     c = catalog["counts"]
     print(f"Policies: {c['policies']}   Bundles: {c['bundles']}   "
           f"Towers: {len(catalog.get('towers', []))}   Goals: {len(catalog.get('goals', []))}   "
+          f"Scenarios: {len(catalog.get('scenarios', []))}   "
           f"Issues: {c['issues']}")
     print(f"Confidence: {c['byConfidence']}\n")
 

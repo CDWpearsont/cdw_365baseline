@@ -249,6 +249,24 @@
       "include": [],
       "exclude": [],
       "order": 70
+    },
+    {
+      "id": "entra-ca-core-starter",
+      "name": "Entra - Core Conditional Access Starter",
+      "description": "The three-policy minimum for a new tenant: admin MFA, risk-based password change, legacy authentication block.",
+      "path": [
+        "Entra",
+        "Conditional Access",
+        "Core Starter"
+      ],
+      "rule": null,
+      "include": [
+        "entra-cross-platform-conditional-access-cdw001-require-multifactor-authentication-for-admins-user",
+        "entra-cross-platform-conditional-access-cdw002-require-password-change-for-high-risk-users-user",
+        "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user"
+      ],
+      "exclude": [],
+      "order": 59
     }
   ],
   "goals": [
@@ -363,6 +381,23 @@
       ]
     },
     {
+      "id": "ca-starter",
+      "tower": "Entra",
+      "icon": "key",
+      "title": "Establish core Conditional Access",
+      "outcome": "The three-policy minimum every tenant should have: multifactor authentication for administrators, risk-based password change, and legacy authentication blocked.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "All platforms",
+          "note": "Core starter",
+          "bundles": [
+            "entra-ca-core-starter"
+          ]
+        }
+      ]
+    },
+    {
       "id": "identity",
       "tower": "Entra",
       "icon": "key",
@@ -461,6 +496,64 @@
       "name": "Exchange Online",
       "icon": "mail",
       "blurb": "Mail flow, anti-spam and mailbox policy"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "new-tenant",
+      "icon": "rocket",
+      "title": "New tenant foundation",
+      "outcome": "Everything needed to stand up a greenfield tenant: core Conditional Access, tenant-wide identity hardening, and Windows Autopilot enrolment.",
+      "includes": [
+        {
+          "goal": "ca-starter",
+          "platform": "Cross-platform"
+        },
+        {
+          "goal": "tenant-hardening",
+          "platform": "Cross-platform"
+        },
+        {
+          "goal": "enrolment",
+          "platform": "Windows"
+        }
+      ]
+    },
+    {
+      "id": "secure-windows",
+      "icon": "shield",
+      "title": "Secure the Windows estate",
+      "outcome": "Hardens Windows devices to CIS Level 1, deploys Defender antivirus and attack surface reduction, and requires managed devices for access.",
+      "includes": [
+        {
+          "goal": "harden-endpoints",
+          "platform": "Windows"
+        },
+        {
+          "goal": "antivirus",
+          "platform": "Windows"
+        },
+        {
+          "goal": "managed-devices",
+          "platform": "Cross-platform"
+        }
+      ]
+    },
+    {
+      "id": "enable-byod",
+      "icon": "mobile",
+      "title": "Enable bring-your-own-device",
+      "outcome": "Lets staff use personal phones safely: app protection on iOS and Android, enrolment restrictions, and device-based Conditional Access.",
+      "includes": [
+        {
+          "goal": "byod",
+          "platform": "Mobile"
+        },
+        {
+          "goal": "managed-devices",
+          "platform": "Cross-platform"
+        }
+      ]
     }
   ]
 }
