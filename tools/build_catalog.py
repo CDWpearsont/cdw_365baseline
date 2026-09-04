@@ -553,6 +553,18 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
     bundle_doc = load_body(bundles_abs) or {"bundles": []}
     bundles = resolve_bundles(policies, bundle_doc.get("bundles", []))
 
+    # Presentation metadata for the Building Blocks wizard. Passed through
+    # untouched: the builder resolves membership, it does not author outcomes.
+    towers = bundle_doc.get("towers", [])
+    goals = bundle_doc.get("goals", [])
+    known = {b["id"] for b in bundles}
+    for g in goals:
+        for opt in g.get("options", []):
+            for bid in opt.get("bundles", []):
+                if bid not in known:
+                    issues.append({"policyId": None, "path": None, "type": "danglingGoalBundle",
+                                   "detail": f"Goal '{g.get('id')}' references unknown bundle '{bid}'"})
+
     for b in bundles:
         if b.get("missing"):
             for pid in b["missing"]:
@@ -588,6 +600,8 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
             "scopes": distinct("scope"),
             "areas": distinct("area"),
         },
+        "towers": towers,
+        "goals": goals,
         "policies": sorted(policies, key=lambda p: p["path"]),
         "bundles": bundles,
         "issues": issues,
@@ -600,7 +614,9 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
 
 def report(catalog: dict) -> None:
     c = catalog["counts"]
-    print(f"Policies: {c['policies']}   Bundles: {c['bundles']}   Issues: {c['issues']}")
+    print(f"Policies: {c['policies']}   Bundles: {c['bundles']}   "
+          f"Towers: {len(catalog.get('towers', []))}   Goals: {len(catalog.get('goals', []))}   "
+          f"Issues: {c['issues']}")
     print(f"Confidence: {c['byConfidence']}\n")
 
     tax = catalog["taxonomy"]
