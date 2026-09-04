@@ -1058,6 +1058,123 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 .mode-pill-manage{background:rgba(22,163,74,.08);color:#15803d}
 .auth-mode-card.active[data-mode="manage"]{border-color:#16a34a;background:rgba(22,163,74,.02)}
 
+/* ═══════════════════════════════════════════════════════════════════
+   BUILDING BLOCKS
+   ═══════════════════════════════════════════════════════════════════ */
+
+#bb-screen { max-width: 940px; margin: 32px auto 80px; padding: 0 20px; }
+
+.bb-head { text-align: center; margin-bottom: 26px; }
+.bb-head h2 {
+  font-family: var(--fhead); font-size: 22px; font-weight: 600;
+  color: var(--text); margin-bottom: 6px;
+}
+.bb-head p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* ── Stepper ──────────────────────────────────────────────────── */
+.bb-steps {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin: 0 auto 30px; max-width: 700px;
+}
+.bb-step { display: flex; align-items: center; gap: 8px; }
+.bb-step-dot {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+  background: var(--s3); color: var(--dim);
+  border: 1px solid var(--border); transition: all .18s;
+}
+.bb-step-label { font-size: 11px; font-weight: 600; color: var(--dim); white-space: nowrap; }
+.bb-step.done .bb-step-dot { background: var(--cdw-red); border-color: var(--cdw-red); color: #fff; }
+.bb-step.done .bb-step-label { color: var(--muted); }
+.bb-step.on .bb-step-dot {
+  background: var(--cdw-red); border-color: var(--cdw-red); color: #fff;
+  box-shadow: 0 0 0 4px rgba(204,0,0,.12);
+}
+.bb-step.on .bb-step-label { color: var(--text); }
+.bb-step-line { flex: 1; height: 1px; background: var(--border); margin: 0 12px; min-width: 24px; }
+.bb-step-line.done { background: var(--cdw-red); }
+
+/* ── Choice tiles ─────────────────────────────────────────────── */
+.bb-grid { display: grid; gap: 14px; }
+.bb-grid-3 { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.bb-grid-2 { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+
+.bb-tile {
+  position: relative; text-align: left; cursor: pointer;
+  background: var(--s1); border: 2px solid var(--border); border-radius: 12px;
+  padding: 18px 18px 16px; transition: all .15s ease;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.bb-tile:hover:not(.bb-disabled) {
+  border-color: var(--cdw-red); transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.07);
+}
+.bb-tile.bb-disabled { opacity: .5; cursor: not-allowed; }
+.bb-tile-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--s3); color: var(--cdw-red); flex-shrink: 0;
+}
+.bb-tile-title { font-family: var(--fhead); font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.35; }
+.bb-tile-blurb { font-size: 12px; color: var(--muted); line-height: 1.5; flex: 1; }
+.bb-tile-foot {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 4px; padding-top: 10px; border-top: 1px solid var(--border);
+}
+.bb-count {
+  font-size: 11px; font-weight: 700; color: var(--cdw-red);
+  background: rgba(204,0,0,.07); padding: 3px 8px; border-radius: 5px;
+}
+.bb-count-zero { color: var(--dim); background: var(--s3); }
+.bb-note { font-size: 11px; color: var(--dim); }
+.bb-soon {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 9px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  background: var(--s3); color: var(--dim); border: 1px solid var(--border);
+  padding: 3px 6px; border-radius: 4px;
+}
+
+/* ── Review ───────────────────────────────────────────────────── */
+.bb-summary {
+  background: var(--s2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 18px 20px; margin-bottom: 18px;
+}
+.bb-sum-row { display: flex; gap: 10px; align-items: baseline; font-size: 13px; margin-bottom: 6px; }
+.bb-sum-row:last-child { margin-bottom: 0; }
+.bb-sum-key { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); min-width: 84px; }
+.bb-sum-val { color: var(--text); font-weight: 500; }
+
+.bb-policy-group { margin-bottom: 16px; }
+.bb-policy-group h4 {
+  font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
+}
+.bb-policy-list { display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow-y: auto; }
+.bb-policy-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text); padding: 5px 8px;
+  background: var(--s1); border: 1px solid var(--border); border-radius: 5px;
+}
+.bb-policy-item svg { color: #16a34a; flex-shrink: 0; }
+
+.bb-empty-note {
+  font-size: 12px; line-height: 1.6; color: #a35a00;
+  background: #fff4e5; border: 1px solid #ffd9a8; border-radius: 8px; padding: 12px 14px;
+}
+
+/* ── Nav ──────────────────────────────────────────────────────── */
+.bb-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--border);
+}
+.bb-nav-right { display: flex; gap: 10px; }
+
+.mode-pill-build{background:rgba(37,99,235,.08);color:#1d4ed8}
+.auth-mode-card.active[data-mode="build"]{border-color:#2563eb;background:rgba(37,99,235,.02)}
+.auth-mode{flex-wrap:wrap}
+.auth-mode-card{min-width:150px}
+
 </style>
 </head>
 <body>
@@ -1123,6 +1240,11 @@ body[data-appmode="manage"] .pcard.mg-dirty {
             <div class="amc-title">Manage</div>
             <div class="amc-desc">View and amend policy taxonomy and enrichment</div>
           </div>
+          <div class="auth-mode-card" data-mode="build" onclick="selectAuthMode('build')">
+            <div class="amc-icon">🧱</div>
+            <div class="amc-title">Building Blocks</div>
+            <div class="amc-desc">Pick a ready-made policy set by outcome</div>
+          </div>
         </div>
         <div id="auth-deploy-info">
           <div class="consent-notice">
@@ -1159,6 +1281,18 @@ body[data-appmode="manage"] .pcard.mg-dirty {
                   onclick="enterManageMode()">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
             Continue to Policy Management
+          </button>
+        </div>
+        <div id="auth-build-info" style="display:none">
+          <div class="doc-notice">
+            <strong>ℹ Start from an outcome</strong><br>
+            Choose a technology, a goal and a platform. The tool pre-selects the
+            policies that deliver it. No sign-in needed to browse or document.
+          </div>
+          <button class="btn btn-doc" id="build-continue-btn" style="width:100%"
+                  onclick="enterBuildMode()">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Start Building Blocks
           </button>
         </div>
       </div>
@@ -1273,6 +1407,17 @@ body[data-appmode="manage"] .pcard.mg-dirty {
         <button class="btn btn-ghost" onclick="discardOverlayEdits()" id="set-discard" disabled>Discard changes</button>
         <button class="btn btn-doc" onclick="saveOverlay()" id="set-save" disabled>Save to GitHub</button>
       </div>
+    </div>
+
+    <!-- ── Building Blocks wizard ──────────────────────────── -->
+    <div id="bb-screen" style="display:none">
+      <div class="bb-steps" id="bb-stepper"></div>
+      <div class="bb-head">
+        <h2 id="bb-title">Building Blocks</h2>
+        <p id="bb-sub"></p>
+      </div>
+      <div id="bb-body"></div>
+      <div class="bb-nav" id="bb-nav"></div>
     </div>
 
     <div id="deployer" style="display:none">
@@ -1627,7 +1772,7 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.2.0',
+  version: '3.3.0',
   date:    '2026-09-04'
 };
 
@@ -1656,6 +1801,8 @@ function selectAuthMode(mode) {
   document.getElementById('auth-doc-info').style.display    = mode === 'document' ? '' : 'none';
   const mgInfo = document.getElementById('auth-manage-info');
   if (mgInfo) mgInfo.style.display = mode === 'manage' ? '' : 'none';
+  const bbInfo = document.getElementById('auth-build-info');
+  if (bbInfo) bbInfo.style.display = mode === 'build' ? '' : 'none';
 }
 
 function setAppMode(mode) {
@@ -2627,6 +2774,9 @@ async function loadAllWorkloads() {
 // Shared by both the manifest and fallback paths: existing-policy checks in
 // deploy mode, nothing in document mode.
 async function afterCatalogueLoaded() {
+  // A Building Blocks choice made before the grid loaded is applied here.
+  if (bbPending) { if (!mgCatalog) await loadCatalog(); bbApplyPendingSelection(); }
+
   // In document mode, skip all Graph checks (no auth needed)
   if (appMode === 'document') {
     Object.keys(WORKLOADS).forEach(wl => {
@@ -6962,6 +7112,310 @@ function mgDiscard() {
   mgCloseDrawer();
   mgUpdateSaveBar();
   Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// BUILDING BLOCKS
+// A graphical step-through that selects an off-the-shelf policy set by
+// outcome rather than by technical detail: tower, then goal, then
+// platform. Membership resolves from catalog.json, so counts shown to a
+// customer are always the live repository contents.
+// ═══════════════════════════════════════════════════════════════════
+
+const BB_STEPS = ['Technology', 'Goal', 'Platform', 'Review'];
+
+let bbStep     = 1;
+let bbTower    = null;   // tower id, e.g. 'Intune'
+let bbGoal     = null;   // goal object
+let bbOption   = null;   // platform option within the goal
+let bbPending  = null;   // policy ids to select once the grid has loaded
+
+const BB_ICONS = {
+  device:      '<path d="M9 17H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v4M13 21h6a1 1 0 001-1v-7a1 1 0 00-1-1h-6a1 1 0 00-1 1v7a1 1 0 001 1z"/>',
+  key:         '<path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.7 5.7l-1.9 1.9a1 1 0 01-.7.3H9v2a1 1 0 01-1 1H6v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2.6a1 1 0 01.3-.7L8.3 12A6 6 0 1121 9z"/>',
+  shield:      '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  'file-lock': '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><rect x="9" y="12" width="6" height="5" rx="1"/>',
+  mail:        '<path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M22 6l-10 7L2 6"/>',
+  layers:      '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>',
+  rocket:      '<path d="M5 13l-2 5 5-2M9 15l6-6a6 6 0 004-6 6 6 0 00-6 4l-6 6M9 15l-2-2"/><circle cx="15" cy="9" r="1.5"/>',
+  virus:       '<circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+  mobile:      '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+  'device-check': '<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4M8 10l3 3 5-5"/>',
+  building:    '<path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 9h1m4 0h1M9 13h1m4 0h1M9 17h1m4 0h1"/>',
+  target:      '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+};
+
+function bbIcon(name, size) {
+  const path = BB_ICONS[name] || BB_ICONS.shield;
+  return `<svg width="${size || 20}" height="${size || 20}" fill="none" viewBox="0 0 24 24"
+    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+}
+
+// ── Entry ─────────────────────────────────────────────────────────
+
+async function enterBuildMode() {
+  appMode = 'build';
+  document.body.dataset.appmode = 'build';
+  document.getElementById('auth-screen').style.display   = 'none';
+  document.getElementById('deployer').style.display      = 'none';
+  document.getElementById('tabbar').style.display        = 'none';
+  document.getElementById('wizard-screen').style.display = 'none';
+  document.getElementById('bb-screen').style.display     = '';
+  document.getElementById('topbar-right').innerHTML =
+    `<span class="mode-pill mode-pill-build">\u{1f9f1} Building Blocks</span>`;
+
+  bbStep = 1; bbTower = null; bbGoal = null; bbOption = null;
+  document.getElementById('bb-body').innerHTML =
+    `<div class="state-box"><div class="spinner"></div><p>Loading catalogue\u2026</p></div>`;
+  bbRenderSteps();
+
+  if (!mgCatalog) await loadCatalog();
+  bbRender();
+}
+
+function bbExit() {
+  document.getElementById('bb-screen').style.display   = 'none';
+  document.getElementById('auth-screen').style.display = '';
+  document.getElementById('topbar-right').innerHTML    = '';
+  selectAuthMode('build');
+}
+
+// ── Catalogue helpers ─────────────────────────────────────────────
+
+function bbBundle(id) {
+  return (mgCatalog?.bundles || []).find(b => b.id === id) || null;
+}
+
+// Union of members across the bundles an option points at.
+function bbMembers(option) {
+  if (!option) return [];
+  const seen = new Set();
+  (option.bundles || []).forEach(id => {
+    const b = bbBundle(id);
+    (b?.members || []).forEach(m => seen.add(m));
+  });
+  return [...seen];
+}
+
+function bbGoals(tower) {
+  return (mgCatalog?.goals || []).filter(g => g.tower === tower);
+}
+
+// A goal is only worth showing if at least one of its options resolves.
+function bbGoalCount(goal) {
+  const seen = new Set();
+  (goal.options || []).forEach(o => bbMembers(o).forEach(m => seen.add(m)));
+  return seen.size;
+}
+
+function bbTowerCount(towerId) {
+  return (mgCatalog?.policies || []).filter(p => p.workload === towerId).length;
+}
+
+// ── Rendering ─────────────────────────────────────────────────────
+
+function bbRenderSteps() {
+  const host = document.getElementById('bb-stepper');
+  host.innerHTML = BB_STEPS.map((label, i) => {
+    const n = i + 1;
+    const cls = n < bbStep ? 'done' : n === bbStep ? 'on' : '';
+    const dot = n < bbStep
+      ? '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
+      : n;
+    const line = i < BB_STEPS.length - 1
+      ? `<div class="bb-step-line ${n < bbStep ? 'done' : ''}"></div>` : '';
+    return `<div class="bb-step ${cls}"><div class="bb-step-dot">${dot}</div>
+      <div class="bb-step-label">${label}</div></div>${line}`;
+  }).join('');
+}
+
+function bbRender() {
+  bbRenderSteps();
+  if (!mgCatalog) {
+    document.getElementById('bb-body').innerHTML =
+      `<div class="bb-empty-note">Could not load <code>catalog.json</code>.
+       Check that the catalogue build workflow has run on the repository.</div>`;
+    return;
+  }
+  if (bbStep === 1) bbRenderTowers();
+  else if (bbStep === 2) bbRenderGoals();
+  else if (bbStep === 3) bbRenderPlatforms();
+  else bbRenderReview();
+}
+
+function bbRenderTowers() {
+  document.getElementById('bb-title').textContent = 'Which technology are you configuring?';
+  document.getElementById('bb-sub').textContent   =
+    'Choose a Microsoft 365 technology tower to see the outcomes available for it.';
+
+  const tiles = (mgCatalog.towers || []).map(t => {
+    const count = bbTowerCount(t.id);
+    const goals = bbGoals(t.id).length;
+    const ready = count > 0 && goals > 0;
+    return `<div class="bb-tile ${ready ? '' : 'bb-disabled'}"
+        ${ready ? `onclick="bbPickTower('${t.id}')"` : ''}>
+      ${ready ? '' : '<span class="bb-soon">Coming soon</span>'}
+      <div class="bb-tile-icon">${bbIcon(t.icon, 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(t.name)}</div>
+      <div class="bb-tile-blurb">${htmlEsc(t.blurb)}</div>
+      <div class="bb-tile-foot">
+        <span class="bb-count ${count ? '' : 'bb-count-zero'}">${count} policies</span>
+        ${ready ? `<span class="bb-note">${goals} building block${goals === 1 ? '' : 's'}</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('bb-body').innerHTML = `<div class="bb-grid bb-grid-3">${tiles}</div>`;
+  bbNav(false, null);
+}
+
+function bbRenderGoals() {
+  const tower = (mgCatalog.towers || []).find(t => t.id === bbTower);
+  document.getElementById('bb-title').textContent = 'What do you want to achieve?';
+  document.getElementById('bb-sub').textContent   =
+    `Each building block is a ready-made set of ${tower ? tower.name : bbTower} policies that delivers one outcome.`;
+
+  const tiles = bbGoals(bbTower).map(g => {
+    const count = bbGoalCount(g);
+    return `<div class="bb-tile" onclick="bbPickGoal('${g.id}')">
+      <div class="bb-tile-icon">${bbIcon(g.icon, 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(g.title)}</div>
+      <div class="bb-tile-blurb">${htmlEsc(g.outcome)}</div>
+      <div class="bb-tile-foot">
+        <span class="bb-count ${count ? '' : 'bb-count-zero'}">${count} policies</span>
+        <span class="bb-note">${(g.options || []).length} option${(g.options || []).length === 1 ? '' : 's'}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('bb-body').innerHTML = `<div class="bb-grid bb-grid-2">${tiles}</div>`;
+  bbNav(true, null);
+}
+
+function bbRenderPlatforms() {
+  document.getElementById('bb-title').textContent = 'Which platform?';
+  document.getElementById('bb-sub').textContent   = htmlEsc(bbGoal.title);
+
+  const tiles = (bbGoal.options || []).map((o, i) => {
+    const count = bbMembers(o).length;
+    return `<div class="bb-tile" onclick="bbPickOption(${i})">
+      <div class="bb-tile-icon">${bbIcon(o.platform === 'macOS' ? 'device'
+        : o.platform === 'Mobile' ? 'mobile'
+        : o.platform === 'Cross-platform' ? 'key' : 'device', 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(o.label)}</div>
+      <div class="bb-tile-blurb">${htmlEsc(o.note || '')}</div>
+      <div class="bb-tile-foot">
+        <span class="bb-count ${count ? '' : 'bb-count-zero'}">${count} policies</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('bb-body').innerHTML = `<div class="bb-grid bb-grid-3">${tiles}</div>`;
+  bbNav(true, null);
+}
+
+function bbRenderReview() {
+  const ids  = bbMembers(bbOption);
+  const recs = ids.map(id => mgById[id]).filter(Boolean);
+  document.getElementById('bb-title').textContent = 'Review your building block';
+  document.getElementById('bb-sub').textContent   =
+    'These policies will be pre-selected. You can still add or remove individual policies afterwards.';
+
+  const byArea = {};
+  recs.forEach(r => { (byArea[r.policyType || 'Other'] ||= []).push(r); });
+
+  const groups = Object.keys(byArea).sort().map(k => `
+    <div class="bb-policy-group">
+      <h4>${htmlEsc(k)} \u00b7 ${byArea[k].length}</h4>
+      <div class="bb-policy-list">
+        ${byArea[k].sort((a, b) => (a.displayName || '').localeCompare(b.displayName || ''))
+          .map(r => `<div class="bb-policy-item">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            ${htmlEsc(r.displayName || r.fileName)}</div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  const empty = `<div class="bb-empty-note">
+    This building block currently resolves to no policies. For framework blocks such as
+    Zero Trust, tag the relevant policies in <strong>Policy Management</strong> and rebuild
+    the catalogue, then they will appear here automatically.</div>`;
+
+  document.getElementById('bb-body').innerHTML = `
+    <div class="bb-summary">
+      <div class="bb-sum-row"><span class="bb-sum-key">Technology</span><span class="bb-sum-val">${htmlEsc(bbTower)}</span></div>
+      <div class="bb-sum-row"><span class="bb-sum-key">Goal</span><span class="bb-sum-val">${htmlEsc(bbGoal.title)}</span></div>
+      <div class="bb-sum-row"><span class="bb-sum-key">Platform</span><span class="bb-sum-val">${htmlEsc(bbOption.label)}</span></div>
+      <div class="bb-sum-row"><span class="bb-sum-key">Policies</span><span class="bb-sum-val">${recs.length}</span></div>
+    </div>
+    ${recs.length ? groups : empty}`;
+
+  bbNav(true, recs.length);
+}
+
+// ── Navigation ────────────────────────────────────────────────────
+
+function bbNav(showBack, reviewCount) {
+  const right = reviewCount
+    ? `<button class="btn btn-ghost" onclick="bbApply('document')">Document these policies</button>
+       <button class="btn btn-primary" onclick="bbApply('deploy')">Deploy these policies</button>`
+    : '';
+  document.getElementById('bb-nav').innerHTML = `
+    <button class="btn btn-ghost btn-sm" onclick="${showBack ? 'bbBack()' : 'bbExit()'}">
+      ${showBack ? '\u2190 Back' : 'Cancel'}
+    </button>
+    <div class="bb-nav-right">${right}</div>`;
+}
+
+function bbBack() {
+  if (bbStep === 4 && (bbGoal.options || []).length === 1) bbStep = 2;  // platform was auto-skipped
+  else bbStep = Math.max(1, bbStep - 1);
+  bbRender();
+}
+
+function bbPickTower(id) { bbTower = id; bbStep = 2; bbRender(); }
+
+function bbPickGoal(id) {
+  bbGoal = bbGoals(bbTower).find(g => g.id === id);
+  const opts = bbGoal.options || [];
+  if (opts.length === 1) { bbOption = opts[0]; bbStep = 4; }   // nothing to choose
+  else bbStep = 3;
+  bbRender();
+}
+
+function bbPickOption(i) { bbOption = (bbGoal.options || [])[i]; bbStep = 4; bbRender(); }
+
+// ── Hand-off ──────────────────────────────────────────────────────
+
+// Stash the chosen ids, then enter the normal grid. Selections are applied
+// once the policy list has loaded, since loading rebuilds the array.
+function bbApply(target) {
+  bbPending = bbMembers(bbOption);
+  document.getElementById('bb-screen').style.display = 'none';
+  if (target === 'document') {
+    openDocWizard();
+  } else {
+    document.getElementById('auth-screen').style.display = '';
+    document.getElementById('topbar-right').innerHTML    = '';
+    selectAuthMode('deploy');
+    showToast('Sign in to deploy the selected building block');
+  }
+}
+
+// Called from afterCatalogueLoaded once policies[] is populated.
+function bbApplyPendingSelection() {
+  if (!bbPending || !bbPending.length) return;
+  const wanted = new Set(bbPending);
+  let hits = 0;
+  Object.keys(WORKLOADS).forEach(wl => {
+    policies[wl].forEach(p => {
+      const rec = mgLookup(p);
+      if (rec && wanted.has(rec.id)) { p.selected = true; hits++; }
+    });
+  });
+  bbPending = null;
+  Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+  updateDeployBar();
+  if (hits) showToast(`Building block applied \u2014 ${hits} policies selected`);
 }
 
 </script>
