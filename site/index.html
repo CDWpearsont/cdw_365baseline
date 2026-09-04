@@ -921,6 +921,146 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
   cursor:pointer;font-size:13px;color:var(--muted);line-height:1}
 .icon-btn:hover{background:rgba(0,0,0,.03);color:var(--text)}
 
+<<<<<<< Updated upstream
+=======
+/* ═══════════════════════════════════════════════════════════════════
+   POLICY MANAGEMENT
+   Uses the existing token set only — no new colours introduced.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Hide deploy/document-only chrome while in manage mode */
+body[data-appmode="manage"] .branding-bar,
+body[data-appmode="manage"] .tpl-bar,
+body[data-appmode="manage"] .select-bar { display: none !important; }
+
+/* The manage-only filter panel exists in every mode but only shows in manage */
+.mg-filter-panel { display: none; }
+body[data-appmode="manage"] .mg-filter-panel { display: block; }
+
+/* ── Manage-mode card affordance ──────────────────────────────── */
+body[data-appmode="manage"] .pcard .pcheck { display: none; }
+body[data-appmode="manage"] .pcard { cursor: pointer; }
+body[data-appmode="manage"] .pcard.mg-dirty {
+  border-color: var(--warn);
+  box-shadow: inset 3px 0 0 var(--warn);
+}
+
+.mg-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 10px; font-weight: 600; line-height: 1;
+  padding: 3px 6px; border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--s3); color: var(--muted);
+  white-space: nowrap;
+}
+.mg-badge-fw       { background: #eef6ff; border-color: #cfe3fb; color: #1e5aa8; }
+.mg-badge-domain   { background: #f3eeff; border-color: #ddd2fb; color: #5b3bb0; }
+.mg-badge-attn     { background: #fff4e5; border-color: #ffd9a8; color: #a35a00; }
+.mg-badge-tag      { background: var(--s2); }
+
+/* ── Attribute source pill (filename / folder / body / override) ─ */
+.mg-src {
+  font-size: 9px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; padding: 2px 5px; border-radius: 3px;
+  background: var(--s3); color: var(--dim); border: 1px solid var(--border);
+}
+.mg-src-override { background: #fff4e5; color: #a35a00; border-color: #ffd9a8; }
+
+/* ── Editor drawer ────────────────────────────────────────────── */
+#mg-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(520px, 100vw);
+  background: var(--s1);
+  border-left: 1px solid var(--border);
+  box-shadow: -8px 0 32px rgba(0,0,0,.10);
+  transform: translateX(100%);
+  transition: transform .22s ease;
+  z-index: 1200;
+  display: flex; flex-direction: column;
+}
+#mg-drawer.open { transform: translateX(0); }
+
+.mg-dr-head {
+  padding: 16px 18px 12px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 12px; flex-shrink: 0;
+}
+.mg-dr-head h3 {
+  font-family: var(--fhead); font-size: 14px; font-weight: 600;
+  line-height: 1.35; color: var(--text); flex: 1;
+}
+.mg-dr-path { font-size: 10px; color: var(--dim); margin-top: 4px; word-break: break-all; }
+.mg-dr-close {
+  background: none; border: none; cursor: pointer; color: var(--muted);
+  font-size: 20px; line-height: 1; padding: 0 2px; flex-shrink: 0;
+}
+.mg-dr-close:hover { color: var(--text); }
+
+.mg-dr-body { flex: 1; overflow-y: auto; padding: 16px 18px 24px; }
+
+.mg-sec { margin-bottom: 22px; }
+.mg-sec-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mg-field { margin-bottom: 12px; }
+.mg-field label {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 4px;
+}
+.mg-field select,
+.mg-field input[type="text"],
+.mg-field textarea {
+  width: 100%; font-family: var(--fbody); font-size: 12px; color: var(--text);
+  background: var(--s1); border: 1px solid var(--border2); border-radius: 5px;
+  padding: 7px 8px;
+}
+.mg-field textarea { resize: vertical; min-height: 64px; line-height: 1.5; }
+.mg-field select:focus,
+.mg-field input:focus,
+.mg-field textarea:focus { outline: none; border-color: var(--intune); }
+.mg-field.changed select,
+.mg-field.changed input,
+.mg-field.changed textarea { border-color: var(--warn); background: #fffdf8; }
+
+.mg-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.mg-tag-btn {
+  font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 999px;
+  border: 1px solid var(--border2); background: var(--s1); color: var(--muted);
+  cursor: pointer; transition: all .12s;
+}
+.mg-tag-btn:hover { border-color: var(--intune); color: var(--text); }
+.mg-tag-btn.on { background: var(--intune); border-color: var(--intune); color: #fff; }
+
+.mg-bundles { display: flex; flex-wrap: wrap; gap: 6px; }
+.mg-empty { font-size: 11px; color: var(--dim); font-style: italic; }
+
+.mg-stale {
+  font-size: 11px; padding: 8px 10px; border-radius: 5px; line-height: 1.5;
+  background: #fff4e5; border: 1px solid #ffd9a8; color: #a35a00;
+  margin-bottom: 12px;
+}
+
+/* ── Save bar ─────────────────────────────────────────────────── */
+#mg-savebar {
+  position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 140%);
+  display: flex; align-items: center; gap: 14px;
+  background: var(--s1); border: 1px solid var(--border);
+  box-shadow: 0 8px 28px rgba(0,0,0,.14);
+  border-radius: 10px; padding: 10px 14px; z-index: 1100;
+  transition: transform .2s ease;
+}
+#mg-savebar.up { transform: translate(-50%, 0); }
+.mg-sb-text { font-size: 12px; color: var(--text); font-weight: 600; }
+.mg-sb-sub  { font-size: 11px; color: var(--muted); }
+
+/* Manage-mode topbar pill */
+.mode-pill-manage{background:rgba(22,163,74,.08);color:#15803d}
+.auth-mode-card.active[data-mode="manage"]{border-color:#16a34a;background:rgba(22,163,74,.02)}
+
+>>>>>>> Stashed changes
 </style>
 </head>
 <body>
@@ -981,6 +1121,11 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
             <div class="amc-title">Document</div>
             <div class="amc-desc">Export selected policies as an LLD document</div>
           </div>
+          <div class="auth-mode-card" data-mode="manage" onclick="selectAuthMode('manage')">
+            <div class="amc-icon">🗂</div>
+            <div class="amc-title">Manage</div>
+            <div class="amc-desc">View and amend policy taxonomy and enrichment</div>
+          </div>
         </div>
         <div id="auth-deploy-info">
           <div class="consent-notice">
@@ -1005,6 +1150,18 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
           <button class="btn btn-doc" id="doc-continue-btn" style="width:100%">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
             Continue to Documentation Mode
+          </button>
+        </div>
+        <div id="auth-manage-info" style="display:none">
+          <div class="doc-notice">
+            <strong>ℹ No sign-in required</strong><br>
+            Manage mode reads <code>catalog.json</code> and the policy store from the
+            GitHub repository. No tenant access or Microsoft sign-in is needed.
+          </div>
+          <button class="btn btn-doc" id="manage-continue-btn" style="width:100%"
+                  onclick="enterManageMode()">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+            Continue to Policy Management
           </button>
         </div>
       </div>
@@ -1217,6 +1374,7 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
             </div>
           </div>
         </div>
+        <div class="filter-panel" id="intune-mg-filters" style="display:none"></div>
         <div class="select-bar">
           <button class="sel-btn" id="intune-selall">Select all visible</button>
           <button class="sel-btn" id="intune-seldesel" title="Deselect all visible policies">Deselect visible</button>
@@ -1285,6 +1443,7 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
             </div>
           </div>
         </div>
+        <div class="filter-panel" id="entra-mg-filters" style="display:none"></div>
         <div class="select-bar">
           <button class="sel-btn" id="entra-selall">Select all visible</button>
           <button class="sel-btn" id="entra-seldesel" title="Deselect all visible policies">Deselect visible</button>
@@ -1353,6 +1512,7 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
             </div>
           </div>
         </div>
+        <div class="filter-panel" id="defender-mg-filters" style="display:none"></div>
         <div class="select-bar">
           <button class="sel-btn" id="defender-selall">Select all visible</button>
           <button class="sel-btn" id="defender-seldesel" title="Deselect all visible policies">Deselect visible</button>
@@ -1470,8 +1630,13 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
+<<<<<<< Updated upstream
   version: '3.1.8.7',
   date:    '2026-08-11'
+=======
+  version: '3.2.0',
+  date:    '2026-09-04'
+>>>>>>> Stashed changes
 };
 
 // LLD template source. Served from the $web container of the same storage
@@ -1497,6 +1662,8 @@ function selectAuthMode(mode) {
   });
   document.getElementById('auth-deploy-info').style.display = mode === 'deploy' ? '' : 'none';
   document.getElementById('auth-doc-info').style.display    = mode === 'document' ? '' : 'none';
+  const mgInfo = document.getElementById('auth-manage-info');
+  if (mgInfo) mgInfo.style.display = mode === 'manage' ? '' : 'none';
 }
 
 function setAppMode(mode) {
@@ -3584,6 +3751,7 @@ function getVisible(wl) {
       if (!matchL1 && !matchL2 && !matchNone) return false;
     }
     if (q && !p.displayName.toLowerCase().includes(q)) return false;
+    if (!mgPassesFilters(wl, p)) return false;
     return true;
   });
 }
@@ -3657,8 +3825,12 @@ function renderGrid(wl, loading) {
       ? `<span class="pname-renamed">${deployName}</span>`
       : deployName;
 
-    return `<div class="pcard ${p.selected?'selected':''}" data-cat="${p.cat}" data-wl="${wl}" data-name="${p.name}"
-         style="animation-delay:${i*20}ms" onclick="togglePolicy('${wl}','${p.name}')">
+    // In manage mode a card opens the editor drawer rather than selecting.
+    const mgClick = appMode === 'manage'
+      ? `mgOpenDrawer('${wl}','${p.name}')`
+      : `togglePolicy('${wl}','${p.name}')`;
+    return `<div class="pcard ${p.selected?'selected':''} ${mgIsDirty(p)?'mg-dirty':''}" data-cat="${p.cat}" data-wl="${wl}" data-name="${p.name}"
+         style="animation-delay:${i*20}ms" onclick="${mgClick}">
       <div class="pcheck">
         <svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
       </div>
@@ -3670,6 +3842,7 @@ function renderGrid(wl, loading) {
           ${flagBadges}
           ${docOnly}
           ${sb}
+          ${mgCardBadges(p)}
         </div>
       </div>
       <button class="pcard-info-btn" title="View policy details" onclick="event.stopPropagation();showPolicyPanel('${wl}','${p.name}')" onmouseenter="prefetchPolicyInsight('${wl}','${p.name}')" onmouseleave="cancelPrefetch('${p.name}')">
@@ -6337,6 +6510,490 @@ window.addEventListener('load', () => {
     showToast('Authentication init failed. Check browser console.', 'err');
   });
 });
+// ═══════════════════════════════════════════════════════════════════
+// POLICY MANAGEMENT
+// Reads catalog.json (built by tools/build_catalog.py) and lets a
+// consultant view and amend taxonomy overrides, tags and enrichment.
+// Deploy and Document behaviour is untouched.
+// ═══════════════════════════════════════════════════════════════════
+
+const CATALOG_URL = `${RAW_BASE}/catalog.json`;
+
+// Azure Function endpoint that commits sidecars back to the repo.
+// Until this is stood up, Save falls back to downloading a .zip of the
+// sidecars so nothing is lost.
+const MG_SAVE_ENDPOINT = ''; // e.g. 'https://cdw-baseline-functions.azurewebsites.net/api/saveMetadata'
+
+let mgCatalog   = null;   // parsed catalog.json
+let mgById      = {};     // policy id -> catalog record
+let mgByPath    = {};     // repo path -> catalog record
+let mgDirty     = {};     // policy id -> { overrides, tags, enrichment }
+let mgCurrentId = null;   // policy open in the drawer
+
+// Filter state, mirroring the existing activeFilter pattern
+const mgFramework = { intune:new Set(), entra:new Set(), defender:new Set() };
+const mgBundle    = { intune:new Set(), entra:new Set(), defender:new Set() };
+const mgAttention = { intune:new Set(), entra:new Set(), defender:new Set() };
+
+const MG_OVERRIDABLE = ['workload','platform','policyType','framework','scope','area','subArea','securityDomain'];
+const MG_ENRICH_FIELDS = [
+  { key:'summary',       label:'Purpose',        rows:3, hint:'One paragraph, customer-facing. Appears in the LLD.' },
+  { key:'rationale',     label:'Rationale',      rows:4, hint:'Why this policy matters.' },
+  { key:'prerequisites', label:'Prerequisites',  rows:2, hint:'One per line.' },
+  { key:'userImpact',    label:'User impact',    rows:2, hint:'What the end user will notice.' },
+  { key:'licensing',     label:'Licensing',      rows:2, hint:'Any licence dependency.' }
+];
+const MG_KNOWN_TAGS = ['cis-l1','cis-l2','zero-trust','autopilot-mvp'];
+
+// ── Entry point ───────────────────────────────────────────────────
+
+function enterManageMode() {
+  appMode = 'manage';
+  document.body.dataset.appmode = 'manage';
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('deployer').style.display    = '';
+  document.getElementById('tabbar').style.display      = 'flex';
+
+  document.getElementById('topbar-right').innerHTML = `
+    <div class="mode-toggle">
+      <button class="mode-btn" onclick="switchToDeployMode()">Deploy</button>
+      <button class="mode-btn" onclick="enterDocMode()">Document</button>
+      <button class="mode-btn active">Manage</button>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="refresh()">Refresh</button>
+    <span class="mode-pill">🗂 Manage Mode</span>`;
+
+  // Status (deployed / undeployed) needs Graph, so it has no meaning here.
+  Object.keys(WORKLOADS).forEach(wl => {
+    const row = document.getElementById(`${wl}-status-filters`)?.closest('.filter-row');
+    if (row) row.style.display = 'none';
+  });
+  document.getElementById('deploy-bar')?.classList.remove('up');
+  loadCatalog().then(() => loadAllWorkloads());
+}
+
+async function loadCatalog() {
+  try {
+    const r = await fetch(`${CATALOG_URL}?t=${Date.now()}`);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    mgCatalog = await r.json();
+    mgById   = {};
+    mgByPath = {};
+    (mgCatalog.policies || []).forEach(p => {
+      mgById[p.id] = p;
+      mgByPath[p.path] = p;
+    });
+    Object.values(policies).flat().forEach(p => { delete p._mgRec; });
+    mgBuildFilters();
+    showToast(`Catalog loaded: ${mgCatalog.counts.policies} policies, ${mgCatalog.counts.bundles} bundles`);
+  } catch (e) {
+    mgCatalog = null;
+    showToast(`Could not load catalog.json — ${e.message}`, 'err');
+  }
+}
+
+// Match a grid policy to its catalog record. The grid stores the repo
+// path on p.path when available; fall back to matching on filename.
+function mgLookup(p) {
+  if (!mgCatalog) return null;
+  if (p._mgRec !== undefined) return p._mgRec;          // memoised, incl. null misses
+  let rec = null;
+  const path = p.folder ? `${p.folder}/${p.name}.json` : null;
+  if (path && mgByPath[path]) rec = mgByPath[path];
+  else {
+    const fn = `${p.name}.json`;
+    rec = (mgCatalog.policies || []).find(c => c.fileName === fn) || null;
+  }
+  p._mgRec = rec;
+  return rec;
+}
+
+// Merge derived record with any unsaved local edits
+function mgEffective(id) {
+  const base = mgById[id];
+  if (!base) return null;
+  const d = mgDirty[id];
+  if (!d) return base;
+  const merged = { ...base, ...(d.overrides || {}) };
+  if (d.tags)       merged.tags = d.tags;
+  if (d.enrichment) merged.enrichment = { ...(base.enrichment || {}), ...d.enrichment };
+  return merged;
+}
+
+// ── Filter chips ──────────────────────────────────────────────────
+
+function mgBuildFilters() {
+  if (!mgCatalog) return;
+  const frameworks = mgCatalog.taxonomy.frameworks || [];
+  const bundles    = mgCatalog.bundles || [];
+
+  Object.keys(WORKLOADS).forEach(wl => {
+    const host = document.getElementById(`${wl}-mg-filters`);
+    if (!host) return;
+    host.className = 'filter-panel mg-filter-panel';
+    host.style.display = '';
+    host.innerHTML = `
+      <div class="filter-row">
+        <span class="filter-label">Framework</span>
+        <div class="filter-chips" id="${wl}-fw-filters">
+          <button class="fchip active" data-fw="all">All</button>
+          ${frameworks.map(f => `<button class="fchip" data-fw="${f}">${f}</button>`).join('')}
+          <button class="fchip" data-fw="none">Unmapped</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Bundle</span>
+        <div class="filter-chips" id="${wl}-bundle-filters">
+          <button class="fchip active" data-bundle="all">All</button>
+          ${bundles.map(b => `<button class="fchip" data-bundle="${b.id}">${b.name} <span class="dot" style="background:var(--dim)"></span>${b.memberCount}</button>`).join('')}
+        </div>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Attention</span>
+        <div class="filter-chips" id="${wl}-attn-filters">
+          <button class="fchip active" data-attn="all">All</button>
+          <button class="fchip" data-attn="unresolved">Unresolved attributes</button>
+          <button class="fchip" data-attn="missingEnrichment">No enrichment</button>
+          <button class="fchip" data-attn="staleEnrichment">Stale enrichment</button>
+          <button class="fchip" data-attn="orphan">No bundle</button>
+        </div>
+      </div>`;
+
+    mgWireChips(`${wl}-fw-filters`,     'fw',     mgFramework[wl], wl);
+    mgWireChips(`${wl}-bundle-filters`, 'bundle', mgBundle[wl],    wl);
+    mgWireChips(`${wl}-attn-filters`,   'attn',   mgAttention[wl], wl);
+  });
+}
+
+function mgWireChips(containerId, attr, stateSet, wl) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.querySelectorAll('.fchip').forEach(chip => {
+    chip.onclick = () => {
+      const v = chip.dataset[attr];
+      if (v === 'all') {
+        stateSet.clear();
+        c.querySelectorAll('.fchip').forEach(x => x.classList.toggle('active', x.dataset[attr] === 'all'));
+      } else {
+        stateSet.has(v) ? stateSet.delete(v) : stateSet.add(v);
+        chip.classList.toggle('active', stateSet.has(v));
+        c.querySelector(`[data-${attr}="all"]`)?.classList.toggle('active', stateSet.size === 0);
+      }
+      renderGrid(wl, false);
+    };
+  });
+}
+
+// Called from getVisible(). Returns true if the policy passes the
+// manage-only filters. Always true outside manage mode.
+function mgPassesFilters(wl, p) {
+  if (appMode !== 'manage' || !mgCatalog) return true;
+  const rec = mgLookup(p);
+  if (!rec) return mgFramework[wl].size === 0 && mgBundle[wl].size === 0 && mgAttention[wl].size === 0;
+  const eff = mgEffective(rec.id) || rec;
+
+  const fw = mgFramework[wl];
+  if (fw.size > 0) {
+    const has = (eff.frameworks || []);
+    const wantNone = fw.has('none') && has.length === 0;
+    const wantAny  = has.some(f => fw.has(f));
+    if (!wantNone && !wantAny) return false;
+  }
+
+  const bd = mgBundle[wl];
+  if (bd.size > 0 && !(eff.bundles || []).some(b => bd.has(b))) return false;
+
+  const at = mgAttention[wl];
+  if (at.size > 0) {
+    const flags = new Set();
+    if ((eff.unresolved || []).length) flags.add('unresolved');
+    if (!eff.enrichment)               flags.add('missingEnrichment');
+    else if (eff.enrichment.stale)     flags.add('staleEnrichment');
+    if (!(eff.bundles || []).length)   flags.add('orphan');
+    if (![...at].some(f => flags.has(f))) return false;
+  }
+  return true;
+}
+
+// Extra badges injected into each card while in manage mode.
+function mgCardBadges(p) {
+  if (appMode !== 'manage' || !mgCatalog) return '';
+  const rec = mgLookup(p);
+  if (!rec) return `<span class="mg-badge mg-badge-attn">Not in catalog</span>`;
+  const eff = mgEffective(rec.id) || rec;
+  const out = [];
+  (eff.frameworks || []).forEach(f => out.push(`<span class="mg-badge mg-badge-fw">${f}</span>`));
+  if (eff.securityDomain) out.push(`<span class="mg-badge mg-badge-domain">${eff.securityDomain}</span>`);
+  if (!eff.enrichment)            out.push(`<span class="mg-badge mg-badge-attn">No enrichment</span>`);
+  else if (eff.enrichment.stale)  out.push(`<span class="mg-badge mg-badge-attn">Stale</span>`);
+  if (!(eff.bundles || []).length) out.push(`<span class="mg-badge mg-badge-attn">No bundle</span>`);
+  else out.push(`<span class="mg-badge">${eff.bundles.length} bundle${eff.bundles.length === 1 ? '' : 's'}</span>`);
+  return out.join('');
+}
+
+function mgIsDirty(p) {
+  const rec = mgLookup(p);
+  return rec ? !!mgDirty[rec.id] : false;
+}
+
+// ── Drawer ────────────────────────────────────────────────────────
+
+function mgOpenDrawer(wl, name) {
+  const p = policies[wl]?.find(x => x.name === name);
+  if (!p) return;
+  const rec = mgLookup(p);
+  if (!rec) { showToast('This policy is not in catalog.json — rebuild the catalog', 'warn'); return; }
+
+  mgCurrentId = rec.id;
+  const eff = mgEffective(rec.id);
+  const tax = mgCatalog.taxonomy;
+  const opts = {
+    workload:       tax.workloads,
+    platform:       tax.platforms,
+    policyType:     tax.policyTypes,
+    framework:      tax.frameworks,
+    scope:          tax.scopes,
+    area:           tax.areas,
+    securityDomain: tax.securityDomains || []
+  };
+
+  const attrHtml = MG_OVERRIDABLE.map(k => {
+    const src = rec.derivedFrom?.[k] || (mgDirty[rec.id]?.overrides?.[k] !== undefined ? 'override' : '');
+    const isOverridden = mgDirty[rec.id]?.overrides?.[k] !== undefined || src === 'override';
+    const list = opts[k];
+    const val = eff[k] ?? '';
+    const control = list
+      ? `<select data-mgattr="${k}" onchange="mgSetOverride('${k}', this.value)">
+           <option value="">(none)</option>
+           ${list.map(o => `<option value="${htmlEsc(o)}" ${o === val ? 'selected' : ''}>${htmlEsc(o)}</option>`).join('')}
+           ${val && !list.includes(val) ? `<option value="${htmlEsc(val)}" selected>${htmlEsc(val)}</option>` : ''}
+         </select>`
+      : `<input type="text" data-mgattr="${k}" value="${htmlEsc(val)}" onchange="mgSetOverride('${k}', this.value)"/>`;
+    return `<div class="mg-field ${isOverridden ? 'changed' : ''}">
+      <label>${k}${src ? `<span class="mg-src ${src === 'override' ? 'mg-src-override' : ''}">${src}</span>` : ''}</label>
+      ${control}
+    </div>`;
+  }).join('');
+
+  const tagHtml = MG_KNOWN_TAGS.map(t =>
+    `<button class="mg-tag-btn ${(eff.tags || []).includes(t) ? 'on' : ''}" onclick="mgToggleTag('${t}')">${t}</button>`
+  ).join('');
+
+  const bundleHtml = (eff.bundles || []).length
+    ? eff.bundles.map(b => {
+        const bd = mgCatalog.bundles.find(x => x.id === b);
+        return `<span class="mg-badge">${htmlEsc(bd ? bd.name : b)}</span>`;
+      }).join('')
+    : `<span class="mg-empty">Not a member of any bundle. Add a tag or adjust an attribute above.</span>`;
+
+  const en = eff.enrichment || {};
+  const enrichHtml = MG_ENRICH_FIELDS.map(f => {
+    const raw = Array.isArray(en[f.key]) ? en[f.key].join('\n') : (en[f.key] || '');
+    const changed = mgDirty[rec.id]?.enrichment?.[f.key] !== undefined;
+    return `<div class="mg-field ${changed ? 'changed' : ''}">
+      <label>${f.label}</label>
+      <textarea rows="${f.rows}" placeholder="${f.hint}"
+        onchange="mgSetEnrichment('${f.key}', this.value)">${htmlEsc(raw)}</textarea>
+    </div>`;
+  }).join('');
+
+  const staleNote = en.stale
+    ? `<div class="mg-stale">The policy file has changed since this enrichment was written. Review and update it, or regenerate.</div>`
+    : '';
+
+  document.getElementById('mg-dr-title').textContent = eff.displayName || rec.fileName;
+  document.getElementById('mg-dr-path').textContent  = rec.path;
+  document.getElementById('mg-dr-body').innerHTML = `
+    <div class="mg-sec">
+      <div class="mg-sec-title">Taxonomy</div>
+      <p class="mg-empty" style="margin-bottom:10px">Values are derived automatically. Changing one records an override that survives future rebuilds.</p>
+      ${attrHtml}
+    </div>
+    <div class="mg-sec">
+      <div class="mg-sec-title">Framework tags</div>
+      <div class="mg-tags">${tagHtml}</div>
+    </div>
+    <div class="mg-sec">
+      <div class="mg-sec-title">Bundle membership</div>
+      <div class="mg-bundles">${bundleHtml}</div>
+    </div>
+    <div class="mg-sec">
+      <div class="mg-sec-title">Enrichment</div>
+      ${staleNote}
+      ${enrichHtml}
+    </div>`;
+
+  document.getElementById('mg-drawer').classList.add('open');
+}
+
+function mgCloseDrawer() {
+  document.getElementById('mg-drawer').classList.remove('open');
+  mgCurrentId = null;
+}
+
+// ── Edit handlers ─────────────────────────────────────────────────
+
+function mgEnsureDirty(id) {
+  if (!mgDirty[id]) mgDirty[id] = { overrides:{}, tags:null, enrichment:{} };
+  return mgDirty[id];
+}
+
+function mgSetOverride(key, value) {
+  if (!mgCurrentId) return;
+  const base = mgById[mgCurrentId];
+  const d = mgEnsureDirty(mgCurrentId);
+  const v = value === '' ? null : value;
+  if (v === base[key]) delete d.overrides[key];
+  else d.overrides[key] = v;
+  mgAfterEdit();
+}
+
+function mgToggleTag(tag) {
+  if (!mgCurrentId) return;
+  const base = mgById[mgCurrentId];
+  const d = mgEnsureDirty(mgCurrentId);
+  const cur = new Set(d.tags || base.tags || []);
+  cur.has(tag) ? cur.delete(tag) : cur.add(tag);
+  const next = [...cur].sort();
+  const orig = [...(base.tags || [])].sort();
+  d.tags = (JSON.stringify(next) === JSON.stringify(orig)) ? null : next;
+  mgAfterEdit();
+  mgOpenDrawer(mgCurrentWl(), mgCurrentName()); // re-render tag + bundle state
+}
+
+function mgSetEnrichment(key, value) {
+  if (!mgCurrentId) return;
+  const base = mgById[mgCurrentId];
+  const d = mgEnsureDirty(mgCurrentId);
+  const orig = base.enrichment?.[key];
+  const origStr = Array.isArray(orig) ? orig.join('\n') : (orig || '');
+  if (value === origStr) delete d.enrichment[key];
+  else d.enrichment[key] = value;
+  mgAfterEdit();
+}
+
+function mgAfterEdit() {
+  // Drop the record entirely if nothing differs from the derived state
+  const d = mgDirty[mgCurrentId];
+  if (d && Object.keys(d.overrides).length === 0 && !d.tags && Object.keys(d.enrichment).length === 0) {
+    delete mgDirty[mgCurrentId];
+  }
+  mgUpdateSaveBar();
+  Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+}
+
+// Helpers so the drawer can re-render itself after a tag toggle
+function mgCurrentWl() {
+  const rec = mgById[mgCurrentId];
+  for (const wl of Object.keys(policies)) {
+    if (policies[wl].some(p => mgLookup(p)?.id === rec.id)) return wl;
+  }
+  return activeTab;
+}
+function mgCurrentName() {
+  const rec = mgById[mgCurrentId];
+  for (const wl of Object.keys(policies)) {
+    const hit = policies[wl].find(p => mgLookup(p)?.id === rec.id);
+    if (hit) return hit.name;
+  }
+  return '';
+}
+
+// ── Save ──────────────────────────────────────────────────────────
+
+function mgUpdateSaveBar() {
+  const n = Object.keys(mgDirty).length;
+  const bar = document.getElementById('mg-savebar');
+  bar.classList.toggle('up', n > 0);
+  document.getElementById('mg-sb-text').textContent = `${n} polic${n === 1 ? 'y' : 'ies'} edited`;
+}
+
+function mgBuildSidecars() {
+  return Object.entries(mgDirty).map(([id, d]) => {
+    const base = mgById[id];
+    const sidecar = { schemaVersion: 1, policyPath: base.path };
+    if (Object.keys(d.overrides).length) sidecar.overrides = d.overrides;
+    if (d.tags) sidecar.tags = d.tags;
+    if (Object.keys(d.enrichment).length) {
+      const en = { ...(base.enrichment || {}) };
+      delete en.stale;
+      Object.entries(d.enrichment).forEach(([k, v]) => {
+        en[k] = (k === 'prerequisites') ? v.split('\n').map(s => s.trim()).filter(Boolean) : v;
+      });
+      en.generatedBy = 'consultant';
+      en.generatedAt = new Date().toISOString();
+      en.sourceHash  = base.policyHash;
+      sidecar.enrichment = en;
+    }
+    return { path: `metadata/${base.path}.meta.json`, content: sidecar };
+  });
+}
+
+async function mgSave() {
+  const files = mgBuildSidecars();
+  if (!files.length) return;
+
+  if (!MG_SAVE_ENDPOINT) {
+    // No backend yet — hand the consultant the files so work is never lost
+    files.forEach(f => {
+      const blob = new Blob([JSON.stringify(f.content, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = f.path.split('/').pop();
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+    showToast(`Downloaded ${files.length} sidecar file(s) — commit them under metadata/`, 'warn');
+    return;
+  }
+
+  try {
+    const r = await fetch(MG_SAVE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ files })
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    showToast(`Saved ${files.length} sidecar file(s) to the repository`);
+    mgDirty = {};
+    mgUpdateSaveBar();
+    await loadCatalog();
+    Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+  } catch (e) {
+    showToast(`Save failed — ${e.message}`, 'err');
+  }
+}
+
+function mgDiscard() {
+  if (!confirm('Discard all unsaved changes?')) return;
+  mgDirty = {};
+  mgCloseDrawer();
+  mgUpdateSaveBar();
+  Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+}
+
 </script>
+<!-- ── Policy Management drawer ───────────────────────────── -->
+<div id="mg-drawer">
+  <div class="mg-dr-head">
+    <div style="flex:1">
+      <h3 id="mg-dr-title">Policy</h3>
+      <div class="mg-dr-path" id="mg-dr-path"></div>
+    </div>
+    <button class="mg-dr-close" onclick="mgCloseDrawer()">&times;</button>
+  </div>
+  <div class="mg-dr-body" id="mg-dr-body"></div>
+</div>
+
+<!-- ── Policy Management save bar ─────────────────────────── -->
+<div id="mg-savebar">
+  <div>
+    <div class="mg-sb-text" id="mg-sb-text">0 policies edited</div>
+    <div class="mg-sb-sub">Saved as sidecar files under metadata/</div>
+  </div>
+  <button class="btn btn-ghost btn-sm" onclick="mgDiscard()">Discard</button>
+  <button class="btn btn-primary btn-sm" onclick="mgSave()">Save changes</button>
+</div>
+
 </body>
 </html>
