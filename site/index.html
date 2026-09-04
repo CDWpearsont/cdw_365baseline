@@ -1175,6 +1175,48 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 .auth-mode{flex-wrap:wrap}
 .auth-mode-card{min-width:150px}
 
+/* ── Building Blocks: multi-select, scenarios ──────────────────── */
+.bb-section-head {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+}
+.bb-tile-scenario { border-color: var(--border2); background: var(--s2); }
+.bb-tile-scenario:hover { border-color: #2563eb; }
+.bb-tile-scenario .bb-tile-icon { color: #2563eb; }
+
+.bb-selectable { padding-right: 46px; }
+.bb-check {
+  position: absolute; top: 16px; right: 16px;
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 2px solid var(--border2); background: var(--s1);
+  display: flex; align-items: center; justify-content: center; transition: all .15s;
+}
+.bb-tile.bb-on { border-color: var(--cdw-red); background: rgba(204,0,0,.02); }
+.bb-tile.bb-on .bb-check { background: var(--cdw-red); border-color: var(--cdw-red); }
+
+.bb-variant {
+  display: inline-block; margin-left: 6px; vertical-align: middle;
+  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+  background: var(--s3); color: var(--muted); border: 1px solid var(--border);
+}
+
+.bb-running { font-size: 12px; font-weight: 600; color: var(--text); margin-right: 6px; }
+
+.bb-sum-blocks { display: flex; flex-direction: column; gap: 8px; }
+.bb-sum-block {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--s1); border: 1px solid var(--border); border-radius: 9px; padding: 12px 14px;
+}
+.bb-sum-block-title { font-family: var(--fhead); font-size: 13px; font-weight: 600; color: var(--text); }
+
+.bb-scenario-banner {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: rgba(37,99,235,.05); border: 1px solid rgba(37,99,235,.2);
+  border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
+  font-size: 13px; color: var(--text); line-height: 1.5;
+}
+.bb-scenario-banner svg { color: #2563eb; flex-shrink: 0; margin-top: 2px; }
+
 </style>
 </head>
 <body>
@@ -1772,7 +1814,7 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.3.0',
+  version: '3.4.0',
   date:    '2026-09-04'
 };
 
@@ -7116,19 +7158,28 @@ function mgDiscard() {
 
 // ═══════════════════════════════════════════════════════════════════
 // BUILDING BLOCKS
-// A graphical step-through that selects an off-the-shelf policy set by
-// outcome rather than by technical detail: tower, then goal, then
-// platform. Membership resolves from catalog.json, so counts shown to a
-// customer are always the live repository contents.
+// A graphical step-through that selects off-the-shelf policy sets by
+// outcome rather than technical detail. Two entry points: a cross-tower
+// scenario, or browse by technology → platform → one or more goals.
+// Membership resolves from catalog.json, so every count shown to a
+// customer is the live repository contents.
 // ═══════════════════════════════════════════════════════════════════
 
-const BB_STEPS = ['Technology', 'Goal', 'Platform', 'Review'];
+const BB_STEPS = ['Start', 'Platform', 'Goals', 'Review'];
 
 let bbStep     = 1;
 let bbTower    = null;   // tower id, e.g. 'Intune'
-let bbGoal     = null;   // goal object
-let bbOption   = null;   // platform option within the goal
+let bbPlatform = null;   // 'Windows' | 'macOS' | 'Mobile' | 'Cross-platform'
+let bbPicks    = {};     // goalId -> option index, one variant per goal
+let bbScenario = null;   // scenario object when entered that way
 let bbPending  = null;   // policy ids to select once the grid has loaded
+
+const BB_PLATFORMS = {
+  'Windows':        { label: 'Windows 10/11',  icon: 'device', blurb: 'Desktops and laptops managed by Intune' },
+  'macOS':          { label: 'macOS',          icon: 'device', blurb: 'Apple desktops and laptops' },
+  'Mobile':         { label: 'iOS and Android',icon: 'mobile', blurb: 'Phones and tablets, corporate or personal' },
+  'Cross-platform': { label: 'All platforms',  icon: 'key',    blurb: 'Applies regardless of device platform' },
+};
 
 const BB_ICONS = {
   device:      '<path d="M9 17H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v4M13 21h6a1 1 0 001-1v-7a1 1 0 00-1-1h-6a1 1 0 00-1 1v7a1 1 0 001 1z"/>',
@@ -7164,13 +7215,17 @@ async function enterBuildMode() {
   document.getElementById('topbar-right').innerHTML =
     `<span class="mode-pill mode-pill-build">\u{1f9f1} Building Blocks</span>`;
 
-  bbStep = 1; bbTower = null; bbGoal = null; bbOption = null;
+  bbReset();
   document.getElementById('bb-body').innerHTML =
     `<div class="state-box"><div class="spinner"></div><p>Loading catalogue\u2026</p></div>`;
   bbRenderSteps();
 
   if (!mgCatalog) await loadCatalog();
   bbRender();
+}
+
+function bbReset() {
+  bbStep = 1; bbTower = null; bbPlatform = null; bbPicks = {}; bbScenario = null;
 }
 
 function bbExit() {
@@ -7182,41 +7237,62 @@ function bbExit() {
 
 // ── Catalogue helpers ─────────────────────────────────────────────
 
-function bbBundle(id) {
-  return (mgCatalog?.bundles || []).find(b => b.id === id) || null;
-}
+function bbBundle(id) { return (mgCatalog?.bundles || []).find(b => b.id === id) || null; }
+
+function bbGoal(id) { return (mgCatalog?.goals || []).find(g => g.id === id) || null; }
 
 // Union of members across the bundles an option points at.
-function bbMembers(option) {
-  if (!option) return [];
+function bbOptionMembers(option) {
   const seen = new Set();
-  (option.bundles || []).forEach(id => {
-    const b = bbBundle(id);
-    (b?.members || []).forEach(m => seen.add(m));
+  (option?.bundles || []).forEach(id => (bbBundle(id)?.members || []).forEach(m => seen.add(m)));
+  return seen;
+}
+
+function bbGoalsFor(tower) { return (mgCatalog?.goals || []).filter(g => g.tower === tower); }
+
+// Distinct platforms a tower's goals can target, in a sensible order.
+function bbPlatformsFor(tower) {
+  const found = new Set();
+  bbGoalsFor(tower).forEach(g => (g.options || []).forEach(o => found.add(o.platform)));
+  return ['Windows', 'macOS', 'Mobile', 'Cross-platform'].filter(p => found.has(p));
+}
+
+// Every (goal, option) pair available for the chosen tower and platform.
+function bbChoices() {
+  const out = [];
+  bbGoalsFor(bbTower).forEach(g => {
+    (g.options || []).forEach((o, i) => {
+      if (o.platform === bbPlatform) out.push({ goal: g, option: o, index: i });
+    });
   });
-  return [...seen];
+  return out;
 }
 
-function bbGoals(tower) {
-  return (mgCatalog?.goals || []).filter(g => g.tower === tower);
+// The currently selected (goal, option) pairs, from either entry point.
+function bbSelection() {
+  if (bbScenario) {
+    return (bbScenario.includes || []).map(inc => {
+      const g = bbGoal(inc.goal); if (!g) return null;
+      const i = (g.options || []).findIndex(o => o.platform === inc.platform);
+      return i < 0 ? null : { goal: g, option: g.options[i], index: i };
+    }).filter(Boolean);
+  }
+  return Object.entries(bbPicks).map(([gid, i]) => {
+    const g = bbGoal(gid);
+    return g && g.options[i] ? { goal: g, option: g.options[i], index: i } : null;
+  }).filter(Boolean);
 }
 
-// A goal is only worth showing if at least one of its options resolves.
-function bbGoalCount(goal) {
+function bbSelectedIds() {
   const seen = new Set();
-  (goal.options || []).forEach(o => bbMembers(o).forEach(m => seen.add(m)));
-  return seen.size;
-}
-
-function bbTowerCount(towerId) {
-  return (mgCatalog?.policies || []).filter(p => p.workload === towerId).length;
+  bbSelection().forEach(s => bbOptionMembers(s.option).forEach(m => seen.add(m)));
+  return [...seen];
 }
 
 // ── Rendering ─────────────────────────────────────────────────────
 
 function bbRenderSteps() {
-  const host = document.getElementById('bb-stepper');
-  host.innerHTML = BB_STEPS.map((label, i) => {
+  document.getElementById('bb-stepper').innerHTML = BB_STEPS.map((label, i) => {
     const n = i + 1;
     const cls = n < bbStep ? 'done' : n === bbStep ? 'on' : '';
     const dot = n < bbStep
@@ -7235,100 +7311,156 @@ function bbRender() {
     document.getElementById('bb-body').innerHTML =
       `<div class="bb-empty-note">Could not load <code>catalog.json</code>.
        Check that the catalogue build workflow has run on the repository.</div>`;
+    document.getElementById('bb-nav').innerHTML =
+      `<button class="btn btn-ghost btn-sm" onclick="bbExit()">Cancel</button><div></div>`;
     return;
   }
-  if (bbStep === 1) bbRenderTowers();
-  else if (bbStep === 2) bbRenderGoals();
-  else if (bbStep === 3) bbRenderPlatforms();
+  if (bbStep === 1) bbRenderStart();
+  else if (bbStep === 2) bbRenderPlatforms();
+  else if (bbStep === 3) bbRenderGoals();
   else bbRenderReview();
 }
 
-function bbRenderTowers() {
-  document.getElementById('bb-title').textContent = 'Which technology are you configuring?';
-  document.getElementById('bb-sub').textContent   =
-    'Choose a Microsoft 365 technology tower to see the outcomes available for it.';
+function bbCount(n) {
+  return `<span class="bb-count ${n ? '' : 'bb-count-zero'}">${n} polic${n === 1 ? 'y' : 'ies'}</span>`;
+}
 
-  const tiles = (mgCatalog.towers || []).map(t => {
-    const count = bbTowerCount(t.id);
-    const goals = bbGoals(t.id).length;
+function bbRenderStart() {
+  document.getElementById('bb-title').textContent = 'What are you setting up?';
+  document.getElementById('bb-sub').textContent =
+    'Start from a common engagement scenario, or browse the technologies directly.';
+
+  const scenarios = (mgCatalog.scenarios || []).map(sc => {
+    const n = bbScenarioCount(sc);
+    const towers = [...new Set((sc.includes || []).map(i => bbGoal(i.goal)?.tower).filter(Boolean))];
+    return `<div class="bb-tile bb-tile-scenario" onclick="bbPickScenario('${sc.id}')">
+      <div class="bb-tile-icon">${bbIcon(sc.icon, 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(sc.title)}</div>
+      <div class="bb-tile-blurb">${htmlEsc(sc.outcome)}</div>
+      <div class="bb-tile-foot">${bbCount(n)}
+        <span class="bb-note">${towers.map(htmlEsc).join(' + ')}</span></div>
+    </div>`;
+  }).join('');
+
+  const towers = (mgCatalog.towers || []).map(t => {
+    const count = (mgCatalog.policies || []).filter(p => p.workload === t.id).length;
+    const goals = bbGoalsFor(t.id).length;
     const ready = count > 0 && goals > 0;
-    return `<div class="bb-tile ${ready ? '' : 'bb-disabled'}"
-        ${ready ? `onclick="bbPickTower('${t.id}')"` : ''}>
+    return `<div class="bb-tile ${ready ? '' : 'bb-disabled'}" ${ready ? `onclick="bbPickTower('${t.id}')"` : ''}>
       ${ready ? '' : '<span class="bb-soon">Coming soon</span>'}
       <div class="bb-tile-icon">${bbIcon(t.icon, 22)}</div>
       <div class="bb-tile-title">${htmlEsc(t.name)}</div>
       <div class="bb-tile-blurb">${htmlEsc(t.blurb)}</div>
-      <div class="bb-tile-foot">
-        <span class="bb-count ${count ? '' : 'bb-count-zero'}">${count} policies</span>
-        ${ready ? `<span class="bb-note">${goals} building block${goals === 1 ? '' : 's'}</span>` : ''}
-      </div>
+      <div class="bb-tile-foot">${bbCount(count)}
+        ${ready ? `<span class="bb-note">${goals} building block${goals === 1 ? '' : 's'}</span>` : ''}</div>
     </div>`;
   }).join('');
 
-  document.getElementById('bb-body').innerHTML = `<div class="bb-grid bb-grid-3">${tiles}</div>`;
-  bbNav(false, null);
+  document.getElementById('bb-body').innerHTML = `
+    ${scenarios ? `<div class="bb-section-head">Engagement scenarios</div>
+      <div class="bb-grid bb-grid-2" style="margin-bottom:26px">${scenarios}</div>` : ''}
+    <div class="bb-section-head">Or browse by technology</div>
+    <div class="bb-grid bb-grid-3">${towers}</div>`;
+  bbNav({ back: 'Cancel', backFn: 'bbExit()' });
 }
 
-function bbRenderGoals() {
-  const tower = (mgCatalog.towers || []).find(t => t.id === bbTower);
-  document.getElementById('bb-title').textContent = 'What do you want to achieve?';
-  document.getElementById('bb-sub').textContent   =
-    `Each building block is a ready-made set of ${tower ? tower.name : bbTower} policies that delivers one outcome.`;
-
-  const tiles = bbGoals(bbTower).map(g => {
-    const count = bbGoalCount(g);
-    return `<div class="bb-tile" onclick="bbPickGoal('${g.id}')">
-      <div class="bb-tile-icon">${bbIcon(g.icon, 22)}</div>
-      <div class="bb-tile-title">${htmlEsc(g.title)}</div>
-      <div class="bb-tile-blurb">${htmlEsc(g.outcome)}</div>
-      <div class="bb-tile-foot">
-        <span class="bb-count ${count ? '' : 'bb-count-zero'}">${count} policies</span>
-        <span class="bb-note">${(g.options || []).length} option${(g.options || []).length === 1 ? '' : 's'}</span>
-      </div>
-    </div>`;
-  }).join('');
-
-  document.getElementById('bb-body').innerHTML = `<div class="bb-grid bb-grid-2">${tiles}</div>`;
-  bbNav(true, null);
+function bbScenarioCount(sc) {
+  const seen = new Set();
+  (sc.includes || []).forEach(inc => {
+    const g = bbGoal(inc.goal); if (!g) return;
+    const o = (g.options || []).find(x => x.platform === inc.platform);
+    if (o) bbOptionMembers(o).forEach(m => seen.add(m));
+  });
+  return seen.size;
 }
 
 function bbRenderPlatforms() {
+  const tower = (mgCatalog.towers || []).find(t => t.id === bbTower);
   document.getElementById('bb-title').textContent = 'Which platform?';
-  document.getElementById('bb-sub').textContent   = htmlEsc(bbGoal.title);
+  document.getElementById('bb-sub').textContent =
+    `${tower ? tower.name : bbTower} \u2014 choose the platform this engagement covers.`;
 
-  const tiles = (bbGoal.options || []).map((o, i) => {
-    const count = bbMembers(o).length;
-    return `<div class="bb-tile" onclick="bbPickOption(${i})">
-      <div class="bb-tile-icon">${bbIcon(o.platform === 'macOS' ? 'device'
-        : o.platform === 'Mobile' ? 'mobile'
-        : o.platform === 'Cross-platform' ? 'key' : 'device', 22)}</div>
-      <div class="bb-tile-title">${htmlEsc(o.label)}</div>
-      <div class="bb-tile-blurb">${htmlEsc(o.note || '')}</div>
-      <div class="bb-tile-foot">
-        <span class="bb-count ${count ? '' : 'bb-count-zero'}">${count} policies</span>
-      </div>
+  const tiles = bbPlatformsFor(bbTower).map(p => {
+    const meta = BB_PLATFORMS[p] || { label: p, icon: 'device', blurb: '' };
+    const n = bbGoalsFor(bbTower).filter(g => (g.options || []).some(o => o.platform === p)).length;
+    return `<div class="bb-tile" onclick="bbPickPlatform('${p}')">
+      <div class="bb-tile-icon">${bbIcon(meta.icon, 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(meta.label)}</div>
+      <div class="bb-tile-blurb">${htmlEsc(meta.blurb)}</div>
+      <div class="bb-tile-foot"><span class="bb-note">${n} building block${n === 1 ? '' : 's'}</span></div>
     </div>`;
   }).join('');
 
   document.getElementById('bb-body').innerHTML = `<div class="bb-grid bb-grid-3">${tiles}</div>`;
-  bbNav(true, null);
+  bbNav({ back: '\u2190 Back', backFn: 'bbBack()' });
+}
+
+function bbRenderGoals() {
+  const meta = BB_PLATFORMS[bbPlatform] || { label: bbPlatform };
+  document.getElementById('bb-title').textContent = 'What do you want to achieve?';
+  document.getElementById('bb-sub').textContent =
+    `${bbTower} \u00b7 ${meta.label} \u2014 choose as many building blocks as the engagement needs.`;
+
+  const choices = bbChoices();
+  // Group by goal so alternative variants of one goal read as a choice, not two blocks.
+  const byGoal = {};
+  choices.forEach(c => { (byGoal[c.goal.id] ||= []).push(c); });
+
+  const tiles = Object.values(byGoal).map(group => group.map(c => {
+    const n = bbOptionMembers(c.option).size;
+    const on = bbPicks[c.goal.id] === c.index;
+    const variant = group.length > 1;
+    return `<div class="bb-tile bb-selectable ${on ? 'bb-on' : ''}"
+        onclick="bbToggleGoal('${c.goal.id}',${c.index})">
+      <div class="bb-check">${on
+        ? '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
+        : ''}</div>
+      <div class="bb-tile-icon">${bbIcon(c.goal.icon, 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(c.goal.title)}
+        ${variant ? `<span class="bb-variant">${htmlEsc(c.option.note || c.option.label)}</span>` : ''}</div>
+      <div class="bb-tile-blurb">${htmlEsc(c.goal.outcome)}</div>
+      <div class="bb-tile-foot">${bbCount(n)}
+        ${variant ? '<span class="bb-note">Alternative</span>' : ''}</div>
+    </div>`;
+  }).join('')).join('');
+
+  document.getElementById('bb-body').innerHTML =
+    tiles ? `<div class="bb-grid bb-grid-2">${tiles}</div>`
+          : `<div class="bb-empty-note">No building blocks are defined for this platform yet.</div>`;
+
+  const picked = bbSelection().length;
+  const total  = bbSelectedIds().length;
+  bbNav({
+    back: '\u2190 Back', backFn: 'bbBack()',
+    running: picked ? `${picked} block${picked === 1 ? '' : 's'} \u00b7 ${total} polic${total === 1 ? 'y' : 'ies'}` : null,
+    next: picked ? 'Review selection \u2192' : null, nextFn: 'bbNext()',
+  });
 }
 
 function bbRenderReview() {
-  const ids  = bbMembers(bbOption);
+  const sel  = bbSelection();
+  const ids  = bbSelectedIds();
   const recs = ids.map(id => mgById[id]).filter(Boolean);
-  document.getElementById('bb-title').textContent = 'Review your building block';
-  document.getElementById('bb-sub').textContent   =
+  document.getElementById('bb-title').textContent = 'Review your selection';
+  document.getElementById('bb-sub').textContent =
     'These policies will be pre-selected. You can still add or remove individual policies afterwards.';
 
-  const byArea = {};
-  recs.forEach(r => { (byArea[r.policyType || 'Other'] ||= []).push(r); });
+  const blocks = sel.map(s => `<div class="bb-sum-block">
+      <div class="bb-tile-icon" style="width:30px;height:30px;border-radius:8px">${bbIcon(s.goal.icon, 16)}</div>
+      <div style="flex:1">
+        <div class="bb-sum-block-title">${htmlEsc(s.goal.title)}</div>
+        <div class="bb-note">${htmlEsc(s.goal.tower)} \u00b7 ${htmlEsc(s.option.label)}${s.option.note ? ' \u00b7 ' + htmlEsc(s.option.note) : ''}</div>
+      </div>
+      ${bbCount(bbOptionMembers(s.option).size)}
+    </div>`).join('');
 
-  const groups = Object.keys(byArea).sort().map(k => `
+  const byType = {};
+  recs.forEach(r => { (byType[r.policyType || 'Other'] ||= []).push(r); });
+  const groups = Object.keys(byType).sort().map(k => `
     <div class="bb-policy-group">
-      <h4>${htmlEsc(k)} \u00b7 ${byArea[k].length}</h4>
+      <h4>${htmlEsc(k)} \u00b7 ${byType[k].length}</h4>
       <div class="bb-policy-list">
-        ${byArea[k].sort((a, b) => (a.displayName || '').localeCompare(b.displayName || ''))
+        ${byType[k].sort((a, b) => (a.displayName || '').localeCompare(b.displayName || ''))
           .map(r => `<div class="bb-policy-item">
             <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
             ${htmlEsc(r.displayName || r.fileName)}</div>`).join('')}
@@ -7336,60 +7468,80 @@ function bbRenderReview() {
     </div>`).join('');
 
   const empty = `<div class="bb-empty-note">
-    This building block currently resolves to no policies. For framework blocks such as
+    This selection currently resolves to no policies. For framework blocks such as
     Zero Trust, tag the relevant policies in <strong>Policy Management</strong> and rebuild
     the catalogue, then they will appear here automatically.</div>`;
 
   document.getElementById('bb-body').innerHTML = `
-    <div class="bb-summary">
-      <div class="bb-sum-row"><span class="bb-sum-key">Technology</span><span class="bb-sum-val">${htmlEsc(bbTower)}</span></div>
-      <div class="bb-sum-row"><span class="bb-sum-key">Goal</span><span class="bb-sum-val">${htmlEsc(bbGoal.title)}</span></div>
-      <div class="bb-sum-row"><span class="bb-sum-key">Platform</span><span class="bb-sum-val">${htmlEsc(bbOption.label)}</span></div>
-      <div class="bb-sum-row"><span class="bb-sum-key">Policies</span><span class="bb-sum-val">${recs.length}</span></div>
-    </div>
+    ${bbScenario ? `<div class="bb-scenario-banner">${bbIcon(bbScenario.icon, 18)}
+      <div><strong>${htmlEsc(bbScenario.title)}</strong><br>
+      <span class="bb-note">${htmlEsc(bbScenario.outcome)}</span></div></div>` : ''}
+    <div class="bb-section-head">Selected building blocks</div>
+    <div class="bb-sum-blocks">${blocks}</div>
+    <div class="bb-section-head" style="margin-top:22px">Policies (${recs.length})</div>
     ${recs.length ? groups : empty}`;
 
-  bbNav(true, recs.length);
+  bbNav({
+    back: '\u2190 Back', backFn: 'bbBack()',
+    review: recs.length,
+  });
 }
 
 // ── Navigation ────────────────────────────────────────────────────
 
-function bbNav(showBack, reviewCount) {
-  const right = reviewCount
+function bbNav(o) {
+  const right = o.review
     ? `<button class="btn btn-ghost" onclick="bbApply('document')">Document these policies</button>
        <button class="btn btn-primary" onclick="bbApply('deploy')">Deploy these policies</button>`
-    : '';
+    : o.next
+      ? `<button class="btn btn-primary" onclick="${o.nextFn}">${o.next}</button>` : '';
   document.getElementById('bb-nav').innerHTML = `
-    <button class="btn btn-ghost btn-sm" onclick="${showBack ? 'bbBack()' : 'bbExit()'}">
-      ${showBack ? '\u2190 Back' : 'Cancel'}
-    </button>
-    <div class="bb-nav-right">${right}</div>`;
+    <button class="btn btn-ghost btn-sm" onclick="${o.backFn}">${o.back}</button>
+    <div class="bb-nav-right">
+      ${o.running ? `<span class="bb-running">${o.running}</span>` : ''}${right}
+    </div>`;
 }
 
 function bbBack() {
-  if (bbStep === 4 && (bbGoal.options || []).length === 1) bbStep = 2;  // platform was auto-skipped
-  else bbStep = Math.max(1, bbStep - 1);
+  if (bbScenario) { bbScenario = null; bbStep = 1; }         // scenario jumped straight to review
+  else if (bbStep === 4) bbStep = 3;
+  else if (bbStep === 3) { bbPicks = {}; bbStep = 2; }
+  else if (bbStep === 2) { bbPlatform = null; bbTower = null; bbStep = 1; }
   bbRender();
 }
 
-function bbPickTower(id) { bbTower = id; bbStep = 2; bbRender(); }
+function bbNext() { if (bbSelection().length) { bbStep = 4; bbRender(); } }
 
-function bbPickGoal(id) {
-  bbGoal = bbGoals(bbTower).find(g => g.id === id);
-  const opts = bbGoal.options || [];
-  if (opts.length === 1) { bbOption = opts[0]; bbStep = 4; }   // nothing to choose
-  else bbStep = 3;
+function bbPickTower(id) {
+  bbTower = id; bbPicks = {};
+  const plats = bbPlatformsFor(id);
+  if (plats.length === 1) { bbPlatform = plats[0]; bbStep = 3; }   // nothing to choose
+  else bbStep = 2;
   bbRender();
 }
 
-function bbPickOption(i) { bbOption = (bbGoal.options || [])[i]; bbStep = 4; bbRender(); }
+function bbPickPlatform(p) { bbPlatform = p; bbStep = 3; bbRender(); }
+
+// One variant per goal: picking a second variant replaces the first.
+function bbToggleGoal(goalId, index) {
+  if (bbPicks[goalId] === index) delete bbPicks[goalId];
+  else bbPicks[goalId] = index;
+  bbRender();
+}
+
+function bbPickScenario(id) {
+  bbScenario = (mgCatalog.scenarios || []).find(s => s.id === id) || null;
+  bbTower = null; bbPlatform = null; bbPicks = {};
+  bbStep = 4;
+  bbRender();
+}
 
 // ── Hand-off ──────────────────────────────────────────────────────
 
 // Stash the chosen ids, then enter the normal grid. Selections are applied
 // once the policy list has loaded, since loading rebuilds the array.
 function bbApply(target) {
-  bbPending = bbMembers(bbOption);
+  bbPending = bbSelectedIds();
   document.getElementById('bb-screen').style.display = 'none';
   if (target === 'document') {
     openDocWizard();
@@ -7397,7 +7549,7 @@ function bbApply(target) {
     document.getElementById('auth-screen').style.display = '';
     document.getElementById('topbar-right').innerHTML    = '';
     selectAuthMode('deploy');
-    showToast('Sign in to deploy the selected building block');
+    showToast('Sign in to deploy the selected building blocks');
   }
 }
 
@@ -7412,12 +7564,13 @@ function bbApplyPendingSelection() {
       if (rec && wanted.has(rec.id)) { p.selected = true; hits++; }
     });
   });
+  const missed = bbPending.length - hits;
   bbPending = null;
   Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
   updateDeployBar();
-  if (hits) showToast(`Building block applied \u2014 ${hits} policies selected`);
+  if (hits) showToast(`Building blocks applied \u2014 ${hits} policies selected` +
+    (missed ? ` (${missed} not found in the policy store)` : ''), missed ? 'warn' : undefined);
 }
-
 </script>
 <!-- ── Policy Management drawer ───────────────────────────── -->
 <div id="mg-drawer">
