@@ -1,0 +1,19 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Login and Lock Screen - v5.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — Login and Lock Screen. Recommendations: 4.10.25.1.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_admx_globalization_blockuserinputmethodsforsignin",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_admx_globalization_blockuserinputmethodsforsignin_1",
+          "children": []
+        }
+      }
+    }
+  ]
+}

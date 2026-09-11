@@ -1,0 +1,19 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L1 - Windows Hello for Business - D - Enhanced Sign-in Security - v5.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows Hello for Business — Enhanced Sign-in Security. Recommendations: 98.1.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_passportforwork_biometrics_enableesswithsupportedperipherals",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_passportforwork_biometrics_enableesswithsupportedperipherals_1",
+          "children": []
+        }
+      }
+    }
+  ]
+}

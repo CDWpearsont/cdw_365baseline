@@ -1,0 +1,19 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - U - Feature Configuration - v5.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Windows User Experience — Feature Configuration. Recommendations: 33.3.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_experience_allowwindowsspotlight",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "user_vendor_msft_policy_config_experience_allowwindowsspotlight_0",
+          "children": []
+        }
+      }
+    }
+  ]
+}

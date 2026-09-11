@@ -1,0 +1,19 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L2 - Device Security - U - Security Hardening - v5.0.0",
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — Security Hardening. Recommendations: 4.11.51.2.1.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "user_vendor_msft_policy_config_admx_windowsmediaplayer_policycodecupdate",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "user_vendor_msft_policy_config_admx_windowsmediaplayer_policycodecupdate_1",
+          "children": []
+        }
+      }
+    }
+  ]
+}
