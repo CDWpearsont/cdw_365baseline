@@ -1,4 +1,4 @@
-name: CDW 365 Baseline Backup
+name: Intune Backup
 
 on:
   schedule:
@@ -288,28 +288,109 @@ jobs:
               Write-Output "Exported $($cdwES.Count) ES and $($cdwSC.Count) SC policies"
             } catch { Write-Error "ES/SC export failed: $($_.Exception.Message)" }
 
-            # Enrolment Restrictions
-            try {
-              $erPath = "$backupRoot/EnrolmentRestrictions"
-              New-Item -Path $erPath -ItemType Directory -Force | Out-Null
-              $cdwER = Get-MgDeviceManagementDeviceEnrollmentConfiguration -All |
-                       Where-Object { $_.DisplayName -like "*CDW Baseline*" } |
-                       Sort-Object Id -Unique
-              foreach ($policy in $cdwER) {
-                $safeName = $policy.DisplayName -replace '[^a-zA-Z0-9-]', '_'
-                # Use REST directly — SDK flattens platform restriction subtypes poorly
-                $detail = Invoke-MgGraphRequest -Method GET `
-                  -Uri "https://graph.microsoft.com/beta/deviceManagement/deviceEnrollmentConfigurations/$($policy.Id)" `
-                  -ErrorAction Stop
-                $removeFields = @('id','createdDateTime','lastModifiedDateTime','version',
-                  'roleScopeTagIds','assignments','priorityMetaData','@odata.context')
-                foreach ($f in $removeFields) { $detail.Remove($f) }
-                $detail | ConvertTo-Json -Depth 20 | Out-File "$erPath/$safeName.json" -Encoding UTF8
-                Write-Output "Exported (ER): $($policy.DisplayName)"
+            # Helper: GET all pages from a Graph collection (Invoke-MgGraphRequest returns hashtables)
+            function Get-GraphAll {
+              param([string]$Uri)
+              $items = @()
+              $next  = $Uri
+              while ($next) {
+                $page   = Invoke-MgGraphRequest -Method GET -Uri $next -ErrorAction Stop
+                $items += @($page.value)
+                $next   = $page.'@odata.nextLink'
               }
-              Clean-FolderForCDW -FolderPath $erPath -CurrentPolicyNames ($cdwER.DisplayName | ForEach-Object { $_ -replace '[^a-zA-Z0-9-]', '_' })
-              Write-Output "Exported $($cdwER.Count) enrolment restriction policies"
-            } catch { Write-Warning "Enrolment Restrictions export failed: $($_.Exception.Message)" }
+              return $items
+            }
+
+            # Enrolment configurations — one read shared by Enrolment Restrictions and ESP.
+            # deviceEnrollmentConfigurations returns every enrolment config type, so the ESP
+            # is split out by @odata.type rather than landing in EnrolmentRestrictions.
+            # If this read fails, both sections are skipped so Clean-FolderForCDW never runs
+            # against an empty list and wipes the folders.
+            $espType     = '#microsoft.graph.windows10EnrollmentCompletionPageConfiguration'
+            $cdwEnrol    = $null
+            try {
+              $cdwEnrol = @(Get-MgDeviceManagementDeviceEnrollmentConfiguration -All |
+                          Where-Object { $_.DisplayName -like "*CDW Baseline*" } |
+                          Sort-Object Id -Unique |
+                          ForEach-Object {
+                            # Use REST directly — SDK flattens platform restriction subtypes poorly
+                            Invoke-MgGraphRequest -Method GET `
+                              -Uri "https://graph.microsoft.com/beta/deviceManagement/deviceEnrollmentConfigurations/$($_.Id)" `
+                              -ErrorAction Stop
+                          })
+            } catch { Write-Warning "Enrolment configuration read failed — skipping ER and ESP export: $($_.Exception.Message)" }
+
+            if ($null -ne $cdwEnrol) {
+
+              # Enrolment Restrictions (everything except ESP)
+              try {
+                $erPath = "$backupRoot/EnrolmentRestrictions"
+                New-Item -Path $erPath -ItemType Directory -Force | Out-Null
+                $cdwER    = @($cdwEnrol | Where-Object { $_['@odata.type'] -ne $espType })
+                $erNames  = @($cdwER | ForEach-Object { $_.displayName -replace '[^a-zA-Z0-9-]', '_' })
+                foreach ($detail in $cdwER) {
+                  $safeName = $detail.displayName -replace '[^a-zA-Z0-9-]', '_'
+                  $removeFields = @('id','createdDateTime','lastModifiedDateTime','version',
+                    'roleScopeTagIds','assignments','priorityMetaData','@odata.context')
+                  foreach ($f in $removeFields) { $detail.Remove($f) }
+                  $detail | ConvertTo-Json -Depth 20 | Out-File "$erPath/$safeName.json" -Encoding UTF8
+                  Write-Output "Exported (ER): $($detail.displayName)"
+                }
+                Clean-FolderForCDW -FolderPath $erPath -CurrentPolicyNames $erNames
+                Write-Output "Exported $($cdwER.Count) enrolment restriction policies"
+              } catch { Write-Warning "Enrolment Restrictions export failed: $($_.Exception.Message)" }
+
+              # Enrolment Status Page
+              # selectedMobileAppIds are reference-tenant app GUIDs and are meaningless in a
+              # customer tenant, so they are stripped. Blocking apps are selected per customer.
+              try {
+                $espPath = "$backupRoot/EnrolmentStatusPage"
+                New-Item -Path $espPath -ItemType Directory -Force | Out-Null
+                $cdwESP   = @($cdwEnrol | Where-Object { $_['@odata.type'] -eq $espType })
+                $espNames = @($cdwESP | ForEach-Object { $_.displayName -replace '[^a-zA-Z0-9-]', '_' })
+                foreach ($detail in $cdwESP) {
+                  $safeName = $detail.displayName -replace '[^a-zA-Z0-9-]', '_'
+                  $appCount = @($detail.selectedMobileAppIds).Where({ $_ }).Count
+                  if ($appCount -gt 0) {
+                    Write-Warning "ESP '$($detail.displayName)': stripped $appCount blocking app ID(s) — deployed ESP will need blocking apps selected per customer"
+                  }
+                  $removeFields = @('id','createdDateTime','lastModifiedDateTime','version',
+                    'roleScopeTagIds','assignments','priority','priorityMetaData','@odata.context',
+                    'selectedMobileAppIds')
+                  foreach ($f in $removeFields) { $detail.Remove($f) }
+                  $detail | ConvertTo-Json -Depth 20 | Out-File "$espPath/$safeName.json" -Encoding UTF8
+                  Write-Output "Exported (ESP): $($detail.displayName)"
+                }
+                Clean-FolderForCDW -FolderPath $espPath -CurrentPolicyNames $espNames
+                Write-Output "Exported $($cdwESP.Count) enrolment status page policies"
+              } catch { Write-Warning "ESP export failed: $($_.Exception.Message)" }
+            }
+
+            # Autopilot Deployment Profiles (Entra join only)
+            # Requires DeviceManagementServiceConfig.Read.All — same permission as enrolment configs.
+            # Hybrid join profiles are skipped: they depend on a domain join profile and the
+            # Intune Connector for AD, which the deployer does not handle.
+            try {
+              $apPath = "$backupRoot/AutopilotProfiles"
+              New-Item -Path $apPath -ItemType Directory -Force | Out-Null
+              $allAP  = Get-GraphAll -Uri "https://graph.microsoft.com/beta/deviceManagement/windowsAutopilotDeploymentProfiles"
+              $cdwAP  = @($allAP | Where-Object { $_.displayName -like "*CDW Baseline*" })
+              $hybrid = @($cdwAP | Where-Object { $_['@odata.type'] -eq '#microsoft.graph.activeDirectoryWindowsAutopilotDeploymentProfile' })
+              foreach ($h in $hybrid) { Write-Warning "Skipped hybrid join Autopilot profile: $($h.displayName)" }
+              $cdwAP   = @($cdwAP | Where-Object { $_['@odata.type'] -ne '#microsoft.graph.activeDirectoryWindowsAutopilotDeploymentProfile' })
+              $apNames = @($cdwAP | ForEach-Object { $_.displayName -replace '[^a-zA-Z0-9-]', '_' })
+              foreach ($apProfile in $cdwAP) {
+                $safeName = $apProfile.displayName -replace '[^a-zA-Z0-9-]', '_'
+                # @odata.type is kept — it is required on POST to select the profile type
+                $removeFields = @('id','createdDateTime','lastModifiedDateTime','roleScopeTagIds',
+                  'assignments','assignedDevices','managementServiceAppId','@odata.context')
+                foreach ($f in $removeFields) { $apProfile.Remove($f) }
+                $apProfile | ConvertTo-Json -Depth 20 | Out-File "$apPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (Autopilot): $($apProfile.displayName)"
+              }
+              Clean-FolderForCDW -FolderPath $apPath -CurrentPolicyNames $apNames
+              Write-Output "Exported $($cdwAP.Count) Autopilot deployment profiles"
+            } catch { Write-Warning "Autopilot profile export failed: $($_.Exception.Message)" }
 
             # MAM App Protection Policies (Android + iOS)
             # Requires DeviceManagementApps.Read.All on the app registration.
