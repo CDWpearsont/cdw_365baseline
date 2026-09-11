@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-11T08:50:53+00:00",
-  "sourceCommit": "fd732519a43c593a2b49de6b70fa7ea3954d19e2",
+  "generatedAt": "2026-09-11T12:36:46+00:00",
+  "sourceCommit": "66d88ed11111e12343908fb0c0d02b6b5bb8538e",
   "counts": {
-    "policies": 219,
+    "policies": 253,
     "bundles": 14,
-    "issues": 230,
+    "issues": 264,
     "byConfidence": {
-      "medium": 114,
+      "medium": 111,
       "low": 2,
-      "high": 103
+      "high": 140
     }
   },
   "taxonomy": {
@@ -130,6 +130,7 @@
       "Delivery Optimisation",
       "Device Guard",
       "Device Health",
+      "Device Health and Security",
       "Device Lock",
       "Device Registration Policy",
       "Device Security",
@@ -3020,6 +3021,43 @@
       ]
     },
     {
+      "id": "intune-windows-compliance-policy-cis-l1-device-health-and-security-user",
+      "path": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_CIS_L1_-_U_-_Device_Health_and_Security_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_Compliance_-_CIS_L1_-_U_-_Device_Health_and_Security_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - Compliance - CIS L1 - U - Device Health and Security - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Compliance Policy",
+      "framework": "CIS L1",
+      "scope": "User",
+      "version": "5.0.0",
+      "area": "Device Health and Security",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:c7aac938906fb675c177c41a2eba8d80136065d1cea80541f40f2f7544a1844c",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
       "id": "intune-windows-compliance-policy-defender-for-endpoint-user",
       "path": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Defender_for_Endpoint_-_v3_1.json",
       "fileName": "Win_-_CDW_Baseline_-_Compliance_-_U_-_Defender_for_Endpoint_-_v3_1.json",
@@ -3450,6 +3488,44 @@
       ]
     },
     {
+      "id": "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-bl-device",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__BL__-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__BL__-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Encryption - D - BitLocker (BL) - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Endpoint Security",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Encryption",
+      "subArea": "BitLocker BL",
+      "securityDomain": null,
+      "settingCount": 27,
+      "policyHash": "sha256:a7ce340a9821e317b119aff3f2e19c0ad35fdb17607bbe25a3ce5d020fdd3c65",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
       "id": "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-os-disk-device",
       "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v4_0_0.json",
       "fileName": "Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v4_0_0.json",
@@ -3527,20 +3603,20 @@
     },
     {
       "id": "intune-windows-endpoint-security-cis-l1-windows-firewall-firewall-configuration-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v4_0_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v4_0_0.json",
-      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Firewall - D - Firewall Configuration - v4.0.0",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Firewall - D - Firewall Configuration - v5.0.0",
       "workload": "Intune",
       "platform": "Windows",
       "policyType": "Endpoint Security",
       "framework": "CIS L1",
       "scope": "Device",
-      "version": "4.0.0",
+      "version": "5.0.0",
       "area": "Windows Firewall",
       "subArea": "Firewall Configuration",
       "securityDomain": null,
-      "settingCount": 6,
-      "policyHash": "sha256:1a2ab9495d41e185b56c1465d71919f01d53ced00d289f731d43aff4e371cbde",
+      "settingCount": 23,
+      "policyHash": "sha256:ef6926b6ef5b66a5647916a68bed54fe09056f00cff5c1adc5916cc5652547b7",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3565,20 +3641,20 @@
     },
     {
       "id": "intune-windows-endpoint-security-cis-l1-windows-hello-for-business-whfb-configuration-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v4_0_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v4_0_0.json",
-      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Hello for Business - D - WHfB Configuration - v4.0.0",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Hello for Business - D - WHfB Configuration - v5.0.0",
       "workload": "Intune",
       "platform": "Windows",
       "policyType": "Endpoint Security",
       "framework": "CIS L1",
       "scope": "Device",
-      "version": "4.0.0",
+      "version": "5.0.0",
       "area": "Windows Hello for Business",
       "subArea": "WHfB Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:e0fd4e5abc2e0b3f0a2e43be836b26a19684478d4d0e96e061f705d053e05814",
+      "policyHash": "sha256:be435e6ec9cd53ee56f242b3b2bbd6c4e98c908d799999dba3142ade1841320c",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3603,20 +3679,20 @@
     },
     {
       "id": "intune-windows-endpoint-security-cis-l1-windows-laps-laps-configuration-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v4_0_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v4_0_0.json",
-      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows LAPS - D - LAPS Configuration - v4.0.0",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows LAPS - D - LAPS Configuration - v5.0.0",
       "workload": "Intune",
       "platform": "Windows",
       "policyType": "Endpoint Security",
       "framework": "CIS L1",
       "scope": "Device",
-      "version": "4.0.0",
+      "version": "5.0.0",
       "area": "Windows LAPS",
       "subArea": "LAPS Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:ca2434dd3ac2706fa9b37a33370a295d2a096edcb853e2e9f060b8db89257a5b",
+      "policyHash": "sha256:6ba4eb837dd7b280c29a05ac40b8826d804a95b6949176532f8dbc2f9bd93e17",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5055,6 +5131,614 @@
       ]
     },
     {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-audit-and-event-logging-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Audit_and_Event_Logging_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Audit_and_Event_Logging_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Audit and Event Logging - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Audit and Event Logging",
+      "securityDomain": null,
+      "settingCount": 40,
+      "policyHash": "sha256:4d592762b978c38d29a0fcf6db25ba6e528d02e41f00fdac025e81a27b393aa7",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-config-refresh-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Config_Refresh_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Config_Refresh_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Config Refresh - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Config Refresh",
+      "securityDomain": null,
+      "settingCount": 3,
+      "policyHash": "sha256:297a2462f57b0f3568a2b255e9abef57efd197732a6bc027803bbc768fbf703f",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-dma-and-device-installation-protection-bl-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_DMA_and_Device_Installation_Protection__BL__-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_DMA_and_Device_Installation_Protection__BL__-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - DMA and Device Installation Protection (BL) - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "DMA and Device Installation Protection BL",
+      "securityDomain": null,
+      "settingCount": 4,
+      "policyHash": "sha256:48b709a48dd22cd8fb3d07f8b5e8ec7851ae6685bf811d89f04697d7ce64f5a5",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-device-guard-credential-guard-and-hvci-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Device_Guard__Credential_Guard_and_HVCI_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Device_Guard__Credential_Guard_and_HVCI_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Device Guard, Credential Guard and HVCI - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Device Guard Credential Guard and HVCI",
+      "securityDomain": null,
+      "settingCount": 7,
+      "policyHash": "sha256:48829b3173708ba70c01eb67dc8889c0c9cccc33b06330111ead0bed4b588f31",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-enhanced-phishing-protection-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Enhanced_Phishing_Protection_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Enhanced_Phishing_Protection_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Enhanced Phishing Protection - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Enhanced Phishing Protection",
+      "securityDomain": null,
+      "settingCount": 4,
+      "policyHash": "sha256:95708134993744ab7139406501404008e765f4597d05598a6ddb60385725461b",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-local-security-policies-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Local_Security_Policies_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Local_Security_Policies_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Local Security Policies - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Local Security Policies",
+      "securityDomain": null,
+      "settingCount": 26,
+      "policyHash": "sha256:e31bfd1433a0e34839a09566238affacb0ad588d2f8502a8f89d2509fd6751cd",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-location-and-privacy-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Location_and_Privacy_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Location_and_Privacy_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Location and Privacy - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Location and Privacy",
+      "securityDomain": null,
+      "settingCount": 4,
+      "policyHash": "sha256:ad192a0db28cd47b6274a7649a07644a245f4a809eb97e0718b536cb7adf932a",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-login-and-lock-screen-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Login_and_Lock_Screen_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Login_and_Lock_Screen_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Login and Lock Screen - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Login and Lock Screen",
+      "securityDomain": null,
+      "settingCount": 12,
+      "policyHash": "sha256:3e8f9de3d5bdbf151bcc4f2377fe142337e392b8b12edfb0ff4c85c1bbf49ab9",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-printing-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Printing_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Printing_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Printing - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Printing",
+      "securityDomain": null,
+      "settingCount": 20,
+      "policyHash": "sha256:7597d25fe2e45c19dfe4b3cd524c517b6bfde1af9aef292522841b57e2966b44",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-remote-desktop-services-and-rpc-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Remote_Desktop_Services_and_RPC_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Remote_Desktop_Services_and_RPC_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Remote Desktop Services and RPC - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Remote Desktop Services and RPC",
+      "securityDomain": null,
+      "settingCount": 13,
+      "policyHash": "sha256:0d22ec50984893654131ea45d4528675dac764c2d7926c2da884e8376adaa640",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-security-hardening-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Security_Hardening_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Security_Hardening_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Security Hardening - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Security Hardening",
+      "securityDomain": null,
+      "settingCount": 90,
+      "policyHash": "sha256:8a91c89b2c3383b8e1b9033c695831486cf0418059a579bcc7c7f3a024ec02db",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-user-rights-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_User_Rights_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_User_Rights_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - User Rights - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "User Rights",
+      "securityDomain": null,
+      "settingCount": 27,
+      "policyHash": "sha256:81126e804cf46e7db8cab593bbf384e849e72367d5253b86098fd98cde9707dd",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-user-rights-no-one-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_User_Rights__No_One__-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_User_Rights__No_One__-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - User Rights (No One) - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "User Rights No One",
+      "securityDomain": null,
+      "settingCount": 7,
+      "policyHash": "sha256:692ffe5d251b88a7205acd674c84dfe6376b3b9c2dbd4be1b9c7b9d31ac1569e",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-windows-package-manager-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Windows_Package_Manager_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Windows_Package_Manager_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Windows Package Manager - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Windows Package Manager",
+      "securityDomain": null,
+      "settingCount": 3,
+      "policyHash": "sha256:75883e929da88ba562a9f526e893d5d7efe34a1d54dda1487c7934c9554dcf37",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-windows-sandbox-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Windows_Sandbox_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Windows_Sandbox_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Windows Sandbox - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Windows Sandbox",
+      "securityDomain": null,
+      "settingCount": 2,
+      "policyHash": "sha256:5e26b63c2e2b6a99da8e92cb826d4b27c2f1bffb7cbc50f9159c99c96fc29f43",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-device-security-security-hardening-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_U_-_Security_Hardening_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_U_-_Security_Hardening_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - U - Security Hardening - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "User",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Security Hardening",
+      "securityDomain": null,
+      "settingCount": 3,
+      "policyHash": "sha256:bc3b309d10c93058a3cfab70fa7289c3cfab6b74ee69e8d6434be87309b3ae35",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
       "id": "intune-windows-settings-catalog-cis-l1-enhanced-phishing-protection-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Enhanced_Phishing_Protection_-_v4_0_0.json",
       "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Enhanced_Phishing_Protection_-_v4_0_0.json",
@@ -5695,6 +6379,44 @@
       ]
     },
     {
+      "id": "intune-windows-settings-catalog-cis-l1-microsoft-store-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Store_-_D_-_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Store_-_D_-_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Store - D - Configuration - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Microsoft Store",
+      "subArea": "Configuration",
+      "securityDomain": null,
+      "settingCount": 3,
+      "policyHash": "sha256:7bc7c5f3a271efc0c3f4a96af0e9ce915522a2b7ca9336439745164be8c0ed13",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
       "id": "intune-windows-settings-catalog-cis-l1-privacy-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Privacy_-_D_-_v4_0_0.json",
       "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Privacy_-_D_-_v4_0_0.json",
@@ -6103,6 +6825,44 @@
       ]
     },
     {
+      "id": "intune-windows-settings-catalog-cis-l1-windows-hello-for-business-enhanced-sign-in-security-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_Enhanced_Sign-in_Security_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_Enhanced_Sign-in_Security_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Hello for Business - D - Enhanced Sign-in Security - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Windows Hello for Business",
+      "subArea": "Enhanced Sign-in Security",
+      "securityDomain": null,
+      "settingCount": 1,
+      "policyHash": "sha256:634f102f7ea6b5a8806eeb6942fbc3ff5c6aa6942b14bc3238f5630b3787a91e",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
       "id": "intune-windows-settings-catalog-cis-l1-windows-ink-workspace-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Ink_Workspace_-_D_-_v4_0_0.json",
       "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Ink_Workspace_-_D_-_v4_0_0.json",
@@ -6215,32 +6975,108 @@
     },
     {
       "id": "intune-windows-settings-catalog-cis-l1-windows-update-for-business-delivery-optimisation-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_Delivery_Optimisation_-_v4_0_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_Delivery_Optimisation_-_v4_0_0.json",
-      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - Delivery Optimisation - v4.0.0",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Delivery_Optimisation_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Delivery_Optimisation_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - D - Delivery Optimisation - v5.0.0",
       "workload": "Intune",
       "platform": "Windows",
       "policyType": "Settings Catalog",
       "framework": "CIS L1",
       "scope": "Device",
-      "version": "4.0.0",
+      "version": "5.0.0",
       "area": "Windows Update for Business",
       "subArea": "Delivery Optimisation",
       "securityDomain": null,
-      "settingCount": 12,
-      "policyHash": "sha256:a5a5994f537c9b15ddfa86e24d2b1590eb35d0819929ca98d9ef1229f3e0d0bb",
+      "settingCount": 1,
+      "policyHash": "sha256:a0d780fe9caaef41031b998a6e5753075c9c71cdc03c5ebe0ed69520fdc19319",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
         "framework": "filename",
+        "scope": "filename",
         "version": "filename",
         "workload": "folder",
-        "scope": "body",
         "area": "filename",
         "subArea": "filename"
       },
       "unresolved": [],
-      "confidence": "medium",
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-windows-update-for-business-reports-and-telemetry-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Reports_and_Telemetry_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Reports_and_Telemetry_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - D - Reports and Telemetry - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Windows Update for Business",
+      "subArea": "Reports and Telemetry",
+      "securityDomain": null,
+      "settingCount": 2,
+      "policyHash": "sha256:0f75cd49a85c8e6ea8e752a9f1b11480e298b27aec69bab1d50dc37150a8fa9e",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-windows-update-for-business-update-settings-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Update_Settings_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Update_Settings_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - D - Update Settings - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Windows Update for Business",
+      "subArea": "Update Settings",
+      "securityDomain": null,
+      "settingCount": 5,
+      "policyHash": "sha256:6f94810856b083c0fc50eb87a1ed2e90ed4d047e632d02e21df1ac2f3caff17a",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
       "enrichment": null,
       "tags": [],
       "frameworks": [
@@ -6253,32 +7089,70 @@
     },
     {
       "id": "intune-windows-settings-catalog-cis-l1-windows-user-experience-feature-configuration-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_Feature_Configuration_-_v4_0_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_Feature_Configuration_-_v4_0_0.json",
-      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - Feature Configuration - v4.0.0",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_D_-_Feature_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_D_-_Feature_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - D - Feature Configuration - v5.0.0",
       "workload": "Intune",
       "platform": "Windows",
       "policyType": "Settings Catalog",
       "framework": "CIS L1",
       "scope": "Device",
-      "version": "4.0.0",
+      "version": "5.0.0",
       "area": "Windows User Experience",
       "subArea": "Feature Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:77373c9deb712324a9b4762b2c8d3787ac17940ffaedce79de772fc6abc6d2db",
+      "policyHash": "sha256:8de10d6b18c1010d05ec0364f43943ea472809ca7f8af9c455f8fbc0649afa06",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
         "framework": "filename",
+        "scope": "filename",
         "version": "filename",
         "workload": "folder",
-        "scope": "body",
         "area": "filename",
         "subArea": "filename"
       },
       "unresolved": [],
-      "confidence": "medium",
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l1-windows-user-experience-feature-configuration-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_U_-_Feature_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_U_-_Feature_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - U - Feature Configuration - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "User",
+      "version": "5.0.0",
+      "area": "Windows User Experience",
+      "subArea": "Feature Configuration",
+      "securityDomain": null,
+      "settingCount": 1,
+      "policyHash": "sha256:a105466586cee1bac929e0c23a002d61886bdf6f7762b16652789d9eb3205ce2",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
       "enrichment": null,
       "tags": [],
       "frameworks": [
@@ -6329,6 +7203,310 @@
       ]
     },
     {
+      "id": "intune-windows-settings-catalog-cis-l2-device-security-local-security-policies-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Local_Security_Policies_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Local_Security_Policies_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Local Security Policies - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Local Security Policies",
+      "securityDomain": null,
+      "settingCount": 2,
+      "policyHash": "sha256:e52057b733214ae1c0ad40c9704298910f59092c27da9a420b7414955bec387d",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l2-device-security-location-and-privacy-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Location_and_Privacy_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Location_and_Privacy_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Location and Privacy - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Location and Privacy",
+      "securityDomain": null,
+      "settingCount": 15,
+      "policyHash": "sha256:0db6e1ca1bfb8a805062d3aef58f822b15a83d5357147e4892da0b28794b4133",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l2-device-security-login-and-lock-screen-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Login_and_Lock_Screen_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Login_and_Lock_Screen_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Login and Lock Screen - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Login and Lock Screen",
+      "securityDomain": null,
+      "settingCount": 1,
+      "policyHash": "sha256:a8414c067a53ef00a99e59cbc112b6676a43e9ee904e563ebb1fa8ce39b98c2f",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l2-device-security-remote-desktop-services-and-rpc-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Remote_Desktop_Services_and_RPC_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Remote_Desktop_Services_and_RPC_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Remote Desktop Services and RPC - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Remote Desktop Services and RPC",
+      "securityDomain": null,
+      "settingCount": 10,
+      "policyHash": "sha256:4336e56dc86db6478dd3984f9a4a3a2d872c14180bb6b1aa99d6591a1fc5be04",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l2-device-security-security-hardening-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Security_Hardening_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Security_Hardening_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Security Hardening - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Security Hardening",
+      "securityDomain": null,
+      "settingCount": 26,
+      "policyHash": "sha256:a0e3cd090fa1402f5f3edeca4c1425c36b629d749950a945f608b45fa4d11bbe",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l2-device-security-user-rights-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_User_Rights_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_User_Rights_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - User Rights - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "User Rights",
+      "securityDomain": null,
+      "settingCount": 1,
+      "policyHash": "sha256:2ad1b7ee56eb390faf629fe74530bc06b51ee87a92148f600e8ef32161b3c60c",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l2-device-security-location-and-privacy-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_U_-_Location_and_Privacy_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_U_-_Location_and_Privacy_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - U - Location and Privacy - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "User",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Location and Privacy",
+      "securityDomain": null,
+      "settingCount": 1,
+      "policyHash": "sha256:49e93031eaa11028c74e3382f7727862752c85a6b698a0f761b96306b4f5286b",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l2-device-security-security-hardening-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_U_-_Security_Hardening_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_U_-_Security_Hardening_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - U - Security Hardening - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "User",
+      "version": "5.0.0",
+      "area": "Device Security",
+      "subArea": "Security Hardening",
+      "securityDomain": null,
+      "settingCount": 1,
+      "policyHash": "sha256:2d6cd7691af372b96076cec7c51639f3e4131b306ec92ebfa6b5bcae6430270d",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
       "id": "intune-windows-settings-catalog-cis-l2-microsoft-edge-profiles-sign-in-and-sync-user",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_Profiles_Sign-In_and_Sync_-_v4_0_0.json",
       "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_Profiles_Sign-In_and_Sync_-_v4_0_0.json",
@@ -6367,21 +7545,59 @@
       ]
     },
     {
-      "id": "intune-windows-settings-catalog-cis-l2-microsoft-store-configuration-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_D_-_Configuration_-_v4_0_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_D_-_Configuration_-_v4_0_0.json",
-      "displayName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - D - Configuration - v4.0.0",
+      "id": "intune-windows-settings-catalog-cis-l2-microsoft-onedrive-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_OneDrive_-_D_-_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_OneDrive_-_D_-_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Microsoft OneDrive - D - Configuration - v5.0.0",
       "workload": "Intune",
       "platform": "Windows",
       "policyType": "Settings Catalog",
       "framework": "CIS L2",
       "scope": "Device",
-      "version": "4.0.0",
+      "version": "5.0.0",
+      "area": "Microsoft OneDrive",
+      "subArea": "Configuration",
+      "securityDomain": null,
+      "settingCount": 1,
+      "policyHash": "sha256:94a400207cef394b5d95fda65eeec84e97f39e3684b78b1f44e2d7fb77c954d5",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l2-microsoft-store-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_D_-_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_D_-_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - D - Configuration - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "5.0.0",
       "area": "Microsoft Store",
       "subArea": "Configuration",
       "securityDomain": null,
-      "settingCount": 7,
-      "policyHash": "sha256:8627d80ef6716fb60fc5a5c78e88de57a357ef3f4692e36119ef6689472f9781",
+      "settingCount": 4,
+      "policyHash": "sha256:12e8df9014a62e5668d77e28513dcf3c0475d82b83869169e1ffd9af9247e979",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6482,32 +7698,32 @@
     },
     {
       "id": "intune-windows-settings-catalog-cis-l2-windows-update-for-business-reports-and-telemetry-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Update_for_Business_-_Reports_and_Telemetry_-_v4_0_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Update_for_Business_-_Reports_and_Telemetry_-_v4_0_0.json",
-      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows Update for Business - Reports and Telemetry - v4.0.0",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Update_for_Business_-_D_-_Reports_and_Telemetry_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Update_for_Business_-_D_-_Reports_and_Telemetry_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows Update for Business - D - Reports and Telemetry - v5.0.0",
       "workload": "Intune",
       "platform": "Windows",
       "policyType": "Settings Catalog",
       "framework": "CIS L2",
       "scope": "Device",
-      "version": "4.0.0",
+      "version": "5.0.0",
       "area": "Windows Update for Business",
       "subArea": "Reports and Telemetry",
       "securityDomain": null,
-      "settingCount": 5,
-      "policyHash": "sha256:a2420eb0b70634881cde3225fce97cbeed42b52cf0c9f059978af15ce4f22a37",
+      "settingCount": 3,
+      "policyHash": "sha256:4506ed02b9cd95185798efefc5df07512974efe67cedbbf6eccd888b8c47c0be",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
         "framework": "filename",
+        "scope": "filename",
         "version": "filename",
         "workload": "folder",
-        "scope": "body",
         "area": "filename",
         "subArea": "filename"
       },
       "unresolved": [],
-      "confidence": "medium",
+      "confidence": "high",
       "enrichment": null,
       "tags": [],
       "frameworks": [
@@ -6557,6 +7773,44 @@
       ]
     },
     {
+      "id": "intune-windows-settings-catalog-cis-l2-windows-user-experience-feature-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_D_-_Feature_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_D_-_Feature_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - D - Feature Configuration - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "5.0.0",
+      "area": "Windows User Experience",
+      "subArea": "Feature Configuration",
+      "securityDomain": null,
+      "settingCount": 6,
+      "policyHash": "sha256:a400ae11207afe56ab08466e68dbdabfc86d06e19bca0526f00dcc3ae41c2f4e",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
       "id": "intune-windows-settings-catalog-cis-l2-windows-user-experience-settings-sync-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_Settings_Sync_-_v4_0_0.json",
       "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_Settings_Sync_-_v4_0_0.json",
@@ -6584,6 +7838,44 @@
       },
       "unresolved": [],
       "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-win-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-cis-l2-windows-user-experience-feature-configuration-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_U_-_Feature_Configuration_-_v5_0_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_U_-_Feature_Configuration_-_v5_0_0.json",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - U - Feature Configuration - v5.0.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "User",
+      "version": "5.0.0",
+      "area": "Windows User Experience",
+      "subArea": "Feature Configuration",
+      "securityDomain": null,
+      "settingCount": 1,
+      "policyHash": "sha256:6fe260746cac605da4af85e4b1dbb71fd7dd1b7c29eb985c5dbd5669ba36bde9",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
       "enrichment": null,
       "tags": [],
       "frameworks": [
@@ -8225,9 +9517,11 @@
       "exclude": [],
       "order": 10,
       "members": [
+        "intune-windows-compliance-policy-cis-l1-device-health-and-security-user",
         "intune-windows-endpoint-security-cis-l1-attack-surface-reduction-asr-rules-device",
         "intune-windows-endpoint-security-cis-l1-defender-antivirus-antivirus-configuration-device",
         "intune-windows-endpoint-security-cis-l1-defender-antivirus-security-experience-device",
+        "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-bl-device",
         "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-os-disk-device",
         "intune-windows-endpoint-security-cis-l1-local-group-membership-local-administrators-device",
         "intune-windows-endpoint-security-cis-l1-windows-firewall-firewall-configuration-device",
@@ -8240,6 +9534,22 @@
         "intune-windows-settings-catalog-cis-l1-delivery-optimisation-device",
         "intune-windows-settings-catalog-cis-l1-device-guard-device",
         "intune-windows-settings-catalog-cis-l1-device-lock-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-audit-and-event-logging-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-config-refresh-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-device-guard-credential-guard-and-hvci-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-dma-and-device-installation-protection-bl-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-enhanced-phishing-protection-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-local-security-policies-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-location-and-privacy-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-login-and-lock-screen-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-printing-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-remote-desktop-services-and-rpc-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-security-hardening-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-security-hardening-user",
+        "intune-windows-settings-catalog-cis-l1-device-security-user-rights-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-user-rights-no-one-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-windows-package-manager-device",
+        "intune-windows-settings-catalog-cis-l1-device-security-windows-sandbox-device",
         "intune-windows-settings-catalog-cis-l1-enhanced-phishing-protection-device",
         "intune-windows-settings-catalog-cis-l1-experience-device",
         "intune-windows-settings-catalog-cis-l1-lanman-workstation-device",
@@ -8257,6 +9567,7 @@
         "intune-windows-settings-catalog-cis-l1-microsoft-office-updates-device",
         "intune-windows-settings-catalog-cis-l1-microsoft-onedrive-configuration-device",
         "intune-windows-settings-catalog-cis-l1-microsoft-onedrive-configuration-user",
+        "intune-windows-settings-catalog-cis-l1-microsoft-store-configuration-device",
         "intune-windows-settings-catalog-cis-l1-privacy-device",
         "intune-windows-settings-catalog-cis-l1-search-device",
         "intune-windows-settings-catalog-cis-l1-smart-screen-device",
@@ -8268,13 +9579,17 @@
         "intune-windows-settings-catalog-cis-l1-widgets-device",
         "intune-windows-settings-catalog-cis-l1-windows-apps-in-box-app-removal-device",
         "intune-windows-settings-catalog-cis-l1-windows-defender-security-center-device",
+        "intune-windows-settings-catalog-cis-l1-windows-hello-for-business-enhanced-sign-in-security-device",
         "intune-windows-settings-catalog-cis-l1-windows-ink-workspace-device",
         "intune-windows-settings-catalog-cis-l1-windows-sandbox-device",
         "intune-windows-settings-catalog-cis-l1-windows-update-for-business-delivery-optimisation-device",
         "intune-windows-settings-catalog-cis-l1-windows-update-for-business-device",
-        "intune-windows-settings-catalog-cis-l1-windows-user-experience-feature-configuration-device"
+        "intune-windows-settings-catalog-cis-l1-windows-update-for-business-reports-and-telemetry-device",
+        "intune-windows-settings-catalog-cis-l1-windows-update-for-business-update-settings-device",
+        "intune-windows-settings-catalog-cis-l1-windows-user-experience-feature-configuration-device",
+        "intune-windows-settings-catalog-cis-l1-windows-user-experience-feature-configuration-user"
       ],
-      "memberCount": 48
+      "memberCount": 71
     },
     {
       "id": "intune-win-cis-l2",
@@ -8296,15 +9611,26 @@
       "order": 20,
       "members": [
         "intune-windows-settings-catalog-cis-l2-defender-antivirus-additional-configuration-device",
+        "intune-windows-settings-catalog-cis-l2-device-security-local-security-policies-device",
+        "intune-windows-settings-catalog-cis-l2-device-security-location-and-privacy-device",
+        "intune-windows-settings-catalog-cis-l2-device-security-location-and-privacy-user",
+        "intune-windows-settings-catalog-cis-l2-device-security-login-and-lock-screen-device",
+        "intune-windows-settings-catalog-cis-l2-device-security-remote-desktop-services-and-rpc-device",
+        "intune-windows-settings-catalog-cis-l2-device-security-security-hardening-device",
+        "intune-windows-settings-catalog-cis-l2-device-security-security-hardening-user",
+        "intune-windows-settings-catalog-cis-l2-device-security-user-rights-device",
         "intune-windows-settings-catalog-cis-l2-microsoft-edge-profiles-sign-in-and-sync-user",
+        "intune-windows-settings-catalog-cis-l2-microsoft-onedrive-configuration-device",
         "intune-windows-settings-catalog-cis-l2-microsoft-store-configuration-device",
         "intune-windows-settings-catalog-cis-l2-microsoft-store-configuration-user",
         "intune-windows-settings-catalog-cis-l2-windows-hello-for-business-cloud-kerberos-trust-device",
         "intune-windows-settings-catalog-cis-l2-windows-update-for-business-reports-and-telemetry-device",
         "intune-windows-settings-catalog-cis-l2-windows-user-experience-copilot-user",
+        "intune-windows-settings-catalog-cis-l2-windows-user-experience-feature-configuration-device",
+        "intune-windows-settings-catalog-cis-l2-windows-user-experience-feature-configuration-user",
         "intune-windows-settings-catalog-cis-l2-windows-user-experience-settings-sync-device"
       ],
-      "memberCount": 8
+      "memberCount": 19
     },
     {
       "id": "intune-win-cdw-standard",
@@ -9218,6 +10544,12 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-windows-compliance-policy-cis-l1-device-health-and-security-user",
+      "path": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_CIS_L1_-_U_-_Device_Health_and_Security_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-windows-compliance-policy-defender-for-endpoint-user",
       "path": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Defender_for_Endpoint_-_v3_1.json",
       "type": "missingEnrichment",
@@ -9290,6 +10622,12 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-bl-device",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__BL__-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-os-disk-device",
       "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v4_0_0.json",
       "type": "missingEnrichment",
@@ -9303,19 +10641,19 @@
     },
     {
       "policyId": "intune-windows-endpoint-security-cis-l1-windows-firewall-firewall-configuration-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v4_0_0.json",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v5_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
     {
       "policyId": "intune-windows-endpoint-security-cis-l1-windows-hello-for-business-whfb-configuration-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v4_0_0.json",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v5_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
     {
       "policyId": "intune-windows-endpoint-security-cis-l1-windows-laps-laps-configuration-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v4_0_0.json",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v5_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -9566,6 +10904,102 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-audit-and-event-logging-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Audit_and_Event_Logging_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-config-refresh-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Config_Refresh_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-dma-and-device-installation-protection-bl-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_DMA_and_Device_Installation_Protection__BL__-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-device-guard-credential-guard-and-hvci-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Device_Guard__Credential_Guard_and_HVCI_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-enhanced-phishing-protection-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Enhanced_Phishing_Protection_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-local-security-policies-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Local_Security_Policies_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-location-and-privacy-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Location_and_Privacy_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-login-and-lock-screen-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Login_and_Lock_Screen_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-printing-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Printing_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-remote-desktop-services-and-rpc-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Remote_Desktop_Services_and_RPC_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-security-hardening-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Security_Hardening_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-user-rights-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_User_Rights_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-user-rights-no-one-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_User_Rights__No_One__-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-windows-package-manager-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Windows_Package_Manager_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-windows-sandbox-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Windows_Sandbox_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-device-security-security-hardening-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_U_-_Security_Hardening_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-windows-settings-catalog-cis-l1-enhanced-phishing-protection-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Enhanced_Phishing_Protection_-_v4_0_0.json",
       "type": "missingEnrichment",
@@ -9668,6 +11102,12 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-windows-settings-catalog-cis-l1-microsoft-store-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Store_-_D_-_Configuration_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-windows-settings-catalog-cis-l1-privacy-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Privacy_-_D_-_v4_0_0.json",
       "type": "missingEnrichment",
@@ -9734,6 +11174,12 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-windows-settings-catalog-cis-l1-windows-hello-for-business-enhanced-sign-in-security-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_Enhanced_Sign-in_Security_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-windows-settings-catalog-cis-l1-windows-ink-workspace-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Ink_Workspace_-_D_-_v4_0_0.json",
       "type": "missingEnrichment",
@@ -9753,13 +11199,31 @@
     },
     {
       "policyId": "intune-windows-settings-catalog-cis-l1-windows-update-for-business-delivery-optimisation-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_Delivery_Optimisation_-_v4_0_0.json",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Delivery_Optimisation_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-windows-update-for-business-reports-and-telemetry-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Reports_and_Telemetry_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-windows-update-for-business-update-settings-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Update_Settings_-_v5_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
     {
       "policyId": "intune-windows-settings-catalog-cis-l1-windows-user-experience-feature-configuration-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_Feature_Configuration_-_v4_0_0.json",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_D_-_Feature_Configuration_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l1-windows-user-experience-feature-configuration-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_U_-_Feature_Configuration_-_v5_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -9770,14 +11234,68 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-windows-settings-catalog-cis-l2-device-security-local-security-policies-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Local_Security_Policies_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l2-device-security-location-and-privacy-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Location_and_Privacy_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l2-device-security-login-and-lock-screen-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Login_and_Lock_Screen_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l2-device-security-remote-desktop-services-and-rpc-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Remote_Desktop_Services_and_RPC_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l2-device-security-security-hardening-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Security_Hardening_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l2-device-security-user-rights-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_User_Rights_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l2-device-security-location-and-privacy-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_U_-_Location_and_Privacy_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l2-device-security-security-hardening-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_U_-_Security_Hardening_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-windows-settings-catalog-cis-l2-microsoft-edge-profiles-sign-in-and-sync-user",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_Profiles_Sign-In_and_Sync_-_v4_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-windows-settings-catalog-cis-l2-microsoft-onedrive-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_OneDrive_-_D_-_Configuration_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-windows-settings-catalog-cis-l2-microsoft-store-configuration-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_D_-_Configuration_-_v4_0_0.json",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_D_-_Configuration_-_v5_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -9795,7 +11313,7 @@
     },
     {
       "policyId": "intune-windows-settings-catalog-cis-l2-windows-update-for-business-reports-and-telemetry-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Update_for_Business_-_Reports_and_Telemetry_-_v4_0_0.json",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Update_for_Business_-_D_-_Reports_and_Telemetry_-_v5_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -9806,8 +11324,20 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-windows-settings-catalog-cis-l2-windows-user-experience-feature-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_D_-_Feature_Configuration_-_v5_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-windows-settings-catalog-cis-l2-windows-user-experience-settings-sync-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_Settings_Sync_-_v4_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-cis-l2-windows-user-experience-feature-configuration-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_U_-_Feature_Configuration_-_v5_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
