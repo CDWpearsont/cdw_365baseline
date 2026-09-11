@@ -1,13 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-04T10:27:39+00:00",
-  "sourceCommit": "4dedcfc7e1589d8534be1769c3be1d87e1e31235",
+  "generatedAt": "2026-09-11T08:50:53+00:00",
+  "sourceCommit": "fd732519a43c593a2b49de6b70fa7ea3954d19e2",
   "counts": {
-    "policies": 217,
+    "policies": 219,
     "bundles": 14,
-    "issues": 222,
+    "issues": 230,
     "byConfidence": {
       "medium": 114,
+      "low": 2,
       "high": 103
     }
   },
@@ -133,6 +134,7 @@
       "Device Registration Policy",
       "Device Security",
       "Disk Encryption",
+      "ESP CDW Baseline",
       "Encryption",
       "Enhanced Phishing Protection",
       "Experience",
@@ -163,6 +165,7 @@
       "System",
       "System Services",
       "Updates",
+      "User Driven Entra PreProv CDW Baseline",
       "User Rights",
       "Virtualization Based Technology",
       "Widgets",
@@ -2829,7 +2832,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:cf1a598d43e5ce4f7b1ebfe27a5db443cdffd8b486a22e07746f78db5deb6e56",
+      "policyHash": "sha256:bbadc749060fe931561e5ff11478be22a898c1480c76f71cfa5005fcfc546332",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2863,7 +2866,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:290765fe9cf458903eb0167e8a436165700cb08fd1683337d112e104b7257049",
+      "policyHash": "sha256:1c4171c27747510b8b7eca0dbba476a25707cffc5ae876b3b9c807b92766b701",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2883,6 +2886,38 @@
       ]
     },
     {
+      "id": "intune-user-driven-entra-preprov-cdw-baseline",
+      "path": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
+      "fileName": "User_Driven_Entra_PreProv_CDW_Baseline.json",
+      "displayName": "User Driven Entra PreProv CDW Baseline",
+      "workload": "Intune",
+      "platform": null,
+      "policyType": null,
+      "framework": null,
+      "scope": null,
+      "version": null,
+      "area": "User Driven Entra PreProv CDW Baseline",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:05a29eadacb4ab133cde4bf00ccc058cb12e6dbf8cfe51f0e544c39dbdebf2c7",
+      "derivedFrom": {
+        "workload": "folder",
+        "area": "filename"
+      },
+      "unresolved": [
+        "platform",
+        "policyType",
+        "scope"
+      ],
+      "confidence": "low",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": []
+    },
+    {
       "id": "intune-macos-compliance-policy-device-health-user",
       "path": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v1_0.json",
       "fileName": "MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v1_0.json",
@@ -2897,7 +2932,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c63799d54f63fe5c62b10406a3020c33de307f2b61eb7d5a607123033e8159f2",
+      "policyHash": "sha256:6a5b0d21ec711c4aadef8b7a0515c9735fdfcdd72b33b0317cfeb3cae31f7ebc",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2931,7 +2966,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:58652ce80ad1e0c5552cffe068f7ed6aaf4d947abd8dd4ebf14784beea022b1d",
+      "policyHash": "sha256:d9ab4ddbd082a37802788065ebf3ed6888918f53f877129b2d9d69256f94d8e8",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2965,7 +3000,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:3adf75c7e573e7d024a122f058bd3da580b7a8108744e0e557ec42f2e7318a84",
+      "policyHash": "sha256:f24cb7351e91136eb35f57daf11f0d046f6ffc00c456428eba89a7a9fecbfd1a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2999,7 +3034,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:8bbf1eed943e80544a9634960e7f22b5dca8320b11b747442180d3556bb949a3",
+      "policyHash": "sha256:2c1027cb5ee971aa8d609d865fd6a4b90fd0f6b73571b0171c91c24c13a7fe63",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3033,7 +3068,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:bb46743a26ae4af6df0504f3eff4cf1881eaf8275e106809717a32c7fbb3f849",
+      "policyHash": "sha256:222ce35dd857616570d9e8b7b04fd98154e475b0022bb4276535c5841f769b96",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3067,7 +3102,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:20f47cd1fa568562ecfbd1319c2a848da77f2be15914998f0da016db7c34f6a0",
+      "policyHash": "sha256:b59ad9c05a106db838bcb4411688a6d747ce027cd1eb1f3e71e6fd42650955db",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3101,7 +3136,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:bff3c75786a427b8aff7980857b6cebba092bbe690b7488c936cf4800c709681",
+      "policyHash": "sha256:c5d144aa11e06393098005efc9e4d1d844050113dadea223db4e7ca1be83fb85",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3135,7 +3170,7 @@
       "subArea": "Pilot",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:8892fe246484bfa03acf6d60403dc0f2389096807d3ab3da6924d6a6d1a00a88",
+      "policyHash": "sha256:82f4414b6a04e39fd52b82615faa6828d78f276626a01d940e04dfc2be0139fb",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3170,7 +3205,7 @@
       "subArea": "UAT",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:bb8f20cddb31a86d78619c58611c22870b15d9052af04f7647cdd372444be17f",
+      "policyHash": "sha256:1b366901ffec8050745d93f09da25c657711dae985397c54e4377baaf8144831",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3205,7 +3240,7 @@
       "subArea": "Production",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:f0a80d714c4fbcf4f3710da98ee359a81dc4f1035a21b496f0cf83d09b5a9345",
+      "policyHash": "sha256:d21af9fb9c597d66c940abd3457576504f81131c3e6d4ab1a2686809b73d3944",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4047,7 +4082,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:fc90b61efc50a42ab78f922e408779d6090139a13259043286fe1c401aae3cc0",
+      "policyHash": "sha256:a1a4c896bab867b99d1b30720ae4fae636b1e995d36c38891195538d256bc5ad",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4081,7 +4116,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c258e9e4524f16e97e222c2246e4087506ac62d9061598d229e232330351c51d",
+      "policyHash": "sha256:23b06c99102fcb48ff5862c6cce3940f83f489804a26b82f88aeab536f48ed78",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4099,6 +4134,38 @@
       "bundles": [
         "intune-mobile-byod"
       ]
+    },
+    {
+      "id": "intune-enrolment-restriction-esp-cdw-baseline-device",
+      "path": "IntuneConfig/EnrolmentStatusPage/ESP_CDW_Baseline.json",
+      "fileName": "ESP_CDW_Baseline.json",
+      "displayName": "ESP CDW Baseline",
+      "workload": "Intune",
+      "platform": null,
+      "policyType": "Enrolment Restriction",
+      "framework": null,
+      "scope": "Device",
+      "version": null,
+      "area": "ESP CDW Baseline",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:50178bc584e8ef7173ca9c33a792d4b113ce8a38f1aa60d74fe6273362d6c60f",
+      "derivedFrom": {
+        "workload": "folder",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [
+        "platform"
+      ],
+      "confidence": "low",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": []
     },
     {
       "id": "intune-android-settings-catalog-restrictions-v1-0-test-device",
@@ -9109,6 +9176,30 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-user-driven-entra-preprov-cdw-baseline",
+      "path": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
+      "type": "unresolved",
+      "detail": "Could not derive 'platform'"
+    },
+    {
+      "policyId": "intune-user-driven-entra-preprov-cdw-baseline",
+      "path": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
+      "type": "unresolved",
+      "detail": "Could not derive 'policyType'"
+    },
+    {
+      "policyId": "intune-user-driven-entra-preprov-cdw-baseline",
+      "path": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
+      "type": "unresolved",
+      "detail": "Could not derive 'scope'"
+    },
+    {
+      "policyId": "intune-user-driven-entra-preprov-cdw-baseline",
+      "path": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-macos-compliance-policy-device-health-user",
       "path": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v1_0.json",
       "type": "missingEnrichment",
@@ -9309,6 +9400,18 @@
     {
       "policyId": "intune-ios-enrolment-restriction-block-personal-device",
       "path": "IntuneConfig/EnrolmentRestrictions/iOS_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-enrolment-restriction-esp-cdw-baseline-device",
+      "path": "IntuneConfig/EnrolmentStatusPage/ESP_CDW_Baseline.json",
+      "type": "unresolved",
+      "detail": "Could not derive 'platform'"
+    },
+    {
+      "policyId": "intune-enrolment-restriction-esp-cdw-baseline-device",
+      "path": "IntuneConfig/EnrolmentStatusPage/ESP_CDW_Baseline.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -10001,6 +10104,18 @@
       "path": null,
       "type": "emptyBundle",
       "detail": "Bundle 'entra-ca-zero-trust' matched no policies"
+    },
+    {
+      "policyId": "intune-user-driven-entra-preprov-cdw-baseline",
+      "path": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
+      "type": "orphan",
+      "detail": "Policy is in no bundle"
+    },
+    {
+      "policyId": "intune-enrolment-restriction-esp-cdw-baseline-device",
+      "path": "IntuneConfig/EnrolmentStatusPage/ESP_CDW_Baseline.json",
+      "type": "orphan",
+      "detail": "Policy is in no bundle"
     },
     {
       "policyId": "intune-android-settings-catalog-restrictions-v1-0-test-device",
