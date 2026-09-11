@@ -1,0 +1,30 @@
+{
+  "enableWhiteGlove": true,
+  "deviceType": "windowsPc",
+  "enrollmentStatusScreenSettings": null,
+  "outOfBoxExperienceSetting": {
+    "privacySettingsHidden": true,
+    "keyboardSelectionPageSkipped": true,
+    "userType": "standard",
+    "eulaHidden": true,
+    "deviceUsageType": "singleUser",
+    "escapeLinkHidden": true
+  },
+  "outOfBoxExperienceSettings": {
+    "hideEscapeLink": true,
+    "hideEULA": true,
+    "userType": "standard",
+    "hidePrivacySettings": true,
+    "deviceUsageType": "singleUser",
+    "skipKeyboardSelectionPage": true
+  },
+  "hardwareHashExtractionEnabled": true,
+  "displayName": "User Driven Entra PreProv CDW Baseline",
+  "extractHardwareHash": true,
+  "language": "os-default",
+  "description": "",
+  "preprovisioningAllowed": true,
+  "deviceNameTemplate": "%SERIAL%",
+  "locale": "os-default",
+  "@odata.type": "#microsoft.graph.azureADWindowsAutopilotDeploymentProfile"
+}
