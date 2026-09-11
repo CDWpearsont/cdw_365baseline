@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-09-11T08:48:58Z",
-  "count": 222,
+  "generated": "2026-09-11T12:36:47Z",
+  "count": 256,
   "entries": [
     {
       "id": "entra.adminconsentrequestpolicy.cdw-baseline-admin-consent-request-policy",
@@ -1117,6 +1117,25 @@
       "isDraft": false
     },
     {
+      "id": "intune.compliancepolicies.win-cdw-baseline-compliance-cis-l1-u-device-health-and-security",
+      "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_CIS_L1_-_U_-_Device_Health_and_Security_-_v5_0_0.json",
+      "sha": "c7aac938906fb675",
+      "workload": "intune",
+      "category": "CompliancePolicies",
+      "objectType": "windows10CompliancePolicy",
+      "displayName": "Win - CDW Baseline - Compliance - CIS L1 - U - Device Health and Security - v5.0.0",
+      "baseName": "Win - CDW Baseline - Compliance - CIS L1 - U - Device Health and Security",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Compliance — Device Health and Security. Recommendations: 106.1.1, 106.1.2, 106.1.3, 106.2.1.1, 106.2.1.2, 106.2.1.3, 106.2.1.4.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "user",
+      "version": "5.0.0",
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-defender-for-endpoint",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Defender_for_Endpoint_-_v3_1.json",
       "sha": "2c1027cb5ee971aa",
@@ -1354,6 +1373,27 @@
       "templateId": "d948ff9b-99cb-4ee0-8012-1fbc09685377_1"
     },
     {
+      "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-encryption-d-bitlocker-bl",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__BL__-_v5_0_0.json",
+      "sha": "a7ce340a9821e317",
+      "workload": "intune",
+      "category": "EndpointSecurity",
+      "objectType": "endpointSecurityDiskEncryption",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Encryption - D - BitLocker (BL) - v5.0.0",
+      "baseName": "Win - CDW Baseline - ES - CIS L1 - Encryption - D - BitLocker (BL)",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1 + BitLocker (BL) profile. Encryption — BitLocker (BL). Recommendations: 4.11.7.1.1, 4.11.7.1.2, 4.11.7.1.3, 4.11.7.1.4, 4.11.7.1.5, 4.11.7.1.6, 4.11.7.1.7, 4.11.7.1.8, 4.11.7.2.1, 4.11.7.2.2, 4.11.7.2.3, 4.11.7.2.4, 4.11.7.2.5, 4.11.7.2.6, 4.11.7.2.7, 4.11.7.2.8, 4.11.7.2.9, 4.11.7.3.1, 4.11.7.3.2, 4.11.7.4, 4.11.7.5, 4.11.7.6, 8.1, 8.2, 8.3.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 7,
+      "deployVia": "graph",
+      "isDraft": false,
+      "templateId": "46ddfc50-d10f-4867-b852-9434254b3bff_1"
+    },
+    {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-encryption-d-bitlocker-os-disk",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v4_0_0.json",
       "sha": "167e34a5113f5a3b",
@@ -1397,41 +1437,41 @@
     },
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-firewall-d-firewall-configuration",
-      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v4_0_0.json",
-      "sha": "1a2ab9495d41e185",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v5_0_0.json",
+      "sha": "ef6926b6ef5b66a5",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityFirewall",
-      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Firewall - D - Firewall Configuration - v4.0.0",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Firewall - D - Firewall Configuration - v5.0.0",
       "baseName": "Win - CDW Baseline - ES - CIS L1 - Windows Firewall - D - Firewall Configuration",
-      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Firewall enabled on all three profiles, stateful FTP disabled, filtering platform connection auditing. Additional CIS firewall settings (default inbound action, logging) require template refs not available via API.",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows Firewall — Firewall Configuration. Recommendations: 37.1, 37.2, 37.3, 37.4, 37.5, 37.6, 37.7, 37.8, 37.9, 37.10, 37.11, 37.12, 37.13, 37.14, 37.15, 37.16, 37.17, 37.18, 37.19, 37.20, 37.21, 37.22, 37.23.",
       "platforms": [
         "windows"
       ],
       "tier": "cis-l1",
       "scope": "device",
-      "version": "4.0.0",
-      "settingCount": 6,
+      "version": "5.0.0",
+      "settingCount": 3,
       "deployVia": "graph",
       "isDraft": false,
       "templateId": "6078910e-d808-4a9f-a51d-1b8a7bacb7c0_1"
     },
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-hello-for-business-d-whfb-configuration",
-      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v4_0_0.json",
-      "sha": "e0fd4e5abc2e0b3f",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v5_0_0.json",
+      "sha": "be435e6ec9cd53ee",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAccountProtection",
-      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Hello for Business - D - WHfB Configuration - v4.0.0",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows Hello for Business - D - WHfB Configuration - v5.0.0",
       "baseName": "Win - CDW Baseline - ES - CIS L1 - Windows Hello for Business - D - WHfB Configuration",
-      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. WHfB enabled, TPM required, minimum PIN 6 chars, enhanced anti-spoofing. (ESS peripheral setting excluded — not in tenant catalog.)",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows Hello for Business — WHfB Configuration. Recommendations: 98.2, 98.3, 98.4.",
       "platforms": [
         "windows"
       ],
       "tier": "cis-l1",
       "scope": "device",
-      "version": "4.0.0",
+      "version": "5.0.0",
       "settingCount": 2,
       "deployVia": "graph",
       "isDraft": false,
@@ -1439,20 +1479,20 @@
     },
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-laps-d-laps-configuration",
-      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v4_0_0.json",
-      "sha": "ca2434dd3ac2706f",
+      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v5_0_0.json",
+      "sha": "6ba4eb837dd7b280",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAccountProtection",
-      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows LAPS - D - LAPS Configuration - v4.0.0",
+      "displayName": "Win - CDW Baseline - ES - CIS L1 - Windows LAPS - D - LAPS Configuration - v5.0.0",
       "baseName": "Win - CDW Baseline - ES - CIS L1 - Windows LAPS - D - LAPS Configuration",
-      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. LAPS backup to Azure AD, password age 30 days, large+small+numbers+special complexity, min length 15, post-auth reset and logoff, 8 hour delay.",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows LAPS — LAPS Configuration. Recommendations: 107.1, 107.2, 107.3, 107.4, 107.5, 107.6.",
       "platforms": [
         "windows"
       ],
       "tier": "cis-l1",
       "scope": "device",
-      "version": "4.0.0",
+      "version": "5.0.0",
       "settingCount": 5,
       "deployVia": "graph",
       "isDraft": false,
@@ -2242,6 +2282,326 @@
       "isDraft": false
     },
     {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-audit-and-event-logging",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Audit_and_Event_Logging_-_v5_0_0.json",
+      "sha": "4d592762b978c38d",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Audit and Event Logging - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Audit and Event Logging",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Audit and Event Logging. Recommendations: 4.10.4.1, 4.11.15.1.1, 4.11.15.1.2, 4.11.15.2.1, 4.11.15.2.2, 4.11.15.3.1, 4.11.15.3.2, 4.11.15.4.1, 4.11.15.4.2, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 6.10, 6.11, 6.12, 6.13, 6.14, 6.15, 6.16, 6.17, 6.18, 6.19, 6.20, 6.21, 6.22, 6.23, 6.24, 6.25, 6.26, 6.27.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 36,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-config-refresh",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Config_Refresh_-_v5_0_0.json",
+      "sha": "297a2462f57b0f35",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Config Refresh - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Config Refresh",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Config Refresh. Recommendations: 15.1, 15.2.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-device-guard-credential-guard-and-hvci",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Device_Guard__Credential_Guard_and_HVCI_-_v5_0_0.json",
+      "sha": "48829b3173708ba7",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Device Guard, Credential Guard and HVCI - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Device Guard, Credential Guard and HVCI",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Device Guard, Credential Guard and HVCI. Recommendations: 23.1, 23.2, 23.3, 23.4, 50.1, 91.1, 91.2.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 7,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-dma-and-device-installation-protection-bl",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_DMA_and_Device_Installation_Protection__BL__-_v5_0_0.json",
+      "sha": "48b709a48dd22cd8",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - DMA and Device Installation Protection (BL) - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - DMA and Device Installation Protection (BL)",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1 + BitLocker (BL) profile. Device Security — DMA and Device Installation Protection (BL). Recommendations: 4.10.9.1.1, 4.10.9.1.2, 4.10.9.1.3, 27.1.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-enhanced-phishing-protection",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Enhanced_Phishing_Protection_-_v5_0_0.json",
+      "sha": "95708134993744ab",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Enhanced Phishing Protection - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Enhanced Phishing Protection",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Enhanced Phishing Protection. Recommendations: 77.1.1, 77.1.2, 77.1.3, 77.1.4.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-local-security-policies",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Local_Security_Policies_-_v5_0_0.json",
+      "sha": "e31bfd1433a0e348",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Local Security Policies - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Local Security Policies",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Local Security Policies. Recommendations: 49.1, 49.2, 49.6, 49.8, 49.11, 49.12, 49.13, 49.14, 49.15, 49.16, 49.17, 49.18, 49.19, 49.20, 49.21, 49.22, 49.23, 49.24, 49.25, 49.26, 49.27, 49.28, 49.29, 49.30, 49.31, 49.32.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 26,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-location-and-privacy",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Location_and_Privacy_-_v5_0_0.json",
+      "sha": "ad192a0db28cd47b",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Location and Privacy - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Location and Privacy",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Location and Privacy. Recommendations: 4.10.19.1, 4.10.20.1.2, 4.10.20.1.5, 69.2.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-login-and-lock-screen",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Login_and_Lock_Screen_-_v5_0_0.json",
+      "sha": "3e8f9de3d5bdbf15",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Login and Lock Screen - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Login and Lock Screen",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Login and Lock Screen. Recommendations: 1.1, 1.2, 4.1.3.1, 4.1.3.2, 4.10.26.1, 4.10.26.2, 4.10.26.3, 4.10.26.4, 4.10.26.5, 4.10.26.6, 4.10.26.7, 69.4.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 12,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-printing",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Printing_-_v5_0_0.json",
+      "sha": "7597d25fe2e45c19",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Printing - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Printing",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Printing. Recommendations: 4.7.1, 4.7.2, 4.7.3, 4.7.4, 4.7.5, 4.7.6, 4.7.7, 4.7.8, 4.7.9, 4.7.10, 4.7.11.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 8,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-remote-desktop-services-and-rpc",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Remote_Desktop_Services_and_RPC_-_v5_0_0.json",
+      "sha": "0d22ec5098489365",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Remote Desktop Services and RPC - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Remote Desktop Services and RPC",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Remote Desktop Services and RPC. Recommendations: 4.10.31.1, 4.10.31.2, 4.11.35.3.2, 4.11.35.4.3.2, 4.11.35.4.9.1, 4.11.35.4.9.2, 4.11.35.4.9.3, 4.11.35.4.9.4, 4.11.35.4.9.5, 4.11.35.4.11.1.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 10,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-security-hardening",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Security_Hardening_-_v5_0_0.json",
+      "sha": "8a91c89b2c3383b8",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Security Hardening - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Security Hardening",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Security Hardening. Recommendations: 4.4.1, 4.4.2, 4.4.3, 4.4.4, 4.4.5, 4.5.1, 4.5.2, 4.5.3, 4.5.5, 4.5.7, 4.5.9, 4.5.12, 4.6.4.1, 4.6.9.1, 4.6.9.2, 4.6.9.3, 4.6.11.1, 4.6.18.1, 4.6.18.2, 4.10.5.1, 4.10.5.2, 4.10.9.2, 4.10.13.1, 4.10.24.1, 4.10.29.5.1, 4.10.29.5.2, 4.10.30.1, 4.10.30.2, 4.10.44.1.1, 4.10.44.1.2, 4.11.3.1, 4.11.6.1, 4.11.6.2, 4.11.6.3, 4.11.8.1, 4.11.8.2, 4.11.8.3, 4.11.18.1, 4.11.18.2, 4.11.18.3, 4.11.18.4, 4.11.27.1, 4.11.36.1, 4.11.41.1, 4.11.49.1, 4.11.49.2, 4.11.54.1.1, 4.11.54.1.2, 4.11.54.1.3, 4.11.54.2.1, 4.11.54.2.3, 4.11.54.2.4, 45.1, 45.2, 45.3, 45.4, 45.5, 45.6, 45.7, 46.1, 46.2, 46.3, 46.4, 46.5, 46.6, 46.7, 55.6, 55.7, 80.1, 82.37, 82.38, 82.39, 82.40, 94.1, 105.1.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 75,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-user-rights",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_User_Rights_-_v5_0_0.json",
+      "sha": "81126e804cf46e7d",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - User Rights - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - User Rights",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — User Rights. Recommendations: 90.2, 90.4, 90.5, 90.6, 90.7, 90.8, 90.10, 90.12, 90.13, 90.14, 90.15, 90.16, 90.17, 90.19, 90.20, 90.21, 90.22, 90.25, 90.26, 90.27, 90.29, 90.30, 90.31, 90.32, 90.33, 90.34, 90.35.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 27,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-user-rights-no-one",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_User_Rights__No_One__-_v5_0_0.json",
+      "sha": "692ffe5d251b88a7",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - User Rights (No One) - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - User Rights (No One)",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — User Rights (No One). Recommendations: 90.1, 90.3, 90.9, 90.11, 90.18, 90.23, 90.28.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 7,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-windows-package-manager",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Windows_Package_Manager_-_v5_0_0.json",
+      "sha": "75883e929da88ba5",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Windows Package Manager - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Windows Package Manager",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Windows Package Manager. Recommendations: 4.11.10.1, 4.11.10.2, 4.11.10.3.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-d-windows-sandbox",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_D_-_Windows_Sandbox_-_v5_0_0.json",
+      "sha": "5e26b63c2e2b6a99",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Windows Sandbox - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - D - Windows Sandbox",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Windows Sandbox. Recommendations: 102.1, 102.2.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-device-security-u-security-hardening",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Device_Security_-_U_-_Security_Hardening_-_v5_0_0.json",
+      "sha": "bc3b309d10c93058",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Device Security - U - Security Hardening - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Device Security - U - Security Hardening",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Device Security — Security Hardening. Recommendations: 4.11.5.1, 4.11.5.2, 4.11.30.1.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "user",
+      "version": "5.0.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-enhanced-phishing-protection",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Enhanced_Phishing_Protection_-_v4_0_0.json",
       "sha": "7dc9b04b826d7899",
@@ -2602,6 +2962,26 @@
       "isDraft": false
     },
     {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-store-d-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Store_-_D_-_Configuration_-_v5_0_0.json",
+      "sha": "7bc7c5f3a271efc0",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Store - D - Configuration - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Microsoft Store - D - Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Microsoft Store — Configuration. Recommendations: 55.1, 55.2, 55.4.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-privacy-d",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Privacy_-_D_-_v4_0_0.json",
       "sha": "31b326f41ca68820",
@@ -2822,6 +3202,26 @@
       "isDraft": false
     },
     {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-hello-for-business-d-enhanced-sign-in-security",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_Enhanced_Sign-in_Security_-_v5_0_0.json",
+      "sha": "634f102f7ea6b5a8",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Hello for Business - D - Enhanced Sign-in Security - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Hello for Business - D - Enhanced Sign-in Security",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows Hello for Business — Enhanced Sign-in Security. Recommendations: 98.1.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-ink-workspace-d",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Ink_Workspace_-_D_-_v4_0_0.json",
       "sha": "4ef2bda823911715",
@@ -2882,48 +3282,104 @@
       "isDraft": false
     },
     {
-      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-update-for-business-delivery-optimisation",
-      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_Delivery_Optimisation_-_v4_0_0.json",
-      "sha": "a5a5994f537c9b15",
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-update-for-business-d-delivery-optimisation",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Delivery_Optimisation_-_v5_0_0.json",
+      "sha": "a0d780fe9caaef41",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
-      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - Delivery Optimisation - v4.0.0",
-      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - Delivery Optimisation",
-      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Windows Update for Business Delivery Optimisation.",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - D - Delivery Optimisation - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - D - Delivery Optimisation",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows Update for Business — Delivery Optimisation. Recommendations: 22.1.",
       "platforms": [
         "windows"
       ],
       "tier": "cis-l1",
-      "version": "4.0.0",
-      "settingCount": 12,
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 1,
       "deployVia": "graph",
-      "isDraft": false,
-      "flags": [
-        "scope-unknown"
-      ]
+      "isDraft": false
     },
     {
-      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-user-experience-feature-configuration",
-      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_Feature_Configuration_-_v4_0_0.json",
-      "sha": "77373c9deb712324",
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-update-for-business-d-reports-and-telemetry",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Reports_and_Telemetry_-_v5_0_0.json",
+      "sha": "0f75cd49a85c8e6e",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
-      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - Feature Configuration - v4.0.0",
-      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - Feature Configuration",
-      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 1. Windows User Experience Feature Configuration.",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - D - Reports and Telemetry - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - D - Reports and Telemetry",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows Update for Business — Reports and Telemetry. Recommendations: 81.3, 81.6.",
       "platforms": [
         "windows"
       ],
       "tier": "cis-l1",
-      "version": "4.0.0",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-update-for-business-d-update-settings",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_Update_for_Business_-_D_-_Update_Settings_-_v5_0_0.json",
+      "sha": "6f94810856b083c0",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - D - Update Settings - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows Update for Business - D - Update Settings",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows Update for Business — Update Settings. Recommendations: 104.1, 104.2, 104.3, 104.4, 104.5.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-user-experience-d-feature-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_D_-_Feature_Configuration_-_v5_0_0.json",
+      "sha": "8de10d6b18c1010d",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - D - Feature Configuration - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - D - Feature Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows User Experience — Feature Configuration. Recommendations: 33.1, 33.4, 33.5, 73.2, 73.3, 99.2.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "5.0.0",
       "settingCount": 6,
       "deployVia": "graph",
-      "isDraft": false,
-      "flags": [
-        "scope-unknown"
-      ]
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-windows-user-experience-u-feature-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Windows_User_Experience_-_U_-_Feature_Configuration_-_v5_0_0.json",
+      "sha": "a105466586cee1ba",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - U - Feature Configuration - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L1 - Windows User Experience - U - Feature Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Windows User Experience — Feature Configuration. Recommendations: 33.2.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l1",
+      "scope": "user",
+      "version": "5.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
     },
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-defender-antivirus-additional-configuration",
@@ -2948,6 +3404,166 @@
       ]
     },
     {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-device-security-d-local-security-policies",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Local_Security_Policies_-_v5_0_0.json",
+      "sha": "e52057b733214ae1",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Local Security Policies - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Local Security Policies",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — Local Security Policies. Recommendations: 49.5, 49.7.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-device-security-d-location-and-privacy",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Location_and_Privacy_-_v5_0_0.json",
+      "sha": "0db6e1ca1bfb8a80",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Location and Privacy - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Location and Privacy",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — Location and Privacy. Recommendations: 4.10.20.1.4, 4.10.20.1.6, 4.10.20.1.7, 4.10.20.1.8, 4.10.20.1.9, 4.10.20.1.10, 4.10.20.1.11, 4.10.20.1.12, 4.10.20.1.13, 12.1, 69.1, 69.3, 69.5, 81.1, 81.2.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 15,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-device-security-d-login-and-lock-screen",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Login_and_Lock_Screen_-_v5_0_0.json",
+      "sha": "a8414c067a53ef00",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Login and Lock Screen - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Login and Lock Screen",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — Login and Lock Screen. Recommendations: 4.10.25.1.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-device-security-d-remote-desktop-services-and-rpc",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Remote_Desktop_Services_and_RPC_-_v5_0_0.json",
+      "sha": "4336e56dc86db647",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Remote Desktop Services and RPC - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Remote Desktop Services and RPC",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — Remote Desktop Services and RPC. Recommendations: 4.11.35.4.2.1, 4.11.35.4.3.1, 4.11.35.4.3.3, 4.11.35.4.3.4, 4.11.35.4.3.5, 4.11.35.4.10.1, 4.11.35.4.10.2.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 7,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-device-security-d-security-hardening",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_Security_Hardening_-_v5_0_0.json",
+      "sha": "a0e3cd090fa1402f",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Security Hardening - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - Security Hardening",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — Security Hardening. Recommendations: 4.5.4, 4.5.6, 4.5.8, 4.5.10, 4.5.11, 4.6.8.1, 4.6.8.2, 4.6.17.1, 4.6.17.2, 4.10.23.1, 4.10.40.5.1, 4.11.3.2, 4.11.34.1, 4.11.48.1, 4.11.53.1, 4.11.53.2, 4.11.54.2.2, 4.11.55.1, 47.1.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 19,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-device-security-d-user-rights",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_D_-_User_Rights_-_v5_0_0.json",
+      "sha": "2ad1b7ee56eb390f",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - User Rights - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Device Security - D - User Rights",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — User Rights. Recommendations: 90.24.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-device-security-u-location-and-privacy",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_U_-_Location_and_Privacy_-_v5_0_0.json",
+      "sha": "49e93031eaa11028",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - U - Location and Privacy - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Device Security - U - Location and Privacy",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — Location and Privacy. Recommendations: 4.10.20.1.3.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "user",
+      "version": "5.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-device-security-u-security-hardening",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Device_Security_-_U_-_Security_Hardening_-_v5_0_0.json",
+      "sha": "2d6cd7691af372b9",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Device Security - U - Security Hardening - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Device Security - U - Security Hardening",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Device Security — Security Hardening. Recommendations: 4.11.51.2.1.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "user",
+      "version": "5.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-edge-profiles-sign-in-and-sync",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_Profiles_Sign-In_and_Sync_-_v4_0_0.json",
       "sha": "4e79dff44128ef75",
@@ -2970,22 +3586,42 @@
       ]
     },
     {
-      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-store-d-configuration",
-      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_D_-_Configuration_-_v4_0_0.json",
-      "sha": "8627d80ef6716fb6",
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-onedrive-d-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_OneDrive_-_D_-_Configuration_-_v5_0_0.json",
+      "sha": "94a400207cef394b",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
-      "displayName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - D - Configuration - v4.0.0",
-      "baseName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - D - Configuration",
-      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Microsoft Store (D) lockdown.",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Microsoft OneDrive - D - Configuration - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Microsoft OneDrive - D - Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Microsoft OneDrive — Configuration. Recommendations: 81.5.",
       "platforms": [
         "windows"
       ],
       "tier": "cis-l2",
       "scope": "device",
-      "version": "4.0.0",
-      "settingCount": 7,
+      "version": "5.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-store-d-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Store_-_D_-_Configuration_-_v5_0_0.json",
+      "sha": "12e8df9014a62e56",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - D - Configuration - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Microsoft Store - D - Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Microsoft Store — Configuration. Recommendations: 4.10.20.1.1, 4.11.41.2, 55.3, 55.5.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 4,
       "deployVia": "graph",
       "isDraft": false
     },
@@ -3032,26 +3668,24 @@
       ]
     },
     {
-      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-update-for-business-reports-and-telemetry",
-      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Update_for_Business_-_Reports_and_Telemetry_-_v4_0_0.json",
-      "sha": "a2420eb0b7063488",
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-update-for-business-d-reports-and-telemetry",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_Update_for_Business_-_D_-_Reports_and_Telemetry_-_v5_0_0.json",
+      "sha": "4506ed02b9cd9518",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
-      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows Update for Business - Reports and Telemetry - v4.0.0",
-      "baseName": "Win - CDW Baseline - SC - CIS L2 - Windows Update for Business - Reports and Telemetry",
-      "description": "CIS Microsoft Intune for Windows 11 Benchmark v4.0.0 — Level 2. Windows Update diagnostics, telemetry and reporting.",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows Update for Business - D - Reports and Telemetry - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Windows Update for Business - D - Reports and Telemetry",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Windows Update for Business — Reports and Telemetry. Recommendations: 81.4, 81.7, 81.8.",
       "platforms": [
         "windows"
       ],
       "tier": "cis-l2",
-      "version": "4.0.0",
-      "settingCount": 5,
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 3,
       "deployVia": "graph",
-      "isDraft": false,
-      "flags": [
-        "scope-unknown"
-      ]
+      "isDraft": false
     },
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-user-experience-copilot",
@@ -3076,6 +3710,26 @@
       ]
     },
     {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-user-experience-d-feature-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_D_-_Feature_Configuration_-_v5_0_0.json",
+      "sha": "a400ae11207afe56",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - D - Feature Configuration - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - D - Feature Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Windows User Experience — Feature Configuration. Recommendations: 54.1, 73.1, 73.4, 75.1, 95.1, 99.1.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "5.0.0",
+      "settingCount": 6,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-user-experience-settings-sync",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_Settings_Sync_-_v4_0_0.json",
       "sha": "3888ea928e94f846",
@@ -3096,6 +3750,26 @@
       "flags": [
         "scope-unknown"
       ]
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-windows-user-experience-u-feature-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Windows_User_Experience_-_U_-_Feature_Configuration_-_v5_0_0.json",
+      "sha": "6fe260746cac605d",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - U - Feature Configuration - v5.0.0",
+      "baseName": "Win - CDW Baseline - SC - CIS L2 - Windows User Experience - U - Feature Configuration",
+      "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 2. Windows User Experience — Feature Configuration. Recommendations: 33.3.",
+      "platforms": [
+        "windows"
+      ],
+      "tier": "cis-l2",
+      "scope": "user",
+      "version": "5.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
     },
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-credential-management-d-passwordless",
