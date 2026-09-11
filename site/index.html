@@ -503,6 +503,8 @@ body{
 .pcard[data-cat="DefenderOffice"]::before       {background:rgba(204,0,0,.5)}
 .pcard[data-cat="EnrolmentRestrictions"]::before{background:#16a34a}
 .pcard[data-cat="AppProtectionPolicies"]::before{background:#0891b2}
+.pcard[data-cat="AutopilotProfiles"]::before    {background:#4f46e5}
+.pcard[data-cat="EnrolmentStatusPage"]::before  {background:#65a30d}
 
 .pcard:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .pcard.selected{border-color:var(--cdw-red);background:rgba(204,0,0,.06);box-shadow:0 0 0 2px rgba(204,0,0,.15)}
@@ -1521,6 +1523,8 @@ body[data-appmode="manage"] .pcard.mg-dirty {
               <button class="fchip" data-filter="CompliancePolicies"><span class="dot" style="background:#fb923c"></span>Compliance</button>
               <button class="fchip" data-filter="DeviceConfigurations"><span class="dot" style="background:#4ade80"></span>Device Config</button>
               <button class="fchip" data-filter="EnrolmentRestrictions"><span class="dot" style="background:#16a34a"></span>Enrolment Restrictions</button>
+              <button class="fchip" data-filter="AutopilotProfiles"><span class="dot" style="background:#4f46e5"></span>Autopilot Profiles</button>
+              <button class="fchip" data-filter="EnrolmentStatusPage"><span class="dot" style="background:#65a30d"></span>Enrolment Status Page</button>
               <button class="fchip" data-filter="AppProtectionPolicies"><span class="dot" style="background:#0891b2"></span>App Protection (MAM)</button>
             </div>
           </div>
@@ -1814,8 +1818,8 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.4.0',
-  date:    '2026-09-04'
+  version: '3.4.1',
+  date:    '2026-09-11'
 };
 
 // LLD template source. Served from the $web container of the same storage
@@ -2461,7 +2465,8 @@ async function saveOverlay() {
 // function has been taught to handle that category.
 const DEPLOYABLE_CATS = {
   intune:   ['EndpointSecurity','SettingsCatalog','CompliancePolicies',
-             'DeviceConfigurations','EnrolmentRestrictions','AppProtectionPolicies'],
+             'DeviceConfigurations','EnrolmentRestrictions','AppProtectionPolicies',
+             'AutopilotProfiles','EnrolmentStatusPage'],
   entra:    ['ConditionalAccess','NamedLocations','AuthMethods'],
   defender: ['DefenderEndpoint','DefenderOffice'],
 };
@@ -2492,6 +2497,8 @@ const WORKLOADS = {
       { folder: 'IntuneConfig/DeviceConfigurations',    cat: 'DeviceConfigurations',  label: 'Device Config'          },
       { folder: 'IntuneConfig/EnrolmentRestrictions',   cat: 'EnrolmentRestrictions', label: 'Enrolment Restrictions' },
       { folder: 'IntuneConfig/AppProtectionPolicies',   cat: 'AppProtectionPolicies', label: 'App Protection (MAM)'   },
+      { folder: 'IntuneConfig/AutopilotProfiles',       cat: 'AutopilotProfiles',     label: 'Autopilot Profiles'     },
+      { folder: 'IntuneConfig/EnrolmentStatusPage',     cat: 'EnrolmentStatusPage',   label: 'Enrolment Status Page'  },
     ],
     deployFn: deployIntunePolicy,
     existsCheckFn: checkIntuneExists,
@@ -2960,29 +2967,35 @@ async function graphGetAll(url) {
 // EXISTS CHECKS
 // ═══════════════════════════════════════════════════════════════════
 async function checkIntuneExists() {
-  const [comp, dc, cfg, er, mamAndroid, mamIos] = await Promise.all([
+  const [comp, dc, cfg, er, mamAndroid, mamIos, ap] = await Promise.all([
     graphGetAll(`${GRAPH}/deviceManagement/deviceCompliancePolicies?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceManagement/deviceConfigurations?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceManagement/configurationPolicies?$select=id,name`),
     graphGetAll(`${GRAPH}/deviceManagement/deviceEnrollmentConfigurations?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceAppManagement/androidManagedAppProtections?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceAppManagement/iosManagedAppProtections?$select=id,displayName`),
+    // No $select — a rejected query returns [] silently and would mark every profile 'ready'
+    graphGetAll(`${GRAPH}/deviceManagement/windowsAutopilotDeploymentProfiles`),
   ]);
   const compMap = new Map(comp.map(p => [p.displayName, p.id]));
   const dcMap   = new Map(dc.map(p => [p.displayName, p.id]));
   const cfgMap  = new Map(cfg.map(p => [p.name, p.id]));
   const erMap   = new Map(er.map(p => [p.displayName, p.id]));
   const mamMap  = new Map([...mamAndroid, ...mamIos].map(p => [p.displayName, p.id]));
+  const apMap   = new Map(ap.map(p => [p.displayName, p.id]));
   for (const p of policies.intune) {
     const deployName = getDeployName(p);
     if (p.cat === 'CompliancePolicies') {
       p.tenantId = compMap.get(deployName) || compMap.get(p.displayName) || null;
     } else if (p.cat === 'DeviceConfigurations') {
       p.tenantId = dcMap.get(deployName) || dcMap.get(p.displayName) || null;
-    } else if (p.cat === 'EnrolmentRestrictions') {
+    } else if (p.cat === 'EnrolmentRestrictions' || p.cat === 'EnrolmentStatusPage') {
+      // ESP shares the deviceEnrollmentConfigurations collection with restrictions
       p.tenantId = erMap.get(deployName) || erMap.get(p.displayName) || null;
     } else if (p.cat === 'AppProtectionPolicies') {
       p.tenantId = mamMap.get(deployName) || mamMap.get(p.displayName) || null;
+    } else if (p.cat === 'AutopilotProfiles') {
+      p.tenantId = apMap.get(deployName) || apMap.get(p.displayName) || null;
     } else {
       p.tenantId = cfgMap.get(deployName) || cfgMap.get(p.displayName) || null;
     }
@@ -3343,6 +3356,70 @@ async function deployIntunePolicy(p, json) {
                    'roleScopeTagIds','assignments','priorityMetaData','@odata.context','priority'];
     body = { ...json };
     RO_ER.forEach(k => delete body[k]);
+
+  } else if (p.cat === 'EnrolmentStatusPage') {
+    // Windows ESP — a deviceEnrollmentConfiguration. Priority is assigned by the
+    // service on create. selectedMobileAppIds are tenant-specific app GUIDs, so
+    // blocking apps are never deployed; they are selected per customer.
+    url = `${GRAPH}/deviceManagement/deviceEnrollmentConfigurations`;
+    const RO_ESP = ['id','createdDateTime','lastModifiedDateTime','version',
+                    'roleScopeTagIds','assignments','priorityMetaData','@odata.context',
+                    'priority','selectedMobileAppIds'];
+    body = { ...json };
+    RO_ESP.forEach(k => delete body[k]);
+    body['@odata.type'] = '#microsoft.graph.windows10EnrollmentCompletionPageConfiguration';
+
+  } else if (p.cat === 'AutopilotProfiles') {
+    // Entra join only — hybrid profiles need a domain join profile and the
+    // Intune Connector for AD, which the deployer does not handle.
+    const AP_ENTRA = '#microsoft.graph.azureADWindowsAutopilotDeploymentProfile';
+    if (json['@odata.type'] && json['@odata.type'] !== AP_ENTRA) {
+      throw new Error('Only Entra-joined Autopilot profiles are supported');
+    }
+    url = `${GRAPH}/deviceManagement/windowsAutopilotDeploymentProfiles`;
+    const RO_AP = ['id','createdDateTime','lastModifiedDateTime','roleScopeTagIds',
+                   'assignments','assignedDevices','managementServiceAppId',
+                   '@odata.context','enrollmentStatusScreenSettings'];
+    body = { ...json };
+    RO_AP.forEach(k => delete body[k]);
+    body['@odata.type'] = AP_ENTRA;
+
+    if (branding.intune.mode !== 'original') {
+      if (body.displayName) body.displayName = applyBranding(body.displayName, 'intune');
+    }
+
+    // The export carries current property names alongside their deprecated
+    // aliases (same values). Send as exported; if Graph rejects it, retry once
+    // with only the current names.
+    const DEPRECATED_AP = {
+      outOfBoxExperienceSettings: 'outOfBoxExperienceSetting',
+      extractHardwareHash:        'hardwareHashExtractionEnabled',
+      enableWhiteGlove:           'preprovisioningAllowed',
+      language:                   'locale',
+    };
+    const postAp = b => fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${graphToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(b)
+    });
+    let r = await postAp(body);
+    if (r.status === 400) {
+      console.warn('Autopilot POST rejected — retrying without deprecated aliases:', await r.text());
+      const slim = { ...body };
+      for (const [old, cur] of Object.entries(DEPRECATED_AP)) {
+        if (cur in slim) delete slim[old];
+      }
+      body = slim;
+      r = await postAp(body);
+    }
+    if (!r.ok) {
+      const errText = await r.text();
+      console.error('Graph 400 body:', errText);
+      console.error('Payload sent:', JSON.stringify(body, null, 2));
+      throw new Error(`Graph ${r.status}: ${errText}`);
+    }
+    const created = await r.json();
+    return created.id || null;
 
   } else if (p.cat === 'AppProtectionPolicies') {
     const odataType = json['@odata.type'] || '';
@@ -3727,7 +3804,10 @@ function getDeleteUrl(p) {
     case 'NamedLocations':
       return `https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations/${p.tenantId}`;
     case 'EnrolmentRestrictions':
+    case 'EnrolmentStatusPage':
       return `${GRAPH}/deviceManagement/deviceEnrollmentConfigurations/${p.tenantId}`;
+    case 'AutopilotProfiles':
+      return `${GRAPH}/deviceManagement/windowsAutopilotDeploymentProfiles/${p.tenantId}`;
     case 'AppProtectionPolicies': {
       const name = (p.displayName || '').toLowerCase();
       const odataType = (p._json?.['@odata.type'] || '').toLowerCase();
@@ -3881,6 +3961,7 @@ const CAT_LABELS = {
   AuthMethods:'Auth Methods', DefenderEndpoint:'Defender Endpoint',
   DefenderOffice:'Defender Office',
   EnrolmentRestrictions:'Enrolment Restriction', AppProtectionPolicies:'App Protection (MAM)',
+  AutopilotProfiles:'Autopilot Profile', EnrolmentStatusPage:'Enrolment Status Page',
   // Categories surfaced by the manifest
   AdminConsentRequestPolicy:'Admin Consent', AppManagementPolicies:'App Management',
   AuthorizationPolicy:'Authorization', CrossTenantAccessPolicy:'Cross-Tenant Access',
@@ -4821,6 +4902,53 @@ function extractSettings(json, cat) {
       const val = Array.isArray(v) ? (v.length === 0 ? 'None' : v.join(', ')) : String(v);
       settings.push({ key: humanizeName(k), rawKey: k, value: humanizeValue(val) });
     }
+
+  } else if (cat === 'AutopilotProfiles') {
+    // Explicit rows in portal order. Deprecated aliases in the export
+    // (outOfBoxExperienceSettings, extractHardwareHash, enableWhiteGlove,
+    // language) are ignored so the LLD doesn't show duplicate rows.
+    const yn  = v => (v === true ? 'Yes' : v === false ? 'No' : null);
+    const oobe = json.outOfBoxExperienceSetting || {};
+    const add = (key, rawKey, value) => {
+      if (value !== null && value !== undefined && value !== '') settings.push({ key, rawKey, value: String(value) });
+    };
+    const JOIN = {
+      '#microsoft.graph.azureADWindowsAutopilotDeploymentProfile':      'Microsoft Entra joined',
+      '#microsoft.graph.activeDirectoryWindowsAutopilotDeploymentProfile': 'Microsoft Entra hybrid joined',
+    };
+    const MODE  = { singleUser: 'User-driven', shared: 'Self-deploying' };
+    const UTYPE = { standard: 'Standard', administrator: 'Administrator' };
+    const DTYPE = { windowsPc: 'Windows PC', holoLens: 'HoloLens', surfaceHub2: 'Surface Hub 2', surfaceHub2S: 'Surface Hub 2S', virtualMachine: 'Virtual machine' };
+    add('Deployment mode',                            'deviceUsageType',               MODE[oobe.deviceUsageType] || oobe.deviceUsageType);
+    add('Join to Microsoft Entra ID as',              '@odata.type',                   JOIN[json['@odata.type']]);
+    add('Device type',                                'deviceType',                    DTYPE[json.deviceType] || json.deviceType);
+    add('Convert all targeted devices to Autopilot',  'hardwareHashExtractionEnabled', yn(json.hardwareHashExtractionEnabled));
+    add('Allow pre-provisioned deployment',           'preprovisioningAllowed',        yn(json.preprovisioningAllowed));
+    add('Microsoft Software License Terms',           'eulaHidden',                    oobe.eulaHidden === undefined ? null : (oobe.eulaHidden ? 'Hide' : 'Show'));
+    add('Privacy settings',                           'privacySettingsHidden',         oobe.privacySettingsHidden === undefined ? null : (oobe.privacySettingsHidden ? 'Hide' : 'Show'));
+    add('Hide change account options',                'escapeLinkHidden',              yn(oobe.escapeLinkHidden));
+    add('User account type',                          'userType',                      UTYPE[oobe.userType] || oobe.userType);
+    add('Language (Region)',                          'locale',                        json.locale === 'os-default' ? 'Operating system default' : json.locale);
+    add('Automatically configure keyboard',           'keyboardSelectionPageSkipped',  yn(oobe.keyboardSelectionPageSkipped));
+    add('Apply device name template',                 'deviceNameTemplate',            json.deviceNameTemplate ? `Yes — ${json.deviceNameTemplate}` : 'No');
+
+  } else if (cat === 'EnrolmentStatusPage') {
+    const yn  = v => (v === true ? 'Yes' : v === false ? 'No' : null);
+    const add = (key, rawKey, value) => {
+      if (value !== null && value !== undefined && value !== '') settings.push({ key, rawKey, value: String(value) });
+    };
+    add('Show app and profile configuration progress',            'showInstallationProgress',                yn(json.showInstallationProgress));
+    add('Error timeout (minutes)',                                 'installProgressTimeoutInMinutes',         json.installProgressTimeoutInMinutes);
+    add('Custom error message',                                    'customErrorMessage',                      json.customErrorMessage);
+    add('Turn on log collection and diagnostics page for end users','allowLogCollectionOnInstallFailure',    yn(json.allowLogCollectionOnInstallFailure));
+    add('Only show page to devices provisioned by OOBE',           'trackInstallProgressForAutopilotOnly',    yn(json.trackInstallProgressForAutopilotOnly));
+    add('Install Windows quality updates (might restart the device)','installQualityUpdates',                yn(json.installQualityUpdates));
+    add('Allow users to reset device if installation error occurs', 'allowDeviceResetOnInstallFailure',       yn(json.allowDeviceResetOnInstallFailure));
+    add('Allow users to use device if installation error occurs',   'allowDeviceUseOnInstallFailure',         yn(json.allowDeviceUseOnInstallFailure));
+    add('Block user retry of device setup on failure',              'blockDeviceSetupRetryByUser',            yn(json.blockDeviceSetupRetryByUser));
+    add('Ignore non-blocking app failures during technician phase', 'allowNonBlockingAppInstallation',        yn(json.allowNonBlockingAppInstallation));
+    add('Disable user status tracking after first user',            'disableUserStatusTrackingAfterFirstUser',yn(json.disableUserStatusTrackingAfterFirstUser));
+    add('Blocking apps',                                            'selectedMobileAppIds',                   'Not defined in baseline — selected per customer');
 
   } else if (cat === 'AppProtectionPolicies') {
     // MAM App Protection policies are flat JSON — iterate top-level scalar/array fields.
