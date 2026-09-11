@@ -143,10 +143,11 @@ $plan = foreach ($name in $targets) {
         $a = Invoke-MgGraphRequest -Method GET -Uri "$base/configurationPolicies('$($p.id)')/assignments" -OutputType PSObject
         if (@($a.value).Count -gt 0) { $assigned = $true }
     }
+    # Build arrays from matches only — @($empty.Property) yields @($null), a phantom entry
     [pscustomobject]@{
         Name       = $name
-        TenantIds  = @($tp.id)
-        RepoFiles  = @($rf.Path)
+        TenantIds  = @($tp | ForEach-Object { $_.id }   | Where-Object { $_ })
+        RepoFiles  = @($rf | ForEach-Object { $_.Path } | Where-Object { $_ })
         Assigned   = $assigned
         Action     = if ($assigned -and -not $IncludeAssigned) { 'SKIP (assigned)' }
                      elseif (-not $tp -and -not $rf)          { 'none (already gone)' }
@@ -187,7 +188,17 @@ $log = foreach ($p in $todo) {
     }
     foreach ($f in $p.RepoFiles) {
         try {
-            if ($useGit) { git -C $RepoPath rm --quiet -- $f | Out-Null } else { Remove-Item -LiteralPath $f }
+            if (-not (Test-Path -LiteralPath $f)) {
+                [pscustomobject]@{ Result = 'already removed (repo)'; Name = $p.Name }
+                continue
+            }
+            if ($useGit) {
+                $out = git -C $RepoPath rm --quiet -- $f 2>&1
+                # git reports failure via exit code, not a PowerShell error
+                if ($LASTEXITCODE -ne 0) { throw "git rm exited $LASTEXITCODE`: $out" }
+            } else {
+                Remove-Item -LiteralPath $f
+            }
             [pscustomobject]@{ Result = 'removed (repo)'; Name = $p.Name }
         } catch {
             [pscustomobject]@{ Result = "FAILED (repo): $($_.Exception.Message)"; Name = $p.Name }
