@@ -9,9 +9,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_disablesavepassword",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_disablesavepassword_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -20,19 +20,18 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_keepalivetime",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_keepalivetime_1",
           "children": [
             {
               "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
               "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_keepalivetime_keepalivetime",
               "choiceSettingValue": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                 "value": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_keepalivetime_keepalivetime_300000",
                 "children": []
               }
             }
-          ]
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -41,9 +40,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_performrouterdiscovery",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_performrouterdiscovery_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -52,7 +51,6 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_tcpmaxdataretransmissionsipv6",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_tcpmaxdataretransmissionsipv6_1",
           "children": [
             {
@@ -63,7 +61,8 @@
                 "value": 3
               }
             }
-          ]
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -72,7 +71,6 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_tcpmaxdataretransmissions",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_tcpmaxdataretransmissions_1",
           "children": [
             {
@@ -83,7 +81,8 @@
                 "value": 3
               }
             }
-          ]
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -92,9 +91,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_linklayertopologydiscovery_lltd_enablelltdio",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_linklayertopologydiscovery_lltd_enablelltdio_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -103,9 +102,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_linklayertopologydiscovery_lltd_enablerspndr",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_linklayertopologydiscovery_lltd_enablerspndr_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -114,9 +113,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_enableregistrar",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_enableregistrar_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -125,9 +124,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_disablewcnui_2",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_disablewcnui_2_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -136,19 +135,18 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_kerberos_devicepkinitenabled",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_kerberos_devicepkinitenabled_1",
           "children": [
             {
               "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
               "settingDefinitionId": "device_vendor_msft_policy_config_admx_kerberos_devicepkinitenabled_devicepkinitbehavior",
               "choiceSettingValue": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                 "value": "device_vendor_msft_policy_config_admx_kerberos_devicepkinitenabled_devicepkinitbehavior_0",
                 "children": []
               }
             }
-          ]
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -157,9 +155,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_msdt_msdtsupportprovider",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_msdt_msdtsupportprovider_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -168,9 +166,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_appxruntime_appxruntimeblockhostedappaccesswinrt",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_appxruntime_appxruntimeblockhostedappaccesswinrt_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -179,9 +177,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_pushtoinstall_disablepushtoinstall",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_pushtoinstall_disablepushtoinstall_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -190,9 +188,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_msi_safeforscripting",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_msi_safeforscripting_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -201,19 +199,18 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging_1",
           "children": [
             {
               "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
               "settingDefinitionId": "device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging_enablescriptblockinvocationlogging",
               "choiceSettingValue": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                 "value": "device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging_enablescriptblockinvocationlogging_0",
                 "children": []
               }
             }
-          ]
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -222,7 +219,6 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enabletranscripting",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enabletranscripting_1",
           "children": [
             {
@@ -237,12 +233,12 @@
               "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
               "settingDefinitionId": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enabletranscripting_enableinvocationheader",
               "choiceSettingValue": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                 "value": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enabletranscripting_enableinvocationheader_0",
                 "children": []
               }
             }
-          ]
+          ],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -251,9 +247,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_remotemanagement_allowremoteservermanagement",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_remotemanagement_allowremoteservermanagement_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -262,9 +258,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_remoteshell_allowremoteshellaccess",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_remoteshell_allowremoteshellaccess_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -273,9 +269,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_licensing_disallowkmsclientonlineavsvalidation",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_licensing_disallowkmsclientonlineavsvalidation_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     }

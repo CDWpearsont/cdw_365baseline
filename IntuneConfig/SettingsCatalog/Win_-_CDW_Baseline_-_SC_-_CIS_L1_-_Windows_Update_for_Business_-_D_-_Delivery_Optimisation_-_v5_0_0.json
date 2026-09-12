@@ -6,12 +6,12 @@
   "settings": [
     {
       "settingInstance": {
-        "settingDefinitionId": "device_vendor_msft_policy_config_deliveryoptimization_dodownloadmode",
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_deliveryoptimization_dodownloadmode",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_deliveryoptimization_dodownloadmode_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     }

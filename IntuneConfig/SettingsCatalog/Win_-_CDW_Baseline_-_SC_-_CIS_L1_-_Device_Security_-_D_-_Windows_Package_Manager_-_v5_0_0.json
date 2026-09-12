@@ -9,9 +9,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_desktopappinstaller_enableexperimentalfeatures",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_desktopappinstaller_enableexperimentalfeatures_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -20,9 +20,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_desktopappinstaller_enablehashoverride",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_desktopappinstaller_enablehashoverride_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -31,9 +31,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_desktopappinstaller_enablemsappinstallerprotocol",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_desktopappinstaller_enablemsappinstallerprotocol_0",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     }

@@ -9,9 +9,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_webthreatdefense_notifymalicious",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_webthreatdefense_notifymalicious_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -20,9 +20,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_webthreatdefense_notifypasswordreuse",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_webthreatdefense_notifypasswordreuse_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -31,9 +31,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_webthreatdefense_notifyunsafeapp",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_webthreatdefense_notifyunsafeapp_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     },
@@ -42,9 +42,9 @@
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
         "settingDefinitionId": "device_vendor_msft_policy_config_webthreatdefense_serviceenabled",
         "choiceSettingValue": {
-          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_webthreatdefense_serviceenabled_1",
-          "children": []
+          "children": [],
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue"
         }
       }
     }
