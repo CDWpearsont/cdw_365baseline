@@ -4,8 +4,8 @@
   "platforms": "windows10",
   "technologies": "mdm,microsoftSense",
   "templateReference": {
-    "templateId": "6078910e-d808-4a9f-a51d-1b8a7bacb7c0_1",
-    "templateFamily": "endpointSecurityFirewall"
+    "templateFamily": "endpointSecurityFirewall",
+    "templateId": "6078910e-d808-4a9f-a51d-1b8a7bacb7c0_1"
   },
   "settings": [
     {
