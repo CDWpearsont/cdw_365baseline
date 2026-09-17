@@ -4,8 +4,19 @@
     Retires superseded CDW Baseline CIS policies from the reference tenant and the repo.
 
 .DESCRIPTION
-    Pick the set with -PolicySet. Each set names the policies a newer benchmark replaces,
-    and the version of the replacement set that must already be in the tenant.
+    Pick the set with -PolicySet. Each set names the policies a newer benchmark replaces.
+
+    Run it in two stages, because the repo and the tenant unblock each other in that order:
+
+      -Stage RepoFiles  removes the superseded JSONs from the repo only. This clears the
+                        duplicate ids that stop the catalog and manifest builds, so the new
+                        policies reach the site and can be deployed. Nothing in the tenant
+                        changes, so the next backup would re-export the old policies —
+                        finish stage two the same day.
+      -Stage Tenant     deletes the superseded policies from the tenant, once the new set is
+                        deployed. Removes any superseded repo files still present.
+      -Stage Both       both at once (the default). Only works when the new set is already
+                        deployed, which normally means the repo files were never in the way.
 
     Dry run by default: reports what would be removed and changes nothing.
     With -Execute (after a typed confirmation):
@@ -24,16 +35,19 @@
     unless -IncludeNoV5Equivalent is used.
 
 .EXAMPLE
-    Connect-MgGraph -TenantId <reference-tenant-id> -Scopes DeviceManagementConfiguration.ReadWrite.All
-    .\tools\Retire-CdwBaselinePolicy.ps1 -RepoPath . -PolicySet DefenderAntivirusV1
+    # Stage one — unblock the builds. No tenant connection needed.
+    .\tools\Retire-CdwBaselinePolicy.ps1 -RepoPath . -PolicySet DefenderAntivirusV1 -Stage RepoFiles -Execute
 
 .EXAMPLE
-    .\tools\Retire-CdwBaselinePolicy.ps1 -RepoPath . -PolicySet WindowsV5 -Execute
+    # Stage two — after the new policies are deployed.
+    Connect-MgGraph -TenantId <reference-tenant-id> -Scopes DeviceManagementConfiguration.ReadWrite.All
+    .\tools\Retire-CdwBaselinePolicy.ps1 -RepoPath . -PolicySet DefenderAntivirusV1 -Stage Tenant -Execute
 #>
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)] [string] $RepoPath,
     [ValidateSet('WindowsV5','DefenderAntivirusV1')] [string] $PolicySet = 'WindowsV5',
+    [ValidateSet('RepoFiles','Tenant','Both')] [string] $Stage = 'Both',
     [switch] $Execute,
     [switch] $IncludeNoV5Equivalent,
     [switch] $IncludeAssigned
@@ -124,12 +138,17 @@ $targets        = @($set.Superseded)
 if ($IncludeNoV5Equivalent) { $targets += $NoV5Equivalent }
 
 # ---------------------------------------------------------------- prerequisites
-if (-not (Get-Command Invoke-MgGraphRequest -ErrorAction SilentlyContinue)) {
-    throw 'Microsoft.Graph.Authentication is required: Install-Module Microsoft.Graph.Authentication -Scope CurrentUser'
-}
-$ctx = Get-MgContext
-if (-not $ctx) {
-    throw 'Not connected. Run: Connect-MgGraph -TenantId <reference-tenant-id> -Scopes DeviceManagementConfiguration.ReadWrite.All'
+$touchTenant = $Stage -in @('Tenant','Both')
+$touchRepo   = $Stage -in @('RepoFiles','Both')
+$ctx = $null
+if ($touchTenant) {
+    if (-not (Get-Command Invoke-MgGraphRequest -ErrorAction SilentlyContinue)) {
+        throw 'Microsoft.Graph.Authentication is required: Install-Module Microsoft.Graph.Authentication -Scope CurrentUser'
+    }
+    $ctx = Get-MgContext
+    if (-not $ctx) {
+        throw 'Not connected. Run: Connect-MgGraph -TenantId <reference-tenant-id> -Scopes DeviceManagementConfiguration.ReadWrite.All'
+    }
 }
 $intuneRoot = Join-Path $RepoPath 'IntuneConfig'
 if (-not (Test-Path $intuneRoot)) { throw "IntuneConfig not found under $RepoPath" }
@@ -145,13 +164,18 @@ function Get-GraphAll([string] $Uri) {
     return $items
 }
 
-Write-Host "Tenant: $($ctx.TenantId)   Account: $($ctx.Account)" -ForegroundColor Cyan
+if ($touchTenant) { Write-Host "Tenant: $($ctx.TenantId)   Account: $($ctx.Account)" -ForegroundColor Cyan }
 Write-Host "Policy set: $PolicySet — superseded by $($set.Benchmark)" -ForegroundColor Cyan
+Write-Host "Stage: $Stage$(if (-not $touchTenant) { ' (repo only — the tenant is not touched)' })" -ForegroundColor Cyan
 
 # ---------------------------------------------------------------- read tenant + repo
-$tenantPolicies   = Get-GraphAll "$base/configurationPolicies?`$select=id,name"
-$tenantCompliance = Get-GraphAll "$base/deviceCompliancePolicies?`$select=id,displayName"
-$tenantNames      = [System.Collections.Generic.HashSet[string]]::new([string[]]@($tenantPolicies.name + $tenantCompliance.displayName))
+$tenantPolicies   = @()
+$tenantNames      = [System.Collections.Generic.HashSet[string]]::new()
+if ($touchTenant) {
+    $tenantPolicies   = Get-GraphAll "$base/configurationPolicies?`$select=id,name"
+    $tenantCompliance = Get-GraphAll "$base/deviceCompliancePolicies?`$select=id,displayName"
+    $tenantNames      = [System.Collections.Generic.HashSet[string]]::new([string[]]@($tenantPolicies.name + $tenantCompliance.displayName))
+}
 
 $repoFiles = Get-ChildItem -Path $intuneRoot -Filter *.json -Recurse -File | ForEach-Object {
     $j = Get-Content -Raw $_.FullName | ConvertFrom-Json -Depth 64
@@ -162,18 +186,26 @@ $repoFiles = Get-ChildItem -Path $intuneRoot -Filter *.json -Recurse -File | For
 # ---------------------------------------------------------------- safety: v5 set present in tenant
 $verEsc    = [regex]::Escape($set.Replacement)
 $v5Files   = @($repoFiles | Where-Object { $_.Name -match $set.Pattern -and $_.Name -match "$verEsc$" })
-$v5Missing = @($v5Files | Where-Object { -not $tenantNames.Contains($_.Name) })
-Write-Host "$($set.Replacement) policies in repo: $($v5Files.Count); present in tenant: $($v5Files.Count - $v5Missing.Count)"
 if ($v5Files.Count -eq 0) { throw "No $($set.Replacement) policy files found in the repo for $PolicySet — nothing to supersede with." }
-if ($v5Missing.Count -gt 0) {
-    Write-Host "These $($set.Replacement) policies are not in the tenant — deploy them first:" -ForegroundColor Red
-    $v5Missing | ForEach-Object { Write-Host "  $($_.Name)" }
-    if ($Execute) { throw "Aborting: $($set.Replacement) set incomplete in tenant. Nothing was deleted." }
+
+if ($touchTenant) {
+    # Deleting from the tenant is only safe once the replacements are live there, otherwise
+    # the workload is left unprotected and the backup deletes the new repo files.
+    $v5Missing = @($v5Files | Where-Object { -not $tenantNames.Contains($_.Name) })
+    Write-Host "$($set.Replacement) policies in repo: $($v5Files.Count); present in tenant: $($v5Files.Count - $v5Missing.Count)"
+    if ($v5Missing.Count -gt 0) {
+        Write-Host "These $($set.Replacement) policies are not in the tenant — deploy them first:" -ForegroundColor Red
+        $v5Missing | ForEach-Object { Write-Host "  $($_.Name)" }
+        Write-Host "If the site cannot show them because the builds are failing, run -Stage RepoFiles first." -ForegroundColor Yellow
+        if ($Execute) { throw "Aborting: $($set.Replacement) set incomplete in tenant. Nothing was deleted." }
+    }
+} else {
+    Write-Host "$($set.Replacement) policies in repo: $($v5Files.Count)"
 }
 
 # ---------------------------------------------------------------- build plan
 $plan = foreach ($name in $targets) {
-    $tp = @($tenantPolicies | Where-Object { $_.name -ceq $name })
+    $tp = if ($touchTenant) { @($tenantPolicies | Where-Object { $_.name -ceq $name }) } else { @() }
     $rf = @($repoFiles     | Where-Object { $_.Name -ceq $name })
     $assigned = $false
     foreach ($p in $tp) {
@@ -215,13 +247,15 @@ if ($answer -cne 'RETIRE') { Write-Host 'Cancelled. Nothing changed.'; return }
 # ---------------------------------------------------------------- execute
 $useGit = (Test-Path (Join-Path $RepoPath '.git')) -and (Get-Command git -ErrorAction SilentlyContinue)
 $log = foreach ($p in $todo) {
-    foreach ($id in $p.TenantIds) {
+    if ($touchTenant) {
+     foreach ($id in $p.TenantIds) {
         try {
             Invoke-MgGraphRequest -Method DELETE -Uri "$base/configurationPolicies('$id')" | Out-Null
             [pscustomobject]@{ Result = 'deleted (tenant)'; Name = $p.Name }
         } catch {
             [pscustomobject]@{ Result = "FAILED (tenant): $($_.Exception.Message)"; Name = $p.Name }
         }
+     }
     }
     foreach ($f in $p.RepoFiles) {
         try {
@@ -244,3 +278,6 @@ $log = foreach ($p in $todo) {
 }
 $log | Format-Table -AutoSize | Out-String -Width 250 | Write-Host
 Write-Host 'Done. Review with git status, then commit and push.' -ForegroundColor Green
+if (-not $touchTenant) {
+    Write-Host "The superseded policies are still in the tenant. Re-run with -Stage Tenant once the $($set.Replacement) set is deployed — before the 04:00 backup re-exports them." -ForegroundColor Yellow
+}
