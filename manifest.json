@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-09-17T15:03:48Z",
+  "generated": "2026-09-17T15:12:04Z",
   "count": 227,
   "enrichedCount": 3,
   "entries": [
@@ -2445,7 +2445,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-d-profiles-sign-in-and-sync",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_D_-_Profiles__Sign-In_and_Sync_-_v1_0_0.json",
-      "sha": "38fd5652dd57b61f",
+      "sha": "3af4ef99786ca345",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2465,7 +2465,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-d-security",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_D_-_Security_-_v1_0_0.json",
-      "sha": "42a7c1122b2c0240",
+      "sha": "8cef51fe2152f8c0",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -3133,7 +3133,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-edge-d-security",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_D_-_Security_-_v1_0_0.json",
-      "sha": "53dbe93d8594cfcc",
+      "sha": "30b1a2d9300aebba",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
