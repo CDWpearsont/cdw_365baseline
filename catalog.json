@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-17T14:52:51+00:00",
-  "sourceCommit": "a0d28c25e2c53d7e8bd83ed2a598747f51f999c4",
+  "generatedAt": "2026-09-17T15:03:48+00:00",
+  "sourceCommit": "d44c5d611d27751ca899e9150aac982713e2a11d",
   "counts": {
-    "policies": 230,
+    "policies": 224,
     "bundles": 14,
-    "issues": 241,
+    "issues": 235,
     "byConfidence": {
       "medium": 102,
       "low": 2,
-      "high": 126
+      "high": 120
     }
   },
   "taxonomy": {
@@ -7877,216 +7877,6 @@
       ]
     },
     {
-      "id": "intune-windows-settings-catalog-microsoft-edge-security-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Security_-_v3_7.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Security_-_v3_7.json",
-      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - D - Security - v3.7",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "Device",
-      "version": "3.7",
-      "area": "Microsoft Edge",
-      "subArea": "Security",
-      "securityDomain": null,
-      "settingCount": 51,
-      "policyHash": "sha256:b3d14626fe6c5e3b08505effd3b24e2016aa337bd8fa90d088838b56ced660ab",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-cdw-standard"
-      ]
-    },
-    {
-      "id": "intune-windows-settings-catalog-microsoft-edge-updates-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Updates_-_v3_6.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Updates_-_v3_6.json",
-      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - D - Updates - v3.6",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "Device",
-      "version": "3.6",
-      "area": "Microsoft Edge",
-      "subArea": "Updates",
-      "securityDomain": null,
-      "settingCount": 22,
-      "policyHash": "sha256:61fb41d2472ada36742a5327004cb10132d2028b4fd1c5ada1fce6ec5adbb207",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-cdw-standard"
-      ]
-    },
-    {
-      "id": "intune-windows-settings-catalog-microsoft-edge-extensions-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Extensions_-_v3_1.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Extensions_-_v3_1.json",
-      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Extensions - v3.1",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "User",
-      "version": "3.1",
-      "area": "Microsoft Edge",
-      "subArea": "Extensions",
-      "securityDomain": null,
-      "settingCount": 6,
-      "policyHash": "sha256:f7b7a26508c29df3dd1cf9d220fea4fb7ed96140bfccc59a69bd92628c87ae2c",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-cdw-standard"
-      ]
-    },
-    {
-      "id": "intune-windows-settings-catalog-microsoft-edge-password-management-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Password_Management_-_v3_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Password_Management_-_v3_0.json",
-      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Password Management - v3.0",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "User",
-      "version": "3.0",
-      "area": "Microsoft Edge",
-      "subArea": "Password Management",
-      "securityDomain": null,
-      "settingCount": 5,
-      "policyHash": "sha256:7189cc8661c96db4276a96aea8b8f207d0d82551e4b784a0145d37b0be41fff4",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-cdw-standard"
-      ]
-    },
-    {
-      "id": "intune-windows-settings-catalog-microsoft-edge-profiles-sign-in-and-sync-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v3_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v3_0.json",
-      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Profiles, Sign-In and Sync - v3.0",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "User",
-      "version": "3.0",
-      "area": "Microsoft Edge",
-      "subArea": "Profiles Sign-In and Sync",
-      "securityDomain": null,
-      "settingCount": 9,
-      "policyHash": "sha256:f011fe114a032efaaec0836b48bb0a148ae5c88fd52ad18184b0391356356426",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-cdw-standard"
-      ]
-    },
-    {
-      "id": "intune-windows-settings-catalog-microsoft-edge-user-experience-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_User_Experience_-_v3_7.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_User_Experience_-_v3_7.json",
-      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - User Experience - v3.7",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "User",
-      "version": "3.7",
-      "area": "Microsoft Edge",
-      "subArea": "User Experience",
-      "securityDomain": null,
-      "settingCount": 13,
-      "policyHash": "sha256:5792cb4fd747abecad2b73dd61c7449ba47afe8ef9cd1e1445ed224b3588cabd",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-cdw-standard"
-      ]
-    },
-    {
       "id": "intune-windows-settings-catalog-microsoft-office-security-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Office_-_D_-_Security_-_v3_6.json",
       "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Office_-_D_-_Security_-_v3_6.json",
@@ -8819,12 +8609,6 @@
         "intune-windows-settings-catalog-device-security-windows-subsystem-for-linux-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
         "intune-windows-settings-catalog-microsoft-accounts-configuration-device",
-        "intune-windows-settings-catalog-microsoft-edge-extensions-user",
-        "intune-windows-settings-catalog-microsoft-edge-password-management-user",
-        "intune-windows-settings-catalog-microsoft-edge-profiles-sign-in-and-sync-user",
-        "intune-windows-settings-catalog-microsoft-edge-security-device",
-        "intune-windows-settings-catalog-microsoft-edge-updates-device",
-        "intune-windows-settings-catalog-microsoft-edge-user-experience-user",
         "intune-windows-settings-catalog-microsoft-office-config-and-experience-user",
         "intune-windows-settings-catalog-microsoft-office-security-device",
         "intune-windows-settings-catalog-microsoft-office-security-user",
@@ -8844,7 +8628,7 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-update-ring-ring-3-production-device"
       ],
-      "memberCount": 60
+      "memberCount": 54
     },
     {
       "id": "intune-win-defender-av",
@@ -10469,42 +10253,6 @@
     {
       "policyId": "intune-windows-settings-catalog-microsoft-accounts-configuration-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Accounts_-_D_-_Configuration_-_v3_2.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-settings-catalog-microsoft-edge-security-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Security_-_v3_7.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-settings-catalog-microsoft-edge-updates-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Updates_-_v3_6.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-settings-catalog-microsoft-edge-extensions-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Extensions_-_v3_1.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-settings-catalog-microsoft-edge-password-management-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Password_Management_-_v3_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-settings-catalog-microsoft-edge-profiles-sign-in-and-sync-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v3_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-settings-catalog-microsoft-edge-user-experience-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_User_Experience_-_v3_7.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
