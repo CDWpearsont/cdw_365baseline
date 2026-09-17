@@ -46,7 +46,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)] [string] $RepoPath,
-    [ValidateSet('WindowsV5','DefenderAntivirusV1')] [string] $PolicySet = 'WindowsV5',
+    [ValidateSet('WindowsV5','DefenderAntivirusV1','EdgeV1')] [string] $PolicySet = 'WindowsV5',
     [ValidateSet('RepoFiles','Tenant','Both')] [string] $Stage = 'Both',
     [switch] $Execute,
     [switch] $IncludeNoV5Equivalent,
@@ -116,6 +116,19 @@ $DefenderAntivirusV1NoEquivalent = @()
 # Replacement versions do not always increase: the Defender benchmark restarts at v1.0.0
 # after v4.0.0 files, so each set names its replacement version explicitly rather than
 # assuming the highest wins.
+# Superseded by the CIS Microsoft Intune for Edge v1.0.0 benchmark. Edge was pulled out of
+# the Windows 11 benchmark into its own, so these came from CIS Intune for Windows 11 v4.0.0.
+# The 33 settings the new benchmark does not cover are carried in the v1.0.0 policies.
+$EdgeV1Superseded = @(
+    'Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Extensions - v4.0.0'
+    'Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Password Management - v4.0.0'
+    'Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Security - v4.0.0'
+    'Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - Updates - v4.0.0'
+    'Win - CDW Baseline - SC - CIS L1 - Microsoft Edge - User Experience - v4.0.0'
+    'Win - CDW Baseline - SC - CIS L2 - Microsoft Edge - Profiles Sign-In and Sync - v4.0.0'
+)
+$EdgeV1NoEquivalent = @()
+
 $Sets = @{
     WindowsV5 = @{
         Superseded   = $WindowsV5Superseded
@@ -123,6 +136,13 @@ $Sets = @{
         Replacement  = 'v5.0.0'
         Pattern      = 'CIS L[12] '
         Benchmark    = 'CIS Microsoft Intune for Windows 11 Benchmark v5.0.0'
+    }
+    EdgeV1 = @{
+        Superseded   = $EdgeV1Superseded
+        NoEquivalent = $EdgeV1NoEquivalent
+        Replacement  = 'v1.0.0'
+        Pattern      = 'Microsoft Edge'
+        Benchmark    = 'CIS Microsoft Intune for Microsoft Edge Benchmark v1.0.0'
     }
     DefenderAntivirusV1 = @{
         Superseded   = $DefenderAntivirusV1Superseded
