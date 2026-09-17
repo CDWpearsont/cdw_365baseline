@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-17T15:03:48+00:00",
-  "sourceCommit": "d44c5d611d27751ca899e9150aac982713e2a11d",
+  "generatedAt": "2026-09-17T15:12:04+00:00",
+  "sourceCommit": "f64b829e11d8db24310f2050592cf5569734e2a5",
   "counts": {
     "policies": 224,
     "bundles": 14,
@@ -5373,7 +5373,7 @@
       "subArea": "Profiles Sign-In and Sync",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:38fd5652dd57b61fd09e0f812ed4cce79d2a6e51acc880941e4083803b109435",
+      "policyHash": "sha256:3af4ef99786ca345f12fb38155dffdca9b38b23c2725abbe2d5b7eb6bc24f957",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5411,7 +5411,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 77,
-      "policyHash": "sha256:42a7c1122b2c0240712da8e2ff073203a02d96f79e93f8171364fc84a2a5b615",
+      "policyHash": "sha256:8cef51fe2152f8c0969e621f762704e34e379c4eb4d57fa80c2c100e1dc2a350",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6666,8 +6666,8 @@
       "area": "Microsoft Edge",
       "subArea": "Security",
       "securityDomain": null,
-      "settingCount": 32,
-      "policyHash": "sha256:53dbe93d8594cfcc2253cc9466f10980afd00d5a506b3cf22150c247a75f50e2",
+      "settingCount": 33,
+      "policyHash": "sha256:30b1a2d9300aebba00e6bc71e9b9c4ea8df8fe8b1351beca74e68c14b0874a7f",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
