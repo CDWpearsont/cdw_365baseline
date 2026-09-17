@@ -48,7 +48,12 @@
             {
               "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
               "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_synctypeslistdisabled_synctypeslistdisableddesc",
-              "simpleSettingCollectionValue": []
+              "simpleSettingCollectionValue": [
+                {
+                  "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                  "value": "passwords"
+                }
+              ]
             }
           ]
         }

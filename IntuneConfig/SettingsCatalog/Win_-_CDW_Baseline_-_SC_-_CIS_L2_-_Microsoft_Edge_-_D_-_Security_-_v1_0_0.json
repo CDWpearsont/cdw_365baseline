@@ -113,11 +113,21 @@
     {
       "settingInstance": {
         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-        "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev116~policy~microsoft_edge~contentsettings_defaultthirdpartystoragepartitioningsetting_defaultthirdpartystoragepartitioningsetting",
+        "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev116~policy~microsoft_edge~contentsettings_defaultthirdpartystoragepartitioningsetting",
         "choiceSettingValue": {
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-          "value": "device_vendor_msft_policy_config_microsoft_edgev116~policy~microsoft_edge~contentsettings_defaultthirdpartystoragepartitioningsetting_defaultthirdpartystoragepartitioningsetting_2",
-          "children": []
+          "value": "device_vendor_msft_policy_config_microsoft_edgev116~policy~microsoft_edge~contentsettings_defaultthirdpartystoragepartitioningsetting_1",
+          "children": [
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+              "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev116~policy~microsoft_edge~contentsettings_defaultthirdpartystoragepartitioningsetting_defaultthirdpartystoragepartitioningsetting",
+              "choiceSettingValue": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                "value": "device_vendor_msft_policy_config_microsoft_edgev116~policy~microsoft_edge~contentsettings_defaultthirdpartystoragepartitioningsetting_defaultthirdpartystoragepartitioningsetting_2",
+                "children": []
+              }
+            }
+          ]
         }
       }
     },
