@@ -1,6 +1,6 @@
 {
   "name": "Win - CDW Baseline - SC - CIS L1 - Defender Antivirus - D - Defender CSP Configuration - v1.0.0",
-  "description": "CIS Microsoft Intune for Microsoft Defender Antivirus Benchmark v1.0.0 — Level 1. Defender Antivirus — Defender CSP Configuration. Recommendations: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 2.27, 2.28, 2.29, 2.34, 2.37, 2.39, 2.42, 2.43, 2.44, 2.45, 2.46, 2.47, 2.48, 2.49, 2.50.",
+  "description": "CIS Microsoft Intune for Microsoft Defender Antivirus Benchmark v1.0.0 — Level 1. Defender Antivirus — Defender CSP Configuration. Recommendations: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 2.27, 2.28, 2.29, 2.34, 2.37, 2.39, 2.42, 2.43, 2.44, 2.45, 2.46, 2.47, 2.48, 2.49, 2.50. Also carries settings from the v4.0.0 Defender policies that this benchmark does not cover: Days To Retain Cleaned Malware, Allow Full Scan On Mapped Network Drives, Disallow Exploit Protection Override.",
   "platforms": "windows10",
   "technologies": "mdm",
   "settings": [
@@ -260,6 +260,38 @@
         "choiceSettingValue": {
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_severethreats_quarantine",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_daystoretaincleanedmalware",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 7
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowfullscanonmappednetworkdrives",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_defender_allowfullscanonmappednetworkdrives_1",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "settingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride",
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride_1",
           "children": []
         }
       }
