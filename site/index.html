@@ -1818,8 +1818,8 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.4.1',
-  date:    '2026-09-11'
+  version: '3.4.2',
+  date:    '2026-09-17'
 };
 
 // LLD template source. Served from the $web container of the same storage
@@ -1865,11 +1865,13 @@ function setAppMode(mode) {
 // grid loads, so customer / opportunity are known up front rather than being
 // remembered at export time.
 function openDocWizard() {
-  document.getElementById('auth-screen').style.display   = 'none';
-  document.getElementById('deployer').style.display      = 'none';
-  document.getElementById('tabbar').style.display        = 'none';
+  // Back returns to the grid mode the wizard was opened from, if any.
+  if (gridVisible())        docWizardReturn = appMode;
+  else if (!screenVisible('wizard-screen')) docWizardReturn = null;
+
+  hideAllScreens();
   document.getElementById('wizard-screen').style.display = '';
-  document.getElementById('topbar-right').innerHTML      = '';
+  renderTopbar('document');
 
   // Restore previous values on an "Edit details" round-trip
   document.getElementById('wiz-customer').value = docMeta.customer;
@@ -1880,11 +1882,20 @@ function openDocWizard() {
   if (!templateBuffer) loadTemplateFromSource();
 }
 
-// Back to the mode-selection screen
+// Back to wherever the wizard was opened from: the policy grid (Edit details
+// round-trip, or a mode switch) or the mode-selection screen.
 function exitDocWizard() {
+  const back = docWizardReturn;
+  docWizardReturn = null;
   document.getElementById('wizard-screen').style.display = 'none';
-  document.getElementById('auth-screen').style.display   = '';
-  selectAuthMode('document');
+  if (back === 'document') {
+    document.getElementById('deployer').style.display = '';
+    document.getElementById('tabbar').style.display   = 'flex';
+    renderTopbar();
+    return;
+  }
+  if (back === 'deploy' || back === 'manage') { switchMode(back); return; }
+  showAuthScreen('document');
 }
 
 // Re-open from the summary bar without losing the policy selection
@@ -1989,41 +2000,160 @@ function renderEngagementBar() {
 }
 
 function enterDocMode() {
-  appMode = 'document';
-  document.body.dataset.appmode = 'document';
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('deployer').style.display    = '';
-  document.getElementById('tabbar').style.display      = 'flex';
-
-  document.getElementById('topbar-right').innerHTML = `
-    <div class="mode-toggle">
-      <button class="mode-btn" onclick="switchToDeployMode()">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-        Deploy
-      </button>
-      <button class="mode-btn active" onclick="setAppMode('document')">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        Document
-      </button>
-    </div>
-    <button class="btn btn-ghost btn-sm" id="refresh-btn" onclick="refresh()">
-      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-      Refresh
-    </button>
-    <span class="mode-pill mode-pill-doc">📄 Doc Mode</span>`;
+  hideAllScreens();
+  document.getElementById('deployer').style.display = '';
+  document.getElementById('tabbar').style.display   = 'flex';
 
   setAppMode('document');
+  renderTopbar();
   renderEngagementBar();
   loadAllWorkloads(); // Uses the same tree-based loader; skips Graph checks in doc mode
 }
 
-function switchToDeployMode() {
-  document.getElementById('deployer').style.display    = 'none';
-  document.getElementById('tabbar').style.display      = 'none';
+// ═══════════════════════════════════════════════════════════════════
+// NAVIGATION — one topbar and one switcher for every mode
+// ═══════════════════════════════════════════════════════════════════
+const MODE_TABS = [
+  { id: 'deploy',   label: 'Deploy',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>' },
+  { id: 'document', label: 'Document',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>' },
+  { id: 'manage',   label: 'Manage',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>' },
+  { id: 'build',    label: 'Building Blocks',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>' },
+];
+
+const SCREEN_IDS = ['auth-screen', 'wizard-screen', 'settings-screen', 'bb-screen', 'deployer'];
+
+let docWizardReturn = null;  // grid mode to return to from the doc wizard
+let bbReturn        = null;  // grid mode to return to from Building Blocks
+let statusChecked   = false; // true once Graph existence checks ran for the grid
+
+function screenVisible(id) {
+  const el = document.getElementById(id);
+  return !!el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none';
+}
+function gridVisible() { return screenVisible('deployer'); }
+
+function hideAllScreens() {
+  SCREEN_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  document.getElementById('tabbar').style.display = 'none';
+}
+
+// Topbar for deploy / document / manage and the doc wizard. Building Blocks
+// keeps its own pill and exits through its Cancel button.
+function renderTopbar(activeOverride) {
+  const active = activeOverride || appMode;
+  const onGrid = gridVisible();
+  const tabs = MODE_TABS.map(t => `
+      <button class="mode-btn${t.id === active ? ' active' : ''}" data-mode="${t.id}" onclick="switchMode('${t.id}')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">${t.icon}</svg>
+        ${t.label}
+      </button>`).join('');
+
+  let html = `<div class="mode-toggle">${tabs}
+    </div>`;
+
+  if (account) {
+    const initials = (account.name || account.username || 'U')
+      .split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+    html += `
+    <div class="user-pill">
+      <div class="user-avatar">${initials}</div>
+      <span>${account.name || account.username}</span>
+    </div>`;
+  }
+  if (onGrid) {
+    html += `
+    <button class="btn btn-ghost btn-sm" id="refresh-btn" onclick="refresh()">
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+      Refresh
+    </button>`;
+  }
+  if (account) {
+    html += `
+    <button class="btn btn-ghost btn-sm" onclick="signOut()">Sign out</button>`;
+  } else if (onGrid && active === 'document') {
+    html += `
+    <span class="mode-pill mode-pill-doc">\u{1f4c4} Doc Mode</span>`;
+  } else if (onGrid && active === 'manage') {
+    html += `
+    <span class="mode-pill mode-pill-manage">\u{1f5c2} Manage Mode</span>`;
+  }
+  document.getElementById('topbar-right').innerHTML = html;
+}
+
+// Back to the mode-selection card, with the given mode highlighted.
+function showAuthScreen(mode) {
+  leaveManageMode();
+  hideAllScreens();
+  docWizardReturn = null;
+  bbReturn        = null;
+  appMode = 'deploy';
+  delete document.body.dataset.appmode;
   document.getElementById('auth-screen').style.display = '';
   document.getElementById('topbar-right').innerHTML    = '';
-  selectAuthMode('deploy');
+  selectAuthMode(mode || 'deploy');
 }
+
+// Tidy up manage-only UI so it does not leak into other modes. Unsaved
+// manage edits stay in memory and the save bar returns on re-entry.
+function leaveManageMode() {
+  mgCloseDrawer();
+  document.getElementById('mg-savebar')?.classList.remove('up');
+  Object.keys(WORKLOADS).forEach(wl => {
+    const row = document.getElementById(`${wl}-status-filters`)?.closest('.filter-row');
+    if (row) row.style.display = '';
+  });
+}
+
+function switchMode(target) {
+  // Already showing this mode's grid — nothing to do.
+  if (target === appMode && target !== 'build' && gridVisible()) return;
+
+  const from = appMode;
+  if (from === 'manage' && target !== 'manage') leaveManageMode();
+
+  switch (target) {
+    case 'deploy':
+      if (!account) { showAuthScreen('deploy'); return; }
+      // In-place from a signed-in document grid keeps the selection, but only
+      // when the tenant existence checks are current for this grid.
+      if (from === 'document' && gridVisible() && statusChecked) {
+        setAppMode('deploy');
+        renderTopbar();
+        return;
+      }
+      onSignedIn();
+      return;
+
+    case 'document':
+      // Signed-in deploy grid switches in place so the selection carries over.
+      if (from === 'deploy' && account && gridVisible()) {
+        setAppMode('document');
+        renderTopbar();
+        renderEngagementBar();
+        return;
+      }
+      openDocWizard();
+      return;
+
+    case 'manage':
+      enterManageMode();
+      return;
+
+    case 'build':
+      enterBuildMode();
+      return;
+  }
+}
+
+// Retained for any older callers.
+function switchToDeployMode() { switchMode('deploy'); }
 
 // ═══════════════════════════════════════════════════════════════════
 // MSAL — multi-tenant app registered in CDW's Azure tenant
@@ -2107,11 +2237,10 @@ async function openSettings() {
     showToast('Manifest not loaded \u2014 cannot edit the overlay', 'warn');
     return;
   }
-  document.getElementById('auth-screen').style.display     = 'none';
-  document.getElementById('deployer').style.display        = 'none';
-  document.getElementById('tabbar').style.display          = 'none';
-  const wiz = document.getElementById('wizard-screen');
-  if (wiz) wiz.style.display = 'none';
+  if (!settingsOpen()) {
+    settingsReturn = SCREEN_IDS.find(id => id !== 'settings-screen' && screenVisible(id)) || 'auth-screen';
+  }
+  hideAllScreens();
   document.getElementById('settings-screen').style.display = 'block';
 
   if (overlaySha === null) await loadOverlay();
@@ -2127,14 +2256,13 @@ function settingsOpen() {
 }
 
 // Hide settings and restore whatever the user was on before.
+let settingsReturn = null;
 function hideSettingsScreen() {
   document.getElementById('settings-screen').style.display = 'none';
-  if (appMode === 'deploy' || appMode === 'document') {
-    document.getElementById('deployer').style.display = '';
-    document.getElementById('tabbar').style.display   = '';
-  } else {
-    document.getElementById('auth-screen').style.display = '';
-  }
+  const back = settingsReturn || 'auth-screen';
+  settingsReturn = null;
+  document.getElementById(back).style.display = '';
+  if (back === 'deployer') document.getElementById('tabbar').style.display = 'flex';
 }
 
 // Resolve staged edits before leaving. Returns a promise for whether the
@@ -2642,35 +2770,14 @@ async function getToken() {
 // AUTH UI
 // ═══════════════════════════════════════════════════════════════════
 function onSignedIn() {
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('deployer').style.display    = '';
-  document.getElementById('tabbar').style.display      = 'flex';
-
-  const initials = (account.name || account.username || 'U')
-    .split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
-
-  document.getElementById('topbar-right').innerHTML = `
-    <div class="mode-toggle">
-      <button class="mode-btn active" data-mode="deploy" onclick="setAppMode('deploy');this.classList.add('active');this.nextElementSibling.classList.remove('active')">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-        Deploy
-      </button>
-      <button class="mode-btn" data-mode="document" onclick="setAppMode('document');this.classList.add('active');this.previousElementSibling.classList.remove('active')">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        Document
-      </button>
-    </div>
-    <div class="user-pill">
-      <div class="user-avatar">${initials}</div>
-      <span>${account.name || account.username}</span>
-    </div>
-    <button class="btn btn-ghost btn-sm" id="refresh-btn" onclick="refresh()">
-      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-      Refresh
-    </button>
-    <button class="btn btn-ghost btn-sm" onclick="signOut()">Sign out</button>`;
+  hideAllScreens();
+  docWizardReturn = null;
+  bbReturn        = null;
+  document.getElementById('deployer').style.display = '';
+  document.getElementById('tabbar').style.display   = 'flex';
 
   setAppMode('deploy');
+  renderTopbar();
   loadAllWorkloads();
 }
 
@@ -2747,6 +2854,7 @@ function buildFromManifest(m) {
 }
 
 async function loadAllWorkloads() {
+  statusChecked = false;
   // Show loading state on all grids
   for (const wl of Object.keys(WORKLOADS)) {
     policies[wl] = [];
@@ -2826,8 +2934,9 @@ async function afterCatalogueLoaded() {
   // A Building Blocks choice made before the grid loaded is applied here.
   if (bbPending) { if (!mgCatalog) await loadCatalog(); bbApplyPendingSelection(); }
 
-  // In document mode, skip all Graph checks (no auth needed)
-  if (appMode === 'document') {
+  // Graph checks only apply to a signed-in deploy grid. Document and manage
+  // modes read the repository alone and must never trigger sign-in.
+  if (appMode !== 'deploy' || !account) {
     Object.keys(WORKLOADS).forEach(wl => {
       policies[wl].forEach(p => { p.status = 'ready'; });
       renderGrid(wl, false);
@@ -2851,6 +2960,7 @@ async function afterCatalogueLoaded() {
     showToast('Could not check existing policies: ' + e.message, 'err');
     Object.keys(WORKLOADS).forEach(wl => policies[wl].forEach(p => { if (p.status === 'loading') p.status = 'ready'; }));
   }
+  statusChecked = true;
   Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
 }
 
@@ -4173,6 +4283,7 @@ function togglePolicy(wl, name) {
 function updateDeployBar() {
   const sel = Object.values(policies).flat().filter(p => p.selected);
   const bar  = document.getElementById('deploy-bar');
+  if (appMode === 'manage') { bar.classList.remove('up'); return; }
   const existCount = sel.filter(p => p.status === 'exists').length;
   const readyCount = sel.filter(p => p.status !== 'exists').length;
 
@@ -6860,20 +6971,15 @@ const MG_KNOWN_TAGS = ['cis-l1','cis-l2','zero-trust','autopilot-mvp'];
 // ── Entry point ───────────────────────────────────────────────────
 
 function enterManageMode() {
-  appMode = 'manage';
-  document.body.dataset.appmode = 'manage';
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('deployer').style.display    = '';
-  document.getElementById('tabbar').style.display      = 'flex';
+  hideAllScreens();
+  docWizardReturn = null;
+  bbReturn        = null;
+  document.getElementById('deployer').style.display = '';
+  document.getElementById('tabbar').style.display   = 'flex';
 
-  document.getElementById('topbar-right').innerHTML = `
-    <div class="mode-toggle">
-      <button class="mode-btn" onclick="switchToDeployMode()">Deploy</button>
-      <button class="mode-btn" onclick="enterDocMode()">Document</button>
-      <button class="mode-btn active">Manage</button>
-    </div>
-    <button class="btn btn-ghost btn-sm" onclick="refresh()">Refresh</button>
-    <span class="mode-pill">🗂 Manage Mode</span>`;
+  setAppMode('manage');
+  renderTopbar();
+  mgUpdateSaveBar();
 
   // Status (deployed / undeployed) needs Graph, so it has no meaning here.
   Object.keys(WORKLOADS).forEach(wl => {
@@ -7333,13 +7439,15 @@ function bbIcon(name, size) {
 // ── Entry ─────────────────────────────────────────────────────────
 
 async function enterBuildMode() {
+  // Cancel returns to the grid mode Building Blocks was opened from, if any.
+  bbReturn = gridVisible() && appMode !== 'build' ? appMode
+           : screenVisible('wizard-screen') ? docWizardReturn
+           : null;
+  if (appMode === 'manage') leaveManageMode();
   appMode = 'build';
   document.body.dataset.appmode = 'build';
-  document.getElementById('auth-screen').style.display   = 'none';
-  document.getElementById('deployer').style.display      = 'none';
-  document.getElementById('tabbar').style.display        = 'none';
-  document.getElementById('wizard-screen').style.display = 'none';
-  document.getElementById('bb-screen').style.display     = '';
+  hideAllScreens();
+  document.getElementById('bb-screen').style.display = '';
   document.getElementById('topbar-right').innerHTML =
     `<span class="mode-pill mode-pill-build">\u{1f9f1} Building Blocks</span>`;
 
@@ -7357,10 +7465,18 @@ function bbReset() {
 }
 
 function bbExit() {
-  document.getElementById('bb-screen').style.display   = 'none';
-  document.getElementById('auth-screen').style.display = '';
-  document.getElementById('topbar-right').innerHTML    = '';
-  selectAuthMode('build');
+  const back = bbReturn;
+  bbReturn = null;
+  document.getElementById('bb-screen').style.display = 'none';
+  if (back === 'deploy' || back === 'document' || back === 'manage') {
+    appMode = null;          // force a full re-entry of the grid mode
+    if (back === 'deploy' && !account) { showAuthScreen('build'); return; }
+    if (back === 'deploy')   { onSignedIn();      return; }
+    if (back === 'document') { enterDocMode();    return; }
+    enterManageMode();
+    return;
+  }
+  showAuthScreen('build');
 }
 
 // ── Catalogue helpers ─────────────────────────────────────────────
@@ -7671,12 +7787,13 @@ function bbPickScenario(id) {
 function bbApply(target) {
   bbPending = bbSelectedIds();
   document.getElementById('bb-screen').style.display = 'none';
+  bbReturn = null;
   if (target === 'document') {
     openDocWizard();
+  } else if (account) {
+    onSignedIn();            // selection is applied once the grid loads
   } else {
-    document.getElementById('auth-screen').style.display = '';
-    document.getElementById('topbar-right').innerHTML    = '';
-    selectAuthMode('deploy');
+    showAuthScreen('deploy');
     showToast('Sign in to deploy the selected building blocks');
   }
 }
