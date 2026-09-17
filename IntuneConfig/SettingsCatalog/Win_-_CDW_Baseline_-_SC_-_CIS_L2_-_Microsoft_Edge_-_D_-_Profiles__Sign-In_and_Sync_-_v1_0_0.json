@@ -1,0 +1,19 @@
+{
+  "name": "Win - CDW Baseline - SC - CIS L2 - Microsoft Edge - D - Profiles, Sign-In and Sync - v1.0.0",
+  "description": "CIS Microsoft Intune for Microsoft Edge Benchmark v1.0.0 — Level 2. Microsoft Edge — Profiles, Sign-In and Sync (device scope). Recommendations: 1.97.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_browserguestmodeenabled",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_browserguestmodeenabled_0",
+          "children": []
+        }
+      }
+    }
+  ]
+}
