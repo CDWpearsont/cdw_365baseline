@@ -98,7 +98,7 @@
         "intune-windows-settings-catalog-device-security-security-hardening-device",
         "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
         "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device",
-        "intune-windows-endpoint-security-windows-laps-laps-configuration-device",
+        "intune-windows-endpoint-security-cis-l1-windows-laps-laps-configuration-device",
         "intune-windows-endpoint-security-local-group-membership-local-administrators-device"
       ],
       "exclude": [],
