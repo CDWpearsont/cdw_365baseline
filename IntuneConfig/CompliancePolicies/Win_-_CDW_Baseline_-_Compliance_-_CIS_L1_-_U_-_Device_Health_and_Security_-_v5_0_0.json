@@ -1,15 +1,15 @@
 {
   "displayName": "Win - CDW Baseline - Compliance - CIS L1 - U - Device Health and Security - v5.0.0",
+  "storageRequireEncryption": false,
+  "passwordRequiredToUnlockFromIdle": false,
+  "@odata.type": "#microsoft.graph.windows10CompliancePolicy",
+  "passwordRequired": false,
+  "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Compliance — Device Health and Security. Recommendations: 106.1.1, 106.1.2, 106.1.3, 106.2.1.1, 106.2.1.2, 106.2.1.3, 106.2.1.4.",
   "earlyLaunchAntiMalwareDriverEnabled": false,
-  "bitLockerEnabled": true,
+  "passwordBlockSimple": false,
   "requireHealthyDeviceReport": false,
   "passwordRequiredType": "deviceDefault",
-  "passwordRequiredToUnlockFromIdle": false,
-  "codeIntegrityEnabled": true,
-  "passwordBlockSimple": false,
-  "description": "CIS Microsoft Intune for Windows 11 Benchmark v5.0.0 — Level 1. Compliance — Device Health and Security. Recommendations: 106.1.1, 106.1.2, 106.1.3, 106.2.1.1, 106.2.1.2, 106.2.1.3, 106.2.1.4.",
-  "@odata.type": "#microsoft.graph.windows10CompliancePolicy",
+  "bitLockerEnabled": true,
   "secureBootEnabled": true,
-  "storageRequireEncryption": false,
-  "passwordRequired": false
+  "codeIntegrityEnabled": true
 }
