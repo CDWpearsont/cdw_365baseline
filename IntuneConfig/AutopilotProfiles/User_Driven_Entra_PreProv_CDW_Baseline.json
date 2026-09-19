@@ -1,30 +1,30 @@
 {
-  "enableWhiteGlove": true,
-  "displayName": "User Driven Entra PreProv CDW Baseline",
-  "deviceType": "windowsPc",
-  "language": "os-default",
-  "hardwareHashExtractionEnabled": true,
-  "description": "",
-  "enrollmentStatusScreenSettings": null,
-  "deviceNameTemplate": "%SERIAL%",
   "extractHardwareHash": true,
-  "outOfBoxExperienceSettings": {
-    "userType": "standard",
-    "skipKeyboardSelectionPage": true,
-    "deviceUsageType": "singleUser",
-    "hideEscapeLink": true,
-    "hidePrivacySettings": true,
-    "hideEULA": true
-  },
+  "deviceType": "windowsPc",
+  "enrollmentStatusScreenSettings": null,
+  "description": "",
   "outOfBoxExperienceSetting": {
     "escapeLinkHidden": true,
-    "eulaHidden": true,
     "deviceUsageType": "singleUser",
     "keyboardSelectionPageSkipped": true,
-    "privacySettingsHidden": true,
-    "userType": "standard"
+    "eulaHidden": true,
+    "userType": "standard",
+    "privacySettingsHidden": true
   },
-  "@odata.type": "#microsoft.graph.azureADWindowsAutopilotDeploymentProfile",
+  "language": "os-default",
   "preprovisioningAllowed": true,
-  "locale": "os-default"
+  "@odata.type": "#microsoft.graph.azureADWindowsAutopilotDeploymentProfile",
+  "displayName": "User Driven Entra PreProv CDW Baseline",
+  "enableWhiteGlove": true,
+  "hardwareHashExtractionEnabled": true,
+  "locale": "os-default",
+  "deviceNameTemplate": "%SERIAL%",
+  "outOfBoxExperienceSettings": {
+    "userType": "standard",
+    "deviceUsageType": "singleUser",
+    "skipKeyboardSelectionPage": true,
+    "hideEscapeLink": true,
+    "hideEULA": true,
+    "hidePrivacySettings": true
+  }
 }
