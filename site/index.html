@@ -503,6 +503,8 @@ body{
 .pcard[data-cat="DefenderOffice"]::before       {background:rgba(204,0,0,.5)}
 .pcard[data-cat="EnrolmentRestrictions"]::before{background:#16a34a}
 .pcard[data-cat="AppProtectionPolicies"]::before{background:#0891b2}
+.pcard[data-cat="AutopilotProfiles"]::before    {background:#4f46e5}
+.pcard[data-cat="EnrolmentStatusPage"]::before  {background:#65a30d}
 
 .pcard:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .pcard.selected{border-color:var(--cdw-red);background:rgba(204,0,0,.06);box-shadow:0 0 0 2px rgba(204,0,0,.15)}
@@ -867,6 +869,356 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
 .sb-flag-danger{background:rgba(200,16,46,.10);color:#c8102e;border:1px solid rgba(200,16,46,.22)}
 .sb-flag-warn  {background:rgba(217,119,6,.10);color:#b45309;border:1px solid rgba(217,119,6,.22)}
 .sb-flag-info  {background:rgba(100,116,139,.10);color:#475569;border:1px solid rgba(100,116,139,.22)}
+/* Settings / manifest enrichment */
+#settings-screen{display:none;max-width:1180px;margin:0 auto;padding:20px 24px 100px}
+.set-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+.set-head h2{margin:0;font-size:19px;font-weight:600;color:var(--text)}
+.set-head .set-sub{margin:2px 0 0;font-size:12px;color:var(--muted);line-height:1.5;max-width:760px}
+.set-stats{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.set-stat{padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:#fff;min-width:110px}
+.set-stat .k{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--dim)}
+.set-stat .v{font-size:20px;font-weight:600;color:var(--text);margin-top:2px}
+.set-stat.warn .v{color:#b45309}
+.set-stat.ok   .v{color:#059669}
+.set-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.set-toolbar input[type=text]{flex:1;min-width:200px;padding:8px 11px;border:1px solid var(--border);
+  border-radius:8px;font-family:var(--fbody);font-size:13px}
+.set-toolbar select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;
+  font-family:var(--fbody);font-size:13px;background:#fff}
+.set-split{display:flex;gap:16px;align-items:flex-start}
+.set-list{flex:0 0 400px;max-height:62vh;overflow-y:auto;border:1px solid var(--border);
+  border-radius:10px;background:#fff}
+.set-row{padding:9px 12px;border-bottom:1px solid var(--border);cursor:pointer;font-size:12px;
+  display:flex;align-items:center;gap:8px}
+.set-row:last-child{border-bottom:none}
+.set-row:hover{background:rgba(124,58,237,.04)}
+.set-row.active{background:rgba(124,58,237,.08);border-left:3px solid #7c3aed;padding-left:9px}
+.set-row .set-row-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+.set-row .set-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.set-dot.on {background:#059669}
+.set-dot.off{background:var(--border)}
+.set-dot.edited{background:#b45309;box-shadow:0 0 0 3px rgba(217,119,6,.18)}
+.set-editor{flex:1;min-width:0;border:1px solid var(--border);border-radius:10px;background:#fff;padding:18px}
+.set-editor .set-empty{color:var(--muted);font-size:13px;text-align:center;padding:60px 20px}
+.set-editor h3{margin:0 0 2px;font-size:15px;font-weight:600;color:var(--text)}
+.set-meta{font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.6}
+.set-meta code{background:rgba(0,0,0,.04);padding:1px 5px;border-radius:4px;font-size:10.5px}
+.set-field{margin-bottom:12px}
+.set-field label{display:block;font-size:11.5px;font-weight:500;color:var(--text);margin-bottom:4px}
+.set-field .set-hint{font-size:10.5px;color:var(--muted);font-weight:400}
+.set-field input[type=text],.set-field textarea{width:100%;padding:8px 10px;border:1px solid var(--border);
+  border-radius:7px;font-family:var(--fbody);font-size:12.5px;color:var(--text);background:#fff;resize:vertical}
+.set-field textarea{min-height:96px;line-height:1.5}
+.set-field input:focus,.set-field textarea:focus{outline:none;border-color:rgba(124,58,237,.45)}
+.set-row2{display:flex;gap:10px}
+.set-row2 .set-field{flex:1;min-width:0}
+.set-actions{display:flex;gap:8px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.set-savebar{position:sticky;bottom:0;margin-top:16px;padding:12px 16px;border:1px solid var(--border);
+  border-radius:10px;background:#fff;display:flex;align-items:center;gap:12px;
+  box-shadow:0 -2px 12px rgba(0,0,0,.05)}
+.set-savebar .set-dirty{font-size:12px;color:var(--muted)}
+.set-savebar .set-dirty b{color:#b45309}
+.set-spacer{flex:1}
+.icon-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:5px 9px;
+  cursor:pointer;font-size:13px;color:var(--muted);line-height:1}
+.icon-btn:hover{background:rgba(0,0,0,.03);color:var(--text)}
+
+/* ═══════════════════════════════════════════════════════════════════
+   POLICY MANAGEMENT
+   Uses the existing token set only — no new colours introduced.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Hide deploy/document-only chrome while in manage mode */
+body[data-appmode="manage"] .branding-bar,
+body[data-appmode="manage"] .tpl-bar,
+body[data-appmode="manage"] .select-bar { display: none !important; }
+
+/* The manage-only filter panel exists in every mode but only shows in manage */
+.mg-filter-panel { display: none; }
+body[data-appmode="manage"] .mg-filter-panel { display: block; }
+
+/* ── Manage-mode card affordance ──────────────────────────────── */
+body[data-appmode="manage"] .pcard .pcheck { display: none; }
+body[data-appmode="manage"] .pcard { cursor: pointer; }
+body[data-appmode="manage"] .pcard.mg-dirty {
+  border-color: var(--warn);
+  box-shadow: inset 3px 0 0 var(--warn);
+}
+
+.mg-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 10px; font-weight: 600; line-height: 1;
+  padding: 3px 6px; border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--s3); color: var(--muted);
+  white-space: nowrap;
+}
+.mg-badge-fw       { background: #eef6ff; border-color: #cfe3fb; color: #1e5aa8; }
+.mg-badge-domain   { background: #f3eeff; border-color: #ddd2fb; color: #5b3bb0; }
+.mg-badge-attn     { background: #fff4e5; border-color: #ffd9a8; color: #a35a00; }
+.mg-badge-tag      { background: var(--s2); }
+
+/* ── Attribute source pill (filename / folder / body / override) ─ */
+.mg-src {
+  font-size: 9px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; padding: 2px 5px; border-radius: 3px;
+  background: var(--s3); color: var(--dim); border: 1px solid var(--border);
+}
+.mg-src-override { background: #fff4e5; color: #a35a00; border-color: #ffd9a8; }
+
+/* ── Editor drawer ────────────────────────────────────────────── */
+#mg-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(520px, 100vw);
+  background: var(--s1);
+  border-left: 1px solid var(--border);
+  box-shadow: -8px 0 32px rgba(0,0,0,.10);
+  transform: translateX(100%);
+  transition: transform .22s ease;
+  z-index: 1200;
+  display: flex; flex-direction: column;
+}
+#mg-drawer.open { transform: translateX(0); }
+
+.mg-dr-head {
+  padding: 16px 18px 12px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 12px; flex-shrink: 0;
+}
+.mg-dr-head h3 {
+  font-family: var(--fhead); font-size: 14px; font-weight: 600;
+  line-height: 1.35; color: var(--text); flex: 1;
+}
+.mg-dr-path { font-size: 10px; color: var(--dim); margin-top: 4px; word-break: break-all; }
+.mg-dr-close {
+  background: none; border: none; cursor: pointer; color: var(--muted);
+  font-size: 20px; line-height: 1; padding: 0 2px; flex-shrink: 0;
+}
+.mg-dr-close:hover { color: var(--text); }
+
+.mg-dr-body { flex: 1; overflow-y: auto; padding: 16px 18px 24px; }
+
+.mg-sec { margin-bottom: 22px; }
+.mg-sec-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mg-field { margin-bottom: 12px; }
+.mg-field label {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 4px;
+}
+.mg-field select,
+.mg-field input[type="text"],
+.mg-field textarea {
+  width: 100%; font-family: var(--fbody); font-size: 12px; color: var(--text);
+  background: var(--s1); border: 1px solid var(--border2); border-radius: 5px;
+  padding: 7px 8px;
+}
+.mg-field textarea { resize: vertical; min-height: 64px; line-height: 1.5; }
+.mg-field select:focus,
+.mg-field input:focus,
+.mg-field textarea:focus { outline: none; border-color: var(--intune); }
+.mg-field.changed select,
+.mg-field.changed input,
+.mg-field.changed textarea { border-color: var(--warn); background: #fffdf8; }
+
+.mg-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.mg-tag-btn {
+  font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 999px;
+  border: 1px solid var(--border2); background: var(--s1); color: var(--muted);
+  cursor: pointer; transition: all .12s;
+}
+.mg-tag-btn:hover { border-color: var(--intune); color: var(--text); }
+.mg-tag-btn.on { background: var(--intune); border-color: var(--intune); color: #fff; }
+
+.mg-bundles { display: flex; flex-wrap: wrap; gap: 6px; }
+.mg-empty { font-size: 11px; color: var(--dim); font-style: italic; }
+
+.mg-stale {
+  font-size: 11px; padding: 8px 10px; border-radius: 5px; line-height: 1.5;
+  background: #fff4e5; border: 1px solid #ffd9a8; color: #a35a00;
+  margin-bottom: 12px;
+}
+
+/* ── Save bar ─────────────────────────────────────────────────── */
+#mg-savebar {
+  position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 140%);
+  display: flex; align-items: center; gap: 14px;
+  background: var(--s1); border: 1px solid var(--border);
+  box-shadow: 0 8px 28px rgba(0,0,0,.14);
+  border-radius: 10px; padding: 10px 14px; z-index: 1100;
+  transition: transform .2s ease;
+}
+#mg-savebar.up { transform: translate(-50%, 0); }
+.mg-sb-text { font-size: 12px; color: var(--text); font-weight: 600; }
+.mg-sb-sub  { font-size: 11px; color: var(--muted); }
+
+/* Manage-mode topbar pill */
+.mode-pill-manage{background:rgba(22,163,74,.08);color:#15803d}
+.auth-mode-card.active[data-mode="manage"]{border-color:#16a34a;background:rgba(22,163,74,.02)}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BUILDING BLOCKS
+   ═══════════════════════════════════════════════════════════════════ */
+
+#bb-screen { max-width: 940px; margin: 32px auto 80px; padding: 0 20px; }
+
+.bb-head { text-align: center; margin-bottom: 26px; }
+.bb-head h2 {
+  font-family: var(--fhead); font-size: 22px; font-weight: 600;
+  color: var(--text); margin-bottom: 6px;
+}
+.bb-head p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* ── Stepper ──────────────────────────────────────────────────── */
+.bb-steps {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin: 0 auto 30px; max-width: 700px;
+}
+.bb-step { display: flex; align-items: center; gap: 8px; }
+.bb-step-dot {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+  background: var(--s3); color: var(--dim);
+  border: 1px solid var(--border); transition: all .18s;
+}
+.bb-step-label { font-size: 11px; font-weight: 600; color: var(--dim); white-space: nowrap; }
+.bb-step.done .bb-step-dot { background: var(--cdw-red); border-color: var(--cdw-red); color: #fff; }
+.bb-step.done .bb-step-label { color: var(--muted); }
+.bb-step.on .bb-step-dot {
+  background: var(--cdw-red); border-color: var(--cdw-red); color: #fff;
+  box-shadow: 0 0 0 4px rgba(204,0,0,.12);
+}
+.bb-step.on .bb-step-label { color: var(--text); }
+.bb-step-line { flex: 1; height: 1px; background: var(--border); margin: 0 12px; min-width: 24px; }
+.bb-step-line.done { background: var(--cdw-red); }
+
+/* ── Choice tiles ─────────────────────────────────────────────── */
+.bb-grid { display: grid; gap: 14px; }
+.bb-grid-3 { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.bb-grid-2 { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+
+.bb-tile {
+  position: relative; text-align: left; cursor: pointer;
+  background: var(--s1); border: 2px solid var(--border); border-radius: 12px;
+  padding: 18px 18px 16px; transition: all .15s ease;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.bb-tile:hover:not(.bb-disabled) {
+  border-color: var(--cdw-red); transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.07);
+}
+.bb-tile.bb-disabled { opacity: .5; cursor: not-allowed; }
+.bb-tile-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--s3); color: var(--cdw-red); flex-shrink: 0;
+}
+.bb-tile-title { font-family: var(--fhead); font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.35; }
+.bb-tile-blurb { font-size: 12px; color: var(--muted); line-height: 1.5; flex: 1; }
+.bb-tile-foot {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 4px; padding-top: 10px; border-top: 1px solid var(--border);
+}
+.bb-count {
+  font-size: 11px; font-weight: 700; color: var(--cdw-red);
+  background: rgba(204,0,0,.07); padding: 3px 8px; border-radius: 5px;
+}
+.bb-count-zero { color: var(--dim); background: var(--s3); }
+.bb-note { font-size: 11px; color: var(--dim); }
+.bb-soon {
+  position: absolute; top: 12px; right: 12px;
+  font-size: 9px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  background: var(--s3); color: var(--dim); border: 1px solid var(--border);
+  padding: 3px 6px; border-radius: 4px;
+}
+
+/* ── Review ───────────────────────────────────────────────────── */
+.bb-summary {
+  background: var(--s2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 18px 20px; margin-bottom: 18px;
+}
+.bb-sum-row { display: flex; gap: 10px; align-items: baseline; font-size: 13px; margin-bottom: 6px; }
+.bb-sum-row:last-child { margin-bottom: 0; }
+.bb-sum-key { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); min-width: 84px; }
+.bb-sum-val { color: var(--text); font-weight: 500; }
+
+.bb-policy-group { margin-bottom: 16px; }
+.bb-policy-group h4 {
+  font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
+}
+.bb-policy-list { display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow-y: auto; }
+.bb-policy-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text); padding: 5px 8px;
+  background: var(--s1); border: 1px solid var(--border); border-radius: 5px;
+}
+.bb-policy-item svg { color: #16a34a; flex-shrink: 0; }
+
+.bb-empty-note {
+  font-size: 12px; line-height: 1.6; color: #a35a00;
+  background: #fff4e5; border: 1px solid #ffd9a8; border-radius: 8px; padding: 12px 14px;
+}
+
+/* ── Nav ──────────────────────────────────────────────────────── */
+.bb-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--border);
+}
+.bb-nav-right { display: flex; gap: 10px; }
+
+.mode-pill-build{background:rgba(37,99,235,.08);color:#1d4ed8}
+.auth-mode-card.active[data-mode="build"]{border-color:#2563eb;background:rgba(37,99,235,.02)}
+.auth-mode{flex-wrap:wrap}
+.auth-mode-card{min-width:150px}
+
+/* ── Building Blocks: multi-select, scenarios ──────────────────── */
+.bb-section-head {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+}
+.bb-tile-scenario { border-color: var(--border2); background: var(--s2); }
+.bb-tile-scenario:hover { border-color: #2563eb; }
+.bb-tile-scenario .bb-tile-icon { color: #2563eb; }
+
+.bb-selectable { padding-right: 46px; }
+.bb-check {
+  position: absolute; top: 16px; right: 16px;
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 2px solid var(--border2); background: var(--s1);
+  display: flex; align-items: center; justify-content: center; transition: all .15s;
+}
+.bb-tile.bb-on { border-color: var(--cdw-red); background: rgba(204,0,0,.02); }
+.bb-tile.bb-on .bb-check { background: var(--cdw-red); border-color: var(--cdw-red); }
+
+.bb-variant {
+  display: inline-block; margin-left: 6px; vertical-align: middle;
+  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+  background: var(--s3); color: var(--muted); border: 1px solid var(--border);
+}
+
+.bb-running { font-size: 12px; font-weight: 600; color: var(--text); margin-right: 6px; }
+
+.bb-sum-blocks { display: flex; flex-direction: column; gap: 8px; }
+.bb-sum-block {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--s1); border: 1px solid var(--border); border-radius: 9px; padding: 12px 14px;
+}
+.bb-sum-block-title { font-family: var(--fhead); font-size: 13px; font-weight: 600; color: var(--text); }
+
+.bb-scenario-banner {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: rgba(37,99,235,.05); border: 1px solid rgba(37,99,235,.2);
+  border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
+  font-size: 13px; color: var(--text); line-height: 1.5;
+}
+.bb-scenario-banner svg { color: #2563eb; flex-shrink: 0; margin-top: 2px; }
+
 </style>
 </head>
 <body>
@@ -880,6 +1232,7 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
       365 Baseline
     </div>
     <span class="build-pill" id="build-pill"></span>
+    <button class="icon-btn" id="settings-btn" title="Manifest settings" onclick="openSettings()" style="display:none">⚙</button>
     <div class="topbar-right" id="topbar-right">
       <!-- populated after auth -->
     </div>
@@ -926,6 +1279,16 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
             <div class="amc-title">Document</div>
             <div class="amc-desc">Export selected policies as an LLD document</div>
           </div>
+          <div class="auth-mode-card" data-mode="manage" onclick="selectAuthMode('manage')">
+            <div class="amc-icon">🗂</div>
+            <div class="amc-title">Manage</div>
+            <div class="amc-desc">View and amend policy taxonomy and enrichment</div>
+          </div>
+          <div class="auth-mode-card" data-mode="build" onclick="selectAuthMode('build')">
+            <div class="amc-icon">🧱</div>
+            <div class="amc-title">Building Blocks</div>
+            <div class="amc-desc">Pick a ready-made policy set by outcome</div>
+          </div>
         </div>
         <div id="auth-deploy-info">
           <div class="consent-notice">
@@ -950,6 +1313,30 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
           <button class="btn btn-doc" id="doc-continue-btn" style="width:100%">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
             Continue to Documentation Mode
+          </button>
+        </div>
+        <div id="auth-manage-info" style="display:none">
+          <div class="doc-notice">
+            <strong>ℹ No sign-in required</strong><br>
+            Manage mode reads <code>catalog.json</code> and the policy store from the
+            GitHub repository. No tenant access or Microsoft sign-in is needed.
+          </div>
+          <button class="btn btn-doc" id="manage-continue-btn" style="width:100%"
+                  onclick="enterManageMode()">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+            Continue to Policy Management
+          </button>
+        </div>
+        <div id="auth-build-info" style="display:none">
+          <div class="doc-notice">
+            <strong>ℹ Start from an outcome</strong><br>
+            Choose a technology, a goal and a platform. The tool pre-selects the
+            policies that deliver it. No sign-in needed to browse or document.
+          </div>
+          <button class="btn btn-doc" id="build-continue-btn" style="width:100%"
+                  onclick="enterBuildMode()">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:6px"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Start Building Blocks
           </button>
         </div>
       </div>
@@ -1022,6 +1409,61 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
       </div>
     </div>
 
+
+    <!-- Manifest enrichment (settings) -->
+    <div id="settings-screen">
+      <div class="set-head">
+        <div>
+          <h2>Manifest enrichment</h2>
+          <p class="set-sub">Human judgement that cannot be derived from the policy JSON. <b>lldSummary</b> is
+          used verbatim in Low Level Designs, replacing the AI rationale for that policy — so approved prose
+          here makes every future export faster, cheaper and consistent. Edits are staged locally and written to
+          <code>manifest.overlay.json</code> only when you save.</p>
+        </div>
+      </div>
+
+      <div class="set-stats" id="set-stats"></div>
+
+      <div class="set-toolbar">
+        <input type="text" id="set-search" placeholder="Search policies…" autocomplete="off"/>
+        <select id="set-filter-state">
+          <option value="all">All policies</option>
+          <option value="unenriched" selected>Awaiting enrichment</option>
+          <option value="enriched">Enriched</option>
+          <option value="edited">Edited (unsaved)</option>
+        </select>
+        <select id="set-filter-workload">
+          <option value="all">All workloads</option>
+        </select>
+      </div>
+
+      <div class="set-split">
+        <div class="set-list" id="set-list"></div>
+        <div class="set-editor" id="set-editor">
+          <div class="set-empty">Select a policy from the list to add or edit its overlay entry.</div>
+        </div>
+      </div>
+
+      <div class="set-savebar">
+        <span class="set-dirty" id="set-dirty">No unsaved changes</span>
+        <div class="set-spacer"></div>
+        <button class="btn btn-ghost" onclick="closeSettings()">Back</button>
+        <button class="btn btn-ghost" onclick="discardOverlayEdits()" id="set-discard" disabled>Discard changes</button>
+        <button class="btn btn-doc" onclick="saveOverlay()" id="set-save" disabled>Save to GitHub</button>
+      </div>
+    </div>
+
+    <!-- ── Building Blocks wizard ──────────────────────────── -->
+    <div id="bb-screen" style="display:none">
+      <div class="bb-steps" id="bb-stepper"></div>
+      <div class="bb-head">
+        <h2 id="bb-title">Building Blocks</h2>
+        <p id="bb-sub"></p>
+      </div>
+      <div id="bb-body"></div>
+      <div class="bb-nav" id="bb-nav"></div>
+    </div>
+
     <div id="deployer" style="display:none">
 
       <!-- Engagement summary (doc mode only) -->
@@ -1081,6 +1523,8 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
               <button class="fchip" data-filter="CompliancePolicies"><span class="dot" style="background:#fb923c"></span>Compliance</button>
               <button class="fchip" data-filter="DeviceConfigurations"><span class="dot" style="background:#4ade80"></span>Device Config</button>
               <button class="fchip" data-filter="EnrolmentRestrictions"><span class="dot" style="background:#16a34a"></span>Enrolment Restrictions</button>
+              <button class="fchip" data-filter="AutopilotProfiles"><span class="dot" style="background:#4f46e5"></span>Autopilot Profiles</button>
+              <button class="fchip" data-filter="EnrolmentStatusPage"><span class="dot" style="background:#65a30d"></span>Enrolment Status Page</button>
               <button class="fchip" data-filter="AppProtectionPolicies"><span class="dot" style="background:#0891b2"></span>App Protection (MAM)</button>
             </div>
           </div>
@@ -1118,6 +1562,7 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
             </div>
           </div>
         </div>
+        <div class="filter-panel" id="intune-mg-filters" style="display:none"></div>
         <div class="select-bar">
           <button class="sel-btn" id="intune-selall">Select all visible</button>
           <button class="sel-btn" id="intune-seldesel" title="Deselect all visible policies">Deselect visible</button>
@@ -1186,6 +1631,7 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
             </div>
           </div>
         </div>
+        <div class="filter-panel" id="entra-mg-filters" style="display:none"></div>
         <div class="select-bar">
           <button class="sel-btn" id="entra-selall">Select all visible</button>
           <button class="sel-btn" id="entra-seldesel" title="Deselect all visible policies">Deselect visible</button>
@@ -1254,6 +1700,7 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
             </div>
           </div>
         </div>
+        <div class="filter-panel" id="defender-mg-filters" style="display:none"></div>
         <div class="select-bar">
           <button class="sel-btn" id="defender-selall">Select all visible</button>
           <button class="sel-btn" id="defender-seldesel" title="Deselect all visible policies">Deselect visible</button>
@@ -1371,8 +1818,8 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.1.8.6',
-  date:    '2026-08-11'
+  version: '3.4.2',
+  date:    '2026-09-17'
 };
 
 // LLD template source. Served from the $web container of the same storage
@@ -1398,6 +1845,10 @@ function selectAuthMode(mode) {
   });
   document.getElementById('auth-deploy-info').style.display = mode === 'deploy' ? '' : 'none';
   document.getElementById('auth-doc-info').style.display    = mode === 'document' ? '' : 'none';
+  const mgInfo = document.getElementById('auth-manage-info');
+  if (mgInfo) mgInfo.style.display = mode === 'manage' ? '' : 'none';
+  const bbInfo = document.getElementById('auth-build-info');
+  if (bbInfo) bbInfo.style.display = mode === 'build' ? '' : 'none';
 }
 
 function setAppMode(mode) {
@@ -1414,11 +1865,13 @@ function setAppMode(mode) {
 // grid loads, so customer / opportunity are known up front rather than being
 // remembered at export time.
 function openDocWizard() {
-  document.getElementById('auth-screen').style.display   = 'none';
-  document.getElementById('deployer').style.display      = 'none';
-  document.getElementById('tabbar').style.display        = 'none';
+  // Back returns to the grid mode the wizard was opened from, if any.
+  if (gridVisible())        docWizardReturn = appMode;
+  else if (!screenVisible('wizard-screen')) docWizardReturn = null;
+
+  hideAllScreens();
   document.getElementById('wizard-screen').style.display = '';
-  document.getElementById('topbar-right').innerHTML      = '';
+  renderTopbar('document');
 
   // Restore previous values on an "Edit details" round-trip
   document.getElementById('wiz-customer').value = docMeta.customer;
@@ -1429,11 +1882,20 @@ function openDocWizard() {
   if (!templateBuffer) loadTemplateFromSource();
 }
 
-// Back to the mode-selection screen
+// Back to wherever the wizard was opened from: the policy grid (Edit details
+// round-trip, or a mode switch) or the mode-selection screen.
 function exitDocWizard() {
+  const back = docWizardReturn;
+  docWizardReturn = null;
   document.getElementById('wizard-screen').style.display = 'none';
-  document.getElementById('auth-screen').style.display   = '';
-  selectAuthMode('document');
+  if (back === 'document') {
+    document.getElementById('deployer').style.display = '';
+    document.getElementById('tabbar').style.display   = 'flex';
+    renderTopbar();
+    return;
+  }
+  if (back === 'deploy' || back === 'manage') { switchMode(back); return; }
+  showAuthScreen('document');
 }
 
 // Re-open from the summary bar without losing the policy selection
@@ -1538,41 +2000,160 @@ function renderEngagementBar() {
 }
 
 function enterDocMode() {
-  appMode = 'document';
-  document.body.dataset.appmode = 'document';
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('deployer').style.display    = '';
-  document.getElementById('tabbar').style.display      = 'flex';
-
-  document.getElementById('topbar-right').innerHTML = `
-    <div class="mode-toggle">
-      <button class="mode-btn" onclick="switchToDeployMode()">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-        Deploy
-      </button>
-      <button class="mode-btn active" onclick="setAppMode('document')">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        Document
-      </button>
-    </div>
-    <button class="btn btn-ghost btn-sm" id="refresh-btn" onclick="refresh()">
-      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-      Refresh
-    </button>
-    <span class="mode-pill mode-pill-doc">📄 Doc Mode</span>`;
+  hideAllScreens();
+  document.getElementById('deployer').style.display = '';
+  document.getElementById('tabbar').style.display   = 'flex';
 
   setAppMode('document');
+  renderTopbar();
   renderEngagementBar();
   loadAllWorkloads(); // Uses the same tree-based loader; skips Graph checks in doc mode
 }
 
-function switchToDeployMode() {
-  document.getElementById('deployer').style.display    = 'none';
-  document.getElementById('tabbar').style.display      = 'none';
+// ═══════════════════════════════════════════════════════════════════
+// NAVIGATION — one topbar and one switcher for every mode
+// ═══════════════════════════════════════════════════════════════════
+const MODE_TABS = [
+  { id: 'deploy',   label: 'Deploy',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>' },
+  { id: 'document', label: 'Document',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>' },
+  { id: 'manage',   label: 'Manage',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>' },
+  { id: 'build',    label: 'Building Blocks',
+    icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>' },
+];
+
+const SCREEN_IDS = ['auth-screen', 'wizard-screen', 'settings-screen', 'bb-screen', 'deployer'];
+
+let docWizardReturn = null;  // grid mode to return to from the doc wizard
+let bbReturn        = null;  // grid mode to return to from Building Blocks
+let statusChecked   = false; // true once Graph existence checks ran for the grid
+
+function screenVisible(id) {
+  const el = document.getElementById(id);
+  return !!el && el.style.display !== 'none' && getComputedStyle(el).display !== 'none';
+}
+function gridVisible() { return screenVisible('deployer'); }
+
+function hideAllScreens() {
+  SCREEN_IDS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  document.getElementById('tabbar').style.display = 'none';
+}
+
+// Topbar for deploy / document / manage and the doc wizard. Building Blocks
+// keeps its own pill and exits through its Cancel button.
+function renderTopbar(activeOverride) {
+  const active = activeOverride || appMode;
+  const onGrid = gridVisible();
+  const tabs = MODE_TABS.map(t => `
+      <button class="mode-btn${t.id === active ? ' active' : ''}" data-mode="${t.id}" onclick="switchMode('${t.id}')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">${t.icon}</svg>
+        ${t.label}
+      </button>`).join('');
+
+  let html = `<div class="mode-toggle">${tabs}
+    </div>`;
+
+  if (account) {
+    const initials = (account.name || account.username || 'U')
+      .split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+    html += `
+    <div class="user-pill">
+      <div class="user-avatar">${initials}</div>
+      <span>${account.name || account.username}</span>
+    </div>`;
+  }
+  if (onGrid) {
+    html += `
+    <button class="btn btn-ghost btn-sm" id="refresh-btn" onclick="refresh()">
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+      Refresh
+    </button>`;
+  }
+  if (account) {
+    html += `
+    <button class="btn btn-ghost btn-sm" onclick="signOut()">Sign out</button>`;
+  } else if (onGrid && active === 'document') {
+    html += `
+    <span class="mode-pill mode-pill-doc">\u{1f4c4} Doc Mode</span>`;
+  } else if (onGrid && active === 'manage') {
+    html += `
+    <span class="mode-pill mode-pill-manage">\u{1f5c2} Manage Mode</span>`;
+  }
+  document.getElementById('topbar-right').innerHTML = html;
+}
+
+// Back to the mode-selection card, with the given mode highlighted.
+function showAuthScreen(mode) {
+  leaveManageMode();
+  hideAllScreens();
+  docWizardReturn = null;
+  bbReturn        = null;
+  appMode = 'deploy';
+  delete document.body.dataset.appmode;
   document.getElementById('auth-screen').style.display = '';
   document.getElementById('topbar-right').innerHTML    = '';
-  selectAuthMode('deploy');
+  selectAuthMode(mode || 'deploy');
 }
+
+// Tidy up manage-only UI so it does not leak into other modes. Unsaved
+// manage edits stay in memory and the save bar returns on re-entry.
+function leaveManageMode() {
+  mgCloseDrawer();
+  document.getElementById('mg-savebar')?.classList.remove('up');
+  Object.keys(WORKLOADS).forEach(wl => {
+    const row = document.getElementById(`${wl}-status-filters`)?.closest('.filter-row');
+    if (row) row.style.display = '';
+  });
+}
+
+function switchMode(target) {
+  // Already showing this mode's grid — nothing to do.
+  if (target === appMode && target !== 'build' && gridVisible()) return;
+
+  const from = appMode;
+  if (from === 'manage' && target !== 'manage') leaveManageMode();
+
+  switch (target) {
+    case 'deploy':
+      if (!account) { showAuthScreen('deploy'); return; }
+      // In-place from a signed-in document grid keeps the selection, but only
+      // when the tenant existence checks are current for this grid.
+      if (from === 'document' && gridVisible() && statusChecked) {
+        setAppMode('deploy');
+        renderTopbar();
+        return;
+      }
+      onSignedIn();
+      return;
+
+    case 'document':
+      // Signed-in deploy grid switches in place so the selection carries over.
+      if (from === 'deploy' && account && gridVisible()) {
+        setAppMode('document');
+        renderTopbar();
+        renderEngagementBar();
+        return;
+      }
+      openDocWizard();
+      return;
+
+    case 'manage':
+      enterManageMode();
+      return;
+
+    case 'build':
+      enterBuildMode();
+      return;
+  }
+}
+
+// Retained for any older callers.
+function switchToDeployMode() { switchMode('deploy'); }
 
 // ═══════════════════════════════════════════════════════════════════
 // MSAL — multi-tenant app registered in CDW's Azure tenant
@@ -1610,6 +2191,397 @@ const RAW_BASE    = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME
 // single request, replacing a GitHub tree walk plus one fetch per policy.
 const MANIFEST_URL = `${RAW_BASE}/manifest.json`;
 
+// ── Manifest enrichment (settings page) ──────────────────────────
+// The overlay holds the fields a machine cannot derive: which blocks a policy
+// belongs to, its licence requirement, and the approved LLD prose. Edits are
+// staged in memory and committed to GitHub in one write, so a half-finished
+// session never reaches the repository.
+
+const OVERLAY_RAW_URL = `${RAW_BASE}/manifest.overlay.json`;
+const OVERLAY_API_URL =
+  `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/manifest.overlay.json?ref=${REPO_BRANCH}`;
+const SAVE_OVERLAY_URL = '/api/save-overlay';
+
+// Overlay fields the editor manages, in display order.
+const OVERLAY_TEXT_FIELDS  = ['lldSummary', 'notes'];
+const OVERLAY_LINE_FIELDS  = ['lldSection', 'assignTo'];
+const OVERLAY_LIST_FIELDS  = ['blocks', 'licence', 'requires', 'conflictsWith', 'supersedes'];
+
+let overlayEntries = {};   // id -> entry, as loaded from GitHub
+let overlayEdits   = {};   // id -> entry, staged changes not yet saved
+let overlaySha     = null; // git sha of the file we loaded, for concurrency
+let setSelectedId  = null;
+
+function csvToList(v) {
+  return String(v || '').split(',').map(x => x.trim()).filter(Boolean);
+}
+function listToCsv(v) {
+  return Array.isArray(v) ? v.join(', ') : (v || '');
+}
+
+// Effective entry = saved overlay with any staged edit applied on top.
+function effectiveEntry(id) {
+  if (Object.prototype.hasOwnProperty.call(overlayEdits, id)) return overlayEdits[id];
+  return overlayEntries[id] || null;
+}
+function isEnriched(id) {
+  const e = effectiveEntry(id);
+  return !!(e && (e.lldSummary || (e.blocks && e.blocks.length)));
+}
+function isEdited(id) {
+  return Object.prototype.hasOwnProperty.call(overlayEdits, id);
+}
+
+async function openSettings() {
+  if (!manifest) {
+    showToast('Manifest not loaded \u2014 cannot edit the overlay', 'warn');
+    return;
+  }
+  if (!settingsOpen()) {
+    settingsReturn = SCREEN_IDS.find(id => id !== 'settings-screen' && screenVisible(id)) || 'auth-screen';
+  }
+  hideAllScreens();
+  document.getElementById('settings-screen').style.display = 'block';
+
+  if (overlaySha === null) await loadOverlay();
+  populateWorkloadFilter();
+  renderSettingsStats();
+  renderSettingsList();
+}
+
+// True if the settings screen is currently the visible view.
+function settingsOpen() {
+  const el = document.getElementById('settings-screen');
+  return !!el && el.style.display !== 'none' && el.style.display !== '';
+}
+
+// Hide settings and restore whatever the user was on before.
+let settingsReturn = null;
+function hideSettingsScreen() {
+  document.getElementById('settings-screen').style.display = 'none';
+  const back = settingsReturn || 'auth-screen';
+  settingsReturn = null;
+  document.getElementById(back).style.display = '';
+  if (back === 'deployer') document.getElementById('tabbar').style.display = 'flex';
+}
+
+// Resolve staged edits before leaving. Returns a promise for whether the
+// caller may proceed. Offered as save / discard / stay, because losing an
+// afternoon of enrichment to a stray click would be miserable.
+async function confirmLeaveSettings() {
+  const n = Object.keys(overlayEdits).length;
+  if (!n) return true;
+
+  if (confirm(`You have ${n} unsaved overlay change${n === 1 ? '' : 's'}.\n\n`
+            + `OK  \u2014 save them to GitHub now\n`
+            + `Cancel \u2014 choose to discard or stay`)) {
+    await saveOverlay();
+    // saveOverlay clears overlayEdits on success; if it failed, stay put.
+    return Object.keys(overlayEdits).length === 0;
+  }
+  return confirm('Discard your unsaved overlay changes and leave?');
+}
+
+async function closeSettings() {
+  if (!(await confirmLeaveSettings())) return;
+  overlayEdits = {};
+  hideSettingsScreen();
+  renderSettingsStats();
+}
+
+// Any click outside the settings screen counts as navigating away. Captured
+// before the target's own handler so the app cannot end up showing two screens
+// at once, which is what happened when the mode and tab buttons were clicked.
+let _leavingSettings = false;
+document.addEventListener('click', (ev) => {
+  if (!settingsOpen() || _leavingSettings) return;
+  const setEl = document.getElementById('settings-screen');
+  if (setEl.contains(ev.target)) return;                 // inside the page
+  if (ev.target.closest && ev.target.closest('#settings-btn')) return;
+
+  ev.preventDefault();
+  ev.stopPropagation();
+  const target = ev.target.closest('button, a, .wtab, .mode-card') || ev.target;
+
+  (async () => {
+    if (!(await confirmLeaveSettings())) return;         // stay put
+    overlayEdits = {};
+    hideSettingsScreen();
+    renderSettingsStats();
+    // Replay the click now the settings screen is closed, so a single click
+    // navigates rather than only dismissing.
+    _leavingSettings = true;
+    try { if (target && target.click) target.click(); }
+    finally { _leavingSettings = false; }
+  })();
+}, true);
+
+// Load the overlay plus its git sha. The sha is what lets the save endpoint
+// detect that someone else has edited the file since we read it.
+async function loadOverlay() {
+  overlayEntries = {};
+  overlaySha = null;
+  try {
+    const r = await fetch(`${OVERLAY_RAW_URL}?t=${Date.now()}`);
+    if (r.ok) {
+      const doc = await r.json();
+      (doc.entries || []).forEach(e => { if (e && e.id) overlayEntries[e.id] = e; });
+    } else if (r.status !== 404) {
+      throw new Error(`HTTP ${r.status}`);
+    }
+  } catch (e) {
+    showToast(`Could not load the overlay: ${e.message}`, 'err');
+  }
+  try {
+    const a = await fetch(OVERLAY_API_URL, { headers: { Accept: 'application/vnd.github+json' } });
+    if (a.ok) overlaySha = (await a.json()).sha || null;
+  } catch { /* sha is optional; save falls back to create */ }
+  console.log(`[Overlay] ${Object.keys(overlayEntries).length} entries, sha ${overlaySha || 'none'}`);
+}
+
+function populateWorkloadFilter() {
+  const sel = document.getElementById('set-filter-workload');
+  if (!sel || sel.options.length > 1) return;
+  const wls = [...new Set(manifest.entries.map(e => e.workload))].sort();
+  wls.forEach(w => {
+    const o = document.createElement('option');
+    o.value = w; o.textContent = w;
+    sel.appendChild(o);
+  });
+}
+
+function renderSettingsStats() {
+  const total     = manifest.entries.length;
+  const enriched  = manifest.entries.filter(e => isEnriched(e.id)).length;
+  const edited    = Object.keys(overlayEdits).length;
+  const el = document.getElementById('set-stats');
+  el.innerHTML = `
+    <div class="set-stat"><div class="k">Objects</div><div class="v">${total}</div></div>
+    <div class="set-stat ok"><div class="k">Enriched</div><div class="v">${enriched}</div></div>
+    <div class="set-stat warn"><div class="k">Awaiting</div><div class="v">${total - enriched}</div></div>
+    <div class="set-stat"><div class="k">Unsaved</div><div class="v">${edited}</div></div>`;
+
+  const dirty = document.getElementById('set-dirty');
+  const save  = document.getElementById('set-save');
+  const disc  = document.getElementById('set-discard');
+  if (edited) {
+    dirty.innerHTML = `<b>${edited}</b> polic${edited === 1 ? 'y' : 'ies'} edited and not yet saved`;
+    save.disabled = false; disc.disabled = false;
+  } else {
+    dirty.textContent = 'No unsaved changes';
+    save.disabled = true; disc.disabled = true;
+  }
+}
+
+function settingsVisibleEntries() {
+  const q  = (document.getElementById('set-search').value || '').toLowerCase().trim();
+  const st = document.getElementById('set-filter-state').value;
+  const wl = document.getElementById('set-filter-workload').value;
+  return manifest.entries.filter(e => {
+    if (wl !== 'all' && e.workload !== wl) return false;
+    if (st === 'unenriched' && isEnriched(e.id)) return false;
+    if (st === 'enriched'  && !isEnriched(e.id)) return false;
+    if (st === 'edited'    && !isEdited(e.id))   return false;
+    if (q && !(e.displayName || '').toLowerCase().includes(q) && !e.id.includes(q)) return false;
+    return true;
+  });
+}
+
+function renderSettingsList() {
+  const list = settingsVisibleEntries();
+  const el = document.getElementById('set-list');
+  if (!list.length) {
+    el.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted);font-size:12px">No policies match these filters.</div>';
+    return;
+  }
+  el.innerHTML = list.map(e => {
+    const cls = isEdited(e.id) ? 'edited' : (isEnriched(e.id) ? 'on' : 'off');
+    const sel = e.id === setSelectedId ? ' active' : '';
+    return `<div class="set-row${sel}" onclick="selectOverlayEntry('${e.id}')">
+      <span class="set-dot ${cls}"></span>
+      <span class="set-row-name" title="${e.displayName.replace(/"/g, '&quot;')}">${e.displayName}</span>
+    </div>`;
+  }).join('');
+}
+
+function selectOverlayEntry(id) {
+  setSelectedId = id;
+  const m = manifest.entries.find(e => e.id === id);
+  if (!m) return;
+  const e = effectiveEntry(id) || {};
+
+  const listField = (k, label, hint) => `
+    <div class="set-field">
+      <label for="ov-${k}">${label} <span class="set-hint">${hint}</span></label>
+      <input type="text" id="ov-${k}" value="${listToCsv(e[k]).replace(/"/g, '&quot;')}"/>
+    </div>`;
+
+  document.getElementById('set-editor').innerHTML = `
+    <h3>${m.displayName}</h3>
+    <div class="set-meta">
+      <code>${m.id}</code><br>
+      ${m.workload} \u00b7 ${m.category} \u00b7 ${m.objectType}
+      ${m.version ? ' \u00b7 v' + m.version : ''}
+      ${m.tier ? ' \u00b7 ' + m.tier.toUpperCase() : ''}
+      ${(m.flags || []).length ? '<br><b>Flags:</b> ' + m.flags.join(', ') : ''}
+    </div>
+
+    <div class="set-field">
+      <label for="ov-lldSummary">LLD summary
+        <span class="set-hint">\u2014 British English, one or two sentences on what this enforces and why. Used verbatim in the design document.</span>
+      </label>
+      <textarea id="ov-lldSummary">${(e.lldSummary || '').replace(/</g, '&lt;')}</textarea>
+      <div class="set-actions">
+        <button class="btn btn-ghost btn-sm" onclick="aiDraftSummary('${m.id}')" id="ov-ai-btn">\u2728 Draft with AI</button>
+        <span class="set-hint" id="ov-ai-status"></span>
+      </div>
+    </div>
+
+    ${listField('blocks',   'Blocks',   '\u2014 comma separated, e.g. intune.win.cis-l1')}
+    <div class="set-row2">
+      ${listField('licence', 'Licence', '\u2014 E3, E5, BP')}
+      <div class="set-field">
+        <label for="ov-lldSection">LLD section <span class="set-hint">\u2014 e.g. 4.3</span></label>
+        <input type="text" id="ov-lldSection" value="${(e.lldSection || '').replace(/"/g, '&quot;')}"/>
+      </div>
+    </div>
+    <div class="set-row2">
+      ${listField('requires', 'Requires', '\u2014 ids that must deploy first')}
+      <div class="set-field">
+        <label for="ov-assignTo">Assign to <span class="set-hint">\u2014 default group id</span></label>
+        <input type="text" id="ov-assignTo" value="${(e.assignTo || '').replace(/"/g, '&quot;')}"/>
+      </div>
+    </div>
+    <div class="set-row2">
+      ${listField('conflictsWith', 'Conflicts with', '')}
+      ${listField('supersedes',    'Supersedes',     '\u2014 older ids this replaces')}
+    </div>
+
+    <div class="set-field">
+      <label for="ov-notes">Internal notes <span class="set-hint">\u2014 never appears in customer output</span></label>
+      <textarea id="ov-notes" style="min-height:56px">${(e.notes || '').replace(/</g, '&lt;')}</textarea>
+    </div>
+
+    <div class="set-actions">
+      <button class="btn btn-doc btn-sm" onclick="stageOverlayEntry('${m.id}')">Apply to staged changes</button>
+      <button class="btn btn-ghost btn-sm" onclick="clearOverlayEntry('${m.id}')">Clear this entry</button>
+    </div>`;
+
+  renderSettingsList();
+}
+
+// Read the form into the staged edits. Entries that end up empty are recorded
+// as a deletion so the save removes them from the overlay.
+function stageOverlayEntry(id) {
+  const entry = { id };
+  OVERLAY_TEXT_FIELDS.concat(OVERLAY_LINE_FIELDS).forEach(k => {
+    const el = document.getElementById('ov-' + k);
+    if (el && el.value.trim()) entry[k] = el.value.trim();
+  });
+  OVERLAY_LIST_FIELDS.forEach(k => {
+    const el = document.getElementById('ov-' + k);
+    if (el) {
+      const list = csvToList(el.value);
+      if (list.length) entry[k] = list;
+    }
+  });
+
+  const meaningful = Object.keys(entry).filter(k => k !== 'id').length > 0;
+  overlayEdits[id] = meaningful ? entry : { id, _delete: true };
+  showToast(meaningful ? 'Staged \u2014 remember to save' : 'Staged for removal', 'ok');
+  renderSettingsStats();
+  renderSettingsList();
+}
+
+function clearOverlayEntry(id) {
+  overlayEdits[id] = { id, _delete: true };
+  selectOverlayEntry(id);
+  renderSettingsStats();
+}
+
+function discardOverlayEdits() {
+  if (!confirm('Discard all staged overlay changes?')) return;
+  overlayEdits = {};
+  if (setSelectedId) selectOverlayEntry(setSelectedId);
+  renderSettingsStats();
+  renderSettingsList();
+  showToast('Staged changes discarded', 'ok');
+}
+
+// Draft the LLD summary with AI. Fetches the policy JSON so the model sees the
+// actual settings rather than just the name. The consultant reviews and applies.
+async function aiDraftSummary(id) {
+  const m = manifest.entries.find(e => e.id === id);
+  if (!m) return;
+  const btn = document.getElementById('ov-ai-btn');
+  const st  = document.getElementById('ov-ai-status');
+  btn.disabled = true; st.textContent = 'Reading policy\u2026';
+
+  try {
+    const wl = WORKLOAD_TAB[m.workload];
+    const p  = wl && policies[wl] ? policies[wl].find(x => x.mId === id) : null;
+    const url = p ? p.raw_url : `${RAW_BASE}/${m.file.split('/').map(encodeURIComponent).join('/')}`;
+    const r = await fetch(`${url}?t=${Date.now()}`);
+    if (!r.ok) throw new Error(`policy fetch ${r.status}`);
+    const json = await r.json();
+
+    st.textContent = 'Drafting\u2026';
+    const rows = extractSettings(json, m.category);
+    const res  = await generateRationale(
+      m.displayName, json.description || m.description || '', rows, true, 'the customer');
+
+    if (res && res.rationale) {
+      document.getElementById('ov-lldSummary').value = res.rationale.trim();
+      st.textContent = 'Draft ready \u2014 review before applying';
+    } else {
+      st.textContent = 'No draft returned';
+    }
+  } catch (e) {
+    console.warn('[Overlay] AI draft failed', e);
+    st.textContent = 'Draft failed: ' + e.message;
+  }
+  btn.disabled = false;
+}
+
+// Merge staged edits into the loaded overlay and commit the whole file.
+async function saveOverlay() {
+  const merged = Object.assign({}, overlayEntries);
+  Object.entries(overlayEdits).forEach(([id, e]) => {
+    if (e._delete) delete merged[id];
+    else merged[id] = e;
+  });
+
+  const doc = {
+    schemaVersion: 1,
+    entries: Object.values(merged).sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
+  };
+
+  const btn = document.getElementById('set-save');
+  btn.disabled = true; btn.textContent = 'Saving\u2026';
+  try {
+    const r = await fetch(SAVE_OVERLAY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ overlay: doc, sha: overlaySha }),
+    });
+    const out = await r.json().catch(() => ({}));
+    if (!r.ok || !out.ok) {
+      throw new Error(out.error || `HTTP ${r.status}`);
+    }
+    overlayEntries = merged;
+    overlayEdits   = {};
+    overlaySha     = out.sha || null;
+    showToast(`Overlay saved \u2014 ${out.entries} entries committed`, 'ok');
+    renderSettingsStats();
+    renderSettingsList();
+  } catch (e) {
+    showToast(`Save failed: ${e.message}`, 'err');
+    console.error('[Overlay] save failed', e);
+  }
+  btn.disabled = false; btn.textContent = 'Save to GitHub';
+}
+
+
 // Maps a manifest workload to a UI tab. Workloads with no tab (exchange,
 // sharepoint, teams, purview) are counted and reported, not silently dropped —
 // they deploy via the PowerShell runner and need their own tab.
@@ -1621,7 +2593,8 @@ const MANIFEST_URL = `${RAW_BASE}/manifest.json`;
 // function has been taught to handle that category.
 const DEPLOYABLE_CATS = {
   intune:   ['EndpointSecurity','SettingsCatalog','CompliancePolicies',
-             'DeviceConfigurations','EnrolmentRestrictions','AppProtectionPolicies'],
+             'DeviceConfigurations','EnrolmentRestrictions','AppProtectionPolicies',
+             'AutopilotProfiles','EnrolmentStatusPage'],
   entra:    ['ConditionalAccess','NamedLocations','AuthMethods'],
   defender: ['DefenderEndpoint','DefenderOffice'],
 };
@@ -1652,6 +2625,8 @@ const WORKLOADS = {
       { folder: 'IntuneConfig/DeviceConfigurations',    cat: 'DeviceConfigurations',  label: 'Device Config'          },
       { folder: 'IntuneConfig/EnrolmentRestrictions',   cat: 'EnrolmentRestrictions', label: 'Enrolment Restrictions' },
       { folder: 'IntuneConfig/AppProtectionPolicies',   cat: 'AppProtectionPolicies', label: 'App Protection (MAM)'   },
+      { folder: 'IntuneConfig/AutopilotProfiles',       cat: 'AutopilotProfiles',     label: 'Autopilot Profiles'     },
+      { folder: 'IntuneConfig/EnrolmentStatusPage',     cat: 'EnrolmentStatusPage',   label: 'Enrolment Status Page'  },
     ],
     deployFn: deployIntunePolicy,
     existsCheckFn: checkIntuneExists,
@@ -1795,35 +2770,14 @@ async function getToken() {
 // AUTH UI
 // ═══════════════════════════════════════════════════════════════════
 function onSignedIn() {
-  document.getElementById('auth-screen').style.display = 'none';
-  document.getElementById('deployer').style.display    = '';
-  document.getElementById('tabbar').style.display      = 'flex';
-
-  const initials = (account.name || account.username || 'U')
-    .split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
-
-  document.getElementById('topbar-right').innerHTML = `
-    <div class="mode-toggle">
-      <button class="mode-btn active" data-mode="deploy" onclick="setAppMode('deploy');this.classList.add('active');this.nextElementSibling.classList.remove('active')">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-        Deploy
-      </button>
-      <button class="mode-btn" data-mode="document" onclick="setAppMode('document');this.classList.add('active');this.previousElementSibling.classList.remove('active')">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        Document
-      </button>
-    </div>
-    <div class="user-pill">
-      <div class="user-avatar">${initials}</div>
-      <span>${account.name || account.username}</span>
-    </div>
-    <button class="btn btn-ghost btn-sm" id="refresh-btn" onclick="refresh()">
-      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-      Refresh
-    </button>
-    <button class="btn btn-ghost btn-sm" onclick="signOut()">Sign out</button>`;
+  hideAllScreens();
+  docWizardReturn = null;
+  bbReturn        = null;
+  document.getElementById('deployer').style.display = '';
+  document.getElementById('tabbar').style.display   = 'flex';
 
   setAppMode('deploy');
+  renderTopbar();
   loadAllWorkloads();
 }
 
@@ -1900,6 +2854,7 @@ function buildFromManifest(m) {
 }
 
 async function loadAllWorkloads() {
+  statusChecked = false;
   // Show loading state on all grids
   for (const wl of Object.keys(WORKLOADS)) {
     policies[wl] = [];
@@ -1909,6 +2864,9 @@ async function loadAllWorkloads() {
   // Preferred path: one manifest fetch supplies the whole catalogue.
   manifest = await loadManifest();
   if (manifest && buildFromManifest(manifest)) {
+    // Overlay editing is only meaningful when the manifest loaded.
+    const sb = document.getElementById('settings-btn');
+    if (sb) sb.style.display = '';
     Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
     await afterCatalogueLoaded();
     return;
@@ -1973,8 +2931,12 @@ async function loadAllWorkloads() {
 // Shared by both the manifest and fallback paths: existing-policy checks in
 // deploy mode, nothing in document mode.
 async function afterCatalogueLoaded() {
-  // In document mode, skip all Graph checks (no auth needed)
-  if (appMode === 'document') {
+  // A Building Blocks choice made before the grid loaded is applied here.
+  if (bbPending) { if (!mgCatalog) await loadCatalog(); bbApplyPendingSelection(); }
+
+  // Graph checks only apply to a signed-in deploy grid. Document and manage
+  // modes read the repository alone and must never trigger sign-in.
+  if (appMode !== 'deploy' || !account) {
     Object.keys(WORKLOADS).forEach(wl => {
       policies[wl].forEach(p => { p.status = 'ready'; });
       renderGrid(wl, false);
@@ -1998,6 +2960,7 @@ async function afterCatalogueLoaded() {
     showToast('Could not check existing policies: ' + e.message, 'err');
     Object.keys(WORKLOADS).forEach(wl => policies[wl].forEach(p => { if (p.status === 'loading') p.status = 'ready'; }));
   }
+  statusChecked = true;
   Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
 }
 
@@ -2114,29 +3077,35 @@ async function graphGetAll(url) {
 // EXISTS CHECKS
 // ═══════════════════════════════════════════════════════════════════
 async function checkIntuneExists() {
-  const [comp, dc, cfg, er, mamAndroid, mamIos] = await Promise.all([
+  const [comp, dc, cfg, er, mamAndroid, mamIos, ap] = await Promise.all([
     graphGetAll(`${GRAPH}/deviceManagement/deviceCompliancePolicies?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceManagement/deviceConfigurations?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceManagement/configurationPolicies?$select=id,name`),
     graphGetAll(`${GRAPH}/deviceManagement/deviceEnrollmentConfigurations?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceAppManagement/androidManagedAppProtections?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceAppManagement/iosManagedAppProtections?$select=id,displayName`),
+    // No $select — a rejected query returns [] silently and would mark every profile 'ready'
+    graphGetAll(`${GRAPH}/deviceManagement/windowsAutopilotDeploymentProfiles`),
   ]);
   const compMap = new Map(comp.map(p => [p.displayName, p.id]));
   const dcMap   = new Map(dc.map(p => [p.displayName, p.id]));
   const cfgMap  = new Map(cfg.map(p => [p.name, p.id]));
   const erMap   = new Map(er.map(p => [p.displayName, p.id]));
   const mamMap  = new Map([...mamAndroid, ...mamIos].map(p => [p.displayName, p.id]));
+  const apMap   = new Map(ap.map(p => [p.displayName, p.id]));
   for (const p of policies.intune) {
     const deployName = getDeployName(p);
     if (p.cat === 'CompliancePolicies') {
       p.tenantId = compMap.get(deployName) || compMap.get(p.displayName) || null;
     } else if (p.cat === 'DeviceConfigurations') {
       p.tenantId = dcMap.get(deployName) || dcMap.get(p.displayName) || null;
-    } else if (p.cat === 'EnrolmentRestrictions') {
+    } else if (p.cat === 'EnrolmentRestrictions' || p.cat === 'EnrolmentStatusPage') {
+      // ESP shares the deviceEnrollmentConfigurations collection with restrictions
       p.tenantId = erMap.get(deployName) || erMap.get(p.displayName) || null;
     } else if (p.cat === 'AppProtectionPolicies') {
       p.tenantId = mamMap.get(deployName) || mamMap.get(p.displayName) || null;
+    } else if (p.cat === 'AutopilotProfiles') {
+      p.tenantId = apMap.get(deployName) || apMap.get(p.displayName) || null;
     } else {
       p.tenantId = cfgMap.get(deployName) || cfgMap.get(p.displayName) || null;
     }
@@ -2497,6 +3466,70 @@ async function deployIntunePolicy(p, json) {
                    'roleScopeTagIds','assignments','priorityMetaData','@odata.context','priority'];
     body = { ...json };
     RO_ER.forEach(k => delete body[k]);
+
+  } else if (p.cat === 'EnrolmentStatusPage') {
+    // Windows ESP — a deviceEnrollmentConfiguration. Priority is assigned by the
+    // service on create. selectedMobileAppIds are tenant-specific app GUIDs, so
+    // blocking apps are never deployed; they are selected per customer.
+    url = `${GRAPH}/deviceManagement/deviceEnrollmentConfigurations`;
+    const RO_ESP = ['id','createdDateTime','lastModifiedDateTime','version',
+                    'roleScopeTagIds','assignments','priorityMetaData','@odata.context',
+                    'priority','selectedMobileAppIds'];
+    body = { ...json };
+    RO_ESP.forEach(k => delete body[k]);
+    body['@odata.type'] = '#microsoft.graph.windows10EnrollmentCompletionPageConfiguration';
+
+  } else if (p.cat === 'AutopilotProfiles') {
+    // Entra join only — hybrid profiles need a domain join profile and the
+    // Intune Connector for AD, which the deployer does not handle.
+    const AP_ENTRA = '#microsoft.graph.azureADWindowsAutopilotDeploymentProfile';
+    if (json['@odata.type'] && json['@odata.type'] !== AP_ENTRA) {
+      throw new Error('Only Entra-joined Autopilot profiles are supported');
+    }
+    url = `${GRAPH}/deviceManagement/windowsAutopilotDeploymentProfiles`;
+    const RO_AP = ['id','createdDateTime','lastModifiedDateTime','roleScopeTagIds',
+                   'assignments','assignedDevices','managementServiceAppId',
+                   '@odata.context','enrollmentStatusScreenSettings'];
+    body = { ...json };
+    RO_AP.forEach(k => delete body[k]);
+    body['@odata.type'] = AP_ENTRA;
+
+    if (branding.intune.mode !== 'original') {
+      if (body.displayName) body.displayName = applyBranding(body.displayName, 'intune');
+    }
+
+    // The export carries current property names alongside their deprecated
+    // aliases (same values). Send as exported; if Graph rejects it, retry once
+    // with only the current names.
+    const DEPRECATED_AP = {
+      outOfBoxExperienceSettings: 'outOfBoxExperienceSetting',
+      extractHardwareHash:        'hardwareHashExtractionEnabled',
+      enableWhiteGlove:           'preprovisioningAllowed',
+      language:                   'locale',
+    };
+    const postAp = b => fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${graphToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(b)
+    });
+    let r = await postAp(body);
+    if (r.status === 400) {
+      console.warn('Autopilot POST rejected — retrying without deprecated aliases:', await r.text());
+      const slim = { ...body };
+      for (const [old, cur] of Object.entries(DEPRECATED_AP)) {
+        if (cur in slim) delete slim[old];
+      }
+      body = slim;
+      r = await postAp(body);
+    }
+    if (!r.ok) {
+      const errText = await r.text();
+      console.error('Graph 400 body:', errText);
+      console.error('Payload sent:', JSON.stringify(body, null, 2));
+      throw new Error(`Graph ${r.status}: ${errText}`);
+    }
+    const created = await r.json();
+    return created.id || null;
 
   } else if (p.cat === 'AppProtectionPolicies') {
     const odataType = json['@odata.type'] || '';
@@ -2881,7 +3914,10 @@ function getDeleteUrl(p) {
     case 'NamedLocations':
       return `https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations/${p.tenantId}`;
     case 'EnrolmentRestrictions':
+    case 'EnrolmentStatusPage':
       return `${GRAPH}/deviceManagement/deviceEnrollmentConfigurations/${p.tenantId}`;
+    case 'AutopilotProfiles':
+      return `${GRAPH}/deviceManagement/windowsAutopilotDeploymentProfiles/${p.tenantId}`;
     case 'AppProtectionPolicies': {
       const name = (p.displayName || '').toLowerCase();
       const odataType = (p._json?.['@odata.type'] || '').toLowerCase();
@@ -3035,6 +4071,7 @@ const CAT_LABELS = {
   AuthMethods:'Auth Methods', DefenderEndpoint:'Defender Endpoint',
   DefenderOffice:'Defender Office',
   EnrolmentRestrictions:'Enrolment Restriction', AppProtectionPolicies:'App Protection (MAM)',
+  AutopilotProfiles:'Autopilot Profile', EnrolmentStatusPage:'Enrolment Status Page',
   // Categories surfaced by the manifest
   AdminConsentRequestPolicy:'Admin Consent', AppManagementPolicies:'App Management',
   AuthorizationPolicy:'Authorization', CrossTenantAccessPolicy:'Cross-Tenant Access',
@@ -3089,6 +4126,7 @@ function getVisible(wl) {
       if (!matchL1 && !matchL2 && !matchNone) return false;
     }
     if (q && !p.displayName.toLowerCase().includes(q)) return false;
+    if (!mgPassesFilters(wl, p)) return false;
     return true;
   });
 }
@@ -3162,8 +4200,12 @@ function renderGrid(wl, loading) {
       ? `<span class="pname-renamed">${deployName}</span>`
       : deployName;
 
-    return `<div class="pcard ${p.selected?'selected':''}" data-cat="${p.cat}" data-wl="${wl}" data-name="${p.name}"
-         style="animation-delay:${i*20}ms" onclick="togglePolicy('${wl}','${p.name}')">
+    // In manage mode a card opens the editor drawer rather than selecting.
+    const mgClick = appMode === 'manage'
+      ? `mgOpenDrawer('${wl}','${p.name}')`
+      : `togglePolicy('${wl}','${p.name}')`;
+    return `<div class="pcard ${p.selected?'selected':''} ${mgIsDirty(p)?'mg-dirty':''}" data-cat="${p.cat}" data-wl="${wl}" data-name="${p.name}"
+         style="animation-delay:${i*20}ms" onclick="${mgClick}">
       <div class="pcheck">
         <svg width="9" height="9" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
       </div>
@@ -3175,6 +4217,7 @@ function renderGrid(wl, loading) {
           ${flagBadges}
           ${docOnly}
           ${sb}
+          ${mgCardBadges(p)}
         </div>
       </div>
       <button class="pcard-info-btn" title="View policy details" onclick="event.stopPropagation();showPolicyPanel('${wl}','${p.name}')" onmouseenter="prefetchPolicyInsight('${wl}','${p.name}')" onmouseleave="cancelPrefetch('${p.name}')">
@@ -3240,6 +4283,7 @@ function togglePolicy(wl, name) {
 function updateDeployBar() {
   const sel = Object.values(policies).flat().filter(p => p.selected);
   const bar  = document.getElementById('deploy-bar');
+  if (appMode === 'manage') { bar.classList.remove('up'); return; }
   const existCount = sel.filter(p => p.status === 'exists').length;
   const readyCount = sel.filter(p => p.status !== 'exists').length;
 
@@ -3969,6 +5013,53 @@ function extractSettings(json, cat) {
       const val = Array.isArray(v) ? (v.length === 0 ? 'None' : v.join(', ')) : String(v);
       settings.push({ key: humanizeName(k), rawKey: k, value: humanizeValue(val) });
     }
+
+  } else if (cat === 'AutopilotProfiles') {
+    // Explicit rows in portal order. Deprecated aliases in the export
+    // (outOfBoxExperienceSettings, extractHardwareHash, enableWhiteGlove,
+    // language) are ignored so the LLD doesn't show duplicate rows.
+    const yn  = v => (v === true ? 'Yes' : v === false ? 'No' : null);
+    const oobe = json.outOfBoxExperienceSetting || {};
+    const add = (key, rawKey, value) => {
+      if (value !== null && value !== undefined && value !== '') settings.push({ key, rawKey, value: String(value) });
+    };
+    const JOIN = {
+      '#microsoft.graph.azureADWindowsAutopilotDeploymentProfile':      'Microsoft Entra joined',
+      '#microsoft.graph.activeDirectoryWindowsAutopilotDeploymentProfile': 'Microsoft Entra hybrid joined',
+    };
+    const MODE  = { singleUser: 'User-driven', shared: 'Self-deploying' };
+    const UTYPE = { standard: 'Standard', administrator: 'Administrator' };
+    const DTYPE = { windowsPc: 'Windows PC', holoLens: 'HoloLens', surfaceHub2: 'Surface Hub 2', surfaceHub2S: 'Surface Hub 2S', virtualMachine: 'Virtual machine' };
+    add('Deployment mode',                            'deviceUsageType',               MODE[oobe.deviceUsageType] || oobe.deviceUsageType);
+    add('Join to Microsoft Entra ID as',              '@odata.type',                   JOIN[json['@odata.type']]);
+    add('Device type',                                'deviceType',                    DTYPE[json.deviceType] || json.deviceType);
+    add('Convert all targeted devices to Autopilot',  'hardwareHashExtractionEnabled', yn(json.hardwareHashExtractionEnabled));
+    add('Allow pre-provisioned deployment',           'preprovisioningAllowed',        yn(json.preprovisioningAllowed));
+    add('Microsoft Software License Terms',           'eulaHidden',                    oobe.eulaHidden === undefined ? null : (oobe.eulaHidden ? 'Hide' : 'Show'));
+    add('Privacy settings',                           'privacySettingsHidden',         oobe.privacySettingsHidden === undefined ? null : (oobe.privacySettingsHidden ? 'Hide' : 'Show'));
+    add('Hide change account options',                'escapeLinkHidden',              yn(oobe.escapeLinkHidden));
+    add('User account type',                          'userType',                      UTYPE[oobe.userType] || oobe.userType);
+    add('Language (Region)',                          'locale',                        json.locale === 'os-default' ? 'Operating system default' : json.locale);
+    add('Automatically configure keyboard',           'keyboardSelectionPageSkipped',  yn(oobe.keyboardSelectionPageSkipped));
+    add('Apply device name template',                 'deviceNameTemplate',            json.deviceNameTemplate ? `Yes — ${json.deviceNameTemplate}` : 'No');
+
+  } else if (cat === 'EnrolmentStatusPage') {
+    const yn  = v => (v === true ? 'Yes' : v === false ? 'No' : null);
+    const add = (key, rawKey, value) => {
+      if (value !== null && value !== undefined && value !== '') settings.push({ key, rawKey, value: String(value) });
+    };
+    add('Show app and profile configuration progress',            'showInstallationProgress',                yn(json.showInstallationProgress));
+    add('Error timeout (minutes)',                                 'installProgressTimeoutInMinutes',         json.installProgressTimeoutInMinutes);
+    add('Custom error message',                                    'customErrorMessage',                      json.customErrorMessage);
+    add('Turn on log collection and diagnostics page for end users','allowLogCollectionOnInstallFailure',    yn(json.allowLogCollectionOnInstallFailure));
+    add('Only show page to devices provisioned by OOBE',           'trackInstallProgressForAutopilotOnly',    yn(json.trackInstallProgressForAutopilotOnly));
+    add('Install Windows quality updates (might restart the device)','installQualityUpdates',                yn(json.installQualityUpdates));
+    add('Allow users to reset device if installation error occurs', 'allowDeviceResetOnInstallFailure',       yn(json.allowDeviceResetOnInstallFailure));
+    add('Allow users to use device if installation error occurs',   'allowDeviceUseOnInstallFailure',         yn(json.allowDeviceUseOnInstallFailure));
+    add('Block user retry of device setup on failure',              'blockDeviceSetupRetryByUser',            yn(json.blockDeviceSetupRetryByUser));
+    add('Ignore non-blocking app failures during technician phase', 'allowNonBlockingAppInstallation',        yn(json.allowNonBlockingAppInstallation));
+    add('Disable user status tracking after first user',            'disableUserStatusTrackingAfterFirstUser',yn(json.disableUserStatusTrackingAfterFirstUser));
+    add('Blocking apps',                                            'selectedMobileAppIds',                   'Not defined in baseline — selected per customer');
 
   } else if (cat === 'AppProtectionPolicies') {
     // MAM App Protection policies are flat JSON — iterate top-level scalar/array fields.
@@ -5622,6 +6713,21 @@ document.getElementById('remove-btn').addEventListener('click', removeSelected);
 document.getElementById('docgen-btn').addEventListener('click', generateDocument);
 document.getElementById('doc-continue-btn').addEventListener('click', openDocWizard);
 
+// Settings page filters
+['set-search'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', renderSettingsList);
+});
+['set-filter-state','set-filter-workload'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', renderSettingsList);
+});
+
+// Warn before losing staged overlay edits on tab close
+window.addEventListener('beforeunload', (e) => {
+  if (Object.keys(overlayEdits).length) { e.preventDefault(); e.returnValue = ''; }
+});
+
 // Wizard field validation
 ['wiz-customer', 'wiz-oppnum', 'wiz-oppname'].forEach(id => {
   const el = document.getElementById(id);
@@ -5827,6 +6933,911 @@ window.addEventListener('load', () => {
     showToast('Authentication init failed. Check browser console.', 'err');
   });
 });
+// ═══════════════════════════════════════════════════════════════════
+// POLICY MANAGEMENT
+// Reads catalog.json (built by tools/build_catalog.py) and lets a
+// consultant view and amend taxonomy overrides, tags and enrichment.
+// Deploy and Document behaviour is untouched.
+// ═══════════════════════════════════════════════════════════════════
+
+const CATALOG_URL = `${RAW_BASE}/catalog.json`;
+
+// Azure Function endpoint that commits sidecars back to the repo.
+// Until this is stood up, Save falls back to downloading a .zip of the
+// sidecars so nothing is lost.
+const MG_SAVE_ENDPOINT = ''; // e.g. 'https://cdw-baseline-functions.azurewebsites.net/api/saveMetadata'
+
+let mgCatalog   = null;   // parsed catalog.json
+let mgById      = {};     // policy id -> catalog record
+let mgByPath    = {};     // repo path -> catalog record
+let mgDirty     = {};     // policy id -> { overrides, tags, enrichment }
+let mgCurrentId = null;   // policy open in the drawer
+
+// Filter state, mirroring the existing activeFilter pattern
+const mgFramework = { intune:new Set(), entra:new Set(), defender:new Set() };
+const mgBundle    = { intune:new Set(), entra:new Set(), defender:new Set() };
+const mgAttention = { intune:new Set(), entra:new Set(), defender:new Set() };
+
+const MG_OVERRIDABLE = ['workload','platform','policyType','framework','scope','area','subArea','securityDomain'];
+const MG_ENRICH_FIELDS = [
+  { key:'summary',       label:'Purpose',        rows:3, hint:'One paragraph, customer-facing. Appears in the LLD.' },
+  { key:'rationale',     label:'Rationale',      rows:4, hint:'Why this policy matters.' },
+  { key:'prerequisites', label:'Prerequisites',  rows:2, hint:'One per line.' },
+  { key:'userImpact',    label:'User impact',    rows:2, hint:'What the end user will notice.' },
+  { key:'licensing',     label:'Licensing',      rows:2, hint:'Any licence dependency.' }
+];
+const MG_KNOWN_TAGS = ['cis-l1','cis-l2','zero-trust','autopilot-mvp'];
+
+// ── Entry point ───────────────────────────────────────────────────
+
+function enterManageMode() {
+  hideAllScreens();
+  docWizardReturn = null;
+  bbReturn        = null;
+  document.getElementById('deployer').style.display = '';
+  document.getElementById('tabbar').style.display   = 'flex';
+
+  setAppMode('manage');
+  renderTopbar();
+  mgUpdateSaveBar();
+
+  // Status (deployed / undeployed) needs Graph, so it has no meaning here.
+  Object.keys(WORKLOADS).forEach(wl => {
+    const row = document.getElementById(`${wl}-status-filters`)?.closest('.filter-row');
+    if (row) row.style.display = 'none';
+  });
+  document.getElementById('deploy-bar')?.classList.remove('up');
+  loadCatalog().then(() => loadAllWorkloads());
+}
+
+async function loadCatalog() {
+  try {
+    const r = await fetch(`${CATALOG_URL}?t=${Date.now()}`);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    mgCatalog = await r.json();
+    mgById   = {};
+    mgByPath = {};
+    (mgCatalog.policies || []).forEach(p => {
+      mgById[p.id] = p;
+      mgByPath[p.path] = p;
+    });
+    Object.values(policies).flat().forEach(p => { delete p._mgRec; });
+    mgBuildFilters();
+    showToast(`Catalog loaded: ${mgCatalog.counts.policies} policies, ${mgCatalog.counts.bundles} bundles`);
+  } catch (e) {
+    mgCatalog = null;
+    showToast(`Could not load catalog.json — ${e.message}`, 'err');
+  }
+}
+
+// Match a grid policy to its catalog record. The grid stores the repo
+// path on p.path when available; fall back to matching on filename.
+function mgLookup(p) {
+  if (!mgCatalog) return null;
+  if (p._mgRec !== undefined) return p._mgRec;          // memoised, incl. null misses
+  let rec = null;
+  const path = p.folder ? `${p.folder}/${p.name}.json` : null;
+  if (path && mgByPath[path]) rec = mgByPath[path];
+  else {
+    const fn = `${p.name}.json`;
+    rec = (mgCatalog.policies || []).find(c => c.fileName === fn) || null;
+  }
+  p._mgRec = rec;
+  return rec;
+}
+
+// Merge derived record with any unsaved local edits
+function mgEffective(id) {
+  const base = mgById[id];
+  if (!base) return null;
+  const d = mgDirty[id];
+  if (!d) return base;
+  const merged = { ...base, ...(d.overrides || {}) };
+  if (d.tags)       merged.tags = d.tags;
+  if (d.enrichment) merged.enrichment = { ...(base.enrichment || {}), ...d.enrichment };
+  return merged;
+}
+
+// ── Filter chips ──────────────────────────────────────────────────
+
+function mgBuildFilters() {
+  if (!mgCatalog) return;
+  const frameworks = mgCatalog.taxonomy.frameworks || [];
+  const bundles    = mgCatalog.bundles || [];
+
+  Object.keys(WORKLOADS).forEach(wl => {
+    const host = document.getElementById(`${wl}-mg-filters`);
+    if (!host) return;
+    host.className = 'filter-panel mg-filter-panel';
+    host.style.display = '';
+    host.innerHTML = `
+      <div class="filter-row">
+        <span class="filter-label">Framework</span>
+        <div class="filter-chips" id="${wl}-fw-filters">
+          <button class="fchip active" data-fw="all">All</button>
+          ${frameworks.map(f => `<button class="fchip" data-fw="${f}">${f}</button>`).join('')}
+          <button class="fchip" data-fw="none">Unmapped</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Bundle</span>
+        <div class="filter-chips" id="${wl}-bundle-filters">
+          <button class="fchip active" data-bundle="all">All</button>
+          ${bundles.map(b => `<button class="fchip" data-bundle="${b.id}">${b.name} <span class="dot" style="background:var(--dim)"></span>${b.memberCount}</button>`).join('')}
+        </div>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Attention</span>
+        <div class="filter-chips" id="${wl}-attn-filters">
+          <button class="fchip active" data-attn="all">All</button>
+          <button class="fchip" data-attn="unresolved">Unresolved attributes</button>
+          <button class="fchip" data-attn="missingEnrichment">No enrichment</button>
+          <button class="fchip" data-attn="staleEnrichment">Stale enrichment</button>
+          <button class="fchip" data-attn="orphan">No bundle</button>
+        </div>
+      </div>`;
+
+    mgWireChips(`${wl}-fw-filters`,     'fw',     mgFramework[wl], wl);
+    mgWireChips(`${wl}-bundle-filters`, 'bundle', mgBundle[wl],    wl);
+    mgWireChips(`${wl}-attn-filters`,   'attn',   mgAttention[wl], wl);
+  });
+}
+
+function mgWireChips(containerId, attr, stateSet, wl) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.querySelectorAll('.fchip').forEach(chip => {
+    chip.onclick = () => {
+      const v = chip.dataset[attr];
+      if (v === 'all') {
+        stateSet.clear();
+        c.querySelectorAll('.fchip').forEach(x => x.classList.toggle('active', x.dataset[attr] === 'all'));
+      } else {
+        stateSet.has(v) ? stateSet.delete(v) : stateSet.add(v);
+        chip.classList.toggle('active', stateSet.has(v));
+        c.querySelector(`[data-${attr}="all"]`)?.classList.toggle('active', stateSet.size === 0);
+      }
+      renderGrid(wl, false);
+    };
+  });
+}
+
+// Called from getVisible(). Returns true if the policy passes the
+// manage-only filters. Always true outside manage mode.
+function mgPassesFilters(wl, p) {
+  if (appMode !== 'manage' || !mgCatalog) return true;
+  const rec = mgLookup(p);
+  if (!rec) return mgFramework[wl].size === 0 && mgBundle[wl].size === 0 && mgAttention[wl].size === 0;
+  const eff = mgEffective(rec.id) || rec;
+
+  const fw = mgFramework[wl];
+  if (fw.size > 0) {
+    const has = (eff.frameworks || []);
+    const wantNone = fw.has('none') && has.length === 0;
+    const wantAny  = has.some(f => fw.has(f));
+    if (!wantNone && !wantAny) return false;
+  }
+
+  const bd = mgBundle[wl];
+  if (bd.size > 0 && !(eff.bundles || []).some(b => bd.has(b))) return false;
+
+  const at = mgAttention[wl];
+  if (at.size > 0) {
+    const flags = new Set();
+    if ((eff.unresolved || []).length) flags.add('unresolved');
+    if (!eff.enrichment)               flags.add('missingEnrichment');
+    else if (eff.enrichment.stale)     flags.add('staleEnrichment');
+    if (!(eff.bundles || []).length)   flags.add('orphan');
+    if (![...at].some(f => flags.has(f))) return false;
+  }
+  return true;
+}
+
+// Extra badges injected into each card while in manage mode.
+function mgCardBadges(p) {
+  if (appMode !== 'manage' || !mgCatalog) return '';
+  const rec = mgLookup(p);
+  if (!rec) return `<span class="mg-badge mg-badge-attn">Not in catalog</span>`;
+  const eff = mgEffective(rec.id) || rec;
+  const out = [];
+  (eff.frameworks || []).forEach(f => out.push(`<span class="mg-badge mg-badge-fw">${f}</span>`));
+  if (eff.securityDomain) out.push(`<span class="mg-badge mg-badge-domain">${eff.securityDomain}</span>`);
+  if (!eff.enrichment)            out.push(`<span class="mg-badge mg-badge-attn">No enrichment</span>`);
+  else if (eff.enrichment.stale)  out.push(`<span class="mg-badge mg-badge-attn">Stale</span>`);
+  if (!(eff.bundles || []).length) out.push(`<span class="mg-badge mg-badge-attn">No bundle</span>`);
+  else out.push(`<span class="mg-badge">${eff.bundles.length} bundle${eff.bundles.length === 1 ? '' : 's'}</span>`);
+  return out.join('');
+}
+
+function mgIsDirty(p) {
+  const rec = mgLookup(p);
+  return rec ? !!mgDirty[rec.id] : false;
+}
+
+// ── Drawer ────────────────────────────────────────────────────────
+
+function mgOpenDrawer(wl, name) {
+  const p = policies[wl]?.find(x => x.name === name);
+  if (!p) return;
+  const rec = mgLookup(p);
+  if (!rec) { showToast('This policy is not in catalog.json — rebuild the catalog', 'warn'); return; }
+
+  mgCurrentId = rec.id;
+  const eff = mgEffective(rec.id);
+  const tax = mgCatalog.taxonomy;
+  const opts = {
+    workload:       tax.workloads,
+    platform:       tax.platforms,
+    policyType:     tax.policyTypes,
+    framework:      tax.frameworks,
+    scope:          tax.scopes,
+    area:           tax.areas,
+    securityDomain: tax.securityDomains || []
+  };
+
+  const attrHtml = MG_OVERRIDABLE.map(k => {
+    const src = rec.derivedFrom?.[k] || (mgDirty[rec.id]?.overrides?.[k] !== undefined ? 'override' : '');
+    const isOverridden = mgDirty[rec.id]?.overrides?.[k] !== undefined || src === 'override';
+    const list = opts[k];
+    const val = eff[k] ?? '';
+    const control = list
+      ? `<select data-mgattr="${k}" onchange="mgSetOverride('${k}', this.value)">
+           <option value="">(none)</option>
+           ${list.map(o => `<option value="${htmlEsc(o)}" ${o === val ? 'selected' : ''}>${htmlEsc(o)}</option>`).join('')}
+           ${val && !list.includes(val) ? `<option value="${htmlEsc(val)}" selected>${htmlEsc(val)}</option>` : ''}
+         </select>`
+      : `<input type="text" data-mgattr="${k}" value="${htmlEsc(val)}" onchange="mgSetOverride('${k}', this.value)"/>`;
+    return `<div class="mg-field ${isOverridden ? 'changed' : ''}">
+      <label>${k}${src ? `<span class="mg-src ${src === 'override' ? 'mg-src-override' : ''}">${src}</span>` : ''}</label>
+      ${control}
+    </div>`;
+  }).join('');
+
+  const tagHtml = MG_KNOWN_TAGS.map(t =>
+    `<button class="mg-tag-btn ${(eff.tags || []).includes(t) ? 'on' : ''}" onclick="mgToggleTag('${t}')">${t}</button>`
+  ).join('');
+
+  const bundleHtml = (eff.bundles || []).length
+    ? eff.bundles.map(b => {
+        const bd = mgCatalog.bundles.find(x => x.id === b);
+        return `<span class="mg-badge">${htmlEsc(bd ? bd.name : b)}</span>`;
+      }).join('')
+    : `<span class="mg-empty">Not a member of any bundle. Add a tag or adjust an attribute above.</span>`;
+
+  const en = eff.enrichment || {};
+  const enrichHtml = MG_ENRICH_FIELDS.map(f => {
+    const raw = Array.isArray(en[f.key]) ? en[f.key].join('\n') : (en[f.key] || '');
+    const changed = mgDirty[rec.id]?.enrichment?.[f.key] !== undefined;
+    return `<div class="mg-field ${changed ? 'changed' : ''}">
+      <label>${f.label}</label>
+      <textarea rows="${f.rows}" placeholder="${f.hint}"
+        onchange="mgSetEnrichment('${f.key}', this.value)">${htmlEsc(raw)}</textarea>
+    </div>`;
+  }).join('');
+
+  const staleNote = en.stale
+    ? `<div class="mg-stale">The policy file has changed since this enrichment was written. Review and update it, or regenerate.</div>`
+    : '';
+
+  document.getElementById('mg-dr-title').textContent = eff.displayName || rec.fileName;
+  document.getElementById('mg-dr-path').textContent  = rec.path;
+  document.getElementById('mg-dr-body').innerHTML = `
+    <div class="mg-sec">
+      <div class="mg-sec-title">Taxonomy</div>
+      <p class="mg-empty" style="margin-bottom:10px">Values are derived automatically. Changing one records an override that survives future rebuilds.</p>
+      ${attrHtml}
+    </div>
+    <div class="mg-sec">
+      <div class="mg-sec-title">Framework tags</div>
+      <div class="mg-tags">${tagHtml}</div>
+    </div>
+    <div class="mg-sec">
+      <div class="mg-sec-title">Bundle membership</div>
+      <div class="mg-bundles">${bundleHtml}</div>
+    </div>
+    <div class="mg-sec">
+      <div class="mg-sec-title">Enrichment</div>
+      ${staleNote}
+      ${enrichHtml}
+    </div>`;
+
+  document.getElementById('mg-drawer').classList.add('open');
+}
+
+function mgCloseDrawer() {
+  document.getElementById('mg-drawer').classList.remove('open');
+  mgCurrentId = null;
+}
+
+// ── Edit handlers ─────────────────────────────────────────────────
+
+function mgEnsureDirty(id) {
+  if (!mgDirty[id]) mgDirty[id] = { overrides:{}, tags:null, enrichment:{} };
+  return mgDirty[id];
+}
+
+function mgSetOverride(key, value) {
+  if (!mgCurrentId) return;
+  const base = mgById[mgCurrentId];
+  const d = mgEnsureDirty(mgCurrentId);
+  const v = value === '' ? null : value;
+  if (v === base[key]) delete d.overrides[key];
+  else d.overrides[key] = v;
+  mgAfterEdit();
+}
+
+function mgToggleTag(tag) {
+  if (!mgCurrentId) return;
+  const base = mgById[mgCurrentId];
+  const d = mgEnsureDirty(mgCurrentId);
+  const cur = new Set(d.tags || base.tags || []);
+  cur.has(tag) ? cur.delete(tag) : cur.add(tag);
+  const next = [...cur].sort();
+  const orig = [...(base.tags || [])].sort();
+  d.tags = (JSON.stringify(next) === JSON.stringify(orig)) ? null : next;
+  mgAfterEdit();
+  mgOpenDrawer(mgCurrentWl(), mgCurrentName()); // re-render tag + bundle state
+}
+
+function mgSetEnrichment(key, value) {
+  if (!mgCurrentId) return;
+  const base = mgById[mgCurrentId];
+  const d = mgEnsureDirty(mgCurrentId);
+  const orig = base.enrichment?.[key];
+  const origStr = Array.isArray(orig) ? orig.join('\n') : (orig || '');
+  if (value === origStr) delete d.enrichment[key];
+  else d.enrichment[key] = value;
+  mgAfterEdit();
+}
+
+function mgAfterEdit() {
+  // Drop the record entirely if nothing differs from the derived state
+  const d = mgDirty[mgCurrentId];
+  if (d && Object.keys(d.overrides).length === 0 && !d.tags && Object.keys(d.enrichment).length === 0) {
+    delete mgDirty[mgCurrentId];
+  }
+  mgUpdateSaveBar();
+  Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+}
+
+// Helpers so the drawer can re-render itself after a tag toggle
+function mgCurrentWl() {
+  const rec = mgById[mgCurrentId];
+  for (const wl of Object.keys(policies)) {
+    if (policies[wl].some(p => mgLookup(p)?.id === rec.id)) return wl;
+  }
+  return activeTab;
+}
+function mgCurrentName() {
+  const rec = mgById[mgCurrentId];
+  for (const wl of Object.keys(policies)) {
+    const hit = policies[wl].find(p => mgLookup(p)?.id === rec.id);
+    if (hit) return hit.name;
+  }
+  return '';
+}
+
+// ── Save ──────────────────────────────────────────────────────────
+
+function mgUpdateSaveBar() {
+  const n = Object.keys(mgDirty).length;
+  const bar = document.getElementById('mg-savebar');
+  bar.classList.toggle('up', n > 0);
+  document.getElementById('mg-sb-text').textContent = `${n} polic${n === 1 ? 'y' : 'ies'} edited`;
+}
+
+function mgBuildSidecars() {
+  return Object.entries(mgDirty).map(([id, d]) => {
+    const base = mgById[id];
+    const sidecar = { schemaVersion: 1, policyPath: base.path };
+    if (Object.keys(d.overrides).length) sidecar.overrides = d.overrides;
+    if (d.tags) sidecar.tags = d.tags;
+    if (Object.keys(d.enrichment).length) {
+      const en = { ...(base.enrichment || {}) };
+      delete en.stale;
+      Object.entries(d.enrichment).forEach(([k, v]) => {
+        en[k] = (k === 'prerequisites') ? v.split('\n').map(s => s.trim()).filter(Boolean) : v;
+      });
+      en.generatedBy = 'consultant';
+      en.generatedAt = new Date().toISOString();
+      en.sourceHash  = base.policyHash;
+      sidecar.enrichment = en;
+    }
+    return { path: `metadata/${base.path}.meta.json`, content: sidecar };
+  });
+}
+
+async function mgSave() {
+  const files = mgBuildSidecars();
+  if (!files.length) return;
+
+  if (!MG_SAVE_ENDPOINT) {
+    // No backend yet — hand the consultant the files so work is never lost
+    files.forEach(f => {
+      const blob = new Blob([JSON.stringify(f.content, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = f.path.split('/').pop();
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+    showToast(`Downloaded ${files.length} sidecar file(s) — commit them under metadata/`, 'warn');
+    return;
+  }
+
+  try {
+    const r = await fetch(MG_SAVE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ files })
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    showToast(`Saved ${files.length} sidecar file(s) to the repository`);
+    mgDirty = {};
+    mgUpdateSaveBar();
+    await loadCatalog();
+    Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+  } catch (e) {
+    showToast(`Save failed — ${e.message}`, 'err');
+  }
+}
+
+function mgDiscard() {
+  if (!confirm('Discard all unsaved changes?')) return;
+  mgDirty = {};
+  mgCloseDrawer();
+  mgUpdateSaveBar();
+  Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// BUILDING BLOCKS
+// A graphical step-through that selects off-the-shelf policy sets by
+// outcome rather than technical detail. Two entry points: a cross-tower
+// scenario, or browse by technology → platform → one or more goals.
+// Membership resolves from catalog.json, so every count shown to a
+// customer is the live repository contents.
+// ═══════════════════════════════════════════════════════════════════
+
+const BB_STEPS = ['Start', 'Platform', 'Goals', 'Review'];
+
+let bbStep     = 1;
+let bbTower    = null;   // tower id, e.g. 'Intune'
+let bbPlatform = null;   // 'Windows' | 'macOS' | 'Mobile' | 'Cross-platform'
+let bbPicks    = {};     // goalId -> option index, one variant per goal
+let bbScenario = null;   // scenario object when entered that way
+let bbPending  = null;   // policy ids to select once the grid has loaded
+
+const BB_PLATFORMS = {
+  'Windows':        { label: 'Windows 10/11',  icon: 'device', blurb: 'Desktops and laptops managed by Intune' },
+  'macOS':          { label: 'macOS',          icon: 'device', blurb: 'Apple desktops and laptops' },
+  'Mobile':         { label: 'iOS and Android',icon: 'mobile', blurb: 'Phones and tablets, corporate or personal' },
+  'Cross-platform': { label: 'All platforms',  icon: 'key',    blurb: 'Applies regardless of device platform' },
+};
+
+const BB_ICONS = {
+  device:      '<path d="M9 17H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v4M13 21h6a1 1 0 001-1v-7a1 1 0 00-1-1h-6a1 1 0 00-1 1v7a1 1 0 001 1z"/>',
+  key:         '<path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.7 5.7l-1.9 1.9a1 1 0 01-.7.3H9v2a1 1 0 01-1 1H6v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2.6a1 1 0 01.3-.7L8.3 12A6 6 0 1121 9z"/>',
+  shield:      '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  'file-lock': '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><rect x="9" y="12" width="6" height="5" rx="1"/>',
+  mail:        '<path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M22 6l-10 7L2 6"/>',
+  layers:      '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>',
+  rocket:      '<path d="M5 13l-2 5 5-2M9 15l6-6a6 6 0 004-6 6 6 0 00-6 4l-6 6M9 15l-2-2"/><circle cx="15" cy="9" r="1.5"/>',
+  virus:       '<circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+  mobile:      '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',
+  'device-check': '<rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4M8 10l3 3 5-5"/>',
+  building:    '<path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 9h1m4 0h1M9 13h1m4 0h1M9 17h1m4 0h1"/>',
+  target:      '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+};
+
+function bbIcon(name, size) {
+  const path = BB_ICONS[name] || BB_ICONS.shield;
+  return `<svg width="${size || 20}" height="${size || 20}" fill="none" viewBox="0 0 24 24"
+    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+}
+
+// ── Entry ─────────────────────────────────────────────────────────
+
+async function enterBuildMode() {
+  // Cancel returns to the grid mode Building Blocks was opened from, if any.
+  bbReturn = gridVisible() && appMode !== 'build' ? appMode
+           : screenVisible('wizard-screen') ? docWizardReturn
+           : null;
+  if (appMode === 'manage') leaveManageMode();
+  appMode = 'build';
+  document.body.dataset.appmode = 'build';
+  hideAllScreens();
+  document.getElementById('bb-screen').style.display = '';
+  document.getElementById('topbar-right').innerHTML =
+    `<span class="mode-pill mode-pill-build">\u{1f9f1} Building Blocks</span>`;
+
+  bbReset();
+  document.getElementById('bb-body').innerHTML =
+    `<div class="state-box"><div class="spinner"></div><p>Loading catalogue\u2026</p></div>`;
+  bbRenderSteps();
+
+  if (!mgCatalog) await loadCatalog();
+  bbRender();
+}
+
+function bbReset() {
+  bbStep = 1; bbTower = null; bbPlatform = null; bbPicks = {}; bbScenario = null;
+}
+
+function bbExit() {
+  const back = bbReturn;
+  bbReturn = null;
+  document.getElementById('bb-screen').style.display = 'none';
+  if (back === 'deploy' || back === 'document' || back === 'manage') {
+    appMode = null;          // force a full re-entry of the grid mode
+    if (back === 'deploy' && !account) { showAuthScreen('build'); return; }
+    if (back === 'deploy')   { onSignedIn();      return; }
+    if (back === 'document') { enterDocMode();    return; }
+    enterManageMode();
+    return;
+  }
+  showAuthScreen('build');
+}
+
+// ── Catalogue helpers ─────────────────────────────────────────────
+
+function bbBundle(id) { return (mgCatalog?.bundles || []).find(b => b.id === id) || null; }
+
+function bbGoal(id) { return (mgCatalog?.goals || []).find(g => g.id === id) || null; }
+
+// Union of members across the bundles an option points at.
+function bbOptionMembers(option) {
+  const seen = new Set();
+  (option?.bundles || []).forEach(id => (bbBundle(id)?.members || []).forEach(m => seen.add(m)));
+  return seen;
+}
+
+function bbGoalsFor(tower) { return (mgCatalog?.goals || []).filter(g => g.tower === tower); }
+
+// Distinct platforms a tower's goals can target, in a sensible order.
+function bbPlatformsFor(tower) {
+  const found = new Set();
+  bbGoalsFor(tower).forEach(g => (g.options || []).forEach(o => found.add(o.platform)));
+  return ['Windows', 'macOS', 'Mobile', 'Cross-platform'].filter(p => found.has(p));
+}
+
+// Every (goal, option) pair available for the chosen tower and platform.
+function bbChoices() {
+  const out = [];
+  bbGoalsFor(bbTower).forEach(g => {
+    (g.options || []).forEach((o, i) => {
+      if (o.platform === bbPlatform) out.push({ goal: g, option: o, index: i });
+    });
+  });
+  return out;
+}
+
+// The currently selected (goal, option) pairs, from either entry point.
+function bbSelection() {
+  if (bbScenario) {
+    return (bbScenario.includes || []).map(inc => {
+      const g = bbGoal(inc.goal); if (!g) return null;
+      const i = (g.options || []).findIndex(o => o.platform === inc.platform);
+      return i < 0 ? null : { goal: g, option: g.options[i], index: i };
+    }).filter(Boolean);
+  }
+  return Object.entries(bbPicks).map(([gid, i]) => {
+    const g = bbGoal(gid);
+    return g && g.options[i] ? { goal: g, option: g.options[i], index: i } : null;
+  }).filter(Boolean);
+}
+
+function bbSelectedIds() {
+  const seen = new Set();
+  bbSelection().forEach(s => bbOptionMembers(s.option).forEach(m => seen.add(m)));
+  return [...seen];
+}
+
+// ── Rendering ─────────────────────────────────────────────────────
+
+function bbRenderSteps() {
+  document.getElementById('bb-stepper').innerHTML = BB_STEPS.map((label, i) => {
+    const n = i + 1;
+    const cls = n < bbStep ? 'done' : n === bbStep ? 'on' : '';
+    const dot = n < bbStep
+      ? '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
+      : n;
+    const line = i < BB_STEPS.length - 1
+      ? `<div class="bb-step-line ${n < bbStep ? 'done' : ''}"></div>` : '';
+    return `<div class="bb-step ${cls}"><div class="bb-step-dot">${dot}</div>
+      <div class="bb-step-label">${label}</div></div>${line}`;
+  }).join('');
+}
+
+function bbRender() {
+  bbRenderSteps();
+  if (!mgCatalog) {
+    document.getElementById('bb-body').innerHTML =
+      `<div class="bb-empty-note">Could not load <code>catalog.json</code>.
+       Check that the catalogue build workflow has run on the repository.</div>`;
+    document.getElementById('bb-nav').innerHTML =
+      `<button class="btn btn-ghost btn-sm" onclick="bbExit()">Cancel</button><div></div>`;
+    return;
+  }
+  if (bbStep === 1) bbRenderStart();
+  else if (bbStep === 2) bbRenderPlatforms();
+  else if (bbStep === 3) bbRenderGoals();
+  else bbRenderReview();
+}
+
+function bbCount(n) {
+  return `<span class="bb-count ${n ? '' : 'bb-count-zero'}">${n} polic${n === 1 ? 'y' : 'ies'}</span>`;
+}
+
+function bbRenderStart() {
+  document.getElementById('bb-title').textContent = 'What are you setting up?';
+  document.getElementById('bb-sub').textContent =
+    'Start from a common engagement scenario, or browse the technologies directly.';
+
+  const scenarios = (mgCatalog.scenarios || []).map(sc => {
+    const n = bbScenarioCount(sc);
+    const towers = [...new Set((sc.includes || []).map(i => bbGoal(i.goal)?.tower).filter(Boolean))];
+    return `<div class="bb-tile bb-tile-scenario" onclick="bbPickScenario('${sc.id}')">
+      <div class="bb-tile-icon">${bbIcon(sc.icon, 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(sc.title)}</div>
+      <div class="bb-tile-blurb">${htmlEsc(sc.outcome)}</div>
+      <div class="bb-tile-foot">${bbCount(n)}
+        <span class="bb-note">${towers.map(htmlEsc).join(' + ')}</span></div>
+    </div>`;
+  }).join('');
+
+  const towers = (mgCatalog.towers || []).map(t => {
+    const count = (mgCatalog.policies || []).filter(p => p.workload === t.id).length;
+    const goals = bbGoalsFor(t.id).length;
+    const ready = count > 0 && goals > 0;
+    return `<div class="bb-tile ${ready ? '' : 'bb-disabled'}" ${ready ? `onclick="bbPickTower('${t.id}')"` : ''}>
+      ${ready ? '' : '<span class="bb-soon">Coming soon</span>'}
+      <div class="bb-tile-icon">${bbIcon(t.icon, 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(t.name)}</div>
+      <div class="bb-tile-blurb">${htmlEsc(t.blurb)}</div>
+      <div class="bb-tile-foot">${bbCount(count)}
+        ${ready ? `<span class="bb-note">${goals} building block${goals === 1 ? '' : 's'}</span>` : ''}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('bb-body').innerHTML = `
+    ${scenarios ? `<div class="bb-section-head">Engagement scenarios</div>
+      <div class="bb-grid bb-grid-2" style="margin-bottom:26px">${scenarios}</div>` : ''}
+    <div class="bb-section-head">Or browse by technology</div>
+    <div class="bb-grid bb-grid-3">${towers}</div>`;
+  bbNav({ back: 'Cancel', backFn: 'bbExit()' });
+}
+
+function bbScenarioCount(sc) {
+  const seen = new Set();
+  (sc.includes || []).forEach(inc => {
+    const g = bbGoal(inc.goal); if (!g) return;
+    const o = (g.options || []).find(x => x.platform === inc.platform);
+    if (o) bbOptionMembers(o).forEach(m => seen.add(m));
+  });
+  return seen.size;
+}
+
+function bbRenderPlatforms() {
+  const tower = (mgCatalog.towers || []).find(t => t.id === bbTower);
+  document.getElementById('bb-title').textContent = 'Which platform?';
+  document.getElementById('bb-sub').textContent =
+    `${tower ? tower.name : bbTower} \u2014 choose the platform this engagement covers.`;
+
+  const tiles = bbPlatformsFor(bbTower).map(p => {
+    const meta = BB_PLATFORMS[p] || { label: p, icon: 'device', blurb: '' };
+    const n = bbGoalsFor(bbTower).filter(g => (g.options || []).some(o => o.platform === p)).length;
+    return `<div class="bb-tile" onclick="bbPickPlatform('${p}')">
+      <div class="bb-tile-icon">${bbIcon(meta.icon, 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(meta.label)}</div>
+      <div class="bb-tile-blurb">${htmlEsc(meta.blurb)}</div>
+      <div class="bb-tile-foot"><span class="bb-note">${n} building block${n === 1 ? '' : 's'}</span></div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('bb-body').innerHTML = `<div class="bb-grid bb-grid-3">${tiles}</div>`;
+  bbNav({ back: '\u2190 Back', backFn: 'bbBack()' });
+}
+
+function bbRenderGoals() {
+  const meta = BB_PLATFORMS[bbPlatform] || { label: bbPlatform };
+  document.getElementById('bb-title').textContent = 'What do you want to achieve?';
+  document.getElementById('bb-sub').textContent =
+    `${bbTower} \u00b7 ${meta.label} \u2014 choose as many building blocks as the engagement needs.`;
+
+  const choices = bbChoices();
+  // Group by goal so alternative variants of one goal read as a choice, not two blocks.
+  const byGoal = {};
+  choices.forEach(c => { (byGoal[c.goal.id] ||= []).push(c); });
+
+  const tiles = Object.values(byGoal).map(group => group.map(c => {
+    const n = bbOptionMembers(c.option).size;
+    const on = bbPicks[c.goal.id] === c.index;
+    const variant = group.length > 1;
+    return `<div class="bb-tile bb-selectable ${on ? 'bb-on' : ''}"
+        onclick="bbToggleGoal('${c.goal.id}',${c.index})">
+      <div class="bb-check">${on
+        ? '<svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>'
+        : ''}</div>
+      <div class="bb-tile-icon">${bbIcon(c.goal.icon, 22)}</div>
+      <div class="bb-tile-title">${htmlEsc(c.goal.title)}
+        ${variant ? `<span class="bb-variant">${htmlEsc(c.option.note || c.option.label)}</span>` : ''}</div>
+      <div class="bb-tile-blurb">${htmlEsc(c.goal.outcome)}</div>
+      <div class="bb-tile-foot">${bbCount(n)}
+        ${variant ? '<span class="bb-note">Alternative</span>' : ''}</div>
+    </div>`;
+  }).join('')).join('');
+
+  document.getElementById('bb-body').innerHTML =
+    tiles ? `<div class="bb-grid bb-grid-2">${tiles}</div>`
+          : `<div class="bb-empty-note">No building blocks are defined for this platform yet.</div>`;
+
+  const picked = bbSelection().length;
+  const total  = bbSelectedIds().length;
+  bbNav({
+    back: '\u2190 Back', backFn: 'bbBack()',
+    running: picked ? `${picked} block${picked === 1 ? '' : 's'} \u00b7 ${total} polic${total === 1 ? 'y' : 'ies'}` : null,
+    next: picked ? 'Review selection \u2192' : null, nextFn: 'bbNext()',
+  });
+}
+
+function bbRenderReview() {
+  const sel  = bbSelection();
+  const ids  = bbSelectedIds();
+  const recs = ids.map(id => mgById[id]).filter(Boolean);
+  document.getElementById('bb-title').textContent = 'Review your selection';
+  document.getElementById('bb-sub').textContent =
+    'These policies will be pre-selected. You can still add or remove individual policies afterwards.';
+
+  const blocks = sel.map(s => `<div class="bb-sum-block">
+      <div class="bb-tile-icon" style="width:30px;height:30px;border-radius:8px">${bbIcon(s.goal.icon, 16)}</div>
+      <div style="flex:1">
+        <div class="bb-sum-block-title">${htmlEsc(s.goal.title)}</div>
+        <div class="bb-note">${htmlEsc(s.goal.tower)} \u00b7 ${htmlEsc(s.option.label)}${s.option.note ? ' \u00b7 ' + htmlEsc(s.option.note) : ''}</div>
+      </div>
+      ${bbCount(bbOptionMembers(s.option).size)}
+    </div>`).join('');
+
+  const byType = {};
+  recs.forEach(r => { (byType[r.policyType || 'Other'] ||= []).push(r); });
+  const groups = Object.keys(byType).sort().map(k => `
+    <div class="bb-policy-group">
+      <h4>${htmlEsc(k)} \u00b7 ${byType[k].length}</h4>
+      <div class="bb-policy-list">
+        ${byType[k].sort((a, b) => (a.displayName || '').localeCompare(b.displayName || ''))
+          .map(r => `<div class="bb-policy-item">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            ${htmlEsc(r.displayName || r.fileName)}</div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  const empty = `<div class="bb-empty-note">
+    This selection currently resolves to no policies. For framework blocks such as
+    Zero Trust, tag the relevant policies in <strong>Policy Management</strong> and rebuild
+    the catalogue, then they will appear here automatically.</div>`;
+
+  document.getElementById('bb-body').innerHTML = `
+    ${bbScenario ? `<div class="bb-scenario-banner">${bbIcon(bbScenario.icon, 18)}
+      <div><strong>${htmlEsc(bbScenario.title)}</strong><br>
+      <span class="bb-note">${htmlEsc(bbScenario.outcome)}</span></div></div>` : ''}
+    <div class="bb-section-head">Selected building blocks</div>
+    <div class="bb-sum-blocks">${blocks}</div>
+    <div class="bb-section-head" style="margin-top:22px">Policies (${recs.length})</div>
+    ${recs.length ? groups : empty}`;
+
+  bbNav({
+    back: '\u2190 Back', backFn: 'bbBack()',
+    review: recs.length,
+  });
+}
+
+// ── Navigation ────────────────────────────────────────────────────
+
+function bbNav(o) {
+  const right = o.review
+    ? `<button class="btn btn-ghost" onclick="bbApply('document')">Document these policies</button>
+       <button class="btn btn-primary" onclick="bbApply('deploy')">Deploy these policies</button>`
+    : o.next
+      ? `<button class="btn btn-primary" onclick="${o.nextFn}">${o.next}</button>` : '';
+  document.getElementById('bb-nav').innerHTML = `
+    <button class="btn btn-ghost btn-sm" onclick="${o.backFn}">${o.back}</button>
+    <div class="bb-nav-right">
+      ${o.running ? `<span class="bb-running">${o.running}</span>` : ''}${right}
+    </div>`;
+}
+
+function bbBack() {
+  if (bbScenario) { bbScenario = null; bbStep = 1; }         // scenario jumped straight to review
+  else if (bbStep === 4) bbStep = 3;
+  else if (bbStep === 3) { bbPicks = {}; bbStep = 2; }
+  else if (bbStep === 2) { bbPlatform = null; bbTower = null; bbStep = 1; }
+  bbRender();
+}
+
+function bbNext() { if (bbSelection().length) { bbStep = 4; bbRender(); } }
+
+function bbPickTower(id) {
+  bbTower = id; bbPicks = {};
+  const plats = bbPlatformsFor(id);
+  if (plats.length === 1) { bbPlatform = plats[0]; bbStep = 3; }   // nothing to choose
+  else bbStep = 2;
+  bbRender();
+}
+
+function bbPickPlatform(p) { bbPlatform = p; bbStep = 3; bbRender(); }
+
+// One variant per goal: picking a second variant replaces the first.
+function bbToggleGoal(goalId, index) {
+  if (bbPicks[goalId] === index) delete bbPicks[goalId];
+  else bbPicks[goalId] = index;
+  bbRender();
+}
+
+function bbPickScenario(id) {
+  bbScenario = (mgCatalog.scenarios || []).find(s => s.id === id) || null;
+  bbTower = null; bbPlatform = null; bbPicks = {};
+  bbStep = 4;
+  bbRender();
+}
+
+// ── Hand-off ──────────────────────────────────────────────────────
+
+// Stash the chosen ids, then enter the normal grid. Selections are applied
+// once the policy list has loaded, since loading rebuilds the array.
+function bbApply(target) {
+  bbPending = bbSelectedIds();
+  document.getElementById('bb-screen').style.display = 'none';
+  bbReturn = null;
+  if (target === 'document') {
+    openDocWizard();
+  } else if (account) {
+    onSignedIn();            // selection is applied once the grid loads
+  } else {
+    showAuthScreen('deploy');
+    showToast('Sign in to deploy the selected building blocks');
+  }
+}
+
+// Called from afterCatalogueLoaded once policies[] is populated.
+function bbApplyPendingSelection() {
+  if (!bbPending || !bbPending.length) return;
+  const wanted = new Set(bbPending);
+  let hits = 0;
+  Object.keys(WORKLOADS).forEach(wl => {
+    policies[wl].forEach(p => {
+      const rec = mgLookup(p);
+      if (rec && wanted.has(rec.id)) { p.selected = true; hits++; }
+    });
+  });
+  const missed = bbPending.length - hits;
+  bbPending = null;
+  Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+  updateDeployBar();
+  if (hits) showToast(`Building blocks applied \u2014 ${hits} policies selected` +
+    (missed ? ` (${missed} not found in the policy store)` : ''), missed ? 'warn' : undefined);
+}
 </script>
+<!-- ── Policy Management drawer ───────────────────────────── -->
+<div id="mg-drawer">
+  <div class="mg-dr-head">
+    <div style="flex:1">
+      <h3 id="mg-dr-title">Policy</h3>
+      <div class="mg-dr-path" id="mg-dr-path"></div>
+    </div>
+    <button class="mg-dr-close" onclick="mgCloseDrawer()">&times;</button>
+  </div>
+  <div class="mg-dr-body" id="mg-dr-body"></div>
+</div>
+
+<!-- ── Policy Management save bar ─────────────────────────── -->
+<div id="mg-savebar">
+  <div>
+    <div class="mg-sb-text" id="mg-sb-text">0 policies edited</div>
+    <div class="mg-sb-sub">Saved as sidecar files under metadata/</div>
+  </div>
+  <button class="btn btn-ghost btn-sm" onclick="mgDiscard()">Discard</button>
+  <button class="btn btn-primary btn-sm" onclick="mgSave()">Save changes</button>
+</div>
+
 </body>
 </html>
