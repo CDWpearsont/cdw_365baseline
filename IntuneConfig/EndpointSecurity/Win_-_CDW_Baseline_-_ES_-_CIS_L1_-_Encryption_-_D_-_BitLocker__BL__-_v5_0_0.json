@@ -4,8 +4,8 @@
   "platforms": "windows10",
   "technologies": "mdm",
   "templateReference": {
-    "templateId": "46ddfc50-d10f-4867-b852-9434254b3bff_1",
-    "templateFamily": "endpointSecurityDiskEncryption"
+    "templateFamily": "endpointSecurityDiskEncryption",
+    "templateId": "46ddfc50-d10f-4867-b852-9434254b3bff_1"
   },
   "settings": [
     {
