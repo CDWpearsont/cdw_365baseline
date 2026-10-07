@@ -1,17 +1,17 @@
 {
-  "trackInstallProgressForAutopilotOnly": true,
-  "@odata.type": "#microsoft.graph.windows10EnrollmentCompletionPageConfiguration",
-  "allowLogCollectionOnInstallFailure": true,
+  "deviceEnrollmentConfigurationType": "windows10EnrollmentCompletionPageConfiguration",
   "customErrorMessage": "Setup could not be completed. Please try again or contact your support person for help.",
-  "blockDeviceSetupRetryByUser": false,
-  "showInstallationProgress": true,
-  "allowDeviceUseOnInstallFailure": false,
-  "allowNonBlockingAppInstallation": true,
-  "disableUserStatusTrackingAfterFirstUser": true,
   "displayName": "ESP CDW Baseline",
+  "allowNonBlockingAppInstallation": true,
+  "trackInstallProgressForAutopilotOnly": true,
   "installProgressTimeoutInMinutes": 60,
+  "allowLogCollectionOnInstallFailure": true,
+  "description": "",
   "installQualityUpdates": true,
   "allowDeviceResetOnInstallFailure": true,
-  "deviceEnrollmentConfigurationType": "windows10EnrollmentCompletionPageConfiguration",
-  "description": ""
+  "disableUserStatusTrackingAfterFirstUser": true,
+  "showInstallationProgress": true,
+  "@odata.type": "#microsoft.graph.windows10EnrollmentCompletionPageConfiguration",
+  "allowDeviceUseOnInstallFailure": false,
+  "blockDeviceSetupRetryByUser": false
 }
