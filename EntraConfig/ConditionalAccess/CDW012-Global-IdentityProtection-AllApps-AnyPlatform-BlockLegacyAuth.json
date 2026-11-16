@@ -1,6 +1,7 @@
 {
   "displayName": "CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
   "state": "disabled",
+  "deletedDateTime": null,
   "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
@@ -39,6 +40,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('1247c815-40c0-452f-86dc-10fa6e2e3c2a')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
   }
 }

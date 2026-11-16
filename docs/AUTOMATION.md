@@ -22,6 +22,7 @@ new Settings Catalog features are spotted.
 - **Create only.** A policy whose name already exists in the tenant is reported as `exists`
   and left alone. Ship changes as a new version (`v1.0` → `v1.1`) or edit in the tenant.
 - **Conditional Access is always created `disabled`.**
+- **EDR onboarding can't be templated**: the onboarding package from the Defender connector is tenant-specific, so create that policy in each tenant.
 - Supported folders: `SettingsCatalog`, `EndpointSecurity`, `CompliancePolicies`,
   `DeviceConfigurations`, `EntraConfig/ConditionalAccess`. Anything else (app protection, ESP,
   Autopilot, enrolment restrictions, Entra tenant settings) is skipped. Deploy those from the test site.
@@ -60,7 +61,8 @@ setting definition and policy template to the `settings-catalog` branch and open
 
 Deploy app permissions (Application, admin consented, reference tenant only):
 `DeviceManagementConfiguration.ReadWrite.All`, `DeviceManagementApps.ReadWrite.All`,
-`DeviceManagementServiceConfig.ReadWrite.All`, `Policy.ReadWrite.ConditionalAccess`, `Policy.Read.All`.
+`DeviceManagementServiceConfig.ReadWrite.All`, `Policy.ReadWrite.ConditionalAccess`, `Policy.Read.All`,
+`Application.Read.All` (CA policies that include or exclude specific apps).
 
 If the federated sign-in fails, the run log prints the subject GitHub presented. The credential's
 Subject identifier must match it exactly.

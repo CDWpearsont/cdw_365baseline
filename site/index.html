@@ -3683,8 +3683,10 @@ async function deployEntraPolicy(p, json) {
       delete body.grantControls['authenticationStrength@odata.context'];
       // If authenticationStrength references a policy by ID, it may not exist in target tenant
       // Keep it but strip OData noise
-      if (body.grantControls.authenticationStrength) {
-        delete body.grantControls.authenticationStrength['@odata.context'];
+      // The export carries the whole authentication strength object; Graph only
+      // needs its id, and built-in strength ids are the same in every tenant.
+      if (body.grantControls.authenticationStrength?.id) {
+        body.grantControls.authenticationStrength = { id: body.grantControls.authenticationStrength.id };
       }
     }
 

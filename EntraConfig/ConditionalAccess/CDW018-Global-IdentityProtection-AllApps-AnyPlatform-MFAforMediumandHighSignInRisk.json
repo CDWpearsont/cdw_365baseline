@@ -1,15 +1,7 @@
 {
   "displayName": "CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
   "state": "disabled",
-  "sessionControls": {
-    "signInFrequency": {
-      "isEnabled": true,
-      "frequencyInterval": "everyTime",
-      "authenticationType": "primaryAndSecondaryAuthentication",
-      "type": null,
-      "value": null
-    }
-  },
+  "deletedDateTime": null,
   "conditions": {
     "userRiskLevels": [],
     "signInRiskLevels": [
@@ -49,6 +41,21 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('6979a7a6-83e2-439e-8985-d3be5469daed')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
+  },
+  "sessionControls": {
+    "disableResilienceDefaults": null,
+    "applicationEnforcedRestrictions": null,
+    "cloudAppSecurity": null,
+    "persistentBrowser": null,
+    "secureSignInSession": null,
+    "signInFrequency": {
+      "value": null,
+      "type": null,
+      "authenticationType": "primaryAndSecondaryAuthentication",
+      "frequencyInterval": "everyTime",
+      "isEnabled": true
+    }
   }
 }

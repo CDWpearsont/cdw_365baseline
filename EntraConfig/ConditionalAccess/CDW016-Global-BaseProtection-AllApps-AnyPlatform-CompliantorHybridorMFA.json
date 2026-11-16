@@ -1,6 +1,7 @@
 {
   "displayName": "CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA",
   "state": "disabled",
+  "deletedDateTime": null,
   "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
@@ -40,6 +41,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('b1f3c441-5fd8-4abf-ace0-1c5681b2d7b2')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
   }
 }

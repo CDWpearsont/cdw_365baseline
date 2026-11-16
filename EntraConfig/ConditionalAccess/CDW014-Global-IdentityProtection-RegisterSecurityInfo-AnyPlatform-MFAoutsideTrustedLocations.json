@@ -1,6 +1,7 @@
 {
   "displayName": "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations",
   "state": "disabled",
+  "deletedDateTime": null,
   "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
@@ -50,8 +51,36 @@
     "builtInControls": [],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('21973d2d-eac7-4d14-82de-cbf4f9788c78')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": {
-      "id": "00000000-0000-0000-0000-000000000002"
+      "id": "00000000-0000-0000-0000-000000000002",
+      "createdDateTime": "2021-12-01T08:00:00Z",
+      "modifiedDateTime": "2021-12-01T08:00:00Z",
+      "displayName": "Multifactor authentication",
+      "description": "Combinations of methods that satisfy strong authentication, such as a password + SMS",
+      "policyType": "builtIn",
+      "requirementsSatisfied": "mfa",
+      "allowedCombinations": [
+        "windowsHelloForBusiness",
+        "fido2",
+        "x509CertificateMultiFactor",
+        "deviceBasedPush",
+        "temporaryAccessPassOneTime",
+        "temporaryAccessPassMultiUse",
+        "password,microsoftAuthenticatorPush",
+        "password,softwareOath",
+        "password,hardwareOath",
+        "password,sms",
+        "password,voice",
+        "federatedMultiFactor",
+        "microsoftAuthenticatorPush,federatedSingleFactor",
+        "softwareOath,federatedSingleFactor",
+        "hardwareOath,federatedSingleFactor",
+        "sms,federatedSingleFactor",
+        "voice,federatedSingleFactor"
+      ],
+      "combinationConfigurations@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('21973d2d-eac7-4d14-82de-cbf4f9788c78')/grantControls/authenticationStrength/combinationConfigurations",
+      "combinationConfigurations": []
     }
   }
 }
