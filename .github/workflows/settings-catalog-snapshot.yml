@@ -1,0 +1,87 @@
+name: Settings Catalog snapshot
+
+# Weekly snapshot of every Intune Settings Catalog definition and policy template,
+# kept on the 'settings-catalog' branch. When anything is new, changed or removed
+# since last week, a GitHub issue lists it so new features can be picked up.
+# Uses the read-only backup app.
+
+on:
+  schedule:
+    - cron: '30 5 * * 1'   # Mondays 05:30 UTC, after the nightly exports
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: settings-catalog-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: repo
+
+      - name: Get previous snapshot
+        shell: bash
+        run: |
+          mkdir -p previous
+          cd repo
+          if git fetch --quiet --depth 1 origin settings-catalog 2>/dev/null; then
+            git --work-tree=../previous checkout FETCH_HEAD -- . 2>/dev/null || true
+            git reset --quiet
+          fi
+          ls -la ../previous
+
+      - name: Fetch current catalog
+        env:
+          CLIENT_ID:     ${{ secrets.CLIENT_ID }}
+          TENANT_ID:     ${{ secrets.TENANT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+        run: python3 repo/tools/settings_catalog_snapshot.py fetch current
+
+      - name: Compare
+        id: diff
+        run: python3 repo/tools/settings_catalog_snapshot.py diff previous current
+
+      - name: Commit snapshot to settings-catalog branch
+        shell: bash
+        run: |
+          cd current
+          cat > README.md <<'EOF'
+          # Settings Catalog snapshot
+
+          Written weekly by `.github/workflows/settings-catalog-snapshot.yml` from the reference tenant.
+          One JSON object per line, sorted by id. `CHANGES.md` lists what changed in the latest run;
+          the history of this branch is the full change log.
+          EOF
+          git init --quiet -b settings-catalog
+          git config user.name  "CDW Baseline Bot"
+          git config user.email "actions@github.com"
+          git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          if git fetch --quiet origin settings-catalog 2>/dev/null; then
+            git reset --quiet --soft FETCH_HEAD
+          fi
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No change since last snapshot"
+          else
+            git commit --quiet -m "Settings Catalog snapshot $(date +%Y-%m-%d)"
+            git push --quiet origin HEAD:settings-catalog
+          fi
+
+      - name: Open issue for changes
+        if: steps.diff.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO:  ${{ github.repository }}
+        shell: bash
+        run: |
+          head -c 60000 current/CHANGES.md > body.md
+          [ "$(wc -c < current/CHANGES.md)" -gt 60000 ] && printf '\n\n_Truncated - full list in CHANGES.md on the settings-catalog branch._\n' >> body.md
+          gh label create settings-catalog --color 0E8A16 --description "Weekly Settings Catalog changes" 2>/dev/null || true
+          gh issue create --title "Settings Catalog changes - $(date +%Y-%m-%d)" --label settings-catalog --body-file body.md

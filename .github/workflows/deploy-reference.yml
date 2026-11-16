@@ -1,0 +1,111 @@
+name: Deploy to reference tenant
+
+# Creates new policies from this branch's JSON in the reference tenant, then
+# runs the export so main picks up the tenant's version straight away.
+#
+# - Signs in as the deploy app via GitHub OIDC (no stored secret).
+# - Gated by the 'reference-tenant' environment: a required reviewer must approve
+#   each run, and only the test branch may deploy.
+# - Create-only: policies that already exist (by name) are left untouched.
+# - Conditional Access policies are always created disabled.
+
+on:
+  workflow_dispatch:
+    inputs:
+      files:
+        description: 'Space-separated JSON paths (blank = every policy JSON added/changed on this branch vs main)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run - report what would be created, change nothing'
+        type: boolean
+        default: false
+
+concurrency:
+  group: reference-tenant
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: reference-tenant
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      intune: ${{ steps.deploy.outputs.intune }}
+      entra:  ${{ steps.deploy.outputs.entra }}
+    steps:
+      - name: Only the test branch deploys
+        if: github.ref_name != 'test'
+        run: |
+          echo "::error::Run this workflow from the test branch (got '${{ github.ref_name }}')."
+          exit 1
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Work out which files to deploy
+        id: files
+        shell: bash
+        env:
+          INPUT_FILES: ${{ inputs.files }}
+        run: |
+          if [ -n "$INPUT_FILES" ]; then
+            FILES="$INPUT_FILES"
+          else
+            git fetch --quiet origin main
+            FILES=$(git diff --name-only --diff-filter=AMR origin/main...HEAD -- 'IntuneConfig/**/*.json' 'EntraConfig/**/*.json' | tr '\n' ' ')
+          fi
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "Files: ${FILES:-<none>}"
+
+      - name: Pre-flight checks
+        if: steps.files.outputs.files != ''
+        run: python3 tools/check_policy_files.py ${{ steps.files.outputs.files }}
+
+      - name: Create policies
+        id: deploy
+        if: steps.files.outputs.files != ''
+        env:
+          TENANT_ID:        ${{ secrets.TENANT_ID }}
+          DEPLOY_CLIENT_ID: ${{ vars.DEPLOY_CLIENT_ID }}
+          DRY_RUN:          ${{ inputs.dry_run }}
+        run: |
+          ARGS=""
+          if [ "$DRY_RUN" = "true" ]; then ARGS="--dry-run"; fi
+          python3 tools/deploy_reference.py $ARGS ${{ steps.files.outputs.files }}
+
+  export:
+    # Pull the newly created policies back into main now instead of at 04:00.
+    needs: deploy
+    if: needs.deploy.outputs.intune == 'true' || needs.deploy.outputs.entra == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Run export workflows on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO:  ${{ github.repository }}
+          INTUNE:   ${{ needs.deploy.outputs.intune }}
+          ENTRA:    ${{ needs.deploy.outputs.entra }}
+        shell: bash
+        run: |
+          run_and_wait () {
+            local wf="$1"
+            local before
+            before=$(gh run list -w "$wf" -L 1 --json databaseId -q '.[0].databaseId // 0')
+            gh workflow run "$wf" --ref main
+            for i in $(seq 1 30); do
+              sleep 5
+              id=$(gh run list -w "$wf" -L 1 --json databaseId -q '.[0].databaseId // 0')
+              [ "$id" != "$before" ] && break
+            done
+            echo "Started $wf run $id"
+            # The export workflows both push to main; run them one at a time.
+            gh run watch "$id" --exit-status --interval 15
+          }
+          if [ "$INTUNE" = "true" ]; then run_and_wait intune-backup.yml; fi
+          if [ "$ENTRA"  = "true" ]; then run_and_wait entra-backup.yml;  fi
