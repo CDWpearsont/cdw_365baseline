@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T13:03:54+00:00",
-  "sourceCommit": "35ba6252379dec336dac7551b6cac1cc100dc6cb",
+  "generatedAt": "2026-11-16T13:07:48+00:00",
+  "sourceCommit": null,
   "counts": {
-    "policies": 246,
+    "policies": 245,
     "bundles": 22,
-    "issues": 257,
+    "issues": 256,
     "byConfidence": {
       "medium": 118,
       "low": 2,
-      "high": 126
+      "high": 125
     }
   },
   "taxonomy": {
@@ -145,7 +145,6 @@
       "Disk Encryption",
       "ESP CDW Baseline",
       "Encryption",
-      "Endpoint Detection and Response",
       "Firewall",
       "Group Unified",
       "Internet Explorer Legacy",
@@ -311,7 +310,7 @@
       "tower": "Intune",
       "icon": "shield",
       "title": "Deploy Microsoft Defender for Endpoint",
-      "outcome": "Onboards devices to Defender for Endpoint and applies the CIS antivirus, attack surface reduction and firewall configuration.",
+      "outcome": "Applies the CIS antivirus, attack surface reduction and firewall configuration for Defender for Endpoint (EDR onboarding is a one-click policy per tenant).",
       "options": [
         {
           "platform": "Windows",
@@ -4553,43 +4552,6 @@
       "bundles": [
         "intune-win-cdw-standard",
         "intune-win-cdw-standard-enforced"
-      ]
-    },
-    {
-      "id": "intune-windows-endpoint-security-endpoint-detection-and-response-onboarding-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Detection_and_Response_-_D_-_Onboarding_-_v1_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_ES_-_Endpoint_Detection_and_Response_-_D_-_Onboarding_-_v1_0.json",
-      "displayName": "Win - CDW Baseline - ES - Endpoint Detection and Response - D - Onboarding - v1.0",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Endpoint Security",
-      "framework": null,
-      "scope": "Device",
-      "version": "1.0",
-      "area": "Endpoint Detection and Response",
-      "subArea": "Onboarding",
-      "securityDomain": null,
-      "settingCount": 2,
-      "policyHash": "sha256:b5b8cd8e3f7a9f8adf70bf26934bdc3100bbd13ff5843f8b1a799b916b3163e7",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-defender-av"
       ]
     },
     {
@@ -9609,7 +9571,6 @@
         "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-audit-mode-device",
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
         "intune-windows-endpoint-security-encryption-personal-data-encryption-user",
-        "intune-windows-endpoint-security-endpoint-detection-and-response-onboarding-device",
         "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
         "intune-windows-settings-catalog-credential-management-passwordless-device",
         "intune-windows-settings-catalog-defender-antivirus-additional-configuration-device",
@@ -9656,7 +9617,7 @@
         "intune-windows-settings-catalog-windows-user-experience-settings-sync-device",
         "intune-windows-update-ring-ring-3-production-device"
       ],
-      "memberCount": 52
+      "memberCount": 51
     },
     {
       "id": "intune-win-cdw-standard-enforced",
@@ -9696,7 +9657,6 @@
         "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-l2-device",
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
         "intune-windows-endpoint-security-encryption-personal-data-encryption-user",
-        "intune-windows-endpoint-security-endpoint-detection-and-response-onboarding-device",
         "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
         "intune-windows-settings-catalog-credential-management-passwordless-device",
         "intune-windows-settings-catalog-defender-antivirus-additional-configuration-device",
@@ -9743,7 +9703,7 @@
         "intune-windows-settings-catalog-windows-user-experience-settings-sync-device",
         "intune-windows-update-ring-ring-3-production-device"
       ],
-      "memberCount": 52
+      "memberCount": 51
     },
     {
       "id": "intune-win-ie-mode",
@@ -9772,7 +9732,7 @@
     {
       "id": "intune-win-defender-av",
       "name": "Windows - Defender for Endpoint",
-      "description": "Defender Antivirus, attack surface reduction, firewall and EDR onboarding, built on the CIS Defender Antivirus v1.0.0 policies. Curated: one ASR policy and the production update ring only.",
+      "description": "Defender Antivirus, attack surface reduction, and firewall, built on the CIS Defender Antivirus v1.0.0 policies. Curated: one ASR policy and the production update ring only.",
       "path": [
         "Intune",
         "Windows",
@@ -9789,13 +9749,13 @@
         "intune-windows-settings-catalog-cis-l1-defender-antivirus-additional-configuration-device",
         "intune-windows-settings-catalog-cis-l1-defender-antivirus-admx-configuration-device",
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-        "intune-windows-endpoint-security-endpoint-detection-and-response-onboarding-device",
         "intune-windows-compliance-policy-defender-for-endpoint-user"
       ],
       "exclude": [],
       "order": 40,
       "prerequisites": [
-        "Microsoft Defender for Endpoint connector enabled in Intune (Endpoint security > Microsoft Defender for Endpoint)"
+        "Microsoft Defender for Endpoint connector enabled in Intune (Endpoint security > Microsoft Defender for Endpoint)",
+        "Create the EDR onboarding policy in Intune (Endpoint security > Endpoint detection and response > Auto from connector). Its onboarding package is tenant-specific, so it can't be deployed from a template"
       ],
       "licensing": [
         "Defender for Endpoint P1/P2, Defender for Business, or Microsoft 365 E5, or E3 with the matching add-on"
@@ -9808,11 +9768,10 @@
         "intune-windows-endpoint-security-cis-l1-defender-antivirus-security-experience-device",
         "intune-windows-endpoint-security-cis-l1-windows-firewall-firewall-configuration-device",
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-        "intune-windows-endpoint-security-endpoint-detection-and-response-onboarding-device",
         "intune-windows-settings-catalog-cis-l1-defender-antivirus-additional-configuration-device",
         "intune-windows-settings-catalog-cis-l1-defender-antivirus-admx-configuration-device"
       ],
-      "memberCount": 10
+      "memberCount": 9
     },
     {
       "id": "intune-win-update-management",
@@ -11514,12 +11473,6 @@
     {
       "policyId": "intune-windows-endpoint-security-encryption-personal-data-encryption-user",
       "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_U_-_Personal_Data_Encryption_-_v3_4.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-endpoint-security-endpoint-detection-and-response-onboarding-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Detection_and_Response_-_D_-_Onboarding_-_v1_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },

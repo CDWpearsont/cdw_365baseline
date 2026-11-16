@@ -134,7 +134,7 @@
     {
       "id": "intune-win-defender-av",
       "name": "Windows - Defender for Endpoint",
-      "description": "Defender Antivirus, attack surface reduction, firewall and EDR onboarding, built on the CIS Defender Antivirus v1.0.0 policies. Curated: one ASR policy and the production update ring only.",
+      "description": "Defender Antivirus, attack surface reduction, and firewall, built on the CIS Defender Antivirus v1.0.0 policies. Curated: one ASR policy and the production update ring only.",
       "path": [
         "Intune",
         "Windows",
@@ -151,13 +151,13 @@
         "intune-windows-settings-catalog-cis-l1-defender-antivirus-additional-configuration-device",
         "intune-windows-settings-catalog-cis-l1-defender-antivirus-admx-configuration-device",
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-        "intune-windows-endpoint-security-endpoint-detection-and-response-onboarding-device",
         "intune-windows-compliance-policy-defender-for-endpoint-user"
       ],
       "exclude": [],
       "order": 40,
       "prerequisites": [
-        "Microsoft Defender for Endpoint connector enabled in Intune (Endpoint security > Microsoft Defender for Endpoint)"
+        "Microsoft Defender for Endpoint connector enabled in Intune (Endpoint security > Microsoft Defender for Endpoint)",
+        "Create the EDR onboarding policy in Intune (Endpoint security > Endpoint detection and response > Auto from connector). Its onboarding package is tenant-specific, so it can't be deployed from a template"
       ],
       "licensing": [
         "Defender for Endpoint P1/P2, Defender for Business, or Microsoft 365 E5, or E3 with the matching add-on"
@@ -784,7 +784,7 @@
       "tower": "Intune",
       "icon": "shield",
       "title": "Deploy Microsoft Defender for Endpoint",
-      "outcome": "Onboards devices to Defender for Endpoint and applies the CIS antivirus, attack surface reduction and firewall configuration.",
+      "outcome": "Applies the CIS antivirus, attack surface reduction and firewall configuration for Defender for Endpoint (EDR onboarding is a one-click policy per tenant).",
       "options": [
         {
           "platform": "Windows",

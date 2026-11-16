@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-16T12:54:28Z",
-  "count": 249,
+  "generated": "2026-11-16T13:07:48Z",
+  "count": 248,
   "enrichedCount": 3,
   "entries": [
     {
@@ -1827,26 +1827,6 @@
       "deployVia": "graph",
       "isDraft": false,
       "templateId": "0b5708d9-9bc2-49a9-b4f7-ec463fcc41e0_1"
-    },
-    {
-      "id": "intune.endpointsecurity.win-cdw-baseline-es-endpoint-detection-and-response-d-onboarding",
-      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Detection_and_Response_-_D_-_Onboarding_-_v1_0.json",
-      "sha": "b5b8cd8e3f7a9f8a",
-      "workload": "intune",
-      "category": "EndpointSecurity",
-      "objectType": "endpointSecurityEndpointDetectionAndResponse",
-      "displayName": "Win - CDW Baseline - ES - Endpoint Detection and Response - D - Onboarding - v1.0",
-      "baseName": "Win - CDW Baseline - ES - Endpoint Detection and Response - D - Onboarding",
-      "description": "Onboards Windows devices to Microsoft Defender for Endpoint using the package from the Intune connector, and enables sample sharing.",
-      "platforms": [
-        "windows"
-      ],
-      "scope": "device",
-      "version": "1.0",
-      "settingCount": 2,
-      "deployVia": "graph",
-      "isDraft": false,
-      "templateId": "0385b795-0f2f-44ac-8602-9f65bf6adede_1"
     },
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-local-group-membership-d-local-administrators",

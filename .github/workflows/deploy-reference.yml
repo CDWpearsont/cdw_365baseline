@@ -80,7 +80,8 @@ jobs:
   export:
     # Pull the newly created policies back into main now instead of at 04:00.
     needs: deploy
-    if: needs.deploy.outputs.intune == 'true' || needs.deploy.outputs.entra == 'true'
+    # Runs even if some policies failed, so the ones that were created reach main
+    if: always() && (needs.deploy.outputs.intune == 'true' || needs.deploy.outputs.entra == 'true')
     runs-on: ubuntu-latest
     permissions:
       actions: write
