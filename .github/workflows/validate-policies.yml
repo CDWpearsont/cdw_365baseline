@@ -19,7 +19,7 @@ on:
         default: ''
 
 permissions:
-  contents: read
+  contents: write   # to commit filled-in Endpoint Security template references back to the PR branch
 
 jobs:
   validate:
@@ -28,6 +28,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          # The PR branch itself (not the merge commit), so fixes can be pushed back to it
+          ref: ${{ github.head_ref || github.ref }}
 
       - name: Find changed policy files
         id: files
@@ -68,5 +70,22 @@ jobs:
           $cred = [pscredential]::new($env:CLIENT_ID, (ConvertTo-SecureString $env:CLIENT_SECRET -AsPlainText -Force))
           Connect-MgGraph -TenantId $env:TENANT_ID -ClientSecretCredential $cred -NoWelcome -ErrorAction Stop
           $dir = New-Item -ItemType Directory -Path (Join-Path $env:RUNNER_TEMP 'policies') -Force
-          foreach ($f in ($env:GRAPH_FILES -split '\s+' | Where-Object { $_ })) { Copy-Item $f $dir.FullName }
-          ./tools/Test-CdwPolicyJson.ps1 -Path $dir.FullName
+          $files = $env:GRAPH_FILES -split '\s+' | Where-Object { $_ }
+          foreach ($f in $files) { Copy-Item $f $dir.FullName }
+          # Endpoint Security policies need template reference IDs, which are global but only
+          # readable from a tenant - fill in any that are missing, then copy them back.
+          ./tools/Test-CdwPolicyJson.ps1 -Path $dir.FullName -FixTemplateReferences
+          $code = $LASTEXITCODE
+          foreach ($f in $files) { Copy-Item (Join-Path $dir.FullName (Split-Path $f -Leaf)) $f -Force }
+          "exit=$code" | Out-File $env:GITHUB_OUTPUT -Append
+          exit $code
+
+      - name: Commit filled-in template references
+        if: always() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        shell: bash
+        run: |
+          if git diff --quiet -- IntuneConfig; then echo "Nothing to commit"; exit 0; fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -qam "Fill in Endpoint Security template references"
+          git push origin "HEAD:${{ github.head_ref }}"

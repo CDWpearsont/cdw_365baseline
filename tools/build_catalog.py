@@ -213,6 +213,65 @@ def iter_setting_ids(node) -> list[str]:
     return found
 
 
+def setting_values(node, out=None) -> dict:
+    """settingDefinitionId -> configured value (as a comparable string) for a
+    Settings Catalog / Endpoint Security body. Entries of list-style collections
+    ('_item_' definitions such as macOS managed login items) are skipped: several
+    policies adding items to the same list merge on the device, they don't conflict."""
+    if out is None:
+        out = {}
+    if isinstance(node, dict):
+        sid = node.get("settingDefinitionId")
+        if isinstance(sid, str) and "_item_" not in sid:
+            val = None
+            for key in ("choiceSettingValue", "simpleSettingValue"):
+                v = node.get(key)
+                if isinstance(v, dict) and "value" in v:
+                    val = json.dumps(v["value"], sort_keys=True)
+            for key in ("simpleSettingCollectionValue", "choiceSettingCollectionValue"):
+                if isinstance(node.get(key), list):
+                    val = json.dumps(sorted(json.dumps(x.get("value") if isinstance(x, dict) else x)
+                                            for x in node[key]))
+            if val is not None:
+                out[sid] = val
+        for v in node.values():
+            setting_values(v, out)
+    elif isinstance(node, list):
+        for v in node:
+            setting_values(v, out)
+    return out
+
+
+def find_conflicts(root: str, policies: list[dict]) -> list[dict]:
+    """Every pair of policies that configures the same setting with different values.
+    Intune holds back conflicting settings, so a device given both gets neither."""
+    by_setting: dict[str, list[tuple[str, str]]] = {}
+    for p in policies:
+        body = load_body(os.path.join(root, p["path"]))
+        if not body or not isinstance(body.get("settings"), list):
+            continue
+        for sid, val in setting_values(body["settings"]).items():
+            by_setting.setdefault(sid, []).append((p["id"], val))
+    pairs: dict[tuple[str, str], list[str]] = {}
+    for sid, entries in by_setting.items():
+        if len({v for _, v in entries}) < 2:
+            continue
+        for i, (a, va) in enumerate(entries):
+            for b, vb in entries[i + 1:]:
+                if va != vb:
+                    pairs.setdefault(tuple(sorted((a, b))), []).append(sid)
+    return [{"a": a, "b": b, "settings": len(sids), "settingIds": sorted(sids)}
+            for (a, b), sids in sorted(pairs.items())]
+
+
+def conflicts_within(ids, conflicts: list[dict], known=()) -> list[dict]:
+    """Conflicting pairs where both policies are in ids, ignoring settings listed
+    as known (reviewed and accepted, e.g. payloads the OS merges)."""
+    ids, known = set(ids), set(known)
+    return [c for c in conflicts
+            if c["a"] in ids and c["b"] in ids and not set(c["settingIds"]) <= known]
+
+
 def detect_workload_from_body(body: dict) -> str | None:
     if "grantControls" in body or "sessionControls" in body:
         return "Entra"
@@ -581,11 +640,44 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
                                "detail": f"Scenario '{sc.get('id')}' wants goal '{inc.get('goal')}' "
                                          f"on platform '{inc.get('platform')}', which it does not offer"})
 
+    # Settings two policies configure differently. A block, a goal option or a
+    # scenario that would deploy both is reported, unless the block says its
+    # members are alternatives (rings, OS variants) assigned to different groups.
+    conflicts = find_conflicts(root, policies)
+    bundle_by_id = {b["id"]: b for b in bundles}
+
+    known = {s for b in bundles for s in b.get("knownConflicts", [])}
+
+    def report_conflicts(where: str, ids) -> None:
+        for c in conflicts_within(ids, conflicts, known):
+            issues.append({"policyId": c["a"], "path": None, "type": "conflictingSettings",
+                           "detail": f"{where}: {c['a']} and {c['b']} set {c['settings']} "
+                                     f"setting(s) differently, e.g. {c['settingIds'][0]}"})
+
+    for b in bundles:
+        if not b.get("allowConflicts"):
+            report_conflicts(f"Bundle '{b['id']}'", b["members"])
+    option_ids = {}
+    for g in goals:
+        for o in g.get("options", []):
+            bids = o.get("bundles", [])
+            if any(bundle_by_id.get(x, {}).get("allowConflicts") for x in bids):
+                continue
+            ids = {m for x in bids for m in bundle_by_id.get(x, {}).get("members", [])}
+            option_ids[(g.get("id"), o.get("platform"))] = ids
+            if len(bids) > 1:
+                report_conflicts(f"Goal '{g.get('id')}' ({o.get('label')})", ids)
+    for sc in scenarios:
+        ids = set()
+        for inc in sc.get("includes", []):
+            ids |= option_ids.get((inc.get("goal"), inc.get("platform")), set())
+        report_conflicts(f"Scenario '{sc.get('id')}'", ids)
+
     for b in bundles:
         if b.get("missing"):
             for pid in b["missing"]:
                 issues.append({"policyId": pid, "path": None, "type": "danglingBundleMember",
-                               "detail": f"Bundle '{b['id']}' references unknown policy"})
+                               "detail": f"Bundle '{b['id']}' references unknown policy '{pid}'"})
         if b["memberCount"] == 0:
             issues.append({"policyId": None, "path": None, "type": "emptyBundle",
                            "detail": f"Bundle '{b['id']}' matched no policies"})
@@ -621,6 +713,7 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
         "scenarios": scenarios,
         "policies": sorted(policies, key=lambda p: p["path"]),
         "bundles": bundles,
+        "conflicts": conflicts,
         "issues": issues,
     }
 

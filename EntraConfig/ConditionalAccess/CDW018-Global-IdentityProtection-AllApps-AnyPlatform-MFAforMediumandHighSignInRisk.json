@@ -1,0 +1,54 @@
+{
+  "displayName": "CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
+  "state": "disabled",
+  "sessionControls": {
+    "signInFrequency": {
+      "isEnabled": true,
+      "frequencyInterval": "everyTime",
+      "authenticationType": "primaryAndSecondaryAuthentication",
+      "type": null,
+      "value": null
+    }
+  },
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [
+      "high",
+      "medium"
+    ],
+    "clientAppTypes": [
+      "all"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [
+        "All"
+      ],
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [
+        "All"
+      ],
+      "excludeUsers": [],
+      "includeGroups": [],
+      "excludeGroups": [],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "excludeGuestsOrExternalUsers": null
+    }
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [
+      "mfa"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": null
+  }
+}

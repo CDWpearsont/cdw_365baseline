@@ -1,0 +1,45 @@
+{
+  "displayName": "CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA",
+  "state": "disabled",
+  "sessionControls": null,
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [
+        "All"
+      ],
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [
+        "None"
+      ],
+      "excludeUsers": [],
+      "includeGroups": [],
+      "excludeGroups": [],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "excludeGuestsOrExternalUsers": null
+    }
+  },
+  "grantControls": {
+    "operator": "AND",
+    "builtInControls": [
+      "compliantDevice"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength": {
+      "id": "00000000-0000-0000-0000-000000000004"
+    }
+  }
+}

@@ -1177,6 +1177,14 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 .auth-mode{flex-wrap:wrap}
 .auth-mode-card{min-width:150px}
 
+/* ── Building Blocks: before-you-deploy and conflict panels ───── */
+.bb-before{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 24px;
+  background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;font-size:13px}
+.bb-before ul,.bb-conflicts ul{margin:6px 0 0 18px;line-height:1.55}
+.bb-conflicts{margin-top:18px;padding:12px 16px;border-radius:10px;font-size:13px;
+  background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.35)}
+.bb-conflicts strong{color:var(--danger);margin-right:6px}
+
 /* ── Building Blocks: multi-select, scenarios ──────────────────── */
 .bb-section-head {
   font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
@@ -1818,7 +1826,7 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.4.2',
+  version: '3.5.0',
   date:    '2026-09-17'
 };
 
@@ -7712,9 +7720,42 @@ function bbRenderReview() {
     </div>`).join('');
 
   const empty = `<div class="bb-empty-note">
-    This selection currently resolves to no policies. For framework blocks such as
-    Zero Trust, tag the relevant policies in <strong>Policy Management</strong> and rebuild
-    the catalogue, then they will appear here automatically.</div>`;
+    This selection currently resolves to no policies. Check that the catalogue build
+    workflow has run since the building blocks were last changed.</div>`;
+
+  // Prerequisites, licensing and notes declared on the selected bundles.
+  const selBundles = [...new Set(sel.flatMap(s => s.option.bundles || []))].map(bbBundle).filter(Boolean);
+  const uniq = key => [...new Set(selBundles.flatMap(b => b[key] || []))];
+  const prereqs = uniq('prerequisites'), licences = uniq('licensing');
+  const notes = selBundles.filter(b => b.notes);
+  const li = arr => arr.map(x => `<li>${htmlEsc(x)}</li>`).join('');
+  const before = (prereqs.length || licences.length || notes.length) ? `
+    <div class="bb-section-head" style="margin-top:22px">Before you deploy</div>
+    <div class="bb-before">
+      ${licences.length ? `<div><strong>Licensing</strong><ul>${li(licences)}</ul></div>` : ''}
+      ${prereqs.length ? `<div><strong>Prerequisites</strong><ul>${li(prereqs)}</ul></div>` : ''}
+      ${notes.length ? `<div><strong>Notes</strong><ul>${notes.map(b =>
+        `<li><em>${htmlEsc(b.name)}:</em> ${htmlEsc(b.notes)}</li>`).join('')}</ul></div>` : ''}
+    </div>` : '';
+
+  // Policies in this selection that set the same setting to different values.
+  // Intune holds back conflicting settings, so the device would get neither.
+  const idSet = new Set(ids);
+  const known = new Set(selBundles.flatMap(b => b.knownConflicts || []));
+  const alternatives = selBundles.filter(b => b.allowConflicts).map(b => new Set(b.members || []));
+  const clashes = (mgCatalog?.conflicts || []).filter(c =>
+    idSet.has(c.a) && idSet.has(c.b) &&
+    !(c.settingIds || []).every(sid => known.has(sid)) &&
+    !alternatives.some(set => set.has(c.a) && set.has(c.b)));
+  const nameOf = id => htmlEsc(mgById[id]?.displayName || id);
+  const conflictBox = clashes.length ? `
+    <div class="bb-conflicts">
+      <strong>${clashes.length} conflicting polic${clashes.length === 1 ? 'y pair' : 'y pairs'}</strong>
+      <span class="bb-note">These pairs set the same settings to different values. Intune won't apply
+      a conflicting setting from either policy, so remove one of each pair before deploying.</span>
+      <ul>${clashes.map(c => `<li>${nameOf(c.a)} <span class="bb-note">vs</span> ${nameOf(c.b)}
+        <span class="bb-note">(${c.settings} setting${c.settings === 1 ? '' : 's'})</span></li>`).join('')}</ul>
+    </div>` : '';
 
   document.getElementById('bb-body').innerHTML = `
     ${bbScenario ? `<div class="bb-scenario-banner">${bbIcon(bbScenario.icon, 18)}
@@ -7722,6 +7763,8 @@ function bbRenderReview() {
       <span class="bb-note">${htmlEsc(bbScenario.outcome)}</span></div></div>` : ''}
     <div class="bb-section-head">Selected building blocks</div>
     <div class="bb-sum-blocks">${blocks}</div>
+    ${conflictBox}
+    ${before}
     <div class="bb-section-head" style="margin-top:22px">Policies (${recs.length})</div>
     ${recs.length ? groups : empty}`;
 
