@@ -39,7 +39,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
-    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('c50b539d-96df-4b7b-b723-a2087babd59d')/grantControls/authenticationStrength/$entity",
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('b695e59a-552b-4a57-adb8-7c7a722c6f47')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
   }
 }
