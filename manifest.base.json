@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-16T12:47:18Z",
+  "generated": "2026-11-16T12:54:28Z",
   "count": 249,
   "entries": [
     {
@@ -1794,7 +1794,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-endpoint-detection-and-response-d-onboarding",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Detection_and_Response_-_D_-_Onboarding_-_v1_0.json",
-      "sha": "e8a7e5739aead6e0",
+      "sha": "b5b8cd8e3f7a9f8a",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityEndpointDetectionAndResponse",

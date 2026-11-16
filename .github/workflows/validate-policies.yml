@@ -87,5 +87,8 @@ jobs:
           if git diff --quiet -- IntuneConfig; then echo "Nothing to commit"; exit 0; fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -qam "Fill in Endpoint Security template references"
+          # Keep the generated manifest in step with the changed files
+          python3 scripts/generate-manifest.py --repo . > /dev/null
+          git add -A IntuneConfig manifest.json manifest.base.json
+          git commit -qm "Fill in Endpoint Security template references"
           git push origin "HEAD:${{ github.head_ref }}"
