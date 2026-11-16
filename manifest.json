@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-16T13:10:18Z",
-  "count": 248,
+  "generated": "2026-11-16T13:09:33Z",
+  "count": 246,
   "enrichedCount": 3,
   "entries": [
     {
@@ -182,20 +182,6 @@
       "caState": "disabled"
     },
     {
-      "id": "entra.conditionalaccess.cdw013-global-baseprotection-azuremanagement-anyplatform-mfa",
-      "file": "EntraConfig/ConditionalAccess/CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA.json",
-      "sha": "b2e14135126a22cb",
-      "workload": "entra",
-      "category": "ConditionalAccess",
-      "objectType": "conditionalAccessPolicy",
-      "displayName": "CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA",
-      "baseName": "CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA",
-      "platforms": [],
-      "deployVia": "graph",
-      "isDraft": false,
-      "caState": "disabled"
-    },
-    {
       "id": "entra.conditionalaccess.cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations",
       "file": "EntraConfig/ConditionalAccess/CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations.json",
       "sha": "5c6bf11713df8262",
@@ -204,20 +190,6 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations",
       "baseName": "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations",
-      "platforms": [],
-      "deployVia": "graph",
-      "isDraft": false,
-      "caState": "disabled"
-    },
-    {
-      "id": "entra.conditionalaccess.cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow",
-      "file": "EntraConfig/ConditionalAccess/CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow.json",
-      "sha": "35dea03d490534d1",
-      "workload": "entra",
-      "category": "ConditionalAccess",
-      "objectType": "conditionalAccessPolicy",
-      "displayName": "CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow",
-      "baseName": "CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow",
       "platforms": [],
       "deployVia": "graph",
       "isDraft": false,
@@ -1233,18 +1205,18 @@
     },
     {
       "id": "intune.appprotectionpolicies.android-cdw-baseline-mam-byod-app-protection",
-      "file": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
-      "sha": "ab57b8202ce19dda",
+      "file": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
+      "sha": "c88028f45a3ac81f",
       "workload": "intune",
       "category": "AppProtectionPolicies",
       "objectType": "appProtectionPolicies",
-      "displayName": "Android - CDW Baseline - MAM - BYOD App Protection - v1.1",
+      "displayName": "Android - CDW Baseline - MAM - BYOD App Protection - v1.0",
       "baseName": "Android - CDW Baseline - MAM - BYOD App Protection",
-      "description": "Microsoft App Protection Data Protection Framework Level 2 (enterprise enhanced). v1.1: block printing, open links in Microsoft Edge, raise minimum OS, require Play Integrity basic integrity and device certification.",
+      "description": "App Protection Policy for applications on Android. Applies to unmanaged (BYOD) personal devices only. Enforces PIN, encryption, data transfer restrictions, and conditional launch checks.",
       "platforms": [
         "android"
       ],
-      "version": "1.1",
+      "version": "1.0",
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -1253,18 +1225,18 @@
     },
     {
       "id": "intune.appprotectionpolicies.ios-cdw-baseline-mam-byod-app-protection",
-      "file": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
-      "sha": "9745a490370871e6",
+      "file": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
+      "sha": "51fbe2ae8c95149f",
       "workload": "intune",
       "category": "AppProtectionPolicies",
       "objectType": "appProtectionPolicies",
-      "displayName": "iOS - CDW Baseline - MAM - BYOD App Protection - v1.1",
+      "displayName": "iOS - CDW Baseline - MAM - BYOD App Protection - v1.0",
       "baseName": "iOS - CDW Baseline - MAM - BYOD App Protection",
-      "description": "Microsoft App Protection Data Protection Framework Level 2 (enterprise enhanced). v1.1: block printing, open links in Microsoft Edge, raise minimum OS.",
+      "description": "App Protection Policy for applications on iOS/iPadOS. Enforces PIN, encryption, data transfer restrictions, FaceID/TouchID, and conditional launch checks.",
       "platforms": [
         "ios"
       ],
-      "version": "1.1",
+      "version": "1.0",
       "deployVia": "graph",
       "isDraft": false,
       "flags": [

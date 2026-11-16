@@ -2,7 +2,8 @@ name: Sync main into test
 
 # Keeps the test branch = main + whatever is being tested, so the test site
 # always sees the latest exported policies. Generated files (catalog, manifest)
-# are rebuilt after the merge rather than merged.
+# are rebuilt after the merge rather than merged, and where a policy JSON
+# differs, main's copy (exported from the reference tenant) wins.
 
 on:
   push:
@@ -48,6 +49,14 @@ jobs:
           if ! git merge --no-edit --no-ff origin/main -m "Sync main into test"; then
             for f in $GENERATED; do
               git ls-files -u -- "$f" | grep -q . && git checkout --theirs -- "$f" && git add -- "$f"
+            done
+            # Policy JSON on main is the reference tenant's own export, so it wins.
+            # This is the normal path once a policy authored on test is deployed
+            # and exported back.
+            for f in $(git diff --name-only --diff-filter=U -- IntuneConfig EntraConfig); do
+              if git cat-file -e "origin/main:$f" 2>/dev/null; then
+                git checkout --theirs -- "$f" && git add -- "$f"
+              fi
             done
             if [ -n "$(git diff --name-only --diff-filter=U)" ]; then
               echo "conflicts=$(git diff --name-only --diff-filter=U | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
