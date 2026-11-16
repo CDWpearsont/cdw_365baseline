@@ -15,7 +15,14 @@
         "choiceSettingValue": {
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_windowsadvancedthreatprotection_configurationtype_autofromconnector",
-          "children": []
+          "children": [],
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "e5c7c98c-c854-4140-836e-bd22db59d651",
+            "useTemplateDefault": false
+          }
+        },
+        "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "23ab0ea3-1b12-429a-8ed0-7390cf699160"
         }
       }
     },
@@ -26,7 +33,14 @@
         "choiceSettingValue": {
           "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
           "value": "device_vendor_msft_windowsadvancedthreatprotection_configuration_samplesharing_1",
-          "children": []
+          "children": [],
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "f72c326c-7c5b-4224-b890-0b9b54522bd9",
+            "useTemplateDefault": false
+          }
+        },
+        "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "6998c81e-2814-4f5e-b492-a6159128a97b"
         }
       }
     }
