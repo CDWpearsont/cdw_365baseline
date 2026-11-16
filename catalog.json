@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T13:09:21+00:00",
-  "sourceCommit": "a385ee1d2471d24b5e0d8fede6fd90786b8cca02",
+  "generatedAt": "2026-11-16T15:09:22+00:00",
+  "sourceCommit": "3965ecfc90ec17bd9afe109f537372462f3a5f12",
   "counts": {
-    "policies": 243,
+    "policies": 245,
     "bundles": 14,
-    "issues": 254,
+    "issues": 256,
     "byConfidence": {
-      "medium": 116,
+      "medium": 118,
       "low": 2,
       "high": 125
     }
@@ -63,7 +63,9 @@
       "CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA",
       "CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA",
       "CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA",
       "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations",
+      "CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow",
       "CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA",
       "CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
       "CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
@@ -835,6 +837,40 @@
       ]
     },
     {
+      "id": "entra-cross-platform-conditional-access-cdw013-global-baseprotection-azuremanagement-anyplatform-mfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA.json",
+      "fileName": "CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA.json",
+      "displayName": "CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA",
+      "subArea": null,
+      "securityDomain": "Identity Security",
+      "settingCount": 0,
+      "policyHash": "sha256:06550df0076b1b84e8bc7cc58d2079d6eb80027d9ef7e9d9412456d5b7559066",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-identity-security"
+      ]
+    },
+    {
       "id": "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
       "path": "EntraConfig/ConditionalAccess/CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations.json",
       "fileName": "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations.json",
@@ -850,6 +886,40 @@
       "securityDomain": "Identity Security",
       "settingCount": 0,
       "policyHash": "sha256:5c6bf11713df82626e97764b8d8f26ddc9ed677482715cec3a818e5dad023cac",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-identity-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow-user",
+      "path": "EntraConfig/ConditionalAccess/CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow.json",
+      "fileName": "CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow.json",
+      "displayName": "CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow",
+      "subArea": null,
+      "securityDomain": "Identity Security",
+      "settingCount": 0,
+      "policyHash": "sha256:fae72c4e1bcb5c20bc9f2d01b5acaa36075c377dc517ceeecdff550d715740bc",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -3250,20 +3320,20 @@
     },
     {
       "id": "intune-android-app-protection-byod-app-protection-user",
-      "path": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
-      "fileName": "Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
-      "displayName": "Android - CDW Baseline - MAM - BYOD App Protection - v1.0",
+      "path": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
+      "fileName": "Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
+      "displayName": "Android - CDW Baseline - MAM - BYOD App Protection - v1.1",
       "workload": "Intune",
       "platform": "Android",
       "policyType": "App Protection",
       "framework": null,
       "scope": "User",
-      "version": "1.0",
+      "version": "1.1",
       "area": "BYOD App Protection",
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c88028f45a3ac81f6a64d11d684f9bf409733073e57d6b3082b314ae73ad33d9",
+      "policyHash": "sha256:3e11b700d9c12955451668ca9e34e24967e0880b9e73e03d67d5c8f8b6a6a54f",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3284,20 +3354,20 @@
     },
     {
       "id": "intune-ios-app-protection-byod-app-protection-user",
-      "path": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
-      "fileName": "iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
-      "displayName": "iOS - CDW Baseline - MAM - BYOD App Protection - v1.0",
+      "path": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
+      "fileName": "iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
+      "displayName": "iOS - CDW Baseline - MAM - BYOD App Protection - v1.1",
       "workload": "Intune",
       "platform": "iOS",
       "policyType": "App Protection",
       "framework": null,
       "scope": "User",
-      "version": "1.0",
+      "version": "1.1",
       "area": "BYOD App Protection",
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:51fbe2ae8c95149fdbe22159f8da79ff63854e49045b45718d87d9ac12934b93",
+      "policyHash": "sha256:dae3da4ab532992c384161a0b475fb17e88007e7a68be71f8780a8d9ae90162d",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3331,7 +3401,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:0a76f4bc296a9840f310658b46c1cf0d72a9e16eb14b0261ef995581d1fee3bd",
+      "policyHash": "sha256:226986c83add54d4130a5128ecef0cf0f33ada1dcc58f7eca6937b748281e8b3",
       "derivedFrom": {
         "workload": "folder",
         "area": "filename"
@@ -3363,7 +3433,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:cfe35eeb1284bf9244ca632106ae24f802b913ef1376bcc092188aada27d5521",
+      "policyHash": "sha256:2e73e40a17fd663aea7e30e1186a777128455ae5ceb428bd191bc7f0c8381d2e",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3397,7 +3467,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:07357346e79efb439adb853701a1110b7ebe0adf52c7060ee26dcece0c37f3f0",
+      "policyHash": "sha256:64dc7a22158aca9a9bfafbb9696dedab02338c834a161344b969014c7a256dc6",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3431,7 +3501,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c99c59a4fcc330ae31d73b10b24578cd55c9a047cb9ba6686f2ba6785b8f6db2",
+      "policyHash": "sha256:ef6381cf9b5f06c086f43725dab36d450795bded5e4a19799ce98dc6cf437a63",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3465,7 +3535,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:88350b32c6b8b3517aaef757a7a45ba6f55714bc9e6b6de1cb2af576c03c9193",
+      "policyHash": "sha256:e4c123da23e508c31cd525bb0577f153be6c61e4183b21b432b7a64b6ab1a2f3",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3502,7 +3572,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:b49e1de52e6708d4771d5c2cad07ed3ad0fd23cf2a24d719b2bc62e09a0783da",
+      "policyHash": "sha256:2f32f01c7e79c8e012e96e700083a1c9b0499e33221b0f20361c32952e41450a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3536,7 +3606,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:13e2e60418995f2864a75af1a63d2b9f9a1ee091f794fe44f19f42fbf25ffc58",
+      "policyHash": "sha256:25649c25e7092dc712d6e2366fefc0a3fcfa35f2c759e5ba97830b5970a41d4c",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3570,7 +3640,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:0ac382797009fc445a745edb21a930489a19ae65c8cc5fd5897c964ef8fb4d42",
+      "policyHash": "sha256:b5ecfdb23b3abd7395b6905c3ab34fb1df1ab2b9855ebdbf005176c4a9d7e9e1",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3604,7 +3674,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:669928c32ef3dc8db7e9d7cf2b756d69871cfce3943d3358786f3b8adcec4b67",
+      "policyHash": "sha256:82239d8d2ebc2c0e2a25a2187fffc57f930dfa9e0d1897aa2dd8d2552cd26980",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3638,7 +3708,7 @@
       "subArea": "Pilot",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:842a56c1e8a952b8f5afac35d40a72797805ef8d803eec7bd89540e09b7fe27a",
+      "policyHash": "sha256:26cae7dcb0b609ef142e2da226e3bcd6c7d22d0571a99b878675fce2a7f74705",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3673,7 +3743,7 @@
       "subArea": "UAT",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:a8cede08663452aff0e38b258463eb2025381e983a59bc9f6247e15e2f15da7a",
+      "policyHash": "sha256:3ce4a89df91914da992a8f369903dd985efda9710cdcd9ed8b16d16f6ad8939f",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3708,7 +3778,7 @@
       "subArea": "Production",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c694030e7f23e387c69df209063f2d6ea3e845cc580360b49b01c3f49efd56a3",
+      "policyHash": "sha256:cdf6c0bc44e4f74947b432d71bda7cede5c70d91bb4f311d2a0c8e5dc2eaf05a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4342,7 +4412,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:9cbfed6660152fa94002e4283823c46b35b47472365b2d391a4a1c544fcf341d",
+      "policyHash": "sha256:70735d5a6b404bcfac55df5579cc44c929625fbdb26232ef9ae91778e930eaa3",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4376,7 +4446,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:411fa5ec53787b783218cb225b10848384889ae602c5b591ec41a76e6f256660",
+      "policyHash": "sha256:067b2f8ca8884841836e8d70212deb5f75a0b3b9e6400edb94337306f238a917",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4410,7 +4480,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:6c86b4cd215179bab113edcd6f3db8f245fa283a56a788d1810993f67d4ea3d6",
+      "policyHash": "sha256:7a91c95cbc54a6a1bbda7fe16d7fb21346de1a692449d59bafb5eaa34dfafe87",
       "derivedFrom": {
         "workload": "folder",
         "policyType": "body",
@@ -9505,7 +9575,9 @@
         "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
         "entra-cross-platform-conditional-access-cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa-user",
         "entra-cross-platform-conditional-access-cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw013-global-baseprotection-azuremanagement-anyplatform-mfa-user",
         "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
+        "entra-cross-platform-conditional-access-cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow-user",
         "entra-cross-platform-conditional-access-cdw018-global-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
         "entra-cross-platform-conditional-access-cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
         "entra-cross-platform-conditional-access-cdw1001-developers-baseprotection-allapps-anyplatform-mfafromunmanageddevices-user",
@@ -9555,7 +9627,7 @@
         "entra-cross-platform-conditional-access-cdw900-workloadidentities-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
         "entra-cross-platform-conditional-access-cdw901-workloadidentities-baseprotection-allapps-anyplatform-blockhighrisk-user"
       ],
-      "memberCount": 57
+      "memberCount": 59
     },
     {
       "id": "entra-ca-cis-l1",
@@ -9737,8 +9809,20 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "entra-cross-platform-conditional-access-cdw013-global-baseprotection-azuremanagement-anyplatform-mfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
       "path": "EntraConfig/ConditionalAccess/CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow-user",
+      "path": "EntraConfig/ConditionalAccess/CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -10164,13 +10248,13 @@
     },
     {
       "policyId": "intune-android-app-protection-byod-app-protection-user",
-      "path": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
+      "path": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
     {
       "policyId": "intune-ios-app-protection-byod-app-protection-user",
-      "path": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
+      "path": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
