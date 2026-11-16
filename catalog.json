@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T12:36:24+00:00",
-  "sourceCommit": "8f2a3bf8df1513958497a5ac8b61495a3c965e15",
+  "generatedAt": "2026-11-16T13:09:21+00:00",
+  "sourceCommit": "a385ee1d2471d24b5e0d8fede6fd90786b8cca02",
   "counts": {
-    "policies": 230,
+    "policies": 243,
     "bundles": 14,
-    "issues": 241,
+    "issues": 254,
     "byConfidence": {
-      "medium": 103,
+      "medium": 116,
       "low": 2,
       "high": 125
     }
@@ -60,6 +60,16 @@
       "CDW002 Require password change for high-risk users",
       "CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block",
       "CDW003 Block Legacy Authentication",
+      "CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA",
+      "CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA",
+      "CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations",
+      "CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA",
+      "CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
+      "CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
+      "CDW019-Global-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
+      "CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA",
+      "CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
       "CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices",
       "CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration",
       "CDW1003-Developers-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
@@ -71,15 +81,18 @@
       "CDW102-Admins-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
       "CDW103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
       "CDW104-Admins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
       "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP",
       "CDW107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy",
       "CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "CDW200-Internals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
       "CDW201-Internals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
       "CDW202-Internals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
       "CDW203-Internals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
       "CDW204-Internals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "CDW206-Internals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
       "CDW207-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
+      "CDW300-Externals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
       "CDW301-Externals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
       "CDW302-Externals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
       "CDW303-Externals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
@@ -720,6 +733,346 @@
       ]
     },
     {
+      "id": "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA.json",
+      "fileName": "CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA.json",
+      "displayName": "CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA",
+      "subArea": null,
+      "securityDomain": "Identity Security",
+      "settingCount": 0,
+      "policyHash": "sha256:d8b1b89e52e3ea8eec1568ac7bbaad47b895d57f41d6abbd682d58dcaf9339a4",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-identity-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA.json",
+      "fileName": "CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA.json",
+      "displayName": "CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA",
+      "subArea": null,
+      "securityDomain": "Identity Security",
+      "settingCount": 0,
+      "policyHash": "sha256:6e4728dd7c7745ec1373b6b7d82043eaddb569f1cd7a75ac462f800f12305fd8",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-identity-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+      "path": "EntraConfig/ConditionalAccess/CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "fileName": "CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "displayName": "CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
+      "subArea": null,
+      "securityDomain": "Identity Security",
+      "settingCount": 0,
+      "policyHash": "sha256:8398157185228cfc01aae93a4060db5ba904895162657eaadd6f4a259e93250b",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-identity-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
+      "path": "EntraConfig/ConditionalAccess/CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations.json",
+      "fileName": "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations.json",
+      "displayName": "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations",
+      "subArea": null,
+      "securityDomain": "Identity Security",
+      "settingCount": 0,
+      "policyHash": "sha256:5c6bf11713df82626e97764b8d8f26ddc9ed677482715cec3a818e5dad023cac",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-identity-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw016-global-baseprotection-allapps-anyplatform-compliantorhybridormfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA.json",
+      "fileName": "CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA.json",
+      "displayName": "CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA",
+      "subArea": null,
+      "securityDomain": "Endpoint Security",
+      "settingCount": 0,
+      "policyHash": "sha256:2346681e7ddcc96d987540f4871f2ad700e14bfb7b1af2e111c49b2f9e606210",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-endpoint-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw017-global-dataandappprotection-allapps-iosorandroid-appprotection-user",
+      "path": "EntraConfig/ConditionalAccess/CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection.json",
+      "fileName": "CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection.json",
+      "displayName": "CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
+      "subArea": null,
+      "securityDomain": "Endpoint Security",
+      "settingCount": 0,
+      "policyHash": "sha256:75c265a4dbf8f04e507d3265147735ae18f03ad17f3bf0c9e32bb813448e0261",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-endpoint-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw018-global-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
+      "path": "EntraConfig/ConditionalAccess/CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk.json",
+      "fileName": "CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk.json",
+      "displayName": "CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
+      "subArea": null,
+      "securityDomain": "Identity Security",
+      "settingCount": 0,
+      "policyHash": "sha256:9a1ae8c2b881f3546090554f684408b052484836fb0bbe044bdd955d58fde0b8",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-identity-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
+      "path": "EntraConfig/ConditionalAccess/CDW019-Global-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk.json",
+      "fileName": "CDW019-Global-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk.json",
+      "displayName": "CDW019-Global-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW019-Global-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
+      "subArea": null,
+      "securityDomain": "Identity Security",
+      "settingCount": 0,
+      "policyHash": "sha256:5fedca44b5db6133b86d816d2e2546c59b635383eb6d38b4783a172f20c83385",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-identity-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw100-admins-baseprotection-allapps-anyplatform-compliantandphishingresistantmfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA.json",
+      "fileName": "CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA.json",
+      "displayName": "CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA",
+      "subArea": null,
+      "securityDomain": "Endpoint Security",
+      "settingCount": 0,
+      "policyHash": "sha256:00fdd190947ac7f6f2866676cec18bb20c46b4e7892006a6c570bc422e68894d",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-endpoint-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw1000-developers-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
+      "path": "EntraConfig/ConditionalAccess/CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
+      "fileName": "CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
+      "displayName": "CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
+      "subArea": null,
+      "securityDomain": "Endpoint Security",
+      "settingCount": 0,
+      "policyHash": "sha256:4ab75a7e80fd4b03b65934e38d45e95e3f309c7d27c0b8239af345c3a511aff7",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-endpoint-security"
+      ]
+    },
+    {
       "id": "entra-cross-platform-conditional-access-cdw1001-developers-baseprotection-allapps-anyplatform-mfafromunmanageddevices-user",
       "path": "EntraConfig/ConditionalAccess/CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices.json",
       "fileName": "CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices.json",
@@ -1094,6 +1447,40 @@
       ]
     },
     {
+      "id": "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-appprotection-user",
+      "path": "EntraConfig/ConditionalAccess/CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection.json",
+      "fileName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection.json",
+      "displayName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
+      "subArea": null,
+      "securityDomain": "Endpoint Security",
+      "settingCount": 0,
+      "policyHash": "sha256:6b276a0259f8fabd84a0431f6d3b947f4be24208bef18bea39d362fbea610371",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-endpoint-security"
+      ]
+    },
+    {
       "id": "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-clientappandapp-user",
       "path": "EntraConfig/ConditionalAccess/CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP.json",
       "fileName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP.json",
@@ -1177,6 +1564,40 @@
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:b58ed508cea855e589e0f594d8ec9cd120d9de6e64b20677d81f60962bb9e478",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-endpoint-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw200-internals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
+      "path": "EntraConfig/ConditionalAccess/CDW200-Internals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
+      "fileName": "CDW200-Internals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
+      "displayName": "CDW200-Internals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW200-Internals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
+      "subArea": null,
+      "securityDomain": "Endpoint Security",
+      "settingCount": 0,
+      "policyHash": "sha256:ab64e57974cb51c990aee6fb8e42b482695cb7da4439b5cf18f73e4fad59ed77",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1381,6 +1802,40 @@
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
       "policyHash": "sha256:aad66d6a6f9f3723ce59b9e1beaab4acb1a68598645117079af801ae0a873f07",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "body",
+        "scope": "inferred",
+        "area": "filename",
+        "securityDomain": "body"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "entra-ca-endpoint-security"
+      ]
+    },
+    {
+      "id": "entra-cross-platform-conditional-access-cdw300-externals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
+      "path": "EntraConfig/ConditionalAccess/CDW300-Externals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
+      "fileName": "CDW300-Externals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
+      "displayName": "CDW300-Externals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
+      "workload": "Entra",
+      "platform": "Cross-platform",
+      "policyType": "Conditional Access",
+      "framework": null,
+      "scope": "User",
+      "version": null,
+      "area": "CDW300-Externals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
+      "subArea": null,
+      "securityDomain": "Endpoint Security",
+      "settingCount": 0,
+      "policyHash": "sha256:f7ed93c729e524f29605ff4e8040b55e1633f2b2bbb4548e0469c2e90bf03ec5",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -9004,19 +9459,26 @@
       "exclude": [],
       "order": 60,
       "members": [
+        "entra-cross-platform-conditional-access-cdw016-global-baseprotection-allapps-anyplatform-compliantorhybridormfa-user",
+        "entra-cross-platform-conditional-access-cdw017-global-dataandappprotection-allapps-iosorandroid-appprotection-user",
+        "entra-cross-platform-conditional-access-cdw100-admins-baseprotection-allapps-anyplatform-compliantandphishingresistantmfa-user",
+        "entra-cross-platform-conditional-access-cdw1000-developers-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
         "entra-cross-platform-conditional-access-cdw1002-developers-baseprotection-allapps-anyplatform-combinedregistration-user",
         "entra-cross-platform-conditional-access-cdw1006-developers-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
         "entra-cross-platform-conditional-access-cdw101-admins-identityprotection-allapps-anyplatform-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-appprotection-user",
         "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-clientappandapp-user",
         "entra-cross-platform-conditional-access-cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
+        "entra-cross-platform-conditional-access-cdw200-internals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
         "entra-cross-platform-conditional-access-cdw201-internals-identityprotection-allapps-anyplatform-combinedregistration-user",
         "entra-cross-platform-conditional-access-cdw206-internals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
         "entra-cross-platform-conditional-access-cdw207-internals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
+        "entra-cross-platform-conditional-access-cdw300-externals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
         "entra-cross-platform-conditional-access-cdw301-externals-identityprotection-allapps-anyplatform-combinedregistration-user",
         "entra-cross-platform-conditional-access-cdw306-externals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
         "entra-cross-platform-conditional-access-cdw307-externals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user"
       ],
-      "memberCount": 11
+      "memberCount": 18
     },
     {
       "id": "entra-ca-identity-security",
@@ -9040,6 +9502,12 @@
         "entra-cross-platform-conditional-access-cdw002-global-attacksurfacereduction-variousapps-anyplatform-block-user",
         "entra-cross-platform-conditional-access-cdw002-require-password-change-for-high-risk-users-user",
         "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user",
+        "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
+        "entra-cross-platform-conditional-access-cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa-user",
+        "entra-cross-platform-conditional-access-cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
+        "entra-cross-platform-conditional-access-cdw018-global-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
         "entra-cross-platform-conditional-access-cdw1001-developers-baseprotection-allapps-anyplatform-mfafromunmanageddevices-user",
         "entra-cross-platform-conditional-access-cdw1003-developers-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
         "entra-cross-platform-conditional-access-cdw1004-developers-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
@@ -9087,7 +9555,7 @@
         "entra-cross-platform-conditional-access-cdw900-workloadidentities-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
         "entra-cross-platform-conditional-access-cdw901-workloadidentities-baseprotection-allapps-anyplatform-blockhighrisk-user"
       ],
-      "memberCount": 51
+      "memberCount": 57
     },
     {
       "id": "entra-ca-cis-l1",
@@ -9251,6 +9719,66 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+      "path": "EntraConfig/ConditionalAccess/CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
+      "path": "EntraConfig/ConditionalAccess/CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw016-global-baseprotection-allapps-anyplatform-compliantorhybridormfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw017-global-dataandappprotection-allapps-iosorandroid-appprotection-user",
+      "path": "EntraConfig/ConditionalAccess/CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw018-global-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
+      "path": "EntraConfig/ConditionalAccess/CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
+      "path": "EntraConfig/ConditionalAccess/CDW019-Global-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw100-admins-baseprotection-allapps-anyplatform-compliantandphishingresistantmfa-user",
+      "path": "EntraConfig/ConditionalAccess/CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw1000-developers-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
+      "path": "EntraConfig/ConditionalAccess/CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "entra-cross-platform-conditional-access-cdw1001-developers-baseprotection-allapps-anyplatform-mfafromunmanageddevices-user",
       "path": "EntraConfig/ConditionalAccess/CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices.json",
       "type": "missingEnrichment",
@@ -9317,6 +9845,12 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-appprotection-user",
+      "path": "EntraConfig/ConditionalAccess/CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-clientappandapp-user",
       "path": "EntraConfig/ConditionalAccess/CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP.json",
       "type": "missingEnrichment",
@@ -9331,6 +9865,12 @@
     {
       "policyId": "entra-cross-platform-conditional-access-cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
       "path": "EntraConfig/ConditionalAccess/CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw200-internals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
+      "path": "EntraConfig/ConditionalAccess/CDW200-Internals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -9367,6 +9907,12 @@
     {
       "policyId": "entra-cross-platform-conditional-access-cdw207-internals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
       "path": "EntraConfig/ConditionalAccess/CDW207-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "entra-cross-platform-conditional-access-cdw300-externals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
+      "path": "EntraConfig/ConditionalAccess/CDW300-Externals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
