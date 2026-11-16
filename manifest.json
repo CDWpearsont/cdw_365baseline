@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-09-17T15:12:04Z",
-  "count": 227,
+  "generated": "2026-11-16T12:18:54Z",
+  "count": 233,
   "enrichedCount": 3,
   "entries": [
     {
@@ -1024,7 +1024,7 @@
     {
       "id": "intune.appprotectionpolicies.android-cdw-baseline-mam-byod-app-protection",
       "file": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
-      "sha": "7c5759e2ae0b2ec9",
+      "sha": "c88028f45a3ac81f",
       "workload": "intune",
       "category": "AppProtectionPolicies",
       "objectType": "appProtectionPolicies",
@@ -1044,7 +1044,7 @@
     {
       "id": "intune.appprotectionpolicies.ios-cdw-baseline-mam-byod-app-protection",
       "file": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_0.json",
-      "sha": "78cfebb9b62083ba",
+      "sha": "51fbe2ae8c95149f",
       "workload": "intune",
       "category": "AppProtectionPolicies",
       "objectType": "appProtectionPolicies",
@@ -1064,7 +1064,7 @@
     {
       "id": "intune.autopilotprofiles.user-driven-entra-preprov-cdw-baseline",
       "file": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
-      "sha": "ff1a293bb690059e",
+      "sha": "0a76f4bc296a9840",
       "workload": "intune",
       "category": "AutopilotProfiles",
       "objectType": "azureADWindowsAutopilotDeploymentProfile",
@@ -1080,7 +1080,7 @@
     {
       "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-device-health",
       "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v1_0.json",
-      "sha": "880abf7f41d8e7a5",
+      "sha": "cfe35eeb1284bf92",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "macOSCompliancePolicy",
@@ -1097,7 +1097,7 @@
     {
       "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-device-security",
       "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Security_-_v1_0.json",
-      "sha": "243d3edf9ec6a086",
+      "sha": "07357346e79efb43",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "macOSCompliancePolicy",
@@ -1114,7 +1114,7 @@
     {
       "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-password",
       "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Password_-_v1_0.json",
-      "sha": "9d11bf847af6be9e",
+      "sha": "c99c59a4fcc330ae",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "macOSCompliancePolicy",
@@ -1131,7 +1131,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-cis-l1-u-device-health-and-security",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_CIS_L1_-_U_-_Device_Health_and_Security_-_v5_0_0.json",
-      "sha": "3aa9bd51cdf4760a",
+      "sha": "88350b32c6b8b351",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1150,7 +1150,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-defender-for-endpoint",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Defender_for_Endpoint_-_v3_1.json",
-      "sha": "b27c71fca5935e58",
+      "sha": "b49e1de52e6708d4",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1167,7 +1167,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-device-health",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v3_1.json",
-      "sha": "b56c62ff3326d427",
+      "sha": "13e2e60418995f28",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1184,7 +1184,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-device-security",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Device_Security_-_v3_1.json",
-      "sha": "2b24674805d8cdba",
+      "sha": "0ac382797009fc44",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1201,7 +1201,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-password",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Password_-_v3_1.json",
-      "sha": "55ed972bf1b5d5e4",
+      "sha": "669928c32ef3dc8d",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1218,7 +1218,7 @@
     {
       "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-1-pilot",
       "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_1_-_Pilot_-_v3_0.json",
-      "sha": "c1a469f7f138ac70",
+      "sha": "842a56c1e8a952b8",
       "workload": "intune",
       "category": "DeviceConfigurations",
       "objectType": "windowsUpdateForBusinessConfiguration",
@@ -1238,7 +1238,7 @@
     {
       "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-2-uat",
       "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_2_-_UAT_-_v3_0.json",
-      "sha": "10fb9ebae339bc6f",
+      "sha": "a8cede08663452af",
       "workload": "intune",
       "category": "DeviceConfigurations",
       "objectType": "windowsUpdateForBusinessConfiguration",
@@ -1258,7 +1258,7 @@
     {
       "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-3-production",
       "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_3_-_Production_-_v3_0.json",
-      "sha": "b7bfbb21cfda64e8",
+      "sha": "c694030e7f23e387",
       "workload": "intune",
       "category": "DeviceConfigurations",
       "objectType": "windowsUpdateForBusinessConfiguration",
@@ -1278,7 +1278,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-attack-surface-reduction-d-asr-rules-audit-mode",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Attack_Surface_Reduction_-_D_-_ASR_Rules__Audit_Mode__-_v3_1.json",
-      "sha": "867797c3147b0412",
+      "sha": "90e85e598d88fcbd",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAttackSurfaceReduction",
@@ -1300,7 +1300,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-attack-surface-reduction-d-asr-rules-l2",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Attack_Surface_Reduction_-_D_-_ASR_Rules__L2__-_v3_7.json",
-      "sha": "dc0fbf8a315ae80d",
+      "sha": "95a6d5fe958eca50",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAttackSurfaceReduction",
@@ -1328,7 +1328,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-attack-surface-reduction-d-asr-rules",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Attack_Surface_Reduction_-_D_-_ASR_Rules_-_v1_0_0.json",
-      "sha": "4493b5c3467194d8",
+      "sha": "748ed94c9d463938",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAttackSurfaceReduction",
@@ -1361,7 +1361,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-attack-surface-reduction-d-exploit-protection",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Attack_Surface_Reduction_-_D_-_Exploit_Protection_-_v1_0_0.json",
-      "sha": "9676f89580dd1251",
+      "sha": "64b1d0cb4e9ba22f",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAttackSurfaceReduction",
@@ -1382,7 +1382,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-defender-antivirus-d-antivirus-configuration",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Defender_Antivirus_-_D_-_Antivirus_Configuration_-_v1_0_0.json",
-      "sha": "75791fa766a7f7fc",
+      "sha": "e5415bb5768aee57",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAntivirus",
@@ -1403,7 +1403,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-defender-antivirus-d-security-experience",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Defender_Antivirus_-_D_-_Security_Experience_-_v1_0_0.json",
-      "sha": "a54eed582500c397",
+      "sha": "03b624d35c6029e6",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAntivirus",
@@ -1424,7 +1424,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-encryption-d-bitlocker-bl",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Encryption_-_D_-_BitLocker__BL__-_v5_0_0.json",
-      "sha": "128f71a204a4e345",
+      "sha": "126c19337b9bf934",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityDiskEncryption",
@@ -1445,7 +1445,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-local-group-membership-d-local-administrators",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Local_Group_Membership_-_D_-_Local_Administrators_-_v4_0_0.json",
-      "sha": "8755e9e39e400b1f",
+      "sha": "0677ff1ee1aa96e5",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAccountProtection",
@@ -1466,7 +1466,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-firewall-d-firewall-configuration",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Firewall_-_D_-_Firewall_Configuration_-_v5_0_0.json",
-      "sha": "00bd5630c91b71be",
+      "sha": "84c3fb179209c06f",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityFirewall",
@@ -1487,7 +1487,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-hello-for-business-d-whfb-configuration",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v5_0_0.json",
-      "sha": "39d3eaadbce16c0b",
+      "sha": "71cfbdda1df1c9c1",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAccountProtection",
@@ -1508,7 +1508,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-cis-l1-windows-laps-d-laps-configuration",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_CIS_L1_-_Windows_LAPS_-_D_-_LAPS_Configuration_-_v5_0_0.json",
-      "sha": "6faca68215979d56",
+      "sha": "7c38e8dc41633e8a",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAccountProtection",
@@ -1538,7 +1538,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-defender-antivirus-updates-ring-1-pilot",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Defender_Antivirus_Updates_-_Ring_1_-_Pilot_-_v3_4.json",
-      "sha": "29033e03c8586650",
+      "sha": "455a4d0b5a6bd783",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAntivirus",
@@ -1559,7 +1559,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-defender-antivirus-updates-ring-2-uat",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Defender_Antivirus_Updates_-_Ring_2_-_UAT_-_v3_4.json",
-      "sha": "4fdab8e0330874c8",
+      "sha": "1bd9f6ac730766f9",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAntivirus",
@@ -1580,7 +1580,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-defender-antivirus-updates-ring-3-production",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Defender_Antivirus_Updates_-_Ring_3_-_Production_-_v3_4.json",
-      "sha": "c24b8628e7a00277",
+      "sha": "cff9a92d3ede5b77",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAntivirus",
@@ -1599,28 +1599,9 @@
       "templateId": "e3f74c5a-a6de-411d-aef6-eb15628f3a0a_1"
     },
     {
-      "id": "intune.endpointsecurity.win-cdw-baseline-es-encryption-d-bitlocker-os-disk",
-      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v3_7.json",
-      "sha": "2f00fa63030bea3d",
-      "workload": "intune",
-      "category": "EndpointSecurity",
-      "objectType": "endpointSecurityDiskEncryption",
-      "displayName": "Win - CDW Baseline - ES - Encryption - D - BitLocker (OS Disk) - v3.7",
-      "baseName": "Win - CDW Baseline - ES - Encryption - D - BitLocker (OS Disk)",
-      "platforms": [
-        "windows"
-      ],
-      "scope": "device",
-      "version": "3.7",
-      "settingCount": 8,
-      "deployVia": "graph",
-      "isDraft": false,
-      "templateId": "46ddfc50-d10f-4867-b852-9434254b3bff_1"
-    },
-    {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-encryption-u-personal-data-encryption",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_U_-_Personal_Data_Encryption_-_v3_4.json",
-      "sha": "b18bfc102609e8e0",
+      "sha": "18e7390b8f2d8f9d",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityDiskEncryption",
@@ -1640,7 +1621,7 @@
     {
       "id": "intune.endpointsecurity.win-cdw-baseline-es-local-group-membership-d-local-administrators",
       "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Local_Group_Membership_-_D_-_Local_Administrators_-_v3_7.json",
-      "sha": "91c7b1d336620daa",
+      "sha": "3d5c907085f00100",
       "workload": "intune",
       "category": "EndpointSecurity",
       "objectType": "endpointSecurityAccountProtection",
@@ -1657,28 +1638,9 @@
       "templateId": "22968f54-45fa-486c-848e-f8224aa69772_1"
     },
     {
-      "id": "intune.endpointsecurity.win-cdw-baseline-es-windows-hello-for-business-d-whfb-configuration",
-      "file": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v3_2.json",
-      "sha": "f5b40a8f07fca522",
-      "workload": "intune",
-      "category": "EndpointSecurity",
-      "objectType": "endpointSecurityAccountProtection",
-      "displayName": "Win - CDW Baseline - ES - Windows Hello for Business - D - WHfB Configuration - v3.2",
-      "baseName": "Win - CDW Baseline - ES - Windows Hello for Business - D - WHfB Configuration",
-      "platforms": [
-        "windows"
-      ],
-      "scope": "device",
-      "version": "3.2",
-      "settingCount": 2,
-      "deployVia": "graph",
-      "isDraft": false,
-      "templateId": "fcef01f2-439d-4c3f-9184-823fd6e97646_1"
-    },
-    {
       "id": "intune.enrolmentrestrictions.android-cdw-baseline-enrolment-restriction-block-personal",
       "file": "IntuneConfig/EnrolmentRestrictions/Android_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
-      "sha": "c199eaa248cb999b",
+      "sha": "9cbfed6660152fa9",
       "workload": "intune",
       "category": "EnrolmentRestrictions",
       "objectType": "deviceEnrollmentPlatformRestrictionConfiguration",
@@ -1698,7 +1660,7 @@
     {
       "id": "intune.enrolmentrestrictions.ios-cdw-baseline-enrolment-restriction-block-personal",
       "file": "IntuneConfig/EnrolmentRestrictions/iOS_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
-      "sha": "0d05039d31ce4e17",
+      "sha": "411fa5ec53787b78",
       "workload": "intune",
       "category": "EnrolmentRestrictions",
       "objectType": "deviceEnrollmentPlatformRestrictionConfiguration",
@@ -1718,7 +1680,7 @@
     {
       "id": "intune.enrolmentstatuspage.esp-cdw-baseline",
       "file": "IntuneConfig/EnrolmentStatusPage/ESP_CDW_Baseline.json",
-      "sha": "7f452712a3d777a4",
+      "sha": "6c86b4cd215179ba",
       "workload": "intune",
       "category": "EnrolmentStatusPage",
       "objectType": "windows10EnrollmentCompletionPageConfiguration",
@@ -1788,6 +1750,25 @@
       "scope": "device",
       "version": "1.0",
       "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-defender-antivirus-d-antivirus-configuration",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Defender_Antivirus_-_D_-_Antivirus_Configuration_-_v1_0.json",
+      "sha": "a1bfbf5f1a0227c1",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - Defender Antivirus - D - Antivirus Configuration - v1.0",
+      "baseName": "MacOS - CDW Baseline - Defender Antivirus - D - Antivirus Configuration",
+      "description": "NOTE: This policy requires deployment of the Defender application and a valid Defender for Endpoint P1/P2 or Defender for Business license:\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/mac-install-with-intune",
+      "platforms": [
+        "macos"
+      ],
+      "scope": "device",
+      "version": "1.0",
+      "settingCount": 19,
       "deployVia": "graph",
       "isDraft": false
     },
@@ -2065,7 +2046,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-defender-antivirus-d-additional-configuration",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Defender_Antivirus_-_D_-_Additional_Configuration_-_v1_0_0.json",
-      "sha": "cd24c44d6e5b9ea0",
+      "sha": "2022e957c6a87da1",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2085,7 +2066,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-defender-antivirus-d-admx-configuration",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Defender_Antivirus_-_D_-_ADMX_Configuration_-_v1_0_0.json",
-      "sha": "34feb212bcb6a4ed",
+      "sha": "5848b2188f9c2f9d",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2425,7 +2406,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-d-password-management",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_D_-_Password_Management_-_v1_0_0.json",
-      "sha": "07cc4f4ec281c486",
+      "sha": "210dee71a7cd1c15",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2445,7 +2426,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-d-profiles-sign-in-and-sync",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_D_-_Profiles__Sign-In_and_Sync_-_v1_0_0.json",
-      "sha": "3af4ef99786ca345",
+      "sha": "a08ef699a4860e0e",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2465,7 +2446,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-d-security",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_D_-_Security_-_v1_0_0.json",
-      "sha": "8cef51fe2152f8c0",
+      "sha": "452a8399c13a8df8",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2485,7 +2466,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-d-updates",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_D_-_Updates_-_v1_0_0.json",
-      "sha": "0e1484f266262097",
+      "sha": "376e57199930efd9",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2505,7 +2486,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-d-user-experience",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_D_-_User_Experience_-_v1_0_0.json",
-      "sha": "126d2b631e332102",
+      "sha": "eb33fd84a18c8a92",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2525,7 +2506,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-u-extensions",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_U_-_Extensions_-_v1_0_0.json",
-      "sha": "35063aaf7fc82744",
+      "sha": "3828ae4c9b71e432",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2545,7 +2526,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-u-password-management",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_U_-_Password_Management_-_v1_0_0.json",
-      "sha": "6b47721471d7c467",
+      "sha": "0c6e9321f691072d",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2565,7 +2546,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-u-profiles-sign-in-and-sync",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v1_0_0.json",
-      "sha": "e3347f1807357d5e",
+      "sha": "9bae94c7b15775a9",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2585,7 +2566,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l1-microsoft-edge-u-user-experience",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L1_-_Microsoft_Edge_-_U_-_User_Experience_-_v1_0_0.json",
-      "sha": "340496c6239c6d1e",
+      "sha": "0c90d167857036f4",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2893,7 +2874,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-defender-antivirus-d-additional-configuration",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Defender_Antivirus_-_D_-_Additional_Configuration_-_v1_0_0.json",
-      "sha": "29f21ac7e0d4f9e4",
+      "sha": "ad21f048435e79d4",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -2913,7 +2894,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-defender-antivirus-d-admx-configuration",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Defender_Antivirus_-_D_-_ADMX_Configuration_-_v1_0_0.json",
-      "sha": "18c36a8e2a35022f",
+      "sha": "249998270da26254",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -3093,7 +3074,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-edge-d-extensions",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_D_-_Extensions_-_v1_0_0.json",
-      "sha": "db7de99339b8b63a",
+      "sha": "447c4e4f84e290eb",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -3113,7 +3094,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-edge-d-profiles-sign-in-and-sync",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_D_-_Profiles__Sign-In_and_Sync_-_v1_0_0.json",
-      "sha": "a52c758fb679a428",
+      "sha": "e8f7db9f0ac688cf",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -3133,7 +3114,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-edge-d-security",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_D_-_Security_-_v1_0_0.json",
-      "sha": "30b1a2d9300aebba",
+      "sha": "fad509cc9ea6d649",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -3153,7 +3134,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-edge-d-user-experience",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_D_-_User_Experience_-_v1_0_0.json",
-      "sha": "808a26ffc0c7cdfb",
+      "sha": "699b1c5ecf323cc1",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -3173,7 +3154,7 @@
     {
       "id": "intune.settingscatalog.win-cdw-baseline-sc-cis-l2-microsoft-edge-u-profiles-sign-in-and-sync",
       "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_CIS_L2_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v1_0_0.json",
-      "sha": "d83e139e0c4ce61f",
+      "sha": "5385706d90d65e95",
       "workload": "intune",
       "category": "SettingsCatalog",
       "objectType": "configurationPolicy",
@@ -3372,6 +3353,25 @@
       "scope": "device",
       "version": "3.3",
       "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-defender-antivirus-d-additional-configuration",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Defender_Antivirus_-_D_-_Additional_Configuration_-_v3_6.json",
+      "sha": "23be025a17024c9c",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Defender Antivirus - D - Additional Configuration - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Defender Antivirus - D - Additional Configuration",
+      "description": "NOTE: Some of these settings require the device to be onboarded to Defender for Endpoint.",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.6",
+      "settingCount": 10,
       "deployVia": "graph",
       "isDraft": false
     },
@@ -3771,6 +3771,114 @@
       "scope": "device",
       "version": "3.2",
       "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-d-security",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Security_-_v3_7.json",
+      "sha": "b3d14626fe6c5e3b",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - D - Security - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - D - Security",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.7",
+      "settingCount": 44,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-d-updates",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Updates_-_v3_6.json",
+      "sha": "61fb41d2472ada36",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - D - Updates - v3.6",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - D - Updates",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "device",
+      "version": "3.6",
+      "settingCount": 13,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-u-extensions",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Extensions_-_v3_1.json",
+      "sha": "f7b7a26508c29df3",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Extensions - v3.1",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - U - Extensions",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.1",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-u-password-management",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Password_Management_-_v3_0.json",
+      "sha": "7189cc8661c96db4",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Password Management - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - U - Password Management",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.0",
+      "settingCount": 4,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-u-profiles-sign-in-and-sync",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v3_0.json",
+      "sha": "f011fe114a032efa",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Profiles, Sign-In and Sync - v3.0",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - U - Profiles, Sign-In and Sync",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.0",
+      "settingCount": 8,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.win-cdw-baseline-sc-microsoft-edge-u-user-experience",
+      "file": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_User_Experience_-_v3_7.json",
+      "sha": "5792cb4fd747abec",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - User Experience - v3.7",
+      "baseName": "Win - CDW Baseline - SC - Microsoft Edge - U - User Experience",
+      "platforms": [
+        "windows"
+      ],
+      "scope": "user",
+      "version": "3.7",
+      "settingCount": 12,
       "deployVia": "graph",
       "isDraft": false
     },
