@@ -2,7 +2,7 @@ name: Build policy catalog
 
 on:
   push:
-    branches: [main]
+    branches: [main, test]
     paths:
       - 'IntuneConfig/**/*.json'
       - 'EntraConfig/**/*.json'
@@ -18,7 +18,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: main-generated-files
+  group: generated-files-${{ github.event_name == 'workflow_run' && 'main' || github.ref_name }}
   cancel-in-progress: false
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.ref_name }}
 
       - uses: actions/setup-python@v5
         with:
@@ -66,5 +66,6 @@ jobs:
             echo "No catalog changes"
           else
             git commit -m "chore: rebuild policy catalog [skip ci]"
-            for i in 1 2 3; do git pull --rebase --quiet origin main && git push && break; sleep 5; done
+            BRANCH="${{ github.event_name == 'workflow_run' && 'main' || github.ref_name }}"
+            for i in 1 2 3; do git pull --rebase --quiet origin "$BRANCH" && git push origin "HEAD:$BRANCH" && break; sleep 5; done
           fi

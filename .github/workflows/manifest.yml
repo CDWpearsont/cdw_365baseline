@@ -1,14 +1,14 @@
 name: Build policy manifest
 
 # Regenerates manifest.base.json and manifest.json whenever a policy JSON or
-# the human overlay changes, and after each export run. On main it commits the
-# result directly; on pull requests it
+# the human overlay changes, and after each export run. On main and test it
+# commits the result directly; on pull requests it
 # only validates, so a PR that forgets to regenerate fails rather than silently
 # shipping a stale manifest.
 
 on:
   push:
-    branches: [main]
+    branches: [main, test]
     paths-ignore:
       - 'site/**'
       - 'docs/**'
@@ -33,7 +33,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: ${{ github.event_name == 'pull_request' && format('manifest-{0}', github.ref) || 'main-generated-files' }}
+  group: ${{ github.event_name == 'pull_request' && format('manifest-{0}', github.ref) || format('generated-files-{0}', github.event_name == 'workflow_run' && 'main' || github.ref_name) }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
@@ -69,7 +69,8 @@ jobs:
             echo "Manifest already current"
           else
             git commit -m "chore: regenerate policy manifest [skip ci]"
-            for i in 1 2 3; do git pull --rebase --quiet origin main && git push origin HEAD:main && break; sleep 5; done
+            BRANCH="${{ github.event_name == 'workflow_run' && 'main' || github.ref_name }}"
+            for i in 1 2 3; do git pull --rebase --quiet origin "$BRANCH" && git push origin "HEAD:$BRANCH" && break; sleep 5; done
           fi
 
       - name: Summary
