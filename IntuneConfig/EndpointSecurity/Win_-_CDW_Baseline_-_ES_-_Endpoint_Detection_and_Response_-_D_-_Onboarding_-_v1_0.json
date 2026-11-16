@@ -1,0 +1,48 @@
+{
+  "name": "Win - CDW Baseline - ES - Endpoint Detection and Response - D - Onboarding - v1.0",
+  "description": "Onboards Windows devices to Microsoft Defender for Endpoint using the package from the Intune connector, and enables sample sharing.",
+  "platforms": "windows10",
+  "technologies": "mdm,microsoftSense",
+  "templateReference": {
+    "templateFamily": "endpointSecurityEndpointDetectionAndResponse",
+    "templateId": "0385b795-0f2f-44ac-8602-9f65bf6adede_1"
+  },
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_windowsadvancedthreatprotection_configurationtype",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_windowsadvancedthreatprotection_configurationtype_autofromconnector",
+          "children": [],
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "e5c7c98c-c854-4140-836e-bd22db59d651",
+            "useTemplateDefault": false
+          }
+        },
+        "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "23ab0ea3-1b12-429a-8ed0-7390cf699160"
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_windowsadvancedthreatprotection_configuration_samplesharing",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_windowsadvancedthreatprotection_configuration_samplesharing_1",
+          "children": [],
+          "settingValueTemplateReference": {
+            "settingValueTemplateId": "f72c326c-7c5b-4224-b890-0b9b54522bd9",
+            "useTemplateDefault": false
+          }
+        },
+        "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "6998c81e-2814-4f5e-b492-a6159128a97b"
+        }
+      }
+    }
+  ]
+}

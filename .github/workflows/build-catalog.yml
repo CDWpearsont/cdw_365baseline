@@ -45,7 +45,7 @@ jobs:
             --root . \
             --policy-dirs IntuneConfig EntraConfig \
             --out catalog.json \
-            --fail-on duplicateId unreadable danglingBundleMember
+            --fail-on duplicateId unreadable danglingBundleMember conflictingSettings danglingGoalBundle danglingScenarioGoal
 
       - name: Summary
         run: python tools/build_catalog.py --root . --policy-dirs IntuneConfig EntraConfig --report >> $GITHUB_STEP_SUMMARY

@@ -29,6 +29,20 @@ new Settings Catalog features are spotted.
   the name with every character outside `A-Z a-z 0-9 -` replaced by `_`. That's what the export
   writes, so the file isn't duplicated.
 
+## Building block checks
+
+`tools/build_catalog.py` compares every Settings Catalog and Endpoint Security setting across
+the library. Any two policies that configure one setting with different values are listed in
+`catalog.json` under `conflicts`, and the build fails (`conflictingSettings`) if a building block,
+a goal option or a scenario would deploy both. Exceptions:
+
+- `"allowConflicts": true` on a block whose members are alternatives assigned to different groups
+  (update rings).
+- `"knownConflicts": [setting ids]` for settings reviewed and accepted.
+
+The wizard's review step shows the same conflicts for whatever the consultant selected, plus the
+`licensing`, `prerequisites` and `notes` declared on each block.
+
 ## Settings Catalog snapshot
 
 **Settings Catalog snapshot** runs every Monday at 05:30 UTC (or on demand). It writes every
