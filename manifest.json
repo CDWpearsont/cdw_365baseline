@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-16T13:07:48Z",
+  "generated": "2026-11-16T13:10:18Z",
   "count": 248,
   "enrichedCount": 3,
   "entries": [
@@ -142,7 +142,7 @@
     {
       "id": "entra.conditionalaccess.cdw010-global-baseprotection-allapps-anyplatform-mfa",
       "file": "EntraConfig/ConditionalAccess/CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA.json",
-      "sha": "e55bba6f5fd9a6dc",
+      "sha": "d8b1b89e52e3ea8e",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -156,7 +156,7 @@
     {
       "id": "entra.conditionalaccess.cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa",
       "file": "EntraConfig/ConditionalAccess/CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA.json",
-      "sha": "3e5e52d9b2707360",
+      "sha": "6e4728dd7c7745ec",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -170,7 +170,7 @@
     {
       "id": "entra.conditionalaccess.cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth",
       "file": "EntraConfig/ConditionalAccess/CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
-      "sha": "9585db9755f1c424",
+      "sha": "8398157185228cfc",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -198,7 +198,7 @@
     {
       "id": "entra.conditionalaccess.cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations",
       "file": "EntraConfig/ConditionalAccess/CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations.json",
-      "sha": "149cab07cf45bbe6",
+      "sha": "5c6bf11713df8262",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -226,7 +226,7 @@
     {
       "id": "entra.conditionalaccess.cdw016-global-baseprotection-allapps-anyplatform-compliantorhybridormfa",
       "file": "EntraConfig/ConditionalAccess/CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA.json",
-      "sha": "571fe8fd83ec3641",
+      "sha": "2346681e7ddcc96d",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -240,7 +240,7 @@
     {
       "id": "entra.conditionalaccess.cdw017-global-dataandappprotection-allapps-iosorandroid-appprotection",
       "file": "EntraConfig/ConditionalAccess/CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection.json",
-      "sha": "355ab4e36282b183",
+      "sha": "75c265a4dbf8f04e",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -254,7 +254,7 @@
     {
       "id": "entra.conditionalaccess.cdw018-global-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk",
       "file": "EntraConfig/ConditionalAccess/CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk.json",
-      "sha": "f2e14d8917f34f00",
+      "sha": "9a1ae8c2b881f354",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -268,7 +268,7 @@
     {
       "id": "entra.conditionalaccess.cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk",
       "file": "EntraConfig/ConditionalAccess/CDW019-Global-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk.json",
-      "sha": "b264cde9e43aedbc",
+      "sha": "5fedca44b5db6133",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -282,7 +282,7 @@
     {
       "id": "entra.conditionalaccess.cdw100-admins-baseprotection-allapps-anyplatform-compliantandphishingresistantmfa",
       "file": "EntraConfig/ConditionalAccess/CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA.json",
-      "sha": "12cc8f7228e7816e",
+      "sha": "00fdd190947ac7f6",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -296,7 +296,7 @@
     {
       "id": "entra.conditionalaccess.cdw1000-developers-baseprotection-allapps-anyplatform-compliantorhybridjoined",
       "file": "EntraConfig/ConditionalAccess/CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
-      "sha": "84acbce3f95a005e",
+      "sha": "4ab75a7e80fd4b03",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -464,7 +464,7 @@
     {
       "id": "entra.conditionalaccess.cdw106-admins-dataandappprotection-allapps-iosorandroid-appprotection",
       "file": "EntraConfig/ConditionalAccess/CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection.json",
-      "sha": "409a15bab917a8df",
+      "sha": "6b276a0259f8fabd",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -520,7 +520,7 @@
     {
       "id": "entra.conditionalaccess.cdw200-internals-baseprotection-allapps-anyplatform-compliantorhybridjoined",
       "file": "EntraConfig/ConditionalAccess/CDW200-Internals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
-      "sha": "2a8cb6d1df58869b",
+      "sha": "ab64e57974cb51c9",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -618,7 +618,7 @@
     {
       "id": "entra.conditionalaccess.cdw300-externals-baseprotection-allapps-anyplatform-compliantorhybridjoined",
       "file": "EntraConfig/ConditionalAccess/CDW300-Externals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
-      "sha": "fe7effa97bd0dac3",
+      "sha": "f7ed93c729e524f2",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",

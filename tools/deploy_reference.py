@@ -116,8 +116,9 @@ def build_body(kind, src):
             body.pop("sessionControls", None)
         gc = body.get("grantControls") or {}
         gc.pop("authenticationStrength@odata.context", None)
-        if isinstance(gc.get("authenticationStrength"), dict):
-            gc["authenticationStrength"].pop("@odata.context", None)
+        if isinstance(gc.get("authenticationStrength"), dict) and gc["authenticationStrength"].get("id"):
+            # Exports carry the whole strength object; Graph only needs its id
+            gc["authenticationStrength"] = {"id": gc["authenticationStrength"]["id"]}
         cond = body.get("conditions") or {}
         for key in ("servicePrincipalRiskLevels", "insiderRiskLevels"):
             if cond.get(key) == []:

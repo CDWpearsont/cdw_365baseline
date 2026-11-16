@@ -1,6 +1,7 @@
 {
   "displayName": "CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
   "state": "disabled",
+  "deletedDateTime": null,
   "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
@@ -48,6 +49,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('ef1f456e-f3de-4d55-9d4f-db35be1fe303')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
   }
 }

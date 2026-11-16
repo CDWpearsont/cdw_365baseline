@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T13:07:48+00:00",
+  "generatedAt": "2026-11-16T13:10:18+00:00",
   "sourceCommit": null,
   "counts": {
     "policies": 245,
@@ -877,7 +877,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:e55bba6f5fd9a6dce5a976252c4797c6f0bd307e4929f078a2eebe1537ca1f33",
+      "policyHash": "sha256:d8b1b89e52e3ea8eec1568ac7bbaad47b895d57f41d6abbd682d58dcaf9339a4",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -912,7 +912,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:3e5e52d9b2707360ce6e7452c79269ef87c9408116c09a50abe5b62d1c430e8e",
+      "policyHash": "sha256:6e4728dd7c7745ec1373b6b7d82043eaddb569f1cd7a75ac462f800f12305fd8",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -947,7 +947,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:9585db9755f1c424f0134ff4137cca808b6c4b86f209a538a1051bbbeb02977e",
+      "policyHash": "sha256:8398157185228cfc01aae93a4060db5ba904895162657eaadd6f4a259e93250b",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1017,7 +1017,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:149cab07cf45bbe6aa360a0195c9a69603022ad91615ee4ada0ca2af7e736377",
+      "policyHash": "sha256:5c6bf11713df82626e97764b8d8f26ddc9ed677482715cec3a818e5dad023cac",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1087,7 +1087,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:571fe8fd83ec36410baf63a59aac0480f5e4f95d90f0b2ee7ee3612d8e6244be",
+      "policyHash": "sha256:2346681e7ddcc96d987540f4871f2ad700e14bfb7b1af2e111c49b2f9e606210",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1122,7 +1122,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:355ab4e36282b183f25b38bce4fd7e34d11c35f2b3776a48a73473ac4875e511",
+      "policyHash": "sha256:75c265a4dbf8f04e507d3265147735ae18f03ad17f3bf0c9e32bb813448e0261",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1157,7 +1157,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:f2e14d8917f34f008359ac80ced78e5aa3c4ea0690683ad5cc3c7004a54111fb",
+      "policyHash": "sha256:9a1ae8c2b881f3546090554f684408b052484836fb0bbe044bdd955d58fde0b8",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1192,7 +1192,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:b264cde9e43aedbcce778cdbaf46e50790e5d7b43d4de012b88f61b45559151a",
+      "policyHash": "sha256:5fedca44b5db6133b86d816d2e2546c59b635383eb6d38b4783a172f20c83385",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1227,7 +1227,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:12cc8f7228e7816e8e88acd7cbb5579809bded0c704ab5908d606fb6f6fd7b93",
+      "policyHash": "sha256:00fdd190947ac7f6f2866676cec18bb20c46b4e7892006a6c570bc422e68894d",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1262,7 +1262,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:84acbce3f95a005ed96c51a70896cdd3ec73ce152bd1ac3ad90e041af0fe680d",
+      "policyHash": "sha256:4ab75a7e80fd4b03b65934e38d45e95e3f309c7d27c0b8239af345c3a511aff7",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1674,7 +1674,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:409a15bab917a8df7cf5bbd0e464b177efdf9747abb351bd0c0ff4da5da70b5f",
+      "policyHash": "sha256:6b276a0259f8fabd84a0431f6d3b947f4be24208bef18bea39d362fbea610371",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1811,7 +1811,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:2a8cb6d1df58869b104caaa8e1291cb4aa5e78b27c1e2cf39ec7aa87bd21de7f",
+      "policyHash": "sha256:ab64e57974cb51c990aee6fb8e42b482695cb7da4439b5cf18f73e4fad59ed77",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -2049,7 +2049,7 @@
       "subArea": null,
       "securityDomain": "Endpoint Security",
       "settingCount": 0,
-      "policyHash": "sha256:fe7effa97bd0dac37d5565e7e7f94fb462725f2757e5cdb232bedd423f57c28e",
+      "policyHash": "sha256:f7ed93c729e524f29605ff4e8040b55e1633f2b2bbb4548e0469c2e90bf03ec5",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
