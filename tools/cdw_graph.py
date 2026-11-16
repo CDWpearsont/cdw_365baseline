@@ -65,13 +65,18 @@ def token_federated(tenant, client_id):
     assertion = github_oidc_token()
     sub = jwt_claims(assertion).get("sub")
     try:
-        return _token_request(tenant, {
+        token = _token_request(tenant, {
             "client_id": client_id,
             "scope": SCOPE,
             "grant_type": "client_credentials",
             "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
             "client_assertion": assertion,
         })
+        # Granted application permissions - not secret, and the first thing to
+        # check when Graph answers 403.
+        roles = sorted(jwt_claims(token).get("roles") or [])
+        print(f"Signed in. Graph permissions in token: {', '.join(roles) or 'NONE - admin consent not granted'}")
+        return token
     except RuntimeError as e:
         # The subject is not secret; printing it is the quickest way to fix a
         # federated credential whose Subject identifier doesn't match.

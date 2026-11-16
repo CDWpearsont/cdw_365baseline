@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-17T15:12:04+00:00",
-  "sourceCommit": "f64b829e11d8db24310f2050592cf5569734e2a5",
+  "generatedAt": "2026-11-16T12:19:46+00:00",
+  "sourceCommit": null,
   "counts": {
-    "policies": 224,
+    "policies": 230,
     "bundles": 14,
-    "issues": 235,
+    "issues": 241,
     "byConfidence": {
-      "medium": 102,
+      "medium": 103,
       "low": 2,
-      "high": 120
+      "high": 125
     }
   },
   "taxonomy": {
@@ -2808,7 +2808,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:7c5759e2ae0b2ec98e29f5827718184775604a091453647d3c3241ccc6f43513",
+      "policyHash": "sha256:c88028f45a3ac81f6a64d11d684f9bf409733073e57d6b3082b314ae73ad33d9",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2842,7 +2842,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:78cfebb9b62083ba3b4980ad1da02169404601bac1fb18245e1368a138c5860e",
+      "policyHash": "sha256:51fbe2ae8c95149fdbe22159f8da79ff63854e49045b45718d87d9ac12934b93",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2876,7 +2876,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:ff1a293bb690059e776dc43893811df9f2b5419f0b7b4082a3e084175683266d",
+      "policyHash": "sha256:0a76f4bc296a9840f310658b46c1cf0d72a9e16eb14b0261ef995581d1fee3bd",
       "derivedFrom": {
         "workload": "folder",
         "area": "filename"
@@ -2908,7 +2908,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:880abf7f41d8e7a51ccb32d61b6ca0a74727c7f7fca711c9b87577880626ad9c",
+      "policyHash": "sha256:cfe35eeb1284bf9244ca632106ae24f802b913ef1376bcc092188aada27d5521",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2942,7 +2942,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:243d3edf9ec6a086511b2cfc40374e77787edb97a504c8a2fb456849138eac34",
+      "policyHash": "sha256:07357346e79efb439adb853701a1110b7ebe0adf52c7060ee26dcece0c37f3f0",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -2976,7 +2976,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:9d11bf847af6be9eea894867ed515f5b32d79458513fe6a550339d90ef3d0060",
+      "policyHash": "sha256:c99c59a4fcc330ae31d73b10b24578cd55c9a047cb9ba6686f2ba6785b8f6db2",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3010,7 +3010,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:3aa9bd51cdf4760a0feef4902bfd9d84904836fde1520760caae95163d960b22",
+      "policyHash": "sha256:88350b32c6b8b3517aaef757a7a45ba6f55714bc9e6b6de1cb2af576c03c9193",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3047,7 +3047,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:b27c71fca5935e5877386765c1564b24b50dec7ef6e32a6aff91ac93db942a2b",
+      "policyHash": "sha256:b49e1de52e6708d4771d5c2cad07ed3ad0fd23cf2a24d719b2bc62e09a0783da",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3081,7 +3081,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:b56c62ff3326d4276d4c3a78feb6f2dac358c2de16dd083e21e9c5496c85f7cd",
+      "policyHash": "sha256:13e2e60418995f2864a75af1a63d2b9f9a1ee091f794fe44f19f42fbf25ffc58",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3115,7 +3115,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:2b24674805d8cdba8976a6b6e84aecd5dfa40f11ebf679689e688ae1473872c9",
+      "policyHash": "sha256:0ac382797009fc445a745edb21a930489a19ae65c8cc5fd5897c964ef8fb4d42",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3149,7 +3149,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:55ed972bf1b5d5e4c114f9061db4e4c25136ea20fac1e67df159da74aef56586",
+      "policyHash": "sha256:669928c32ef3dc8db7e9d7cf2b756d69871cfce3943d3358786f3b8adcec4b67",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3183,7 +3183,7 @@
       "subArea": "Pilot",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c1a469f7f138ac70298a443907883af4943b65747a643a4088573b6213b9e0a2",
+      "policyHash": "sha256:842a56c1e8a952b8f5afac35d40a72797805ef8d803eec7bd89540e09b7fe27a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3218,7 +3218,7 @@
       "subArea": "UAT",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:10fb9ebae339bc6f24a8d31d5e9690061385791759b9b9637f6d7c599d5c1394",
+      "policyHash": "sha256:a8cede08663452aff0e38b258463eb2025381e983a59bc9f6247e15e2f15da7a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3253,7 +3253,7 @@
       "subArea": "Production",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:b7bfbb21cfda64e8298fd55042c62a7bfa343191f88a6ce903d696c5fd577d10",
+      "policyHash": "sha256:c694030e7f23e387c69df209063f2d6ea3e845cc580360b49b01c3f49efd56a3",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3288,7 +3288,7 @@
       "subArea": "ASR Rules Audit Mode",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:867797c3147b04127e01b0d34aa704e30ac4e634919485873b2663758e41372c",
+      "policyHash": "sha256:90e85e598d88fcbd977ca4a8c1da47662b00ed530c89307d28dbbd1ca6eb5b28",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3324,7 +3324,7 @@
       "subArea": "ASR Rules L2",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:dc0fbf8a315ae80d0dc142c0d863689b4e43978a10e79afdbbc1cbb365930733",
+      "policyHash": "sha256:95a6d5fe958eca50e940772f093c1701118a5faca428757d1579f155e223179d",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3360,7 +3360,7 @@
       "subArea": "ASR Rules",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:4493b5c3467194d8a957385b9a425c6bf3465c6ebe708dfbb6b720ff8f344f03",
+      "policyHash": "sha256:748ed94c9d4639380f440adc078c767857fd89115b985bdc70dbc5a7011b0219",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3399,7 +3399,7 @@
       "subArea": "Exploit Protection",
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:9676f89580dd125143987a0575485ea82dc6cf97e8596b3ed514b145f7792da4",
+      "policyHash": "sha256:64b1d0cb4e9ba22f4bbd604a67e9cb564ef33fe4b758033b675747a7987fcbb5",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3438,7 +3438,7 @@
       "subArea": "Antivirus Configuration",
       "securityDomain": null,
       "settingCount": 28,
-      "policyHash": "sha256:75791fa766a7f7fc61a2307b5a4ae71272e93e18586fd3189e3202f99bfa9e6f",
+      "policyHash": "sha256:e5415bb5768aee570cf7014b506ed08593dbeb04f87bae46c9e1fed611989e51",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3477,7 +3477,7 @@
       "subArea": "Security Experience",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:a54eed582500c397a7749b3de109c018a85e9aecc127afce22bfbbb9981d958f",
+      "policyHash": "sha256:03b624d35c6029e6046548d824d4aa4e51f6fe12d7f5118b5eba570aca033fcd",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3516,7 +3516,7 @@
       "subArea": "BitLocker BL",
       "securityDomain": null,
       "settingCount": 27,
-      "policyHash": "sha256:128f71a204a4e345c07d46aa4d099e006a58aee574775291a2a96e909b991a8c",
+      "policyHash": "sha256:126c19337b9bf934db8e6acf0c86ef646c79517852a889d608516628f129704c",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3536,7 +3536,8 @@
       ],
       "notes": null,
       "bundles": [
-        "intune-win-cis-l1"
+        "intune-win-cis-l1",
+        "intune-win-autopilot-mvp"
       ]
     },
     {
@@ -3554,7 +3555,7 @@
       "subArea": "Local Administrators",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:8755e9e39e400b1f8bac4dd85a7f93c4208ca55efe0fb436dd7ba11df72c8899",
+      "policyHash": "sha256:0677ff1ee1aa96e5eda99396a5b439f77a6a2284dc3b77c364e502b6a2085c01",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3592,7 +3593,7 @@
       "subArea": "Firewall Configuration",
       "securityDomain": null,
       "settingCount": 23,
-      "policyHash": "sha256:00bd5630c91b71be07a985126b71063943c9c4ca5548aa620b6376f3791c5da7",
+      "policyHash": "sha256:84c3fb179209c06fe645f6954c94a2ab04eea762741795542a6c5d21a1e605b1",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3630,7 +3631,7 @@
       "subArea": "WHfB Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:39d3eaadbce16c0bf48426eacda604c01f9efef6778c05a50f2c85db8c933b6c",
+      "policyHash": "sha256:71cfbdda1df1c9c161cc50ac10908f862cce7eab05a2b8b80b1671c62a09bef4",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3668,7 +3669,7 @@
       "subArea": "LAPS Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:6faca68215979d56fda2e4fce13db4032d49e5443a851daadda81c234a0ec51b",
+      "policyHash": "sha256:7c38e8dc41633e8a29ffddf7613958d432ee26ec1a548c2d672883400f6851ee",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3707,7 +3708,7 @@
       "subArea": "Ring 1 - Pilot",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:29033e03c8586650ec2452f7bf7cf58ad48bbccbedfeb3202e5aa70fe6a89687",
+      "policyHash": "sha256:455a4d0b5a6bd783c35d656412733f1dc209e915d4c273e5119ce0b7044c0c22",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3743,7 +3744,7 @@
       "subArea": "Ring 2 - UAT",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:4fdab8e0330874c859a8b85140ed72a318f2a0558a2a3e02812fe713e7413f04",
+      "policyHash": "sha256:1bd9f6ac730766f9686724744364e2a091595b087c9609726188e59d9bb02bec",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3779,7 +3780,7 @@
       "subArea": "Ring 3 - Production",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:c24b8628e7a002771c4f682513ff5cc2365fba8a9e992b5e98659b4727d6a2e6",
+      "policyHash": "sha256:cff9a92d3ede5b77a9f3ef634b8d7d10b3c37b788ef6ca58cd8a512120a637ee",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3801,42 +3802,6 @@
       ]
     },
     {
-      "id": "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v3_7.json",
-      "fileName": "Win_-_CDW_Baseline_-_ES_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v3_7.json",
-      "displayName": "Win - CDW Baseline - ES - Encryption - D - BitLocker (OS Disk) - v3.7",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Endpoint Security",
-      "framework": null,
-      "scope": "Device",
-      "version": "3.7",
-      "area": "Encryption",
-      "subArea": "BitLocker OS Disk",
-      "securityDomain": null,
-      "settingCount": 25,
-      "policyHash": "sha256:2f00fa63030bea3df8038cd18ab6205e3de15381e6a65186774bd1d68ea13839",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-autopilot-mvp"
-      ]
-    },
-    {
       "id": "intune-windows-endpoint-security-encryption-personal-data-encryption-user",
       "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_U_-_Personal_Data_Encryption_-_v3_4.json",
       "fileName": "Win_-_CDW_Baseline_-_ES_-_Encryption_-_U_-_Personal_Data_Encryption_-_v3_4.json",
@@ -3851,7 +3816,7 @@
       "subArea": "Personal Data Encryption",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:b18bfc102609e8e0a1cd6c568f17cc47d4124cef222d2a7951f1ab30b2de6009",
+      "policyHash": "sha256:18e7390b8f2d8f9d4d875c1ff9199977656df9c626f368bfcea098c2e1f52920",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3886,7 +3851,7 @@
       "subArea": "Local Administrators",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:91c7b1d336620daa3320d49c4fb0c051bd6da1bdc207ca650f91e7c0511229be",
+      "policyHash": "sha256:3d5c907085f001006816aed47a8eda9cfc28ffb22b3c901fb50d56c24c8e81d1",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3908,41 +3873,6 @@
       ]
     },
     {
-      "id": "intune-windows-endpoint-security-windows-hello-for-business-whfb-configuration-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v3_2.json",
-      "fileName": "Win_-_CDW_Baseline_-_ES_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v3_2.json",
-      "displayName": "Win - CDW Baseline - ES - Windows Hello for Business - D - WHfB Configuration - v3.2",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Endpoint Security",
-      "framework": null,
-      "scope": "Device",
-      "version": "3.2",
-      "area": "Windows Hello for Business",
-      "subArea": "WHfB Configuration",
-      "securityDomain": null,
-      "settingCount": 7,
-      "policyHash": "sha256:f5b40a8f07fca52271567ed6994cb9072602b1db062b3d397638def206e6b73e",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-cdw-standard"
-      ]
-    },
-    {
       "id": "intune-android-enrolment-restriction-block-personal-device",
       "path": "IntuneConfig/EnrolmentRestrictions/Android_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
       "fileName": "Android_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
@@ -3957,7 +3887,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c199eaa248cb999b12444e5749f4630f564556efed01e6274aa0d84e7e303111",
+      "policyHash": "sha256:9cbfed6660152fa94002e4283823c46b35b47472365b2d391a4a1c544fcf341d",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3991,7 +3921,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:0d05039d31ce4e17f64ad2f907cdb29c42f21395d5c0c2e945a860ae881c2b8a",
+      "policyHash": "sha256:411fa5ec53787b783218cb225b10848384889ae602c5b591ec41a76e6f256660",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4025,7 +3955,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:7f452712a3d777a46f7e41590ceca415a676661220a9524394537a5ca81689b4",
+      "policyHash": "sha256:6c86b4cd215179bab113edcd6f3db8f245fa283a56a788d1810993f67d4ea3d6",
       "derivedFrom": {
         "workload": "folder",
         "policyType": "body",
@@ -4090,6 +4020,41 @@
       "securityDomain": null,
       "settingCount": 28,
       "policyHash": "sha256:f0118e0904199ee734ba6ba2d52b20b33b4b7276dc74f38487dc65bc649be658",
+      "derivedFrom": {
+        "platform": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "body",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cdw-standard"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-defender-antivirus-antivirus-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Defender_Antivirus_-_D_-_Antivirus_Configuration_-_v1_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_Defender_Antivirus_-_D_-_Antivirus_Configuration_-_v1_0.json",
+      "displayName": "MacOS - CDW Baseline - Defender Antivirus - D - Antivirus Configuration - v1.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": null,
+      "scope": "Device",
+      "version": "1.0",
+      "area": "Defender Antivirus",
+      "subArea": "Antivirus Configuration",
+      "securityDomain": null,
+      "settingCount": 26,
+      "policyHash": "sha256:a1bfbf5f1a0227c1f81c6632c6b4b10abf11e5e8bc786c93f47b0582621a3079",
       "derivedFrom": {
         "platform": "filename",
         "scope": "filename",
@@ -4649,7 +4614,7 @@
       "subArea": "ADMX Configuration",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:34feb212bcb6a4ed0240bcd154892f14d4018b493ea14cae4249cfa7df2c27d3",
+      "policyHash": "sha256:5848b2188f9c2f9d923b00493e2afd4e65d64e0bf7ca11dd74ac2e1a5b8ed27a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4688,7 +4653,7 @@
       "subArea": "Additional Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:cd24c44d6e5b9ea087b0c007a3f0f1096629f77b50f0abd17672aa8a38f3433a",
+      "policyHash": "sha256:2022e957c6a87da14291e6e06fd0e30293a932b322ff57d4abb84e064923e642",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5335,7 +5300,7 @@
       "subArea": "Password Management",
       "securityDomain": null,
       "settingCount": 2,
-      "policyHash": "sha256:07cc4f4ec281c486b1980c1b8929c679c800d2cc547e6f0e5a6c474e8f0bb0e8",
+      "policyHash": "sha256:210dee71a7cd1c1541ea4a34f35ad9e4aa6f03d2cec6810fe1d894bac43d1be7",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5373,7 +5338,7 @@
       "subArea": "Profiles Sign-In and Sync",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:3af4ef99786ca345f12fb38155dffdca9b38b23c2725abbe2d5b7eb6bc24f957",
+      "policyHash": "sha256:a08ef699a4860e0e6551d613d5b23987b8ba0f40919750da81399a5735f491a3",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5411,7 +5376,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 77,
-      "policyHash": "sha256:8cef51fe2152f8c0969e621f762704e34e379c4eb4d57fa80c2c100e1dc2a350",
+      "policyHash": "sha256:452a8399c13a8df8b6330a988500f014eb22fabd16d4f9c161fa3ed267fbaa46",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5449,7 +5414,7 @@
       "subArea": "Updates",
       "securityDomain": null,
       "settingCount": 24,
-      "policyHash": "sha256:0e1484f266262097e99d1c9fb5891d6b979a6597d9343832cc6498aec3c3aaca",
+      "policyHash": "sha256:376e57199930efd9158dd82bafcaf682872486d75540a87de30d41bf85f46791",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5487,7 +5452,7 @@
       "subArea": "User Experience",
       "securityDomain": null,
       "settingCount": 24,
-      "policyHash": "sha256:126d2b631e332102c96bc693c1dbeff5d86dde2049aa1055958e7d350719b144",
+      "policyHash": "sha256:eb33fd84a18c8a928c41ae726ce626252a9daf181e7089a9a2ac802e35fb51a2",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5525,7 +5490,7 @@
       "subArea": "Extensions",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:35063aaf7fc82744ac6f15fbc6e756329b9dc2d5e0d43ed534316b9384968405",
+      "policyHash": "sha256:3828ae4c9b71e43229f3df037d47cc2c7d34e4360cfd65addb5452e57433a2e5",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5563,7 +5528,7 @@
       "subArea": "Password Management",
       "securityDomain": null,
       "settingCount": 5,
-      "policyHash": "sha256:6b47721471d7c46714ce0beb7d43704f0313094e270ac9c196cca41a940a0c98",
+      "policyHash": "sha256:0c6e9321f691072d5bb91cea9e5ddf621ef39d0c157cb7f75088165618a40a76",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5601,7 +5566,7 @@
       "subArea": "Profiles Sign-In and Sync",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:e3347f1807357d5e036093b8b4e7e3d9999f25a02a034342052f8d90f3f66e09",
+      "policyHash": "sha256:9bae94c7b15775a99d807bc055a5a58281a5387567f6f806789a8971d47c2872",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -5639,7 +5604,7 @@
       "subArea": "User Experience",
       "securityDomain": null,
       "settingCount": 12,
-      "policyHash": "sha256:340496c6239c6d1e65c28af53fc3773a2e67ea8bdeeb0888c755f2b7eb114abb",
+      "policyHash": "sha256:0c90d167857036f41526b082c65041ce60e757cf5ec6963af90a0a5f46e4d1d4",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6209,7 +6174,7 @@
       "subArea": "ADMX Configuration",
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:18c36a8e2a35022faf4eaaca2d31cf42eab3ea8be40285aee285f40e6189a7cd",
+      "policyHash": "sha256:249998270da26254a9d6666e8ab70bfb49cb7cf1ab6bc97283e19691cae918ec",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6248,7 +6213,7 @@
       "subArea": "Additional Configuration",
       "securityDomain": null,
       "settingCount": 2,
-      "policyHash": "sha256:29f21ac7e0d4f9e4ab00a97484c52b67d511898e812ee646b479b75f4c806ee5",
+      "policyHash": "sha256:ad21f048435e79d4a26ff6f50a2ee61e843e4d74f275d5359811fc39f75ab51d",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6591,7 +6556,7 @@
       "subArea": "Extensions",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:db7de99339b8b63a9c756079e91483bf7d144379b1e1696a61e572477bc1bb47",
+      "policyHash": "sha256:447c4e4f84e290eb5f1b70c9fa585a2e64b9471e6576dc4491648df5dd48a3fa",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6629,7 +6594,7 @@
       "subArea": "Profiles Sign-In and Sync",
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:a52c758fb679a428d4ba5fc1d30c762042141fd6f900e34b2ff5bc2d5fbd90c3",
+      "policyHash": "sha256:e8f7db9f0ac688cff242e7368e67869ede67d732692b8269cbb0811e28dffee7",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6667,7 +6632,7 @@
       "subArea": "Security",
       "securityDomain": null,
       "settingCount": 33,
-      "policyHash": "sha256:30b1a2d9300aebba00e6bc71e9b9c4ea8df8fe8b1351beca74e68c14b0874a7f",
+      "policyHash": "sha256:fad509cc9ea6d6499446a2d2284ee74dc1b76a11f6598e996fed9094497eddc5",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6705,7 +6670,7 @@
       "subArea": "User Experience",
       "securityDomain": null,
       "settingCount": 10,
-      "policyHash": "sha256:808a26ffc0c7cdfb16e6ff27fbb58e42d5f019b9a843708a8bc1fc7445e2c21d",
+      "policyHash": "sha256:699b1c5ecf323cc1e8acaf24d206fa9c39c5beed2b1003adcc2db1963f64bc7b",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -6743,7 +6708,7 @@
       "subArea": "Profiles Sign-In and Sync",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:d83e139e0c4ce61f968f26ffe22190c9dbd9c880596a6a8fbf023158cd8ec952",
+      "policyHash": "sha256:5385706d90d65e9585209dbdc530bc14819374a0e241383abf03b7766f6a7398",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -7103,6 +7068,42 @@
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-defender-antivirus-additional-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Defender_Antivirus_-_D_-_Additional_Configuration_-_v3_6.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_Defender_Antivirus_-_D_-_Additional_Configuration_-_v3_6.json",
+      "displayName": "Win - CDW Baseline - SC - Defender Antivirus - D - Additional Configuration - v3.6",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": null,
+      "scope": "Device",
+      "version": "3.6",
+      "area": "Defender Antivirus",
+      "subArea": "Additional Configuration",
+      "securityDomain": null,
+      "settingCount": 10,
+      "policyHash": "sha256:23be025a17024c9c78d28377dca438419b2ab94c479950906b0104558395c087",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "intune-win-cdw-standard",
+        "intune-win-defender-av"
       ]
     },
     {
@@ -7877,6 +7878,216 @@
       ]
     },
     {
+      "id": "intune-windows-settings-catalog-microsoft-edge-security-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Security_-_v3_7.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Security_-_v3_7.json",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - D - Security - v3.7",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": null,
+      "scope": "Device",
+      "version": "3.7",
+      "area": "Microsoft Edge",
+      "subArea": "Security",
+      "securityDomain": null,
+      "settingCount": 51,
+      "policyHash": "sha256:b3d14626fe6c5e3b08505effd3b24e2016aa337bd8fa90d088838b56ced660ab",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "intune-win-cdw-standard"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-microsoft-edge-updates-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Updates_-_v3_6.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Updates_-_v3_6.json",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - D - Updates - v3.6",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": null,
+      "scope": "Device",
+      "version": "3.6",
+      "area": "Microsoft Edge",
+      "subArea": "Updates",
+      "securityDomain": null,
+      "settingCount": 22,
+      "policyHash": "sha256:61fb41d2472ada36742a5327004cb10132d2028b4fd1c5ada1fce6ec5adbb207",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "intune-win-cdw-standard"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-microsoft-edge-extensions-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Extensions_-_v3_1.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Extensions_-_v3_1.json",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Extensions - v3.1",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": null,
+      "scope": "User",
+      "version": "3.1",
+      "area": "Microsoft Edge",
+      "subArea": "Extensions",
+      "securityDomain": null,
+      "settingCount": 6,
+      "policyHash": "sha256:f7b7a26508c29df3dd1cf9d220fea4fb7ed96140bfccc59a69bd92628c87ae2c",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "intune-win-cdw-standard"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-microsoft-edge-password-management-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Password_Management_-_v3_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Password_Management_-_v3_0.json",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Password Management - v3.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": null,
+      "scope": "User",
+      "version": "3.0",
+      "area": "Microsoft Edge",
+      "subArea": "Password Management",
+      "securityDomain": null,
+      "settingCount": 5,
+      "policyHash": "sha256:7189cc8661c96db4276a96aea8b8f207d0d82551e4b784a0145d37b0be41fff4",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "intune-win-cdw-standard"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-microsoft-edge-profiles-sign-in-and-sync-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v3_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v3_0.json",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - Profiles, Sign-In and Sync - v3.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": null,
+      "scope": "User",
+      "version": "3.0",
+      "area": "Microsoft Edge",
+      "subArea": "Profiles Sign-In and Sync",
+      "securityDomain": null,
+      "settingCount": 9,
+      "policyHash": "sha256:f011fe114a032efaaec0836b48bb0a148ae5c88fd52ad18184b0391356356426",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "intune-win-cdw-standard"
+      ]
+    },
+    {
+      "id": "intune-windows-settings-catalog-microsoft-edge-user-experience-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_User_Experience_-_v3_7.json",
+      "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_User_Experience_-_v3_7.json",
+      "displayName": "Win - CDW Baseline - SC - Microsoft Edge - U - User Experience - v3.7",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Settings Catalog",
+      "framework": null,
+      "scope": "User",
+      "version": "3.7",
+      "area": "Microsoft Edge",
+      "subArea": "User Experience",
+      "securityDomain": null,
+      "settingCount": 13,
+      "policyHash": "sha256:5792cb4fd747abecad2b73dd61c7449ba47afe8ef9cd1e1445ed224b3588cabd",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "intune-win-cdw-standard"
+      ]
+    },
+    {
       "id": "intune-windows-settings-catalog-microsoft-office-security-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Office_-_D_-_Security_-_v3_6.json",
       "fileName": "Win_-_CDW_Baseline_-_SC_-_Microsoft_Office_-_D_-_Security_-_v3_6.json",
@@ -8582,11 +8793,10 @@
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-1-pilot-device",
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-2-uat-device",
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-        "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
         "intune-windows-endpoint-security-encryption-personal-data-encryption-user",
         "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
-        "intune-windows-endpoint-security-windows-hello-for-business-whfb-configuration-device",
         "intune-windows-settings-catalog-credential-management-passwordless-device",
+        "intune-windows-settings-catalog-defender-antivirus-additional-configuration-device",
         "intune-windows-settings-catalog-device-security-administrator-protection-device",
         "intune-windows-settings-catalog-device-security-audit-and-event-logging-device",
         "intune-windows-settings-catalog-device-security-config-refresh-device",
@@ -8609,6 +8819,12 @@
         "intune-windows-settings-catalog-device-security-windows-subsystem-for-linux-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
         "intune-windows-settings-catalog-microsoft-accounts-configuration-device",
+        "intune-windows-settings-catalog-microsoft-edge-extensions-user",
+        "intune-windows-settings-catalog-microsoft-edge-password-management-user",
+        "intune-windows-settings-catalog-microsoft-edge-profiles-sign-in-and-sync-user",
+        "intune-windows-settings-catalog-microsoft-edge-security-device",
+        "intune-windows-settings-catalog-microsoft-edge-updates-device",
+        "intune-windows-settings-catalog-microsoft-edge-user-experience-user",
         "intune-windows-settings-catalog-microsoft-office-config-and-experience-user",
         "intune-windows-settings-catalog-microsoft-office-security-device",
         "intune-windows-settings-catalog-microsoft-office-security-user",
@@ -8628,7 +8844,7 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-update-ring-ring-3-production-device"
       ],
-      "memberCount": 54
+      "memberCount": 59
     },
     {
       "id": "intune-win-defender-av",
@@ -8666,9 +8882,10 @@
         "intune-windows-settings-catalog-cis-l1-defender-antivirus-additional-configuration-device",
         "intune-windows-settings-catalog-cis-l1-defender-antivirus-admx-configuration-device",
         "intune-windows-settings-catalog-cis-l2-defender-antivirus-additional-configuration-device",
-        "intune-windows-settings-catalog-cis-l2-defender-antivirus-admx-configuration-device"
+        "intune-windows-settings-catalog-cis-l2-defender-antivirus-admx-configuration-device",
+        "intune-windows-settings-catalog-defender-antivirus-additional-configuration-device"
       ],
-      "memberCount": 13
+      "memberCount": 14
     },
     {
       "id": "intune-win-autopilot-mvp",
@@ -8683,7 +8900,7 @@
       "rule": null,
       "include": [
         "intune-windows-settings-catalog-device-security-security-hardening-device",
-        "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
+        "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-bl-device",
         "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device",
         "intune-windows-endpoint-security-cis-l1-windows-laps-laps-configuration-device",
         "intune-windows-endpoint-security-local-group-membership-local-administrators-device"
@@ -8691,8 +8908,8 @@
       "exclude": [],
       "order": 45,
       "members": [
+        "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-bl-device",
         "intune-windows-endpoint-security-cis-l1-windows-laps-laps-configuration-device",
-        "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
         "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
         "intune-windows-settings-catalog-device-security-security-hardening-device",
         "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device"
@@ -8721,6 +8938,7 @@
         "intune-macos-compliance-policy-device-security-user",
         "intune-macos-compliance-policy-password-user",
         "intune-macos-settings-catalog-authentication-platform-sso-device",
+        "intune-macos-settings-catalog-defender-antivirus-antivirus-configuration-device",
         "intune-macos-settings-catalog-defender-antivirus-mde-configuration-device",
         "intune-macos-settings-catalog-device-security-accounts-and-login-device",
         "intune-macos-settings-catalog-device-security-restrictions-device",
@@ -8737,7 +8955,7 @@
         "intune-macos-settings-catalog-microsoft-onedrive-service-and-access-device",
         "intune-macos-settings-catalog-updates-update-configuration-device"
       ],
-      "memberCount": 19
+      "memberCount": 20
     },
     {
       "id": "intune-mobile-byod",
@@ -9585,12 +9803,6 @@
       "detail": "No enrichment authored"
     },
     {
-      "policyId": "intune-windows-endpoint-security-encryption-bitlocker-os-disk-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_D_-_BitLocker__OS_Disk__-_v3_7.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
       "policyId": "intune-windows-endpoint-security-encryption-personal-data-encryption-user",
       "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_U_-_Personal_Data_Encryption_-_v3_4.json",
       "type": "missingEnrichment",
@@ -9599,12 +9811,6 @@
     {
       "policyId": "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
       "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Local_Group_Membership_-_D_-_Local_Administrators_-_v3_7.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-endpoint-security-windows-hello-for-business-whfb-configuration-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Windows_Hello_for_Business_-_D_-_WHfB_Configuration_-_v3_2.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -9641,6 +9847,12 @@
     {
       "policyId": "intune-macos-settings-catalog-authentication-platform-sso-device",
       "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Authentication_-_D_-_Platform_SSO_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-defender-antivirus-antivirus-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Defender_Antivirus_-_D_-_Antivirus_Configuration_-_v1_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -10125,6 +10337,12 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "intune-windows-settings-catalog-defender-antivirus-additional-configuration-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Defender_Antivirus_-_D_-_Additional_Configuration_-_v3_6.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-windows-settings-catalog-device-security-administrator-protection-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Administrator_Protection_-_v3_7.json",
       "type": "missingEnrichment",
@@ -10253,6 +10471,42 @@
     {
       "policyId": "intune-windows-settings-catalog-microsoft-accounts-configuration-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Accounts_-_D_-_Configuration_-_v3_2.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-microsoft-edge-security-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Security_-_v3_7.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-microsoft-edge-updates-device",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_D_-_Updates_-_v3_6.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-microsoft-edge-extensions-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Extensions_-_v3_1.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-microsoft-edge-password-management-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Password_Management_-_v3_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-microsoft-edge-profiles-sign-in-and-sync-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_Profiles__Sign-In_and_Sync_-_v3_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-settings-catalog-microsoft-edge-user-experience-user",
+      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Microsoft_Edge_-_U_-_User_Experience_-_v3_7.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },

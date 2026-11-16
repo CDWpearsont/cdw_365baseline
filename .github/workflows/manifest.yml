@@ -1,7 +1,8 @@
 name: Build policy manifest
 
 # Regenerates manifest.base.json and manifest.json whenever a policy JSON or
-# the human overlay changes. On main it commits the result; on pull requests it
+# the human overlay changes, and after each export run. On main it commits the
+# result directly; on pull requests it
 # only validates, so a PR that forgets to regenerate fails rather than silently
 # shipping a stale manifest.
 
@@ -14,6 +15,12 @@ on:
       - '.github/**'
       - 'manifest.base.json'
       - 'manifest.json'
+  # The export workflows push with GITHUB_TOKEN, which never triggers 'push'
+  # workflows - so regenerate whenever one of them finishes instead.
+  workflow_run:
+    workflows: ['Intune Backup', 'CDW Entra Baseline Backup', 'CDW Defender Baseline Backup']
+    types: [completed]
+    branches: [main]
   pull_request:
     paths-ignore:
       - 'site/**'
@@ -24,17 +31,19 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 concurrency:
-  group: manifest-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.event_name == 'pull_request' && format('manifest-{0}', github.ref) || 'main-generated-files' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   manifest:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || '' }}
 
       - uses: actions/setup-python@v5
         with:
@@ -50,18 +59,18 @@ jobs:
         if: github.event_name != 'pull_request'
         run: python3 scripts/generate-manifest.py --repo .
 
-      - name: Open PR if changed
+      - name: Commit manifest
         if: github.event_name != 'pull_request'
-        uses: peter-evans/create-pull-request@v6
-        with:
-          commit-message: "chore: regenerate policy manifest"
-          title: "chore: regenerate policy manifest"
-          body: "Automated regeneration from scripts/generate-manifest.py"
-          branch: chore/manifest-update
-          delete-branch: true
-          add-paths: |
-            manifest.base.json
-            manifest.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest.base.json manifest.json
+          if git diff --staged --quiet; then
+            echo "Manifest already current"
+          else
+            git commit -m "chore: regenerate policy manifest [skip ci]"
+            for i in 1 2 3; do git pull --rebase --quiet origin main && git push origin HEAD:main && break; sleep 5; done
+          fi
 
       - name: Summary
         if: always()

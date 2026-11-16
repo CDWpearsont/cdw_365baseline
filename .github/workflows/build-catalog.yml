@@ -9,7 +9,17 @@ on:
       - 'metadata/**'
       - 'bundles.json'
       - 'tools/build_catalog.py'
+  # The export workflows push with GITHUB_TOKEN, which never triggers 'push'
+  # workflows - so rebuild whenever one of them finishes instead.
+  workflow_run:
+    workflows: ['Intune Backup', 'CDW Entra Baseline Backup', 'CDW Defender Baseline Backup']
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
+
+concurrency:
+  group: main-generated-files
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -17,8 +27,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -53,5 +66,5 @@ jobs:
             echo "No catalog changes"
           else
             git commit -m "chore: rebuild policy catalog [skip ci]"
-            git push
+            for i in 1 2 3; do git pull --rebase --quiet origin main && git push && break; sleep 5; done
           fi
