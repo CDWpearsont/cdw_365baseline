@@ -1,0 +1,60 @@
+{
+  "displayName": "CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA",
+  "state": "disabled",
+  "deletedDateTime": null,
+  "sessionControls": null,
+  "conditions": {
+    "userRiskLevels": [],
+    "signInRiskLevels": [],
+    "clientAppTypes": [
+      "all"
+    ],
+    "servicePrincipalRiskLevels": [],
+    "applications": {
+      "includeApplications": [
+        "All"
+      ],
+      "excludeApplications": [],
+      "includeUserActions": [],
+      "includeAuthenticationContextClassReferences": [],
+      "applicationFilter": null
+    },
+    "users": {
+      "includeUsers": [
+        "None"
+      ],
+      "excludeUsers": [],
+      "includeGroups": [],
+      "excludeGroups": [],
+      "includeRoles": [],
+      "excludeRoles": [],
+      "includeGuestsOrExternalUsers": null,
+      "excludeGuestsOrExternalUsers": null
+    }
+  },
+  "grantControls": {
+    "operator": "AND",
+    "builtInControls": [
+      "compliantDevice"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('c35e8e87-7509-4de8-acf7-a0d7745b20c6')/grantControls/authenticationStrength/$entity",
+    "authenticationStrength": {
+      "id": "00000000-0000-0000-0000-000000000004",
+      "createdDateTime": "2021-12-01T08:00:00Z",
+      "modifiedDateTime": "2021-12-01T08:00:00Z",
+      "displayName": "Phishing-resistant MFA",
+      "description": "Phishing-resistant, Passwordless methods for the strongest authentication, such as a FIDO2 security key",
+      "policyType": "builtIn",
+      "requirementsSatisfied": "mfa",
+      "allowedCombinations": [
+        "windowsHelloForBusiness",
+        "fido2",
+        "x509CertificateMultiFactor"
+      ],
+      "combinationConfigurations@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('c35e8e87-7509-4de8-acf7-a0d7745b20c6')/grantControls/authenticationStrength/combinationConfigurations",
+      "combinationConfigurations": []
+    }
+  }
+}
