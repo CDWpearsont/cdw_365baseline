@@ -1,0 +1,83 @@
+name: Sync main into test
+
+# Keeps the test branch = main + whatever is being tested, so the test site
+# always sees the latest exported policies. Generated files (catalog, manifest)
+# are rebuilt after the merge rather than merged.
+
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: ['Build policy catalog', 'Build policy manifest']
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: generated-files-test
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: test
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Merge main
+        id: merge
+        shell: bash
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch --quiet origin main
+          if git merge-base --is-ancestor origin/main HEAD; then
+            echo "test already contains main"; echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          GENERATED="catalog.json manifest.json manifest.base.json"
+          if ! git merge --no-edit --no-ff origin/main -m "Sync main into test"; then
+            for f in $GENERATED; do
+              git ls-files -u -- "$f" | grep -q . && git checkout --theirs -- "$f" && git add -- "$f"
+            done
+            if [ -n "$(git diff --name-only --diff-filter=U)" ]; then
+              echo "conflicts=$(git diff --name-only --diff-filter=U | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+              git merge --abort
+              exit 1
+            fi
+            git commit --no-edit -q
+          fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Rebuild generated files
+        if: steps.merge.outputs.changed == 'true'
+        shell: bash
+        run: |
+          python3 tools/build_catalog.py --root . --policy-dirs IntuneConfig EntraConfig --out catalog.json
+          python3 scripts/generate-manifest.py --repo .
+          git add catalog.json manifest.json manifest.base.json
+          git diff --cached --quiet || git commit -q -m "chore: rebuild catalog and manifest after sync [skip ci]"
+          git push origin HEAD:test
+
+      - name: Report a conflict
+        if: failure() && steps.merge.outputs.conflicts != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO:  ${{ github.repository }}
+          FILES:    ${{ steps.merge.outputs.conflicts }}
+        shell: bash
+        run: |
+          gh label create sync-conflict --color B60205 --description "main could not be merged into test" 2>/dev/null || true
+          if [ -z "$(gh issue list --label sync-conflict --state open --json number -q '.[].number')" ]; then
+            gh issue create --label sync-conflict --title "main can't be merged into test automatically" \
+              --body "These files changed on both branches: \`$FILES\`. Resolve by merging main into test by hand (or ask Claude), then this workflow carries on."
+          fi
