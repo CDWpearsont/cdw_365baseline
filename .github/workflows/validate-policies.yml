@@ -1,0 +1,72 @@
+name: Validate policy JSON
+
+# Runs on every PR that adds or changes policy JSON.
+#  1. Offline checks (naming, file name, required fields, CA state)
+#  2. Settings Catalog / Endpoint Security JSON checked against the reference
+#     tenant with tools/Test-CdwPolicyJson.ps1 (read-only, backup app)
+
+on:
+  pull_request:
+    branches: [test, main]
+    paths:
+      - 'IntuneConfig/**/*.json'
+      - 'EntraConfig/**/*.json'
+  workflow_dispatch:
+    inputs:
+      files:
+        description: 'Space-separated JSON paths to check (blank = all changed vs main)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find changed policy files
+        id: files
+        shell: bash
+        env:
+          INPUT_FILES: ${{ github.event.inputs.files }}
+          BASE: ${{ github.base_ref || 'main' }}
+        run: |
+          if [ -n "$INPUT_FILES" ]; then
+            FILES="$INPUT_FILES"
+          else
+            git fetch --quiet origin "$BASE"
+            FILES=$(git diff --name-only --diff-filter=AMR "origin/$BASE...HEAD" -- 'IntuneConfig/**/*.json' 'EntraConfig/**/*.json' | tr '\n' ' ')
+          fi
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          SC=$(for f in $FILES; do case "$f" in IntuneConfig/SettingsCatalog/*|IntuneConfig/EndpointSecurity/*) echo "$f";; esac; done | tr '\n' ' ')
+          echo "graph_files=$SC" >> "$GITHUB_OUTPUT"
+          echo "Changed: $FILES"
+
+      - name: Offline checks
+        if: steps.files.outputs.files != ''
+        run: python3 tools/check_policy_files.py ${{ steps.files.outputs.files }}
+
+      - name: Install Microsoft.Graph.Authentication
+        if: steps.files.outputs.graph_files != ''
+        shell: pwsh
+        run: Install-Module Microsoft.Graph.Authentication -Scope CurrentUser -Force -ErrorAction Stop
+
+      - name: Check settings against the reference tenant
+        if: steps.files.outputs.graph_files != ''
+        env:
+          CLIENT_ID:     ${{ secrets.CLIENT_ID }}
+          TENANT_ID:     ${{ secrets.TENANT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          GRAPH_FILES:   ${{ steps.files.outputs.graph_files }}
+        shell: pwsh
+        run: |
+          $cred = [pscredential]::new($env:CLIENT_ID, (ConvertTo-SecureString $env:CLIENT_SECRET -AsPlainText -Force))
+          Connect-MgGraph -TenantId $env:TENANT_ID -ClientSecretCredential $cred -NoWelcome -ErrorAction Stop
+          $dir = New-Item -ItemType Directory -Path (Join-Path $env:RUNNER_TEMP 'policies') -Force
+          foreach ($f in ($env:GRAPH_FILES -split '\s+' | Where-Object { $_ })) { Copy-Item $f $dir.FullName }
+          ./tools/Test-CdwPolicyJson.ps1 -Path $dir.FullName
