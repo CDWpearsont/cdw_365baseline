@@ -261,7 +261,15 @@ jobs:
               Write-Output "No changes to commit"
             } else {
               git commit -m "$commitMsg"
-              git push origin HEAD
+              # Other workflows also commit to main; rebase onto theirs and retry.
+              $pushed = $false
+              foreach ($i in 1..3) {
+                git pull --rebase --quiet origin main
+                git push origin HEAD:main
+                if ($LASTEXITCODE -eq 0) { $pushed = $true; break }
+                Start-Sleep -Seconds 10
+              }
+              if (-not $pushed) { throw 'Push to main failed after 3 attempts' }
               Write-Output "Committed and pushed"
             }
           }
