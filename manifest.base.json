@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-16T14:36:06Z",
-  "count": 248,
+  "generated": "2026-11-16T15:09:33Z",
+  "count": 244,
   "entries": [
     {
       "id": "entra.adminconsentrequestpolicy.cdw-baseline-admin-consent-request-policy",
@@ -57,7 +57,7 @@
     {
       "id": "entra.conditionalaccess.cdw001-global-baseprotection-allapps-anyplatform-blocknonpersonas",
       "file": "EntraConfig/ConditionalAccess/CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas.json",
-      "sha": "6a9a0f8287240fb6",
+      "sha": "9143857208b254c9",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -67,21 +67,6 @@
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
-    },
-    {
-      "id": "entra.conditionalaccess.cdw001-require-multifactor-authentication-for-admins",
-      "file": "EntraConfig/ConditionalAccess/CDW001__Require_multifactor_authentication_for_admins.json",
-      "sha": "82f4d0f6245ab68a",
-      "workload": "entra",
-      "category": "ConditionalAccess",
-      "objectType": "conditionalAccessPolicy",
-      "displayName": "CDW001: Require multifactor authentication for admins",
-      "baseName": "CDW001: Require multifactor authentication for admins",
-      "platforms": [],
-      "deployVia": "graph",
-      "isDraft": false,
-      "caState": "disabled",
-      "caNumber": "CDW001"
     },
     {
       "id": "entra.conditionalaccess.cdw002-global-attacksurfacereduction-variousapps-anyplatform-block",
@@ -96,36 +81,6 @@
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
-    },
-    {
-      "id": "entra.conditionalaccess.cdw002-require-password-change-for-high-risk-users",
-      "file": "EntraConfig/ConditionalAccess/CDW002__Require_password_change_for_high-risk_users.json",
-      "sha": "11396cc6ec705972",
-      "workload": "entra",
-      "category": "ConditionalAccess",
-      "objectType": "conditionalAccessPolicy",
-      "displayName": "CDW002: Require password change for high-risk users",
-      "baseName": "CDW002: Require password change for high-risk users",
-      "platforms": [],
-      "deployVia": "graph",
-      "isDraft": false,
-      "caState": "enabledForReportingButNotEnforced",
-      "caNumber": "CDW002"
-    },
-    {
-      "id": "entra.conditionalaccess.cdw003-block-legacy-authentication",
-      "file": "EntraConfig/ConditionalAccess/CDW003__Block_Legacy_Authentication.json",
-      "sha": "b380baa23c300219",
-      "workload": "entra",
-      "category": "ConditionalAccess",
-      "objectType": "conditionalAccessPolicy",
-      "displayName": "CDW003: Block Legacy Authentication",
-      "baseName": "CDW003: Block Legacy Authentication",
-      "platforms": [],
-      "deployVia": "graph",
-      "isDraft": false,
-      "caState": "enabledForReportingButNotEnforced",
-      "caNumber": "CDW003"
     },
     {
       "id": "entra.conditionalaccess.cdw010-global-baseprotection-allapps-anyplatform-mfa",
@@ -172,7 +127,7 @@
     {
       "id": "entra.conditionalaccess.cdw013-global-baseprotection-azuremanagement-anyplatform-mfa",
       "file": "EntraConfig/ConditionalAccess/CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA.json",
-      "sha": "b2e14135126a22cb",
+      "sha": "06550df0076b1b84",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -200,7 +155,7 @@
     {
       "id": "entra.conditionalaccess.cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow",
       "file": "EntraConfig/ConditionalAccess/CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow.json",
-      "sha": "35dea03d490534d1",
+      "sha": "fae72c4e1bcb5c20",
       "workload": "entra",
       "category": "ConditionalAccess",
       "objectType": "conditionalAccessPolicy",
@@ -458,20 +413,6 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
       "baseName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
-      "platforms": [],
-      "deployVia": "graph",
-      "isDraft": false,
-      "caState": "disabled"
-    },
-    {
-      "id": "entra.conditionalaccess.cdw106-admins-dataandappprotection-allapps-iosorandroid-clientappandapp",
-      "file": "EntraConfig/ConditionalAccess/CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP.json",
-      "sha": "1db1cb87f96e48db",
-      "workload": "entra",
-      "category": "ConditionalAccess",
-      "objectType": "conditionalAccessPolicy",
-      "displayName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP",
-      "baseName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP",
       "platforms": [],
       "deployVia": "graph",
       "isDraft": false,
@@ -1222,7 +1163,7 @@
     {
       "id": "intune.appprotectionpolicies.android-cdw-baseline-mam-byod-app-protection",
       "file": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
-      "sha": "ab57b8202ce19dda",
+      "sha": "3e11b700d9c12955",
       "workload": "intune",
       "category": "AppProtectionPolicies",
       "objectType": "appProtectionPolicies",
@@ -1242,7 +1183,7 @@
     {
       "id": "intune.appprotectionpolicies.ios-cdw-baseline-mam-byod-app-protection",
       "file": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
-      "sha": "9745a490370871e6",
+      "sha": "dae3da4ab532992c",
       "workload": "intune",
       "category": "AppProtectionPolicies",
       "objectType": "appProtectionPolicies",
@@ -1262,7 +1203,7 @@
     {
       "id": "intune.autopilotprofiles.user-driven-entra-preprov-cdw-baseline",
       "file": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
-      "sha": "0a76f4bc296a9840",
+      "sha": "226986c83add54d4",
       "workload": "intune",
       "category": "AutopilotProfiles",
       "objectType": "azureADWindowsAutopilotDeploymentProfile",
@@ -1278,7 +1219,7 @@
     {
       "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-device-health",
       "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v1_0.json",
-      "sha": "cfe35eeb1284bf92",
+      "sha": "2e73e40a17fd663a",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "macOSCompliancePolicy",
@@ -1295,7 +1236,7 @@
     {
       "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-device-security",
       "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Security_-_v1_0.json",
-      "sha": "07357346e79efb43",
+      "sha": "64dc7a22158aca9a",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "macOSCompliancePolicy",
@@ -1312,7 +1253,7 @@
     {
       "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-password",
       "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Password_-_v1_0.json",
-      "sha": "c99c59a4fcc330ae",
+      "sha": "ef6381cf9b5f06c0",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "macOSCompliancePolicy",
@@ -1329,7 +1270,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-cis-l1-u-device-health-and-security",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_CIS_L1_-_U_-_Device_Health_and_Security_-_v5_0_0.json",
-      "sha": "88350b32c6b8b351",
+      "sha": "e4c123da23e508c3",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1348,7 +1289,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-defender-for-endpoint",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Defender_for_Endpoint_-_v3_1.json",
-      "sha": "b49e1de52e6708d4",
+      "sha": "2f32f01c7e79c8e0",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1365,7 +1306,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-device-health",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v3_1.json",
-      "sha": "13e2e60418995f28",
+      "sha": "25649c25e7092dc7",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1382,7 +1323,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-device-security",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Device_Security_-_v3_1.json",
-      "sha": "0ac382797009fc44",
+      "sha": "b5ecfdb23b3abd73",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1399,7 +1340,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-password",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Password_-_v3_1.json",
-      "sha": "669928c32ef3dc8d",
+      "sha": "82239d8d2ebc2c0e",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1416,7 +1357,7 @@
     {
       "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-1-pilot",
       "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_1_-_Pilot_-_v3_0.json",
-      "sha": "842a56c1e8a952b8",
+      "sha": "26cae7dcb0b609ef",
       "workload": "intune",
       "category": "DeviceConfigurations",
       "objectType": "windowsUpdateForBusinessConfiguration",
@@ -1436,7 +1377,7 @@
     {
       "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-2-uat",
       "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_2_-_UAT_-_v3_0.json",
-      "sha": "a8cede08663452af",
+      "sha": "3ce4a89df91914da",
       "workload": "intune",
       "category": "DeviceConfigurations",
       "objectType": "windowsUpdateForBusinessConfiguration",
@@ -1456,7 +1397,7 @@
     {
       "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-3-production",
       "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_3_-_Production_-_v3_0.json",
-      "sha": "c694030e7f23e387",
+      "sha": "cdf6c0bc44e4f749",
       "workload": "intune",
       "category": "DeviceConfigurations",
       "objectType": "windowsUpdateForBusinessConfiguration",
@@ -1813,7 +1754,7 @@
     {
       "id": "intune.enrolmentrestrictions.android-cdw-baseline-enrolment-restriction-block-personal",
       "file": "IntuneConfig/EnrolmentRestrictions/Android_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
-      "sha": "9cbfed6660152fa9",
+      "sha": "70735d5a6b404bcf",
       "workload": "intune",
       "category": "EnrolmentRestrictions",
       "objectType": "deviceEnrollmentPlatformRestrictionConfiguration",
@@ -1833,7 +1774,7 @@
     {
       "id": "intune.enrolmentrestrictions.ios-cdw-baseline-enrolment-restriction-block-personal",
       "file": "IntuneConfig/EnrolmentRestrictions/iOS_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
-      "sha": "411fa5ec53787b78",
+      "sha": "067b2f8ca8884841",
       "workload": "intune",
       "category": "EnrolmentRestrictions",
       "objectType": "deviceEnrollmentPlatformRestrictionConfiguration",
@@ -1853,7 +1794,7 @@
     {
       "id": "intune.enrolmentstatuspage.esp-cdw-baseline",
       "file": "IntuneConfig/EnrolmentStatusPage/ESP_CDW_Baseline.json",
-      "sha": "6c86b4cd215179ba",
+      "sha": "7a91c95cbc54a6a1",
       "workload": "intune",
       "category": "EnrolmentStatusPage",
       "objectType": "windows10EnrollmentCompletionPageConfiguration",

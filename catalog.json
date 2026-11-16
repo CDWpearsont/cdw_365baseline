@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-16T14:36:06+00:00",
-  "sourceCommit": "05d533a2a8b6eaf5cfc7ad6a36db2e827b33b088",
+  "generatedAt": "2026-11-16T15:09:22+00:00",
+  "sourceCommit": "3965ecfc90ec17bd9afe109f537372462f3a5f12",
   "counts": {
     "policies": 245,
-    "bundles": 22,
+    "bundles": 14,
     "issues": 256,
     "byConfidence": {
       "medium": 118,
@@ -243,22 +243,14 @@
       "tower": "Intune",
       "icon": "layers",
       "title": "Apply the full CDW standard baseline",
-      "outcome": "The complete CDW-authored device baseline: security, user experience, browser, Office and update management.",
+      "outcome": "The complete CDW-authored device baseline, covering security, user experience, browser, Office and update management.",
       "options": [
         {
           "platform": "Windows",
           "label": "Windows 10/11",
-          "note": "ASR in audit mode",
+          "note": "All CDW standard policies",
           "bundles": [
             "intune-win-cdw-standard"
-          ]
-        },
-        {
-          "platform": "Windows",
-          "label": "Windows 10/11 (ASR enforced)",
-          "note": "ASR in block mode",
-          "bundles": [
-            "intune-win-cdw-standard-enforced"
           ]
         },
         {
@@ -272,33 +264,16 @@
       ]
     },
     {
-      "id": "legacy-sites",
-      "tower": "Intune",
-      "icon": "layers",
-      "title": "Support legacy sites in IE mode",
-      "outcome": "Hardened Internet Explorer mode settings for Edge, only where legacy intranet sites still need it.",
-      "options": [
-        {
-          "platform": "Windows",
-          "label": "Windows 10/11",
-          "note": "IE mode",
-          "bundles": [
-            "intune-win-ie-mode"
-          ]
-        }
-      ]
-    },
-    {
       "id": "enrolment",
       "tower": "Intune",
       "icon": "rocket",
       "title": "Stand up modern device enrolment",
-      "outcome": "Everything a new device needs from Windows Autopilot: profile, enrolment status page, compliance, BitLocker, LAPS, local admin control, passwordless sign-in, antivirus and updates.",
+      "outcome": "The minimum viable set to bring new devices into management with Autopilot: hardening, encryption, LAPS, local admin control and passwordless sign-in.",
       "options": [
         {
           "platform": "Windows",
           "label": "Windows Autopilot",
-          "note": "Entra join",
+          "note": "Minimum viable product",
           "bundles": [
             "intune-win-autopilot-mvp"
           ]
@@ -308,33 +283,16 @@
     {
       "id": "antivirus",
       "tower": "Intune",
-      "icon": "shield",
-      "title": "Deploy Microsoft Defender for Endpoint",
-      "outcome": "Applies the CIS antivirus, attack surface reduction and firewall configuration for Defender for Endpoint (EDR onboarding is a one-click policy per tenant).",
+      "icon": "virus",
+      "title": "Deploy antivirus and threat protection",
+      "outcome": "Microsoft Defender Antivirus configuration, update rings and attack surface reduction rules.",
       "options": [
         {
           "platform": "Windows",
           "label": "Windows 10/11",
-          "note": "CIS Defender Antivirus v1.0.0",
+          "note": "Defender AV and ASR",
           "bundles": [
             "intune-win-defender-av"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "updates",
-      "tower": "Intune",
-      "icon": "layers",
-      "title": "Manage Windows and app updates",
-      "outcome": "Pilot, UAT and production rings for Windows and Defender updates, with Delivery Optimisation and app update channels.",
-      "options": [
-        {
-          "platform": "Windows",
-          "label": "Windows 10/11",
-          "note": "Three rings",
-          "bundles": [
-            "intune-win-update-management"
           ]
         }
       ]
@@ -344,15 +302,14 @@
       "tower": "Intune",
       "icon": "mobile",
       "title": "Protect company data on personal devices",
-      "outcome": "App protection on personal iOS and Android phones without enrolment, required by Conditional Access.",
+      "outcome": "App protection and enrolment restrictions so corporate data stays contained on unmanaged iOS and Android devices.",
       "options": [
         {
           "platform": "Mobile",
           "label": "iOS and Android",
-          "note": "Level 2 app protection",
+          "note": "BYOD app protection",
           "bundles": [
-            "intune-mobile-byod",
-            "entra-ca-mobile-app-protection"
+            "intune-mobile-byod"
           ]
         }
       ]
@@ -361,32 +318,15 @@
       "id": "ca-starter",
       "tower": "Entra",
       "icon": "key",
-      "title": "Establish the Conditional Access foundation",
-      "outcome": "Microsoft's Secure foundation: MFA for everyone and for admins, legacy authentication and device code flow blocked, Azure management and security info registration protected.",
+      "title": "Establish core Conditional Access",
+      "outcome": "The three-policy minimum every tenant should have: multifactor authentication for administrators, risk-based password change, and legacy authentication blocked.",
       "options": [
         {
           "platform": "Cross-platform",
           "label": "All platforms",
-          "note": "Entra ID P1",
+          "note": "Core starter",
           "bundles": [
-            "entra-ca-secure-foundation"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "risk",
-      "tower": "Entra",
-      "icon": "shield",
-      "title": "Respond to risky sign-ins and users",
-      "outcome": "Identity Protection policies that challenge risky sign-ins and force a password change for high-risk users.",
-      "options": [
-        {
-          "platform": "Cross-platform",
-          "label": "All platforms",
-          "note": "Entra ID P2",
-          "bundles": [
-            "entra-ca-risk"
+            "entra-ca-core-starter"
           ]
         }
       ]
@@ -395,15 +335,15 @@
       "id": "identity",
       "tower": "Entra",
       "icon": "key",
-      "title": "Protect administrators",
-      "outcome": "Admin sign-ins need a compliant device and phishing-resistant MFA, with risk, legacy authentication and session controls.",
+      "title": "Secure user and administrator sign-in",
+      "outcome": "Conditional Access covering multifactor authentication, risk-based controls and blocking of legacy authentication.",
       "options": [
         {
           "platform": "Cross-platform",
           "label": "All platforms",
-          "note": "Admins persona",
+          "note": "Identity Conditional Access",
           "bundles": [
-            "entra-ca-privileged-access"
+            "entra-ca-identity-security"
           ]
         }
       ]
@@ -411,86 +351,16 @@
     {
       "id": "managed-devices",
       "tower": "Entra",
-      "icon": "device",
+      "icon": "device-check",
       "title": "Require managed or compliant devices",
-      "outcome": "Compliance policies for Windows and macOS, and Conditional Access requiring a compliant or hybrid-joined device, or MFA.",
+      "outcome": "Device-based Conditional Access so corporate resources are only reachable from compliant, managed or app-protected devices.",
       "options": [
         {
           "platform": "Cross-platform",
           "label": "All platforms",
-          "note": "Compliant, hybrid joined or MFA",
+          "note": "Device Conditional Access",
           "bundles": [
-            "entra-ca-require-managed",
-            "intune-win-compliance",
-            "intune-macos-compliance"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "zero-trust",
-      "tower": "Entra",
-      "icon": "shield",
-      "title": "Apply a Zero Trust identity framework",
-      "outcome": "Microsoft's Zero Trust Conditional Access templates: the Secure foundation plus risk-based access, managed devices and mobile app protection.",
-      "options": [
-        {
-          "platform": "Cross-platform",
-          "label": "All platforms",
-          "note": "Entra ID P2",
-          "bundles": [
-            "entra-ca-zero-trust"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "persona-framework",
-      "tower": "Entra",
-      "icon": "layers",
-      "title": "Deploy the persona-based CA framework",
-      "outcome": "The full persona framework for mature tenants: separate policy sets for admins, internal users, externals, developers, guests and service accounts.",
-      "options": [
-        {
-          "platform": "Cross-platform",
-          "label": "All personas",
-          "note": "Needs persona groups",
-          "bundles": [
-            "entra-ca-persona-framework"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "guests",
-      "tower": "Entra",
-      "icon": "key",
-      "title": "Secure guest and external access",
-      "outcome": "MFA, Terms of Use, risk and session controls for guests and guest administrators.",
-      "options": [
-        {
-          "platform": "Cross-platform",
-          "label": "All platforms",
-          "note": "Guest personas",
-          "bundles": [
-            "entra-ca-guests"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "service-accounts",
-      "tower": "Entra",
-      "icon": "key",
-      "title": "Lock down service accounts and workload identities",
-      "outcome": "Service accounts limited to trusted locations and their own apps, with risk-based blocks.",
-      "options": [
-        {
-          "platform": "Cross-platform",
-          "label": "All platforms",
-          "note": "Service account personas",
-          "bundles": [
-            "entra-ca-service-accounts"
+            "entra-ca-endpoint-security"
           ]
         }
       ]
@@ -498,16 +368,33 @@
     {
       "id": "tenant-hardening",
       "tower": "Entra",
-      "icon": "shield",
+      "icon": "building",
       "title": "Harden tenant-wide identity settings",
       "outcome": "Tenant configuration: authorization policy, device registration, cross-tenant access, admin consent and directory settings.",
       "options": [
         {
           "platform": "Cross-platform",
           "label": "All platforms",
-          "note": "Tenant policies",
+          "note": "Tenant configuration",
           "bundles": [
             "entra-tenant-config"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zero-trust",
+      "tower": "Entra",
+      "icon": "target",
+      "title": "Apply a Zero Trust identity framework",
+      "outcome": "The Conditional Access set forming a Zero Trust reference architecture. Populated by tagging policies in Policy Management.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "All platforms",
+          "note": "Zero Trust framework",
+          "bundles": [
+            "entra-ca-zero-trust"
           ]
         }
       ]
@@ -518,7 +405,7 @@
       "id": "new-tenant",
       "icon": "rocket",
       "title": "New tenant foundation",
-      "outcome": "Day-one setup for a greenfield tenant: the Conditional Access foundation, tenant hardening, managed-device access and Windows Autopilot.",
+      "outcome": "Everything needed to stand up a greenfield tenant: core Conditional Access, tenant-wide identity hardening, and Windows Autopilot enrolment.",
       "includes": [
         {
           "goal": "ca-starter",
@@ -526,10 +413,6 @@
         },
         {
           "goal": "tenant-hardening",
-          "platform": "Cross-platform"
-        },
-        {
-          "goal": "managed-devices",
           "platform": "Cross-platform"
         },
         {
@@ -542,7 +425,7 @@
       "id": "secure-windows",
       "icon": "shield",
       "title": "Secure the Windows estate",
-      "outcome": "CIS Level 1 hardening, Defender for Endpoint onboarding, update rings and managed-device access.",
+      "outcome": "Hardens Windows devices to CIS Level 1, deploys Defender antivirus and attack surface reduction, and requires managed devices for access.",
       "includes": [
         {
           "goal": "harden-endpoints",
@@ -550,10 +433,6 @@
         },
         {
           "goal": "antivirus",
-          "platform": "Windows"
-        },
-        {
-          "goal": "updates",
           "platform": "Windows"
         },
         {
@@ -566,30 +445,14 @@
       "id": "enable-byod",
       "icon": "mobile",
       "title": "Enable bring-your-own-device",
-      "outcome": "Personal phones with Level 2 app protection, personal enrolment blocked, and Conditional Access requiring protected apps.",
+      "outcome": "Lets staff use personal phones safely: app protection on iOS and Android, enrolment restrictions, and device-based Conditional Access.",
       "includes": [
         {
           "goal": "byod",
           "platform": "Mobile"
-        }
-      ]
-    },
-    {
-      "id": "protect-identities",
-      "icon": "key",
-      "title": "Protect identities",
-      "outcome": "The Conditional Access foundation, admin protection and risk-based access.",
-      "includes": [
-        {
-          "goal": "ca-starter",
-          "platform": "Cross-platform"
         },
         {
-          "goal": "identity",
-          "platform": "Cross-platform"
-        },
-        {
-          "goal": "risk",
+          "goal": "managed-devices",
           "platform": "Cross-platform"
         }
       ]
@@ -729,7 +592,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -762,7 +625,10 @@
       "tags": [],
       "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-ca-identity-security",
+        "entra-ca-core-starter"
+      ]
     },
     {
       "id": "entra-cross-platform-conditional-access-cdw002-global-attacksurfacereduction-variousapps-anyplatform-block-user",
@@ -795,7 +661,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -828,7 +694,10 @@
       "tags": [],
       "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-ca-identity-security",
+        "entra-ca-core-starter"
+      ]
     },
     {
       "id": "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user",
@@ -860,7 +729,10 @@
       "tags": [],
       "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-ca-identity-security",
+        "entra-ca-core-starter"
+      ]
     },
     {
       "id": "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
@@ -893,8 +765,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-secure-foundation",
-        "entra-ca-zero-trust"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -928,8 +799,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-secure-foundation",
-        "entra-ca-zero-trust"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -963,8 +833,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-secure-foundation",
-        "entra-ca-zero-trust"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -982,7 +851,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:b2e14135126a22cb102c0610c1970b8ec3393d9641340f3aacd4158d8d71bbed",
+      "policyHash": "sha256:06550df0076b1b84e8bc7cc58d2079d6eb80027d9ef7e9d9412456d5b7559066",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -998,8 +867,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-secure-foundation",
-        "entra-ca-zero-trust"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1033,8 +901,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-secure-foundation",
-        "entra-ca-zero-trust"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1052,7 +919,7 @@
       "subArea": null,
       "securityDomain": "Identity Security",
       "settingCount": 0,
-      "policyHash": "sha256:35dea03d490534d14c9ef756ec8425c6a076a80e91affe2a9d1a62de3431ea51",
+      "policyHash": "sha256:fae72c4e1bcb5c20bc9f2d01b5acaa36075c377dc517ceeecdff550d715740bc",
       "derivedFrom": {
         "workload": "folder",
         "platform": "inferred",
@@ -1068,8 +935,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-secure-foundation",
-        "entra-ca-zero-trust"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1103,8 +969,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-zero-trust",
-        "entra-ca-require-managed"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1138,8 +1003,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-zero-trust",
-        "entra-ca-mobile-app-protection"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1173,8 +1037,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-risk",
-        "entra-ca-zero-trust"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1208,8 +1071,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-risk",
-        "entra-ca-zero-trust"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1243,8 +1105,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-privileged-access",
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1278,7 +1139,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1312,7 +1173,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1346,7 +1207,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1380,7 +1241,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1414,7 +1275,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1448,7 +1309,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1482,7 +1343,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1516,7 +1377,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1550,8 +1411,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-privileged-access",
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1585,8 +1445,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-privileged-access",
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1620,8 +1479,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-privileged-access",
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1655,8 +1513,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-privileged-access",
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1690,8 +1547,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-privileged-access",
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1724,7 +1580,9 @@
       "tags": [],
       "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "entra-ca-endpoint-security"
+      ]
     },
     {
       "id": "entra-cross-platform-conditional-access-cdw107-admins-dataprotection-allapps-anyplatform-sessionpolicy-user",
@@ -1757,8 +1615,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-privileged-access",
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1792,8 +1649,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-privileged-access",
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1827,7 +1683,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1861,7 +1717,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -1895,7 +1751,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1929,7 +1785,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1963,7 +1819,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -1997,7 +1853,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -2031,7 +1887,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -2065,7 +1921,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -2099,7 +1955,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -2133,7 +1989,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2167,7 +2023,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2201,7 +2057,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2235,7 +2091,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -2269,7 +2125,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework"
+        "entra-ca-endpoint-security"
       ]
     },
     {
@@ -2303,8 +2159,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2338,8 +2193,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2373,8 +2227,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2408,8 +2261,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2443,8 +2295,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2478,8 +2329,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2513,8 +2363,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2548,8 +2397,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2583,8 +2431,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2618,8 +2465,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2653,8 +2499,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2688,8 +2533,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2723,8 +2567,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2758,8 +2601,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-guests"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2793,8 +2635,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2828,8 +2669,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2863,8 +2703,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2898,8 +2737,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2933,8 +2771,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -2968,8 +2805,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3003,8 +2839,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3038,8 +2873,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3073,8 +2907,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3108,8 +2941,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3143,8 +2975,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3178,8 +3009,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3213,8 +3043,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3248,8 +3077,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3283,8 +3111,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3318,8 +3145,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3353,8 +3179,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "entra-ca-persona-framework",
-        "entra-ca-service-accounts"
+        "entra-ca-identity-security"
       ]
     },
     {
@@ -3508,7 +3333,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:ab57b8202ce19dda3eb329a9d633b915ecf5b0479c775e837ba2c65c10f96b22",
+      "policyHash": "sha256:3e11b700d9c12955451668ca9e34e24967e0880b9e73e03d67d5c8f8b6a6a54f",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3542,7 +3367,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:9745a490370871e69854ff598649c3f02c5ee9ec6a7a6f0bf2562e402b1403dc",
+      "policyHash": "sha256:dae3da4ab532992c384161a0b475fb17e88007e7a68be71f8780a8d9ae90162d",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3576,7 +3401,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:0a76f4bc296a9840f310658b46c1cf0d72a9e16eb14b0261ef995581d1fee3bd",
+      "policyHash": "sha256:226986c83add54d4130a5128ecef0cf0f33ada1dcc58f7eca6937b748281e8b3",
       "derivedFrom": {
         "workload": "folder",
         "area": "filename"
@@ -3591,9 +3416,7 @@
       "tags": [],
       "frameworks": [],
       "notes": null,
-      "bundles": [
-        "intune-win-autopilot-mvp"
-      ]
+      "bundles": []
     },
     {
       "id": "intune-macos-compliance-policy-device-health-user",
@@ -3610,7 +3433,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:cfe35eeb1284bf9244ca632106ae24f802b913ef1376bcc092188aada27d5521",
+      "policyHash": "sha256:2e73e40a17fd663aea7e30e1186a777128455ae5ceb428bd191bc7f0c8381d2e",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3626,8 +3449,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-macos-cdw-standard",
-        "intune-macos-compliance"
+        "intune-macos-cdw-standard"
       ]
     },
     {
@@ -3645,7 +3467,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:07357346e79efb439adb853701a1110b7ebe0adf52c7060ee26dcece0c37f3f0",
+      "policyHash": "sha256:64dc7a22158aca9a9bfafbb9696dedab02338c834a161344b969014c7a256dc6",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3661,8 +3483,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-macos-cdw-standard",
-        "intune-macos-compliance"
+        "intune-macos-cdw-standard"
       ]
     },
     {
@@ -3680,7 +3501,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c99c59a4fcc330ae31d73b10b24578cd55c9a047cb9ba6686f2ba6785b8f6db2",
+      "policyHash": "sha256:ef6381cf9b5f06c086f43725dab36d450795bded5e4a19799ce98dc6cf437a63",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3696,8 +3517,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-macos-cdw-standard",
-        "intune-macos-compliance"
+        "intune-macos-cdw-standard"
       ]
     },
     {
@@ -3715,7 +3535,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:88350b32c6b8b3517aaef757a7a45ba6f55714bc9e6b6de1cb2af576c03c9193",
+      "policyHash": "sha256:e4c123da23e508c31cd525bb0577f153be6c61e4183b21b432b7a64b6ab1a2f3",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3734,8 +3554,7 @@
       ],
       "notes": null,
       "bundles": [
-        "intune-win-cis-l1",
-        "intune-win-autopilot-mvp"
+        "intune-win-cis-l1"
       ]
     },
     {
@@ -3753,7 +3572,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:b49e1de52e6708d4771d5c2cad07ed3ad0fd23cf2a24d719b2bc62e09a0783da",
+      "policyHash": "sha256:2f32f01c7e79c8e012e96e700083a1c9b0499e33221b0f20361c32952e41450a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3769,7 +3588,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-defender-av"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -3787,7 +3606,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:13e2e60418995f2864a75af1a63d2b9f9a1ee091f794fe44f19f42fbf25ffc58",
+      "policyHash": "sha256:25649c25e7092dc712d6e2366fefc0a3fcfa35f2c759e5ba97830b5970a41d4c",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3803,9 +3622,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-compliance"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -3823,7 +3640,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:0ac382797009fc445a745edb21a930489a19ae65c8cc5fd5897c964ef8fb4d42",
+      "policyHash": "sha256:b5ecfdb23b3abd7395b6905c3ab34fb1df1ab2b9855ebdbf005176c4a9d7e9e1",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3839,9 +3656,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-compliance"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -3859,7 +3674,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:669928c32ef3dc8db7e9d7cf2b756d69871cfce3943d3358786f3b8adcec4b67",
+      "policyHash": "sha256:82239d8d2ebc2c0e2a25a2187fffc57f930dfa9e0d1897aa2dd8d2552cd26980",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3875,9 +3690,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-compliance"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -3895,7 +3708,7 @@
       "subArea": "Pilot",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:842a56c1e8a952b8f5afac35d40a72797805ef8d803eec7bd89540e09b7fe27a",
+      "policyHash": "sha256:26cae7dcb0b609ef142e2da226e3bcd6c7d22d0571a99b878675fce2a7f74705",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3912,7 +3725,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-update-management"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -3930,7 +3743,7 @@
       "subArea": "UAT",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:a8cede08663452aff0e38b258463eb2025381e983a59bc9f6247e15e2f15da7a",
+      "policyHash": "sha256:3ce4a89df91914da992a8f369903dd985efda9710cdcd9ed8b16d16f6ad8939f",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3947,7 +3760,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-update-management"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -3965,7 +3778,7 @@
       "subArea": "Production",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c694030e7f23e387c69df209063f2d6ea3e845cc580360b49b01c3f49efd56a3",
+      "policyHash": "sha256:cdf6c0bc44e4f74947b432d71bda7cede5c70d91bb4f311d2a0c8e5dc2eaf05a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3982,10 +3795,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-update-management",
-        "intune-win-autopilot-mvp"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -4020,7 +3830,8 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard"
+        "intune-win-cdw-standard",
+        "intune-win-defender-av"
       ]
     },
     {
@@ -4055,7 +3866,8 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard",
+        "intune-win-defender-av"
       ]
     },
     {
@@ -4172,8 +3984,7 @@
       "notes": null,
       "bundles": [
         "intune-win-cis-l1",
-        "intune-win-defender-av",
-        "intune-win-autopilot-mvp"
+        "intune-win-defender-av"
       ]
     },
     {
@@ -4289,8 +4100,7 @@
       ],
       "notes": null,
       "bundles": [
-        "intune-win-cis-l1",
-        "intune-win-autopilot-mvp"
+        "intune-win-cis-l1"
       ]
     },
     {
@@ -4328,8 +4138,7 @@
       ],
       "notes": null,
       "bundles": [
-        "intune-win-cis-l1",
-        "intune-win-defender-av"
+        "intune-win-cis-l1"
       ]
     },
     {
@@ -4441,7 +4250,8 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-update-management"
+        "intune-win-cdw-standard",
+        "intune-win-defender-av"
       ]
     },
     {
@@ -4476,7 +4286,8 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-update-management"
+        "intune-win-cdw-standard",
+        "intune-win-defender-av"
       ]
     },
     {
@@ -4512,10 +4323,7 @@
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-defender-av",
-        "intune-win-update-management",
-        "intune-win-autopilot-mvp"
+        "intune-win-defender-av"
       ]
     },
     {
@@ -4550,8 +4358,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -4587,7 +4394,7 @@
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-autopilot-mvp"
       ]
     },
     {
@@ -4605,7 +4412,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:9cbfed6660152fa94002e4283823c46b35b47472365b2d391a4a1c544fcf341d",
+      "policyHash": "sha256:70735d5a6b404bcfac55df5579cc44c929625fbdb26232ef9ae91778e930eaa3",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4639,7 +4446,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:411fa5ec53787b783218cb225b10848384889ae602c5b591ec41a76e6f256660",
+      "policyHash": "sha256:067b2f8ca8884841836e8d70212deb5f75a0b3b9e6400edb94337306f238a917",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4673,7 +4480,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:6c86b4cd215179bab113edcd6f3db8f245fa283a56a788d1810993f67d4ea3d6",
+      "policyHash": "sha256:7a91c95cbc54a6a1bbda7fe16d7fb21346de1a692449d59bafb5eaa34dfafe87",
       "derivedFrom": {
         "workload": "folder",
         "policyType": "body",
@@ -4688,9 +4495,7 @@
       "tags": [],
       "frameworks": [],
       "notes": null,
-      "bundles": [
-        "intune-win-autopilot-mvp"
-      ]
+      "bundles": []
     },
     {
       "id": "intune-android-settings-catalog-restrictions-v1-0-test-device",
@@ -6914,7 +6719,8 @@
       ],
       "notes": null,
       "bundles": [
-        "intune-win-cis-l2"
+        "intune-win-cis-l2",
+        "intune-win-defender-av"
       ]
     },
     {
@@ -6952,7 +6758,8 @@
       ],
       "notes": null,
       "bundles": [
-        "intune-win-cis-l2"
+        "intune-win-cis-l2",
+        "intune-win-defender-av"
       ]
     },
     {
@@ -7785,8 +7592,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -7822,7 +7628,7 @@
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-defender-av"
       ]
     },
     {
@@ -7857,8 +7663,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -7893,8 +7698,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -7929,8 +7733,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -7965,8 +7768,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8000,7 +7802,9 @@
       "tags": [],
       "frameworks": [],
       "notes": null,
-      "bundles": []
+      "bundles": [
+        "intune-win-cdw-standard"
+      ]
     },
     {
       "id": "intune-windows-settings-catalog-device-security-local-security-policies-24h2-device",
@@ -8034,8 +7838,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8070,8 +7873,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8106,8 +7908,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8142,8 +7943,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8178,8 +7978,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8214,8 +8013,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8251,7 +8049,7 @@
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-autopilot-mvp"
       ]
     },
     {
@@ -8286,8 +8084,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8322,8 +8119,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8358,8 +8154,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8394,8 +8189,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8430,8 +8224,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8466,8 +8259,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8502,8 +8294,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8538,8 +8329,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8574,7 +8364,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-ie-mode"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8609,8 +8399,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8645,8 +8434,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8681,9 +8469,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-update-management"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8718,8 +8504,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8754,8 +8539,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8790,8 +8574,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8826,8 +8609,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8862,8 +8644,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8898,9 +8679,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-update-management"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8935,8 +8714,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -8971,8 +8749,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9007,8 +8784,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9043,8 +8819,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9079,8 +8854,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9115,8 +8889,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9151,8 +8924,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9188,7 +8960,6 @@
       "notes": null,
       "bundles": [
         "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
         "intune-win-autopilot-mvp"
       ]
     },
@@ -9224,9 +8995,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-update-management"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9261,9 +9030,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced",
-        "intune-win-update-management"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9298,8 +9065,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9334,8 +9100,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9370,8 +9135,7 @@
       "frameworks": [],
       "notes": null,
       "bundles": [
-        "intune-win-cdw-standard",
-        "intune-win-cdw-standard-enforced"
+        "intune-win-cdw-standard"
       ]
     },
     {
@@ -9411,7 +9175,7 @@
     {
       "id": "intune-win-cis-l1",
       "name": "Windows - CIS Level 1",
-      "description": "Every Windows policy aligned to CIS Microsoft Intune for Windows 11 Benchmark Level 1 (plus the CIS Edge, Defender Antivirus and Microsoft 365 Apps benchmarks). New CIS L1 policies join automatically on commit.",
+      "description": "Every Windows policy aligned to CIS Microsoft Intune for Windows 11 Benchmark Level 1. New CIS L1 policies join automatically on commit.",
       "path": [
         "Intune",
         "Windows",
@@ -9426,10 +9190,6 @@
       "include": [],
       "exclude": [],
       "order": 10,
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "notes": "Items marked (BL) are the CIS BitLocker profile, which CIS treats as optional. Expect some user impact; deploy to a pilot group first.",
       "members": [
         "intune-windows-compliance-policy-cis-l1-device-health-and-security-user",
         "intune-windows-endpoint-security-cis-l1-attack-surface-reduction-asr-rules-device",
@@ -9488,7 +9248,7 @@
     {
       "id": "intune-win-cis-l2",
       "name": "Windows - CIS Level 2",
-      "description": "Windows policies aligned to CIS Level 2. Layer on top of Level 1 for high-security environments; expect higher user impact.",
+      "description": "Windows policies aligned to CIS Level 2. Layer on top of L1; expect higher user impact.",
       "path": [
         "Intune",
         "Windows",
@@ -9503,9 +9263,6 @@
       "include": [],
       "exclude": [],
       "order": 20,
-      "licensing": [
-        "Microsoft Intune"
-      ],
       "members": [
         "intune-windows-settings-catalog-cis-l2-defender-antivirus-additional-configuration-device",
         "intune-windows-settings-catalog-cis-l2-defender-antivirus-admx-configuration-device",
@@ -9536,7 +9293,7 @@
     {
       "id": "intune-win-cdw-standard",
       "name": "Windows - CDW Standard Baseline",
-      "description": "The CDW-authored Windows baseline: everything not tagged to an external framework, with ASR rules in audit mode and the production update rings. Pilot and UAT rings are in Update Management; legacy Internet Explorer settings are in their own block.",
+      "description": "The CDW-authored Windows baseline. Everything not tagged to an external framework.",
       "path": [
         "Intune",
         "Windows",
@@ -9549,26 +9306,17 @@
         "framework": null
       },
       "include": [],
-      "exclude": [
-        "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-l2-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-1-pilot-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-2-uat-device",
-        "intune-windows-update-ring-ring-1-pilot-device",
-        "intune-windows-update-ring-ring-2-uat-device",
-        "intune-windows-settings-catalog-device-security-local-security-policies-device",
-        "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user"
-      ],
+      "exclude": [],
       "order": 30,
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "notes": "Local Security Policies (24H2+) targets Windows 11 24H2 and later.",
       "members": [
+        "intune-windows-compliance-policy-defender-for-endpoint-user",
         "intune-windows-compliance-policy-device-health-user",
         "intune-windows-compliance-policy-device-security-user",
         "intune-windows-compliance-policy-password-user",
         "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-audit-mode-device",
+        "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-l2-device",
+        "intune-windows-endpoint-security-defender-antivirus-updates-ring-1-pilot-device",
+        "intune-windows-endpoint-security-defender-antivirus-updates-ring-2-uat-device",
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
         "intune-windows-endpoint-security-encryption-personal-data-encryption-user",
         "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
@@ -9580,6 +9328,7 @@
         "intune-windows-settings-catalog-device-security-device-guard-credential-guard-and-hvci-user",
         "intune-windows-settings-catalog-device-security-enhanced-phishing-protection-device",
         "intune-windows-settings-catalog-device-security-local-security-policies-24h2-device",
+        "intune-windows-settings-catalog-device-security-local-security-policies-device",
         "intune-windows-settings-catalog-device-security-location-and-privacy-device",
         "intune-windows-settings-catalog-device-security-login-and-lock-screen-device",
         "intune-windows-settings-catalog-device-security-power-and-device-lock-user",
@@ -9593,6 +9342,7 @@
         "intune-windows-settings-catalog-device-security-windows-sandbox-user",
         "intune-windows-settings-catalog-device-security-windows-spotlight-and-org-messages-user",
         "intune-windows-settings-catalog-device-security-windows-subsystem-for-linux-device",
+        "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
         "intune-windows-settings-catalog-microsoft-accounts-configuration-device",
         "intune-windows-settings-catalog-microsoft-edge-extensions-user",
         "intune-windows-settings-catalog-microsoft-edge-password-management-user",
@@ -9615,291 +9365,86 @@
         "intune-windows-settings-catalog-windows-user-experience-copilot-user",
         "intune-windows-settings-catalog-windows-user-experience-feature-configuration-device",
         "intune-windows-settings-catalog-windows-user-experience-settings-sync-device",
+        "intune-windows-update-ring-ring-1-pilot-device",
+        "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-update-ring-ring-3-production-device"
       ],
-      "memberCount": 51
+      "memberCount": 59
     },
     {
-      "id": "intune-win-cdw-standard-enforced",
-      "name": "Windows - CDW Standard Baseline (ASR enforced)",
-      "description": "The CDW standard baseline with attack surface reduction rules enforced (block) instead of audit. Use once audit-mode results have been reviewed.",
+      "id": "intune-win-defender-av",
+      "name": "Windows - Defender Antivirus",
+      "description": "All Windows antivirus and Defender configuration, regardless of framework.",
       "path": [
         "Intune",
         "Windows",
-        "Security Baselines",
-        "CDW Standard (enforced)"
+        "Security",
+        "Antivirus"
       ],
       "rule": {
         "workload": "Intune",
         "platform": "Windows",
-        "framework": null
+        "area": [
+          "Defender",
+          "Defender Antivirus",
+          "Defender Antivirus Updates",
+          "Attack Surface Reduction"
+        ]
       },
       "include": [],
-      "exclude": [
-        "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-audit-mode-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-1-pilot-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-2-uat-device",
-        "intune-windows-update-ring-ring-1-pilot-device",
-        "intune-windows-update-ring-ring-2-uat-device",
-        "intune-windows-settings-catalog-device-security-local-security-policies-device",
-        "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user"
-      ],
-      "order": 35,
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "notes": "Review ASR audit events in Defender (Reports > Attack surface reduction rules) before switching from audit.",
-      "members": [
-        "intune-windows-compliance-policy-device-health-user",
-        "intune-windows-compliance-policy-device-security-user",
-        "intune-windows-compliance-policy-password-user",
-        "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-l2-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-        "intune-windows-endpoint-security-encryption-personal-data-encryption-user",
-        "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
-        "intune-windows-settings-catalog-credential-management-passwordless-device",
-        "intune-windows-settings-catalog-defender-antivirus-additional-configuration-device",
-        "intune-windows-settings-catalog-device-security-administrator-protection-device",
-        "intune-windows-settings-catalog-device-security-audit-and-event-logging-device",
-        "intune-windows-settings-catalog-device-security-config-refresh-device",
-        "intune-windows-settings-catalog-device-security-device-guard-credential-guard-and-hvci-user",
-        "intune-windows-settings-catalog-device-security-enhanced-phishing-protection-device",
-        "intune-windows-settings-catalog-device-security-local-security-policies-24h2-device",
-        "intune-windows-settings-catalog-device-security-location-and-privacy-device",
-        "intune-windows-settings-catalog-device-security-login-and-lock-screen-device",
-        "intune-windows-settings-catalog-device-security-power-and-device-lock-user",
-        "intune-windows-settings-catalog-device-security-printing-device",
-        "intune-windows-settings-catalog-device-security-remote-desktop-services-and-rpc-device",
-        "intune-windows-settings-catalog-device-security-script-file-associations-device",
-        "intune-windows-settings-catalog-device-security-security-hardening-device",
-        "intune-windows-settings-catalog-device-security-timezone-device",
-        "intune-windows-settings-catalog-device-security-user-rights-device",
-        "intune-windows-settings-catalog-device-security-windows-package-manager-device",
-        "intune-windows-settings-catalog-device-security-windows-sandbox-user",
-        "intune-windows-settings-catalog-device-security-windows-spotlight-and-org-messages-user",
-        "intune-windows-settings-catalog-device-security-windows-subsystem-for-linux-device",
-        "intune-windows-settings-catalog-microsoft-accounts-configuration-device",
-        "intune-windows-settings-catalog-microsoft-edge-extensions-user",
-        "intune-windows-settings-catalog-microsoft-edge-password-management-user",
-        "intune-windows-settings-catalog-microsoft-edge-profiles-sign-in-and-sync-user",
-        "intune-windows-settings-catalog-microsoft-edge-security-device",
-        "intune-windows-settings-catalog-microsoft-edge-updates-device",
-        "intune-windows-settings-catalog-microsoft-edge-user-experience-user",
-        "intune-windows-settings-catalog-microsoft-office-config-and-experience-user",
-        "intune-windows-settings-catalog-microsoft-office-security-device",
-        "intune-windows-settings-catalog-microsoft-office-security-user",
-        "intune-windows-settings-catalog-microsoft-office-updates-device",
-        "intune-windows-settings-catalog-microsoft-onedrive-configuration-device",
-        "intune-windows-settings-catalog-microsoft-onedrive-configuration-user",
-        "intune-windows-settings-catalog-microsoft-store-configuration-device",
-        "intune-windows-settings-catalog-microsoft-store-configuration-user",
-        "intune-windows-settings-catalog-windows-apps-in-box-app-removal-device",
-        "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device",
-        "intune-windows-settings-catalog-windows-update-for-business-delivery-optimisation-device",
-        "intune-windows-settings-catalog-windows-update-for-business-reports-and-telemetry-device",
-        "intune-windows-settings-catalog-windows-user-experience-copilot-user",
-        "intune-windows-settings-catalog-windows-user-experience-feature-configuration-device",
-        "intune-windows-settings-catalog-windows-user-experience-settings-sync-device",
-        "intune-windows-update-ring-ring-3-production-device"
-      ],
-      "memberCount": 51
-    },
-    {
-      "id": "intune-win-ie-mode",
-      "name": "Windows - Internet Explorer Mode (legacy)",
-      "description": "Security settings for Internet Explorer mode in Microsoft Edge, for customers who still run legacy intranet sites.",
-      "path": [
-        "Intune",
-        "Windows",
-        "Browser",
-        "IE mode"
-      ],
-      "rule": null,
-      "include": [
-        "intune-windows-settings-catalog-internet-explorer-legacy-security-device"
-      ],
-      "exclude": [],
-      "order": 38,
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "members": [
-        "intune-windows-settings-catalog-internet-explorer-legacy-security-device"
-      ],
-      "memberCount": 1
-    },
-    {
-      "id": "intune-win-defender-av",
-      "name": "Windows - Defender for Endpoint",
-      "description": "Defender Antivirus, attack surface reduction, and firewall, built on the CIS Defender Antivirus v1.0.0 policies. Curated: one ASR policy and the production update ring only.",
-      "path": [
-        "Intune",
-        "Windows",
-        "Endpoint Security",
-        "Defender for Endpoint"
-      ],
-      "rule": null,
-      "include": [
-        "intune-windows-endpoint-security-cis-l1-attack-surface-reduction-asr-rules-device",
-        "intune-windows-endpoint-security-cis-l1-attack-surface-reduction-exploit-protection-device",
-        "intune-windows-endpoint-security-cis-l1-defender-antivirus-antivirus-configuration-device",
-        "intune-windows-endpoint-security-cis-l1-defender-antivirus-security-experience-device",
-        "intune-windows-endpoint-security-cis-l1-windows-firewall-firewall-configuration-device",
-        "intune-windows-settings-catalog-cis-l1-defender-antivirus-additional-configuration-device",
-        "intune-windows-settings-catalog-cis-l1-defender-antivirus-admx-configuration-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user"
-      ],
       "exclude": [],
       "order": 40,
-      "prerequisites": [
-        "Microsoft Defender for Endpoint connector enabled in Intune (Endpoint security > Microsoft Defender for Endpoint)",
-        "Create the EDR onboarding policy in Intune (Endpoint security > Endpoint detection and response > Auto from connector). Its onboarding package is tenant-specific, so it can't be deployed from a template"
-      ],
-      "licensing": [
-        "Defender for Endpoint P1/P2, Defender for Business, or Microsoft 365 E5, or E3 with the matching add-on"
-      ],
       "members": [
-        "intune-windows-compliance-policy-defender-for-endpoint-user",
+        "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-audit-mode-device",
+        "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-l2-device",
         "intune-windows-endpoint-security-cis-l1-attack-surface-reduction-asr-rules-device",
         "intune-windows-endpoint-security-cis-l1-attack-surface-reduction-exploit-protection-device",
         "intune-windows-endpoint-security-cis-l1-defender-antivirus-antivirus-configuration-device",
         "intune-windows-endpoint-security-cis-l1-defender-antivirus-security-experience-device",
-        "intune-windows-endpoint-security-cis-l1-windows-firewall-firewall-configuration-device",
+        "intune-windows-endpoint-security-defender-antivirus-updates-ring-1-pilot-device",
+        "intune-windows-endpoint-security-defender-antivirus-updates-ring-2-uat-device",
         "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
         "intune-windows-settings-catalog-cis-l1-defender-antivirus-additional-configuration-device",
-        "intune-windows-settings-catalog-cis-l1-defender-antivirus-admx-configuration-device"
+        "intune-windows-settings-catalog-cis-l1-defender-antivirus-admx-configuration-device",
+        "intune-windows-settings-catalog-cis-l2-defender-antivirus-additional-configuration-device",
+        "intune-windows-settings-catalog-cis-l2-defender-antivirus-admx-configuration-device",
+        "intune-windows-settings-catalog-defender-antivirus-additional-configuration-device"
       ],
-      "memberCount": 9
-    },
-    {
-      "id": "intune-win-update-management",
-      "name": "Windows - Update Management",
-      "description": "Windows Update for Business and Defender update rings (pilot, UAT, production) with Delivery Optimisation, update reporting and Microsoft 365 Apps / Edge update channels.",
-      "path": [
-        "Intune",
-        "Windows",
-        "Updates",
-        "Update rings"
-      ],
-      "rule": null,
-      "include": [
-        "intune-windows-update-ring-ring-1-pilot-device",
-        "intune-windows-update-ring-ring-2-uat-device",
-        "intune-windows-update-ring-ring-3-production-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-1-pilot-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-2-uat-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-        "intune-windows-settings-catalog-windows-update-for-business-delivery-optimisation-device",
-        "intune-windows-settings-catalog-windows-update-for-business-reports-and-telemetry-device",
-        "intune-windows-settings-catalog-microsoft-office-updates-device",
-        "intune-windows-settings-catalog-microsoft-edge-updates-device"
-      ],
-      "exclude": [],
-      "order": 50,
-      "allowConflicts": true,
-      "licensing": [
-        "Microsoft Intune",
-        "Windows Enterprise E3 or later for update reports"
-      ],
-      "notes": "The three rings are alternatives: assign Ring 1 to the pilot group, Ring 2 to UAT and Ring 3 to everyone else. Never assign two rings to the same device.",
-      "members": [
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-1-pilot-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-2-uat-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-        "intune-windows-settings-catalog-microsoft-edge-updates-device",
-        "intune-windows-settings-catalog-microsoft-office-updates-device",
-        "intune-windows-settings-catalog-windows-update-for-business-delivery-optimisation-device",
-        "intune-windows-settings-catalog-windows-update-for-business-reports-and-telemetry-device",
-        "intune-windows-update-ring-ring-1-pilot-device",
-        "intune-windows-update-ring-ring-2-uat-device",
-        "intune-windows-update-ring-ring-3-production-device"
-      ],
-      "memberCount": 10
+      "memberCount": 14
     },
     {
       "id": "intune-win-autopilot-mvp",
-      "name": "Windows - Autopilot",
-      "description": "Everything a new Windows device needs from Autopilot: deployment profile, enrolment status page, compliance, BitLocker, LAPS, local admin control, passwordless sign-in, antivirus and the production update rings.",
+      "name": "Windows - Autopilot Minimum Viable",
+      "description": "The smallest policy set required to stand up Windows Autopilot enrolment for a new customer. Curated by the practice, not derived. Review at each benchmark release.",
       "path": [
         "Intune",
         "Windows",
         "Deployment",
-        "Autopilot"
+        "Autopilot MVP"
       ],
       "rule": null,
       "include": [
-        "intune-user-driven-entra-preprov-cdw-baseline",
-        "intune-enrolment-restriction-esp-cdw-baseline-device",
-        "intune-windows-compliance-policy-cis-l1-device-health-and-security-user",
+        "intune-windows-settings-catalog-device-security-security-hardening-device",
         "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-bl-device",
-        "intune-windows-endpoint-security-cis-l1-windows-laps-laps-configuration-device",
-        "intune-windows-endpoint-security-cis-l1-local-group-membership-local-administrators-device",
         "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device",
-        "intune-windows-endpoint-security-cis-l1-defender-antivirus-antivirus-configuration-device",
-        "intune-windows-update-ring-ring-3-production-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device"
+        "intune-windows-endpoint-security-cis-l1-windows-laps-laps-configuration-device",
+        "intune-windows-endpoint-security-local-group-membership-local-administrators-device"
       ],
       "exclude": [],
-      "order": 60,
-      "prerequisites": [
-        "Devices registered with Windows Autopilot (hardware hash or OEM)",
-        "A device group for the Autopilot profile",
-        "Cloud Kerberos Trust needs the AzureADKerberos object in on-premises AD when users reach on-premises resources"
-      ],
-      "licensing": [
-        "Microsoft Intune",
-        "Microsoft Entra ID P1"
-      ],
-      "notes": "Uses the Entra join, pre-provisioned profile. Add the customer's required apps to the enrolment status page.",
+      "order": 45,
       "members": [
-        "intune-enrolment-restriction-esp-cdw-baseline-device",
-        "intune-user-driven-entra-preprov-cdw-baseline",
-        "intune-windows-compliance-policy-cis-l1-device-health-and-security-user",
-        "intune-windows-endpoint-security-cis-l1-defender-antivirus-antivirus-configuration-device",
         "intune-windows-endpoint-security-cis-l1-encryption-bitlocker-bl-device",
-        "intune-windows-endpoint-security-cis-l1-local-group-membership-local-administrators-device",
         "intune-windows-endpoint-security-cis-l1-windows-laps-laps-configuration-device",
-        "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-        "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device",
-        "intune-windows-update-ring-ring-3-production-device"
+        "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
+        "intune-windows-settings-catalog-device-security-security-hardening-device",
+        "intune-windows-settings-catalog-windows-hello-for-business-cloud-kerberos-trust-device"
       ],
-      "memberCount": 10
-    },
-    {
-      "id": "intune-win-compliance",
-      "name": "Windows - Compliance (CDW)",
-      "description": "CDW Windows compliance policies: device health, device security and password. Pair with the Conditional Access 'require managed device' policy.",
-      "path": [
-        "Intune",
-        "Windows",
-        "Compliance",
-        "CDW"
-      ],
-      "rule": null,
-      "include": [
-        "intune-windows-compliance-policy-device-health-user",
-        "intune-windows-compliance-policy-device-security-user",
-        "intune-windows-compliance-policy-password-user"
-      ],
-      "exclude": [],
-      "order": 70,
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "notes": "Also set 'Mark devices with no compliance policy assigned as' to Not compliant in Intune > Device compliance > Compliance settings.",
-      "members": [
-        "intune-windows-compliance-policy-device-health-user",
-        "intune-windows-compliance-policy-device-security-user",
-        "intune-windows-compliance-policy-password-user"
-      ],
-      "memberCount": 3
+      "memberCount": 5
     },
     {
       "id": "intune-macos-cdw-standard",
       "name": "macOS - CDW Standard Baseline",
-      "description": "The CDW-authored macOS baseline, including Platform SSO, Defender, FileVault and Microsoft 365 apps.",
+      "description": "The CDW-authored macOS baseline.",
       "path": [
         "Intune",
         "macOS",
@@ -9912,14 +9457,7 @@
       },
       "include": [],
       "exclude": [],
-      "order": 80,
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "knownConflicts": [
-        "com.apple.system-extension-policy_allowedsystemextensions_generickey"
-      ],
-      "notes": "Defender and OneDrive both allow Microsoft system extensions in separate profiles; check both are approved on a test Mac after deployment.",
+      "order": 50,
       "members": [
         "intune-macos-compliance-policy-device-health-user",
         "intune-macos-compliance-policy-device-security-user",
@@ -9945,57 +9483,27 @@
       "memberCount": 20
     },
     {
-      "id": "intune-macos-compliance",
-      "name": "macOS - Compliance (CDW)",
-      "description": "CDW macOS compliance policies: device health, device security and password.",
-      "path": [
-        "Intune",
-        "macOS",
-        "Compliance",
-        "CDW"
-      ],
-      "rule": null,
-      "include": [
-        "intune-macos-compliance-policy-device-health-user",
-        "intune-macos-compliance-policy-device-security-user",
-        "intune-macos-compliance-policy-password-user"
-      ],
-      "exclude": [],
-      "order": 85,
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "members": [
-        "intune-macos-compliance-policy-device-health-user",
-        "intune-macos-compliance-policy-device-security-user",
-        "intune-macos-compliance-policy-password-user"
-      ],
-      "memberCount": 3
-    },
-    {
       "id": "intune-mobile-byod",
-      "name": "Mobile - BYOD App Protection",
-      "description": "App protection for personal iOS and Android phones without enrolment, at Microsoft's Data Protection Framework Level 2, with personal device enrolment blocked.",
+      "name": "Mobile - BYOD Baseline",
+      "description": "iOS and Android app protection, restrictions and enrolment controls for BYOD.",
       "path": [
         "Intune",
         "Mobile",
-        "BYOD",
-        "App protection"
+        "BYOD"
       ],
-      "rule": null,
-      "include": [
-        "intune-android-app-protection-byod-app-protection-user",
-        "intune-ios-app-protection-byod-app-protection-user",
-        "intune-android-enrolment-restriction-block-personal-device",
-        "intune-ios-enrolment-restriction-block-personal-device"
+      "rule": {
+        "workload": "Intune",
+        "platform": [
+          "iOS",
+          "Android"
+        ]
+      },
+      "include": [],
+      "exclude": [
+        "intune-android-settings-catalog-restrictions-v1-0-test-device",
+        "intune-ios-settings-catalog-restrictions-v1-0-test-device"
       ],
-      "exclude": [],
-      "order": 90,
-      "licensing": [
-        "Microsoft Intune",
-        "Microsoft Entra ID P1 (for the Conditional Access policy)"
-      ],
-      "notes": "Users need Microsoft Authenticator (iOS) or Company Portal (Android) as the broker app.",
+      "order": 55,
       "members": [
         "intune-android-app-protection-byod-app-protection-user",
         "intune-android-enrolment-restriction-block-personal-device",
@@ -10005,480 +9513,178 @@
       "memberCount": 4
     },
     {
-      "id": "entra-ca-secure-foundation",
-      "name": "Entra - Secure Foundation",
-      "description": "Microsoft's Secure foundation Conditional Access set: MFA for all users, MFA for admin roles, block legacy authentication, MFA for Azure management, secure security info registration and block device code flow.",
+      "id": "entra-ca-endpoint-security",
+      "name": "Entra - CDW Endpoint Security",
+      "description": "Device-based Conditional Access: compliant device, hybrid join, app protection and platform conditions. Membership is derived from the policy body, not tagged.",
       "path": [
         "Entra",
         "Conditional Access",
-        "Foundation"
+        "CDW Endpoint Security"
       ],
-      "rule": null,
-      "include": [
-        "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa-user",
-        "entra-cross-platform-conditional-access-cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw013-global-baseprotection-azuremanagement-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow-user"
-      ],
+      "rule": {
+        "policyType": "Conditional Access",
+        "securityDomain": "Endpoint Security"
+      },
+      "include": [],
       "exclude": [],
-      "order": 100,
-      "prerequisites": [
-        "Two break-glass accounts, excluded from every policy",
-        "Named locations marked as trusted (for security info registration)",
-        "Check sign-in logs for device code flow use (Teams Rooms, CLI tools) before enabling CDW015"
-      ],
-      "licensing": [
-        "Microsoft Entra ID P1"
-      ],
-      "notes": "Policies deploy disabled. Move each to report-only, review the sign-in logs, then enable.",
+      "order": 60,
       "members": [
-        "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa-user",
-        "entra-cross-platform-conditional-access-cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw013-global-baseprotection-azuremanagement-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow-user"
+        "entra-cross-platform-conditional-access-cdw016-global-baseprotection-allapps-anyplatform-compliantorhybridormfa-user",
+        "entra-cross-platform-conditional-access-cdw017-global-dataandappprotection-allapps-iosorandroid-appprotection-user",
+        "entra-cross-platform-conditional-access-cdw100-admins-baseprotection-allapps-anyplatform-compliantandphishingresistantmfa-user",
+        "entra-cross-platform-conditional-access-cdw1000-developers-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
+        "entra-cross-platform-conditional-access-cdw1002-developers-baseprotection-allapps-anyplatform-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw1006-developers-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
+        "entra-cross-platform-conditional-access-cdw101-admins-identityprotection-allapps-anyplatform-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-appprotection-user",
+        "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-clientappandapp-user",
+        "entra-cross-platform-conditional-access-cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
+        "entra-cross-platform-conditional-access-cdw200-internals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
+        "entra-cross-platform-conditional-access-cdw201-internals-identityprotection-allapps-anyplatform-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw206-internals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
+        "entra-cross-platform-conditional-access-cdw207-internals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
+        "entra-cross-platform-conditional-access-cdw300-externals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
+        "entra-cross-platform-conditional-access-cdw301-externals-identityprotection-allapps-anyplatform-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw306-externals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
+        "entra-cross-platform-conditional-access-cdw307-externals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user"
       ],
-      "memberCount": 6
+      "memberCount": 18
     },
     {
-      "id": "entra-ca-risk",
-      "name": "Entra - Risk-Based Access",
-      "description": "Identity Protection policies: MFA for medium and high sign-in risk, and MFA plus password change for high user risk.",
+      "id": "entra-ca-identity-security",
+      "name": "Entra - CDW Identity Security",
+      "description": "User-focused Conditional Access: MFA, risk-based controls, legacy authentication and authentication strength. Membership is derived from the policy body, not tagged.",
       "path": [
         "Entra",
         "Conditional Access",
-        "Risk"
+        "CDW Identity Security"
       ],
-      "rule": null,
-      "include": [
-        "entra-cross-platform-conditional-access-cdw018-global-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user"
-      ],
+      "rule": {
+        "policyType": "Conditional Access",
+        "securityDomain": "Identity Security"
+      },
+      "include": [],
       "exclude": [],
-      "order": 110,
-      "prerequisites": [
-        "Self-service password reset and password writeback (for hybrid users)"
-      ],
-      "licensing": [
-        "Microsoft Entra ID P2"
-      ],
+      "order": 61,
       "members": [
+        "entra-cross-platform-conditional-access-cdw001-global-baseprotection-allapps-anyplatform-blocknonpersonas-user",
+        "entra-cross-platform-conditional-access-cdw001-require-multifactor-authentication-for-admins-user",
+        "entra-cross-platform-conditional-access-cdw002-global-attacksurfacereduction-variousapps-anyplatform-block-user",
+        "entra-cross-platform-conditional-access-cdw002-require-password-change-for-high-risk-users-user",
+        "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user",
+        "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
+        "entra-cross-platform-conditional-access-cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa-user",
+        "entra-cross-platform-conditional-access-cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw013-global-baseprotection-azuremanagement-anyplatform-mfa-user",
+        "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
+        "entra-cross-platform-conditional-access-cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow-user",
         "entra-cross-platform-conditional-access-cdw018-global-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user"
+        "entra-cross-platform-conditional-access-cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
+        "entra-cross-platform-conditional-access-cdw1001-developers-baseprotection-allapps-anyplatform-mfafromunmanageddevices-user",
+        "entra-cross-platform-conditional-access-cdw1003-developers-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
+        "entra-cross-platform-conditional-access-cdw1004-developers-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw1005-developers-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw1007-developers-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
+        "entra-cross-platform-conditional-access-cdw102-admins-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
+        "entra-cross-platform-conditional-access-cdw103-admins-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw104-admins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw107-admins-dataprotection-allapps-anyplatform-sessionpolicy-user",
+        "entra-cross-platform-conditional-access-cdw202-internals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
+        "entra-cross-platform-conditional-access-cdw203-internals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw204-internals-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw302-externals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
+        "entra-cross-platform-conditional-access-cdw303-externals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw304-externals-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw400-guests-baseprotection-allapps-anyplatform-mfa-user",
+        "entra-cross-platform-conditional-access-cdw401-guests-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw402-guests-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw403-guests-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw404-guests-attacksurfacereduction-allapps-anyplatform-blocknonguestappaccess-user",
+        "entra-cross-platform-conditional-access-cdw405-guests-complianceprotection-allapps-anyplatform-requiretou-user",
+        "entra-cross-platform-conditional-access-cdw406-guests-dataprotection-allapps-anyplatform-signinsessionpolicy-user",
+        "entra-cross-platform-conditional-access-cdw500-guestadmins-baseprotection-allapps-anyplatform-mfa-user",
+        "entra-cross-platform-conditional-access-cdw501-guestadmins-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
+        "entra-cross-platform-conditional-access-cdw502-guestadmins-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw503-guestadmins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw504-guestadmins-attacksurfacereduction-allapps-anyplatform-blocknonguestadminsappaccess-user",
+        "entra-cross-platform-conditional-access-cdw505-guestadmins-complianceprotection-allapps-anyplatform-requiretou-user",
+        "entra-cross-platform-conditional-access-cdw506-guestadmins-dataprotection-allapps-anyplatform-signinsessionpolicy-user",
+        "entra-cross-platform-conditional-access-cdw600-microsoft365serviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
+        "entra-cross-platform-conditional-access-cdw601-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw602-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
+        "entra-cross-platform-conditional-access-cdw603-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw604-microsoft365serviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
+        "entra-cross-platform-conditional-access-cdw700-azureserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
+        "entra-cross-platform-conditional-access-cdw701-azureserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw702-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
+        "entra-cross-platform-conditional-access-cdw703-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw704-azureserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
+        "entra-cross-platform-conditional-access-cdw800-corpserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
+        "entra-cross-platform-conditional-access-cdw801-corpserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
+        "entra-cross-platform-conditional-access-cdw802-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
+        "entra-cross-platform-conditional-access-cdw803-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
+        "entra-cross-platform-conditional-access-cdw804-corpserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365andazure-user",
+        "entra-cross-platform-conditional-access-cdw900-workloadidentities-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
+        "entra-cross-platform-conditional-access-cdw901-workloadidentities-baseprotection-allapps-anyplatform-blockhighrisk-user"
       ],
-      "memberCount": 2
+      "memberCount": 59
+    },
+    {
+      "id": "entra-ca-cis-l1",
+      "name": "Entra - Conditional Access CIS L1",
+      "description": "Conditional Access policies mapped to CIS Level 1. Requires the 'cis-l1' tag on the policy sidecar.",
+      "path": [
+        "Entra",
+        "Conditional Access",
+        "CIS L1"
+      ],
+      "rule": {
+        "policyType": "Conditional Access",
+        "frameworks": "CIS L1"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 62,
+      "members": [],
+      "memberCount": 0
+    },
+    {
+      "id": "entra-ca-cis-l2",
+      "name": "Entra - Conditional Access CIS L2",
+      "description": "Conditional Access policies mapped to CIS Level 2. Requires the 'cis-l2' tag on the policy sidecar.",
+      "path": [
+        "Entra",
+        "Conditional Access",
+        "CIS L2"
+      ],
+      "rule": {
+        "policyType": "Conditional Access",
+        "frameworks": "CIS L2"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 63,
+      "members": [],
+      "memberCount": 0
     },
     {
       "id": "entra-ca-zero-trust",
       "name": "Entra - Zero Trust Framework",
-      "description": "Microsoft's Zero Trust Conditional Access template set: the Secure foundation plus risk-based access, managed or MFA-verified devices and app protection on mobile.",
+      "description": "Conditional Access policies forming the Zero Trust reference architecture. Requires the 'zero-trust' tag on the policy sidecar.",
       "path": [
         "Entra",
         "Conditional Access",
         "Zero Trust"
       ],
-      "rule": null,
-      "include": [
-        "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa-user",
-        "entra-cross-platform-conditional-access-cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw013-global-baseprotection-azuremanagement-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow-user",
-        "entra-cross-platform-conditional-access-cdw016-global-baseprotection-allapps-anyplatform-compliantorhybridormfa-user",
-        "entra-cross-platform-conditional-access-cdw017-global-dataandappprotection-allapps-iosorandroid-appprotection-user",
-        "entra-cross-platform-conditional-access-cdw018-global-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user"
-      ],
+      "rule": {
+        "policyType": "Conditional Access",
+        "frameworks": "Zero Trust"
+      },
+      "include": [],
       "exclude": [],
-      "order": 120,
-      "prerequisites": [
-        "Two break-glass accounts, excluded from every policy",
-        "Device compliance policies assigned before CDW016 is enabled",
-        "App protection policies assigned before CDW017 is enabled"
-      ],
-      "licensing": [
-        "Microsoft Entra ID P2",
-        "Microsoft Intune"
-      ],
-      "members": [
-        "entra-cross-platform-conditional-access-cdw010-global-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw011-global-identityprotection-allapps-anyplatform-adminrolesmfa-user",
-        "entra-cross-platform-conditional-access-cdw012-global-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw013-global-baseprotection-azuremanagement-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw014-global-identityprotection-registersecurityinfo-anyplatform-mfaoutsidetrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw015-global-attacksurfacereduction-allapps-anyplatform-blockdevicecodeflow-user",
-        "entra-cross-platform-conditional-access-cdw016-global-baseprotection-allapps-anyplatform-compliantorhybridormfa-user",
-        "entra-cross-platform-conditional-access-cdw017-global-dataandappprotection-allapps-iosorandroid-appprotection-user",
-        "entra-cross-platform-conditional-access-cdw018-global-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw019-global-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user"
-      ],
-      "memberCount": 10
-    },
-    {
-      "id": "entra-ca-require-managed",
-      "name": "Entra - Require Managed Devices",
-      "description": "Requires a compliant or hybrid-joined device, or MFA, for every sign-in.",
-      "path": [
-        "Entra",
-        "Conditional Access",
-        "Devices"
-      ],
-      "rule": null,
-      "include": [
-        "entra-cross-platform-conditional-access-cdw016-global-baseprotection-allapps-anyplatform-compliantorhybridormfa-user"
-      ],
-      "exclude": [],
-      "order": 130,
-      "licensing": [
-        "Microsoft Entra ID P1",
-        "Microsoft Intune"
-      ],
-      "members": [
-        "entra-cross-platform-conditional-access-cdw016-global-baseprotection-allapps-anyplatform-compliantorhybridormfa-user"
-      ],
-      "memberCount": 1
-    },
-    {
-      "id": "entra-ca-mobile-app-protection",
-      "name": "Entra - Require App Protection on Mobile",
-      "description": "Requires an app protection policy for access from iOS and Android.",
-      "path": [
-        "Entra",
-        "Conditional Access",
-        "Mobile"
-      ],
-      "rule": null,
-      "include": [
-        "entra-cross-platform-conditional-access-cdw017-global-dataandappprotection-allapps-iosorandroid-appprotection-user"
-      ],
-      "exclude": [],
-      "order": 140,
-      "licensing": [
-        "Microsoft Entra ID P1",
-        "Microsoft Intune"
-      ],
-      "members": [
-        "entra-cross-platform-conditional-access-cdw017-global-dataandappprotection-allapps-iosorandroid-appprotection-user"
-      ],
-      "memberCount": 1
-    },
-    {
-      "id": "entra-ca-privileged-access",
-      "name": "Entra - Privileged Access",
-      "description": "Admin persona Conditional Access: compliant device plus phishing-resistant MFA, risk-based controls, legacy authentication block, session limits and unknown-platform block.",
-      "path": [
-        "Entra",
-        "Conditional Access",
-        "Personas",
-        "Admins"
-      ],
-      "rule": null,
-      "include": [
-        "entra-cross-platform-conditional-access-cdw100-admins-baseprotection-allapps-anyplatform-compliantandphishingresistantmfa-user",
-        "entra-cross-platform-conditional-access-cdw101-admins-identityprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw102-admins-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw103-admins-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw104-admins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-appprotection-user",
-        "entra-cross-platform-conditional-access-cdw107-admins-dataprotection-allapps-anyplatform-sessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user"
-      ],
-      "exclude": [],
-      "order": 150,
-      "prerequisites": [
-        "A CA-Persona-Admins group (assign it to each policy)",
-        "Admins registered for a phishing-resistant method: passkey/FIDO2, Windows Hello for Business or certificate"
-      ],
-      "licensing": [
-        "Microsoft Entra ID P2",
-        "Microsoft Intune"
-      ],
-      "members": [
-        "entra-cross-platform-conditional-access-cdw100-admins-baseprotection-allapps-anyplatform-compliantandphishingresistantmfa-user",
-        "entra-cross-platform-conditional-access-cdw101-admins-identityprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw102-admins-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw103-admins-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw104-admins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-appprotection-user",
-        "entra-cross-platform-conditional-access-cdw107-admins-dataprotection-allapps-anyplatform-sessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user"
-      ],
-      "memberCount": 8
-    },
-    {
-      "id": "entra-ca-persona-framework",
-      "name": "Entra - Persona Framework (all personas)",
-      "description": "The full persona-based Conditional Access framework: Global, Admins, Internals, Externals, Developers, Guests, Guest admins, service accounts and workload identities.",
-      "path": [
-        "Entra",
-        "Conditional Access",
-        "Personas",
-        "All"
-      ],
-      "rule": null,
-      "include": [
-        "entra-cross-platform-conditional-access-cdw001-global-baseprotection-allapps-anyplatform-blocknonpersonas-user",
-        "entra-cross-platform-conditional-access-cdw002-global-attacksurfacereduction-variousapps-anyplatform-block-user",
-        "entra-cross-platform-conditional-access-cdw100-admins-baseprotection-allapps-anyplatform-compliantandphishingresistantmfa-user",
-        "entra-cross-platform-conditional-access-cdw1000-developers-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
-        "entra-cross-platform-conditional-access-cdw1001-developers-baseprotection-allapps-anyplatform-mfafromunmanageddevices-user",
-        "entra-cross-platform-conditional-access-cdw1002-developers-baseprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw1003-developers-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw1004-developers-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw1005-developers-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw1006-developers-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
-        "entra-cross-platform-conditional-access-cdw1007-developers-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw101-admins-identityprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw102-admins-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw103-admins-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw104-admins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-appprotection-user",
-        "entra-cross-platform-conditional-access-cdw107-admins-dataprotection-allapps-anyplatform-sessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw200-internals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
-        "entra-cross-platform-conditional-access-cdw201-internals-identityprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw202-internals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw203-internals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw204-internals-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw206-internals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
-        "entra-cross-platform-conditional-access-cdw207-internals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw300-externals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
-        "entra-cross-platform-conditional-access-cdw301-externals-identityprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw302-externals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw303-externals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw304-externals-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw306-externals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
-        "entra-cross-platform-conditional-access-cdw307-externals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw400-guests-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw401-guests-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw402-guests-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw403-guests-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw404-guests-attacksurfacereduction-allapps-anyplatform-blocknonguestappaccess-user",
-        "entra-cross-platform-conditional-access-cdw405-guests-complianceprotection-allapps-anyplatform-requiretou-user",
-        "entra-cross-platform-conditional-access-cdw406-guests-dataprotection-allapps-anyplatform-signinsessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw500-guestadmins-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw501-guestadmins-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw502-guestadmins-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw503-guestadmins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw504-guestadmins-attacksurfacereduction-allapps-anyplatform-blocknonguestadminsappaccess-user",
-        "entra-cross-platform-conditional-access-cdw505-guestadmins-complianceprotection-allapps-anyplatform-requiretou-user",
-        "entra-cross-platform-conditional-access-cdw506-guestadmins-dataprotection-allapps-anyplatform-signinsessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw600-microsoft365serviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw601-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw602-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw603-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw604-microsoft365serviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
-        "entra-cross-platform-conditional-access-cdw700-azureserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw701-azureserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw702-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw703-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw704-azureserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
-        "entra-cross-platform-conditional-access-cdw800-corpserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw801-corpserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw802-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw803-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw804-corpserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365andazure-user",
-        "entra-cross-platform-conditional-access-cdw900-workloadidentities-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw901-workloadidentities-baseprotection-allapps-anyplatform-blockhighrisk-user"
-      ],
-      "exclude": [],
-      "order": 160,
-      "prerequisites": [
-        "One security group per persona, assigned to that persona's policies (policies deploy targeting no users)",
-        "Break-glass accounts excluded from every policy",
-        "Named locations for service accounts",
-        "Terms of Use objects for CDW401/405/501/505 (the grant is added per tenant)"
-      ],
-      "licensing": [
-        "Microsoft Entra ID P2",
-        "Microsoft Intune",
-        "Workload Identities Premium for CDW900/901"
-      ],
-      "members": [
-        "entra-cross-platform-conditional-access-cdw001-global-baseprotection-allapps-anyplatform-blocknonpersonas-user",
-        "entra-cross-platform-conditional-access-cdw002-global-attacksurfacereduction-variousapps-anyplatform-block-user",
-        "entra-cross-platform-conditional-access-cdw100-admins-baseprotection-allapps-anyplatform-compliantandphishingresistantmfa-user",
-        "entra-cross-platform-conditional-access-cdw1000-developers-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
-        "entra-cross-platform-conditional-access-cdw1001-developers-baseprotection-allapps-anyplatform-mfafromunmanageddevices-user",
-        "entra-cross-platform-conditional-access-cdw1002-developers-baseprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw1003-developers-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw1004-developers-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw1005-developers-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw1006-developers-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
-        "entra-cross-platform-conditional-access-cdw1007-developers-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw101-admins-identityprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw102-admins-identityprotection-allapps-anyplatform-mfaandpwdformediumandhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw103-admins-identityprotection-allapps-anyplatform-mfaformediumandhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw104-admins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-appprotection-user",
-        "entra-cross-platform-conditional-access-cdw107-admins-dataprotection-allapps-anyplatform-sessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw108-admins-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw200-internals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
-        "entra-cross-platform-conditional-access-cdw201-internals-identityprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw202-internals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw203-internals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw204-internals-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw206-internals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
-        "entra-cross-platform-conditional-access-cdw207-internals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw300-externals-baseprotection-allapps-anyplatform-compliantorhybridjoined-user",
-        "entra-cross-platform-conditional-access-cdw301-externals-identityprotection-allapps-anyplatform-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw302-externals-identityprotection-allapps-anyplatform-mfaandpwdforhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw303-externals-identityprotection-allapps-anyplatform-mfaforhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw304-externals-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw306-externals-dataandappprotection-allapps-iosorandroid-clientapporapp-user",
-        "entra-cross-platform-conditional-access-cdw307-externals-attacksurfacereduction-allapps-anyplatform-blockunknownplatforms-user",
-        "entra-cross-platform-conditional-access-cdw400-guests-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw401-guests-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw402-guests-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw403-guests-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw404-guests-attacksurfacereduction-allapps-anyplatform-blocknonguestappaccess-user",
-        "entra-cross-platform-conditional-access-cdw405-guests-complianceprotection-allapps-anyplatform-requiretou-user",
-        "entra-cross-platform-conditional-access-cdw406-guests-dataprotection-allapps-anyplatform-signinsessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw500-guestadmins-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw501-guestadmins-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw502-guestadmins-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw503-guestadmins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw504-guestadmins-attacksurfacereduction-allapps-anyplatform-blocknonguestadminsappaccess-user",
-        "entra-cross-platform-conditional-access-cdw505-guestadmins-complianceprotection-allapps-anyplatform-requiretou-user",
-        "entra-cross-platform-conditional-access-cdw506-guestadmins-dataprotection-allapps-anyplatform-signinsessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw600-microsoft365serviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw601-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw602-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw603-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw604-microsoft365serviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
-        "entra-cross-platform-conditional-access-cdw700-azureserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw701-azureserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw702-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw703-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw704-azureserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
-        "entra-cross-platform-conditional-access-cdw800-corpserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw801-corpserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw802-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw803-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw804-corpserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365andazure-user",
-        "entra-cross-platform-conditional-access-cdw900-workloadidentities-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw901-workloadidentities-baseprotection-allapps-anyplatform-blockhighrisk-user"
-      ],
-      "memberCount": 63
-    },
-    {
-      "id": "entra-ca-guests",
-      "name": "Entra - Guests and External Collaboration",
-      "description": "Guest and guest-admin personas: MFA, Terms of Use, risk, legacy authentication block, app scoping and session limits.",
-      "path": [
-        "Entra",
-        "Conditional Access",
-        "Personas",
-        "Guests"
-      ],
-      "rule": null,
-      "include": [
-        "entra-cross-platform-conditional-access-cdw400-guests-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw401-guests-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw402-guests-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw403-guests-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw404-guests-attacksurfacereduction-allapps-anyplatform-blocknonguestappaccess-user",
-        "entra-cross-platform-conditional-access-cdw405-guests-complianceprotection-allapps-anyplatform-requiretou-user",
-        "entra-cross-platform-conditional-access-cdw406-guests-dataprotection-allapps-anyplatform-signinsessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw500-guestadmins-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw501-guestadmins-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw502-guestadmins-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw503-guestadmins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw504-guestadmins-attacksurfacereduction-allapps-anyplatform-blocknonguestadminsappaccess-user",
-        "entra-cross-platform-conditional-access-cdw505-guestadmins-complianceprotection-allapps-anyplatform-requiretou-user",
-        "entra-cross-platform-conditional-access-cdw506-guestadmins-dataprotection-allapps-anyplatform-signinsessionpolicy-user"
-      ],
-      "exclude": [],
-      "order": 170,
-      "prerequisites": [
-        "Terms of Use objects for CDW401/405/501/505 (the grant is added per tenant)",
-        "Cross-tenant access settings reviewed"
-      ],
-      "licensing": [
-        "Microsoft Entra ID P2"
-      ],
-      "members": [
-        "entra-cross-platform-conditional-access-cdw400-guests-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw401-guests-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw402-guests-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw403-guests-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw404-guests-attacksurfacereduction-allapps-anyplatform-blocknonguestappaccess-user",
-        "entra-cross-platform-conditional-access-cdw405-guests-complianceprotection-allapps-anyplatform-requiretou-user",
-        "entra-cross-platform-conditional-access-cdw406-guests-dataprotection-allapps-anyplatform-signinsessionpolicy-user",
-        "entra-cross-platform-conditional-access-cdw500-guestadmins-baseprotection-allapps-anyplatform-mfa-user",
-        "entra-cross-platform-conditional-access-cdw501-guestadmins-identityprotection-allapps-anyplatform-tou-combinedregistration-user",
-        "entra-cross-platform-conditional-access-cdw502-guestadmins-identityprotection-allapps-anyplatform-mfaformediumandhighuserandsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw503-guestadmins-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw504-guestadmins-attacksurfacereduction-allapps-anyplatform-blocknonguestadminsappaccess-user",
-        "entra-cross-platform-conditional-access-cdw505-guestadmins-complianceprotection-allapps-anyplatform-requiretou-user",
-        "entra-cross-platform-conditional-access-cdw506-guestadmins-dataprotection-allapps-anyplatform-signinsessionpolicy-user"
-      ],
-      "memberCount": 14
-    },
-    {
-      "id": "entra-ca-service-accounts",
-      "name": "Entra - Service Accounts and Workload Identities",
-      "description": "Microsoft 365, Azure and on-premises service account personas and workload identity policies: trusted locations only, risk blocks and app scoping.",
-      "path": [
-        "Entra",
-        "Conditional Access",
-        "Personas",
-        "Service accounts"
-      ],
-      "rule": null,
-      "include": [
-        "entra-cross-platform-conditional-access-cdw600-microsoft365serviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw601-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw602-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw603-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw604-microsoft365serviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
-        "entra-cross-platform-conditional-access-cdw700-azureserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw701-azureserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw702-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw703-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw704-azureserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
-        "entra-cross-platform-conditional-access-cdw800-corpserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw801-corpserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw802-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw803-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw804-corpserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365andazure-user",
-        "entra-cross-platform-conditional-access-cdw900-workloadidentities-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw901-workloadidentities-baseprotection-allapps-anyplatform-blockhighrisk-user"
-      ],
-      "exclude": [],
-      "order": 180,
-      "prerequisites": [
-        "One group per service account persona",
-        "Named locations for each service's source IPs"
-      ],
-      "licensing": [
-        "Microsoft Entra ID P2",
-        "Workload Identities Premium for CDW900/901"
-      ],
-      "members": [
-        "entra-cross-platform-conditional-access-cdw600-microsoft365serviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw601-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw602-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw603-microsoft365serviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw604-microsoft365serviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
-        "entra-cross-platform-conditional-access-cdw700-azureserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw701-azureserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw702-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw703-azureserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw704-azureserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365-user",
-        "entra-cross-platform-conditional-access-cdw800-corpserviceaccounts-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw801-corpserviceaccounts-identityprotection-allapps-anyplatform-blocklegacyauth-user",
-        "entra-cross-platform-conditional-access-cdw802-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighuserrisk-user",
-        "entra-cross-platform-conditional-access-cdw803-corpserviceaccounts-identityprotection-allapps-anyplatform-blockhighsigninrisk-user",
-        "entra-cross-platform-conditional-access-cdw804-corpserviceaccounts-attacksurfacereduction-o365-anyplatform-blocknono365andazure-user",
-        "entra-cross-platform-conditional-access-cdw900-workloadidentities-baseprotection-allapps-anyplatform-blockuntrustedlocations-user",
-        "entra-cross-platform-conditional-access-cdw901-workloadidentities-baseprotection-allapps-anyplatform-blockhighrisk-user"
-      ],
-      "memberCount": 17
+      "order": 64,
+      "members": [],
+      "memberCount": 0
     },
     {
       "id": "entra-tenant-config",
@@ -10498,10 +9704,7 @@
       },
       "include": [],
       "exclude": [],
-      "order": 190,
-      "licensing": [
-        "Microsoft Entra ID P1"
-      ],
+      "order": 70,
       "members": [
         "entra-cross-platform-directory-setting-group-unified-tenant",
         "entra-cross-platform-directory-setting-password-rule-settings-tenant",
@@ -10512,271 +9715,30 @@
         "entra-cross-platform-tenant-policy-device-registration-policy-tenant"
       ],
       "memberCount": 7
-    }
-  ],
-  "conflicts": [
-    {
-      "a": "intune-macos-settings-catalog-defender-antivirus-mde-configuration-device",
-      "b": "intune-macos-settings-catalog-microsoft-onedrive-service-and-access-device",
-      "settings": 1,
-      "settingIds": [
-        "com.apple.system-extension-policy_allowedsystemextensions_generickey"
-      ]
     },
     {
-      "a": "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-audit-mode-device",
-      "b": "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-l2-device",
-      "settings": 16,
-      "settingIds": [
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockabuseofexploitedvulnerablesigneddrivers",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockadobereaderfromcreatingchildprocesses",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockallofficeapplicationsfromcreatingchildprocesses",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockcredentialstealingfromwindowslocalsecurityauthoritysubsystem",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablecontentfromemailclientandwebmail",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutionofpotentiallyobfuscatedscripts",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockjavascriptorvbscriptfromlaunchingdownloadedexecutablecontent",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfromcreatingexecutablecontent",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfrominjectingcodeintootherprocesses",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficecommunicationappfromcreatingchildprocesses",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockpersistencethroughwmieventsubscription",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockprocesscreationsfrompsexecandwmicommands",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuntrustedunsignedprocessesthatrunfromusb",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuseofcopiedorimpersonatedsystemtools",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockwin32apicallsfromofficemacros",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_useadvancedprotectionagainstransomware"
-      ]
-    },
-    {
-      "a": "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-audit-mode-device",
-      "b": "intune-windows-endpoint-security-cis-l1-attack-surface-reduction-asr-rules-device",
-      "settings": 16,
-      "settingIds": [
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockabuseofexploitedvulnerablesigneddrivers",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockadobereaderfromcreatingchildprocesses",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockallofficeapplicationsfromcreatingchildprocesses",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockcredentialstealingfromwindowslocalsecurityauthoritysubsystem",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablecontentfromemailclientandwebmail",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablefilesrunningunlesstheymeetprevalenceagetrustedlistcriterion",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockjavascriptorvbscriptfromlaunchingdownloadedexecutablecontent",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfromcreatingexecutablecontent",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfrominjectingcodeintootherprocesses",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficecommunicationappfromcreatingchildprocesses",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockpersistencethroughwmieventsubscription",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockprocesscreationsfrompsexecandwmicommands",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockrebootingmachineinsafemode",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuntrustedunsignedprocessesthatrunfromusb",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuseofcopiedorimpersonatedsystemtools",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockwin32apicallsfromofficemacros"
-      ]
-    },
-    {
-      "a": "intune-windows-endpoint-security-attack-surface-reduction-asr-rules-l2-device",
-      "b": "intune-windows-endpoint-security-cis-l1-attack-surface-reduction-asr-rules-device",
-      "settings": 6,
-      "settingIds": [
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablefilesrunningunlesstheymeetprevalenceagetrustedlistcriterion",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutionofpotentiallyobfuscatedscripts",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficecommunicationappfromcreatingchildprocesses",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockprocesscreationsfrompsexecandwmicommands",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockrebootingmachineinsafemode",
-        "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_useadvancedprotectionagainstransomware"
-      ]
-    },
-    {
-      "a": "intune-windows-endpoint-security-defender-antivirus-updates-ring-1-pilot-device",
-      "b": "intune-windows-endpoint-security-defender-antivirus-updates-ring-2-uat-device",
-      "settings": 3,
-      "settingIds": [
-        "device_vendor_msft_defender_configuration_engineupdateschannel",
-        "device_vendor_msft_defender_configuration_platformupdateschannel",
-        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
-      ]
-    },
-    {
-      "a": "intune-windows-endpoint-security-defender-antivirus-updates-ring-1-pilot-device",
-      "b": "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-      "settings": 3,
-      "settingIds": [
-        "device_vendor_msft_defender_configuration_engineupdateschannel",
-        "device_vendor_msft_defender_configuration_platformupdateschannel",
-        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
-      ]
-    },
-    {
-      "a": "intune-windows-endpoint-security-defender-antivirus-updates-ring-2-uat-device",
-      "b": "intune-windows-endpoint-security-defender-antivirus-updates-ring-3-production-device",
-      "settings": 3,
-      "settingIds": [
-        "device_vendor_msft_defender_configuration_engineupdateschannel",
-        "device_vendor_msft_defender_configuration_platformupdateschannel",
-        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-device-security-audit-and-event-logging-device",
-      "b": "intune-windows-settings-catalog-device-security-audit-and-event-logging-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-device-security-device-guard-credential-guard-and-hvci-device",
-      "b": "intune-windows-settings-catalog-device-security-device-guard-credential-guard-and-hvci-user",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_deviceguard_requireplatformsecurityfeatures"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-device-security-local-security-policies-device",
-      "b": "intune-windows-settings-catalog-device-security-local-security-policies-24h2-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforstandardusers"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-device-security-local-security-policies-device",
-      "b": "intune-windows-settings-catalog-device-security-local-security-policies-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforstandardusers"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-device-security-security-hardening-device",
-      "b": "intune-windows-settings-catalog-device-security-login-and-lock-screen-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_windowslogon_allowautomaticrestartsignon"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-device-security-security-hardening-device",
-      "b": "intune-windows-settings-catalog-device-security-security-hardening-device",
-      "settings": 4,
-      "settingIds": [
-        "device_vendor_msft_policy_config_lanmanserver_minsmb2dialect",
-        "device_vendor_msft_policy_config_lanmanworkstation_minsmb2dialect",
-        "device_vendor_msft_policy_config_lanmanworkstation_requireencryption",
-        "device_vendor_msft_policy_config_wirelessdisplay_requirepinforpairing"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-device-security-user-rights-device",
-      "b": "intune-windows-settings-catalog-device-security-user-rights-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_userrights_generatesecurityaudits"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-device-security-windows-sandbox-device",
-      "b": "intune-windows-settings-catalog-device-security-windows-sandbox-user",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_windowssandbox_allowclipboardredirection"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-microsoft-edge-password-management-user",
-      "b": "intune-windows-settings-catalog-microsoft-edge-password-management-user",
-      "settings": 1,
-      "settingIds": [
-        "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~passwordmanager_passwordmanagerenabled"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-microsoft-edge-profiles-sign-in-and-sync-user",
-      "b": "intune-windows-settings-catalog-microsoft-edge-profiles-sign-in-and-sync-user",
-      "settings": 1,
-      "settingIds": [
-        "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_autoimportatfirstrun"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-microsoft-edge-security-device",
-      "b": "intune-windows-settings-catalog-microsoft-edge-security-device",
-      "settings": 4,
-      "settingIds": [
-        "device_vendor_msft_policy_config_microsoft_edgeupdates.2~policy~microsoft_edge_downloadrestrictions_downloadrestrictions",
-        "device_vendor_msft_policy_config_microsoft_edgev128~policy~microsoft_edge_dynamiccodesettings_dynamiccodesettings",
-        "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_configureshare",
-        "device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~experimentation_featureflagoverridescontrol"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-microsoft-edge-updates-device",
-      "b": "intune-windows-settings-catalog-microsoft-edge-updates-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotificationperiod_relaunchnotificationperiod"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-microsoft-store-configuration-device",
-      "b": "intune-windows-settings-catalog-microsoft-store-configuration-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_applicationmanagement_blocknonadminuserinstall"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l1-windows-update-for-business-reports-and-telemetry-device",
-      "b": "intune-windows-settings-catalog-windows-update-for-business-reports-and-telemetry-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_system_allowtelemetry"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l2-device-security-location-and-privacy-device",
-      "b": "intune-windows-settings-catalog-device-security-location-and-privacy-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_system_allowlocation"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l2-microsoft-edge-profiles-sign-in-and-sync-user",
-      "b": "intune-windows-settings-catalog-microsoft-edge-profiles-sign-in-and-sync-user",
-      "settings": 1,
-      "settingIds": [
-        "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_browsersignin_browsersignin"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l2-microsoft-edge-security-device",
-      "b": "intune-windows-settings-catalog-microsoft-edge-security-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~httpauthentication_authschemes_authschemes"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l2-windows-user-experience-feature-configuration-device",
-      "b": "intune-windows-settings-catalog-windows-user-experience-feature-configuration-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_search_allowcloudsearch"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-cis-l2-windows-user-experience-feature-configuration-user",
-      "b": "intune-windows-settings-catalog-device-security-windows-spotlight-and-org-messages-user",
-      "settings": 1,
-      "settingIds": [
-        "user_vendor_msft_policy_config_experience_allowwindowsspotlight"
-      ]
-    },
-    {
-      "a": "intune-windows-settings-catalog-device-security-local-security-policies-24h2-device",
-      "b": "intune-windows-settings-catalog-device-security-local-security-policies-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_enableadministratoraccountstatus"
-      ]
+      "id": "entra-ca-core-starter",
+      "name": "Entra - Core Conditional Access Starter",
+      "description": "The three-policy minimum for a new tenant: admin MFA, risk-based password change, legacy authentication block.",
+      "path": [
+        "Entra",
+        "Conditional Access",
+        "Core Starter"
+      ],
+      "rule": null,
+      "include": [
+        "entra-cross-platform-conditional-access-cdw001-require-multifactor-authentication-for-admins-user",
+        "entra-cross-platform-conditional-access-cdw002-require-password-change-for-high-risk-users-user",
+        "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user"
+      ],
+      "exclude": [],
+      "order": 59,
+      "members": [
+        "entra-cross-platform-conditional-access-cdw001-require-multifactor-authentication-for-admins-user",
+        "entra-cross-platform-conditional-access-cdw002-require-password-change-for-high-risk-users-user",
+        "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user"
+      ],
+      "memberCount": 3
     }
   ],
   "issues": [
@@ -12275,38 +11237,38 @@
       "detail": "No enrichment authored"
     },
     {
-      "policyId": "entra-cross-platform-conditional-access-cdw001-require-multifactor-authentication-for-admins-user",
-      "path": "EntraConfig/ConditionalAccess/CDW001__Require_multifactor_authentication_for_admins.json",
+      "policyId": null,
+      "path": null,
+      "type": "emptyBundle",
+      "detail": "Bundle 'entra-ca-cis-l1' matched no policies"
+    },
+    {
+      "policyId": null,
+      "path": null,
+      "type": "emptyBundle",
+      "detail": "Bundle 'entra-ca-cis-l2' matched no policies"
+    },
+    {
+      "policyId": null,
+      "path": null,
+      "type": "emptyBundle",
+      "detail": "Bundle 'entra-ca-zero-trust' matched no policies"
+    },
+    {
+      "policyId": "intune-user-driven-entra-preprov-cdw-baseline",
+      "path": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
       "type": "orphan",
       "detail": "Policy is in no bundle"
     },
     {
-      "policyId": "entra-cross-platform-conditional-access-cdw002-require-password-change-for-high-risk-users-user",
-      "path": "EntraConfig/ConditionalAccess/CDW002__Require_password_change_for_high-risk_users.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "entra-cross-platform-conditional-access-cdw003-block-legacy-authentication-user",
-      "path": "EntraConfig/ConditionalAccess/CDW003__Block_Legacy_Authentication.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "entra-cross-platform-conditional-access-cdw106-admins-dataandappprotection-allapps-iosorandroid-clientappandapp-user",
-      "path": "EntraConfig/ConditionalAccess/CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-ClientAppandAPP.json",
+      "policyId": "intune-enrolment-restriction-esp-cdw-baseline-device",
+      "path": "IntuneConfig/EnrolmentStatusPage/ESP_CDW_Baseline.json",
       "type": "orphan",
       "detail": "Policy is in no bundle"
     },
     {
       "policyId": "intune-android-settings-catalog-restrictions-v1-0-test-device",
       "path": "IntuneConfig/SettingsCatalog/Android_-_CDW_Baseline_-_SC_-_Restrictions_-_D_-_v1_0__TEST_.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "intune-windows-settings-catalog-device-security-local-security-policies-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Device_Security_-_D_-_Local_Security_Policies_-_v3_0.json",
       "type": "orphan",
       "detail": "Policy is in no bundle"
     },

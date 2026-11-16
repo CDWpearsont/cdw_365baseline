@@ -1,6 +1,7 @@
 {
   "displayName": "CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow",
   "state": "disabled",
+  "deletedDateTime": null,
   "sessionControls": null,
   "conditions": {
     "userRiskLevels": [],
@@ -43,6 +44,7 @@
     ],
     "customAuthenticationFactors": [],
     "termsOfUse": [],
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies('ceb3401f-36f4-4e91-9a77-4cae9f9aeb42')/grantControls/authenticationStrength/$entity",
     "authenticationStrength": null
   }
 }
