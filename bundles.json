@@ -73,7 +73,11 @@
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
         "intune-windows-compliance-policy-defender-for-endpoint-user",
         "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
+        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device",
+        "intune-windows-settings-catalog-copilot-readiness-recall-device",
+        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
+        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user"
       ],
       "order": 30,
       "licensing": [
@@ -107,7 +111,11 @@
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
         "intune-windows-compliance-policy-defender-for-endpoint-user",
         "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
+        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device",
+        "intune-windows-settings-catalog-copilot-readiness-recall-device",
+        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
+        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user"
       ],
       "order": 35,
       "licensing": [
@@ -729,6 +737,62 @@
         "Elevation rules for the customer's line-of-business apps, written from the elevation report after a few weeks of reporting"
       ],
       "notes": "Not validated in the CDW reference tenant: the developer tenant can't hold Endpoint Privilege Management licences. Test with a pilot group first."
+    },
+    {
+      "id": "intune-win-shared-devices",
+      "name": "Windows - Shared and frontline devices",
+      "description": "Shared PC mode for hot desks, frontline and shift workers: one Entra user at a time, automatic profile clean-up, OneDrive sync, sign-in on wake, fast first sign-in and web sign-in.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Shared Devices",
+        "Shared PC"
+      ],
+      "rule": null,
+      "include": [
+        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device"
+      ],
+      "exclude": [],
+      "order": 210,
+      "licensing": [
+        "Microsoft Intune",
+        "Windows 11 Pro, Enterprise or Education"
+      ],
+      "prerequisites": [
+        "A device group containing only the shared devices: assign this policy to devices, never to users",
+        "Devices Entra joined (Autopilot recommended); Shared PC mode applies at the next sign-out",
+        "Temporary Access Pass enabled if frontline users sign in with web sign-in"
+      ],
+      "notes": "Shared iPads (Apple Business Manager + automated device enrolment) and Android shared device mode (dedicated device enrolment profile with Entra shared mode) are set up per tenant in Intune and are not in the library."
+    },
+    {
+      "id": "intune-win-copilot-readiness",
+      "name": "Windows - Copilot readiness",
+      "description": "Windows and Edge settings for Microsoft 365 Copilot: the Copilot key opens the work Copilot app, Copilot Chat is available in Edge with page context for work profiles, agentic browsing stays off and Recall stays off until assessed.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Copilot",
+        "Readiness"
+      ],
+      "rule": null,
+      "include": [
+        "intune-windows-settings-catalog-copilot-readiness-recall-device",
+        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
+        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user"
+      ],
+      "exclude": [],
+      "order": 220,
+      "licensing": [
+        "Microsoft Intune",
+        "Microsoft 365 Copilot Chat is included for Entra ID users; Microsoft 365 Copilot licences for in-app Copilot and work grounding"
+      ],
+      "prerequisites": [
+        "Microsoft 365 Copilot app deployed (it installs with Microsoft 365 Apps)",
+        "Windows 11 24H2 or later for the Copilot key and Recall settings",
+        "Before licensing Microsoft 365 Copilot: review SharePoint oversharing (site access reviews, sensitivity labels). Restricted SharePoint Search and Purview DLP for Copilot will follow in the PowerShell-based building blocks"
+      ],
+      "notes": "The CDW standard \"Turn off Windows Copilot\" user policy only affects the retired Copilot sidebar and doesn't block the Microsoft 365 Copilot app; Microsoft is deprecating it. Remove it from customers adopting Copilot."
     }
   ],
   "goals": [
@@ -1061,6 +1125,40 @@
           "note": "Users justify and re-authenticate",
           "bundles": [
             "intune-win-epm-user"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frontline",
+      "tower": "Intune",
+      "icon": "device",
+      "title": "Set up shared and frontline devices",
+      "outcome": "Shared Windows devices for hot desks and shift workers: one user at a time, profiles cleaned up automatically, quick first sign-in.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "Shared PC mode",
+          "bundles": [
+            "intune-win-shared-devices"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "copilot-ready",
+      "tower": "Intune",
+      "icon": "rocket",
+      "title": "Prepare devices for Microsoft 365 Copilot",
+      "outcome": "Users reach work Copilot from the Copilot key and Edge, with agentic features and Recall held back until assessed.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "Windows and Edge",
+          "bundles": [
+            "intune-win-copilot-readiness"
           ]
         }
       ]
