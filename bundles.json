@@ -278,7 +278,8 @@
       ],
       "rule": {
         "workload": "Intune",
-        "platform": "macOS"
+        "platform": "macOS",
+        "framework": null
       },
       "include": [],
       "exclude": [],
@@ -793,6 +794,90 @@
         "Before licensing Microsoft 365 Copilot: review SharePoint oversharing (site access reviews, sensitivity labels). Restricted SharePoint Search and Purview DLP for Copilot will follow in the PowerShell-based building blocks"
       ],
       "notes": "The CDW standard \"Turn off Windows Copilot\" user policy only affects the retired Copilot sidebar and doesn't block the Microsoft 365 Copilot app; Microsoft is deprecating it. Remove it from customers adopting Copilot."
+    },
+    {
+      "id": "intune-macos-cis-l1",
+      "name": "macOS - CIS Level 1",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1: FileVault, firewall, restrictions, passcode, software updates, power and login window, Apple Intelligence and Siri. Gatekeeper is a separate block so Level 2 can replace it.",
+      "path": [
+        "Intune",
+        "macOS",
+        "Security Baselines",
+        "CIS L1"
+      ],
+      "rule": {
+        "workload": "Intune",
+        "platform": "macOS",
+        "frameworks": "CIS L1"
+      },
+      "include": [],
+      "exclude": [
+        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
+      ],
+      "order": 40,
+      "notes": "Not applied (organisation-specific or disruptive): 2.5.1.1 Activation Lock, 2.7.1 profile removal password (absent is compliant), 2.9.1.7 passcode regex, 2.9.1.13 change password at next auth, 2.11.3.1 system extension overrides (default already off), 2.13.1 profile removal (set on the ADE enrolment profile). Blocking iCloud Drive, AirDrop and Handoff changes how users work: brief the customer before deploying. Full mapping: docs/CIS-macOS-26.md.",
+      "licensing": [
+        "Microsoft Intune"
+      ],
+      "prerequisites": [
+        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
+        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
+        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
+      ]
+    },
+    {
+      "id": "intune-macos-cis-l1-gatekeeper",
+      "name": "macOS - CIS Level 1 Gatekeeper",
+      "description": "Gatekeeper for App Store and identified developer apps, without user override. Replaced by the Level 2 App Store-only policy.",
+      "path": [
+        "Intune",
+        "macOS",
+        "Security Baselines",
+        "CIS L1",
+        "Gatekeeper"
+      ],
+      "rule": null,
+      "include": [
+        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
+      ],
+      "exclude": [],
+      "order": 41,
+      "licensing": [
+        "Microsoft Intune"
+      ],
+      "prerequisites": [
+        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
+        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
+        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
+      ]
+    },
+    {
+      "id": "intune-macos-cis-l2",
+      "name": "macOS - CIS Level 2",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2 additions: App Store-only Gatekeeper and software updates, no content caching, Game Center or password AutoFill, complex passwords. Use with Level 1.",
+      "path": [
+        "Intune",
+        "macOS",
+        "Security Baselines",
+        "CIS L2"
+      ],
+      "rule": {
+        "workload": "Intune",
+        "platform": "macOS",
+        "frameworks": "CIS L2"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 42,
+      "notes": "Not applied: 2.8.29 Touch ID for unlock (set to the customer's policy). App Store-only Gatekeeper means every non-App Store app must be deployed through Intune.",
+      "licensing": [
+        "Microsoft Intune"
+      ],
+      "prerequisites": [
+        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
+        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
+        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
+      ]
     }
   ],
   "goals": [
@@ -826,6 +911,24 @@
           "note": "CDW standard",
           "bundles": [
             "intune-macos-cdw-standard"
+          ]
+        },
+        {
+          "platform": "macOS",
+          "label": "macOS (CIS)",
+          "note": "CIS Level 1",
+          "bundles": [
+            "intune-macos-cis-l1",
+            "intune-macos-cis-l1-gatekeeper"
+          ]
+        },
+        {
+          "platform": "macOS",
+          "label": "macOS (CIS strict)",
+          "note": "CIS Level 1 + Level 2",
+          "bundles": [
+            "intune-macos-cis-l1",
+            "intune-macos-cis-l2"
           ]
         }
       ]

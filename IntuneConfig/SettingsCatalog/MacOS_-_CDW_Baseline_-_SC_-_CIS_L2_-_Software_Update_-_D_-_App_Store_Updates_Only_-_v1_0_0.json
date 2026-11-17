@@ -1,0 +1,48 @@
+{
+  "name": "MacOS - CDW Baseline - SC - CIS L2 - Software Update - D - App Store Updates Only - v1.0.0",
+  "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2, 2.2.1 and 2.6.1.1: software updates only from the App Store (required for the Level 2 Gatekeeper policy) and content caching does not turn itself on.",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.appstore_com.apple.appstore",
+        "groupSettingCollectionValue": [
+          {
+            "children": [
+              {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.appstore_restrict-store-softwareupdate-only",
+                "choiceSettingValue": {
+                  "value": "com.apple.appstore_restrict-store-softwareupdate-only_true",
+                  "children": []
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "contentcaching_contentcaching",
+        "groupSettingCollectionValue": [
+          {
+            "children": [
+              {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "contentcaching_autoactivation",
+                "choiceSettingValue": {
+                  "value": "contentcaching_autoactivation_false",
+                  "children": []
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

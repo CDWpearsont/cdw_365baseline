@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T13:30:52+00:00",
+  "generatedAt": "2026-11-17T13:46:42+00:00",
   "sourceCommit": null,
   "counts": {
-    "policies": 248,
-    "bundles": 26,
-    "issues": 258,
+    "policies": 260,
+    "bundles": 29,
+    "issues": 270,
     "byConfidence": {
       "medium": 114,
       "low": 3,
-      "high": 131
+      "high": 143
     }
   },
   "taxonomy": {
@@ -51,6 +51,7 @@
     ],
     "areas": [
       "Admin Consent Request Policy",
+      "Apple Intelligence and Siri",
       "Attack Surface Reduction",
       "Authentication",
       "Authorization Policy",
@@ -145,6 +146,7 @@
       "Encryption",
       "Endpoint Privilege Management",
       "Firewall",
+      "Gatekeeper",
       "Group Unified",
       "Internet Explorer Legacy",
       "Local Group Membership",
@@ -154,6 +156,7 @@
       "Microsoft Office",
       "Microsoft OneDrive",
       "Microsoft Store",
+      "Passcode",
       "Password",
       "Password Rule Settings",
       "Restrictions",
@@ -162,6 +165,8 @@
       "Ring 3",
       "Share Point Tenant Settings",
       "Shared Devices",
+      "Software Update",
+      "System Configuration",
       "Updates",
       "User Driven Entra PreProv CDW Baseline",
       "Windows Apps",
@@ -235,6 +240,24 @@
           "note": "CDW standard",
           "bundles": [
             "intune-macos-cdw-standard"
+          ]
+        },
+        {
+          "platform": "macOS",
+          "label": "macOS (CIS)",
+          "note": "CIS Level 1",
+          "bundles": [
+            "intune-macos-cis-l1",
+            "intune-macos-cis-l1-gatekeeper"
+          ]
+        },
+        {
+          "platform": "macOS",
+          "label": "macOS (CIS strict)",
+          "note": "CIS Level 1 + Level 2",
+          "bundles": [
+            "intune-macos-cis-l1",
+            "intune-macos-cis-l2"
           ]
         }
       ]
@@ -5289,6 +5312,462 @@
       ]
     },
     {
+      "id": "intune-macos-settings-catalog-cis-l1-apple-intelligence-and-siri-apple-intelligence-and-siri-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Apple_Intelligence_and_Siri_-_D_-_Apple_Intelligence_and_Siri_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Apple_Intelligence_and_Siri_-_D_-_Apple_Intelligence_and_Siri_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Apple Intelligence and Siri - D - Apple Intelligence and Siri - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Apple Intelligence and Siri",
+      "subArea": "Apple Intelligence and Siri",
+      "securityDomain": null,
+      "settingCount": 20,
+      "policyHash": "sha256:33d156f05e91791a66bcfe81aa3ae39ed6b0f0cd691cb6fcc292a71fc6ff9f4c",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l1-disk-encryption-filevault-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Disk_Encryption_-_D_-_FileVault_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Disk_Encryption_-_D_-_FileVault_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Disk Encryption - D - FileVault - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Disk Encryption",
+      "subArea": "FileVault",
+      "securityDomain": null,
+      "settingCount": 12,
+      "policyHash": "sha256:b3631ae6a7d7f11124b92635ec30fa5d531192a9db70d1f8024a6dc09350c0fa",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l1-firewall-firewall-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Firewall_-_D_-_Firewall_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Firewall_-_D_-_Firewall_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Firewall - D - Firewall - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Firewall",
+      "subArea": "Firewall",
+      "securityDomain": null,
+      "settingCount": 3,
+      "policyHash": "sha256:bcc795cfc47152ceb9a289c6fc7f47f10f0a12bf7c2cf146725fecbbb1557e94",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Gatekeeper_-_D_-_App_Store_and_Identified_Developers_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Gatekeeper_-_D_-_App_Store_and_Identified_Developers_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Gatekeeper - D - App Store and Identified Developers - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Gatekeeper",
+      "subArea": "App Store and Identified Developers",
+      "securityDomain": null,
+      "settingCount": 6,
+      "policyHash": "sha256:122e6df7f6346e20ea0317dd77bf6a56cebbec8f6b4364f1f52fc8cf45c05f24",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l1-gatekeeper"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l1-passcode-local-account-password-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Passcode_-_D_-_Local_Account_Password_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Passcode_-_D_-_Local_Account_Password_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Passcode - D - Local Account Password - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Passcode",
+      "subArea": "Local Account Password",
+      "securityDomain": null,
+      "settingCount": 10,
+      "policyHash": "sha256:ca3adfa50984e6ca04968a3255b7392e29cd29f5b8bdf7a46a404ffc0fc67450",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l1-restrictions-sharing-icloud-and-continuity-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Restrictions_-_D_-_Sharing__iCloud_and_Continuity_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Restrictions_-_D_-_Sharing__iCloud_and_Continuity_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Restrictions - D - Sharing, iCloud and Continuity - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Restrictions",
+      "subArea": "Sharing iCloud and Continuity",
+      "securityDomain": null,
+      "settingCount": 36,
+      "policyHash": "sha256:52dd3847088186c114fade90c5bfb768d99fddbd37365098239df600b1fe5749",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l1-software-update-automatic-and-enforced-updates-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Software_Update_-_D_-_Automatic_and_Enforced_Updates_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Software_Update_-_D_-_Automatic_and_Enforced_Updates_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Software Update - D - Automatic and Enforced Updates - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Software Update",
+      "subArea": "Automatic and Enforced Updates",
+      "securityDomain": null,
+      "settingCount": 13,
+      "policyHash": "sha256:12c8ce5ce4f86b2bb5886706bffe256abfe5064d35bf5109e1c204361b547548",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l1-system-configuration-power-screen-saver-and-login-window-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_System_Configuration_-_D_-_Power__Screen_Saver_and_Login_Window_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_System_Configuration_-_D_-_Power__Screen_Saver_and_Login_Window_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - System Configuration - D - Power, Screen Saver and Login Window - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L1",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "System Configuration",
+      "subArea": "Power Screen Saver and Login Window",
+      "securityDomain": null,
+      "settingCount": 27,
+      "policyHash": "sha256:623671fbbde28473ca7daa26ee88ae107bb2c51a460da3d52aafec82ee59ac2c",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l1"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Gatekeeper_-_D_-_App_Store_Only_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Gatekeeper_-_D_-_App_Store_Only_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Gatekeeper - D - App Store Only - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Gatekeeper",
+      "subArea": "App Store Only",
+      "securityDomain": null,
+      "settingCount": 6,
+      "policyHash": "sha256:86551a14951740e7dfabcf62481b84ee58bc6c03c98ba373c8ca6dcf4d3ee4bf",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l2-passcode-complex-password-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Passcode_-_D_-_Complex_Password_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Passcode_-_D_-_Complex_Password_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Passcode - D - Complex Password - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Passcode",
+      "subArea": "Complex Password",
+      "securityDomain": null,
+      "settingCount": 3,
+      "policyHash": "sha256:86b7276177b4e9b26e4edf56e4da41bb0c4f2c08da14474e5fea00a403c83e5c",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l2-restrictions-game-center-content-caching-and-autofill-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Restrictions_-_D_-_Game_Center__Content_Caching_and_AutoFill_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Restrictions_-_D_-_Game_Center__Content_Caching_and_AutoFill_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Restrictions - D - Game Center, Content Caching and AutoFill - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Restrictions",
+      "subArea": "Game Center Content Caching and AutoFill",
+      "securityDomain": null,
+      "settingCount": 4,
+      "policyHash": "sha256:5504a61a7befa297f4936ac60f89554122a29abf417e7ac3610358ec999d94a7",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l2"
+      ]
+    },
+    {
+      "id": "intune-macos-settings-catalog-cis-l2-software-update-app-store-updates-only-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Software_Update_-_D_-_App_Store_Updates_Only_-_v1_0_0.json",
+      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Software_Update_-_D_-_App_Store_Updates_Only_-_v1_0_0.json",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Software Update - D - App Store Updates Only - v1.0.0",
+      "workload": "Intune",
+      "platform": "macOS",
+      "policyType": "Settings Catalog",
+      "framework": "CIS L2",
+      "scope": "Device",
+      "version": "1.0.0",
+      "area": "Software Update",
+      "subArea": "App Store Updates Only",
+      "securityDomain": null,
+      "settingCount": 4,
+      "policyHash": "sha256:dd73005d59bb744e890b6c3afbc9d1aceb8b440f8e5467476a97a0c48009ed2f",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "framework": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L2"
+      ],
+      "notes": null,
+      "bundles": [
+        "intune-macos-cis-l2"
+      ]
+    },
+    {
       "id": "intune-macos-settings-catalog-updates-update-configuration-device",
       "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Updates_-_D_-_Update_Configuration_-_v1_0.json",
       "fileName": "MacOS_-_CDW_Baseline_-_Updates_-_D_-_Update_Configuration_-_v1_0.json",
@@ -10097,7 +10576,8 @@
       ],
       "rule": {
         "workload": "Intune",
-        "platform": "macOS"
+        "platform": "macOS",
+        "framework": null
       },
       "include": [],
       "exclude": [],
@@ -10825,9 +11305,130 @@
         "intune-windows-settings-catalog-copilot-readiness-recall-device"
       ],
       "memberCount": 3
+    },
+    {
+      "id": "intune-macos-cis-l1",
+      "name": "macOS - CIS Level 1",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1: FileVault, firewall, restrictions, passcode, software updates, power and login window, Apple Intelligence and Siri. Gatekeeper is a separate block so Level 2 can replace it.",
+      "path": [
+        "Intune",
+        "macOS",
+        "Security Baselines",
+        "CIS L1"
+      ],
+      "rule": {
+        "workload": "Intune",
+        "platform": "macOS",
+        "frameworks": "CIS L1"
+      },
+      "include": [],
+      "exclude": [
+        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
+      ],
+      "order": 40,
+      "notes": "Not applied (organisation-specific or disruptive): 2.5.1.1 Activation Lock, 2.7.1 profile removal password (absent is compliant), 2.9.1.7 passcode regex, 2.9.1.13 change password at next auth, 2.11.3.1 system extension overrides (default already off), 2.13.1 profile removal (set on the ADE enrolment profile). Blocking iCloud Drive, AirDrop and Handoff changes how users work: brief the customer before deploying. Full mapping: docs/CIS-macOS-26.md.",
+      "licensing": [
+        "Microsoft Intune"
+      ],
+      "prerequisites": [
+        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
+        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
+        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
+      ],
+      "members": [
+        "intune-macos-settings-catalog-cis-l1-apple-intelligence-and-siri-apple-intelligence-and-siri-device",
+        "intune-macos-settings-catalog-cis-l1-disk-encryption-filevault-device",
+        "intune-macos-settings-catalog-cis-l1-firewall-firewall-device",
+        "intune-macos-settings-catalog-cis-l1-passcode-local-account-password-device",
+        "intune-macos-settings-catalog-cis-l1-restrictions-sharing-icloud-and-continuity-device",
+        "intune-macos-settings-catalog-cis-l1-software-update-automatic-and-enforced-updates-device",
+        "intune-macos-settings-catalog-cis-l1-system-configuration-power-screen-saver-and-login-window-device"
+      ],
+      "memberCount": 7
+    },
+    {
+      "id": "intune-macos-cis-l1-gatekeeper",
+      "name": "macOS - CIS Level 1 Gatekeeper",
+      "description": "Gatekeeper for App Store and identified developer apps, without user override. Replaced by the Level 2 App Store-only policy.",
+      "path": [
+        "Intune",
+        "macOS",
+        "Security Baselines",
+        "CIS L1",
+        "Gatekeeper"
+      ],
+      "rule": null,
+      "include": [
+        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
+      ],
+      "exclude": [],
+      "order": 41,
+      "licensing": [
+        "Microsoft Intune"
+      ],
+      "prerequisites": [
+        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
+        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
+        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
+      ],
+      "members": [
+        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
+      ],
+      "memberCount": 1
+    },
+    {
+      "id": "intune-macos-cis-l2",
+      "name": "macOS - CIS Level 2",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2 additions: App Store-only Gatekeeper and software updates, no content caching, Game Center or password AutoFill, complex passwords. Use with Level 1.",
+      "path": [
+        "Intune",
+        "macOS",
+        "Security Baselines",
+        "CIS L2"
+      ],
+      "rule": {
+        "workload": "Intune",
+        "platform": "macOS",
+        "frameworks": "CIS L2"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 42,
+      "notes": "Not applied: 2.8.29 Touch ID for unlock (set to the customer's policy). App Store-only Gatekeeper means every non-App Store app must be deployed through Intune.",
+      "licensing": [
+        "Microsoft Intune"
+      ],
+      "prerequisites": [
+        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
+        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
+        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
+      ],
+      "members": [
+        "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
+        "intune-macos-settings-catalog-cis-l2-passcode-complex-password-device",
+        "intune-macos-settings-catalog-cis-l2-restrictions-game-center-content-caching-and-autofill-device",
+        "intune-macos-settings-catalog-cis-l2-software-update-app-store-updates-only-device"
+      ],
+      "memberCount": 4
     }
   ],
   "conflicts": [
+    {
+      "a": "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device",
+      "b": "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
+      "settings": 1,
+      "settingIds": [
+        "com.apple.systempolicy.control_allowidentifieddevelopers"
+      ]
+    },
+    {
+      "a": "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
+      "b": "intune-macos-settings-catalog-firewall-gatekeeper-device",
+      "settings": 1,
+      "settingIds": [
+        "com.apple.systempolicy.control_allowidentifieddevelopers"
+      ]
+    },
     {
       "a": "intune-macos-settings-catalog-defender-antivirus-mde-configuration-device",
       "b": "intune-macos-settings-catalog-microsoft-onedrive-service-and-access-device",
@@ -11914,6 +12515,78 @@
     {
       "policyId": "intune-macos-settings-catalog-microsoft-onedrive-known-folder-move-user",
       "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_OneDrive_-_U_-_Known_Folder_Move_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l1-apple-intelligence-and-siri-apple-intelligence-and-siri-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Apple_Intelligence_and_Siri_-_D_-_Apple_Intelligence_and_Siri_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l1-disk-encryption-filevault-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Disk_Encryption_-_D_-_FileVault_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l1-firewall-firewall-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Firewall_-_D_-_Firewall_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Gatekeeper_-_D_-_App_Store_and_Identified_Developers_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l1-passcode-local-account-password-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Passcode_-_D_-_Local_Account_Password_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l1-restrictions-sharing-icloud-and-continuity-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Restrictions_-_D_-_Sharing__iCloud_and_Continuity_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l1-software-update-automatic-and-enforced-updates-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Software_Update_-_D_-_Automatic_and_Enforced_Updates_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l1-system-configuration-power-screen-saver-and-login-window-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_System_Configuration_-_D_-_Power__Screen_Saver_and_Login_Window_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Gatekeeper_-_D_-_App_Store_Only_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l2-passcode-complex-password-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Passcode_-_D_-_Complex_Password_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l2-restrictions-game-center-content-caching-and-autofill-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Restrictions_-_D_-_Game_Center__Content_Caching_and_AutoFill_-_v1_0_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-macos-settings-catalog-cis-l2-software-update-app-store-updates-only-device",
+      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Software_Update_-_D_-_App_Store_Updates_Only_-_v1_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },

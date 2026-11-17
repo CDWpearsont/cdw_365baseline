@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-17T13:30:53Z",
-  "count": 250,
+  "generated": "2026-11-17T13:46:42Z",
+  "count": 262,
   "enrichedCount": 2,
   "entries": [
     {
@@ -2202,6 +2202,246 @@
       "scope": "user",
       "version": "1.0",
       "settingCount": 15,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l1-apple-intelligence-and-siri-d-apple-intelligence-and-siri",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Apple_Intelligence_and_Siri_-_D_-_Apple_Intelligence_and_Siri_-_v1_0_0.json",
+      "sha": "33d156f05e91791a",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Apple Intelligence and Siri - D - Apple Intelligence and Siri - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L1 - Apple Intelligence and Siri - D - Apple Intelligence and Siri",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1, 2.14 (Declarative Device Management): Siri off; ChatGPT and other external intelligence integrations off; Writing Tools, Image Playground, Genmoji, Apple Intelligence reports and Mail, Notes and Safari summaries off; dictation on-device only.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l1-disk-encryption-d-filevault",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Disk_Encryption_-_D_-_FileVault_-_v1_0_0.json",
+      "sha": "b3631ae6a7d7f111",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Disk Encryption - D - FileVault - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L1 - Disk Encryption - D - FileVault",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1, 2.3: FileVault enabled in Setup Assistant (or deferred to the first logout with no bypass), recovery key hidden from the user and escrowed to Intune, FileVault cannot be turned off. Adds the Intune escrow location and 6-monthly key rotation, which Intune needs to manage the key.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 3,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l1-firewall-d-firewall",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Firewall_-_D_-_Firewall_-_v1_0_0.json",
+      "sha": "bcc795cfc47152ce",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Firewall - D - Firewall - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L1 - Firewall - D - Firewall",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1, 2.6.2: application firewall on, stealth mode on.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l1-gatekeeper-d-app-store-and-identified-developers",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Gatekeeper_-_D_-_App_Store_and_Identified_Developers_-_v1_0_0.json",
+      "sha": "122e6df7f6346e20",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Gatekeeper - D - App Store and Identified Developers - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L1 - Gatekeeper - D - App Store and Identified Developers",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1, 2.12.1.1, 2.12.1.2 and 2.12.2.1: Gatekeeper on for apps from the App Store and identified developers, users cannot override it, XProtect malware upload off. The Level 2 Gatekeeper policy replaces this one.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l1-passcode-d-local-account-password",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Passcode_-_D_-_Local_Account_Password_-_v1_0_0.json",
+      "sha": "ca3adfa50984e6ca",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Passcode - D - Local Account Password - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L1 - Passcode - D - Local Account Password",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1, 2.9.1 (Declarative Device Management): password required, 15 characters minimum, alphanumeric, changed at least every 365 days, last 24 not reused, lock after 15 minutes idle with no grace period, 5 failed attempts then a 15-minute lockout. Not applied: 2.9.1.7 Regex (organisation-specific word list) and 2.9.1.13 Change At Next Auth (forces every user to change their password at once). Applies to local account passwords; Platform SSO with Secure Enclave keys is unaffected.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l1-restrictions-d-sharing-icloud-and-continuity",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Restrictions_-_D_-_Sharing__iCloud_and_Continuity_-_v1_0_0.json",
+      "sha": "52dd3847088186c1",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Restrictions - D - Sharing, iCloud and Continuity - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L1 - Restrictions - D - Sharing, iCloud and Continuity",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1, 2.8: blocks iCloud sync (Drive, Desktop and Documents, Photos, Mail, Calendar, Contacts, Notes, Reminders, Bookmarks, Freeform, Keychain), AirDrop, AirPlay receiving, Handoff, Universal Control, iPhone Mirroring, Auto Unlock, sharing changes, local user creation, erase-all, profile installation by users and diagnostics submission. Needs supervised (ADE-enrolled) Macs.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l1-software-update-d-automatic-and-enforced-updates",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Software_Update_-_D_-_Automatic_and_Enforced_Updates_-_v1_0_0.json",
+      "sha": "12c8ce5ce4f86b2b",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Software Update - D - Automatic and Enforced Updates - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L1 - Software Update - D - Automatic and Enforced Updates",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1, 2.10 (Declarative Device Management): updates download and install automatically, Background Security Improvements on without rollback, standard users can install OS updates, and the latest macOS is enforced 7 days after release at 12:00 local time (devices restart at the deadline).",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l1-system-configuration-d-power-screen-saver-and-login-window",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_System_Configuration_-_D_-_Power__Screen_Saver_and_Login_Window_-_v1_0_0.json",
+      "sha": "623671fbbde28473",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - System Configuration - D - Power, Screen Saver and Login Window - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L1 - System Configuration - D - Power, Screen Saver and Login Window",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1, 2.1.1.1, 2.4 and 2.11.1-2.11.2: guest account off, login window shows name and password fields, login items notifications shown; display sleeps after 10 minutes and the Mac after 15 on every power source, no wake on LAN or modem ring, FileVault key destroyed on standby; screen saver asks for the password immediately. Not applied: 2.11.3.1 (system extension user overrides, already off by default), because a second system extension payload can clash with the Defender for Endpoint profile.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l1",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 5,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l2-gatekeeper-d-app-store-only",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Gatekeeper_-_D_-_App_Store_Only_-_v1_0_0.json",
+      "sha": "86551a14951740e7",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Gatekeeper - D - App Store Only - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L2 - Gatekeeper - D - App Store Only",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2, 2.12.1.3 (with 2.12.1.1 and 2.12.2.1): Gatekeeper only allows App Store apps; users cannot override it, XProtect malware upload off. Use instead of the Level 1 Gatekeeper policy. Apps from identified developers must be deployed by Intune.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 2,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l2-passcode-d-complex-password",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Passcode_-_D_-_Complex_Password_-_v1_0_0.json",
+      "sha": "86b7276177b4e9b2",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Passcode - D - Complex Password - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L2 - Passcode - D - Complex Password",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2, 2.9.1.4 and 2.9.1.9 (Declarative Device Management): complex password with at least one special character. Use with the Level 1 passcode policy.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l2-restrictions-d-game-center-content-caching-and-autofill",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Restrictions_-_D_-_Game_Center__Content_Caching_and_AutoFill_-_v1_0_0.json",
+      "sha": "5504a61a7befa297",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Restrictions - D - Game Center, Content Caching and AutoFill - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L2 - Restrictions - D - Game Center, Content Caching and AutoFill",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2, 2.8.14, 2.8.20 and 2.8.23: blocks Game Center, content caching and password AutoFill. Needs supervised Macs.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 1,
+      "deployVia": "graph",
+      "isDraft": false
+    },
+    {
+      "id": "intune.settingscatalog.macos-cdw-baseline-sc-cis-l2-software-update-d-app-store-updates-only",
+      "file": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Software_Update_-_D_-_App_Store_Updates_Only_-_v1_0_0.json",
+      "sha": "dd73005d59bb744e",
+      "workload": "intune",
+      "category": "SettingsCatalog",
+      "objectType": "configurationPolicy",
+      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Software Update - D - App Store Updates Only - v1.0.0",
+      "baseName": "MacOS - CDW Baseline - SC - CIS L2 - Software Update - D - App Store Updates Only",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2, 2.2.1 and 2.6.1.1: software updates only from the App Store (required for the Level 2 Gatekeeper policy) and content caching does not turn itself on.",
+      "platforms": [
+        "macos"
+      ],
+      "tier": "cis-l2",
+      "scope": "device",
+      "version": "1.0.0",
+      "settingCount": 2,
       "deployVia": "graph",
       "isDraft": false
     },
