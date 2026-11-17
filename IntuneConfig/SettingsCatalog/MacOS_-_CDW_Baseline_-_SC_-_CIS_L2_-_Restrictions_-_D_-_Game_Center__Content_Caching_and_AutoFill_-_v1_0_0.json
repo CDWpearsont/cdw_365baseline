@@ -1,0 +1,44 @@
+{
+  "name": "MacOS - CDW Baseline - SC - CIS L2 - Restrictions - D - Game Center, Content Caching and AutoFill - v1.0.0",
+  "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2, 2.8.14, 2.8.20 and 2.8.23: blocks Game Center, content caching and password AutoFill. Needs supervised Macs.",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.applicationaccess_com.apple.applicationaccess",
+        "groupSettingCollectionValue": [
+          {
+            "children": [
+              {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.applicationaccess_allowgamecenter",
+                "choiceSettingValue": {
+                  "value": "com.apple.applicationaccess_allowgamecenter_false",
+                  "children": []
+                }
+              },
+              {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.applicationaccess_allowcontentcaching",
+                "choiceSettingValue": {
+                  "value": "com.apple.applicationaccess_allowcontentcaching_false",
+                  "children": []
+                }
+              },
+              {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.applicationaccess_allowpasswordautofill",
+                "choiceSettingValue": {
+                  "value": "com.apple.applicationaccess_allowpasswordautofill_false",
+                  "children": []
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "name": "MacOS - CDW Baseline - SC - CIS L1 - Gatekeeper - D - App Store and Identified Developers - v1.0.0",
+  "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1, 2.12.1.1, 2.12.1.2 and 2.12.2.1: Gatekeeper on for apps from the App Store and identified developers, users cannot override it, XProtect malware upload off. The Level 2 Gatekeeper policy replaces this one.",
+  "platforms": "macOS",
+  "technologies": "mdm,appleRemoteManagement",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.systempolicy.control_com.apple.systempolicy.control",
+        "groupSettingCollectionValue": [
+          {
+            "children": [
+              {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.systempolicy.control_enableassessment",
+                "choiceSettingValue": {
+                  "value": "com.apple.systempolicy.control_enableassessment_true",
+                  "children": []
+                }
+              },
+              {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.systempolicy.control_allowidentifieddevelopers",
+                "choiceSettingValue": {
+                  "value": "com.apple.systempolicy.control_allowidentifieddevelopers_true",
+                  "children": []
+                }
+              },
+              {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.systempolicy.control_enablexprotectmalwareupload",
+                "choiceSettingValue": {
+                  "value": "com.apple.systempolicy.control_enablexprotectmalwareupload_false",
+                  "children": []
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+        "settingDefinitionId": "com.apple.systempolicy.managed_com.apple.systempolicy.managed",
+        "groupSettingCollectionValue": [
+          {
+            "children": [
+              {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.systempolicy.managed_disableoverride",
+                "choiceSettingValue": {
+                  "value": "com.apple.systempolicy.managed_disableoverride_true",
+                  "children": []
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
