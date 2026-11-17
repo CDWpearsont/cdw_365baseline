@@ -1,0 +1,28 @@
+{
+  "name": "Win - CDW Baseline - SC - Copilot Readiness - D - Recall - v1.0",
+  "description": "Keeps Recall off on Copilot+ PCs until the customer has assessed it: the Recall feature is removed and snapshots are never saved. Recall is off by default on managed devices; this makes the decision explicit and visible in reporting.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "settings": [
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_allowrecallenablement",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_windowsai_allowrecallenablement_0",
+          "children": []
+        }
+      }
+    },
+    {
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disableaidataanalysis",
+        "choiceSettingValue": {
+          "value": "device_vendor_msft_policy_config_windowsai_disableaidataanalysis_1",
+          "children": []
+        }
+      }
+    }
+  ]
+}
