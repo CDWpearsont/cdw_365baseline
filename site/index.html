@@ -292,6 +292,13 @@ body{
 }
 .confirm-suppress input{width:14px;height:14px;accent-color:var(--cdw-red);cursor:pointer;flex-shrink:0}
 
+/* ── PowerShell runner bar ──────────────────────────────────────── */
+.runner-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--s2);border:1px solid var(--border);
+  border-radius:8px;padding:10px 14px;margin:0 0 12px;font-size:12px;color:var(--muted)}
+.runner-bar strong{color:var(--text)}
+.runner-bar .rb-ok{color:#15803d;font-weight:600}
+.runner-bar .rb-warn{color:#b45309;font-weight:600}
+
 /* ── Tenant inputs dialog ───────────────────────────────────────── */
 .ti-dialog{max-width:680px;max-height:88vh;overflow-y:auto;text-align:left}
 .ti-dialog h3,.ti-dialog > p{text-align:left}
@@ -1280,8 +1287,7 @@ body[data-appmode="manage"] .pcard.mg-dirty {
       <span class="tab-dot"></span>Defender 365
     </button>
     <button class="wtab" data-tab="exchange">
-      <span class="tab-dot"></span>Exchange Online
-      <span class="tab-coming">Soon</span>
+      <span class="tab-dot"></span>Exchange, Teams &amp; Purview
     </button>
     <button class="wtab" data-tab="sharepoint">
       <span class="tab-dot"></span>SharePoint
@@ -1742,22 +1748,43 @@ body[data-appmode="manage"] .pcard.mg-dirty {
         </div>
       </div>
 
-      <!-- ── EXCHANGE TAB (coming soon) ────────────────────── -->
+      <!-- ── EXCHANGE / TEAMS / PURVIEW TAB (PowerShell runner) ── -->
       <div class="tab-panel" id="panel-exchange">
         <div class="wl-header">
           <div class="wl-icon wl-icon-exchange">📧</div>
           <div>
-            <div class="wl-title">Exchange Online</div>
-            <div class="wl-desc">Mail flow rules, connectors, anti-spam and transport policies</div>
+            <div class="wl-title">Exchange, Teams &amp; Purview</div>
+            <div class="wl-desc">Settings with no Graph API, applied by the CDW PowerShell runner using your sign-in</div>
           </div>
         </div>
-        <div class="coming-panel">
-          <h3>Coming in a future release</h3>
-          <p>Exchange Online configuration is managed primarily through PowerShell (Exchange Online Management module) rather than Microsoft Graph. Browser-based deployment is not yet possible for most Exchange settings.</p>
-          <div class="api-coverage">
-            <span class="coverage-dot" style="background:var(--warn)"></span>
-            Limited Graph API coverage for Exchange — PowerShell module required
+        <div class="runner-bar" id="runner-bar"></div>
+        <div class="filter-panel">
+          <div class="filter-row" style="display:none">
+            <div class="filter-chips" id="exchange-filters"><button class="fchip active" data-filter="all">All</button></div>
+            <div class="filter-chips" id="exchange-platform-filters"><button class="fchip active" data-platform="all">All</button></div>
           </div>
+          <div class="filter-row">
+            <span class="filter-label">Status</span>
+            <div class="filter-chips" id="exchange-status-filters">
+              <button class="fchip active" data-status="all">All</button>
+              <button class="fchip" data-status="ready">Undeployed</button>
+              <button class="fchip" data-status="exists">Already deployed</button>
+            </div>
+          </div>
+          <div class="filter-row">
+            <span class="filter-label">Search</span>
+            <div class="filter-search-wrap">
+              <input type="text" class="filter-search-input" id="exchange-search" placeholder="Search policies…"/>
+            </div>
+          </div>
+        </div>
+        <div class="filter-panel" id="exchange-mg-filters" style="display:none"></div>
+        <div class="select-bar">
+          <button class="sel-btn" id="exchange-selall">Select all visible</button>
+          <button class="sel-btn" id="exchange-seldesel" title="Deselect all visible policies">Deselect visible</button>
+        </div>
+        <div class="pgrid" id="exchange-grid">
+          <div class="state-box"><div class="spinner"></div><p>Loading…</p></div>
         </div>
       </div>
 
@@ -1848,7 +1875,7 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.10.0',
+  version: '3.11.0',
   date:    '2026-09-17'
 };
 
@@ -2657,6 +2684,11 @@ const WORKLOAD_TAB = {
   mdca:     'defender',
   mdo:      'defender',
   sharepoint: 'entra',   // SharePoint/OneDrive tenant settings deploy through Graph
+  // PowerShell-only workloads, applied by the runner
+  exchange: 'exchange',
+  teams:    'exchange',
+  purview:  'exchange',
+  onedrive: 'exchange',
 };
 const API_BASE    = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents`; // kept for reference — Trees API used instead
 
@@ -2704,6 +2736,14 @@ const WORKLOADS = {
     deployFn: deployDefenderPolicy,
     existsCheckFn: checkDefenderExists,
   },
+  exchange: {
+    // Listed from the manifest; these folders are only used by the fallback tree walk.
+    folders: [
+      { folder: 'ExchangeOnline/SafeLinks', cat: 'SafeLinks', label: 'Safe Links' },
+    ],
+    deployFn: null,             // deployed as one batch by the PowerShell runner
+    existsCheckFn: async () => {},
+  },
 };
 
 // ═══════════════════════════════════════════════════════════════════
@@ -2713,15 +2753,15 @@ let msalInstance = null;
 let account      = null;
 let graphToken   = null;
 let activeTab    = 'intune';
-let activeFilter   = { intune: new Set(), entra: new Set(), defender: new Set() };
-let activePlatform = { intune: new Set(), entra: new Set(), defender: new Set() };
-let activeCisLevel = { intune: new Set(), entra: new Set(), defender: new Set() };
-let activeStatus   = { intune: new Set(), entra: new Set(), defender: new Set() };
+let activeFilter   = { intune: new Set(), entra: new Set(), defender: new Set(), exchange: new Set() };
+let activePlatform = { intune: new Set(), entra: new Set(), defender: new Set(), exchange: new Set() };
+let activeCisLevel = { intune: new Set(), entra: new Set(), defender: new Set(), exchange: new Set() };
+let activeStatus   = { intune: new Set(), entra: new Set(), defender: new Set(), exchange: new Set() };
 let appMode      = 'deploy'; // 'deploy' or 'document'
 let templateBuffer = null;   // ArrayBuffer of uploaded LLD template .docx
 
 // policies[workload] = [{ name, displayName, cat, folder, raw_url, status, selected }]
-const policies = { intune: [], entra: [], defender: [] };
+const policies = { intune: [], entra: [], defender: [], exchange: [] };
 
 const GRAPH = 'https://graph.microsoft.com/beta';
 
@@ -2734,6 +2774,7 @@ const branding = {
   intune:   { mode: 'original', text: '', _pendingMode: 'original', _pendingText: '' },
   entra:    { mode: 'original', text: '', _pendingMode: 'original', _pendingText: '' },
   defender: { mode: 'original', text: '', _pendingMode: 'original', _pendingText: '' },
+  exchange: { mode: 'original', text: '', _pendingMode: 'original', _pendingText: '' },
 };
 
 // Branding patterns per workload
@@ -2794,7 +2835,11 @@ async function initMsal() {
   msalInstance = new msal.PublicClientApplication(MSAL_CFG);
   await msalInstance.initialize();
   const resp = await msalInstance.handleRedirectPromise();
-  if (resp?.account) { account = resp.account; onSignedIn(); return; }
+  if (resp?.account) {
+    account = resp.account; onSignedIn();
+    if (sessionStorage.getItem('runnerConsentQueue')) runnerResumeConsent().catch(e => showToast(e.message, 'err'));
+    return;
+  }
   const accounts = msalInstance.getAllAccounts();
   if (accounts.length > 0) { account = accounts[0]; onSignedIn(); }
 }
@@ -2893,8 +2938,10 @@ function buildFromManifest(m) {
       flags:       e.flags || [],
       version:     e.version || null,
       objectType:  e.objectType || null,
+      file:        e.file,
+      manifestWorkload: e.workload,
       deployVia:   e.deployVia || 'graph',
-      deployable:  isDeployable(wl, e.category),
+      deployable:  e.deployVia === 'powershell' ? !!RUNNER_API : isDeployable(wl, e.category),
       lldSummary:  e.lldSummary || null,
       description: e.description || '',
     });
@@ -3017,7 +3064,10 @@ async function afterCatalogueLoaded() {
     Object.keys(WORKLOADS).forEach(wl => policies[wl].forEach(p => { if (p.status === 'loading') p.status = 'ready'; }));
   }
   statusChecked = true;
+  // Runner policies can't be checked against the tenant from the browser.
+  policies.exchange.forEach(p => { if (p.status === 'loading') p.status = 'ready'; });
   Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+  renderRunnerBar().catch(() => { /* bar is informational */ });
 }
 
 // Fetch each policy's JSON to extract the real display name and platform.
@@ -3984,6 +4034,7 @@ async function deploy() {
   }
 
   log(`Starting deployment of ${toProcess.length} items…`);
+  const runnerItems = [];
   (tenantInputs.created || []).forEach(c => log(`✓ Created ${c}`, 'lok'));
 
   for (let i = 0; i < toProcess.length; i++) {
@@ -3993,6 +4044,10 @@ async function deploy() {
 
     if (p.status === 'exists') {
       log(`⚠ Skipped — already exists: ${getDeployName(p)}`, 'lsk'); sk++; continue;
+    }
+
+    if (p.deployVia === 'powershell' && p.deployable !== false) {
+      runnerItems.push(p); continue;       // applied together by the runner below
     }
 
     if (p.deployable === false) {
@@ -4026,6 +4081,11 @@ async function deploy() {
     }
   }
 
+  if (runnerItems.length) {
+    const r = await runRunnerBatch(runnerItems, log);
+    ok += r.ok; sk += r.sk; er += r.er;
+  }
+
   pbar.style.width = '100%';
   log(`─── Complete: ${ok} deployed · ${sk} skipped · ${er} failed ───`);
   document.getElementById('s-ok').textContent = ok;
@@ -4036,6 +4096,180 @@ async function deploy() {
   Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
   showToast(`Done — ${ok} deployed, ${sk} skipped, ${er} failed`, er ? 'err' : sk ? 'warn' : 'ok');
   document.getElementById('deploy-btn').disabled = false;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// POWERSHELL RUNNER
+// Exchange, Security & Compliance, SharePoint admin and Teams settings have no
+// Graph API. The site gets delegated tokens for each of those services with the
+// consultant's sign-in and hands them, with the selection, to the CDW runner
+// broker, which starts a short-lived container to apply them.
+// ═══════════════════════════════════════════════════════════════════
+
+// Broker URL (runner/infra output 'brokerUrl'). Empty until the runner is deployed.
+const RUNNER_API = '';
+
+// Delegated scopes per runner workload. SharePoint admin needs the tenant's own host.
+function runnerScopes(workload, tenantName) {
+  switch (workload) {
+    case 'exo':   return [['https://outlook.office365.com/.default']];
+    case 'scc':   return [['https://ps.compliance.protection.outlook.com/.default']];
+    case 'spo':   return [[`https://${tenantName}-admin.sharepoint.com/.default`]];
+    case 'teams': return [['48ac35b8-9aa8-4d74-927d-1f4a14a0b239/.default'], ['https://graph.microsoft.com/.default']];
+    case 'mdca':  return [['05a65629-4c1b-48c1-a78b-804c4abdd4af/.default']];
+    default:      return [];
+  }
+}
+const RUNNER_TOKEN_KEYS = { teams: ['teams', 'teamsGraph'] };
+const RUNNER_LABELS = { exo: 'Exchange Online', scc: 'Security & Compliance', spo: 'SharePoint admin',
+                        teams: 'Teams', mdca: 'Defender for Cloud Apps' };
+
+let runnerTenant = null;   // { guid, initialDomain, name }
+
+async function runnerTenantInfo() {
+  if (runnerTenant?.guid === account?.tenantId) return runnerTenant;
+  const r = await fetch('https://graph.microsoft.com/v1.0/organization?$select=verifiedDomains',
+    { headers: { Authorization: `Bearer ${graphToken || await getToken()}` } });
+  if (!r.ok) throw new Error(`Couldn't read the tenant's domains (Graph ${r.status})`);
+  const initial = ((await r.json()).value?.[0]?.verifiedDomains || []).find(d => d.isInitial)?.name;
+  if (!initial) throw new Error('No initial onmicrosoft.com domain found');
+  runnerTenant = { guid: account.tenantId, initialDomain: initial, name: initial.split('.')[0] };
+  return runnerTenant;
+}
+
+// The runner workload a policy file belongs to: the file's own "workload" field,
+// falling back to the manifest workload.
+const RUNNER_WORKLOAD_OF = { exchange: 'exo', teams: 'teams', purview: 'scc', onedrive: 'spo', mdca: 'mdca', mdo: 'exo' };
+function runnerWorkload(p, json) { return json?.workload || RUNNER_WORKLOAD_OF[p.manifestWorkload] || 'exo'; }
+
+async function runnerToken(scopes, interactive) {
+  const req = { scopes, account, authority: `https://login.microsoftonline.com/${account.tenantId}` };
+  try {
+    return (await msalInstance.acquireTokenSilent(req)).accessToken;
+  } catch (e) {
+    if (!interactive) throw e;
+    await msalInstance.acquireTokenRedirect(req);
+    return null;
+  }
+}
+
+// Consent for each service is granted by redirect, one service at a time. The queue
+// survives the redirects in sessionStorage and resumes on return.
+async function runnerConnect(workloads) {
+  const info = await runnerTenantInfo();
+  const queue = workloads.flatMap(w => runnerScopes(w, info.name));
+  sessionStorage.setItem('runnerConsentQueue', JSON.stringify(queue));
+  await runnerResumeConsent();
+}
+
+async function runnerResumeConsent() {
+  let queue = [];
+  try { queue = JSON.parse(sessionStorage.getItem('runnerConsentQueue') || '[]'); } catch { /* none */ }
+  while (queue.length) {
+    const scopes = queue[0];
+    try { await runnerToken(scopes, false); queue.shift(); }
+    catch {
+      sessionStorage.setItem('runnerConsentQueue', JSON.stringify(queue.slice(1)));
+      await runnerToken(scopes, true);      // redirects; resumes after sign-in
+      return;
+    }
+  }
+  sessionStorage.removeItem('runnerConsentQueue');
+  renderRunnerBar();
+}
+
+async function renderRunnerBar() {
+  const bar = document.getElementById('runner-bar');
+  if (!bar) return;
+  if (!RUNNER_API) {
+    bar.innerHTML = `<span class="rb-warn">Runner not deployed</span>
+      <span>Deploying these needs the CDW PowerShell runner (runner/infra). Until then they appear in Document mode only.</span>`;
+    return;
+  }
+  const workloads = [...new Set(Object.values(policies).flat()
+    .filter(p => p.deployVia === 'powershell').map(p => p.runnerWorkload || RUNNER_WORKLOAD_OF[p.manifestWorkload] || 'exo'))];
+  let info;
+  try { info = await runnerTenantInfo(); } catch { info = null; }
+  const status = [];
+  for (const w of workloads) {
+    let okAll = !!info;
+    for (const scopes of (info ? runnerScopes(w, info.name) : [])) {
+      try { await runnerToken(scopes, false); } catch { okAll = false; }
+    }
+    status.push(`${RUNNER_LABELS[w] || w}: ${okAll ? '<span class="rb-ok">connected</span>' : '<span class="rb-warn">not connected</span>'}`);
+  }
+  bar.innerHTML = `<strong>PowerShell runner</strong><span>${status.join(' · ') || 'No PowerShell policies in the library'}</span>
+    <button class="btn btn-ghost btn-sm" onclick='runnerConnect(${JSON.stringify(workloads)})'>Connect services</button>`;
+}
+
+// Applies the selected runner policies in one run and logs a line per policy.
+async function runRunnerBatch(items, log) {
+  const out = { ok: 0, sk: 0, er: 0 };
+  const fail = msg => { items.forEach(p => log(`✗ Failed: ${getDeployName(p)} — ${msg}`, 'ler')); out.er += items.length; return out; };
+  if (!RUNNER_API) return fail('the PowerShell runner is not deployed');
+
+  log(`Preparing ${items.length} PowerShell polic${items.length === 1 ? 'y' : 'ies'} for the runner…`);
+  let info, selected = [], tokens = {};
+  try {
+    info = await runnerTenantInfo();
+    for (const p of items) {
+      const json = await tiJson(p);
+      const w = runnerWorkload(p, json);
+      selected.push({ workload: w, path: p.file || `${p.folder}/${p.name}.json`, name: p.name });
+    }
+    for (const w of new Set(selected.map(s => s.workload))) {
+      const keys = RUNNER_TOKEN_KEYS[w] || [w];
+      const scopeSets = runnerScopes(w, info.name);
+      for (let i = 0; i < scopeSets.length; i++) {
+        try { tokens[keys[i]] = await runnerToken(scopeSets[i], false); }
+        catch { return fail(`not connected to ${RUNNER_LABELS[w] || w}: use Connect services on the Exchange, Teams & Purview tab`); }
+      }
+    }
+  } catch (e) { return fail(e.message); }
+
+  let idToken;
+  try { idToken = (await msalInstance.acquireTokenSilent({ scopes: ['openid', 'profile'], account })).idToken; }
+  catch { return fail('sign in again to use the runner'); }
+
+  const call = (method, path, body) => fetch(`${RUNNER_API}${path}`, {
+    method, headers: { Authorization: `Bearer ${idToken}`, 'Content-Type': 'application/json' },
+    body: body ? JSON.stringify(body) : undefined });
+
+  const start = await call('POST', '/runs', {
+    tenantId: info.initialDomain, tenantGuid: info.guid, branch: REPO_BRANCH, tokens,
+    selected: selected.map(({ workload, path }) => ({ workload, path })),
+  }).catch(e => ({ ok: false, statusText: e.message }));
+  if (!start.ok) {
+    let msg = start.statusText; try { msg = (await start.json()).error || msg; } catch { /* keep */ }
+    return fail(`runner refused the request: ${msg}`);
+  }
+  const { runId } = await start.json();
+  log(`Runner started (run ${runId.slice(0, 8)}). This usually takes 2–4 minutes…`);
+
+  const deadline = Date.now() + 30 * 60 * 1000;
+  let state = null;
+  while (Date.now() < deadline) {
+    await new Promise(r => setTimeout(r, 10000));
+    const r = await call('GET', `/runs/${runId}`).catch(() => null);
+    if (!r || !r.ok) continue;
+    state = await r.json();
+    if (state.status !== 'Running') break;
+  }
+  if (!state || state.status === 'Running') return fail('the runner did not finish within 30 minutes');
+  if (state.error && !(state.results || []).length) return fail(state.error);
+
+  const byPath = new Map((state.results || []).map(x => [x.path, x]));
+  for (let i = 0; i < items.length; i++) {
+    const p = items[i], res = byPath.get(selected[i].path);
+    if (res?.status === 'ok') {
+      log(`✓ ${res.action === 'updated' ? 'Updated' : 'Deployed'}: ${getDeployName(p)}`, 'lok'); out.ok++;
+      const orig = policies[p.wl]?.find(x => x.name === p.name);
+      if (orig) { orig.status = 'exists'; orig.selected = false; }
+    } else {
+      log(`✗ Failed: ${getDeployName(p)} — ${res?.message || 'no result from the runner'}`, 'ler'); out.er++;
+    }
+  }
+  return out;
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -7372,7 +7606,7 @@ document.querySelectorAll('.wtab').forEach(btn => {
 });
 
 // Filter chips — multi-select, wired per workload
-['intune','entra','defender'].forEach(wl => {
+['intune','entra','defender','exchange'].forEach(wl => {
 
   function applyChipToggle(chipEl, stateSet, valueAttr, containerId) {
     const val = chipEl.dataset[valueAttr];
@@ -7488,9 +7722,9 @@ let mgDirty     = {};     // policy id -> { overrides, tags, enrichment }
 let mgCurrentId = null;   // policy open in the drawer
 
 // Filter state, mirroring the existing activeFilter pattern
-const mgFramework = { intune:new Set(), entra:new Set(), defender:new Set() };
-const mgBundle    = { intune:new Set(), entra:new Set(), defender:new Set() };
-const mgAttention = { intune:new Set(), entra:new Set(), defender:new Set() };
+const mgFramework = { intune:new Set(), entra:new Set(), defender:new Set(), exchange:new Set() };
+const mgBundle    = { intune:new Set(), entra:new Set(), defender:new Set(), exchange:new Set() };
+const mgAttention = { intune:new Set(), entra:new Set(), defender:new Set(), exchange:new Set() };
 
 const MG_OVERRIDABLE = ['workload','platform','policyType','framework','scope','area','subArea','securityDomain'];
 const MG_ENRICH_FIELDS = [

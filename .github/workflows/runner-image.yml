@@ -1,0 +1,41 @@
+name: Build runner image
+
+# Builds the PowerShell runner container and pushes it to GitHub Container Registry:
+#   ghcr.io/cdwpearsont/cdw365-runner:<branch>   (main = prod, test = test site)
+# The Container Apps job pulls the tag at the start of every run.
+
+on:
+  push:
+    branches: [main, test]
+    paths:
+      - 'runner/Dockerfile'
+      - 'runner/src/**'
+      - '.github/workflows/runner-image.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: runner
+          push: true
+          tags: |
+            ghcr.io/cdwpearsont/cdw365-runner:${{ github.ref_name }}
+            ghcr.io/cdwpearsont/cdw365-runner:${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.description=CDW 365 Baseline PowerShell runner
