@@ -17,8 +17,11 @@ name: CDW Defender Baseline Backup
 #  Graph and WindowsDefenderATP permissions, but separate secrets allow isolation)
 
 on:
-  schedule:
-    - cron: '0 5 * * *'
+  # Schedule paused: the reference tenant is a developer tenant without Defender
+  # for Endpoint, so the WindowsDefenderATP API (and Ti.ReadWrite.All) doesn't
+  # exist there and every run failed. Re-enable once the reference tenant has MDE.
+  # schedule:
+  #   - cron: '0 5 * * *'
   workflow_dispatch:
 
 jobs:
