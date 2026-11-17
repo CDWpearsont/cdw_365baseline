@@ -74,8 +74,24 @@ Deploy app permissions (Application, admin consented, reference tenant only):
 `Policy.ReadWrite.DeviceConfiguration`, `SharePointTenantSettings.ReadWrite.All`,
 `Directory.ReadWrite.All` (directory settings).
 
-The deployer site's app registration needs the same permissions as **delegated** permissions; the
-site asks consultants to consent to them at sign-in.
+The deployer site's app registration needs the same permissions as **delegated** permissions, plus
+`Group.ReadWrite.All` for the tenant inputs step; the site asks consultants to consent to them at sign-in.
+
+## Tenant inputs (deployer site)
+
+Before deploying, the site asks for the values the library can't carry, and remembers them per tenant
+in the browser:
+
+| Input | Applied to |
+|---|---|
+| Break-glass group (pick or create) | Excluded from every Conditional Access policy (not workload identity policies) |
+| Persona groups (pick or create, one per persona in the selection) | Included in that persona's CA policies, which ship targeting nobody. Block non-personas targets all users and excludes every saved persona group and all guests |
+| Trusted location (office public IP ranges) | Created as a trusted named location; "block untrusted locations" policies exclude `AllTrusted` |
+| Intune pilot group (optional) | New Intune policies are assigned to it |
+| CA starting state | Off (default) or report-only |
+
+Guests-persona policies that target nobody are pointed at all guest and external user types. The pipeline
+into the reference tenant doesn't use tenant inputs: policies there stay untargeted.
 
 If the federated sign-in fails, the run log prints the subject GitHub presented. The credential's
 Subject identifier must match it exactly.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T13:16:56+00:00",
-  "sourceCommit": "95645b9fb4ce02848039a99b4761751674a623db",
+  "generatedAt": "2026-11-17T13:17:34+00:00",
+  "sourceCommit": null,
   "counts": {
     "policies": 242,
     "bundles": 22,
@@ -9928,7 +9928,7 @@
       "exclude": [],
       "order": 100,
       "prerequisites": [
-        "Two break-glass accounts, excluded from every policy",
+        "Two break-glass accounts in a group, picked or created at the tenant inputs step and excluded from every policy",
         "Named locations marked as trusted (for security info registration)",
         "Check sign-in logs for device code flow use (Teams Rooms, CLI tools) before enabling CDW015"
       ],
@@ -9999,7 +9999,7 @@
       "exclude": [],
       "order": 120,
       "prerequisites": [
-        "Two break-glass accounts, excluded from every policy",
+        "Two break-glass accounts in a group, picked or created at the tenant inputs step and excluded from every policy",
         "Device compliance policies assigned before CDW016 is enabled",
         "App protection policies assigned before CDW017 is enabled"
       ],
@@ -10191,8 +10191,8 @@
       "exclude": [],
       "order": 160,
       "prerequisites": [
-        "One security group per persona, assigned to that persona's policies (policies deploy targeting no users)",
-        "Break-glass accounts excluded from every policy",
+        "One security group per persona, picked or created at the tenant inputs step and assigned to that persona's policies",
+        "Break-glass group, excluded from every policy at the tenant inputs step",
         "Named locations for service accounts",
         "Terms of Use objects for CDW401/405/501/505 (the grant is added per tenant)"
       ],
@@ -10355,7 +10355,7 @@
       "exclude": [],
       "order": 180,
       "prerequisites": [
-        "One group per service account persona",
+        "One group per service account persona, plus the office public IP ranges as a trusted location (both set at the tenant inputs step)",
         "Named locations for each service's source IPs"
       ],
       "licensing": [

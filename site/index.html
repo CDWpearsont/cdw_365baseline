@@ -292,6 +292,28 @@ body{
 }
 .confirm-suppress input{width:14px;height:14px;accent-color:var(--cdw-red);cursor:pointer;flex-shrink:0}
 
+/* ── Tenant inputs dialog ───────────────────────────────────────── */
+.ti-dialog{max-width:680px;max-height:88vh;overflow-y:auto;text-align:left}
+.ti-dialog h3,.ti-dialog > p{text-align:left}
+.ti-section{margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+.ti-section h4{font-size:13px;font-weight:700;margin-bottom:2px}
+.ti-help{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:6px}
+.ti-row{display:grid;grid-template-columns:190px 120px 1fr;gap:8px;align-items:center;margin-top:8px;font-size:12px}
+.ti-row label{font-weight:600}
+.ti-row .ti-sub{display:block;font-weight:400;color:var(--muted);font-size:11px}
+.ti-in{width:100%;background:#fff;border:1px solid var(--border);border-radius:5px;color:var(--text);
+  font-family:var(--fbody);font-size:12px;padding:6px 10px;outline:none}
+.ti-in:focus{border-color:var(--cdw-red)}
+.ti-in:disabled{opacity:.45}
+textarea.ti-in{min-height:54px;resize:vertical;font-family:monospace}
+.ti-err{grid-column:2 / -1;color:#b91c1c;font-size:11px}
+.ti-err:empty{display:none}
+.ti-radio{display:flex;gap:18px;font-size:12px;margin-top:6px}
+.ti-radio label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.ti-warn{background:#fff7ed;border:1px solid #fdba74;border-radius:8px;padding:10px 14px;margin-top:16px;font-size:12px}
+.ti-warn ul{margin:6px 0 0 18px}
+.ti-warn:empty{display:none}
+
 /* ── User pill ──────────────────────────────────────────────────── */
 .user-pill{
   display:flex;align-items:center;gap:8px;
@@ -1826,7 +1848,7 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.6.0',
+  version: '3.7.0',
   date:    '2026-09-17'
 };
 
@@ -2192,6 +2214,8 @@ const SCOPES = [
   'Policy.ReadWrite.DeviceConfiguration',
   'SharePointTenantSettings.ReadWrite.All',
   'Directory.ReadWrite.All',
+  // Tenant inputs: find or create break-glass, persona and pilot groups
+  'Group.ReadWrite.All',
 ];
 
 // ═══════════════════════════════════════════════════════════════════
@@ -3765,6 +3789,9 @@ async function deployEntraPolicy(p, json) {
     // The CA schema requires these fields to always be arrays.
     ensureCaArrays(body);
 
+    // Customer-specific groups, locations and state from the tenant inputs step.
+    p._tiNotes = tiApplyCa(body, json.displayName || p.displayName, tenantInputs || {});
+
   } else if (p.cat === 'NamedLocations') {
     url = `https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations`;
   } else if (TENANT_SETTING_URLS[p.cat] || p.cat === 'DirectorySettings') {
@@ -3903,31 +3930,18 @@ function showWarnDialog({ icon, title, message, detail, confirmLabel, suppressKe
 
 // Pre-deploy warnings — returns true if deploy should proceed, false if cancelled.
 async function showDeployWarnings(toProcess) {
-  const hasCA     = toProcess.some(p => p.cat === 'ConditionalAccess' && p.status !== 'exists');
   const hasIntune = toProcess.some(p => p.wl === 'intune' && p.status !== 'exists');
 
-  // Warning 1: Intune policies deploy unassigned
-  if (hasIntune && localStorage.getItem('suppressIntuneAssignWarn') !== '1') {
+  // Intune policies deploy unassigned unless a pilot group was given.
+  // (Conditional Access state is chosen in the tenant inputs dialog.)
+  if (hasIntune && !tenantInputs?.pilot?.id && localStorage.getItem('suppressIntuneAssignWarn') !== '1') {
     const { proceed } = await showWarnDialog({
       icon: '📋',
       title: 'Intune policies deploy unassigned',
-      message: 'Intune policies are always created without group assignments. After deployment, each policy will need to be manually assigned to the appropriate groups in the Intune admin centre before it takes effect.',
+      message: 'No pilot group was given, so Intune policies will be created without assignments. Assign each policy in the Intune admin centre before it takes effect.',
       detail: null,
       confirmLabel: 'Understood, continue',
       suppressKey: 'suppressIntuneAssignWarn',
-    });
-    if (!proceed) return false;
-  }
-
-  // Warning 2: CA policies deployed disabled
-  if (hasCA && localStorage.getItem('suppressCAWarn') !== '1') {
-    const { proceed } = await showWarnDialog({
-      icon: '🔒',
-      title: 'Conditional Access policies deploy disabled',
-      message: 'Conditional Access policies are always created in <strong>disabled</strong> state by Microsoft. After deployment, review each policy in the Entra admin centre and enable them once assignments and exclusions are confirmed.',
-      detail: null,
-      confirmLabel: 'Understood, continue',
-      suppressKey: 'suppressCAWarn',
     });
     if (!proceed) return false;
   }
@@ -3940,6 +3954,12 @@ async function deploy() {
     policies[wl].filter(p => p.selected).map(p => ({ ...p, wl, deployFn: def.deployFn }))
   );
   if (!toProcess.length) return;
+
+  graphToken = await getToken();
+  if (!graphToken) return; // redirect in progress
+
+  tenantInputs = await showTenantInputs(toProcess);
+  if (!tenantInputs) return;
 
   const proceed = await showDeployWarnings(toProcess);
   if (!proceed) return;
@@ -3963,9 +3983,8 @@ async function deploy() {
     logBody.scrollTop = logBody.scrollHeight;
   }
 
-  graphToken = await getToken();
-  if (!graphToken) return; // redirect in progress
   log(`Starting deployment of ${toProcess.length} items…`);
+  (tenantInputs.created || []).forEach(c => log(`✓ Created ${c}`, 'lok'));
 
   for (let i = 0; i < toProcess.length; i++) {
     const p = toProcess[i];
@@ -3989,8 +4008,17 @@ async function deploy() {
         if (!r.ok) throw new Error(`GitHub fetch ${r.status}`);
         json = await r.json();
       }
+      delete p._tiNotes;
       const createdId = await p.deployFn(p, json);
       log(`✓ Deployed: ${getDeployName(p)}`, 'lok');
+      (p._tiNotes || []).forEach(n => log(`  ⚠ ${n}`, 'lsk'));
+      if (p.wl === 'intune' && tenantInputs.pilot?.id && createdId) {
+        try {
+          if (await tiAssignPilot(p, json, createdId)) log(`  ↳ Assigned to ${htmlEsc(tenantInputs.pilot.name)}`, 'lin');
+        } catch (e) {
+          log(`  ⚠ Created, but assigning to the pilot group failed: ${e.message}`, 'lsk');
+        }
+      }
       p.status = 'exists'; ok++;
       if (orig) { orig.status = 'exists'; orig.tenantId = createdId; orig.selected = false; }
     } catch(e) {
@@ -4008,6 +4036,392 @@ async function deploy() {
   Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
   showToast(`Done — ${ok} deployed, ${sk} skipped, ${er} failed`, er ? 'err' : sk ? 'warn' : 'ok');
   document.getElementById('deploy-btn').disabled = false;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TENANT INPUTS
+// Customer-specific values the library can't carry: the emergency access
+// (break-glass) exclusion group, persona groups, trusted office locations,
+// an Intune pilot group and the Conditional Access starting state. Asked for
+// once per deployment, remembered per tenant, injected into what's created.
+// ═══════════════════════════════════════════════════════════════════
+
+let tenantInputs = null;
+
+const TI_PERSONAS = {
+  Admins: 'Admins', Internals: 'Internal users', Externals: 'External users',
+  Developers: 'Developers', GuestAdmins: 'Guest admins',
+  Microsoft365ServiceAccounts: 'Microsoft 365 service accounts',
+  AzureServiceAccounts: 'Azure service accounts', CorpServiceAccounts: 'On-premises service accounts',
+};
+const TI_ALL_GUESTS = {
+  guestOrExternalUserTypes: 'internalGuest,b2bCollaborationGuest,b2bCollaborationMember,b2bDirectConnectUser,otherExternalUser,serviceProvider',
+  externalTenants: { '@odata.type': '#microsoft.graph.conditionalAccessAllExternalTenants', membershipKind: 'all' },
+};
+
+const tiKey  = () => `cdwTenantInputs:${account?.tenantId || 'unknown'}`;
+const tiLoad = () => { try { return JSON.parse(localStorage.getItem(tiKey())) || {}; } catch { return {}; } };
+const tiSave = v => { try { localStorage.setItem(tiKey(), JSON.stringify(v)); } catch { /* storage unavailable */ } };
+const tiArr  = v => Array.isArray(v) ? v : v == null ? [] : [v];
+
+// Persona is the second segment of the CDW CA naming scheme: CDW100-Admins-...
+function caPersona(name) { const m = /^[^-]+-([^-]+)-/.exec(name || ''); return m ? m[1] : null; }
+
+// The library ships persona policies targeting nobody (includeUsers: None).
+function caUntargeted(json) {
+  const u = json?.conditions?.users || {};
+  return tiArr(u.includeUsers).join() === 'None' && !tiArr(u.includeGroups).length &&
+         !tiArr(u.includeRoles).length && !u.includeGuestsOrExternalUsers;
+}
+const caBlocksUntrusted = name => /UntrustedLocations/i.test(name || '');
+const caIsNonPersonas  = name => /BlockNonPersonas/i.test(name || '');
+
+async function graphSend(method, url, body, headers) {
+  const r = await fetch(url, {
+    method,
+    headers: { Authorization: `Bearer ${graphToken}`, 'Content-Type': 'application/json', ...(headers || {}) },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error(`Graph ${r.status}: ${await r.text()}`);
+  return r.status === 204 ? null : r.json().catch(() => null);
+}
+
+// Policy JSON, cached on the grid row so the deploy loop doesn't fetch it again.
+async function tiJson(p) {
+  const orig = policies[p.wl]?.find(x => x.name === p.name);
+  if (orig?._json) return orig._json;
+  const r = await fetch(p.raw_url);
+  if (!r.ok) return null;
+  const json = await r.json();
+  if (orig) orig._json = json;
+  return json;
+}
+
+// What this selection needs from the customer.
+async function tiAnalyse(toProcess) {
+  const todo = toProcess.filter(p => p.status !== 'exists' && p.deployable !== false);
+  const ca = todo.filter(p => p.cat === 'ConditionalAccess');
+  const out = { hasCA: ca.length > 0, hasIntune: todo.some(p => p.wl === 'intune'),
+                personas: [], trusted: false, nonPersonas: false, workload: 0 };
+  const personas = new Set();
+  const jsons = await Promise.all(ca.map(tiJson));
+  ca.forEach((p, i) => {
+    const json = jsons[i];
+    const name = json?.displayName || p.displayName;
+    const persona = caPersona(name);
+    if (persona === 'WorkloadIdentities') { out.workload++; return; }
+    if (caUntargeted(json) && TI_PERSONAS[persona]) personas.add(persona);
+    if (caIsNonPersonas(name)) out.nonPersonas = true;
+    const loc = json?.conditions?.locations;
+    if (caBlocksUntrusted(name) || [...tiArr(loc?.includeLocations), ...tiArr(loc?.excludeLocations)].includes('AllTrusted'))
+      out.trusted = true;
+  });
+  out.personas = Object.keys(TI_PERSONAS).filter(k => personas.has(k));
+  return out;
+}
+
+function tiNick(name) { return (name.replace(/[^A-Za-z0-9]/g, '') || 'cdwgroup').slice(0, 60); }
+
+async function tiFindGroup(name) {
+  const f = encodeURIComponent(`displayName eq '${name.replace(/'/g, "''")}'`);
+  const d = await graphSend('GET', `https://graph.microsoft.com/v1.0/groups?$filter=${f}&$select=id,displayName`);
+  return d?.value?.[0] || null;
+}
+
+async function tiResolveGroup(mode, name, created) {
+  name = (name || '').trim();
+  if (mode === 'skip' || !name) return null;
+  const found = await tiFindGroup(name);
+  if (found) return { id: found.id, name: found.displayName };
+  if (mode === 'existing') throw new Error(`No group called "${name}" in this tenant`);
+  const g = await graphSend('POST', 'https://graph.microsoft.com/v1.0/groups', {
+    displayName: name, mailNickname: tiNick(name), mailEnabled: false, securityEnabled: true,
+    description: 'Created by the CDW 365 Baseline Deployer',
+  });
+  created.push(`group ${htmlEsc(name)}`);
+  return { id: g.id, name: g.displayName };
+}
+
+function tiParseRanges(text) {
+  const parts = (text || '').split(/[\s,;]+/).map(x => x.trim()).filter(Boolean);
+  const bad = parts.filter(x => !/^(\d{1,3}\.){3}\d{1,3}\/\d{1,2}$/.test(x) && !/^[0-9a-f:]+\/\d{1,3}$/i.test(x));
+  return { ranges: parts.filter(x => !bad.includes(x)), bad };
+}
+
+// Group search for the datalist, as the consultant types.
+let tiSearchTimer = null;
+function tiSuggest(input) {
+  clearTimeout(tiSearchTimer);
+  const q = input.value.trim().replace(/"/g, '');
+  if (q.length < 2) return;
+  tiSearchTimer = setTimeout(async () => {
+    try {
+      const d = await graphSend('GET',
+        `https://graph.microsoft.com/v1.0/groups?$search="displayName:${encodeURIComponent(q)}"&$select=displayName&$top=15`,
+        undefined, { ConsistencyLevel: 'eventual' });
+      document.getElementById('ti-groups').innerHTML =
+        (d?.value || []).map(g => `<option value="${htmlEsc(g.displayName)}"></option>`).join('');
+    } catch { /* suggestions are a convenience */ }
+  }, 300);
+}
+
+function tiGroupRow(key, label, sub, saved, suggested) {
+  const mode = saved?.name ? 'existing' : 'create';
+  const name = saved?.name || suggested;
+  return `<div class="ti-row" data-key="${key}">
+    <label>${htmlEsc(label)}${sub ? `<span class="ti-sub">${htmlEsc(sub)}</span>` : ''}</label>
+    <select class="ti-in" data-mode onchange="this.parentElement.querySelector('[data-name]').disabled = this.value === 'skip'">
+      <option value="existing" ${mode === 'existing' ? 'selected' : ''}>Use existing</option>
+      <option value="create" ${mode === 'create' ? 'selected' : ''}>Create</option>
+      <option value="skip">Skip</option>
+    </select>
+    <input class="ti-in" data-name list="ti-groups" value="${htmlEsc(name)}" oninput="tiSuggest(this)" autocomplete="off">
+    <div class="ti-err"></div>
+  </div>`;
+}
+
+// Returns the inputs to use, or null if cancelled. Nothing is asked when the
+// selection has nothing customer-specific in it.
+async function showTenantInputs(toProcess) {
+  const need = await tiAnalyse(toProcess);
+  if (!need.hasCA && !need.hasIntune) return {};
+  const saved = tiLoad();
+
+  const sections = [];
+  if (need.hasCA) {
+    sections.push(`<div class="ti-section">
+      <h4>Emergency access</h4>
+      <div class="ti-help">Excluded from every Conditional Access policy in this deployment. Put the tenant's
+        break-glass accounts in it before any policy is switched on.</div>
+      ${tiGroupRow('breakGlass', 'Break-glass group', 'Excluded from all policies', saved.breakGlass, 'CDW-CA-Exclude-EmergencyAccess')}
+    </div>`);
+  }
+  if (need.personas.length) {
+    sections.push(`<div class="ti-section">
+      <h4>Persona groups</h4>
+      <div class="ti-help">Each persona's policies are assigned to its group. Library policies target nobody until this is set.</div>
+      ${need.personas.map(k => tiGroupRow(`persona:${k}`, TI_PERSONAS[k], null, saved.personas?.[k], `CDW-CA-Persona-${k}`)).join('')}
+    </div>`);
+  }
+  if (need.nonPersonas) {
+    const known = Object.values({ ...(saved.personas || {}) }).filter(g => g?.id).length;
+    sections.push(`<div class="ti-section">
+      <h4>Block non-personas</h4>
+      <div class="ti-help">This policy blocks every member user who isn't in a persona group (guests are excluded).
+        It's assigned to all users and excludes every persona group set for this tenant, including those above.
+        ${known ? `${known} persona group${known === 1 ? ' is' : 's are'} already saved for this tenant.` : ''}
+        Leave it off until all users are in a persona group.</div>
+    </div>`);
+  }
+  if (need.trusted) {
+    sections.push(`<div class="ti-section">
+      <h4>Trusted locations</h4>
+      <div class="ti-help">Policies in this selection rely on trusted named locations (service accounts and workload
+        identities can only sign in from them). Add the customer's office public IP ranges, or leave blank if
+        trusted locations already exist.</div>
+      <div class="ti-row" data-key="trusted">
+        <label>Location name</label>
+        <div></div>
+        <input class="ti-in" data-locname value="${htmlEsc(saved.trustedName || 'CDW - Trusted - Office public IPs')}">
+        <label>IP ranges<span class="ti-sub">CIDR, one per line</span></label>
+        <div></div>
+        <textarea class="ti-in" data-ranges placeholder="203.0.113.0/24"></textarea>
+        <div class="ti-err"></div>
+      </div>
+    </div>`);
+  }
+  if (need.hasIntune) {
+    sections.push(`<div class="ti-section">
+      <h4>Intune pilot group</h4>
+      <div class="ti-help">New Intune policies are assigned to this group. Skip it to create them unassigned.</div>
+      ${tiGroupRow('pilot', 'Pilot group', 'Users or devices', saved.pilot, 'CDW-Intune-Pilot')}
+    </div>`);
+  }
+  if (need.hasCA) {
+    const st = saved.caState || 'disabled';
+    sections.push(`<div class="ti-section">
+      <h4>Conditional Access starting state</h4>
+      <div class="ti-radio">
+        <label><input type="radio" name="ti-state" value="disabled" ${st === 'disabled' ? 'checked' : ''}> Off</label>
+        <label><input type="radio" name="ti-state" value="enabledForReportingButNotEnforced" ${st !== 'disabled' ? 'checked' : ''}> Report-only</label>
+      </div>
+      <div class="ti-help" style="margin-top:6px">Report-only shows the impact in sign-in logs without enforcing anything.
+        Report-only policies that require a compliant device can still prompt Mac, iOS and Android users for a
+        device certificate.</div>
+    </div>`);
+  }
+  if (need.workload) {
+    sections.push(`<div class="ti-section"><div class="ti-help">${need.workload} workload identity
+      polic${need.workload === 1 ? 'y' : 'ies'} will be created targeting no service principals. Pick the service
+      principals in the Entra admin centre (this needs Workload Identities Premium).</div></div>`);
+  }
+
+  return new Promise(resolve => {
+    const overlay = document.createElement('div');
+    overlay.className = 'confirm-overlay';
+    overlay.innerHTML = `
+      <div class="confirm-dialog ti-dialog">
+        <h3>Tenant inputs</h3>
+        <p>Customer-specific values for this deployment. They're remembered for this tenant.</p>
+        <datalist id="ti-groups"></datalist>
+        ${sections.join('')}
+        <div class="ti-warn" id="ti-warn"></div>
+        <div class="confirm-actions" style="margin-top:18px">
+          <button class="btn btn-ghost" id="ti-cancel">Cancel</button>
+          <button class="btn btn-deploy" id="ti-ok">Continue</button>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+    requestAnimationFrame(() => overlay.classList.add('visible'));
+
+    const close = value => {
+      overlay.classList.remove('visible');
+      setTimeout(() => overlay.remove(), 200);
+      resolve(value);
+    };
+    overlay.querySelector('#ti-cancel').addEventListener('click', () => close(null));
+
+    let acknowledged = null;     // warnings text the consultant has already seen
+    const okBtn = overlay.querySelector('#ti-ok');
+    okBtn.addEventListener('click', async () => {
+      okBtn.disabled = true; okBtn.textContent = 'Checking…';
+      overlay.querySelectorAll('.ti-err').forEach(e => e.textContent = '');
+      const created = [], warnings = [];
+      const result = { personas: { ...(saved.personas || {}) }, created };
+      let failed = false;
+
+      for (const row of overlay.querySelectorAll('.ti-row[data-key]')) {
+        const key = row.dataset.key;
+        if (key === 'trusted') continue;
+        const mode = row.querySelector('[data-mode]').value;
+        const name = row.querySelector('[data-name]').value;
+        try {
+          const g = await tiResolveGroup(mode, name, created);
+          if (g) row.querySelector('[data-mode]').value = 'existing';   // don't create twice on a retry
+          if (key.startsWith('persona:')) {
+            const k = key.slice(8);
+            if (g) result.personas[k] = g; else delete result.personas[k];
+          } else result[key] = g;
+        } catch (e) {
+          row.querySelector('.ti-err').textContent = e.message; failed = true;
+        }
+      }
+
+      if (need.trusted) {
+        const row = overlay.querySelector('.ti-row[data-key="trusted"]');
+        const { ranges, bad } = tiParseRanges(row.querySelector('[data-ranges]').value);
+        const locName = row.querySelector('[data-locname]').value.trim();
+        result.trustedName = locName;
+        if (bad.length) { row.querySelector('.ti-err').textContent = `Not CIDR ranges: ${bad.join(', ')}`; failed = true; }
+        else {
+          try {
+            const locs = await graphGetAll('https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations');
+            const existing = locs.find(l => l.displayName === locName);
+            if (ranges.length && !existing) {
+              await graphSend('POST', 'https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations', {
+                '@odata.type': '#microsoft.graph.ipNamedLocation', displayName: locName, isTrusted: true,
+                ipRanges: ranges.map(c => ({
+                  '@odata.type': c.includes(':') ? '#microsoft.graph.iPv6CidrRange' : '#microsoft.graph.iPv4CidrRange',
+                  cidrAddress: c })),
+              });
+              created.push(`trusted location ${htmlEsc(locName)}`);
+              row.querySelector('[data-ranges]').value = '';
+              result.trustedReady = true;
+            } else {
+              if (ranges.length && existing) warnings.push(`A named location called "${locName}" already exists, so the ranges entered weren't added to it.`);
+              result.trustedReady = locs.some(l => l.isTrusted);
+              if (!result.trustedReady) warnings.push('There are no trusted named locations, so "block untrusted locations" policies will be created without their trusted-location exclusion. Add office IP ranges, or add the exclusion before switching them on.');
+            }
+          } catch (e) { row.querySelector('.ti-err').textContent = e.message; failed = true; }
+        }
+      }
+
+      if (need.hasCA) {
+        result.caState = overlay.querySelector('input[name="ti-state"]:checked')?.value || 'disabled';
+        if (!result.breakGlass) warnings.push('No break-glass group: the Conditional Access policies will have no emergency access exclusion.');
+        else {
+          try {
+            const r = await fetch(`https://graph.microsoft.com/v1.0/groups/${result.breakGlass.id}/members/$count`,
+              { headers: { Authorization: `Bearer ${graphToken}`, ConsistencyLevel: 'eventual' } });
+            if (r.ok && Number(await r.text()) === 0)
+              warnings.push(`${htmlEsc(result.breakGlass.name)} has no members yet. Add the break-glass accounts before switching any policy on.`);
+          } catch { /* membership check is advisory */ }
+        }
+        if (need.nonPersonas && !Object.values(result.personas).some(g => g?.id))
+          warnings.push('No persona groups are set, so "block non-personas" will be created targeting nobody.');
+      }
+
+      // Save what resolved, even if something else failed, so retries don't recreate it.
+      const { created: _c, ...persist } = result;
+      tiSave({ ...saved, ...persist });
+
+      okBtn.disabled = false;
+      if (failed) { okBtn.textContent = 'Continue'; return; }
+      const warnText = warnings.join('|');
+      if (warnings.length && acknowledged !== warnText) {
+        acknowledged = warnText;
+        overlay.querySelector('#ti-warn').innerHTML = `<strong>Check before continuing</strong><ul>${warnings.map(w => `<li>${w}</li>`).join('')}</ul>`;
+        okBtn.textContent = 'Continue anyway';
+        return;
+      }
+      close(result);
+    });
+  });
+}
+
+// Applies the tenant inputs to a CA policy body. Returns notes for the deploy log.
+function tiApplyCa(body, srcName, ti) {
+  const notes = [];
+  const u = (body.conditions ||= {}).users ||= {};
+  const persona = caPersona(srcName);
+  const addExclude = ids => { u.excludeGroups = [...new Set([...tiArr(u.excludeGroups), ...ids])]; };
+
+  if (persona === 'WorkloadIdentities') {
+    notes.push('Workload identity policy: pick its service principals before switching it on');
+  } else {
+    if (ti.breakGlass?.id) addExclude([ti.breakGlass.id]);
+    if (caUntargeted(body)) {
+      const group = ti.personas?.[persona];
+      if (group?.id) {
+        u.includeUsers = []; u.includeGroups = [group.id];
+      } else if (caIsNonPersonas(srcName)) {
+        const ids = Object.values(ti.personas || {}).map(g => g?.id).filter(Boolean);
+        if (ids.length) {
+          u.includeUsers = ['All']; addExclude(ids);
+          u.excludeGuestsOrExternalUsers = TI_ALL_GUESTS;
+        } else notes.push('Targets nobody: no persona groups set');
+      } else if (persona === 'Guests') {
+        u.includeUsers = []; u.includeGuestsOrExternalUsers = TI_ALL_GUESTS;
+      } else {
+        notes.push('Targets nobody: assign users before switching it on');
+      }
+    }
+  }
+
+  const loc = body.conditions.locations;
+  if (loc && caBlocksUntrusted(srcName) && !tiArr(loc.excludeLocations).length) {
+    if (ti.trustedReady) loc.excludeLocations = ['AllTrusted'];
+    else notes.push('No trusted-location exclusion: add one before switching it on');
+  }
+  if (ti.caState) body.state = ti.caState;
+  return notes;
+}
+
+// Assigns a newly created Intune object to the pilot group.
+async function tiAssignPilot(p, json, id) {
+  const base = getDeleteUrl({ ...p, tenantId: id, _json: json });
+  if (!base) return false;
+  const target = { '@odata.type': '#microsoft.graph.groupAssignmentTarget', groupId: tenantInputs.pilot.id };
+  let url = `${base}/assign`, body = { assignments: [{ target }] };
+  if (p.cat === 'EnrolmentRestrictions' || p.cat === 'EnrolmentStatusPage') {
+    body = { enrollmentConfigurationAssignments: [{ target }] };
+  } else if (p.cat === 'AutopilotProfiles') {
+    url = `${base}/assignments`; body = { target };
+  } else if (p.cat === 'CompliancePolicies') {
+    body = { assignments: [{ '@odata.type': '#microsoft.graph.deviceCompliancePolicyAssignment', target }] };
+  }
+  await graphSend('POST', url, body);
+  return true;
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -4034,6 +4448,10 @@ function getDeleteUrl(p) {
       return `${GRAPH}/deviceManagement/deviceEnrollmentConfigurations/${p.tenantId}`;
     case 'AutopilotProfiles':
       return `${GRAPH}/deviceManagement/windowsAutopilotDeploymentProfiles/${p.tenantId}`;
+    case 'FeatureUpdates':
+      return `${GRAPH}/deviceManagement/windowsFeatureUpdateProfiles/${p.tenantId}`;
+    case 'AppConfigurationPolicies':
+      return `${GRAPH}/deviceAppManagement/targetedManagedAppConfigurations/${p.tenantId}`;
     case 'AppProtectionPolicies': {
       const name = (p.displayName || '').toLowerCase();
       const odataType = (p._json?.['@odata.type'] || '').toLowerCase();
