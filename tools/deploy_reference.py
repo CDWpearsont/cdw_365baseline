@@ -268,6 +268,16 @@ def apply_singleton(graph, kind, src, dry_run):
     return f"{'Would apply' if dry_run else 'Applied'} {url.rsplit('/', 1)[-1]}"
 
 
+def load_library_only(root="."):
+    """Policies the reference tenant can't hold (licensing). Path -> reason."""
+    path = os.path.join(root, "library-only.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8-sig") as fh:
+        data = json.load(fh)
+    return {f["path"]: f.get("reason", "") for f in data.get("files", [])}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -284,8 +294,12 @@ def main():
 
     existing = {}
     rows, failed, workloads = [], 0, set()
+    library_only = load_library_only()
 
     for path in files:
+        if path.replace("\\", "/") in library_only:
+            rows.append((path, "skipped", "Library-only: " + library_only[path.replace("\\", "/")]))
+            continue
         kind, workload = kind_for(path)
         if not kind:
             rows.append((path, "skipped", "Folder not supported by automation - deploy from the test site"))

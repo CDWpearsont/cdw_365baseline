@@ -107,6 +107,13 @@ def main(files):
         return 0
     bad = 0
     lines = ["## Policy file checks", "", "| File | Result |", "|---|---|"]
+    # Every library-only entry must point at a policy file that exists.
+    if os.path.exists("library-only.json"):
+        with open("library-only.json", encoding="utf-8-sig") as fh:
+            for entry in json.load(fh).get("files", []):
+                if not os.path.exists(entry.get("path", "")):
+                    print(f"::error file=library-only.json::Listed file not found: {entry.get('path')}")
+                    bad += 1
     for f in sorted(files):
         errors, warnings = check(f)
         for e in errors:

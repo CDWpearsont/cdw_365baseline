@@ -71,7 +71,9 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-settings-catalog-device-security-local-security-policies-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user"
+        "intune-windows-compliance-policy-defender-for-endpoint-user",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
       ],
       "order": 30,
       "licensing": [
@@ -103,7 +105,9 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-settings-catalog-device-security-local-security-policies-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user"
+        "intune-windows-compliance-policy-defender-for-endpoint-user",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
       ],
       "order": 35,
       "licensing": [
@@ -675,6 +679,56 @@
       "licensing": [
         "Microsoft Entra ID P1"
       ]
+    },
+    {
+      "id": "intune-win-epm-support",
+      "name": "Windows - Endpoint Privilege Management (support approval)",
+      "description": "Standard users request elevation from IT for anything not covered by an elevation rule. All elevations are reported.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Privilege Management",
+        "Support approval"
+      ],
+      "include": [
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device"
+      ],
+      "order": 200,
+      "rule": null,
+      "exclude": [],
+      "licensing": [
+        "Microsoft 365 E5 (includes Endpoint Privilege Management), or the Endpoint Privilege Management add-on with Intune Plan 1"
+      ],
+      "prerequisites": [
+        "Remove users from the local Administrators group (the CDW standard Local Administrators policy does this)",
+        "Elevation rules for the customer's line-of-business apps, written from the elevation report after a few weeks of reporting"
+      ],
+      "notes": "Not validated in the CDW reference tenant: the developer tenant can't hold Endpoint Privilege Management licences. Test with a pilot group first."
+    },
+    {
+      "id": "intune-win-epm-user",
+      "name": "Windows - Endpoint Privilege Management (user confirmation)",
+      "description": "Standard users elevate after a business justification and Windows authentication. All elevations are reported. A stepping stone while elevation rules are written.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Privilege Management",
+        "User confirmation"
+      ],
+      "include": [
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
+      ],
+      "order": 201,
+      "rule": null,
+      "exclude": [],
+      "licensing": [
+        "Microsoft 365 E5 (includes Endpoint Privilege Management), or the Endpoint Privilege Management add-on with Intune Plan 1"
+      ],
+      "prerequisites": [
+        "Remove users from the local Administrators group (the CDW standard Local Administrators policy does this)",
+        "Elevation rules for the customer's line-of-business apps, written from the elevation report after a few weeks of reporting"
+      ],
+      "notes": "Not validated in the CDW reference tenant: the developer tenant can't hold Endpoint Privilege Management licences. Test with a pilot group first."
     }
   ],
   "goals": [
@@ -982,6 +1036,31 @@
           "note": "Tenant policies",
           "bundles": [
             "entra-tenant-config"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "least-privilege",
+      "tower": "Intune",
+      "icon": "key",
+      "title": "Remove local admin rights",
+      "outcome": "Users work as standard users and elevate through Endpoint Privilege Management, with every elevation reported.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "IT approves each request",
+          "bundles": [
+            "intune-win-epm-support"
+          ]
+        },
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11 (self-service)",
+          "note": "Users justify and re-authenticate",
+          "bundles": [
+            "intune-win-epm-user"
           ]
         }
       ]
