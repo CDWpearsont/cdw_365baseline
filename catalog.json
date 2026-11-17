@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T11:51:52+00:00",
-  "sourceCommit": "ca7b8b29ef0ff522102e2781a8592f04dc33a9df",
+  "generatedAt": "2026-11-17T11:52:06+00:00",
+  "sourceCommit": "1a8d7a5527c20b45f1445950282e4c266bcfe459",
   "counts": {
     "policies": 241,
     "bundles": 22,
