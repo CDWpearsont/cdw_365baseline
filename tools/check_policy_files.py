@@ -18,7 +18,7 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
-from deploy_reference import ENDPOINTS, kind_for  # noqa: E402
+from deploy_reference import ENDPOINTS, SINGLETONS, kind_for  # noqa: E402
 
 
 def safe_name(name):
@@ -40,19 +40,27 @@ def check(path):
     kind, _ = kind_for(path)
     norm = path.replace("\\", "/")
     is_entra = norm.startswith("EntraConfig/")
-    name_key = ENDPOINTS[kind][1] if kind else ("name" if "name" in data else "displayName")
-    name = data.get(name_key)
-
     if not kind:
         # Naming rules for these folders differ per type; only check the JSON parses.
         warnings.append("Folder not supported by deploy-reference - deploy this one from the test site")
         return errors, warnings
+    if kind in SINGLETONS:
+        # Tenant-wide settings: no export naming rules, just the CDW metadata
+        if not data.get("displayName"):
+            errors.append("Missing 'displayName' (CDW metadata shown in the catalog)")
+        if kind == "directorySetting" and not data.get("templateId"):
+            errors.append("Missing 'templateId'")
+        if kind == "authMethod" and not (data.get("id") or data.get("@odata.type")):
+            errors.append("Missing 'id' or '@odata.type' (which authentication method)")
+        return errors, warnings
+    name_key = ENDPOINTS[kind][1]
+    name = data.get(name_key)
     if not name:
         errors.append(f"Missing '{name_key}'")
         return errors, warnings
 
-    if is_entra and kind == "conditionalAccess" and not name.startswith("CDW"):
-        errors.append("CA displayName must start with 'CDW' or the nightly export will ignore it")
+    if is_entra and not name.startswith("CDW"):
+        errors.append("Entra policy names must start with 'CDW' or the nightly export will ignore them")
     if not is_entra and "CDW Baseline" not in name:
         errors.append("Name must contain 'CDW Baseline' or the nightly export will ignore it")
 
