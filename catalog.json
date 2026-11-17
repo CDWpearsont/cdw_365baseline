@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T13:18:13+00:00",
-  "sourceCommit": "88f8d8aad992aa0c1ccbcf3f011343164dabebb5",
+  "generatedAt": "2026-11-17T13:27:56+00:00",
+  "sourceCommit": null,
   "counts": {
-    "policies": 242,
-    "bundles": 22,
-    "issues": 252,
+    "policies": 244,
+    "bundles": 24,
+    "issues": 254,
     "byConfidence": {
       "medium": 114,
       "low": 3,
-      "high": 125
+      "high": 127
     }
   },
   "taxonomy": {
@@ -142,6 +142,7 @@
       "Disk Encryption",
       "ESP CDW Baseline",
       "Encryption",
+      "Endpoint Privilege Management",
       "Firewall",
       "Group Unified",
       "Internet Explorer Legacy",
@@ -506,6 +507,31 @@
           "note": "Tenant policies",
           "bundles": [
             "entra-tenant-config"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "least-privilege",
+      "tower": "Intune",
+      "icon": "key",
+      "title": "Remove local admin rights",
+      "outcome": "Users work as standard users and elevate through Endpoint Privilege Management, with every elevation reported.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "IT approves each request",
+          "bundles": [
+            "intune-win-epm-support"
+          ]
+        },
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11 (self-service)",
+          "note": "Users justify and re-authenticate",
+          "bundles": [
+            "intune-win-epm-user"
           ]
         }
       ]
@@ -4422,6 +4448,78 @@
       "bundles": [
         "intune-win-cdw-standard",
         "intune-win-cdw-standard-enforced"
+      ]
+    },
+    {
+      "id": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__Support_Approval__-_v1_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__Support_Approval__-_v1_0.json",
+      "displayName": "Win - CDW Baseline - ES - Endpoint Privilege Management - D - Elevation Settings (Support Approval) - v1.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Endpoint Security",
+      "framework": null,
+      "scope": "Device",
+      "version": "1.0",
+      "area": "Endpoint Privilege Management",
+      "subArea": "Elevation Settings Support Approval",
+      "securityDomain": null,
+      "settingCount": 4,
+      "policyHash": "sha256:07bc8d0969954a832ef57b12e5e71cc50a9d02048cdb61c6d2bebd3950234aff",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "libraryOnly": true,
+      "bundles": [
+        "intune-win-epm-support"
+      ]
+    },
+    {
+      "id": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__User_Confirmation__-_v1_0.json",
+      "fileName": "Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__User_Confirmation__-_v1_0.json",
+      "displayName": "Win - CDW Baseline - ES - Endpoint Privilege Management - D - Elevation Settings (User Confirmation) - v1.0",
+      "workload": "Intune",
+      "platform": "Windows",
+      "policyType": "Endpoint Security",
+      "framework": null,
+      "scope": "Device",
+      "version": "1.0",
+      "area": "Endpoint Privilege Management",
+      "subArea": "Elevation Settings User Confirmation",
+      "securityDomain": null,
+      "settingCount": 5,
+      "policyHash": "sha256:5146b15701e9f6361c969ee794366ac120f57f05ee39eb304bc8206a95079e9d",
+      "derivedFrom": {
+        "platform": "filename",
+        "policyType": "filename",
+        "scope": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "high",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "libraryOnly": true,
+      "bundles": [
+        "intune-win-epm-user"
       ]
     },
     {
@@ -9460,7 +9558,9 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-settings-catalog-device-security-local-security-policies-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user"
+        "intune-windows-compliance-policy-defender-for-endpoint-user",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
       ],
       "order": 30,
       "licensing": [
@@ -9546,7 +9646,9 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-settings-catalog-device-security-local-security-policies-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user"
+        "intune-windows-compliance-policy-defender-for-endpoint-user",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
       ],
       "order": 35,
       "licensing": [
@@ -10415,6 +10517,64 @@
         "entra-cross-platform-tenant-policy-device-registration-policy-tenant"
       ],
       "memberCount": 7
+    },
+    {
+      "id": "intune-win-epm-support",
+      "name": "Windows - Endpoint Privilege Management (support approval)",
+      "description": "Standard users request elevation from IT for anything not covered by an elevation rule. All elevations are reported.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Privilege Management",
+        "Support approval"
+      ],
+      "include": [
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device"
+      ],
+      "order": 200,
+      "rule": null,
+      "exclude": [],
+      "licensing": [
+        "Microsoft 365 E5 (includes Endpoint Privilege Management), or the Endpoint Privilege Management add-on with Intune Plan 1"
+      ],
+      "prerequisites": [
+        "Remove users from the local Administrators group (the CDW standard Local Administrators policy does this)",
+        "Elevation rules for the customer's line-of-business apps, written from the elevation report after a few weeks of reporting"
+      ],
+      "notes": "Not validated in the CDW reference tenant: the developer tenant can't hold Endpoint Privilege Management licences. Test with a pilot group first.",
+      "members": [
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device"
+      ],
+      "memberCount": 1
+    },
+    {
+      "id": "intune-win-epm-user",
+      "name": "Windows - Endpoint Privilege Management (user confirmation)",
+      "description": "Standard users elevate after a business justification and Windows authentication. All elevations are reported. A stepping stone while elevation rules are written.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Privilege Management",
+        "User confirmation"
+      ],
+      "include": [
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
+      ],
+      "order": 201,
+      "rule": null,
+      "exclude": [],
+      "licensing": [
+        "Microsoft 365 E5 (includes Endpoint Privilege Management), or the Endpoint Privilege Management add-on with Intune Plan 1"
+      ],
+      "prerequisites": [
+        "Remove users from the local Administrators group (the CDW standard Local Administrators policy does this)",
+        "Elevation rules for the customer's line-of-business apps, written from the elevation report after a few weeks of reporting"
+      ],
+      "notes": "Not validated in the CDW reference tenant: the developer tenant can't hold Endpoint Privilege Management licences. Test with a pilot group first.",
+      "members": [
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
+      ],
+      "memberCount": 1
     }
   ],
   "conflicts": [
@@ -10513,6 +10673,14 @@
         "device_vendor_msft_defender_configuration_engineupdateschannel",
         "device_vendor_msft_defender_configuration_platformupdateschannel",
         "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ]
+    },
+    {
+      "a": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
+      "b": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
+      "settings": 1,
+      "settingIds": [
+        "device_vendor_msft_policy_elevationclientsettings_defaultelevationresponse"
       ]
     },
     {
@@ -11352,6 +11520,18 @@
     {
       "policyId": "intune-windows-endpoint-security-encryption-personal-data-encryption-user",
       "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Encryption_-_U_-_Personal_Data_Encryption_-_v3_4.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__Support_Approval__-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__User_Confirmation__-_v1_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },

@@ -1,0 +1,13 @@
+{
+  "_comment": "Policies the reference tenant can't hold, usually because the licence isn't available in a developer tenant. The nightly export leaves these files alone and the pipeline skips them; the deployer site deploys them to customers as normal. They have not been validated in the reference tenant.",
+  "files": [
+    {
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__Support_Approval__-_v1_0.json",
+      "reason": "Endpoint Privilege Management needs Microsoft 365 E5 (or the Intune Suite / EPM add-on); not available in the developer tenant"
+    },
+    {
+      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__User_Confirmation__-_v1_0.json",
+      "reason": "Endpoint Privilege Management needs Microsoft 365 E5 (or the Intune Suite / EPM add-on); not available in the developer tenant"
+    }
+  ]
+}

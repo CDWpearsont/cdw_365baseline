@@ -576,6 +576,12 @@ def discover(root: str, policy_dirs: list[str], metadata_dir: str) -> list[str]:
 def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: str) -> dict:
     issues: list[dict] = []
     rel_paths = discover(root, policy_dirs, metadata_dir)
+    # Policies that can't be held in the reference tenant (see library-only.json).
+    library_only = set()
+    lo_path = os.path.join(root, "library-only.json")
+    if os.path.exists(lo_path):
+        with open(lo_path, encoding="utf-8-sig") as fh:
+            library_only = {f["path"] for f in json.load(fh).get("files", [])}
 
     policies = []
     for rel in rel_paths:
@@ -586,6 +592,8 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
             continue
         policy = derive(rel, abs_path)
         policy = apply_sidecar(policy, load_sidecar(sidecar_path(root, rel, metadata_dir)))
+        if rel.replace("\\", "/") in library_only:
+            policy["libraryOnly"] = True
         policies.append(policy)
 
     # Identity collisions would silently merge two distinct policies.

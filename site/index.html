@@ -1848,7 +1848,7 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.7.0',
+  version: '3.8.0',
   date:    '2026-09-17'
 };
 
@@ -8241,7 +8241,8 @@ function bbRenderReview() {
         ${byType[k].sort((a, b) => (a.displayName || '').localeCompare(b.displayName || ''))
           .map(r => `<div class="bb-policy-item">
             <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            ${htmlEsc(r.displayName || r.fileName)}</div>`).join('')}
+            ${htmlEsc(r.displayName || r.fileName)}${r.libraryOnly
+              ? ' <span class="bb-note" title="Not in the CDW reference tenant (licensing), so not validated there">\u00b7 not validated in reference tenant</span>' : ''}</div>`).join('')}
       </div>
     </div>`).join('');
 

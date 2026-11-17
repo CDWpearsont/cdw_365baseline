@@ -106,7 +106,14 @@ jobs:
             function Clean-FolderForCDW {
               param([string]$FolderPath, [string[]]$CurrentPolicyNames)
               if (-not (Test-Path $FolderPath)) { return }
+              # Library-only policies can't exist in the reference tenant (licensing), so keep them.
+              $libraryOnly = @()
+              if (Test-Path ./library-only.json) {
+                $libraryOnly = @((Get-Content ./library-only.json -Raw | ConvertFrom-Json).files | ForEach-Object { $_.path })
+              }
               Get-ChildItem -Path $FolderPath -File -Filter "*.json" | ForEach-Object {
+                $rel = [IO.Path]::GetRelativePath((Get-Location).Path, $_.FullName) -replace '\\', '/'
+                if ($libraryOnly -contains $rel) { return }
                 if ($CurrentPolicyNames -notcontains $_.BaseName) {
                   Write-Output "Removing obsolete: $($_.Name)"
                   Remove-Item $_.FullName -Force
