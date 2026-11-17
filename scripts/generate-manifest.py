@@ -46,7 +46,7 @@ WORKLOADS = {
     'defenderoffice':    ('mdo',         'powershell'),
     'exchangeonline':    ('exchange',    'powershell'),
     'exchangeconfig':    ('exchange',    'powershell'),
-    'sharepointconfig':  ('sharepoint',  'powershell'),
+    'sharepointconfig':  ('sharepoint',  'graph'),
     'onedriveconfig':    ('onedrive',    'powershell'),
     'teamsconfig':       ('teams',       'powershell'),
     'purviewconfig':     ('purview',     'powershell'),

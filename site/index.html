@@ -1826,7 +1826,7 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.5.0',
+  version: '3.6.0',
   date:    '2026-09-17'
 };
 
@@ -2184,6 +2184,14 @@ const SCOPES = [
   'Policy.ReadWrite.ConditionalAccess',
   'Policy.Read.All',
   'Application.Read.All',
+  // Tenant-wide Entra and SharePoint settings (Tenant Configuration blocks)
+  'Policy.ReadWrite.Authorization',
+  'Policy.ReadWrite.CrossTenantAccess',
+  'Policy.ReadWrite.ApplicationConfiguration',
+  'Policy.ReadWrite.AuthenticationMethod',
+  'Policy.ReadWrite.DeviceConfiguration',
+  'SharePointTenantSettings.ReadWrite.All',
+  'Directory.ReadWrite.All',
 ];
 
 // ═══════════════════════════════════════════════════════════════════
@@ -2607,8 +2615,10 @@ async function saveOverlay() {
 const DEPLOYABLE_CATS = {
   intune:   ['EndpointSecurity','SettingsCatalog','CompliancePolicies',
              'DeviceConfigurations','EnrolmentRestrictions','AppProtectionPolicies',
-             'AutopilotProfiles','EnrolmentStatusPage'],
-  entra:    ['ConditionalAccess','NamedLocations','AuthMethods'],
+             'AutopilotProfiles','EnrolmentStatusPage','FeatureUpdates','AppConfigurationPolicies'],
+  entra:    ['ConditionalAccess','NamedLocations','AuthMethods','AuthorizationPolicy',
+             'CrossTenantAccessPolicy','DeviceRegistrationPolicy','AppManagementPolicies',
+             'DirectorySettings','TenantSettings'],
   defender: ['DefenderEndpoint','DefenderOffice'],
 };
 
@@ -2622,6 +2632,7 @@ const WORKLOAD_TAB = {
   defender: 'defender',
   mdca:     'defender',
   mdo:      'defender',
+  sharepoint: 'entra',   // SharePoint/OneDrive tenant settings deploy through Graph
 };
 const API_BASE    = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents`; // kept for reference — Trees API used instead
 
@@ -2640,6 +2651,8 @@ const WORKLOADS = {
       { folder: 'IntuneConfig/AppProtectionPolicies',   cat: 'AppProtectionPolicies', label: 'App Protection (MAM)'   },
       { folder: 'IntuneConfig/AutopilotProfiles',       cat: 'AutopilotProfiles',     label: 'Autopilot Profiles'     },
       { folder: 'IntuneConfig/EnrolmentStatusPage',     cat: 'EnrolmentStatusPage',   label: 'Enrolment Status Page'  },
+      { folder: 'IntuneConfig/FeatureUpdates',          cat: 'FeatureUpdates',        label: 'Feature Updates'        },
+      { folder: 'IntuneConfig/AppConfigurationPolicies', cat: 'AppConfigurationPolicies', label: 'App Configuration (MAM)' },
     ],
     deployFn: deployIntunePolicy,
     existsCheckFn: checkIntuneExists,
@@ -2649,6 +2662,12 @@ const WORKLOADS = {
       { folder: 'EntraConfig/ConditionalAccess', cat: 'ConditionalAccess', label: 'Conditional Access' },
       { folder: 'EntraConfig/NamedLocations',    cat: 'NamedLocations',    label: 'Named Locations'    },
       { folder: 'EntraConfig/AuthMethods',       cat: 'AuthMethods',       label: 'Auth Methods'       },
+      { folder: 'EntraConfig/AuthorizationPolicy',      cat: 'AuthorizationPolicy',      label: 'Authorization'        },
+      { folder: 'EntraConfig/CrossTenantAccessPolicy',  cat: 'CrossTenantAccessPolicy',  label: 'Cross-Tenant Access'  },
+      { folder: 'EntraConfig/DeviceRegistrationPolicy', cat: 'DeviceRegistrationPolicy', label: 'Device Registration'  },
+      { folder: 'EntraConfig/AppManagementPolicies',    cat: 'AppManagementPolicies',    label: 'App Management'       },
+      { folder: 'EntraConfig/DirectorySettings',        cat: 'DirectorySettings',        label: 'Directory Settings'   },
+      { folder: 'SharePointConfig/TenantSettings',      cat: 'TenantSettings',           label: 'SharePoint & OneDrive' },
     ],
     deployFn: deployEntraPolicy,
     existsCheckFn: checkEntraExists,
@@ -3090,7 +3109,7 @@ async function graphGetAll(url) {
 // EXISTS CHECKS
 // ═══════════════════════════════════════════════════════════════════
 async function checkIntuneExists() {
-  const [comp, dc, cfg, er, mamAndroid, mamIos, ap] = await Promise.all([
+  const [comp, dc, cfg, er, mamAndroid, mamIos, ap, fu, mac] = await Promise.all([
     graphGetAll(`${GRAPH}/deviceManagement/deviceCompliancePolicies?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceManagement/deviceConfigurations?$select=id,displayName`),
     graphGetAll(`${GRAPH}/deviceManagement/configurationPolicies?$select=id,name`),
@@ -3099,6 +3118,8 @@ async function checkIntuneExists() {
     graphGetAll(`${GRAPH}/deviceAppManagement/iosManagedAppProtections?$select=id,displayName`),
     // No $select — a rejected query returns [] silently and would mark every profile 'ready'
     graphGetAll(`${GRAPH}/deviceManagement/windowsAutopilotDeploymentProfiles`),
+    graphGetAll(`${GRAPH}/deviceManagement/windowsFeatureUpdateProfiles`),
+    graphGetAll(`${GRAPH}/deviceAppManagement/targetedManagedAppConfigurations`),
   ]);
   const compMap = new Map(comp.map(p => [p.displayName, p.id]));
   const dcMap   = new Map(dc.map(p => [p.displayName, p.id]));
@@ -3106,6 +3127,8 @@ async function checkIntuneExists() {
   const erMap   = new Map(er.map(p => [p.displayName, p.id]));
   const mamMap  = new Map([...mamAndroid, ...mamIos].map(p => [p.displayName, p.id]));
   const apMap   = new Map(ap.map(p => [p.displayName, p.id]));
+  const fuMap   = new Map(fu.map(p => [p.displayName, p.id]));
+  const macMap  = new Map(mac.map(p => [p.displayName, p.id]));
   for (const p of policies.intune) {
     const deployName = getDeployName(p);
     if (p.cat === 'CompliancePolicies') {
@@ -3119,6 +3142,10 @@ async function checkIntuneExists() {
       p.tenantId = mamMap.get(deployName) || mamMap.get(p.displayName) || null;
     } else if (p.cat === 'AutopilotProfiles') {
       p.tenantId = apMap.get(deployName) || apMap.get(p.displayName) || null;
+    } else if (p.cat === 'FeatureUpdates') {
+      p.tenantId = fuMap.get(deployName) || fuMap.get(p.displayName) || null;
+    } else if (p.cat === 'AppConfigurationPolicies') {
+      p.tenantId = macMap.get(deployName) || macMap.get(p.displayName) || null;
     } else {
       p.tenantId = cfgMap.get(deployName) || cfgMap.get(p.displayName) || null;
     }
@@ -3594,6 +3621,37 @@ async function deployIntunePolicy(p, json) {
     }
     return createdId;
 
+  } else if (p.cat === 'FeatureUpdates') {
+    url = `${GRAPH}/deviceManagement/windowsFeatureUpdateProfiles`;
+    body = stripReadOnly(json);
+    delete body.endOfSupportDate;
+    delete body.deployableContentDisplayName;
+
+  } else if (p.cat === 'AppConfigurationPolicies') {
+    // MAM app configuration: create, then target the apps in one call.
+    url = `${GRAPH}/deviceAppManagement/targetedManagedAppConfigurations`;
+    body = stripReadOnly(json);
+    const apps = Array.isArray(json.apps) ? json.apps.map(a => { const c = { ...a }; delete c.id; delete c.version; return c; }) : [];
+    delete body.apps; delete body.deployedAppCount; delete body.isAssigned;
+    if (branding.intune.mode !== 'original' && body.displayName) {
+      body.displayName = applyBranding(body.displayName, 'intune');
+    }
+    const r = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${graphToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!r.ok) throw new Error(`Graph ${r.status}: ${await r.text()}`);
+    const created = await r.json();
+    const group = json.appGroupType || 'selectedPublicApps';
+    const t = await fetch(`${url}/${created.id}/targetApps`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${graphToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ apps: group === 'selectedPublicApps' ? apps : [], appGroupType: group })
+    });
+    if (!t.ok) throw new Error(`Created, but targeting apps failed: Graph ${t.status}: ${await t.text()}`);
+    return created.id || null;
+
   } else {
     // EndpointSecurity + SettingsCatalog → configurationPolicies
     url = `${GRAPH}/deviceManagement/configurationPolicies`;
@@ -3709,9 +3767,14 @@ async function deployEntraPolicy(p, json) {
 
   } else if (p.cat === 'NamedLocations') {
     url = `https://graph.microsoft.com/v1.0/identity/conditionalAccess/namedLocations`;
+  } else if (TENANT_SETTING_URLS[p.cat] || p.cat === 'DirectorySettings') {
+    return deployTenantSetting(p, json);
   } else {
-    // AuthMethods — these are tenant-wide settings, use PATCH not POST
-    const methodType = body['@odata.type']?.replace('#microsoft.graph.','') || 'unknownMethod';
+    // AuthMethods — these are tenant-wide settings, use PATCH not POST.
+    // The URL takes the method id (fido2, microsoftAuthenticator, ...), not the type name.
+    const methodType = json.id || (json['@odata.type'] || '').replace('#microsoft.graph.', '')
+      .replace('AuthenticationMethodConfiguration', '') || 'unknownMethod';
+    ['displayName', 'description'].forEach(k => delete body[k]);
     url = `${GRAPH}/policies/authenticationMethodsPolicy/authenticationMethodConfigurations/${methodType}`;
     const r = await fetch(url, {
       method: 'PATCH',
@@ -3734,6 +3797,44 @@ async function deployEntraPolicy(p, json) {
   }
   const created = await r.json();
   return created.id || null;
+}
+
+// Tenant-wide settings: one object per tenant, updated in place. displayName and
+// description in these files are CDW metadata, not Graph properties.
+const TENANT_SETTING_URLS = {
+  AuthorizationPolicy:      ['PATCH', 'https://graph.microsoft.com/v1.0/policies/authorizationPolicy'],
+  CrossTenantAccessPolicy:  ['PATCH', 'https://graph.microsoft.com/v1.0/policies/crossTenantAccessPolicy/default'],
+  DeviceRegistrationPolicy: ['PUT',   'https://graph.microsoft.com/beta/policies/deviceRegistrationPolicy'],
+  AppManagementPolicies:    ['PATCH', 'https://graph.microsoft.com/v1.0/policies/defaultAppManagementPolicy'],
+  TenantSettings:           ['PATCH', 'https://graph.microsoft.com/v1.0/admin/sharepoint/settings'],
+};
+const TENANT_SETTING_METADATA = ['displayName', 'description', 'isServiceDefault', '_comment', '_notes',
+  'id', 'createdDateTime', 'modifiedDateTime', 'lastModifiedDateTime', '@odata.context'];
+
+async function deployTenantSetting(p, json) {
+  const send = async (method, url, body) => {
+    const r = await fetch(url, {
+      method,
+      headers: { Authorization: `Bearer ${graphToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!r.ok) throw new Error(`Graph ${r.status}: ${await r.text()}`);
+    return r.status === 204 ? null : r.json().catch(() => null);
+  };
+  if (p.cat === 'DirectorySettings') {
+    // Template-based group settings: update the tenant's existing one, or create it.
+    const base = 'https://graph.microsoft.com/v1.0/groupSettings';
+    const existing = (await graphGetAll(base)).find(s => s.templateId === json.templateId);
+    if (existing) { await send('PATCH', `${base}/${existing.id}`, { values: json.values }); return existing.id; }
+    const created = await send('POST', base, { templateId: json.templateId, values: json.values });
+    return created?.id || null;
+  }
+  const [method, url] = TENANT_SETTING_URLS[p.cat];
+  const body = { ...json };
+  TENANT_SETTING_METADATA.forEach(k => delete body[k]);
+  if (p.cat === 'DeviceRegistrationPolicy') body.id = 'deviceRegistrationPolicy';
+  await send(method, url, body);
+  return null;   // updated in place, no new object id
 }
 
 async function deployDefenderPolicy(p, json) {

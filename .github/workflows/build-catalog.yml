@@ -6,6 +6,7 @@ on:
     paths:
       - 'IntuneConfig/**/*.json'
       - 'EntraConfig/**/*.json'
+      - 'SharePointConfig/**/*.json'
       - 'metadata/**'
       - 'bundles.json'
       - 'tools/build_catalog.py'
@@ -43,12 +44,12 @@ jobs:
         run: |
           python tools/build_catalog.py \
             --root . \
-            --policy-dirs IntuneConfig EntraConfig \
+            --policy-dirs IntuneConfig EntraConfig SharePointConfig \
             --out catalog.json \
             --fail-on duplicateId unreadable danglingBundleMember conflictingSettings danglingGoalBundle danglingScenarioGoal
 
       - name: Summary
-        run: python tools/build_catalog.py --root . --policy-dirs IntuneConfig EntraConfig --report >> $GITHUB_STEP_SUMMARY
+        run: python tools/build_catalog.py --root . --policy-dirs IntuneConfig EntraConfig SharePointConfig --report >> $GITHUB_STEP_SUMMARY
 
       # Stage 2 slots in here: read catalog.json, find issues of type
       # missingEnrichment or staleEnrichment, call GPT-4o for each, write the

@@ -1,21 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T13:02:24+00:00",
-  "sourceCommit": "057cd4d8ee51333cd8f2f652daf45f4103576bf4",
+  "generatedAt": "2026-11-17T13:13:48+00:00",
+  "sourceCommit": null,
   "counts": {
-    "policies": 241,
+    "policies": 242,
     "bundles": 22,
-    "issues": 248,
+    "issues": 252,
     "byConfidence": {
       "medium": 114,
-      "low": 2,
+      "low": 3,
       "high": 125
     }
   },
   "taxonomy": {
     "workloads": [
       "Entra",
-      "Intune"
+      "Intune",
+      "SharePoint"
     ],
     "platforms": [
       "Android",
@@ -157,6 +158,7 @@
       "Ring 1",
       "Ring 2",
       "Ring 3",
+      "Share Point Tenant Settings",
       "Updates",
       "User Driven Entra PreProv CDW Baseline",
       "Windows Apps",
@@ -9273,6 +9275,39 @@
       "frameworks": [],
       "notes": null,
       "bundles": []
+    },
+    {
+      "id": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "fileName": "CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "displayName": "CDW Baseline - SharePoint Tenant Settings",
+      "workload": "SharePoint",
+      "platform": "Cross-platform",
+      "policyType": null,
+      "framework": null,
+      "scope": null,
+      "version": "1.0",
+      "area": "Share Point Tenant Settings",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:39f9164dd8c41280c1094a71a070d6b2f3a75c8afeccfa30caac13d5e19242ec",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "platform": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [
+        "policyType",
+        "scope"
+      ],
+      "confidence": "low",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": []
     }
   ],
   "bundles": [
@@ -12119,6 +12154,24 @@
       "detail": "No enrichment authored"
     },
     {
+      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "type": "unresolved",
+      "detail": "Could not derive 'policyType'"
+    },
+    {
+      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "type": "unresolved",
+      "detail": "Could not derive 'scope'"
+    },
+    {
+      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "intune-android-settings-catalog-restrictions-v1-0-test-device",
       "path": "IntuneConfig/SettingsCatalog/Android_-_CDW_Baseline_-_SC_-_Restrictions_-_D_-_v1_0__TEST_.json",
       "type": "orphan",
@@ -12133,6 +12186,12 @@
     {
       "policyId": "intune-ios-settings-catalog-restrictions-v1-0-test-device",
       "path": "IntuneConfig/SettingsCatalog/iOS_-_CDW_Baseline_-_SC_-_Restrictions_-_D_-_v1_0__TEST_.json",
+      "type": "orphan",
+      "detail": "Policy is in no bundle"
+    },
+    {
+      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
       "type": "orphan",
       "detail": "Policy is in no bundle"
     }

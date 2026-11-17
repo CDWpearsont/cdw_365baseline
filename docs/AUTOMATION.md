@@ -23,9 +23,15 @@ new Settings Catalog features are spotted.
   and left alone. Ship changes as a new version (`v1.0` → `v1.1`) or edit in the tenant.
 - **Conditional Access is always created `disabled`.**
 - **EDR onboarding can't be templated**: the onboarding package from the Defender connector is tenant-specific, so create that policy in each tenant.
-- Supported folders: `SettingsCatalog`, `EndpointSecurity`, `CompliancePolicies`,
-  `DeviceConfigurations`, `EntraConfig/ConditionalAccess`. Anything else (app protection, ESP,
-  Autopilot, enrolment restrictions, Entra tenant settings) is skipped. Deploy those from the test site.
+- **Named policies** (created once, skipped if the name exists): Settings Catalog, Endpoint Security,
+  compliance, device configurations, app protection, app configuration (MAM), enrolment restrictions,
+  enrolment status page, Autopilot profiles (Entra join), feature update profiles, Conditional Access,
+  named locations.
+- **Tenant-wide settings** (one object per tenant, applied whenever the file changes): authorization
+  policy, cross-tenant access default, device registration policy, default app management policy,
+  directory settings (by template), authentication methods, SharePoint/OneDrive tenant settings.
+  These aren't exported back from the tenant: the repo file is the source of truth.
+- Admin consent request policy isn't deployed automatically yet: its reviewers are tenant-specific.
 - Names must contain `CDW Baseline` (Intune) or start with `CDW` (CA), and the file name must be
   the name with every character outside `A-Z a-z 0-9 -` replaced by `_`. That's what the export
   writes, so the file isn't duplicated.
@@ -62,7 +68,14 @@ setting definition and policy template to the `settings-catalog` branch and open
 Deploy app permissions (Application, admin consented, reference tenant only):
 `DeviceManagementConfiguration.ReadWrite.All`, `DeviceManagementApps.ReadWrite.All`,
 `DeviceManagementServiceConfig.ReadWrite.All`, `Policy.ReadWrite.ConditionalAccess`, `Policy.Read.All`,
-`Application.Read.All` (CA policies that include or exclude specific apps).
+`Application.Read.All` (CA policies that include or exclude specific apps),
+`Policy.ReadWrite.Authorization`, `Policy.ReadWrite.CrossTenantAccess`,
+`Policy.ReadWrite.ApplicationConfiguration`, `Policy.ReadWrite.AuthenticationMethod`,
+`Policy.ReadWrite.DeviceConfiguration`, `SharePointTenantSettings.ReadWrite.All`,
+`Directory.ReadWrite.All` (directory settings).
+
+The deployer site's app registration needs the same permissions as **delegated** permissions; the
+site asks consultants to consent to them at sign-in.
 
 If the federated sign-in fails, the run log prints the subject GitHub presented. The credential's
 Subject identifier must match it exactly.

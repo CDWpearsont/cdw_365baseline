@@ -56,7 +56,7 @@ jobs:
             FILES="$INPUT_FILES"
           else
             git fetch --quiet origin main
-            FILES=$(git diff --name-only --diff-filter=AMR origin/main...HEAD -- 'IntuneConfig/**/*.json' 'EntraConfig/**/*.json' | tr '\n' ' ')
+            FILES=$(git diff --name-only --diff-filter=AMR origin/main...HEAD -- 'IntuneConfig/**/*.json' 'EntraConfig/**/*.json' 'SharePointConfig/**/*.json' | tr '\n' ' ')
           fi
           echo "files=$FILES" >> "$GITHUB_OUTPUT"
           echo "Files: ${FILES:-<none>}"
