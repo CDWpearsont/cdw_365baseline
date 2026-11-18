@@ -1086,6 +1086,35 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
 .ti-note{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:8px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.5}
 .ti-note strong{display:block;color:#5b21b6;margin-bottom:2px}
 .wiz-more{margin:4px 0 10px}
+/* Statement of Work import */
+.sow-box{display:flex;gap:14px;align-items:center;border:1px dashed rgba(124,58,237,.45);background:rgba(124,58,237,.03);
+  border-radius:10px;padding:12px 14px;margin:0 0 18px}
+.sow-box.loaded{border-style:solid;border-color:rgba(5,150,105,.45);background:rgba(5,150,105,.04)}
+.sow-box.busy{opacity:.85}
+.sow-box-main{flex:1;min-width:0}
+.sow-box-title{font-size:13px;font-weight:600;color:var(--text)}
+.sow-opt{font-size:10px;font-weight:500;color:var(--dim);text-transform:uppercase;letter-spacing:.4px;margin-left:6px}
+.sow-box-text{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:2px}
+.sow-box-actions{display:flex;gap:6px;flex-shrink:0}
+.sow-dialog{max-width:860px!important;width:94%!important;max-height:88vh;overflow-y:auto;padding:26px 28px!important;text-align:left}
+.sow-dialog h3{text-align:left!important}
+.sow-dialog .sow-lead{font-size:12px;color:var(--muted);margin:0 0 14px;line-height:1.55;text-align:left!important}
+.sow-sec{margin:0 0 16px}
+.sow-sec-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--dim);margin:0 0 6px}
+.sow-sec textarea,.sow-sec input[type=text]{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:7px;
+  font-family:var(--fbody);font-size:12.5px;color:var(--text);background:#fff;resize:vertical;line-height:1.5}
+.sow-sec textarea:focus,.sow-sec input:focus{outline:none;border-color:rgba(124,58,237,.45)}
+.sow-hint{font-size:10.5px;color:var(--muted);margin-top:3px}
+.sow-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sow-meta-row{display:grid;grid-template-columns:22px 150px 1fr;gap:8px;align-items:center;margin-bottom:6px;font-size:12px}
+.sow-meta-row .sow-cur{font-size:10.5px;color:var(--dim);grid-column:3}
+.sow-bb{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;font-size:12px}
+.sow-bb input{margin-top:2px;accent-color:#7c3aed}
+.sow-bb .sow-bb-name{font-weight:600;color:var(--text)}
+.sow-bb .sow-bb-why{color:var(--muted);margin-top:2px;line-height:1.45}
+.sow-bb .sow-bb-ev{color:var(--dim);font-style:italic;margin-top:2px}
+.sow-gaps{font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 12px;margin:0 0 6px}
+.sow-gaps li{margin-left:16px}
 .wiz-more summary{cursor:pointer;font-size:12px;color:var(--muted);margin-bottom:8px}
 /* ── QA fixes (Nov 2026) ───────────────────────────────────────── */
 /* Off-screen panels: hide them (and their shadows) once the slide-out ends,
@@ -1245,6 +1274,19 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
           <div class="wiz-step"><span class="wiz-dot">2</span> Select policies</div>
           <div class="wiz-sep"></div>
           <div class="wiz-step"><span class="wiz-dot">3</span> Export</div>
+        </div>
+
+        <div class="sow-box" id="sow-box">
+          <div class="sow-box-main">
+            <div class="sow-box-title">Start from the Statement of Work <span class="sow-opt">optional</span></div>
+            <div class="sow-box-text" id="sow-status">Upload the SoW (Word or PDF) to fill in these details, the project background, scope, dependencies and assumptions, and to suggest the policies to select. You review everything before it is used.</div>
+          </div>
+          <div class="sow-box-actions">
+            <button class="btn btn-ghost btn-sm" id="sow-review-btn" style="display:none" onclick="sowOpenReview()">Review</button>
+            <button class="btn btn-ghost btn-sm" id="sow-remove-btn" style="display:none" onclick="sowRemove()">Remove</button>
+            <button class="btn btn-doc btn-sm" id="sow-upload-btn" onclick="document.getElementById('sow-file').click()">Upload SoW</button>
+          </div>
+          <input type="file" id="sow-file" accept=".docx,.pdf,.txt,.md" style="display:none" onchange="sowFileChosen(this)"/>
         </div>
 
         <div class="wiz-field">
@@ -1696,7 +1738,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.15.0',
+  version: '3.16.0',
   date:    '2026-09-17'
 };
 
@@ -1718,7 +1760,7 @@ function loadSettingNames() {
 const TEMPLATE_NAME = 'LLD.docx';
 
 // Engagement details captured by the doc-mode wizard
-let docMeta = { customer: '', oppNumber: '', oppName: '', author: '', companyNo: '', address: '', templateSource: null };
+let docMeta = { customer: '', oppNumber: '', oppName: '', author: '', companyNo: '', address: '', templateSource: null, sow: null };
 
 // Customer, opportunity number and name are required before an LLD can be exported.
 function docMetaComplete() {
@@ -1778,6 +1820,7 @@ function openDocWizard() {
   document.getElementById('wiz-author').value   = docMeta.author || savedAuthor() || account?.name || '';
   document.getElementById('wiz-companyno').value = docMeta.companyNo;
   document.getElementById('wiz-address').value   = docMeta.address;
+  sowRenderStatus();
   validateDocWizard();
 
   if (!templateBuffer) loadTemplateFromSource();
@@ -1896,8 +1939,376 @@ function submitDocWizard() {
   // policy list and selection rather than reloading the library.
   const fromGrid = docWizardReturn;
   docWizardReturn = null;
-  if (fromGrid && policiesLoaded()) { showGridInPlace('document'); return; }
+  if (fromGrid && policiesLoaded()) {
+    showGridInPlace('document');
+    if (bbPending) bbApplyPendingSelection();
+    return;
+  }
   enterDocMode();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// STATEMENT OF WORK IMPORT
+// The SoW is read in the browser (Word, PDF or text), sent to the AI function
+// for structured extraction, and shown for review. Nothing is used until the
+// consultant applies it, and nothing is stored beyond this page session.
+// ═══════════════════════════════════════════════════════════════════
+
+const SOW_MAX_CHARS = 60000;            // ~15k tokens; longer documents are truncated
+const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+let sowDraft = null;                    // last AI extraction, before or after review
+
+function sowSetBusy(text) {
+  const box = document.getElementById('sow-box');
+  box.classList.toggle('busy', !!text);
+  if (text) document.getElementById('sow-status').textContent = text;
+  document.getElementById('sow-upload-btn').disabled = !!text;
+}
+
+function sowRenderStatus() {
+  const box = document.getElementById('sow-box');
+  if (!box) return;
+  const sow = docMeta.sow;
+  box.classList.toggle('loaded', !!sow);
+  document.getElementById('sow-review-btn').style.display = sowDraft ? '' : 'none';
+  document.getElementById('sow-remove-btn').style.display = sow ? '' : 'none';
+  document.getElementById('sow-upload-btn').textContent = sow ? 'Replace' : 'Upload SoW';
+  if (!sow && sowDraft) {
+    document.getElementById('sow-status').textContent = `${sowDraft.fileName} has been read. Review it to use the details.`;
+    return;
+  }
+  if (!sow) {
+    document.getElementById('sow-status').textContent = 'Upload the SoW (Word or PDF) to fill in these details, the project background, ' +
+      'scope, dependencies and assumptions, and to suggest the policies to select. You review everything before it is used.';
+    return;
+  }
+  const n = a => (a || []).length;
+  const parts = [
+    n(sow.background) && 'background',
+    n(sow.inScope) + n(sow.outOfScope) && `${n(sow.inScope) + n(sow.outOfScope)} scope items`,
+    n(sow.dependencies) && `${n(sow.dependencies)} ${n(sow.dependencies) === 1 ? 'dependency' : 'dependencies'}`,
+    n(sow.assumptions) && `${n(sow.assumptions)} ${n(sow.assumptions) === 1 ? 'assumption' : 'assumptions'}`,
+    n(sow.decisions) && `${n(sow.decisions)} design ${n(sow.decisions) === 1 ? 'decision' : 'decisions'}`,
+    sow.blockCount && `${sow.blockCount} policies to select`,
+  ].filter(Boolean);
+  document.getElementById('sow-status').textContent =
+    `${sow.fileName}: ${parts.join(', ') || 'no details used'} will go into the LLD.`;
+}
+
+function sowRemove() {
+  docMeta.sow = null;
+  sowDraft = null;
+  bbPending = null;
+  sowRenderStatus();
+  showToast('Statement of Work removed');
+}
+
+async function sowFileChosen(input) {
+  const file = input.files && input.files[0];
+  input.value = '';
+  if (!file) return;
+  try {
+    sowSetBusy(`Reading ${file.name}\u2026`);
+    let text = await sowReadFile(file);
+    text = text.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+    if (text.length < 200) throw new Error('No readable text found. If it is a scanned PDF, upload the Word version.');
+    const truncated = text.length > SOW_MAX_CHARS;
+    if (truncated) text = text.slice(0, SOW_MAX_CHARS);
+    sowSetBusy(`Analysing ${file.name} with AI\u2026 this takes about 30 seconds`);
+    if (!mgCatalog) await loadCatalog(true);
+    const draft = await sowExtract(text);
+    draft.fileName = file.name;
+    draft.truncated = truncated;
+    sowDraft = draft;
+    sowSetBusy(null);
+    sowRenderStatus();
+    sowOpenReview();
+  } catch (e) {
+    sowSetBusy(null);
+    sowRenderStatus();
+    console.warn('[SoW]', e);
+    showToast(`Could not use the Statement of Work: ${e.message}`, 'err');
+  }
+}
+
+// ── Reading ──────────────────────────────────────────────────────
+
+async function sowReadFile(file) {
+  const name = file.name.toLowerCase();
+  if (name.endsWith('.docx')) return sowDocxText(await file.arrayBuffer());
+  if (name.endsWith('.pdf'))  return sowPdfText(await file.arrayBuffer());
+  if (name.endsWith('.doc'))  throw new Error('Save the document as .docx and try again');
+  return await file.text();
+}
+
+// Word: headings become "#" lines and table rows "a | b | c", so the
+// structure (Scope, Assumptions, ...) survives into the prompt.
+async function sowDocxText(buf) {
+  const zip = await JSZip.loadAsync(buf);
+  const xml = await zip.file('word/document.xml')?.async('string');
+  if (!xml) throw new Error('Not a Word document');
+  const doc = new DOMParser().parseFromString(xml, 'application/xml');
+  const body = doc.getElementsByTagNameNS(W_NS, 'body')[0];
+  const textOf = n => [...n.getElementsByTagNameNS(W_NS, 't')].map(t => t.textContent).join('');
+  const out = [];
+  const walk = node => {
+    for (const c of node.childNodes) {
+      if (c.nodeType !== 1) continue;
+      if (c.localName === 'p') {
+        const t = textOf(c).trim();
+        if (!t) continue;
+        const st = c.getElementsByTagNameNS(W_NS, 'pStyle')[0]?.getAttribute('w:val') || '';
+        const h = /^Heading(\d)/i.exec(st);
+        const list = c.getElementsByTagNameNS(W_NS, 'numPr').length > 0 || /list/i.test(st);
+        out.push(h ? `${'#'.repeat(Math.min(+h[1], 4))} ${t}` : list ? `- ${t}` : t);
+      } else if (c.localName === 'tbl') {
+        for (const tr of c.getElementsByTagNameNS(W_NS, 'tr')) {
+          if (tr.parentNode !== c) continue;
+          const cells = [...tr.childNodes].filter(x => x.nodeType === 1 && x.localName === 'tc').map(tc => textOf(tc).trim());
+          if (cells.some(Boolean)) out.push(cells.join(' | '));
+        }
+        out.push('');
+      } else if (c.localName === 'sdt' || c.localName === 'sdtContent' || c.localName === 'customXml') {
+        walk(c);
+      }
+    }
+  };
+  walk(body);
+  return out.join('\n');
+}
+
+function loadScriptOnce(src) {
+  return new Promise((resolve, reject) => {
+    if ([...document.scripts].some(sc => sc.src === src)) return resolve();
+    const el = document.createElement('script');
+    el.src = src; el.crossOrigin = 'anonymous';
+    el.onload = () => resolve(); el.onerror = () => reject(new Error('Could not load the PDF reader'));
+    document.head.appendChild(el);
+  });
+}
+
+async function sowPdfText(buf) {
+  if (!window.pdfjsLib) await loadScriptOnce(PDFJS_URL);
+  const lib = window.pdfjsLib;
+  if (!lib) throw new Error('PDF reader unavailable');
+  lib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_URL;
+  const pdf = await lib.getDocument({ data: new Uint8Array(buf) }).promise;
+  const pages = [];
+  for (let i = 1; i <= Math.min(pdf.numPages, 80); i++) {
+    const page = await pdf.getPage(i);
+    const tc = await page.getTextContent();
+    // Rebuild lines from the text items' vertical positions.
+    let lastY = null, line = '', lines = [];
+    for (const it of tc.items) {
+      const y = it.transform ? Math.round(it.transform[5]) : null;
+      if (lastY !== null && y !== null && Math.abs(y - lastY) > 2) { lines.push(line.trim()); line = ''; }
+      line += it.str + (it.hasEOL ? '\n' : ' ');
+      lastY = y;
+    }
+    if (line.trim()) lines.push(line.trim());
+    pages.push(lines.filter(Boolean).join('\n'));
+  }
+  return pages.join('\n\n');
+}
+
+// ── AI extraction ────────────────────────────────────────────────
+
+async function sowAsk(system, user, maxTokens) {
+  const resp = await fetch(AI_FUNCTION_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
+                           max_tokens: maxTokens, temperature: 0.1 }),
+  });
+  if (resp.status === 404 || resp.status === 405) throw new Error(`the AI service isn't reachable from this site (HTTP ${resp.status})`);
+  if (!resp.ok) throw new Error(`AI error ${resp.status}: ${(await resp.text()).slice(0, 200)}`);
+  const data = await resp.json();
+  const text = (data?.choices?.[0]?.message?.content || '').trim()
+    .replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+  const start = text.indexOf('{'), end = text.lastIndexOf('}');
+  if (start < 0 || end <= start) throw new Error('the AI response was not in the expected format');
+  return JSON.parse(text.slice(start, end + 1));
+}
+
+const SOW_SYSTEM = `You extract facts from a CDW Statement of Work (SoW) for a Microsoft 365 project, to seed the
+Low Level Design. Respond ONLY with a JSON object. Use British English. Be faithful to the document: never invent
+scope, dependencies, decisions or names that it does not state. Keep each list item to one concise sentence.
+Do not mention that the text was extracted, summarised or produced by AI.`;
+
+async function sowExtract(text) {
+  const doc = `--- STATEMENT OF WORK ---\n${text}\n--- END ---`;
+  const goals = (mgCatalog?.goals || []).map(g => ({
+    id: g.id, title: g.title, outcome: g.outcome,
+    options: (g.options || []).map(o => ({ label: o.label, platform: o.platform, note: o.note })),
+  }));
+
+  const factsPrompt = `${doc}
+
+Return a JSON object:
+{
+  "customer": "customer organisation name as written in the SoW, or empty",
+  "opportunityNumber": "opportunity / OPP reference, or empty",
+  "projectName": "short project or opportunity name, or empty",
+  "background": ["1-3 paragraphs for the LLD Background section, written in the third person ('<customer> has engaged CDW to...'), covering the business context and objectives"],
+  "inScope": ["in-scope items relevant to the technical design"],
+  "outOfScope": ["explicitly out-of-scope items"],
+  "dependencies": ["dependencies on the customer or third parties"],
+  "assumptions": ["assumptions"],
+  "constraints": ["constraints: timescales, licensing, change windows, regulatory"]
+}
+At most 12 items per list. Leave a list empty if the SoW does not cover it.`;
+
+  const designPrompt = `${doc}
+
+Building Block goals (each option is a ready-made policy set):
+${JSON.stringify(goals)}
+
+Return a JSON object:
+{
+  "decisions": [{"type": "Technical | Scope | Commercial", "decision": "a design decision the SoW states or agrees", "evidence": "short quote from the SoW"}],
+  "goals": [{"goal": "<goal id from the list>", "option": "<option label from that goal>", "reason": "why the SoW calls for it", "evidence": "short quote from the SoW"}],
+  "gaps": ["SoW requirements that none of the goals cover"]
+}
+Decisions: at most 6, only ones the SoW actually states (for example licensing, platforms in scope, approach to rollout).
+Goals: only where the SoW clearly calls for that outcome; pick the option that matches the platform and strictness described.`;
+
+  const [facts, design] = await Promise.all([
+    sowAsk(SOW_SYSTEM, factsPrompt, 1800),
+    sowAsk(SOW_SYSTEM, designPrompt, 1200),
+  ]);
+  const list = (a, max = 12) => (Array.isArray(a) ? a : []).map(x => String(x || '').trim()).filter(Boolean).slice(0, max);
+  const str = x => (typeof x === 'string' ? x.trim() : '');
+  const goalIds = new Set(goals.map(g => g.id));
+  return {
+    customer: str(facts.customer), opportunityNumber: str(facts.opportunityNumber), projectName: str(facts.projectName),
+    background: list(facts.background, 3),
+    inScope: list(facts.inScope), outOfScope: list(facts.outOfScope), dependencies: list(facts.dependencies),
+    assumptions: list(facts.assumptions), constraints: list(facts.constraints),
+    decisions: (Array.isArray(design.decisions) ? design.decisions : [])
+      .filter(d => d && str(d.decision)).slice(0, 6)
+      .map(d => ({ type: ['Technical', 'Scope', 'Commercial'].includes(str(d.type)) ? str(d.type) : 'Technical',
+                   decision: str(d.decision), evidence: str(d.evidence) })),
+    goals: (Array.isArray(design.goals) ? design.goals : [])
+      .filter(g => g && goalIds.has(g.goal))
+      .map(g => {
+        const goal = bbGoal(g.goal);
+        const idx = Math.max(0, (goal.options || []).findIndex(o => o.label === g.option));
+        return { goal: g.goal, option: idx, reason: str(g.reason), evidence: str(g.evidence), selected: true };
+      }),
+    gaps: list(design.gaps, 8),
+  };
+}
+
+// ── Review ───────────────────────────────────────────────────────
+
+function sowOpenReview() {
+  const d = sowDraft;
+  if (!d) return;
+  const lines = a => htmlEsc((a || []).join('\n'));
+  const cur = { customer: document.getElementById('wiz-customer').value.trim(),
+                opp: document.getElementById('wiz-oppnum').value.trim(),
+                name: document.getElementById('wiz-oppname').value.trim() };
+  const metaRow = (key, label, value, current) => !value ? '' : `
+    <div class="sow-meta-row">
+      <input type="checkbox" id="sow-use-${key}" ${!current || current === value ? 'checked' : ''}/>
+      <label for="sow-use-${key}">${label}</label>
+      <input type="text" id="sow-${key}" value="${htmlEsc(value)}"/>
+      ${current && current !== value ? `<span class="sow-cur">Currently: ${htmlEsc(current)}</span>` : ''}
+    </div>`;
+  const listSec = (key, title, hint, items = d[key]) => `
+    <div class="sow-sec"><div class="sow-sec-title">${title}</div>
+      <textarea id="sow-${key}" rows="${Math.min(10, Math.max(3, Math.ceil((items || []).join(' ').length / 60) + (items || []).length))}">${lines(items)}</textarea>
+      <div class="sow-hint">${hint || 'One item per line. Clear it to leave the section out.'}</div></div>`;
+  const goalsHtml = (d.goals || []).map((g, i) => {
+    const goal = bbGoal(g.goal); const opt = goal?.options?.[g.option];
+    const count = opt ? bbOptionMembers(opt).size : 0;
+    return `<label class="sow-bb"><input type="checkbox" id="sow-goal-${i}" ${g.selected ? 'checked' : ''}/>
+      <div><div class="sow-bb-name">${htmlEsc(goal?.title || g.goal)} \u2014 ${htmlEsc(opt?.label || '')}
+        <span style="font-weight:400;color:var(--dim)">(${count} ${count === 1 ? 'policy' : 'policies'})</span></div>
+        ${g.reason ? `<div class="sow-bb-why">${htmlEsc(g.reason)}</div>` : ''}
+        ${g.evidence ? `<div class="sow-bb-ev">\u201c${htmlEsc(g.evidence)}\u201d</div>` : ''}</div></label>`;
+  }).join('');
+
+  const overlay = document.createElement('div');
+  overlay.className = 'confirm-overlay';
+  overlay.innerHTML = `
+    <div class="confirm-dialog sow-dialog" role="dialog" aria-label="Review the Statement of Work">
+      <h3>Review: ${htmlEsc(d.fileName)}</h3>
+      <p class="sow-lead">Check and edit what was taken from the Statement of Work. Only what you keep here goes into the
+      LLD and the policy selection.${d.truncated ? ' <b>The document was long, so only the first part was read.</b>' : ''}</p>
+
+      ${(d.customer || d.opportunityNumber || d.projectName) ? `<div class="sow-sec"><div class="sow-sec-title">Engagement details</div>
+        ${metaRow('customer', 'Customer name', d.customer, cur.customer)}
+        ${metaRow('opp', 'Opportunity number', d.opportunityNumber, cur.opp)}
+        ${metaRow('name', 'Opportunity name', d.projectName, cur.name)}</div>` : ''}
+
+      <div class="sow-sec"><div class="sow-sec-title">Background</div>
+        <textarea id="sow-background" rows="5">${htmlEsc((d.background || []).join('\n\n'))}</textarea>
+        <div class="sow-hint">Goes under Introduction. Separate paragraphs with a blank line.</div></div>
+
+      <div class="sow-grid2">${listSec('inScope', 'In scope')}${listSec('outOfScope', 'Out of scope')}</div>
+      <div class="sow-grid2">${listSec('dependencies', 'Dependencies')}${listSec('assumptions', 'Assumptions')}</div>
+      ${listSec('constraints', 'Constraints')}
+      ${listSec('decisions', 'Design decisions from the SoW', 'One per line as <i>Type: decision</i> (Technical, Scope or Commercial). Added to the Design Decisions table.',
+                (d.decisions || []).map(x => `${x.type}: ${x.decision}`))}
+
+      <div class="sow-sec"><div class="sow-sec-title">Suggested Building Blocks</div>
+        ${goalsHtml || '<div class="sow-hint">No Building Block clearly matched the SoW. Select policies in the grid as usual.</div>'}
+        ${(d.gaps || []).length ? `<div class="sow-gaps"><b>Not covered by a Building Block:</b><ul>${d.gaps.map(g => `<li>${htmlEsc(g)}</li>`).join('')}</ul></div>` : ''}
+      </div>
+
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" id="sow-cancel">Cancel</button>
+        <button class="btn btn-doc" id="sow-apply">Use these details</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.classList.add('visible'));
+  const close = () => { overlay.classList.remove('visible'); setTimeout(() => overlay.remove(), 200); };
+  overlay.querySelector('#sow-cancel').addEventListener('click', close);
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  overlay.querySelector('#sow-apply').addEventListener('click', () => { sowApply(overlay); close(); });
+}
+
+function sowApply(root) {
+  const d = sowDraft;
+  const val = id => root.querySelector('#' + id)?.value ?? '';
+  const items = id => val(id).split('\n').map(x => x.replace(/^[-\u2022*]\s*/, '').trim()).filter(Boolean);
+  const take = (key, field) => {
+    const box = root.querySelector('#sow-use-' + key);
+    if (box && box.checked && val('sow-' + key).trim()) document.getElementById(field).value = val('sow-' + key).trim();
+  };
+  take('customer', 'wiz-customer'); take('opp', 'wiz-oppnum'); take('name', 'wiz-oppname');
+
+  // Keep what the consultant edited, so a second review starts from it.
+  d.background = val('sow-background').split(/\n\s*\n/).map(x => x.replace(/\s+/g, ' ').trim()).filter(Boolean);
+  ['inScope', 'outOfScope', 'dependencies', 'assumptions', 'constraints'].forEach(k => { d[k] = items('sow-' + k); });
+  d.decisions = items('sow-decisions').map(line => {
+    const m = /^(Technical|Scope|Commercial)\s*[:\-\u2013]\s*(.+)$/i.exec(line);
+    return m ? { type: m[1][0].toUpperCase() + m[1].slice(1).toLowerCase(), decision: m[2].trim() } : { type: 'Technical', decision: line };
+  });
+  (d.goals || []).forEach((g, i) => { g.selected = !!root.querySelector('#sow-goal-' + i)?.checked; });
+
+  // Policies from the chosen Building Blocks are selected once the grid loads.
+  const ids = new Set();
+  (d.goals || []).filter(g => g.selected).forEach(g => {
+    const opt = bbGoal(g.goal)?.options?.[g.option];
+    if (opt) bbOptionMembers(opt).forEach(m => ids.add(m));
+  });
+  bbPending = ids.size ? [...ids] : null;
+
+  docMeta.sow = {
+    fileName: d.fileName,
+    projectName: val('sow-name').trim() || d.projectName || '',
+    background: d.background, inScope: d.inScope, outOfScope: d.outOfScope,
+    dependencies: d.dependencies, assumptions: d.assumptions, constraints: d.constraints,
+    decisions: d.decisions.map(x => [x.type, x.decision]),
+    blockCount: ids.size,
+  };
+  sowRenderStatus();
+  validateDocWizard();
+  showToast('Statement of Work applied' + (ids.size ? ` \u2014 ${ids.size} policies will be selected` : ''));
 }
 
 // Summary chip above the policy grid in doc mode
@@ -6980,6 +7391,45 @@ function lldFinalise(docXml, ctx) {
   // Empty headings (the template ends with one) would show as blank TOC entries.
   for (const n of kids(body, 'p')) if (headingLevel(n) && !textOf(n).trim()) body.removeChild(n);
 
+  // ── Statement of Work sections ──
+  // Lists use a copy of the template's two-column table (as Key Terminology),
+  // so they pick up the template's own table style.
+  function heading(text, level) {
+    const p = el('p'), pPr = el('pPr'), st = el('pStyle');
+    st.setAttribute('w:val', 'Heading' + level); pPr.appendChild(st); p.appendChild(pPr);
+    const r = el('r'), t = el('t'); t.textContent = text; r.appendChild(t); p.appendChild(r);
+    return p;
+  }
+  function listTable(prefix, header, items) {
+    const model = kids(body, 'tbl').find(t => {
+      const h = headerOf(t); return h.length === 2 && h[0].toLowerCase() === 'acronym';
+    });
+    if (!model || kids(model, 'tr').length < 2) {
+      return items.map(x => para('\u2022 ' + x));
+    }
+    const tbl = model.cloneNode(true);
+    const hdr = kids(tbl, 'tr')[0];
+    kids(hdr, 'tc').forEach((tc, i) => setCellText(tc, i === 0 ? 'Ref' : header));
+    fillTable(tbl, items.map((x, i) => [`${prefix}${i + 1}`, x]));
+    return [tbl, para('')];
+  }
+  function sowNodes(sow) {
+    if (!sow) return [];
+    const out = [];
+    if ((sow.background || []).length) { out.push(heading('Background', 2)); sow.background.forEach(t => out.push(para(t))); }
+    const lists = [
+      ['In Scope', 'IS', 'In scope', sow.inScope], ['Out of Scope', 'OS', 'Out of scope', sow.outOfScope],
+      ['Dependencies', 'DEP', 'Dependency', sow.dependencies], ['Assumptions', 'AS', 'Assumption', sow.assumptions],
+      ['Constraints', 'CON', 'Constraint', sow.constraints],
+    ];
+    lists.forEach(([title, prefix, header, items]) => {
+      if (!(items || []).length) return;
+      out.push(heading(title, 2));
+      out.push(...listTable(prefix, header, items));
+    });
+    return out;
+  }
+
   // ── Table helpers ──
   const headerOf = tbl => { const tr = kids(tbl, 'tr')[0]; return tr ? kids(tr, 'tc').map(tc => textOf(tc).trim()) : []; };
   const findTable = (cols) => kids(body, 'tbl').find(t => {
@@ -7026,8 +7476,9 @@ function lldFinalise(docXml, ctx) {
   const appr = findTable(['Approver', 'Title', 'Approval Type', 'Document Version']);
   if (appr) fillTable(appr, [['', '', 'Technical', '0.1']]);
 
-  // 4. Introduction, written from the engagement and the selection.
-  insertAfterHeading('Introduction', ctx.introduction.map(para));
+  // 4. Introduction, written from the engagement and the selection, then the
+  //    Statement of Work sections (background, scope, dependencies, ...).
+  insertAfterHeading('Introduction', [...ctx.introduction.map(para), ...sowNodes(ctx.sow)]);
 
   // 5. Design decisions that follow from the selection (replacing the
   //    template's Azure examples).
@@ -7136,7 +7587,22 @@ function lldContext(policyJsons, meta, dateStr) {
   const facts = policyJsons.map(p => ({ n: p.displayName || '', cat: p.cat, tier: p.tier }));
   const glossary = LLD_GLOSSARY.filter(([, , test]) => facts.some(test)).map(([a, m]) => [a, m]);
 
-  return { date: dateStr, author: meta.author, introduction, decisions, references, glossary, links: [] };
+  // Statement of Work: its agreed decisions lead the table, and the SoW itself is a referenced document.
+  const sow = meta.sow || null;
+  if (sow) {
+    const agreed = (sow.decisions || []).filter(d => d && d[1]);
+    // Drop a generated decision when the SoW already records one on the same topic.
+    const topics = [/conditional access|report-only/i, /pilot/i, /level 2|\bL2\b/i, /tenant-wide/i];
+    const said = agreed.map(d => d[1]).join(' ');
+    for (let i = decisions.length - 1; i >= 0; i--) {
+      if (topics.some(rx => rx.test(decisions[i][1]) && rx.test(said))) decisions.splice(i, 1);
+    }
+    decisions.unshift(...agreed);
+    references.unshift(['Statement of Work', `${sow.projectName || meta.oppName || 'Project'} Statement of Work` +
+      (meta.oppNumber ? ` (${meta.oppNumber})` : ''), sow.fileName || '']);
+  }
+
+  return { date: dateStr, author: meta.author, introduction, decisions, references, glossary, sow, links: [] };
 }
 
 // Tells Word to refresh the table of contents (and other fields) on open.
