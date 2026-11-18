@@ -1950,13 +1950,25 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.13.0',
+  version: '3.14.0',
   date:    '2026-09-17'
 };
 
 // LLD template source. Served from the $web container of the same storage
 // account as this page, so it is same-origin: no CORS rules, no SAS token.
 const TEMPLATE_URL  = 'templates/LLD.docx';
+// Settings Catalog display names for the library's settings and choice options
+// (built by tools/build_setting_names.py from the settings-catalog snapshot).
+const SETTING_NAMES_URL = 'setting-names.json';
+let SC_NAMES = { names: {}, options: {} };
+let scNamesLoad = null;
+function loadSettingNames() {
+  if (!scNamesLoad) scNamesLoad = fetch(SETTING_NAMES_URL, { cache: 'no-cache' })
+    .then(r => r.ok ? r.json() : null)
+    .then(j => { if (j && j.names) SC_NAMES = { names: j.names || {}, options: j.options || {} }; })
+    .catch(e => { console.warn('[LLD] Setting names unavailable:', e.message); scNamesLoad = null; });
+  return scNamesLoad;
+}
 const TEMPLATE_NAME = 'LLD.docx';
 
 // Engagement details captured by the doc-mode wizard
@@ -6244,6 +6256,18 @@ function flattenSettings(obj, prefix, settings, depth) {
     if (k.startsWith('@odata') || v === null || v === undefined) continue;
     const label = (prefix ? prefix + ' \u203a ' : '') + humanizeName(k);
     if (Array.isArray(v)) {
+      const reviewer = x => {
+        const m = /roleTemplateId=([0-9a-f-]{36})/i.exec(x.query || '');
+        if (m) return `Members of ${LLD_ROLES[m[1].toLowerCase()] || 'directory role ' + m[1]}`;
+        const u = /\/users\/([^/?]+)$/i.exec(x.query || ''); if (u) return `User ${u[1]}`;
+        const g = /\/groups\/([^/?]+)\/(transitive)?members/i.exec(x.query || ''); if (g) return `Members of group ${g[1]}`;
+        return null;
+      };
+      const objs = v.filter(x => x && typeof x === 'object');
+      if (objs.length && objs.every(x => 'query' in x) && objs.every(reviewer)) {
+        settings.push({ key: label, rawKey: k, value: objs.map(reviewer).join(', ') });
+        continue;
+      }
       const val = v.length === 0 ? 'None'
         : v.map(x => (x && typeof x === 'object') ? Object.values(x).filter(y => y !== null && typeof y !== 'object').join(' / ') : String(x)).join(', ');
       settings.push({ key: label, rawKey: k, value: humanizeValue(val) });
@@ -6267,17 +6291,20 @@ function humanizeChoice(val) {
 function extractSettingInstance(si, settings, depth) {
   if (!si) return;
   const defId = si.settingDefinitionId || si.settingdefinitionid || '';
-  const shortName = friendlySettingName(defId);
+  const friendly = friendlySettingName(defId);
+  // The portal's display name when we have it; the skip rules below use the derived name.
+  const shortName = SC_NAMES.names[defId] || friendly;
+  const optionName = v => (typeof v === 'string' && SC_NAMES.options[v]) || null;
 
   // Skip metadata-like entries that aren't real settings
   const SKIP_NAMES = new Set(['name', 'value', 'key', 'empty', '', 'dropdown', 'dropdownname', 'enum', 'integer', 'string', 'boolean', 'checkbox']);
   // Also skip Office COM security exe child settings (excelexe, outlookexe, etc.)
   // These are repeated 14 times per rule and add no value
-  const lowerName = shortName.toLowerCase().replace(/\s+/g, '');
+  const lowerName = friendly.toLowerCase().replace(/\s+/g, '');
   const isOfficeExe = /^(excel|exprwd|groove|msaccess|mse7|mspub|onenote|outlook|powerpnt|pptview|spdesign|visio|winproj|winword)exe/i.test(lowerName);
-  const isPartname = /^partname\s/i.test(shortName);
-  const isTypePicker = shortName.startsWith('$');
-  if (SKIP_NAMES.has(shortName.toLowerCase().trim()) || isOfficeExe || isPartname || isTypePicker) {
+  const isPartname = /^partname\s/i.test(friendly);
+  const isTypePicker = friendly.startsWith('$');
+  if (SKIP_NAMES.has(friendly.toLowerCase().trim()) || isOfficeExe || isPartname || isTypePicker) {
     // Still recurse into children if they exist
     if (si.choiceSettingValue && si.choiceSettingValue.children) {
       for (const child of si.choiceSettingValue.children) extractSettingInstance(child, settings, depth);
@@ -6301,7 +6328,7 @@ function extractSettingInstance(si, settings, depth) {
     } else {
       val = 'Configured';
     }
-    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: humanizeChoice(val) });
+    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: optionName(cv) || humanizeChoice(val) });
 
     // Choice settings can have children (dependent settings)
     if (si.choiceSettingValue.children && Array.isArray(si.choiceSettingValue.children)) {
@@ -6355,9 +6382,9 @@ function extractSettingInstance(si, settings, depth) {
     const choices = Array.isArray(si.choiceSettingCollectionValue) ? si.choiceSettingCollectionValue : [si.choiceSettingCollectionValue];
     const vals = choices.map(c => {
       const v = c.value || c;
-      return typeof v === 'string' ? v.split('_').pop() : 'Configured';
+      return optionName(v) || (typeof v === 'string' ? humanizeChoice(v.split('_').pop()) : 'Configured');
     });
-    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: vals.map(v => humanizeChoice(v)).join(', ') });
+    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: vals.join(', ') });
 
   } else {
     settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: 'Configured' });
@@ -6795,8 +6822,10 @@ function humanizeValue(raw) {
 
   // If it starts with { or [, it's JSON — truncate if too long
   if ((raw.startsWith('{') || raw.startsWith('[')) && raw.length > 100) {
-    return '[Complex value — see portal]';
+    try { JSON.parse(raw); return '[Complex value — see portal]'; } catch (e) { return raw; }
   }
+  // Browser extension IDs and similar opaque tokens are shown as-is.
+  if (/^[a-p]{32}(;.*)?$/.test(raw)) return raw;
 
   // Choice enum string values like "block", "audit", "allow", "enable", "disable", etc.
   const CHOICE_MAP = {
@@ -7041,22 +7070,29 @@ Keys needing human-readable names: ${nameKeys.slice(0, 25).join(', ')}
 Settings (raw key: value):
 ${settingsSummary}${moreLine}
 
-Respond with ONLY a JSON object like: {"names": {"rawkey": "Clean Name"}, "rationale": ${includeRationale ? '"CDW will..."' : 'null'}}`;
+Respond with ONLY a JSON object, rationale first, like: {"rationale": ${includeRationale ? '"CDW will..."' : 'null'}, "names": {"rawkey": "Clean Name"}}`;
 
   const body = {
     messages: [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: userPrompt }
     ],
-    max_tokens: 1000,
+    max_tokens: 1500,
     temperature: 0.2
   };
 
-  const resp = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
+  // One retry for throttling or a transient server error.
+  let resp;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (resp.ok || !(resp.status === 429 || resp.status >= 500) || attempt === 1) break;
+    const wait = Math.min(10, Number(resp.headers.get('retry-after')) || 3) * 1000;
+    await new Promise(r => setTimeout(r, wait));
+  }
 
   if (!resp.ok) {
     const err = await resp.text();
@@ -7799,6 +7835,7 @@ function lldSettingsXml(settingsXml) {
 }
 
 async function generateDocument() {
+  await loadSettingNames();
   const selected = Object.entries(WORKLOADS).flatMap(([wl]) =>
     policies[wl].filter(p => p.selected).map(p => ({ ...p, wl }))
   );
@@ -8466,6 +8503,7 @@ document.querySelectorAll('.wtab').forEach(btn => {
 
 
 window.addEventListener('load', () => {
+  loadSettingNames();
   document.body.dataset.activetab = 'intune';
   initMsal().catch(err => {
     console.error('MSAL init failed:', err);

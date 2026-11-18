@@ -10,6 +10,7 @@ on:
       - 'metadata/**'
       - 'bundles.json'
       - 'tools/build_catalog.py'
+      - 'tools/build_setting_names.py'
   # The export workflows push with GITHUB_TOKEN, which never triggers 'push'
   # workflows - so rebuild whenever one of them finishes instead.
   workflow_run:
@@ -48,6 +49,17 @@ jobs:
             --out catalog.json \
             --fail-on duplicateId unreadable danglingBundleMember conflictingSettings danglingGoalBundle danglingScenarioGoal
 
+      # Portal display names for the settings the library uses, from the weekly
+      # Settings Catalog snapshot. Used by the LLD; skipped if the snapshot is missing.
+      - name: Build setting names
+        run: |
+          if git fetch --quiet --depth 1 origin settings-catalog; then
+            git show FETCH_HEAD:settings.ndjson > "$RUNNER_TEMP/settings.ndjson"
+            python tools/build_setting_names.py --catalog "$RUNNER_TEMP/settings.ndjson" --policies IntuneConfig --out site/setting-names.json
+          else
+            echo "settings-catalog branch not found; keeping site/setting-names.json"
+          fi
+
       - name: Summary
         run: python tools/build_catalog.py --root . --policy-dirs IntuneConfig EntraConfig SharePointConfig ExchangeOnline DefenderCloudApps --report >> $GITHUB_STEP_SUMMARY
 
@@ -61,7 +73,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # metadata/ only exists once sidecars have been authored, so stage it
           # conditionally — an absent folder must not fail the run.
-          git add catalog.json
+          git add catalog.json site/setting-names.json
           if [ -d metadata ]; then git add metadata; fi
           if git diff --staged --quiet; then
             echo "No catalog changes"
