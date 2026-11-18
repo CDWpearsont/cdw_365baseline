@@ -1,22 +1,21 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T14:20:08+00:00",
-  "sourceCommit": "3f0c673aa8c66d5ea136a8b1b657370ab26414da",
+  "generatedAt": "2026-11-18T12:39:04+00:00",
+  "sourceCommit": "20070a2d4d6866864fd5c5323e3ad1ca4736285b",
   "counts": {
-    "policies": 260,
-    "bundles": 29,
-    "issues": 270,
+    "policies": 241,
+    "bundles": 22,
+    "issues": 248,
     "byConfidence": {
       "medium": 114,
-      "low": 3,
-      "high": 143
+      "low": 2,
+      "high": 125
     }
   },
   "taxonomy": {
     "workloads": [
       "Entra",
-      "Intune",
-      "SharePoint"
+      "Intune"
     ],
     "platforms": [
       "Android",
@@ -51,7 +50,6 @@
     ],
     "areas": [
       "Admin Consent Request Policy",
-      "Apple Intelligence and Siri",
       "Attack Surface Reduction",
       "Authentication",
       "Authorization Policy",
@@ -130,7 +128,6 @@
       "CDW804-CorpServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365andAzure",
       "CDW900-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
       "CDW901-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockHighRisk",
-      "Copilot Readiness",
       "Credential Management",
       "Cross Tenant Access Policy Default",
       "Default App Management Policy",
@@ -144,9 +141,7 @@
       "Disk Encryption",
       "ESP CDW Baseline",
       "Encryption",
-      "Endpoint Privilege Management",
       "Firewall",
-      "Gatekeeper",
       "Group Unified",
       "Internet Explorer Legacy",
       "Local Group Membership",
@@ -156,17 +151,12 @@
       "Microsoft Office",
       "Microsoft OneDrive",
       "Microsoft Store",
-      "Passcode",
       "Password",
       "Password Rule Settings",
       "Restrictions",
       "Ring 1",
       "Ring 2",
       "Ring 3",
-      "Share Point Tenant Settings",
-      "Shared Devices",
-      "Software Update",
-      "System Configuration",
       "Updates",
       "User Driven Entra PreProv CDW Baseline",
       "Windows Apps",
@@ -240,24 +230,6 @@
           "note": "CDW standard",
           "bundles": [
             "intune-macos-cdw-standard"
-          ]
-        },
-        {
-          "platform": "macOS",
-          "label": "macOS (CIS)",
-          "note": "CIS Level 1",
-          "bundles": [
-            "intune-macos-cis-l1",
-            "intune-macos-cis-l1-gatekeeper"
-          ]
-        },
-        {
-          "platform": "macOS",
-          "label": "macOS (CIS strict)",
-          "note": "CIS Level 1 + Level 2",
-          "bundles": [
-            "intune-macos-cis-l1",
-            "intune-macos-cis-l2"
           ]
         }
       ]
@@ -532,65 +504,6 @@
           "note": "Tenant policies",
           "bundles": [
             "entra-tenant-config"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "least-privilege",
-      "tower": "Intune",
-      "icon": "key",
-      "title": "Remove local admin rights",
-      "outcome": "Users work as standard users and elevate through Endpoint Privilege Management, with every elevation reported.",
-      "options": [
-        {
-          "platform": "Windows",
-          "label": "Windows 10/11",
-          "note": "IT approves each request",
-          "bundles": [
-            "intune-win-epm-support"
-          ]
-        },
-        {
-          "platform": "Windows",
-          "label": "Windows 10/11 (self-service)",
-          "note": "Users justify and re-authenticate",
-          "bundles": [
-            "intune-win-epm-user"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "frontline",
-      "tower": "Intune",
-      "icon": "device",
-      "title": "Set up shared and frontline devices",
-      "outcome": "Shared Windows devices for hot desks and shift workers: one user at a time, profiles cleaned up automatically, quick first sign-in.",
-      "options": [
-        {
-          "platform": "Windows",
-          "label": "Windows 10/11",
-          "note": "Shared PC mode",
-          "bundles": [
-            "intune-win-shared-devices"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "copilot-ready",
-      "tower": "Intune",
-      "icon": "rocket",
-      "title": "Prepare devices for Microsoft 365 Copilot",
-      "outcome": "Users reach work Copilot from the Copilot key and Edge, with agentic features and Recall held back until assessed.",
-      "options": [
-        {
-          "platform": "Windows",
-          "label": "Windows 10/11",
-          "note": "Windows and Edge",
-          "bundles": [
-            "intune-win-copilot-readiness"
           ]
         }
       ]
@@ -3463,7 +3376,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:aae14cfe7bb1c188072e2a5914cd4d7c41f7e1796da2d420b65df00d52a37fe4",
+      "policyHash": "sha256:d484e39d75c3b73ee892597bf119eeadcdd81dff82910e3824c30f56e3e41c9b",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3497,7 +3410,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:9ffb8eed928fcc8efc4cdcf760ccfee466f8f0824b6be614ff34f0ea4af861bc",
+      "policyHash": "sha256:b702e390fff6b574d85bb11ca50d0a5063cee8153b9d8764cc471700a4ffed98",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3531,7 +3444,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:59aa89f36d4ed2d766e8a1ba7828bc1024a5aa5839f8e8deda92759870e619eb",
+      "policyHash": "sha256:cc16078682bf266acb2cedf319cbd2afcae1567e04e9fac6e95e9d5a3a8c47b0",
       "derivedFrom": {
         "workload": "folder",
         "area": "filename"
@@ -3565,7 +3478,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:8535666188d3cd93a5e13c5da3ec2b58c31ca86e74718fda625adadb9289b7a9",
+      "policyHash": "sha256:13bb22ae4e2ebb6d122c85bfed3c13898e38fb198df0ab052c9c3abcfd27c0e1",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3600,7 +3513,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:eba4e296aef819d80eed9a03ccd4825e515a62261889b50ba9d2bb69942ce407",
+      "policyHash": "sha256:fdeb290440be93044a11ff932c2479c34145ae31c6e05c5ab51bac508166df62",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3635,7 +3548,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:128e15c370affb0c6bb73ed41313ab4e81289a391c0143956c794756364f4972",
+      "policyHash": "sha256:ff1c5d3e089510aa81d3a95dc67a80459d055b12e69d68524ef442a4e87bf224",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3670,7 +3583,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:65fc3f989e05185113ae6099079fd1c6cd8c3da62bed314e44d671d28a5368d7",
+      "policyHash": "sha256:25e9ed63d04244b8317c8ab8253afcfe19dae1fefb609710333450db41f62072",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3708,7 +3621,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:20776d9dfd9874440b792f4279582feb7756dfd0c72af16c28df92f6ccdef2e0",
+      "policyHash": "sha256:89c43773774587bd05bb36c6538439bf8100aa2a8063a8c2ae3b453658ffd933",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3742,7 +3655,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:5b24049ab9a51f207b03b7835f46dd71b915e05fe41abcec2f1c93b1be83a850",
+      "policyHash": "sha256:9049d91c2020bf69da70ea65bdaebdb84f0c93f08f39917d42898bc6eabf4791",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3778,7 +3691,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:2588375f4ce4d74f8dbb781881e101b1eaf024d322e9c4b2c11049b454c0d074",
+      "policyHash": "sha256:36f9eb3f69e2969b3098e9e4af0b4216964c40e1bba970dbde5ff81d51b0dea4",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3814,7 +3727,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:574b46a171cf986e59d6241a0e207403731e468b07373e89a837898a5a8ec39f",
+      "policyHash": "sha256:2426d0ebe52d52052546f9e8edbeffe23bfd7f3aa288a20237e4b22d8a782a7a",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3850,7 +3763,7 @@
       "subArea": "Pilot",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c8a3c6e38a3c652112a9af07cd030267d92a64716ed708caa38081e54aada795",
+      "policyHash": "sha256:1dc0243d73a9d1ca8f29685341731dd2d7efb2edf86c5cb0a031c629bd5cd3f1",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3885,7 +3798,7 @@
       "subArea": "UAT",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:13cfb31f16b801d0198c798d63afedf1dbc866ec50289c862b1ceb703b7f9b7d",
+      "policyHash": "sha256:8617eb24efefb0576046ea51b5c0b6fb0e9f4e9244fa03ab21426ebf3aff9239",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -3920,7 +3833,7 @@
       "subArea": "Production",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:8bdb7b5e117580d68446872cf04ed474d8923ea2d8d08a9f295b486c3cdf9db3",
+      "policyHash": "sha256:602dc26698f7e127bb169a0841f644b0b65773ef17468ad09572e3b234318962",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4510,78 +4423,6 @@
       ]
     },
     {
-      "id": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__Support_Approval__-_v1_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__Support_Approval__-_v1_0.json",
-      "displayName": "Win - CDW Baseline - ES - Endpoint Privilege Management - D - Elevation Settings (Support Approval) - v1.0",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Endpoint Security",
-      "framework": null,
-      "scope": "Device",
-      "version": "1.0",
-      "area": "Endpoint Privilege Management",
-      "subArea": "Elevation Settings Support Approval",
-      "securityDomain": null,
-      "settingCount": 4,
-      "policyHash": "sha256:07bc8d0969954a832ef57b12e5e71cc50a9d02048cdb61c6d2bebd3950234aff",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "libraryOnly": true,
-      "bundles": [
-        "intune-win-epm-support"
-      ]
-    },
-    {
-      "id": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__User_Confirmation__-_v1_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__User_Confirmation__-_v1_0.json",
-      "displayName": "Win - CDW Baseline - ES - Endpoint Privilege Management - D - Elevation Settings (User Confirmation) - v1.0",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Endpoint Security",
-      "framework": null,
-      "scope": "Device",
-      "version": "1.0",
-      "area": "Endpoint Privilege Management",
-      "subArea": "Elevation Settings User Confirmation",
-      "securityDomain": null,
-      "settingCount": 5,
-      "policyHash": "sha256:5146b15701e9f6361c969ee794366ac120f57f05ee39eb304bc8206a95079e9d",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "libraryOnly": true,
-      "bundles": [
-        "intune-win-epm-user"
-      ]
-    },
-    {
       "id": "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
       "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Local_Group_Membership_-_D_-_Local_Administrators_-_v3_7.json",
       "fileName": "Win_-_CDW_Baseline_-_ES_-_Local_Group_Membership_-_D_-_Local_Administrators_-_v3_7.json",
@@ -4632,7 +4473,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:406d1e38497d1ba5d9282a9ed78a5759e37005af3e05cd6ad7a51e9c32152059",
+      "policyHash": "sha256:39f15a61aa6200e802672344e37965313c57f035750879f14175c8e552cb12ad",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4666,7 +4507,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:c5791fa77fbbe8cf91df982c3c474bc3efa29267efb6f73cb990b3b39b1a653d",
+      "policyHash": "sha256:215755403e2cf0e6a905d875e3b9b2389b54f8726c8479052cd5aff058dd0686",
       "derivedFrom": {
         "platform": "filename",
         "policyType": "filename",
@@ -4700,7 +4541,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:36245f589b2e6ee3941de3c52332885c205010ac3b6bb685f43f2001a88dd941",
+      "policyHash": "sha256:4a5c1e213debdfd5f04de9a631dcb23a48b471664bcdaf27ef935771e3c5e61d",
       "derivedFrom": {
         "workload": "folder",
         "policyType": "body",
@@ -5309,462 +5150,6 @@
       "notes": null,
       "bundles": [
         "intune-macos-cdw-standard"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l1-apple-intelligence-and-siri-apple-intelligence-and-siri-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Apple_Intelligence_and_Siri_-_D_-_Apple_Intelligence_and_Siri_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Apple_Intelligence_and_Siri_-_D_-_Apple_Intelligence_and_Siri_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Apple Intelligence and Siri - D - Apple Intelligence and Siri - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L1",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Apple Intelligence and Siri",
-      "subArea": "Apple Intelligence and Siri",
-      "securityDomain": null,
-      "settingCount": 20,
-      "policyHash": "sha256:33d156f05e91791a66bcfe81aa3ae39ed6b0f0cd691cb6fcc292a71fc6ff9f4c",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L1"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l1"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l1-disk-encryption-filevault-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Disk_Encryption_-_D_-_FileVault_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Disk_Encryption_-_D_-_FileVault_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Disk Encryption - D - FileVault - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L1",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Disk Encryption",
-      "subArea": "FileVault",
-      "securityDomain": null,
-      "settingCount": 12,
-      "policyHash": "sha256:b3631ae6a7d7f11124b92635ec30fa5d531192a9db70d1f8024a6dc09350c0fa",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L1"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l1"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l1-firewall-firewall-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Firewall_-_D_-_Firewall_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Firewall_-_D_-_Firewall_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Firewall - D - Firewall - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L1",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Firewall",
-      "subArea": "Firewall",
-      "securityDomain": null,
-      "settingCount": 3,
-      "policyHash": "sha256:bcc795cfc47152ceb9a289c6fc7f47f10f0a12bf7c2cf146725fecbbb1557e94",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L1"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l1"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Gatekeeper_-_D_-_App_Store_and_Identified_Developers_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Gatekeeper_-_D_-_App_Store_and_Identified_Developers_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Gatekeeper - D - App Store and Identified Developers - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L1",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Gatekeeper",
-      "subArea": "App Store and Identified Developers",
-      "securityDomain": null,
-      "settingCount": 6,
-      "policyHash": "sha256:122e6df7f6346e20ea0317dd77bf6a56cebbec8f6b4364f1f52fc8cf45c05f24",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L1"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l1-gatekeeper"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l1-passcode-local-account-password-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Passcode_-_D_-_Local_Account_Password_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Passcode_-_D_-_Local_Account_Password_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Passcode - D - Local Account Password - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L1",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Passcode",
-      "subArea": "Local Account Password",
-      "securityDomain": null,
-      "settingCount": 10,
-      "policyHash": "sha256:ca3adfa50984e6ca04968a3255b7392e29cd29f5b8bdf7a46a404ffc0fc67450",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L1"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l1"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l1-restrictions-sharing-icloud-and-continuity-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Restrictions_-_D_-_Sharing__iCloud_and_Continuity_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Restrictions_-_D_-_Sharing__iCloud_and_Continuity_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Restrictions - D - Sharing, iCloud and Continuity - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L1",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Restrictions",
-      "subArea": "Sharing iCloud and Continuity",
-      "securityDomain": null,
-      "settingCount": 36,
-      "policyHash": "sha256:52dd3847088186c114fade90c5bfb768d99fddbd37365098239df600b1fe5749",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L1"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l1"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l1-software-update-automatic-and-enforced-updates-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Software_Update_-_D_-_Automatic_and_Enforced_Updates_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Software_Update_-_D_-_Automatic_and_Enforced_Updates_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - Software Update - D - Automatic and Enforced Updates - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L1",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Software Update",
-      "subArea": "Automatic and Enforced Updates",
-      "securityDomain": null,
-      "settingCount": 13,
-      "policyHash": "sha256:12c8ce5ce4f86b2bb5886706bffe256abfe5064d35bf5109e1c204361b547548",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L1"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l1"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l1-system-configuration-power-screen-saver-and-login-window-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_System_Configuration_-_D_-_Power__Screen_Saver_and_Login_Window_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_System_Configuration_-_D_-_Power__Screen_Saver_and_Login_Window_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L1 - System Configuration - D - Power, Screen Saver and Login Window - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L1",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "System Configuration",
-      "subArea": "Power Screen Saver and Login Window",
-      "securityDomain": null,
-      "settingCount": 27,
-      "policyHash": "sha256:623671fbbde28473ca7daa26ee88ae107bb2c51a460da3d52aafec82ee59ac2c",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L1"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l1"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Gatekeeper_-_D_-_App_Store_Only_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Gatekeeper_-_D_-_App_Store_Only_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Gatekeeper - D - App Store Only - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L2",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Gatekeeper",
-      "subArea": "App Store Only",
-      "securityDomain": null,
-      "settingCount": 6,
-      "policyHash": "sha256:86551a14951740e7dfabcf62481b84ee58bc6c03c98ba373c8ca6dcf4d3ee4bf",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L2"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l2"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l2-passcode-complex-password-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Passcode_-_D_-_Complex_Password_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Passcode_-_D_-_Complex_Password_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Passcode - D - Complex Password - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L2",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Passcode",
-      "subArea": "Complex Password",
-      "securityDomain": null,
-      "settingCount": 3,
-      "policyHash": "sha256:86b7276177b4e9b26e4edf56e4da41bb0c4f2c08da14474e5fea00a403c83e5c",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L2"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l2"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l2-restrictions-game-center-content-caching-and-autofill-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Restrictions_-_D_-_Game_Center__Content_Caching_and_AutoFill_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Restrictions_-_D_-_Game_Center__Content_Caching_and_AutoFill_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Restrictions - D - Game Center, Content Caching and AutoFill - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L2",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Restrictions",
-      "subArea": "Game Center Content Caching and AutoFill",
-      "securityDomain": null,
-      "settingCount": 4,
-      "policyHash": "sha256:5504a61a7befa297f4936ac60f89554122a29abf417e7ac3610358ec999d94a7",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L2"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l2"
-      ]
-    },
-    {
-      "id": "intune-macos-settings-catalog-cis-l2-software-update-app-store-updates-only-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Software_Update_-_D_-_App_Store_Updates_Only_-_v1_0_0.json",
-      "fileName": "MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Software_Update_-_D_-_App_Store_Updates_Only_-_v1_0_0.json",
-      "displayName": "MacOS - CDW Baseline - SC - CIS L2 - Software Update - D - App Store Updates Only - v1.0.0",
-      "workload": "Intune",
-      "platform": "macOS",
-      "policyType": "Settings Catalog",
-      "framework": "CIS L2",
-      "scope": "Device",
-      "version": "1.0.0",
-      "area": "Software Update",
-      "subArea": "App Store Updates Only",
-      "securityDomain": null,
-      "settingCount": 4,
-      "policyHash": "sha256:dd73005d59bb744e890b6c3afbc9d1aceb8b440f8e5467476a97a0c48009ed2f",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "framework": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [
-        "CIS L2"
-      ],
-      "notes": null,
-      "bundles": [
-        "intune-macos-cis-l2"
       ]
     },
     {
@@ -8237,111 +7622,6 @@
       ]
     },
     {
-      "id": "intune-windows-settings-catalog-copilot-readiness-recall-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Copilot_Readiness_-_D_-_Recall_-_v1_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Copilot_Readiness_-_D_-_Recall_-_v1_0.json",
-      "displayName": "Win - CDW Baseline - SC - Copilot Readiness - D - Recall - v1.0",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "Device",
-      "version": "1.0",
-      "area": "Copilot Readiness",
-      "subArea": "Recall",
-      "securityDomain": null,
-      "settingCount": 2,
-      "policyHash": "sha256:1450fa4488964dc26194ae8744f94eee7f8b349cf614e5eba7ede5534d075416",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-copilot-readiness"
-      ]
-    },
-    {
-      "id": "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Copilot_Readiness_-_U_-_Copilot_Key_-_v1_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Copilot_Readiness_-_U_-_Copilot_Key_-_v1_0.json",
-      "displayName": "Win - CDW Baseline - SC - Copilot Readiness - U - Copilot Key - v1.0",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "User",
-      "version": "1.0",
-      "area": "Copilot Readiness",
-      "subArea": "Copilot Key",
-      "securityDomain": null,
-      "settingCount": 1,
-      "policyHash": "sha256:3318837ddca7bb9397f28ac40c6cf04b6246314275710bd76fc5328f2ed9dbf3",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-copilot-readiness"
-      ]
-    },
-    {
-      "id": "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Copilot_Readiness_-_U_-_Microsoft_Edge_Copilot_-_v1_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Copilot_Readiness_-_U_-_Microsoft_Edge_Copilot_-_v1_0.json",
-      "displayName": "Win - CDW Baseline - SC - Copilot Readiness - U - Microsoft Edge Copilot - v1.0",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "User",
-      "version": "1.0",
-      "area": "Copilot Readiness",
-      "subArea": "Microsoft Edge Copilot",
-      "securityDomain": null,
-      "settingCount": 5,
-      "policyHash": "sha256:f85d6e6dbc6a40c4d1d2c6fccacf5160cc914935bfee6dbc20efa5315148198b",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-copilot-readiness"
-      ]
-    },
-    {
       "id": "intune-windows-settings-catalog-credential-management-passwordless-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Credential_Management_-_D_-_Passwordless_-_v3_3.json",
       "fileName": "Win_-_CDW_Baseline_-_SC_-_Credential_Management_-_D_-_Passwordless_-_v3_3.json",
@@ -9708,41 +8988,6 @@
       ]
     },
     {
-      "id": "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Shared_Devices_-_D_-_Shared_PC_Mode_-_v1_0.json",
-      "fileName": "Win_-_CDW_Baseline_-_SC_-_Shared_Devices_-_D_-_Shared_PC_Mode_-_v1_0.json",
-      "displayName": "Win - CDW Baseline - SC - Shared Devices - D - Shared PC Mode - v1.0",
-      "workload": "Intune",
-      "platform": "Windows",
-      "policyType": "Settings Catalog",
-      "framework": null,
-      "scope": "Device",
-      "version": "1.0",
-      "area": "Shared Devices",
-      "subArea": "Shared PC Mode",
-      "securityDomain": null,
-      "settingCount": 11,
-      "policyHash": "sha256:de8c980e56c49aa64b304d52d016cc1ae14b09f1e484adf94e0a73ebea23d6c3",
-      "derivedFrom": {
-        "platform": "filename",
-        "policyType": "filename",
-        "scope": "filename",
-        "version": "filename",
-        "workload": "folder",
-        "area": "filename",
-        "subArea": "filename"
-      },
-      "unresolved": [],
-      "confidence": "high",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": [
-        "intune-win-shared-devices"
-      ]
-    },
-    {
       "id": "intune-windows-settings-catalog-windows-apps-in-box-app-removal-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Windows_Apps_-_D_-_In-Box_App_Removal_-_v3_7.json",
       "fileName": "Win_-_CDW_Baseline_-_SC_-_Windows_Apps_-_D_-_In-Box_App_Removal_-_v3_7.json",
@@ -10028,39 +9273,6 @@
       "frameworks": [],
       "notes": null,
       "bundles": []
-    },
-    {
-      "id": "sharepoint-cross-platform-share-point-tenant-settings",
-      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
-      "fileName": "CDW_Baseline_SharePointTenantSettings_v1_0.json",
-      "displayName": "CDW Baseline - SharePoint Tenant Settings",
-      "workload": "SharePoint",
-      "platform": "Cross-platform",
-      "policyType": null,
-      "framework": null,
-      "scope": null,
-      "version": "1.0",
-      "area": "Share Point Tenant Settings",
-      "subArea": null,
-      "securityDomain": null,
-      "settingCount": 0,
-      "policyHash": "sha256:39f9164dd8c41280c1094a71a070d6b2f3a75c8afeccfa30caac13d5e19242ec",
-      "derivedFrom": {
-        "version": "filename",
-        "workload": "folder",
-        "platform": "inferred",
-        "area": "filename"
-      },
-      "unresolved": [
-        "policyType",
-        "scope"
-      ],
-      "confidence": "low",
-      "enrichment": null,
-      "tags": [],
-      "frameworks": [],
-      "notes": null,
-      "bundles": []
     }
   ],
   "bundles": [
@@ -10213,13 +9425,7 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-settings-catalog-device-security-local-security-policies-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user",
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
-        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device",
-        "intune-windows-settings-catalog-copilot-readiness-recall-device",
-        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
-        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user"
+        "intune-windows-compliance-policy-defender-for-endpoint-user"
       ],
       "order": 30,
       "licensing": [
@@ -10305,13 +9511,7 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-settings-catalog-device-security-local-security-policies-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user",
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
-        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device",
-        "intune-windows-settings-catalog-copilot-readiness-recall-device",
-        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
-        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user"
+        "intune-windows-compliance-policy-defender-for-endpoint-user"
       ],
       "order": 35,
       "licensing": [
@@ -10576,8 +9776,7 @@
       ],
       "rule": {
         "workload": "Intune",
-        "platform": "macOS",
-        "framework": null
+        "platform": "macOS"
       },
       "include": [],
       "exclude": [],
@@ -10694,7 +9893,7 @@
       "exclude": [],
       "order": 100,
       "prerequisites": [
-        "Two break-glass accounts in a group, picked or created at the tenant inputs step and excluded from every policy",
+        "Two break-glass accounts, excluded from every policy",
         "Named locations marked as trusted (for security info registration)",
         "Check sign-in logs for device code flow use (Teams Rooms, CLI tools) before enabling CDW015"
       ],
@@ -10765,7 +9964,7 @@
       "exclude": [],
       "order": 120,
       "prerequisites": [
-        "Two break-glass accounts in a group, picked or created at the tenant inputs step and excluded from every policy",
+        "Two break-glass accounts, excluded from every policy",
         "Device compliance policies assigned before CDW016 is enabled",
         "App protection policies assigned before CDW017 is enabled"
       ],
@@ -10957,8 +10156,8 @@
       "exclude": [],
       "order": 160,
       "prerequisites": [
-        "One security group per persona, picked or created at the tenant inputs step and assigned to that persona's policies",
-        "Break-glass group, excluded from every policy at the tenant inputs step",
+        "One security group per persona, assigned to that persona's policies (policies deploy targeting no users)",
+        "Break-glass accounts excluded from every policy",
         "Named locations for service accounts",
         "Terms of Use objects for CDW401/405/501/505 (the grant is added per tenant)"
       ],
@@ -11121,7 +10320,7 @@
       "exclude": [],
       "order": 180,
       "prerequisites": [
-        "One group per service account persona, plus the office public IP ranges as a trusted location (both set at the tenant inputs step)",
+        "One group per service account persona",
         "Named locations for each service's source IPs"
       ],
       "licensing": [
@@ -11181,254 +10380,9 @@
         "entra-cross-platform-tenant-policy-device-registration-policy-tenant"
       ],
       "memberCount": 7
-    },
-    {
-      "id": "intune-win-epm-support",
-      "name": "Windows - Endpoint Privilege Management (support approval)",
-      "description": "Standard users request elevation from IT for anything not covered by an elevation rule. All elevations are reported.",
-      "path": [
-        "Intune",
-        "Windows",
-        "Privilege Management",
-        "Support approval"
-      ],
-      "include": [
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device"
-      ],
-      "order": 200,
-      "rule": null,
-      "exclude": [],
-      "licensing": [
-        "Microsoft 365 E5 (includes Endpoint Privilege Management), or the Endpoint Privilege Management add-on with Intune Plan 1"
-      ],
-      "prerequisites": [
-        "Remove users from the local Administrators group (the CDW standard Local Administrators policy does this)",
-        "Elevation rules for the customer's line-of-business apps, written from the elevation report after a few weeks of reporting"
-      ],
-      "notes": "Not validated in the CDW reference tenant: the developer tenant can't hold Endpoint Privilege Management licences. Test with a pilot group first.",
-      "members": [
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device"
-      ],
-      "memberCount": 1
-    },
-    {
-      "id": "intune-win-epm-user",
-      "name": "Windows - Endpoint Privilege Management (user confirmation)",
-      "description": "Standard users elevate after a business justification and Windows authentication. All elevations are reported. A stepping stone while elevation rules are written.",
-      "path": [
-        "Intune",
-        "Windows",
-        "Privilege Management",
-        "User confirmation"
-      ],
-      "include": [
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
-      ],
-      "order": 201,
-      "rule": null,
-      "exclude": [],
-      "licensing": [
-        "Microsoft 365 E5 (includes Endpoint Privilege Management), or the Endpoint Privilege Management add-on with Intune Plan 1"
-      ],
-      "prerequisites": [
-        "Remove users from the local Administrators group (the CDW standard Local Administrators policy does this)",
-        "Elevation rules for the customer's line-of-business apps, written from the elevation report after a few weeks of reporting"
-      ],
-      "notes": "Not validated in the CDW reference tenant: the developer tenant can't hold Endpoint Privilege Management licences. Test with a pilot group first.",
-      "members": [
-        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
-      ],
-      "memberCount": 1
-    },
-    {
-      "id": "intune-win-shared-devices",
-      "name": "Windows - Shared and frontline devices",
-      "description": "Shared PC mode for hot desks, frontline and shift workers: one Entra user at a time, automatic profile clean-up, OneDrive sync, sign-in on wake, fast first sign-in and web sign-in.",
-      "path": [
-        "Intune",
-        "Windows",
-        "Shared Devices",
-        "Shared PC"
-      ],
-      "rule": null,
-      "include": [
-        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device"
-      ],
-      "exclude": [],
-      "order": 210,
-      "licensing": [
-        "Microsoft Intune",
-        "Windows 11 Pro, Enterprise or Education"
-      ],
-      "prerequisites": [
-        "A device group containing only the shared devices: assign this policy to devices, never to users",
-        "Devices Entra joined (Autopilot recommended); Shared PC mode applies at the next sign-out",
-        "Temporary Access Pass enabled if frontline users sign in with web sign-in"
-      ],
-      "notes": "Shared iPads (Apple Business Manager + automated device enrolment) and Android shared device mode (dedicated device enrolment profile with Entra shared mode) are set up per tenant in Intune and are not in the library.",
-      "members": [
-        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device"
-      ],
-      "memberCount": 1
-    },
-    {
-      "id": "intune-win-copilot-readiness",
-      "name": "Windows - Copilot readiness",
-      "description": "Windows and Edge settings for Microsoft 365 Copilot: the Copilot key opens the work Copilot app, Copilot Chat is available in Edge with page context for work profiles, agentic browsing stays off and Recall stays off until assessed.",
-      "path": [
-        "Intune",
-        "Windows",
-        "Copilot",
-        "Readiness"
-      ],
-      "rule": null,
-      "include": [
-        "intune-windows-settings-catalog-copilot-readiness-recall-device",
-        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
-        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user"
-      ],
-      "exclude": [],
-      "order": 220,
-      "licensing": [
-        "Microsoft Intune",
-        "Microsoft 365 Copilot Chat is included for Entra ID users; Microsoft 365 Copilot licences for in-app Copilot and work grounding"
-      ],
-      "prerequisites": [
-        "Microsoft 365 Copilot app deployed (it installs with Microsoft 365 Apps)",
-        "Windows 11 24H2 or later for the Copilot key and Recall settings",
-        "Before licensing Microsoft 365 Copilot: review SharePoint oversharing (site access reviews, sensitivity labels). Restricted SharePoint Search and Purview DLP for Copilot will follow in the PowerShell-based building blocks"
-      ],
-      "notes": "The CDW standard \"Turn off Windows Copilot\" user policy only affects the retired Copilot sidebar and doesn't block the Microsoft 365 Copilot app; Microsoft is deprecating it. Remove it from customers adopting Copilot.",
-      "members": [
-        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
-        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user",
-        "intune-windows-settings-catalog-copilot-readiness-recall-device"
-      ],
-      "memberCount": 3
-    },
-    {
-      "id": "intune-macos-cis-l1",
-      "name": "macOS - CIS Level 1",
-      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1: FileVault, firewall, restrictions, passcode, software updates, power and login window, Apple Intelligence and Siri. Gatekeeper is a separate block so Level 2 can replace it.",
-      "path": [
-        "Intune",
-        "macOS",
-        "Security Baselines",
-        "CIS L1"
-      ],
-      "rule": {
-        "workload": "Intune",
-        "platform": "macOS",
-        "frameworks": "CIS L1"
-      },
-      "include": [],
-      "exclude": [
-        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
-      ],
-      "order": 40,
-      "notes": "Not applied (organisation-specific or disruptive): 2.5.1.1 Activation Lock, 2.7.1 profile removal password (absent is compliant), 2.9.1.7 passcode regex, 2.9.1.13 change password at next auth, 2.11.3.1 system extension overrides (default already off), 2.13.1 profile removal (set on the ADE enrolment profile). Blocking iCloud Drive, AirDrop and Handoff changes how users work: brief the customer before deploying. Full mapping: docs/CIS-macOS-26.md.",
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "prerequisites": [
-        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
-        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
-        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
-      ],
-      "members": [
-        "intune-macos-settings-catalog-cis-l1-apple-intelligence-and-siri-apple-intelligence-and-siri-device",
-        "intune-macos-settings-catalog-cis-l1-disk-encryption-filevault-device",
-        "intune-macos-settings-catalog-cis-l1-firewall-firewall-device",
-        "intune-macos-settings-catalog-cis-l1-passcode-local-account-password-device",
-        "intune-macos-settings-catalog-cis-l1-restrictions-sharing-icloud-and-continuity-device",
-        "intune-macos-settings-catalog-cis-l1-software-update-automatic-and-enforced-updates-device",
-        "intune-macos-settings-catalog-cis-l1-system-configuration-power-screen-saver-and-login-window-device"
-      ],
-      "memberCount": 7
-    },
-    {
-      "id": "intune-macos-cis-l1-gatekeeper",
-      "name": "macOS - CIS Level 1 Gatekeeper",
-      "description": "Gatekeeper for App Store and identified developer apps, without user override. Replaced by the Level 2 App Store-only policy.",
-      "path": [
-        "Intune",
-        "macOS",
-        "Security Baselines",
-        "CIS L1",
-        "Gatekeeper"
-      ],
-      "rule": null,
-      "include": [
-        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
-      ],
-      "exclude": [],
-      "order": 41,
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "prerequisites": [
-        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
-        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
-        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
-      ],
-      "members": [
-        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
-      ],
-      "memberCount": 1
-    },
-    {
-      "id": "intune-macos-cis-l2",
-      "name": "macOS - CIS Level 2",
-      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2 additions: App Store-only Gatekeeper and software updates, no content caching, Game Center or password AutoFill, complex passwords. Use with Level 1.",
-      "path": [
-        "Intune",
-        "macOS",
-        "Security Baselines",
-        "CIS L2"
-      ],
-      "rule": {
-        "workload": "Intune",
-        "platform": "macOS",
-        "frameworks": "CIS L2"
-      },
-      "include": [],
-      "exclude": [],
-      "order": 42,
-      "notes": "Not applied: 2.8.29 Touch ID for unlock (set to the customer's policy). App Store-only Gatekeeper means every non-App Store app must be deployed through Intune.",
-      "licensing": [
-        "Microsoft Intune"
-      ],
-      "prerequisites": [
-        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
-        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
-        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
-      ],
-      "members": [
-        "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
-        "intune-macos-settings-catalog-cis-l2-passcode-complex-password-device",
-        "intune-macos-settings-catalog-cis-l2-restrictions-game-center-content-caching-and-autofill-device",
-        "intune-macos-settings-catalog-cis-l2-software-update-app-store-updates-only-device"
-      ],
-      "memberCount": 4
     }
   ],
   "conflicts": [
-    {
-      "a": "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device",
-      "b": "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
-      "settings": 1,
-      "settingIds": [
-        "com.apple.systempolicy.control_allowidentifieddevelopers"
-      ]
-    },
-    {
-      "a": "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
-      "b": "intune-macos-settings-catalog-firewall-gatekeeper-device",
-      "settings": 1,
-      "settingIds": [
-        "com.apple.systempolicy.control_allowidentifieddevelopers"
-      ]
-    },
     {
       "a": "intune-macos-settings-catalog-defender-antivirus-mde-configuration-device",
       "b": "intune-macos-settings-catalog-microsoft-onedrive-service-and-access-device",
@@ -11524,14 +10478,6 @@
         "device_vendor_msft_defender_configuration_engineupdateschannel",
         "device_vendor_msft_defender_configuration_platformupdateschannel",
         "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
-      ]
-    },
-    {
-      "a": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
-      "b": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
-      "settings": 1,
-      "settingIds": [
-        "device_vendor_msft_policy_elevationclientsettings_defaultelevationresponse"
       ]
     },
     {
@@ -12375,18 +11321,6 @@
       "detail": "No enrichment authored"
     },
     {
-      "policyId": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__Support_Approval__-_v1_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
-      "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Endpoint_Privilege_Management_-_D_-_Elevation_Settings__User_Confirmation__-_v1_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
       "policyId": "intune-windows-endpoint-security-local-group-membership-local-administrators-device",
       "path": "IntuneConfig/EndpointSecurity/Win_-_CDW_Baseline_-_ES_-_Local_Group_Membership_-_D_-_Local_Administrators_-_v3_7.json",
       "type": "missingEnrichment",
@@ -12515,78 +11449,6 @@
     {
       "policyId": "intune-macos-settings-catalog-microsoft-onedrive-known-folder-move-user",
       "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_Microsoft_OneDrive_-_U_-_Known_Folder_Move_-_v1_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l1-apple-intelligence-and-siri-apple-intelligence-and-siri-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Apple_Intelligence_and_Siri_-_D_-_Apple_Intelligence_and_Siri_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l1-disk-encryption-filevault-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Disk_Encryption_-_D_-_FileVault_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l1-firewall-firewall-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Firewall_-_D_-_Firewall_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Gatekeeper_-_D_-_App_Store_and_Identified_Developers_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l1-passcode-local-account-password-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Passcode_-_D_-_Local_Account_Password_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l1-restrictions-sharing-icloud-and-continuity-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Restrictions_-_D_-_Sharing__iCloud_and_Continuity_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l1-software-update-automatic-and-enforced-updates-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_Software_Update_-_D_-_Automatic_and_Enforced_Updates_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l1-system-configuration-power-screen-saver-and-login-window-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L1_-_System_Configuration_-_D_-_Power__Screen_Saver_and_Login_Window_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l2-gatekeeper-app-store-only-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Gatekeeper_-_D_-_App_Store_Only_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l2-passcode-complex-password-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Passcode_-_D_-_Complex_Password_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l2-restrictions-game-center-content-caching-and-autofill-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Restrictions_-_D_-_Game_Center__Content_Caching_and_AutoFill_-_v1_0_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-macos-settings-catalog-cis-l2-software-update-app-store-updates-only-device",
-      "path": "IntuneConfig/SettingsCatalog/MacOS_-_CDW_Baseline_-_SC_-_CIS_L2_-_Software_Update_-_D_-_App_Store_Updates_Only_-_v1_0_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -12981,24 +11843,6 @@
       "detail": "No enrichment authored"
     },
     {
-      "policyId": "intune-windows-settings-catalog-copilot-readiness-recall-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Copilot_Readiness_-_D_-_Recall_-_v1_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Copilot_Readiness_-_U_-_Copilot_Key_-_v1_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
-      "policyId": "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Copilot_Readiness_-_U_-_Microsoft_Edge_Copilot_-_v1_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
       "policyId": "intune-windows-settings-catalog-credential-management-passwordless-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Credential_Management_-_D_-_Passwordless_-_v3_3.json",
       "type": "missingEnrichment",
@@ -13227,12 +12071,6 @@
       "detail": "No enrichment authored"
     },
     {
-      "policyId": "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device",
-      "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Shared_Devices_-_D_-_Shared_PC_Mode_-_v1_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
       "policyId": "intune-windows-settings-catalog-windows-apps-in-box-app-removal-device",
       "path": "IntuneConfig/SettingsCatalog/Win_-_CDW_Baseline_-_SC_-_Windows_Apps_-_D_-_In-Box_App_Removal_-_v3_7.json",
       "type": "missingEnrichment",
@@ -13281,24 +12119,6 @@
       "detail": "No enrichment authored"
     },
     {
-      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
-      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
-      "type": "unresolved",
-      "detail": "Could not derive 'policyType'"
-    },
-    {
-      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
-      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
-      "type": "unresolved",
-      "detail": "Could not derive 'scope'"
-    },
-    {
-      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
-      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
-      "type": "missingEnrichment",
-      "detail": "No enrichment authored"
-    },
-    {
       "policyId": "intune-android-settings-catalog-restrictions-v1-0-test-device",
       "path": "IntuneConfig/SettingsCatalog/Android_-_CDW_Baseline_-_SC_-_Restrictions_-_D_-_v1_0__TEST_.json",
       "type": "orphan",
@@ -13313,12 +12133,6 @@
     {
       "policyId": "intune-ios-settings-catalog-restrictions-v1-0-test-device",
       "path": "IntuneConfig/SettingsCatalog/iOS_-_CDW_Baseline_-_SC_-_Restrictions_-_D_-_v1_0__TEST_.json",
-      "type": "orphan",
-      "detail": "Policy is in no bundle"
-    },
-    {
-      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
-      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
       "type": "orphan",
       "detail": "Policy is in no bundle"
     }
