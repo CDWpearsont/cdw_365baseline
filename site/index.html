@@ -905,6 +905,23 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
   overflow:hidden;text-overflow:ellipsis;max-width:240px}
 .eng-item .eng-v.eng-muted{color:var(--muted);font-weight:400;font-style:italic}
 .eng-spacer{flex:1}
+.lld-bar{border-color:rgba(200,16,46,.22);background:rgba(200,16,46,.025)}
+.lld-bar-text{font-size:12px;color:var(--muted);line-height:1.5;flex:1 1 360px;min-width:0}
+.lld-bar-text b{color:var(--text)}
+.lld-chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.lld-chip{padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;min-width:96px}
+.lld-chip .k{font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--dim)}
+.lld-chip .v{font-size:18px;font-weight:600;color:var(--text)}
+.lld-chip.warn .v{color:#b45309}.lld-chip.ok .v{color:#059669}.lld-chip.off .v{color:var(--muted)}
+.lld-pol{border:1px solid var(--border);border-radius:8px;margin:0 0 6px;font-size:12px}
+.lld-pol summary{cursor:pointer;padding:8px 10px;font-weight:600;color:var(--text)}
+.lld-pol ul{margin:0 0 8px 0;padding:0 12px 0 28px}
+.lld-pol li{margin:3px 0;color:var(--muted)}
+.lld-pol li b{color:var(--text);font-weight:500}
+.lld-tag{display:inline-block;font-size:10px;font-weight:600;border-radius:4px;padding:1px 6px;margin-left:6px}
+.lld-tag.auto{background:#ecfdf5;color:#047857}.lld-tag.man{background:#fffbeb;color:#b45309}
+.lld-list{font-size:12px;color:var(--muted);margin:0 0 6px 18px}
+.lld-list li{margin:3px 0}
 
 /* Manifest flag badges */
 .sb-flag-danger{background:rgba(200,16,46,.10);color:#c8102e;border:1px solid rgba(200,16,46,.22)}
@@ -1395,6 +1412,18 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
         <input type="file" id="tpl-upload" accept=".docx" style="display:none"/>
       </div>
 
+      <!-- Signed-off LLD import (deploy mode only) -->
+      <div class="eng-bar lld-bar" id="lld-bar" style="display:none">
+        <span class="eng-icon">📑</span>
+        <div class="lld-bar-text" id="lld-bar-text">Deploying from a signed-off LLD? Import the Word version to select its policies and apply its edits. Optional: you can still select policies by hand.</div>
+        <div class="eng-spacer"></div>
+        <button class="btn btn-ghost btn-sm" id="lld-plan-btn" style="display:none" onclick="lldShowPlan(lldImport)">View plan</button>
+        <button class="btn btn-ghost btn-sm" id="lld-checklist-btn" style="display:none" onclick="lldDownloadChecklist()">Manual steps</button>
+        <button class="btn btn-ghost btn-sm" id="lld-clear-btn" style="display:none" onclick="lldClear()">Clear</button>
+        <button class="btn btn-primary btn-sm" id="lld-import-btn" onclick="document.getElementById('lld-file').click()">Import LLD</button>
+        <input type="file" id="lld-file" accept=".docx" style="display:none" onchange="lldImportChosen(this)"/>
+      </div>
+
       <!-- ── INTUNE TAB ──────────────────────────────────────── -->
       <div class="tab-panel active" id="panel-intune">
         <div class="wl-header">
@@ -1741,7 +1770,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.18.0',
+  version: '3.19.0',
   date:    '2026-09-17'
 };
 
@@ -1801,6 +1830,8 @@ function setAppMode(mode) {
   document.getElementById('remove-btn').style.display   = 'none';
   document.getElementById('docgen-btn').style.display   = mode === 'document' ? '' : 'none';
   document.getElementById('tpl-bar').style.display      = mode === 'document' ? '' : 'none';
+  const lldBar = document.getElementById('lld-bar');
+  if (lldBar) lldBar.style.display = mode === 'deploy' ? '' : 'none';
   updateDeployBar();
 }
 
@@ -4087,18 +4118,13 @@ async function runDeployment(toProcess) {
 
     try {
       // Fetched fresh in this deployment (tenant inputs may already have done so)
-      let json = orig?._json;
-      if (!json) {
-        const r = await fetch(`${p.raw_url}?t=${Date.now()}`);
-        if (!r.ok) throw new Error(`GitHub fetch ${r.status}`);
-        json = await r.json();
-        if (orig) orig._json = json;
-      }
+      let json = await deployJson(p);
       delete p._tiNotes;
       json = withTargetTenant(json, account?.tenantId);
       const createdId = await p.deployFn(p, json);
       log(`✓ Deployed: ${htmlEsc(getDeployName(p))}`, 'lok');
       (p._tiNotes || []).forEach(n => log(`  ⚠ ${htmlEsc(n)}`, 'lsk'));
+      lldLogResult(orig, p, log);
       if (p.wl === 'intune' && tenantInputs.pilot?.id && createdId) {
         try {
           if (await tiAssignPilot(p, json, createdId)) log(`  ↳ Assigned to ${htmlEsc(tenantInputs.pilot.name)}`, 'lin');
@@ -4126,6 +4152,11 @@ async function runDeployment(toProcess) {
 
   pbar.style.width = '100%';
   log(`─── Complete: ${ok} deployed · ${sk} skipped · ${er} failed ───`);
+  if (lldImport) {
+    const n = lldManualSteps().length;
+    log(n ? `📑 ${n} manual ${n === 1 ? 'step' : 'steps'} from the LLD \u2014 <a href="#" onclick="lldDownloadChecklist();return false">download the checklist</a>`
+          : '📑 Everything in the LLD that the site can deploy was applied.', n ? 'lsk' : 'lok');
+  }
   document.getElementById('s-ok').textContent = ok;
   document.getElementById('s-sk').textContent = sk;
   document.getElementById('s-er').textContent = er;
@@ -4133,6 +4164,623 @@ async function runDeployment(toProcess) {
 
   Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
   showToast(`Done — ${ok} deployed, ${sk} skipped, ${er} failed`, er ? 'err' : sk ? 'warn' : 'ok');
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+// SIGNED-OFF LLD IMPORT (Deploy mode, optional)
+// Reads the Word LLD, matches its policies to the library (exactly, through
+// the record embedded at export; otherwise by name), compares every settings
+// table with what was exported, and builds a plan: policies to select, edits
+// to apply at deployment, and manual steps for anything the site cannot do.
+// Manual selection and deployment are unchanged; this only pre-selects.
+// ═══════════════════════════════════════════════════════════════════
+
+let lldImport = null;   // the applied plan
+
+const lldNorm = t => String(t ?? '').replace(/[ \s]+/g, ' ').trim();
+const lldKey  = t => lldNorm(t).toLowerCase();
+const lldStripVersion = t => lldKey(t).replace(/\s*[-–]?\s*v\d+(\.\d+)*(\s*\((test|draft|preview)\))?\s*$/i, '');
+const LLD_TEMPLATE_H1 = ['document control', 'introduction', 'design decisions', 'prerequisites', 'design', 'appendices',
+                         'approval to proceed', 'final sign off', 'sign off, design', 'table of contents'];
+
+async function lldImportChosen(input) {
+  const file = input.files && input.files[0];
+  input.value = '';
+  if (!file) return;
+  if (!policiesLoaded()) { showToast('Wait for the policy list to load, then import the LLD', 'warn'); return; }
+  const btn = document.getElementById('lld-import-btn');
+  btn.disabled = true; btn.textContent = 'Reading…';
+  try {
+    const zip = await JSZip.loadAsync(await file.arrayBuffer());
+    const xml = await zip.file('word/document.xml')?.async('string');
+    if (!xml) throw new Error('not a Word document');
+    const record = await lldReadRecord(zip);
+    const parsed = lldParseDoc(xml);
+    if (!parsed.policies.length) throw new Error('no policy tables were found in the Design section');
+    btn.textContent = 'Comparing…';
+    const plan = await lldBuildPlan(record, parsed, file.name);
+    lldShowPlan(plan);
+  } catch (e) {
+    console.warn('[LLD import]', e);
+    showToast(`Could not import the LLD: ${e.message}`, 'err');
+  } finally {
+    btn.disabled = false; btn.textContent = lldImport ? 'Import another' : 'Import LLD';
+  }
+}
+
+// ── Reading the document ─────────────────────────────────────────
+
+function lldParseDoc(xml) {
+  const doc = new DOMParser().parseFromString(xml, 'application/xml');
+  const body = doc.getElementsByTagNameNS(W_NS, 'body')[0];
+  const kids = (n, tag) => [...n.childNodes].filter(c => c.nodeType === 1 && (!tag || c.localName === tag));
+  // w:t only: deleted text in tracked changes is w:delText, so the document reads as if changes were accepted.
+  const textOf = n => lldNorm([...n.getElementsByTagNameNS(W_NS, 't')].map(t => t.textContent).join(''));
+  const level = n => {
+    const st = n.localName === 'p' && n.getElementsByTagNameNS(W_NS, 'pStyle')[0];
+    const m = st && /^Heading(\d)$/.exec(st.getAttribute('w:val') || '');
+    return m ? +m[1] : 0;
+  };
+  const known = new Set([...Object.values(WL_LABELS), ...Object.values(CAT_LABELS)].map(lldKey));
+  const out = { policies: [], extras: [], sections: [] };
+  let inDesign = false, current = null, extra = null, h1 = '';
+  for (const n of kids(body)) {
+    const lv = level(n);
+    if (lv) {
+      const t = textOf(n);
+      if (!t) continue;
+      if (lv === 1) {
+        h1 = t; inDesign = lldKey(t) === 'design';
+        current = null; extra = null;
+        if (!LLD_TEMPLATE_H1.includes(lldKey(t))) out.sections.push(t);
+        continue;
+      }
+      if (!inDesign) continue;
+      current = null; extra = null;
+      if (lv >= 4) { current = { heading: t, rows: [], assign: [], text: '' }; out.policies.push(current); continue; }
+      if (!known.has(lldKey(t))) { extra = { heading: t, level: lv, text: '' }; out.extras.push(extra); }
+      continue;
+    }
+    if (!inDesign) continue;
+    if (n.localName === 'p') {
+      const t = textOf(n);
+      if (t && extra && extra.text.length < 400) extra.text += (extra.text ? ' ' : '') + t;
+      if (t && current && !current.rows.length && current.text.length < 400) current.text += (current.text ? ' ' : '') + t;
+      continue;
+    }
+    if (n.localName === 'tbl' && current && !current.rows.length) {
+      let part = 'settings';
+      for (const tr of kids(n, 'tr')) {
+        const cells = kids(tr, 'tc').map(textOf);
+        if (cells.length === 1) { if (/^assignment/i.test(cells[0])) part = 'assign'; else if (/scope tags/i.test(cells[0])) part = 'tags'; continue; }
+        if (cells.length < 2) continue;
+        if (part === 'settings') {
+          if (lldKey(cells[0]) === 'setting' && lldKey(cells[1]) === 'value') continue;
+          current.rows.push([cells[0], cells[1]]);
+        } else if (part === 'assign' && /groups$/i.test(cells[0]) && cells[1]) {
+          current.assign.push([cells[0], cells[1]]);
+        }
+      }
+    } else if (n.localName === 'tbl' && extra) {
+      extra.text += (extra.text ? ' ' : '') + '(table)';
+    }
+  }
+  return out;
+}
+
+// Aligns two row lists by label, in order; returns changed / removed / added.
+function lldDiffRows(base, doc, strict) {
+  const used = new Set(), changes = [];
+  const skip = l => !l || /^─+$/.test(l);
+  base.forEach(([label, value, ptr]) => {
+    if (skip(label)) return;
+    const i = doc.findIndex((r, k) => !used.has(k) && lldKey(r[0]) === lldKey(label));
+    if (i < 0) { if (strict) changes.push({ kind: 'removed', label, from: value, to: '', ptr }); return; }
+    used.add(i);
+    if (lldNorm(doc[i][1]) !== lldNorm(value)) changes.push({ kind: 'changed', label, from: value, to: doc[i][1], ptr });
+  });
+  let unmatched = 0;
+  doc.forEach(([label, value], k) => {
+    if (used.has(k) || skip(label)) return;
+    if (strict) changes.push({ kind: 'added', label, from: '', to: value, ptr: '' }); else unmatched++;
+  });
+  return { changes, unmatched };
+}
+
+// ── Building the plan ────────────────────────────────────────────
+
+async function lldBuildPlan(record, parsed, fileName) {
+  const grid = Object.entries(policies).flatMap(([wl, list]) => list.map(p => ({ p, wl })));
+  const byFile = new Map(grid.filter(g => g.p.file).map(g => [g.p.file, g]));
+  const byName = new Map();
+  grid.forEach(g => [getDeployName(g.p), g.p.displayName].forEach(n => {
+    if (n && !byName.has(lldStripVersion(n))) byName.set(lldStripVersion(n), g);
+  }));
+  const docByHeading = new Map(parsed.policies.map(d => [lldKey(d.heading), d]));
+  const usedDoc = new Set();
+  const items = [];
+  const commit = record?.source?.commit || null;
+  const pin = (file) => (record && commit && file)
+    ? `https://raw.githubusercontent.com/${record.source.owner}/${record.source.repo}/${commit}/${file.split('/').map(encodeURIComponent).join('/')}`
+    : null;
+
+  if (record) {
+    for (const rp of record.policies || []) {
+      const g = (rp.file && byFile.get(rp.file)) || byName.get(lldStripVersion(rp.heading)) || null;
+      const d = docByHeading.get(lldKey(rp.heading));
+      if (!d) { items.push({ status: 'removed', heading: rp.heading, g }); continue; }
+      usedDoc.add(d);
+      if (!g) { items.push({ status: 'unmatched', heading: rp.heading, doc: d, reason: 'no longer in the library' }); continue; }
+      let { changes } = lldDiffRows(rp.rows || [], d.rows, true);
+      if (changes.length) changes = await lldSettle(changes, pin(rp.file) || g.p.raw_url, rp.cat, false);
+      items.push({ status: changes.length ? 'edited' : 'unchanged', heading: rp.heading, g, doc: d,
+                   edits: changes, pinUrl: pin(rp.file), hash: rp.hash, cat: rp.cat });
+    }
+  } else {
+    // No record (exported before records existed): match by name and compare
+    // with the policy as it is in the library now.
+    for (const d of parsed.policies) {
+      const g = byName.get(lldStripVersion(d.heading));
+      if (!g) continue;
+      usedDoc.add(d);
+      let rows = [], json = null;
+      try {
+        const r = await fetch(`${g.p.raw_url}?t=${Date.now()}`);
+        if (r.ok) {
+          json = await r.json();
+          rows = lldTableRows(applyBranding(json.name || json.displayName || g.p.displayName, g.wl), json.description || '',
+                              json.platforms || json.platform || '', extractSettings(json, g.p.cat));
+        }
+      } catch { /* compared as unchanged */ }
+      let { changes, unmatched } = lldDiffRows(rows, d.rows, false);
+      // The LLD was written by an older version of the site, so some values are
+      // just worded differently. Keep only differences that change the policy,
+      // and leave those for the consultant to check rather than applying them.
+      if (changes.length && json) changes = await lldSettle(changes, null, g.p.cat, true, json);
+      items.push({ status: changes.length ? 'edited' : 'unchanged', heading: d.heading, g, doc: d, edits: changes,
+                   uncompared: unmatched, cat: g.p.cat });
+    }
+  }
+  // Tables in the Design section that match nothing in the library.
+  parsed.policies.filter(d => !usedDoc.has(d)).forEach(d => {
+    const g = !record && byName.get(lldStripVersion(d.heading));
+    if (!g) items.push({ status: 'unmatched', heading: d.heading, doc: d, reason: 'not in the library' });
+  });
+
+  const plan = { fileName, record: !!record, commit, createdAt: record?.createdAt || null,
+                 engagement: record?.engagement || null, items, extras: parsed.extras, sections: parsed.sections };
+  plan.counts = {
+    unchanged: items.filter(i => i.status === 'unchanged').length,
+    edited: items.filter(i => i.status === 'edited').length,
+    removed: items.filter(i => i.status === 'removed').length,
+    manual: 0,
+  };
+  plan.counts.manual = lldPlanManual(plan).length;
+  return plan;
+}
+
+// Drops differences that do not change the policy (the same value worded
+// differently) by applying each one to a copy of the policy and comparing.
+async function lldSettle(changes, url, cat, verifyOnly, json = null) {
+  if (!json) {
+    try { const r = await fetch(`${url}?t=${Date.now()}`); if (!r.ok) return changes; json = JSON.parse((await r.text()).replace(/^\uFEFF/, '')); }
+    catch { return changes; }
+  }
+  const before = JSON.stringify(json);
+  const out = [];
+  for (const e of changes) {
+    if (e.kind !== 'changed') { out.push(verifyOnly ? { ...e, verify: true } : e); continue; }
+    const copy = JSON.parse(before);
+    let res;
+    try { res = await lldApplyEdit(copy, cat, e); } catch (err) { res = err.message; }
+    if (res === true && JSON.stringify(copy) === before) continue;      // same value, different wording
+    out.push(verifyOnly ? { ...e, verify: true } : e);
+  }
+  return out;
+}
+
+// Edits the site applies at deployment; everything else is a manual step.
+function lldAutoEdit(e, cat) {
+  if (e.verify) return false;
+  if (e.kind === 'added') return false;
+  if (!e.ptr || e.ptr === 'name' || e.ptr === 'platform') return false;
+  if (e.kind === 'removed') return /^sc:/.test(e.ptr);
+  if (/^ca:(include|exclude)Groups$/.test(e.ptr)) return false;
+  return true;
+}
+
+function lldPlanManual(plan) {
+  const out = [];
+  plan.items.forEach(i => {
+    if (i.status === 'unmatched') out.push({ policy: i.heading, item: 'Build by hand', detail: `Policy ${i.reason}; build it from the LLD table` });
+    (i.edits || []).filter(e => !lldAutoEdit(e, i.cat)).forEach(e => out.push({
+      policy: i.heading, item: e.label,
+      detail: e.verify ? `Check: the library has ${e.from}, the LLD says ${e.to}`
+            : e.kind === 'added' ? `Add: ${e.to}` : e.kind === 'removed' ? `Remove (was ${e.from})` : `Change ${e.from} → ${e.to}` }));
+    (i.doc?.assign || []).forEach(([k, v]) => out.push({ policy: i.heading, item: k, detail: `Assign: ${v}` }));
+  });
+  plan.extras.forEach(x => out.push({ policy: x.heading, item: 'Section added to the LLD', detail: x.text.slice(0, 300) || 'Review and build if needed' }));
+  plan.sections.forEach(t => out.push({ policy: t, item: 'Section added to the LLD', detail: 'Outside the Design section; check whether it needs build work' }));
+  return out;
+}
+
+// ── Plan dialog ──────────────────────────────────────────────────
+
+function lldShowPlan(plan) {
+  if (!plan) return;
+  const c = plan.counts;
+  const date = plan.createdAt ? new Date(plan.createdAt).toLocaleDateString('en-GB') : null;
+  const source = plan.record
+    ? `Exported${date ? ' on ' + date : ''}${plan.engagement?.customer ? ' for ' + htmlEsc(plan.engagement.customer) : ''}. Compared with exactly what was exported.`
+    : 'This LLD has no export record (it was created before records were added), so policies were matched by name and compared with the library as it is now. Differences are listed for you to check; they are not applied automatically.';
+  const editedHtml = plan.items.filter(i => i.status === 'edited').map(i => `
+    <details class="lld-pol"><summary>${htmlEsc(i.heading)} — ${i.edits.length} ${i.edits.length === 1 ? 'change' : 'changes'}</summary><ul>
+      ${i.edits.map(e => `<li><b>${htmlEsc(e.label)}</b>: ${e.kind === 'added' ? 'added → ' + htmlEsc(e.to) : e.kind === 'removed' ? 'removed (was ' + htmlEsc(e.from) + ')' : htmlEsc(e.from) + ' → ' + htmlEsc(e.to)}
+        <span class="lld-tag ${lldAutoEdit(e, i.cat) ? 'auto">applied at deployment' : e.verify ? 'man">check' : 'man">manual'}</span></li>`).join('')}
+      ${i.uncompared ? `<li>${i.uncompared} rows could not be compared (their names differ from the current library).</li>` : ''}
+    </ul></details>`).join('');
+  const removed = plan.items.filter(i => i.status === 'removed');
+  const manual = lldPlanManual(plan);
+  const selectable = plan.items.filter(i => (i.status === 'unchanged' || i.status === 'edited') && i.g && i.g.p.deployable !== false);
+  const docOnly = plan.items.filter(i => (i.status === 'unchanged' || i.status === 'edited') && i.g && i.g.p.deployable === false).length;
+  const overlay = document.createElement('div');
+  overlay.className = 'confirm-overlay';
+  overlay.innerHTML = `
+    <div class="confirm-dialog sow-dialog" role="dialog" aria-label="Deployment plan from the LLD">
+      <h3>Deployment plan: ${htmlEsc(plan.fileName)}</h3>
+      <p class="sow-lead">${source}</p>
+      <div class="lld-chips">
+        <div class="lld-chip ok"><div class="k">As designed</div><div class="v">${c.unchanged}</div></div>
+        <div class="lld-chip ${c.edited ? 'warn' : ''}"><div class="k">Edited</div><div class="v">${c.edited}</div></div>
+        <div class="lld-chip off"><div class="k">Removed</div><div class="v">${c.removed}</div></div>
+        <div class="lld-chip ${c.manual ? 'warn' : ''}"><div class="k">Manual steps</div><div class="v">${c.manual}</div></div>
+      </div>
+      ${editedHtml ? `<div class="sow-sec"><div class="sow-sec-title">Edited since export</div>${editedHtml}</div>` : ''}
+      ${removed.length ? `<div class="sow-sec"><div class="sow-sec-title">Removed from the LLD (not selected)</div>
+        <ul class="lld-list">${removed.map(i => `<li>${htmlEsc(i.heading)}</li>`).join('')}</ul></div>` : ''}
+      ${manual.length ? `<div class="sow-sec"><div class="sow-sec-title">Manual steps</div>
+        <ul class="lld-list">${manual.slice(0, 40).map(m => `<li><b>${htmlEsc(m.policy)}</b> — ${htmlEsc(m.item)}: ${htmlEsc(m.detail)}</li>`).join('')}
+        ${manual.length > 40 ? `<li>… and ${manual.length - 40} more in the checklist</li>` : ''}</ul></div>` : ''}
+      ${docOnly ? `<p class="sow-lead">${docOnly} documented ${docOnly === 1 ? 'policy has' : 'policies have'} no deployment path in the site yet and ${docOnly === 1 ? 'is' : 'are'} not selected.</p>` : ''}
+      ${plan.record && plan.commit ? `<label class="confirm-suppress"><input type="checkbox" id="lld-pin" ${plan.pin !== false ? 'checked' : ''}/>
+        Deploy the policy versions the LLD was exported from (library version ${htmlEsc(plan.commit.slice(0, 7))})</label>` : ''}
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" id="lld-cancel">${plan === lldImport ? 'Close' : 'Cancel'}</button>
+        ${manual.length ? '<button class="btn btn-ghost" id="lld-dl">Download manual steps</button>' : ''}
+        <button class="btn btn-primary" id="lld-apply">Select ${selectable.length} ${selectable.length === 1 ? 'policy' : 'policies'}</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.classList.add('visible'));
+  const close = () => { overlay.classList.remove('visible'); setTimeout(() => overlay.remove(), 200); };
+  overlay.querySelector('#lld-cancel').addEventListener('click', close);
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  overlay.querySelector('#lld-dl')?.addEventListener('click', () => lldDownloadChecklist(plan));
+  overlay.querySelector('#lld-apply').addEventListener('click', () => {
+    plan.pin = overlay.querySelector('#lld-pin') ? overlay.querySelector('#lld-pin').checked : false;
+    lldApplyPlan(plan); close();
+  });
+}
+
+function lldApplyPlan(plan) {
+  Object.values(policies).flat().forEach(p => { p.selected = false; delete p._lld; delete p._lldResult; delete p._json; });
+  let n = 0;
+  plan.items.forEach(i => {
+    if (!i.g || (i.status !== 'unchanged' && i.status !== 'edited')) return;
+    const p = i.g.p;
+    if (p.deployable === false) return;
+    p.selected = true; n++;
+    p._lld = { pinUrl: plan.pin ? i.pinUrl : null, hash: plan.pin ? i.hash : null,
+               edits: (i.edits || []).filter(e => lldAutoEdit(e, i.cat)), heading: i.heading };
+  });
+  lldImport = plan;
+  plan.deployManual = [];
+  Object.keys(WORKLOADS).forEach(wl => renderGrid(wl, false));
+  updateDeployBar();
+  lldRenderBar();
+  showToast(`LLD imported — ${n} ${n === 1 ? 'policy' : 'policies'} selected`);
+}
+
+function lldClear() {
+  lldImport = null;
+  Object.values(policies).flat().forEach(p => { delete p._lld; delete p._lldResult; delete p._json; });
+  lldRenderBar();
+  showToast('LLD import cleared; the selection is unchanged');
+}
+
+function lldRenderBar() {
+  const t = document.getElementById('lld-bar-text');
+  if (!t) return;
+  const on = !!lldImport;
+  ['lld-plan-btn', 'lld-clear-btn'].forEach(id => { document.getElementById(id).style.display = on ? '' : 'none'; });
+  document.getElementById('lld-checklist-btn').style.display = on && lldManualSteps().length ? '' : 'none';
+  document.getElementById('lld-import-btn').textContent = on ? 'Import another' : 'Import LLD';
+  if (!on) { t.textContent = 'Deploying from a signed-off LLD? Import the Word version to select its policies and apply its edits. Optional: you can still select policies by hand.'; return; }
+  const c = lldImport.counts;
+  t.innerHTML = `<b>${htmlEsc(lldImport.fileName)}</b>: ${c.unchanged} as designed, ` +
+    (lldImport.record ? `${c.edited} edited (applied when deployed), ` : `${c.edited} with differences to check, `) +
+    `${c.removed} removed, ${lldManualSteps().length} manual ${lldManualSteps().length === 1 ? 'step' : 'steps'}. You can still change the selection.`;
+}
+
+function lldManualSteps(plan = lldImport) {
+  if (!plan) return [];
+  return [...lldPlanManual(plan), ...(plan.deployManual || [])];
+}
+
+function lldDownloadChecklist(plan = lldImport) {
+  const rows = lldManualSteps(plan);
+  const csv = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const lines = [['Policy or section', 'Setting / item', 'What to do', 'Done'].map(csv).join(',')]
+    .concat(rows.map(r => [r.policy, r.item, r.detail, ''].map(csv).join(',')));
+  const blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (plan?.fileName || 'LLD').replace(/\.docx$/i, '') + ' - manual steps.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+// ── Deployment: pinned version + LLD edits ───────────────────────
+
+async function deployJson(p) {
+  const orig = policies[p.wl]?.find(x => x.name === p.name) || p;
+  if (orig._json) return orig._json;
+  const plan = orig._lld || null;
+  let url = plan?.pinUrl || p.raw_url, note = null;
+  let r = await fetch(`${url}?t=${Date.now()}`);
+  if (!r.ok && plan?.pinUrl) {
+    note = 'The exported version could not be read, so the current library version was used.';
+    url = p.raw_url; r = await fetch(`${url}?t=${Date.now()}`);
+  }
+  if (!r.ok) throw new Error(`GitHub fetch ${r.status}`);
+  const text = (await r.text()).replace(/^﻿/, '');
+  const json = JSON.parse(text);
+  if (plan?.hash && url === plan.pinUrl && (await sha256Hex(text)) !== plan.hash) {
+    note = 'The library file does not match the exported one exactly; check the settings after deployment.';
+  }
+  if (plan) {
+    orig._lldResult = plan.edits.length ? await lldApplyEdits(json, p.cat, plan.edits) : { applied: [], failed: [] };
+    if (note) orig._lldResult.note = note;
+  }
+  orig._json = json;
+  return json;
+}
+
+function lldLogResult(orig, p, log) {
+  const res = orig?._lldResult;
+  if (!res) return;
+  if (res.note) log(`  ⚠ ${htmlEsc(res.note)}`, 'lsk');
+  res.applied.forEach(e => log(`  ↳ LLD: ${htmlEsc(e.label)} → ${htmlEsc(e.to || '(removed)')}`, 'lin'));
+  res.failed.forEach(e => {
+    log(`  ⚠ LLD change not applied, do it by hand: ${htmlEsc(e.label)} → ${htmlEsc(e.to || '(remove)')} (${htmlEsc(e.reason)})`, 'lsk');
+    lldImport?.deployManual.push({ policy: getDeployName(p), item: e.label,
+      detail: `${e.kind === 'removed' ? 'Remove' : 'Set to ' + e.to} (${e.reason})` });
+  });
+  lldRenderBar();
+}
+
+// Applies LLD edits to a policy's JSON in place. Each edit's pointer says where
+// the row came from (see extractSettings); values are turned back from their
+// LLD wording into what Graph expects. Anything uncertain is left for a person.
+async function lldApplyEdits(json, cat, edits) {
+  const applied = [], failed = [];
+  for (const e of edits) {
+    try {
+      const msg = await lldApplyEdit(json, cat, e);
+      if (msg === true) applied.push(e); else failed.push({ ...e, reason: msg || 'not supported' });
+    } catch (err) { failed.push({ ...e, reason: err.message }); }
+  }
+  return { applied, failed };
+}
+
+const lldInvert = map => Object.fromEntries(Object.entries(map).map(([k, v]) => [lldKey(v), k]));
+const lldSplit = v => lldNorm(v) === '' || /^none$/i.test(lldNorm(v)) ? [] : String(v).split(/\s*[,;]\s*/).map(lldNorm).filter(Boolean);
+const LLD_BOOL = { enabled: true, disabled: false, yes: true, no: false, true: true, false: false, on: true, off: false,
+                   allow: true, block: false, required: true, 'not required': false };
+
+function lldToCamel(display) {
+  const words = lldNorm(display).split(' ');
+  return words.map((w, i) => i === 0 ? w.charAt(0).toLowerCase() + w.slice(1) : w.charAt(0).toUpperCase() + w.slice(1)).join('');
+}
+
+// A scalar in its original type, from its LLD wording.
+function lldScalar(orig, display) {
+  const t = lldKey(display);
+  if (typeof orig === 'boolean') { if (t in LLD_BOOL) return LLD_BOOL[t]; throw new Error('expected yes/no'); }
+  if (typeof orig === 'number') { const n = Number(String(display).replace(/[, ]/g, '')); if (Number.isFinite(n)) return n; throw new Error('expected a number'); }
+  if (typeof orig === 'string') {
+    if (orig === 'true' || orig === 'false') { if (t in LLD_BOOL) return String(LLD_BOOL[t]); }
+    if (/^\d+$/.test(orig) && /^\d+$/.test(t)) return t;
+    if (/^[a-z][A-Za-z0-9]*$/.test(orig) && /\s/.test(lldNorm(display))) return lldToCamel(display);   // camelCase enum
+    if (/^[a-z][A-Za-z0-9]*$/.test(orig) && lldKey(display) === orig.toLowerCase()) return orig;
+    return /^[a-z][A-Za-z0-9]*$/.test(orig) ? lldToCamel(display) : lldNorm(display);
+  }
+  throw new Error('unsupported value');
+}
+
+function lldPath(obj, path, create) {
+  const parts = path.split('.');
+  let o = obj;
+  for (let i = 0; i < parts.length - 1; i++) {
+    if (o[parts[i]] === undefined || o[parts[i]] === null) { if (!create) return null; o[parts[i]] = {}; }
+    o = o[parts[i]];
+  }
+  return { parent: o, key: parts[parts.length - 1] };
+}
+
+async function lldScOptions(defId) {
+  // Options the library knows (from the Intune portal names), then the tenant's own definition.
+  const local = Object.entries(SC_NAMES.options || {}).filter(([k]) => k.startsWith(defId + '_')).map(([k, v]) => [k, v]);
+  if (local.length) return local;
+  if (!graphToken) return [];
+  const r = await fetch(`https://graph.microsoft.com/beta/deviceManagement/configurationSettings/${encodeURIComponent(defId)}`,
+                        { headers: { Authorization: `Bearer ${graphToken}` } });
+  if (!r.ok) return [];
+  const d = await r.json();
+  return (d.options || []).map(o => [o.itemId, o.displayName]);
+}
+
+async function lldScOption(defId, display, current) {
+  const want = lldKey(display);
+  const label = ([id, name]) => [lldKey(name || ''), lldKey(humanizeChoice(String(id).split('_').pop()))];
+  let opts = await lldScOptions(defId);
+  if (current && !opts.some(o => o[0] === current)) opts = [...opts, [current, SC_NAMES.options[current] || '']];
+  // On/off settings: the other half of a _0/_1 or _false/_true pair.
+  const pair = { '0': '1', '1': '0', false: 'true', true: 'false' };
+  const tail = String(current || '').split('_').pop();
+  if (current && tail in pair) {
+    const other = current.slice(0, -tail.length) + pair[tail];
+    if (!opts.some(o => o[0] === other)) opts = [...opts, [other, SC_NAMES.options[other] || '']];
+  }
+  let hit = opts.find(o => label(o).includes(want));
+  if (!hit && graphToken) {   // the library list may not include the chosen option
+    const r = await fetch(`https://graph.microsoft.com/beta/deviceManagement/configurationSettings/${encodeURIComponent(defId)}`,
+                          { headers: { Authorization: `Bearer ${graphToken}` } }).catch(() => null);
+    if (r && r.ok) hit = ((await r.json()).options || []).map(o => [o.itemId, o.displayName]).find(o => label(o).includes(want));
+  }
+  return hit ? hit[0] : null;
+}
+
+// The nth instance of a setting definition, in the same order extractSettings reads them.
+function lldFindInstance(json, defId, nth) {
+  let count = 0, found = null;
+  const asList = v => Array.isArray(v) ? v : v ? [v] : [];
+  const visit = (inst, top, idx) => {
+    if (found || !inst || typeof inst !== 'object') return;
+    if (inst.settingDefinitionId === defId && ++count === nth) { found = { si: inst, top, idx }; return; }
+    const kids = [];
+    if (inst.choiceSettingValue?.children) kids.push(...inst.choiceSettingValue.children);
+    asList(inst.groupSettingCollectionValue).forEach(g => kids.push(...(g?.children || [])));
+    if (inst.groupSettingValue?.children) kids.push(...inst.groupSettingValue.children);
+    asList(inst.choiceSettingCollectionValue).forEach(c => kids.push(...(c?.children || [])));
+    kids.forEach(k => visit(k, false, idx));
+  };
+  (json.settings || []).forEach((s, i) => visit(s.settingInstance || s, true, i));
+  return found;
+}
+
+const LLD_SID_BY_NAME = () => Object.fromEntries(Object.entries(LLD_SIDS).map(([sid, n]) => [lldKey(n), '*' + sid]));
+
+async function lldApplyEdit(json, cat, e) {
+  const ptr = e.ptr || '';
+  if (ptr === 'description') { json.description = lldNorm(e.to); return true; }
+
+  // Settings Catalog / Endpoint Security
+  if (ptr.startsWith('sc:')) {
+    const m = /^sc:(.+)#(\d+)$/.exec(ptr);
+    const hit = m && lldFindInstance(json, m[1], +m[2]);
+    if (!hit) return 'setting not found in the policy';
+    const si = hit.si;
+    if (e.kind === 'removed') {
+      if (hit.top) { json.settings.splice(hit.idx, 1); return true; }
+      return 'only top-level settings can be removed automatically';
+    }
+    if (si.choiceSettingValue) {
+      const cur = si.choiceSettingValue.value;
+      const id = await lldScOption(m[1], e.to, cur);
+      if (!id) return `no option called "${e.to}"`;
+      if (id !== cur && (si.choiceSettingValue.children || []).length) return 'this option has dependent settings';
+      si.choiceSettingValue.value = id; return true;
+    }
+    if (si.simpleSettingValue) {
+      const isInt = /Integer/i.test(si.simpleSettingValue['@odata.type'] || '');
+      if (isInt) { const n = parseInt(String(e.to).replace(/[, ]/g, ''), 10); if (!Number.isFinite(n)) return 'expected a number'; si.simpleSettingValue.value = n; }
+      else si.simpleSettingValue.value = lldNorm(e.to);
+      return true;
+    }
+    if (si.simpleSettingCollectionValue) {
+      const arr = Array.isArray(si.simpleSettingCollectionValue) ? si.simpleSettingCollectionValue : [si.simpleSettingCollectionValue];
+      const type = arr[0]?.['@odata.type'] || '#microsoft.graph.deviceManagementConfigurationStringSettingValue';
+      const sids = LLD_SID_BY_NAME();
+      const vals = lldKey(e.to) === 'no one' ? ['<![CDATA[]]>'] : lldSplit(e.to).map(v => sids[lldKey(v)] || v);
+      si.simpleSettingCollectionValue = vals.map(v => ({ '@odata.type': type, value: v }));
+      return true;
+    }
+    if (si.choiceSettingCollectionValue) {
+      const out = [];
+      for (const v of lldSplit(e.to)) { const id = await lldScOption(m[1], v); if (!id) return `no option called "${v}"`; out.push({ value: id, children: [] }); }
+      si.choiceSettingCollectionValue = out; return true;
+    }
+    return 'grouped settings need to be changed by hand';
+  }
+
+  // Conditional Access
+  if (ptr.startsWith('ca:')) {
+    const f = ptr.slice(3), to = e.to;
+    const cond = json.conditions = json.conditions || {};
+    const list = (map, extra = {}) => lldSplit(to).map(v => { const k = { ...lldInvert(map), ...extra }[lldKey(v)]; if (!k) throw new Error(`unknown value "${v}"`); return k; });
+    switch (f) {
+      case 'state': { const v = lldInvert(LLD_CA_STATE)[lldKey(to)]; if (!v) return 'expected On, Off or Report-only'; json.state = v; return true; }
+      case 'includeUsers': case 'excludeUsers': {
+        const vals = lldSplit(to).map(v => lldInvert(LLD_CA_USERS)[lldKey(v)] || (/^[0-9a-f-]{36}$/i.test(v) ? v : null));
+        if (vals.some(v => !v)) return 'named users need to be set by hand';
+        (cond.users = cond.users || {})[f] = vals; return true;
+      }
+      case 'includeRoles': case 'excludeRoles': (cond.users = cond.users || {})[f] = list(LLD_ROLES); return true;
+      case 'includeApplications': case 'excludeApplications': (cond.applications = cond.applications || {})[f] = list(LLD_APPS); return true;
+      case 'includePlatforms': case 'excludePlatforms': {
+        const CA_PLAT = { 'all platforms': 'all', android: 'android', 'ios/ipados': 'iOS', ios: 'iOS', windows: 'windows', macos: 'macOS', linux: 'linux', 'windows phone': 'windowsPhone' };
+        const vals = lldSplit(to).map(v => CA_PLAT[lldKey(v)]); if (vals.some(v => !v)) return 'unknown platform';
+        (cond.platforms = cond.platforms || {})[f] = vals; return true;
+      }
+      case 'clientAppTypes': cond.clientAppTypes = list(LLD_CA_CLIENTS); return true;
+      case 'signInRiskLevels': case 'userRiskLevels': cond[f] = lldSplit(to).map(v => v.toLowerCase()); return true;
+      case 'includeLocations': case 'excludeLocations': {
+        const vals = lldSplit(to).map(v => lldInvert(LLD_CA_LOCATIONS)[lldKey(v)]);
+        if (vals.some(v => !v)) return 'named locations need to be set by hand';
+        (cond.locations = cond.locations || {})[f] = vals; return true;
+      }
+      case 'builtInControls': case 'grantControls': {
+        if (lldKey(to) === 'block access') { json.grantControls = { operator: 'OR', builtInControls: ['block'] }; return true; }
+        const m = /^require (one|all) of:\s*(.+)$/i.exec(lldNorm(to));
+        const names = m ? m[2].split(/\s*;\s*/) : [to];
+        const inv = lldInvert(LLD_CA_GRANTS);
+        const ctl = names.map(n => inv[lldKey(n)]); if (ctl.some(c => !c)) return 'unknown grant control';
+        json.grantControls = { ...(json.grantControls || {}), operator: m && m[1].toLowerCase() === 'all' ? 'AND' : 'OR', builtInControls: ctl };
+        return true;
+      }
+      case 'signInFrequency': {
+        const sess = json.sessionControls = json.sessionControls || {};
+        if (lldKey(to) === 'every time') { sess.signInFrequency = { isEnabled: true, frequencyInterval: 'everyTime', type: null, value: null, authenticationType: 'primaryAndSecondaryAuthentication' }; return true; }
+        const mm = /^(\d+)\s*(hour|day)s?$/i.exec(lldNorm(to)); if (!mm) return 'expected "Every time" or a number of hours or days';
+        sess.signInFrequency = { isEnabled: true, frequencyInterval: 'timeBased', type: mm[2].toLowerCase() + 's', value: +mm[1], authenticationType: 'primaryAndSecondaryAuthentication' };
+        return true;
+      }
+      default: return 'this Conditional Access setting needs to be changed by hand';
+    }
+  }
+
+  // Directory settings
+  if (ptr.startsWith('values:')) {
+    const item = (json.values || []).find(v => v.name === ptr.slice(7));
+    if (!item) return 'setting not found';
+    item.value = String(lldScalar(String(item.value), e.to)); return true;
+  }
+
+  // Flat policies: compliance, device configuration, app protection,
+  // enrolment, Autopilot / ESP, tenant-wide objects.
+  let path = ptr.startsWith('@ap.') ? null : ptr;
+  if (ptr.startsWith('@ap.')) {
+    const ap = json.additionalProperties ? 'additionalProperties' : json.AdditionalProperties ? 'AdditionalProperties' : null;
+    if (!ap) return 'setting not found';
+    path = ap + '.' + ptr.slice(4);
+  }
+  let loc = lldPath(json, path, false);
+  if ((!loc || !(loc.key in loc.parent)) && json.outOfBoxExperienceSetting && path in json.outOfBoxExperienceSetting) {
+    loc = { parent: json.outOfBoxExperienceSetting, key: path };
+  }
+  if (!loc || !(loc.key in loc.parent)) return 'setting not found';
+  const orig = loc.parent[loc.key];
+  if (Array.isArray(orig)) {
+    if (orig.some(x => x && typeof x === 'object')) return 'list values need to be changed by hand';
+    loc.parent[loc.key] = lldSplit(e.to).map(v => (orig.length && typeof orig[0] === 'string' && /^[a-z]/.test(orig[0])) ? lldToCamel(v) : v);
+    return true;
+  }
+  if (orig === null || typeof orig === 'object') return 'value needs to be changed by hand';
+  if (typeof orig === 'boolean' && /^(hide|show)$/i.test(lldNorm(e.to))) { loc.parent[loc.key] = /^hide$/i.test(lldNorm(e.to)); return true; }
+  loc.parent[loc.key] = lldScalar(orig, e.to);
+  return true;
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -4359,13 +5007,7 @@ async function graphSend(method, url, body, headers) {
 
 // Policy JSON, cached on the grid row so the deploy loop doesn't fetch it again.
 async function tiJson(p) {
-  const orig = policies[p.wl]?.find(x => x.name === p.name);
-  if (orig?._json) return orig._json;           // fetched earlier in this deployment
-  const r = await fetch(`${p.raw_url}?t=${Date.now()}`);
-  if (!r.ok) return null;
-  const json = await r.json();
-  if (orig) orig._json = json;
-  return json;
+  try { return await deployJson(p); } catch { return null; }
 }
 
 // What this selection needs from the customer.
