@@ -1741,7 +1741,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.17.2',
+  version: '3.17.3',
   date:    '2026-09-17'
 };
 
@@ -2262,7 +2262,11 @@ Return a JSON object:
 }
 Decisions: at most 6, only ones the SoW actually states (for example licensing, platforms in scope, approach to rollout).
 Goals: only where the SoW clearly calls for that outcome; pick the option that matches the platform and strictness described.
-Never pick a goal or option for anything the SoW puts out of scope (for example a platform it excludes). Gaps: at most 5.`;
+Never pick a goal or option for anything the SoW puts out of scope (for example a platform it excludes).
+List each goal and option once: if several SoW items point to the same one, give one entry whose reason covers them all.
+The goals cover Windows 10/11 clients, macOS and mobile devices only: list anything for Windows Server (or other
+servers) under "gaps", never as a client option.
+Gaps: at most 5.`;
 
   // Four small calls in parallel; each answer is short, so each stays well
   // inside the time limit. The scope/context call is optional.
@@ -2305,7 +2309,16 @@ Never pick a goal or option for anything the SoW puts out of scope (for example 
         const idx = Math.max(0, (goal.options || []).findIndex(o => o.label === g.option));
         return { goal: g.goal, option: idx, reason: str(g.reason), evidence: str(g.evidence), selected: true };
       })
-      .filter(g => !excluded(bbGoal(g.goal)?.options?.[g.option]?.platform)),
+      .filter(g => !excluded(bbGoal(g.goal)?.options?.[g.option]?.platform))
+      // One entry per goal and option: the AI can list the same block once per SoW
+      // item that calls for it. Keep the first reason and up to two quotes.
+      .reduce((acc, g) => {
+        const hit = acc.find(x => x.goal === g.goal && x.option === g.option);
+        if (!hit) acc.push({ ...g, quotes: g.evidence ? [g.evidence] : [] });
+        else if (g.evidence && hit.quotes.length < 2 && !hit.quotes.includes(g.evidence)) hit.quotes.push(g.evidence);
+        return acc;
+      }, [])
+      .map(g => ({ ...g, evidence: g.quotes.join('\u201d \u2026 \u201c') })),
     gaps: list(design.gaps, 8),
   };
 }
