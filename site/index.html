@@ -3368,6 +3368,19 @@ async function checkDefenderExists() {
   for (const p of policies.defender) applyExists(p, cfgMap);
 }
 
+// The reference tenant's own ID is exported into some policies (OneDrive Known
+// Folder Move and the allowed-tenant list). Deployed as-is it would point a
+// customer at CDW's tenant and block sync for their own, so it is swapped for
+// the target tenant's ID on deploy and shown neutrally in documents.
+const REFERENCE_TENANT_ID = '41366425-7a25-414f-9554-f0928745d0cb';
+const TENANT_ID_LABEL = "Customer tenant ID (set at deployment)";
+function withTargetTenant(json, tenantId) {
+  const s = JSON.stringify(json);
+  if (!s.includes(REFERENCE_TENANT_ID)) return json;
+  if (!tenantId) throw new Error('Policy contains a tenant ID but the target tenant is unknown');
+  return JSON.parse(s.split(REFERENCE_TENANT_ID).join(tenantId));
+}
+
 // ═══════════════════════════════════════════════════════════════════
 // DEPLOY FUNCTIONS
 // ═══════════════════════════════════════════════════════════════════
@@ -4190,6 +4203,7 @@ async function runDeployment(toProcess) {
         if (orig) orig._json = json;
       }
       delete p._tiNotes;
+      json = withTargetTenant(json, account?.tenantId);
       const createdId = await p.deployFn(p, json);
       log(`✓ Deployed: ${htmlEsc(getDeployName(p))}`, 'lok');
       (p._tiNotes || []).forEach(n => log(`  ⚠ ${htmlEsc(n)}`, 'lsk'));
@@ -6366,8 +6380,13 @@ function friendlySettingName(defId) {
   const segments = meaningful.split('_').filter(s => s.length > 0);
   if (segments.length === 0) return defId;
 
-  // ONLY use the LAST segment — no context prefixes
-  const main = segments[segments.length - 1];
+  // ONLY use the LAST segment — no context prefixes. ADMX instances end in a
+  // number (..._channel_log_retention_2): name those from the segment before it.
+  let main = segments[segments.length - 1];
+  if (/^\d+$/.test(main) && segments.length > 1) {
+    const prev = segments[segments.length - 2];
+    return `${SETTING_NAME_LOOKUP[prev.toLowerCase()] || humanizeCamelCase(prev)} (${main})`;
+  }
 
   // Check lookup for this segment
   if (SETTING_NAME_LOOKUP[main.toLowerCase()]) return SETTING_NAME_LOOKUP[main.toLowerCase()];
@@ -6747,6 +6766,9 @@ function humanizeValue(raw) {
 
   // Graph's "no date" sentinel
   if (/^0001-01-01T00:00:00/.test(raw)) return 'Not set';
+
+  // The reference tenant's ID is replaced with the customer's at deployment
+  if (raw.includes(REFERENCE_TENANT_ID)) return raw.split(REFERENCE_TENANT_ID).join(TENANT_ID_LABEL);
 
   // Numeric — return as-is (the setting name provides context)
   if (/^\d+$/.test(raw)) return raw;
@@ -7493,6 +7515,12 @@ async function generateDocument() {
       }
     }
 
+    // A 404/405 from the AI function means the endpoint isn't there (for example
+    // no backend linked to this Static Web Apps environment). Stop calling it
+    // after the first such answer instead of once per policy.
+    let aiMissing = null;
+    const noteAiError = e => { const m = /\b(404|405)\b/.exec(e?.message || ''); if (m && !aiMissing) aiMissing = m[1]; };
+
     // ── Terminology table — AI-generated, injected into section 5.1 ──
     setProgress(1 + selected.length + 1, 'AI: generating terminology…');
     try {
@@ -7545,8 +7573,9 @@ async function generateDocument() {
         }
       }
     } catch(e) {
+      noteAiError(e);
       console.warn('[LLD] Terminology generation failed (non-fatal):', e.message);
-      showToast(`Terminology skipped: ${e.message}`, 'warn');
+      if (!aiMissing) showToast(`Terminology skipped: ${e.message}`, 'warn');
     }
 
     // AI name clean-up and rationale, four policies at a time. Results are
@@ -7554,7 +7583,7 @@ async function generateDocument() {
     const aiRationaleEnabled = document.getElementById('ai-enabled-toggle').checked;
     const aiBase = 1 + selected.length + 1;
     let aiDone = 0, aiFailed = 0;
-    if (policyJsons.length) {
+    if (policyJsons.length && !aiMissing) {
       showToast(aiRationaleEnabled ? `AI: writing rationale for ${policyJsons.length} policies…`
                                    : `AI: tidying setting names for ${policyJsons.length} policies…`, 'ok');
     }
@@ -7562,6 +7591,7 @@ async function generateDocument() {
       p._rows = extractSettings(p.json, p.cat);
       p._policyName = applyBranding(p.json.name || p.json.displayName || p.displayName, p.wl);
       const manifestSummary = p.lldSummary || null;
+      if (aiMissing) { p._rationale = manifestSummary; setProgress(aiBase + (++aiDone), null); return; }
       try {
         const aiResult = await generateRationale(p._policyName, p.json.description || '', p._rows,
                                                  aiRationaleEnabled && !manifestSummary, customerName);
@@ -7578,12 +7608,18 @@ async function generateDocument() {
       } catch(e) {
         // A failed AI call must not discard an approved summary.
         p._rationale = manifestSummary;
-        if (!manifestSummary) aiFailed++;
-        console.warn('[AI] Enhancement failed for', p.displayName, e.message);
+        noteAiError(e);
+        if (!manifestSummary && !aiMissing) aiFailed++;
+        if (!aiMissing) console.warn('[AI] Enhancement failed for', p.displayName, e.message);
       }
       setProgress(aiBase + (++aiDone), null);
     });
-    if (aiFailed) showToast(`AI was unavailable for ${aiFailed} of ${policyJsons.length} policies \u2014 exported without rationale`, 'warn');
+    if (aiMissing) {
+      showToast(`The AI service isn't reachable from this site (HTTP ${aiMissing}). ` +
+                'The document was exported without AI rationale or setting-name clean-up.', 'warn');
+    } else if (aiFailed) {
+      showToast(`AI was unavailable for ${aiFailed} of ${policyJsons.length} policies \u2014 exported without rationale`, 'warn');
+    }
 
     // Build design section XML
     let designXml = '';
