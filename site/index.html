@@ -1272,6 +1272,8 @@ body[data-appmode="manage"] .pcard.mg-dirty {
 .ti-note{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:8px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.5}
 .ti-note strong{display:block;color:#5b21b6;margin-bottom:2px}
 .set-target{font-size:11px;color:#b45309;margin-left:12px}
+.wiz-more{margin:4px 0 10px}
+.wiz-more summary{cursor:pointer;font-size:12px;color:var(--muted);margin-bottom:8px}
 /* ── QA fixes (Nov 2026) ───────────────────────────────────────── */
 /* Off-screen panels: hide them (and their shadows) once the slide-out ends,
    so no shadow strip shows at the right or bottom edge. */
@@ -1472,6 +1474,24 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
           <input type="text" id="wiz-author" placeholder="Your name" autocomplete="off"/>
           <div class="wiz-hint">Shown on the title page and in Document Control. Remembered on this browser.</div>
         </div>
+        <details class="wiz-more">
+          <summary>Sign-off details (optional)</summary>
+          <div class="wiz-field">
+            <label for="wiz-contact">Customer signatory</label>
+            <input type="text" id="wiz-contact" placeholder="e.g. Jane Smith, IT Director" autocomplete="off"/>
+          </div>
+          <div class="wiz-row">
+            <div class="wiz-field">
+              <label for="wiz-companyno">Registered company number</label>
+              <input type="text" id="wiz-companyno" placeholder="e.g. 01234567" autocomplete="off"/>
+            </div>
+            <div class="wiz-field">
+              <label for="wiz-address">Registered address</label>
+              <input type="text" id="wiz-address" placeholder="e.g. 1 High Street, London" autocomplete="off"/>
+            </div>
+          </div>
+          <div class="wiz-hint">Fill the Approval to Proceed and Final Sign Off pages. Anything left blank stays as a placeholder to complete.</div>
+        </details>
         <div class="wiz-hint" id="wiz-filename-preview" style="margin:-6px 0 4px"></div>
 
         <div class="wiz-divider">Template</div>
@@ -1934,7 +1954,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.11.0',
+  version: '3.12.0',
   date:    '2026-09-17'
 };
 
@@ -1944,7 +1964,7 @@ const TEMPLATE_URL  = 'templates/LLD.docx';
 const TEMPLATE_NAME = 'LLD.docx';
 
 // Engagement details captured by the doc-mode wizard
-let docMeta = { customer: '', oppNumber: '', oppName: '', author: '', templateSource: null };
+let docMeta = { customer: '', oppNumber: '', oppName: '', author: '', contact: '', companyNo: '', address: '', templateSource: null };
 
 // Customer, opportunity number and name are required before an LLD can be exported.
 function docMetaComplete() {
@@ -2004,6 +2024,9 @@ function openDocWizard() {
   document.getElementById('wiz-oppnum').value   = docMeta.oppNumber;
   document.getElementById('wiz-oppname').value  = docMeta.oppName;
   document.getElementById('wiz-author').value   = docMeta.author || savedAuthor() || account?.name || '';
+  document.getElementById('wiz-contact').value   = docMeta.contact;
+  document.getElementById('wiz-companyno').value = docMeta.companyNo;
+  document.getElementById('wiz-address').value   = docMeta.address;
   validateDocWizard();
 
   if (!templateBuffer) loadTemplateFromSource();
@@ -2114,6 +2137,9 @@ function submitDocWizard() {
   docMeta.oppNumber = document.getElementById('wiz-oppnum').value.trim();
   docMeta.oppName   = document.getElementById('wiz-oppname').value.trim();
   docMeta.author    = document.getElementById('wiz-author').value.trim();
+  docMeta.contact   = document.getElementById('wiz-contact').value.trim();
+  docMeta.companyNo = document.getElementById('wiz-companyno').value.trim();
+  docMeta.address   = document.getElementById('wiz-address').value.trim();
   try { localStorage.setItem('cdwLldAuthor', docMeta.author); } catch { /* storage unavailable */ }
   document.getElementById('wizard-screen').style.display = 'none';
   // Opened from a loaded grid (Edit details, or a switch from Deploy): keep the
@@ -7388,10 +7414,13 @@ Return ONLY a JSON array like: [{"acronym": "MFA", "meaning": "Multi-Factor Auth
     console.warn('[LLD] Terminology JSON was truncated — recovered', terms.length, 'entries');
   }
 
-  // Sort alphabetically, ensure valid shape
-  return terms
+  // Sort alphabetically, ensure valid shape. An empty result counts as a
+  // failure so the template table is kept and the built-in glossary used.
+  const valid = (Array.isArray(terms) ? terms : [])
     .filter(t => t && t.acronym && t.meaning)
     .sort((a, b) => a.acronym.localeCompare(b.acronym));
+  if (!valid.length) throw new Error('No usable terminology in the AI response');
+  return valid;
 }
 function buildTerminologyTableXml(terms) {
   // Matches the template's Style1 table: two columns (1202 + 3798 pct), firstColumn shading
@@ -7402,6 +7431,257 @@ function buildTerminologyTableXml(terms) {
   ).join('');
 
   return `<w:tbl><w:tblPr><w:tblStyle w:val="Style1"/><w:tblW w:w="5000" w:type="pct"/><w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr><w:tblGrid><w:gridCol w:w="2514"/><w:gridCol w:w="7942"/></w:tblGrid>${headerRow}${dataRows}</w:tbl>`;
+}
+
+
+// ═══════════════════════════════════════════════════════════════════
+// LLD TEMPLATE CLEAN-UP
+// The CDW template's "! Read Me First" section sets the rules for a finished
+// LLD: delete section 1, delete every "!" section, delete everything
+// highlighted yellow, and complete the mandatory sections (section 2 on).
+// This pass applies them to the generated document.
+// ═══════════════════════════════════════════════════════════════════
+const W_NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+const R_NS = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+
+// Adds the hyperlink relationships lldFinalise created to document.xml.rels.
+function lldRelsXml(relsXml, links) {
+  if (!links.length) return relsXml;
+  const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  const add = links.map(l => `<Relationship Id="${l.id}" Type="${R_NS}/hyperlink" Target="${esc(l.url)}" TargetMode="External"/>`).join('');
+  return relsXml.replace('</Relationships>', add + '</Relationships>');
+}
+
+// Plain-language glossary used when the AI terminology table is unavailable.
+const LLD_GLOSSARY = [
+  ['ASR',     'Attack Surface Reduction: Defender rules that block behaviours commonly used by malware', p => /attack surface reduction|asr/i.test(p.n)],
+  ['BYOD',    'Bring Your Own Device: personally owned phones and tablets used for work',             p => /byod/i.test(p.n)],
+  ['CA',      'Conditional Access: Entra ID policies that decide how and when users can sign in',      p => p.cat === 'ConditionalAccess'],
+  ['CIS',     'Center for Internet Security: publisher of the security benchmarks referenced here',   p => !!p.tier],
+  ['EPM',     'Endpoint Privilege Management: controlled elevation for standard users',               p => /privilege management/i.test(p.n)],
+  ['ESP',     'Enrolment Status Page: progress screen shown while a new device is set up',            p => p.cat === 'EnrolmentStatusPage'],
+  ['KFM',     'Known Folder Move: redirects Desktop, Documents and Pictures to OneDrive',             p => /onedrive/i.test(p.n)],
+  ['LAPS',    'Local Administrator Password Solution: rotates and stores local admin passwords',      p => /laps/i.test(p.n)],
+  ['MAM',     'Mobile Application Management: protects company data inside apps',                     p => p.cat === 'AppProtectionPolicies' || p.cat === 'AppConfigurationPolicies'],
+  ['MDE',     'Microsoft Defender for Endpoint',                                                      p => /defender/i.test(p.n)],
+  ['MFA',     'Multifactor Authentication',                                                           p => p.cat === 'ConditionalAccess'],
+  ['WHfB',    'Windows Hello for Business: passwordless sign-in for Windows',                         p => /hello for business|whfb/i.test(p.n)],
+  ['WUfB',    'Windows Update for Business: update rings and deferral settings',                      p => /wufb|windows update for business/i.test(p.n)],
+];
+
+function lldFinalise(docXml, ctx) {
+  const doc = new DOMParser().parseFromString(docXml, 'application/xml');
+  if (doc.querySelector('parsererror')) return docXml;     // leave it to the validator
+  const body = doc.getElementsByTagNameNS(W_NS, 'body')[0];
+  if (!body) return docXml;
+  const el = (tag) => doc.createElementNS(W_NS, 'w:' + tag);
+  const kids = (n, tag) => [...n.childNodes].filter(c => c.nodeType === 1 && (!tag || c.localName === tag));
+  const textOf = n => [...n.getElementsByTagNameNS(W_NS, 't')].map(t => t.textContent).join('');
+  const headingLevel = n => {
+    if (n.localName !== 'p') return 0;
+    const st = n.getElementsByTagNameNS(W_NS, 'pStyle')[0];
+    const m = st && /^Heading(\d)$/.exec(st.getAttribute('w:val') || '');
+    return m ? +m[1] : 0;
+  };
+  const isBodyText = n => n.localName === 'p' && !n.getElementsByTagNameNS(W_NS, 'drawing').length &&
+                          !n.getElementsByTagNameNS(W_NS, 'fldChar').length && !n.getElementsByTagNameNS(W_NS, 'instrText').length &&
+                          !n.getElementsByTagNameNS(W_NS, 'sectPr').length;
+
+  // 1. Delete every section whose heading starts with "!" (this takes section 1
+  //    and all its subsections, including the contributors list).
+  let skipLevel = 0;
+  for (const n of kids(body)) {
+    if (n.localName === 'sectPr') break;
+    const lvl = headingLevel(n);
+    if (skipLevel && lvl && lvl <= skipLevel && !textOf(n).trim().startsWith('!')) skipLevel = 0;
+    if (!skipLevel && lvl && textOf(n).trim().startsWith('!')) skipLevel = lvl;
+    if (skipLevel) body.removeChild(n);
+  }
+
+  // 2. Delete everything highlighted yellow (template guidance), then any
+  //    body paragraph left with no text.
+  const emptied = new Set();
+  for (const r of [...doc.getElementsByTagNameNS(W_NS, 'r')]) {
+    const hl = r.getElementsByTagNameNS(W_NS, 'highlight')[0];
+    if (hl && hl.getAttribute('w:val') === 'yellow') {
+      let p = r.parentNode; while (p && p.localName !== 'p') p = p.parentNode;
+      r.parentNode.removeChild(r);
+      if (p) emptied.add(p);
+    }
+  }
+  // Remove paragraphs emptied above (not ones that were empty spacers in the
+  // template, and never a table cell's only paragraph).
+  for (const p of emptied) {
+    if (p.parentNode === body && !textOf(p).trim() && isBodyText(p)) body.removeChild(p);
+  }
+  // Empty spacer paragraphs that belonged to the yellow guidance (their
+  // paragraph mark is highlighted) go too.
+  for (const p of kids(body, 'p')) {
+    if (!textOf(p).trim() && isBodyText(p) && p.getElementsByTagNameNS(W_NS, 'r').length === 0 &&
+        [...p.getElementsByTagNameNS(W_NS, 'highlight')].some(h => h.getAttribute('w:val') === 'yellow')) body.removeChild(p);
+  }
+  // The table of contents keeps its cached entries until Word updates it (it
+  // will, on open: see lldSettingsXml). Drop the entries for deleted "!"
+  // sections now so the document never shows them; the TOC field itself stays.
+  for (const p of [...doc.getElementsByTagNameNS(W_NS, 'p')]) {
+    const st = p.getElementsByTagNameNS(W_NS, 'pStyle')[0];
+    if (!st || !/^TOC\d$/.test(st.getAttribute('w:val') || '')) continue;
+    for (const a of [...p.getElementsByTagNameNS(W_NS, 'hyperlink')]) {
+      const t = textOf(a).replace(/PAGEREF.*$/, '');
+      if (/^\s*[\d.]*\s*!/.test(t)) a.parentNode.removeChild(a);
+    }
+    if (!p.getElementsByTagNameNS(W_NS, 'hyperlink').length && !p.getElementsByTagNameNS(W_NS, 'fldChar').length)
+      p.parentNode.removeChild(p);
+  }
+
+  // Empty headings (the template ends with one) would show as blank TOC entries.
+  for (const n of kids(body, 'p')) if (headingLevel(n) && !textOf(n).trim()) body.removeChild(n);
+
+  // ── Table helpers ──
+  const headerOf = tbl => { const tr = kids(tbl, 'tr')[0]; return tr ? kids(tr, 'tc').map(tc => textOf(tc).trim()) : []; };
+  const findTable = (cols) => kids(body, 'tbl').find(t => {
+    const h = headerOf(t); return cols.every((c, i) => (h[i] || '').toLowerCase() === c.toLowerCase());
+  });
+  const setCellText = (tc, value) => {
+    const ps = kids(tc, 'p');
+    const p = ps[0] || tc.appendChild(el('p'));
+    ps.slice(1).forEach(x => tc.removeChild(x));
+    const rPr = p.getElementsByTagNameNS(W_NS, 'rPr')[0];
+    const keepRPr = rPr && rPr.parentNode.localName === 'r' ? rPr.cloneNode(true) : null;
+    // Template example rows can carry guidance highlighting; real content must not.
+    if (keepRPr) [...keepRPr.getElementsByTagNameNS(W_NS, 'highlight')].forEach(h => keepRPr.removeChild(h));
+    kids(p).filter(c => c.localName !== 'pPr').forEach(c => p.removeChild(c));
+    const r = el('r'); if (keepRPr) r.appendChild(keepRPr);
+    const t = el('t'); t.setAttribute('xml:space', 'preserve'); t.textContent = value == null ? '' : String(value);
+    r.appendChild(t); p.appendChild(r);
+  };
+  const fillTable = (tbl, rows) => {
+    const trs = kids(tbl, 'tr');
+    const template = trs[1]; if (!template) return;
+    trs.slice(1).forEach(tr => tbl.removeChild(tr));
+    (rows.length ? rows : [[]]).forEach(values => {
+      const tr = template.cloneNode(true);
+      kids(tr, 'tc').forEach((tc, i) => setCellText(tc, values[i] || ''));
+      tbl.appendChild(tr);
+    });
+  };
+  const para = (text) => {
+    const p = el('p'), r = el('r'), t = el('t');
+    t.setAttribute('xml:space', 'preserve'); t.textContent = text;
+    r.appendChild(t); p.appendChild(r); return p;
+  };
+  const insertAfterHeading = (title, nodes) => {
+    const h = kids(body, 'p').find(n => headingLevel(n) === 1 && textOf(n).trim().toLowerCase() === title.toLowerCase());
+    if (!h) return;
+    let at = h.nextSibling;
+    nodes.forEach(n => body.insertBefore(n, at));
+  };
+
+  // 3. Document Control: a real first revision, and an approval row to complete.
+  const rev = findTable(['Version', 'Date', 'Author', 'Description']);
+  if (rev) fillTable(rev, [['0.1', ctx.date, ctx.author || '', 'Initial draft generated by the CDW 365 Baseline tool']]);
+  const appr = findTable(['Approver', 'Title', 'Approval Type', 'Document Version']);
+  if (appr) fillTable(appr, [['', '', 'Technical', '0.1']]);
+
+  // 4. Introduction, written from the engagement and the selection.
+  insertAfterHeading('Introduction', ctx.introduction.map(para));
+
+  // 5. Design decisions that follow from the selection (replacing the
+  //    template's Azure examples).
+  const dd = findTable(['Reference', 'Type', 'Description']);
+  // The Reference column auto-numbers (DD1., DD2. ...) from the template's list style.
+  if (dd) fillTable(dd, ctx.decisions.map(d => ['', d[0], d[1]]));
+
+  // 6. Referenced documents for the technologies in this design.
+  const refs = findTable(['Title', 'Description', 'Path/URL/Location']);
+  if (refs) {
+    fillTable(refs, ctx.references);
+    // Make the URLs real hyperlinks; their relationships are added at zip time.
+    kids(refs, 'tr').slice(1).forEach(tr => {
+      const tc = kids(tr, 'tc')[2]; const p = tc && kids(tc, 'p')[0]; const r = p && kids(p, 'r')[0];
+      const url = r ? textOf(r).trim() : '';
+      if (!/^https?:\/\//.test(url)) return;
+      const id = `rIdLld${ctx.links.length + 1}`;
+      ctx.links.push({ id, url });
+      const hl = el('hyperlink'); hl.setAttributeNS(R_NS, 'r:id', id); hl.setAttribute('w:history', '1');
+      const rPr = r.getElementsByTagNameNS(W_NS, 'rPr')[0] || r.insertBefore(el('rPr'), r.firstChild);
+      if (!rPr.getElementsByTagNameNS(W_NS, 'rStyle').length) {
+        const rs = el('rStyle'); rs.setAttribute('w:val', 'Hyperlink'); rPr.insertBefore(rs, rPr.firstChild);
+      }
+      p.replaceChild(hl, r); hl.appendChild(r);
+    });
+  }
+
+  // 7. Key terminology: the template's Azure examples are replaced by the AI
+  //    table when it ran; otherwise use the built-in glossary.
+  const terms = findTable(['Acronym', 'Meaning']);
+  if (terms && /Virtual Network/i.test(textOf(terms))) fillTable(terms, ctx.glossary);
+
+  return new XMLSerializer().serializeToString(doc);
+}
+
+// Builds the content lldFinalise needs from the exported policies.
+function lldContext(policyJsons, meta, dateStr) {
+  const by = wl => policyJsons.filter(p => p.wl === wl);
+  const wlNames = Object.keys(WL_LABELS).filter(wl => by(wl).length).map(wl => WL_LABELS[wl]);
+  const list = a => a.length <= 1 ? (a[0] || '') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+  const cisL1 = policyJsons.filter(p => p.tier === 'cis-l1').length;
+  const cisL2 = policyJsons.filter(p => p.tier === 'cis-l2').length;
+  const hasCA = policyJsons.some(p => p.cat === 'ConditionalAccess');
+  const hasIntune = by('intune').length > 0;
+  const tenantWide = policyJsons.filter(p => ['AuthorizationPolicy','CrossTenantAccessPolicy','DeviceRegistrationPolicy',
+    'AppManagementPolicies','DirectorySettings','TenantSettings','AdminConsentRequestPolicy'].includes(p.cat)).length;
+  const runner = policyJsons.filter(p => p.deployVia === 'powershell').length;
+  const customer = meta.customer || 'the customer';
+
+  const introduction = [
+    `This Low Level Design describes the Microsoft 365 configuration CDW will implement for ${customer}` +
+      (meta.oppName ? ` as part of ${meta.oppName}` : '') + (meta.oppNumber ? ` (${meta.oppNumber})` : '') + '.',
+    `It covers ${policyJsons.length} ${policyJsons.length === 1 ? 'policy' : 'policies'} across ${list(wlNames)}, ` +
+      `taken from the CDW 365 Baseline: a maintained library of Microsoft 365 security and management configuration ` +
+      `aligned to CIS benchmarks and Microsoft's Zero Trust guidance.`,
+    `The Design section lists each policy with its purpose and settings, as they will be configured in ${customer}'s tenant.`,
+  ];
+
+  const decisions = [
+    ['Technical', `The configuration is based on the CDW 365 Baseline: ${policyJsons.length} policies across ${list(wlNames)}.`],
+  ];
+  if (cisL1 || cisL2) decisions.push(['Technical',
+    `${[cisL1 ? `${cisL1} ${cisL1 === 1 ? 'policy aligns' : 'policies align'} with CIS Level 1` : '',
+        cisL2 ? `${cisL2} with CIS Level 2` : ''].filter(Boolean).join(' and ')} benchmark recommendations.` +
+    (cisL2 ? ' Level 2 settings are stricter and can affect usability, so they are piloted before wider rollout.' : '')]);
+  if (hasCA) decisions.push(['Technical',
+    'Conditional Access policies are created switched off, reviewed in report-only mode and then enabled in stages. ' +
+    'An emergency access (break-glass) group is excluded from every policy.']);
+  if (hasIntune) decisions.push(['Technical',
+    'Intune policies are assigned to a pilot group first and widened once validated.']);
+  if (tenantWide) decisions.push(['Technical',
+    `${tenantWide} tenant-wide ${tenantWide === 1 ? 'setting replaces' : 'settings replace'} the current tenant configuration when applied; existing values are reviewed with ${customer} first.`]);
+  if (runner) decisions.push(['Technical',
+    `${runner} Exchange Online, Defender or Purview ${runner === 1 ? 'setting is' : 'settings are'} applied with PowerShell as ${runner === 1 ? 'it has' : 'they have'} no Microsoft Graph API.`]);
+
+  const references = [];
+  if (hasIntune) references.push(['Microsoft Intune documentation', 'Microsoft guidance for the Intune features in this design', 'https://learn.microsoft.com/intune/']);
+  if (hasCA) references.push(['Conditional Access documentation', 'Microsoft guidance for Entra ID Conditional Access', 'https://learn.microsoft.com/entra/identity/conditional-access/']);
+  if (by('entra').some(p => p.cat !== 'ConditionalAccess')) references.push(['Microsoft Entra ID documentation', 'Microsoft guidance for the Entra ID tenant settings in this design', 'https://learn.microsoft.com/entra/identity/']);
+  if (policyJsons.some(p => p.cat === 'SafeLinks')) references.push(['Microsoft Defender for Office 365 documentation', 'Microsoft guidance for Safe Links and related protection', 'https://learn.microsoft.com/defender-office-365/']);
+  if (policyJsons.some(p => p.manifestWorkload === 'mdca')) references.push(['Microsoft Defender for Cloud Apps documentation', 'Microsoft guidance for Defender for Cloud Apps policies', 'https://learn.microsoft.com/defender-cloud-apps/']);
+  if (cisL1 || cisL2) references.push(['CIS Benchmarks', 'Center for Internet Security benchmarks referenced by the CIS-aligned policies', 'https://www.cisecurity.org/cis-benchmarks']);
+
+  const facts = policyJsons.map(p => ({ n: p.displayName || '', cat: p.cat, tier: p.tier }));
+  const glossary = LLD_GLOSSARY.filter(([, , test]) => facts.some(test)).map(([a, m]) => [a, m]);
+
+  return { date: dateStr, author: meta.author, introduction, decisions, references, glossary, links: [] };
+}
+
+// Tells Word to refresh the table of contents (and other fields) on open.
+function lldSettingsXml(settingsXml) {
+  if (/<w:updateFields\b/.test(settingsXml)) return settingsXml;
+  const tag = '<w:updateFields w:val="true"/>';
+  // Schema order: updateFields comes before these elements.
+  const m = /<w:(hdrShapeDefaults|footnotePr|endnotePr|compat|docVars|rsids)\b/.exec(settingsXml);
+  if (m) return settingsXml.slice(0, m.index) + tag + settingsXml.slice(m.index);
+  return settingsXml.replace('</w:settings>', tag + '</w:settings>');
 }
 
 async function generateDocument() {
@@ -7484,6 +7764,10 @@ async function generateDocument() {
       ['OPP12345',             docMeta.oppNumber || 'OPP12345'],
       ['00/00/00',             ukDate],
       ['Joe Bloggs',           docMeta.author || '[Author]'],
+      // Sign-off pages: filled when given in the wizard, otherwise left to complete.
+      ['[Client Company No]',  docMeta.companyNo || '[Client Company No]'],
+      ['[Client Address]',     docMeta.address   || '[Client Address]'],
+      ['[NAME]',               docMeta.contact   || '[NAME]'],
     ];
     for (const [token, value] of PLACEHOLDERS) docXml = docXml.split(token).join(xmlEsc(value));
 
@@ -7758,6 +8042,17 @@ async function generateDocument() {
       }
     }
 
+    // Apply the template's own rules (section 1, "!" sections, yellow guidance)
+    // and complete the mandatory sections.
+    var lldCtx = null;
+    try {
+      lldCtx = lldContext(policyJsons, docMeta, ukDate);
+      docXml = lldFinalise(docXml, lldCtx);
+    } catch (e) {
+      if (lldCtx) lldCtx.links = [];
+      console.warn('[LLD] Template clean-up failed (non-fatal):', e);
+    }
+
     // Validate XML is well-formed before writing
     try {
       const parser = new DOMParser();
@@ -7811,6 +8106,10 @@ async function generateDocument() {
     // Repack: update document.xml in the original zip and regenerate
     setProgress(_progTotal, 'Building document…');
     zip.file('word/document.xml', docXml);
+    const settingsFile = zip.file('word/settings.xml');
+    if (settingsFile) zip.file('word/settings.xml', lldSettingsXml(await settingsFile.async('string')));
+    const relsFile = zip.file('word/_rels/document.xml.rels');
+    if (relsFile && lldCtx?.links?.length) zip.file('word/_rels/document.xml.rels', lldRelsXml(await relsFile.async('string'), lldCtx.links));
     const outBlob = await zip.generateAsync({
       type: 'blob',
       compression: 'DEFLATE',
