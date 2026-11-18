@@ -1770,7 +1770,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.19.0',
+  version: '3.19.1',
   date:    '2026-09-17'
 };
 
@@ -1846,6 +1846,7 @@ function openDocWizard() {
   hideAllScreens();
   document.getElementById('wizard-screen').style.display = '';
   renderTopbar('document');
+  aiWarmUp();
 
   // Restore previous values on an "Edit details" round-trip
   document.getElementById('wiz-customer').value = docMeta.customer;
@@ -7543,6 +7544,17 @@ function buildPolicyTableXml(policyName, description, platform, settingsRows, sh
 // Relative path means no function key in client-side JavaScript.
 const AI_FUNCTION_URL = '/api/generate-rationale';
 
+// The AI function runs on a Consumption plan and goes to sleep when idle; the
+// first call afterwards can fail with "Backend call failure" while it starts.
+// An empty request wakes it without calling the AI (it answers 400 at once), so
+// the wizard sends one when it opens, at most every ten minutes.
+let aiWarmedAt = 0;
+function aiWarmUp() {
+  if (Date.now() - aiWarmedAt < 10 * 60 * 1000) return;
+  aiWarmedAt = Date.now();
+  fetch(AI_FUNCTION_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' }).catch(() => {});
+}
+
 function toggleAiConfig() { /* URL is hardcoded — nothing to show/hide */ }
 
 // Project context from the Statement of Work, so rationale can tie a policy to
@@ -8042,12 +8054,19 @@ Return ONLY a JSON array like: [{"acronym": "MFA", "meaning": "Multi-Factor Auth
     temperature: 0.2
   };
 
-  const resp = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  });
-  if (!resp.ok) throw new Error(`Terminology AI error ${resp.status}`);
+  // One retry: the first AI call after the function app has been idle can fail
+  // while it starts up ("Backend call failure").
+  let resp;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (resp.ok || !(resp.status === 429 || resp.status >= 500) || attempt === 1) break;
+    await new Promise(r => setTimeout(r, Math.min(10, Number(resp.headers.get('retry-after')) || 4) * 1000));
+  }
+  if (!resp.ok) throw new Error(`Terminology AI error ${resp.status}: ${(await resp.text().catch(() => '')).slice(0, 160)}`);
 
   const data = await resp.json();
   const text = (data?.choices?.[0]?.message?.content || '').trim();
