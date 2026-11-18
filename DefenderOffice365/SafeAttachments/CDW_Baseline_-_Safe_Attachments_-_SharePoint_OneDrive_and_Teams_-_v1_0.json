@@ -1,0 +1,12 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - Safe Attachments - SharePoint, OneDrive and Teams - v1.0",
+  "description": "Turns on Defender for Office 365 for SharePoint, OneDrive and Microsoft Teams, and Safe Documents for Office clients, so malicious files are detected and locked where they are stored and opened.",
+  "type": "AtpPolicyForO365",
+  "singleton": true,
+  "parameters": {
+    "EnableATPForSPOTeamsODB": true,
+    "EnableSafeDocs": true,
+    "AllowSafeDocsOpen": false
+  }
+}

@@ -41,7 +41,7 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_catalog as bc  # noqa: E402
 
-POLICY_DIRS = ["IntuneConfig", "EntraConfig", "SharePointConfig", "ExchangeOnline", "DefenderCloudApps"]
+POLICY_DIRS = ["IntuneConfig", "EntraConfig", "SharePointConfig", "ExchangeOnline", "DefenderCloudApps", "DefenderOffice365"]
 OVERRIDABLE = ["platform", "policyType", "scope", "area", "securityDomain"]
 TEXT_LIMITS = {"summary": 600, "rationale": 600, "userImpact": 400, "licensing": 200}
 # The customer must not be able to tell the document was generated, and the

@@ -44,6 +44,7 @@ WORKLOADS = {
     'defenderendpoint':  ('defender',    'graph'),
     'defendercloudapps': ('mdca',        'powershell'),
     'defenderoffice':    ('mdo',         'powershell'),
+    'defenderoffice365': ('mdo',         'powershell'),
     'exchangeonline':    ('exchange',    'powershell'),
     'exchangeconfig':    ('exchange',    'powershell'),
     'sharepointconfig':  ('sharepoint',  'graph'),

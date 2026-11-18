@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-18T12:41:09Z",
-  "count": 262,
+  "generated": "2026-11-18T17:11:37Z",
+  "count": 281,
   "entries": [
     {
       "id": "entra.adminconsentrequestpolicy.cdw-baseline-admin-consent-request-policy",
@@ -1310,9 +1310,155 @@
       ]
     },
     {
+      "id": "exchange.exchangesettings.cdw-baseline-cis-l1-block-additional-storage-providers-in-outlook-on-the-web",
+      "file": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Block_Additional_Storage_Providers_in_Outlook_on_the_Web_-_v1_0.json",
+      "sha": "7e8098f343d35a7f",
+      "workload": "exchange",
+      "category": "ExchangeSettings",
+      "objectType": "exchangeSettings",
+      "displayName": "CDW Baseline - CIS L1 - Block Additional Storage Providers in Outlook on the Web - v1.0",
+      "baseName": "CDW Baseline - CIS L1 - Block Additional Storage Providers in Outlook on the Web",
+      "description": "Stops users opening or attaching files from third-party storage (such as personal cloud drives) in Outlook on the web.",
+      "platforms": [
+        "all"
+      ],
+      "tier": "cis-l1",
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "exchange.exchangesettings.cdw-baseline-cis-l1-block-automatic-forwarding-to-remote-domains",
+      "file": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Block_Automatic_Forwarding_to_Remote_Domains_-_v1_0.json",
+      "sha": "b2f58ae7996e91f8",
+      "workload": "exchange",
+      "category": "ExchangeSettings",
+      "objectType": "exchangeSettings",
+      "displayName": "CDW Baseline - CIS L1 - Block Automatic Forwarding to Remote Domains - v1.0",
+      "baseName": "CDW Baseline - CIS L1 - Block Automatic Forwarding to Remote Domains",
+      "description": "Stops automatic forwarding of mail to external domains through the default remote domain.",
+      "platforms": [
+        "all"
+      ],
+      "tier": "cis-l1",
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "exchange.exchangesettings.cdw-baseline-cis-l1-disable-external-calendar-sharing",
+      "file": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Disable_External_Calendar_Sharing_-_v1_0.json",
+      "sha": "13d13fdd2e4b66fe",
+      "workload": "exchange",
+      "category": "ExchangeSettings",
+      "objectType": "exchangeSettings",
+      "displayName": "CDW Baseline - CIS L1 - Disable External Calendar Sharing - v1.0",
+      "baseName": "CDW Baseline - CIS L1 - Disable External Calendar Sharing",
+      "description": "Turns off the default sharing policy, so users cannot share calendar details with external people.",
+      "platforms": [
+        "all"
+      ],
+      "tier": "cis-l1",
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "exchange.exchangesettings.cdw-baseline-cis-l1-disable-smtp-auth",
+      "file": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Disable_SMTP_AUTH_-_v1_0.json",
+      "sha": "ea8ef99758a58788",
+      "workload": "exchange",
+      "category": "ExchangeSettings",
+      "objectType": "exchangeSettings",
+      "displayName": "CDW Baseline - CIS L1 - Disable SMTP AUTH - v1.0",
+      "baseName": "CDW Baseline - CIS L1 - Disable SMTP AUTH",
+      "description": "Turns off SMTP client authentication (basic authentication submission) for the organisation. Devices or applications that still need it are enabled per mailbox.",
+      "platforms": [
+        "all"
+      ],
+      "tier": "cis-l1",
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "exchange.exchangesettings.cdw-baseline-cis-l1-mailtips",
+      "file": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_MailTips_-_v1_0.json",
+      "sha": "27dfa9bfc530eaa2",
+      "workload": "exchange",
+      "category": "ExchangeSettings",
+      "objectType": "exchangeSettings",
+      "displayName": "CDW Baseline - CIS L1 - MailTips - v1.0",
+      "baseName": "CDW Baseline - CIS L1 - MailTips",
+      "description": "Turns on MailTips, including the warning when a message goes to external recipients and to large audiences (25 or more).",
+      "platforms": [
+        "all"
+      ],
+      "tier": "cis-l1",
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "exchange.exchangesettings.cdw-baseline-cis-l1-organisation-auditing-and-modern-authentication",
+      "file": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Organisation_Auditing_and_Modern_Authentication_-_v1_0.json",
+      "sha": "2f6ef72099eaed24",
+      "workload": "exchange",
+      "category": "ExchangeSettings",
+      "objectType": "exchangeSettings",
+      "displayName": "CDW Baseline - CIS L1 - Organisation Auditing and Modern Authentication - v1.0",
+      "baseName": "CDW Baseline - CIS L1 - Organisation Auditing and Modern Authentication",
+      "description": "Keeps mailbox auditing on for the organisation and turns on modern authentication for Exchange Online clients.",
+      "platforms": [
+        "all"
+      ],
+      "tier": "cis-l1",
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "exchange.exchangesettings.cdw-baseline-external-sender-tagging",
+      "file": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_External_Sender_Tagging_-_v1_0.json",
+      "sha": "b5873b9266e20c37",
+      "workload": "exchange",
+      "category": "ExchangeSettings",
+      "objectType": "exchangeSettings",
+      "displayName": "CDW Baseline - External Sender Tagging - v1.0",
+      "baseName": "CDW Baseline - External Sender Tagging",
+      "description": "Shows an External tag on messages from outside the organisation in Outlook, so users can spot external and spoofed senders.",
+      "platforms": [
+        "all"
+      ],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
       "id": "exchange.safelinks.safe-links-excluding-email",
       "file": "ExchangeOnline/SafeLinks/Safe_Links_excluding_email.json",
-      "sha": "6488048c1f192019",
+      "sha": "82d791ae53d68322",
       "workload": "exchange",
       "category": "SafeLinks",
       "objectType": "safeLinks",
@@ -4812,6 +4958,222 @@
       "platforms": [
         "all"
       ],
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.antimalware.cdw-baseline-anti-malware-standard",
+      "file": "DefenderOffice365/AntiMalware/CDW_Baseline_-_Anti-Malware_-_Standard_-_v1_0.json",
+      "sha": "3fd9eb60ca6f39fa",
+      "workload": "mdo",
+      "category": "AntiMalware",
+      "objectType": "antiMalware",
+      "displayName": "CDW Baseline - Anti-Malware - Standard - v1.0",
+      "baseName": "CDW Baseline - Anti-Malware - Standard",
+      "description": "Microsoft recommended anti-malware settings: common attachments filter on (file types such as executables and scripts rejected with an NDR), zero-hour auto purge, malware quarantined for admins only.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.antimalware.cdw-baseline-anti-malware-strict",
+      "file": "DefenderOffice365/AntiMalware/CDW_Baseline_-_Anti-Malware_-_Strict_-_v1_0.json",
+      "sha": "22342db572cf422b",
+      "workload": "mdo",
+      "category": "AntiMalware",
+      "objectType": "antiMalware",
+      "displayName": "CDW Baseline - Anti-Malware - Strict - v1.0",
+      "baseName": "CDW Baseline - Anti-Malware - Strict",
+      "description": "Microsoft recommended anti-malware settings: common attachments filter on (file types such as executables and scripts rejected with an NDR), zero-hour auto purge, malware quarantined for admins only.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.antiphishing.cdw-baseline-anti-phishing-standard",
+      "file": "DefenderOffice365/AntiPhishing/CDW_Baseline_-_Anti-Phishing_-_Standard_-_v1_0.json",
+      "sha": "e6d42aa59f6abb72",
+      "workload": "mdo",
+      "category": "AntiPhishing",
+      "objectType": "antiPhishing",
+      "displayName": "CDW Baseline - Anti-Phishing - Standard - v1.0",
+      "baseName": "CDW Baseline - Anti-Phishing - Standard",
+      "description": "Microsoft recommended Standard anti-phishing settings for Defender for Office 365: phishing threshold 3 (more aggressive), spoof intelligence honouring DMARC, impersonation protection for the organisation's own domains with mailbox intelligence, and safety tips. Users to protect from impersonation (for example executives) are agreed during design and added afterwards.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.antiphishing.cdw-baseline-anti-phishing-strict",
+      "file": "DefenderOffice365/AntiPhishing/CDW_Baseline_-_Anti-Phishing_-_Strict_-_v1_0.json",
+      "sha": "dd2c74e9b0f832d0",
+      "workload": "mdo",
+      "category": "AntiPhishing",
+      "objectType": "antiPhishing",
+      "displayName": "CDW Baseline - Anti-Phishing - Strict - v1.0",
+      "baseName": "CDW Baseline - Anti-Phishing - Strict",
+      "description": "Microsoft recommended Strict anti-phishing settings for Defender for Office 365: phishing threshold 4 (most aggressive), spoof intelligence honouring DMARC, impersonation protection for the organisation's own domains with mailbox intelligence, and safety tips. Users to protect from impersonation (for example executives) are agreed during design and added afterwards.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.antispam.cdw-baseline-anti-spam-standard",
+      "file": "DefenderOffice365/AntiSpam/CDW_Baseline_-_Anti-Spam_-_Standard_-_v1_0.json",
+      "sha": "51ade89cd8ccbbde",
+      "workload": "mdo",
+      "category": "AntiSpam",
+      "objectType": "antiSpam",
+      "displayName": "CDW Baseline - Anti-Spam - Standard - v1.0",
+      "baseName": "CDW Baseline - Anti-Spam - Standard",
+      "description": "Microsoft recommended Standard inbound anti-spam settings: bulk threshold 6, phishing and high-confidence spam quarantined, spam and bulk to Junk Email, 30-day quarantine retention and zero-hour auto purge.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.antispam.cdw-baseline-anti-spam-strict",
+      "file": "DefenderOffice365/AntiSpam/CDW_Baseline_-_Anti-Spam_-_Strict_-_v1_0.json",
+      "sha": "b8fe192bd5576165",
+      "workload": "mdo",
+      "category": "AntiSpam",
+      "objectType": "antiSpam",
+      "displayName": "CDW Baseline - Anti-Spam - Strict - v1.0",
+      "baseName": "CDW Baseline - Anti-Spam - Strict",
+      "description": "Microsoft recommended Strict inbound anti-spam settings: bulk threshold 5, phishing and high-confidence spam quarantined, spam and bulk quarantined, 30-day quarantine retention and zero-hour auto purge.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.outboundspam.cdw-baseline-outbound-spam-default",
+      "file": "DefenderOffice365/OutboundSpam/CDW_Baseline_-_Outbound_Spam_-_Default_-_v1_0.json",
+      "sha": "26d0eba13bd1051c",
+      "workload": "mdo",
+      "category": "OutboundSpam",
+      "objectType": "outboundSpam",
+      "displayName": "CDW Baseline - Outbound Spam - Default - v1.0",
+      "baseName": "CDW Baseline - Outbound Spam - Default",
+      "description": "Sets the default outbound spam policy to Microsoft's recommended Standard limits (500 external and 1,000 internal recipients an hour, 1,000 a day; senders over the limit blocked) and turns off automatic forwarding to external addresses.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.safeattachments.cdw-baseline-safe-attachments-sharepoint-onedrive-and-teams",
+      "file": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_SharePoint_OneDrive_and_Teams_-_v1_0.json",
+      "sha": "d30dc57c9c46b587",
+      "workload": "mdo",
+      "category": "SafeAttachments",
+      "objectType": "safeAttachments",
+      "displayName": "CDW Baseline - Safe Attachments - SharePoint, OneDrive and Teams - v1.0",
+      "baseName": "CDW Baseline - Safe Attachments - SharePoint, OneDrive and Teams",
+      "description": "Turns on Defender for Office 365 for SharePoint, OneDrive and Microsoft Teams, and Safe Documents for Office clients, so malicious files are detected and locked where they are stored and opened.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.safeattachments.cdw-baseline-safe-attachments-standard",
+      "file": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_Standard_-_v1_0.json",
+      "sha": "ab2e2c35aff5c8f9",
+      "workload": "mdo",
+      "category": "SafeAttachments",
+      "objectType": "safeAttachments",
+      "displayName": "CDW Baseline - Safe Attachments - Standard - v1.0",
+      "baseName": "CDW Baseline - Safe Attachments - Standard",
+      "description": "Microsoft recommended Safe Attachments policy: attachments are detonated before delivery and malicious ones blocked and quarantined for admins only.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.safeattachments.cdw-baseline-safe-attachments-strict",
+      "file": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_Strict_-_v1_0.json",
+      "sha": "89fabaae22f78391",
+      "workload": "mdo",
+      "category": "SafeAttachments",
+      "objectType": "safeAttachments",
+      "displayName": "CDW Baseline - Safe Attachments - Strict - v1.0",
+      "baseName": "CDW Baseline - Safe Attachments - Strict",
+      "description": "Microsoft recommended Safe Attachments policy: attachments are detonated before delivery and malicious ones blocked and quarantined for admins only.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.safelinks.cdw-baseline-safe-links-standard",
+      "file": "DefenderOffice365/SafeLinks/CDW_Baseline_-_Safe_Links_-_Standard_-_v1_0.json",
+      "sha": "a6ad4f1ab32303eb",
+      "workload": "mdo",
+      "category": "SafeLinks",
+      "objectType": "safeLinks",
+      "displayName": "CDW Baseline - Safe Links - Standard - v1.0",
+      "baseName": "CDW Baseline - Safe Links - Standard",
+      "description": "Microsoft recommended Safe Links policy: links in email (including internal mail), Teams and Office apps are checked at the time of click, URLs are scanned before delivery, and users cannot click through to a malicious site.",
+      "platforms": [],
+      "version": "1.0",
+      "deployVia": "powershell",
+      "isDraft": false,
+      "flags": [
+        "scope-unknown"
+      ]
+    },
+    {
+      "id": "mdo.safelinks.cdw-baseline-safe-links-strict",
+      "file": "DefenderOffice365/SafeLinks/CDW_Baseline_-_Safe_Links_-_Strict_-_v1_0.json",
+      "sha": "97183acea1dc350d",
+      "workload": "mdo",
+      "category": "SafeLinks",
+      "objectType": "safeLinks",
+      "displayName": "CDW Baseline - Safe Links - Strict - v1.0",
+      "baseName": "CDW Baseline - Safe Links - Strict",
+      "description": "Microsoft recommended Safe Links policy: links in email (including internal mail), Teams and Office apps are checked at the time of click, URLs are scanned before delivery, and users cannot click through to a malicious site.",
+      "platforms": [],
+      "version": "1.0",
       "deployVia": "powershell",
       "isDraft": false,
       "flags": [

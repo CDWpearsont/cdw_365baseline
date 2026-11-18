@@ -1,0 +1,11 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - CIS L1 - Organisation Auditing and Modern Authentication - v1.0",
+  "description": "Keeps mailbox auditing on for the organisation and turns on modern authentication for Exchange Online clients.",
+  "type": "OrganizationConfig",
+  "singleton": true,
+  "parameters": {
+    "AuditDisabled": false,
+    "OAuth2ClientProfileEnabled": true
+  }
+}

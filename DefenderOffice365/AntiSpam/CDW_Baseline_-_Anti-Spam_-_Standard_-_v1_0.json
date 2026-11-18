@@ -1,0 +1,36 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - Anti-Spam - Standard - v1.0",
+  "description": "Microsoft recommended Standard inbound anti-spam settings: bulk threshold 6, phishing and high-confidence spam quarantined, spam and bulk to Junk Email, 30-day quarantine retention and zero-hour auto purge.",
+  "type": "HostedContentFilterPolicy",
+  "identity": "CDW Baseline - Anti-Spam - Standard",
+  "parameters": {
+    "BulkThreshold": 6,
+    "MarkAsSpamBulkMail": "On",
+    "SpamAction": "MoveToJmf",
+    "SpamQuarantineTag": "DefaultFullAccessPolicy",
+    "HighConfidenceSpamAction": "Quarantine",
+    "HighConfidenceSpamQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "PhishSpamAction": "Quarantine",
+    "PhishQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "HighConfidencePhishAction": "Quarantine",
+    "HighConfidencePhishQuarantineTag": "AdminOnlyAccessPolicy",
+    "BulkSpamAction": "MoveToJmf",
+    "BulkQuarantineTag": "DefaultFullAccessPolicy",
+    "QuarantineRetentionPeriod": 30,
+    "InlineSafetyTipsEnabled": true,
+    "PhishZapEnabled": true,
+    "SpamZapEnabled": true
+  },
+  "rule": {
+    "type": "HostedContentFilterRule",
+    "identity": "CDW Baseline - Anti-Spam - Standard",
+    "parameters": {
+      "HostedContentFilterPolicy": "CDW Baseline - Anti-Spam - Standard",
+      "RecipientDomainIs": [
+        "{{acceptedDomains}}"
+      ],
+      "Priority": 1
+    }
+  }
+}

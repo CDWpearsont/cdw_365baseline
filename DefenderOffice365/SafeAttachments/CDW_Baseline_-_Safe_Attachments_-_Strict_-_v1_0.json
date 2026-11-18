@@ -1,0 +1,24 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - Safe Attachments - Strict - v1.0",
+  "description": "Microsoft recommended Safe Attachments policy: attachments are detonated before delivery and malicious ones blocked and quarantined for admins only.",
+  "type": "SafeAttachmentPolicy",
+  "identity": "CDW Baseline - Safe Attachments - Strict",
+  "parameters": {
+    "Enable": true,
+    "Action": "Block",
+    "QuarantineTag": "AdminOnlyAccessPolicy",
+    "Redirect": false
+  },
+  "rule": {
+    "type": "SafeAttachmentRule",
+    "identity": "CDW Baseline - Safe Attachments - Strict",
+    "parameters": {
+      "SafeAttachmentPolicy": "CDW Baseline - Safe Attachments - Strict",
+      "RecipientDomainIs": [
+        "{{acceptedDomains}}"
+      ],
+      "Priority": 0
+    }
+  }
+}

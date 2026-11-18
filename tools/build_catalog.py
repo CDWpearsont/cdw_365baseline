@@ -74,6 +74,10 @@ PATH_POLICY_TYPE = {
     "SafeLinks": "Safe Links",
     "SafeAttachments": "Safe Attachments",
     "AntiPhishing": "Anti-Phishing",
+    "AntiSpam": "Anti-Spam",
+    "AntiMalware": "Anti-Malware",
+    "OutboundSpam": "Outbound Spam",
+    "ExchangeSettings": "Exchange Setting",
     "DefenderCloudApps": "Cloud Apps Policy",
 }
 
@@ -119,6 +123,7 @@ FOLDER_WORKLOAD = {
     "ExchangeConfig": "Exchange Online",
     "ExchangeOnline": "Exchange Online",
     "DefenderCloudApps": "Defender",
+    "DefenderOffice365": "Defender",
     "SharePointConfig": "SharePoint",
     "TeamsConfig": "Teams",
     "PurviewConfig": "Purview",
