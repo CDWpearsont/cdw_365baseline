@@ -1,20 +1,22 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T14:20:08+00:00",
-  "sourceCommit": "3f0c673aa8c66d5ea136a8b1b657370ab26414da",
+  "generatedAt": "2026-11-18T10:15:41+00:00",
+  "sourceCommit": null,
   "counts": {
-    "policies": 260,
+    "policies": 262,
     "bundles": 29,
-    "issues": 270,
+    "issues": 274,
     "byConfidence": {
-      "medium": 114,
+      "medium": 116,
       "low": 3,
       "high": 143
     }
   },
   "taxonomy": {
     "workloads": [
+      "Defender",
       "Entra",
+      "Exchange Online",
       "Intune",
       "SharePoint"
     ],
@@ -27,11 +29,13 @@
     ],
     "policyTypes": [
       "App Protection",
+      "Cloud Apps Policy",
       "Compliance Policy",
       "Conditional Access",
       "Directory Setting",
       "Endpoint Security",
       "Enrolment Restriction",
+      "Safe Links",
       "Settings Catalog",
       "Tenant Policy",
       "Update Ring"
@@ -57,6 +61,7 @@
       "Authorization Policy",
       "BYOD App Protection",
       "Block Personal",
+      "Bulk Download Monitoring",
       "CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
       "CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block",
       "CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA",
@@ -163,6 +168,7 @@
       "Ring 1",
       "Ring 2",
       "Ring 3",
+      "Safe Links excluding email",
       "Share Point Tenant Settings",
       "Shared Devices",
       "Software Update",
@@ -680,6 +686,37 @@
   ],
   "policies": [
     {
+      "id": "defender-cross-platform-cloud-apps-policy-bulk-download-monitoring-tenant",
+      "path": "DefenderCloudApps/Policies/Bulk_Download_Monitoring.json",
+      "fileName": "Bulk_Download_Monitoring.json",
+      "displayName": "Bulk Download Monitoring",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Cloud Apps Policy",
+      "framework": null,
+      "scope": "Tenant",
+      "version": null,
+      "area": "Bulk Download Monitoring",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:d37bcf8e5d98cff6f62e120e95b839e3cc91e6973d507495b18d4e081758a835",
+      "derivedFrom": {
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": []
+    },
+    {
       "id": "entra-cross-platform-tenant-policy-admin-consent-request-policy-tenant",
       "path": "EntraConfig/AdminConsentRequestPolicy/CDW_Baseline_AdminConsentRequestPolicy_v1_0.json",
       "fileName": "CDW_Baseline_AdminConsentRequestPolicy_v1_0.json",
@@ -694,7 +731,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:14580e4259b76d6d2c6e6f7e33b23598cbb4134768485d74ce8c549690a71c58",
+      "policyHash": "sha256:9bd03155befc50a34d17b4989a6dd29452a078dd521326d3e78196841a01ce79",
       "derivedFrom": {
         "version": "filename",
         "workload": "folder",
@@ -3447,6 +3484,37 @@
       "bundles": [
         "entra-tenant-config"
       ]
+    },
+    {
+      "id": "exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant",
+      "path": "ExchangeOnline/SafeLinks/Safe_Links_excluding_email.json",
+      "fileName": "Safe_Links_excluding_email.json",
+      "displayName": "Safe Links excluding email",
+      "workload": "Exchange Online",
+      "platform": "Cross-platform",
+      "policyType": "Safe Links",
+      "framework": null,
+      "scope": "Tenant",
+      "version": null,
+      "area": "Safe Links excluding email",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:6488048c1f192019184817d9a6fb33aedfabdb234739748cc149f3e0af184f51",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "folder",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": []
     },
     {
       "id": "intune-android-app-protection-byod-app-protection-user",
@@ -11703,6 +11771,12 @@
   ],
   "issues": [
     {
+      "policyId": "defender-cross-platform-cloud-apps-policy-bulk-download-monitoring-tenant",
+      "path": "DefenderCloudApps/Policies/Bulk_Download_Monitoring.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
       "policyId": "entra-cross-platform-tenant-policy-admin-consent-request-policy-tenant",
       "path": "EntraConfig/AdminConsentRequestPolicy/CDW_Baseline_AdminConsentRequestPolicy_v1_0.json",
       "type": "missingEnrichment",
@@ -12179,6 +12253,12 @@
     {
       "policyId": "entra-cross-platform-directory-setting-password-rule-settings-tenant",
       "path": "EntraConfig/DirectorySettings/CDW_Baseline_DirectorySetting_PasswordRuleSettings_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant",
+      "path": "ExchangeOnline/SafeLinks/Safe_Links_excluding_email.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -13297,6 +13377,18 @@
       "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-cloud-apps-policy-bulk-download-monitoring-tenant",
+      "path": "DefenderCloudApps/Policies/Bulk_Download_Monitoring.json",
+      "type": "orphan",
+      "detail": "Policy is in no bundle"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant",
+      "path": "ExchangeOnline/SafeLinks/Safe_Links_excluding_email.json",
+      "type": "orphan",
+      "detail": "Policy is in no bundle"
     },
     {
       "policyId": "intune-android-settings-catalog-restrictions-v1-0-test-device",

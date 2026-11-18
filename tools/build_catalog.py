@@ -69,6 +69,14 @@ POLICY_TYPE_TOKENS = {
     "DirectorySetting": "Directory Setting",
 }
 
+# Folder -> policy type for workloads applied by the PowerShell runner.
+PATH_POLICY_TYPE = {
+    "SafeLinks": "Safe Links",
+    "SafeAttachments": "Safe Attachments",
+    "AntiPhishing": "Anti-Phishing",
+    "DefenderCloudApps": "Cloud Apps Policy",
+}
+
 # Where a policy type has an unambiguous scope, the filename need not say so.
 DEFAULT_SCOPE_BY_TYPE = {
     "Conditional Access": "User",
@@ -109,6 +117,8 @@ FOLDER_WORKLOAD = {
     "EntraConfig": "Entra",
     "DefenderConfig": "Defender",
     "ExchangeConfig": "Exchange Online",
+    "ExchangeOnline": "Exchange Online",
+    "DefenderCloudApps": "Defender",
     "SharePointConfig": "SharePoint",
     "TeamsConfig": "Teams",
     "PurviewConfig": "Purview",
@@ -420,6 +430,17 @@ def derive(rel_path: str, abs_path: str) -> dict:
             rec["scope"], source["scope"] = sc, "body"
         elif rec["policyType"] in DEFAULT_SCOPE_BY_TYPE:
             rec["scope"], source["scope"] = DEFAULT_SCOPE_BY_TYPE[rec["policyType"]], "inferred"
+
+    # PowerShell-runner workloads have no Graph body hints; the folder names the type.
+    if not rec["policyType"]:
+        for part, ptype in PATH_POLICY_TYPE.items():
+            if f"/{part}/" in "/" + rel_path.replace("\\", "/"):
+                rec["policyType"], source["policyType"] = ptype, "folder"
+                if not rec["scope"]:
+                    rec["scope"], source["scope"] = "Tenant", "inferred"
+                if not rec["platform"]:
+                    rec["platform"], source["platform"] = "Cross-platform", "inferred"
+                break
 
     if not rec["policyType"] and rec["workload"] == "Entra":
         rec["policyType"], source["policyType"] = "Tenant Policy", "inferred"
