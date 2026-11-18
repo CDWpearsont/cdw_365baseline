@@ -1770,7 +1770,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.19.1',
+  version: '3.20.0',
   date:    '2026-09-17'
 };
 
@@ -5525,6 +5525,8 @@ const CAT_LABELS = {
   AuthorizationPolicy:'Authorization', CrossTenantAccessPolicy:'Cross-Tenant Access',
   DeviceRegistrationPolicy:'Device Registration', DirectorySettings:'Directory Settings',
   Policies:'Cloud Apps', SafeLinks:'Safe Links', TenantSettings:'SharePoint & OneDrive',
+  AntiPhishing:'Anti-Phishing', AntiSpam:'Anti-Spam', AntiMalware:'Anti-Malware', OutboundSpam:'Outbound Spam',
+  SafeAttachments:'Safe Attachments', ExchangeSettings:'Exchange Settings',
 };
 
 // Flags lifted out of policy descriptions by the manifest generator, so a
@@ -5547,6 +5549,8 @@ const CAT_DOTS = {
   EnrolmentStatusPage:'#65a30d', AppProtectionPolicies:'#0891b2', AppConfigurationPolicies:'#06b6d4',
   FeatureUpdates:'#10b981', ConditionalAccess:'#8b5cf6', NamedLocations:'#a78bfa', AuthMethods:'#c4b5fd',
   DefenderEndpoint:'#f87171', DefenderOffice:'#fca5a5', SafeLinks:'#fb923c', Policies:'#f97316',
+  AntiPhishing:'#ef4444', AntiSpam:'#f59e0b', AntiMalware:'#dc2626', OutboundSpam:'#d97706', SafeAttachments:'#ea580c',
+  ExchangeSettings:'#d97706',
 };
 function renderTypeChips(wl) {
   const host = document.getElementById(`${wl}-filters`);
@@ -5902,7 +5906,7 @@ function showToast(msg, type='ok') {
 const WL_LABELS = {
   intune:   'Microsoft Intune',
   entra:    'Entra ID',
-  defender: 'Microsoft Defender 365',
+  defender: 'Microsoft Defender',
   exchange: 'Exchange Online, Teams and Purview',
 };
 const WL_INTROS = {
@@ -7346,6 +7350,7 @@ function humanizeValue(raw) {
     'none': 'None', 'all': 'All',
     'user': 'User', 'device': 'Device', 'both': 'Both',
     'always': 'Always', 'never': 'Never', 'prompt': 'Prompt',
+    'movetojmf': 'Move to Junk Email folder', 'blockuser': 'Block the user', 'blockuserfortoday': 'Block the user until tomorrow',
   };
   const lower = raw.toLowerCase();
   if (CHOICE_MAP[lower]) return CHOICE_MAP[lower];
@@ -7392,7 +7397,7 @@ const LLD_SIDS = {
   'S-1-5-80-3139157870-2983391045-3678747466-658725712-1809340420': 'NT SERVICE\\WdiServiceHost',
 };
 function lldTidyValue(value) {
-  const v = String(value ?? '');
+  const v = String(value ?? '').replace(/\{\{\s*accepted\s*domains\s*\}\}/gi, 'All accepted domains');
   if (/^<!\[CDATA\[\s*\]\]>$/.test(v.trim())) return 'No one';
   if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(\s*,\s*[0-9a-f-]{36})*$/i.test(v.trim()))
     return v.split(/\s*,\s*/).map(g => LLD_ROLES[g] || LLD_APPS[g] || g).join(', ');
@@ -8129,9 +8134,13 @@ const LLD_GLOSSARY = [
   ['BYOD',    'Bring Your Own Device: personally owned phones and tablets used for work',             p => /byod/i.test(p.n)],
   ['CA',      'Conditional Access: Entra ID policies that decide how and when users can sign in',      p => p.cat === 'ConditionalAccess'],
   ['CIS',     'Center for Internet Security: publisher of the security benchmarks referenced here',   p => !!p.tier],
+  ['DMARC',   'Domain-based Message Authentication, Reporting and Conformance: a sender domain policy for mail that fails authentication', p => p.cat === 'AntiPhishing'],
+  ['MDO',     'Microsoft Defender for Office 365: protection for email, Teams, SharePoint and OneDrive', p => ['SafeLinks', 'SafeAttachments', 'AntiPhishing', 'AntiSpam', 'AntiMalware'].includes(p.cat)],
+  ['SMTP',    'Simple Mail Transfer Protocol: the protocol used to send email', p => /smtp/i.test(p.n)],
+  ['ZAP',     'Zero-hour Auto Purge: removes malicious messages from mailboxes after delivery', p => ['AntiSpam', 'AntiMalware'].includes(p.cat)],
   ['EPM',     'Endpoint Privilege Management: controlled elevation for standard users',               p => /privilege management/i.test(p.n)],
   ['ESP',     'Enrolment Status Page: progress screen shown while a new device is set up',            p => p.cat === 'EnrolmentStatusPage'],
-  ['KFM',     'Known Folder Move: redirects Desktop, Documents and Pictures to OneDrive',             p => /onedrive/i.test(p.n)],
+  ['KFM',     'Known Folder Move: redirects Desktop, Documents and Pictures to OneDrive',             p => /onedrive/i.test(p.n) && /^(SettingsCatalog|DeviceConfigurations)$/.test(p.cat)],
   ['LAPS',    'Local Administrator Password Solution: rotates and stores local admin passwords',      p => /laps/i.test(p.n)],
   ['MAM',     'Mobile Application Management: protects company data inside apps',                     p => p.cat === 'AppProtectionPolicies' || p.cat === 'AppConfigurationPolicies'],
   ['MDE',     'Microsoft Defender for Endpoint',                                                      p => /defender/i.test(p.n)],
@@ -8397,12 +8406,13 @@ function lldContext(policyJsons, meta, dateStr) {
   if (hasIntune) references.push(['Microsoft Intune documentation', 'Microsoft guidance for the Intune features in this design', 'https://learn.microsoft.com/intune/']);
   if (hasCA) references.push(['Conditional Access documentation', 'Microsoft guidance for Entra ID Conditional Access', 'https://learn.microsoft.com/entra/identity/conditional-access/']);
   if (by('entra').some(p => p.cat !== 'ConditionalAccess')) references.push(['Microsoft Entra ID documentation', 'Microsoft guidance for the Entra ID tenant settings in this design', 'https://learn.microsoft.com/entra/identity/']);
-  if (policyJsons.some(p => p.cat === 'SafeLinks')) references.push(['Microsoft Defender for Office 365 documentation', 'Microsoft guidance for Safe Links and related protection', 'https://learn.microsoft.com/defender-office-365/']);
+  if (policyJsons.some(p => ['SafeLinks', 'SafeAttachments', 'AntiPhishing', 'AntiSpam', 'AntiMalware', 'OutboundSpam'].includes(p.cat))) references.push(['Microsoft Defender for Office 365 documentation', 'Microsoft guidance for email and collaboration threat protection', 'https://learn.microsoft.com/defender-office-365/']);
+  if (policyJsons.some(p => p.cat === 'ExchangeSettings')) references.push(['Exchange Online documentation', 'Microsoft guidance for the Exchange Online settings in this design', 'https://learn.microsoft.com/exchange/exchange-online']);
   if (policyJsons.some(p => p.manifestWorkload === 'mdca')) references.push(['Microsoft Defender for Cloud Apps documentation', 'Microsoft guidance for Defender for Cloud Apps policies', 'https://learn.microsoft.com/defender-cloud-apps/']);
   if (cisL1 || cisL2) references.push(['CIS Benchmarks', 'Center for Internet Security benchmarks referenced by the CIS-aligned policies', 'https://www.cisecurity.org/cis-benchmarks']);
 
   const facts = policyJsons.map(p => ({ n: p.displayName || '', cat: p.cat, tier: p.tier }));
-  const glossary = LLD_GLOSSARY.filter(([, , test]) => facts.some(test)).map(([a, m]) => [a, m]);
+  const glossary = LLD_GLOSSARY.filter(([, , test]) => facts.some(test)).map(([a, m]) => [a, m]).sort((x, y) => x[0].localeCompare(y[0]));
 
   // Statement of Work: its agreed decisions lead the table, and the SoW itself is a referenced document.
   const sow = meta.sow || null;

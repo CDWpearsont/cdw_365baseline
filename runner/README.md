@@ -122,3 +122,19 @@ No change to `Invoke-Runner.ps1` is needed.
   works cleanly today.
 - **Defender for Cloud Apps** has no create API for the doc's policy types —
   see the honesty note in `src/Workloads/Mdca.ps1`.
+
+## Exchange Online and Defender for Office 365 policy files
+
+Files under `ExchangeOnline/` and `DefenderOffice365/` use `"workload": "exo"`:
+
+- `type`, `identity`, `parameters`: create-or-update with `Get-/Set-/New-<type>`.
+- `rule` (optional): the matching rule, created or updated the same way. The
+  policy link (for example `AntiPhishPolicy`) is only sent when the rule is created.
+- `"singleton": true`: tenant-wide settings that only have a `Set-` cmdlet
+  (`OrganizationConfig`, `TransportConfig`, `ExternalInOutlook`, `AtpPolicyForO365`).
+- `{{acceptedDomains}}` in a list value is replaced with the tenant's accepted
+  domains, so a rule applies to every recipient.
+- `displayName` and `description` are for the site and the LLD; the runner ignores them.
+
+Standard and Strict variants follow Microsoft's recommended settings for EOP and
+Defender for Office 365. Use one or the other for the same recipients.

@@ -1,5 +1,5 @@
 {
-  "_comment": "One file = one selectable policy. Parameters are passed straight to New-/Set-SafeLinksPolicy as a splat — to support a new EXO/MDO policy type, just create another file with a different 'type'.",
+  "_comment": "One file = one selectable policy. Parameters are passed straight to New-/Set-SafeLinksPolicy as a splat — to support a new EXO/MDO policy type, just create another file with a different 'type'. {{acceptedDomains}} is replaced by the tenant's accepted domains at deployment.",
   "workload": "exo",
   "type": "SafeLinksPolicy",
   "identity": "Safe Links excluding email",
@@ -20,7 +20,9 @@
     "identity": "Safe Links excluding email",
     "parameters": {
       "SafeLinksPolicy": "Safe Links excluding email",
-      "RecipientDomainIs": [],
+      "RecipientDomainIs": [
+        "{{acceptedDomains}}"
+      ],
       "Priority": 0
     }
   }

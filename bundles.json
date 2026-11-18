@@ -878,6 +878,141 @@
         "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
         "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
       ]
+    },
+    {
+      "id": "mdo-standard",
+      "name": "Defender for Office 365 - Standard protection",
+      "description": "Microsoft's recommended Standard settings for anti-phishing (with impersonation protection), anti-spam, anti-malware, Safe Attachments and Safe Links, applied to every accepted domain, plus outbound spam limits with external auto-forwarding off and Safe Attachments for SharePoint, OneDrive and Teams.",
+      "path": [
+        "Defender",
+        "Email and collaboration",
+        "Standard"
+      ],
+      "rule": null,
+      "include": [
+        "defender-cross-platform-anti-phishing-anti-phishing-standard-tenant",
+        "defender-cross-platform-anti-spam-anti-spam-standard-tenant",
+        "defender-cross-platform-anti-malware-anti-malware-standard-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-standard-tenant",
+        "defender-cross-platform-safe-links-safe-links-standard-tenant",
+        "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant"
+      ],
+      "exclude": [],
+      "order": 200,
+      "licensing": [
+        "Microsoft Defender for Office 365 Plan 1 or 2 (included in Microsoft 365 E5 and Business Premium)"
+      ],
+      "notes": "Users to protect from impersonation (for example executives) are agreed during design and added after deployment. Choose Standard or Strict, not both."
+    },
+    {
+      "id": "mdo-strict",
+      "name": "Defender for Office 365 - Strict protection",
+      "description": "Microsoft's recommended Strict settings: more aggressive phishing threshold, and spam, bulk and spoofed mail quarantined rather than delivered to Junk. For organisations or groups at higher risk.",
+      "path": [
+        "Defender",
+        "Email and collaboration",
+        "Strict"
+      ],
+      "rule": null,
+      "include": [
+        "defender-cross-platform-anti-phishing-anti-phishing-strict-tenant",
+        "defender-cross-platform-anti-spam-anti-spam-strict-tenant",
+        "defender-cross-platform-anti-malware-anti-malware-strict-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-strict-tenant",
+        "defender-cross-platform-safe-links-safe-links-strict-tenant",
+        "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant"
+      ],
+      "exclude": [],
+      "order": 210,
+      "licensing": [
+        "Microsoft Defender for Office 365 Plan 1 or 2 (included in Microsoft 365 E5 and Business Premium)"
+      ],
+      "notes": "More messages are quarantined than with Standard; agree the quarantine release process with the customer. Choose Standard or Strict, not both."
+    },
+    {
+      "id": "mdo-collaboration",
+      "name": "Defender for Office 365 - Files and Teams",
+      "description": "Safe Attachments for SharePoint, OneDrive and Teams with Safe Documents, and Safe Links at time of click in Teams and Office apps without rewriting email links.",
+      "path": [
+        "Defender",
+        "Email and collaboration",
+        "Files and Teams"
+      ],
+      "rule": null,
+      "include": [
+        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
+        "exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant"
+      ],
+      "exclude": [],
+      "order": 220,
+      "licensing": [
+        "Microsoft Defender for Office 365 Plan 1 or 2"
+      ],
+      "notes": "Use instead of the email protection blocks where the customer does not want email links rewritten."
+    },
+    {
+      "id": "mdca-monitoring",
+      "name": "Defender for Cloud Apps - Activity monitoring",
+      "description": "Alerts on unusual activity in cloud apps, starting with bulk downloads by a single user.",
+      "path": [
+        "Defender",
+        "Cloud apps"
+      ],
+      "rule": {
+        "workload": "Defender",
+        "policyType": "Cloud Apps Policy"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 230,
+      "licensing": [
+        "Microsoft Defender for Cloud Apps (included in Microsoft 365 E5)"
+      ],
+      "notes": "Template-based policies are created in the Defender portal; the deployment lists them as manual steps."
+    },
+    {
+      "id": "exo-cis-hardening",
+      "name": "Exchange Online - CIS Level 1 hardening",
+      "description": "CIS Microsoft 365 Foundations Level 1 settings for Exchange Online: SMTP AUTH off, mailbox auditing and modern authentication on, no automatic forwarding to remote domains, no external calendar sharing, no third-party storage in Outlook on the web, and MailTips.",
+      "path": [
+        "Exchange Online",
+        "Hardening",
+        "CIS L1"
+      ],
+      "rule": {
+        "workload": "Exchange Online",
+        "policyType": "Exchange Setting",
+        "framework": "CIS L1"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 300,
+      "licensing": [
+        "Exchange Online (Microsoft 365 E3/E5 or Business Premium)"
+      ],
+      "notes": "Check for devices and applications that still send mail with SMTP AUTH (for example multifunction printers) before applying; enable it on those mailboxes only."
+    },
+    {
+      "id": "exo-external-awareness",
+      "name": "Exchange Online - External sender awareness",
+      "description": "External tag on messages from outside the organisation and MailTips warnings when writing to external recipients or large audiences.",
+      "path": [
+        "Exchange Online",
+        "User awareness"
+      ],
+      "rule": null,
+      "include": [
+        "exchange-online-cross-platform-exchange-setting-external-sender-tagging-tenant",
+        "exchange-online-cross-platform-exchange-setting-cis-l1-mailtips-tenant"
+      ],
+      "exclude": [],
+      "order": 310,
+      "licensing": [
+        "Exchange Online"
+      ],
+      "notes": null
     }
   ],
   "goals": [
@@ -1265,6 +1400,99 @@
           ]
         }
       ]
+    },
+    {
+      "id": "email-threat-protection",
+      "tower": "Defender",
+      "icon": "shield",
+      "title": "Protect email from phishing and malware",
+      "outcome": "Anti-phishing with impersonation protection, anti-spam, anti-malware, Safe Attachments and Safe Links for every mailbox, to Microsoft's recommended settings.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "Standard",
+          "note": "Microsoft recommended",
+          "bundles": [
+            "mdo-standard"
+          ]
+        },
+        {
+          "platform": "Cross-platform",
+          "label": "Strict",
+          "note": "Higher-risk organisations",
+          "bundles": [
+            "mdo-strict"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collaboration-protection",
+      "tower": "Defender",
+      "icon": "layers",
+      "title": "Protect files and Teams",
+      "outcome": "Malicious files in SharePoint, OneDrive and Teams are detected and locked, and links in Teams and Office apps are checked when clicked.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "Files and Teams",
+          "note": "Without email link rewriting",
+          "bundles": [
+            "mdo-collaboration"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cloud-app-monitoring",
+      "tower": "Defender",
+      "icon": "target",
+      "title": "Monitor cloud app activity",
+      "outcome": "Alerts on unusual activity in cloud apps, such as a user downloading large amounts of data.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "Activity alerts",
+          "note": "Defender for Cloud Apps",
+          "bundles": [
+            "mdca-monitoring"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exchange-hardening",
+      "tower": "Exchange Online",
+      "icon": "mail",
+      "title": "Lock down Exchange Online",
+      "outcome": "Legacy SMTP authentication off, auditing on, no automatic forwarding or external calendar sharing, aligned to the CIS Microsoft 365 Foundations benchmark.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "CIS Level 1",
+          "note": "CIS Microsoft 365 Foundations",
+          "bundles": [
+            "exo-cis-hardening"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "external-awareness",
+      "tower": "Exchange Online",
+      "icon": "building",
+      "title": "Help users spot external mail",
+      "outcome": "Messages from outside the organisation are tagged External, and users are warned before writing to external recipients or large audiences.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "External tagging and MailTips",
+          "note": "",
+          "bundles": [
+            "exo-external-awareness"
+          ]
+        }
+      ]
     }
   ],
   "towers": [
@@ -1284,7 +1512,7 @@
       "id": "Defender",
       "name": "Microsoft Defender",
       "icon": "shield",
-      "blurb": "Endpoint and Office threat protection"
+      "blurb": "Email, collaboration and cloud app protection (endpoint protection is in Intune)"
     },
     {
       "id": "Purview",
@@ -1376,6 +1604,26 @@
         },
         {
           "goal": "risk",
+          "platform": "Cross-platform"
+        }
+      ]
+    },
+    {
+      "id": "secure-email",
+      "icon": "mail",
+      "title": "Secure email",
+      "outcome": "Defender for Office 365 protection at Microsoft's Standard settings, Exchange Online hardened to CIS Level 1, and external sender awareness.",
+      "includes": [
+        {
+          "goal": "email-threat-protection",
+          "platform": "Cross-platform"
+        },
+        {
+          "goal": "exchange-hardening",
+          "platform": "Cross-platform"
+        },
+        {
+          "goal": "external-awareness",
           "platform": "Cross-platform"
         }
       ]

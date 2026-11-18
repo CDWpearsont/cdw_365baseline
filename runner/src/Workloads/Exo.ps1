@@ -12,7 +12,13 @@
   Only the named object is touched. Untouched policies stay exactly as-is.
 
   Most MDO policies are inert without a matching *Rule* (recipient scoping).
-  An optional "rule" block in the JSON is applied the same create-or-update way.
+  An optional "rule" block in the JSON is applied the same create-or-update way;
+  "{{acceptedDomains}}" in a value becomes the tenant's accepted domains.
+
+  Tenant-wide settings with only a Set- cmdlet (OrganizationConfig,
+  TransportConfig, ExternalInOutlook, AtpPolicyForO365) use "singleton": true.
+  Default objects (the default remote domain, sharing and OWA policies, the
+  default outbound spam policy) are updated by identity.
 #>
 
 Register-Workload -Key 'exo' -TokenKey 'exo' `
@@ -21,42 +27,72 @@ Register-Workload -Key 'exo' -TokenKey 'exo' `
         Import-Module ExchangeOnlineManagement -ErrorAction Stop
         # Delegated token pass-through — EXO V3 supports -AccessToken.
         # The consultant's interactive sign-in produced this token in the browser;
-        # nothing is stored on the runner.
+        # nothing is stored on the runner. Only the cmdlets the library uses are loaded.
+        $nouns = @(
+            'SafeLinksPolicy', 'SafeLinksRule', 'SafeAttachmentPolicy', 'SafeAttachmentRule',
+            'AntiPhishPolicy', 'AntiPhishRule', 'MalwareFilterPolicy', 'MalwareFilterRule',
+            'HostedContentFilterPolicy', 'HostedContentFilterRule', 'HostedOutboundSpamFilterPolicy',
+            'AtpPolicyForO365', 'OrganizationConfig', 'TransportConfig', 'ExternalInOutlook',
+            'RemoteDomain', 'SharingPolicy', 'OwaMailboxPolicy'
+        )
+        $commands = @('Get-AcceptedDomain') + ($nouns | ForEach-Object { "Get-$_", "New-$_", "Set-$_" })
         Connect-ExchangeOnline -AccessToken $Ctx.Tokens.exo `
                                -Organization $Ctx.TenantId `
-                               -ShowBanner:$false -CommandName @(
-                                   'Get-SafeLinksPolicy','New-SafeLinksPolicy','Set-SafeLinksPolicy',
-                                   'Get-SafeLinksRule','New-SafeLinksRule','Set-SafeLinksRule',
-                                   'Get-SafeAttachmentPolicy','New-SafeAttachmentPolicy','Set-SafeAttachmentPolicy',
-                                   'Get-AntiPhishPolicy','New-AntiPhishPolicy','Set-AntiPhishPolicy',
-                                   'Get-MalwareFilterPolicy','New-MalwareFilterPolicy','Set-MalwareFilterPolicy',
-                                   'Get-HostedContentFilterPolicy','New-HostedContentFilterPolicy','Set-HostedContentFilterPolicy',
-                                   'Get-SafeAttachmentRule','New-SafeAttachmentRule','Set-SafeAttachmentRule',
-                                   'Get-AntiPhishRule','New-AntiPhishRule','Set-AntiPhishRule'
-                               )
+                               -ShowBanner:$false -CommandName $commands
+        $script:ExoAcceptedDomains = $null
     } `
     -Apply {
         param($Policy, $Ctx)
 
-        function Set-ExoObject {
-            param([string]$Type, [string]$Identity, [object]$Parameters, [string]$NameParam = 'Name')
-            $p = @{}
-            if ($Parameters) { $Parameters.PSObject.Properties | ForEach-Object { $p[$_.Name] = $_.Value } }
-
-            $existing = & "Get-$Type" -Identity $Identity -ErrorAction SilentlyContinue
-            if ($existing) {
-                & "Set-$Type" -Identity $Identity @p -Confirm:$false | Out-Null
-                return 'updated'
+        # Tokens in parameter values: {{acceptedDomains}} -> every accepted domain
+        # in the customer's tenant, so a rule applies to all their recipients.
+        function Expand-ExoValue($Value) {
+            if ($Value -is [System.Collections.IEnumerable] -and $Value -isnot [string]) {
+                $out = foreach ($v in $Value) {
+                    if ($v -eq '{{acceptedDomains}}') {
+                        if (-not $script:ExoAcceptedDomains) {
+                            $script:ExoAcceptedDomains = @(Get-AcceptedDomain | ForEach-Object { [string]$_.DomainName })
+                        }
+                        $script:ExoAcceptedDomains
+                    } else { $v }
+                }
+                return [string[]]@($out)
             }
-            else {
-                $p[$NameParam] = $Identity
-                & "New-$Type" @p -Confirm:$false | Out-Null
-                return 'created'
-            }
+            return $Value
         }
 
-        # 1) the policy
-        $action = Set-ExoObject -Type $Policy.type -Identity $Policy.identity -Parameters $Policy.parameters
+        function ConvertTo-ExoSplat($Parameters) {
+            $p = @{}
+            if ($Parameters) { $Parameters.PSObject.Properties | ForEach-Object { $p[$_.Name] = Expand-ExoValue $_.Value } }
+            $p
+        }
+
+        # The policy a rule points at can only be given when the rule is created.
+        $ruleLinks = 'SafeLinksPolicy', 'SafeAttachmentPolicy', 'AntiPhishPolicy', 'MalwareFilterPolicy',
+                     'HostedContentFilterPolicy', 'HostedOutboundSpamFilterPolicy'
+
+        function Set-ExoObject {
+            param([string]$Type, [string]$Identity, [object]$Parameters, [switch]$Singleton)
+            $p = ConvertTo-ExoSplat $Parameters
+            if ($Singleton) {
+                & "Set-$Type" @p -Confirm:$false -ErrorAction Stop | Out-Null
+                return 'updated'
+            }
+            $existing = & "Get-$Type" -Identity $Identity -ErrorAction SilentlyContinue
+            if ($existing) {
+                if ($Type -like '*Rule') { $ruleLinks | ForEach-Object { $p.Remove($_) } }
+                & "Set-$Type" -Identity $Identity @p -Confirm:$false -ErrorAction Stop | Out-Null
+                return 'updated'
+            }
+            $p['Name'] = $Identity
+            & "New-$Type" @p -Confirm:$false -ErrorAction Stop | Out-Null
+            return 'created'
+        }
+
+        $isSingleton = ($Policy.PSObject.Properties.Name -contains 'singleton') -and $Policy.singleton
+
+        # 1) the policy (or tenant-wide setting)
+        $action = Set-ExoObject -Type $Policy.type -Identity $Policy.identity -Parameters $Policy.parameters -Singleton:$isSingleton
 
         # 2) the rule, if present (scopes the policy to recipients)
         if ($Policy.PSObject.Properties.Name -contains 'rule' -and $Policy.rule) {

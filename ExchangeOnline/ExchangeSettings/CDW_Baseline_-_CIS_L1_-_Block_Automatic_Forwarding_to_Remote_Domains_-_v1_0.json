@@ -1,0 +1,10 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - CIS L1 - Block Automatic Forwarding to Remote Domains - v1.0",
+  "description": "Stops automatic forwarding of mail to external domains through the default remote domain.",
+  "type": "RemoteDomain",
+  "identity": "Default",
+  "parameters": {
+    "AutoForwardEnabled": false
+  }
+}

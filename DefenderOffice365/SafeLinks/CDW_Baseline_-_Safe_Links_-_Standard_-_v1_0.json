@@ -1,0 +1,30 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - Safe Links - Standard - v1.0",
+  "description": "Microsoft recommended Safe Links policy: links in email (including internal mail), Teams and Office apps are checked at the time of click, URLs are scanned before delivery, and users cannot click through to a malicious site.",
+  "type": "SafeLinksPolicy",
+  "identity": "CDW Baseline - Safe Links - Standard",
+  "parameters": {
+    "EnableSafeLinksForEmail": true,
+    "EnableForInternalSenders": true,
+    "ScanUrls": true,
+    "DeliverMessageAfterScan": true,
+    "DisableUrlRewrite": false,
+    "EnableSafeLinksForTeams": true,
+    "EnableSafeLinksForOffice": true,
+    "TrackClicks": true,
+    "AllowClickThrough": false,
+    "EnableOrganizationBranding": false
+  },
+  "rule": {
+    "type": "SafeLinksRule",
+    "identity": "CDW Baseline - Safe Links - Standard",
+    "parameters": {
+      "SafeLinksPolicy": "CDW Baseline - Safe Links - Standard",
+      "RecipientDomainIs": [
+        "{{acceptedDomains}}"
+      ],
+      "Priority": 1
+    }
+  }
+}

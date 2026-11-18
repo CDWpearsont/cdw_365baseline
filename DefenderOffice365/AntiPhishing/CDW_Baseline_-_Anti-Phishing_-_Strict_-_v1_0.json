@@ -1,0 +1,43 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - Anti-Phishing - Strict - v1.0",
+  "description": "Microsoft recommended Strict anti-phishing settings for Defender for Office 365: phishing threshold 4 (most aggressive), spoof intelligence honouring DMARC, impersonation protection for the organisation's own domains with mailbox intelligence, and safety tips. Users to protect from impersonation (for example executives) are agreed during design and added afterwards.",
+  "type": "AntiPhishPolicy",
+  "identity": "CDW Baseline - Anti-Phishing - Strict",
+  "parameters": {
+    "Enabled": true,
+    "PhishThresholdLevel": 4,
+    "EnableSpoofIntelligence": true,
+    "HonorDmarcPolicy": true,
+    "DmarcQuarantineAction": "Quarantine",
+    "DmarcRejectAction": "Reject",
+    "AuthenticationFailAction": "Quarantine",
+    "SpoofQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "EnableFirstContactSafetyTips": true,
+    "EnableUnauthenticatedSender": true,
+    "EnableViaTag": true,
+    "EnableOrganizationDomainsProtection": true,
+    "EnableMailboxIntelligence": true,
+    "EnableMailboxIntelligenceProtection": true,
+    "MailboxIntelligenceProtectionAction": "Quarantine",
+    "MailboxIntelligenceQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "TargetedDomainProtectionAction": "Quarantine",
+    "TargetedDomainQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "TargetedUserProtectionAction": "Quarantine",
+    "TargetedUserQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "EnableSimilarUsersSafetyTips": true,
+    "EnableSimilarDomainsSafetyTips": true,
+    "EnableUnusualCharactersSafetyTips": true
+  },
+  "rule": {
+    "type": "AntiPhishRule",
+    "identity": "CDW Baseline - Anti-Phishing - Strict",
+    "parameters": {
+      "AntiPhishPolicy": "CDW Baseline - Anti-Phishing - Strict",
+      "RecipientDomainIs": [
+        "{{acceptedDomains}}"
+      ],
+      "Priority": 0
+    }
+  }
+}

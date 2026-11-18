@@ -1,0 +1,14 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - Outbound Spam - Default - v1.0",
+  "description": "Sets the default outbound spam policy to Microsoft's recommended Standard limits (500 external and 1,000 internal recipients an hour, 1,000 a day; senders over the limit blocked) and turns off automatic forwarding to external addresses.",
+  "type": "HostedOutboundSpamFilterPolicy",
+  "identity": "Default",
+  "parameters": {
+    "RecipientLimitExternalPerHour": 500,
+    "RecipientLimitInternalPerHour": 1000,
+    "RecipientLimitPerDay": 1000,
+    "ActionWhenThresholdReached": "BlockUser",
+    "AutoForwardingMode": "Off"
+  }
+}
