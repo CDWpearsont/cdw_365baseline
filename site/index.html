@@ -1741,7 +1741,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.17.0',
+  version: '3.17.1',
   date:    '2026-09-17'
 };
 
@@ -2199,10 +2199,14 @@ Return a JSON object:
   "constraints": ["constraints: timescales, licensing, change windows, regulatory"]
 }
 At most 12 items per list. Leave a list empty if the SoW does not cover it.
-"prerequisites" holds ONLY technical prerequisites the SoW lists or plainly requires: licences, the access the CDW
-consultant needs to the customer's tenant or systems (roles, accounts), minimum software or OS versions, hardware,
-network or connectivity requirements. Leave out commercial, scheduling and people dependencies (for example
-nominating a pilot group or providing a project manager). At most 10.`;
+"prerequisites" are the prerequisites for the DESIGN, built mainly from the SoW's Dependencies section: the
+technical dependencies there become design prerequisites. Also include technical items that appear in the SoW's own
+Prerequisites section, as consultants sometimes put technical dependencies there by mistake. Technical means:
+licences, the access the CDW consultant needs to the customer's tenant or systems (roles, accounts), minimum
+software or OS versions, hardware, network or connectivity requirements.
+Leave out the commercial prerequisites of the SoW itself (a signed SoW, a purchase order, payment terms) and
+scheduling or people dependencies (for example nominating a pilot group or providing a project manager).
+Merge duplicates. At most 10.`;
 
   const designPrompt = `${doc}
 
@@ -2311,7 +2315,7 @@ function sowOpenReview() {
 
       ${listSec('decisions', 'Design decisions from the SoW', 'One per line as <i>Type: decision</i> (Technical, Scope or Commercial). Added to the Design Decisions table.',
                 (d.decisions || []).map(x => `${x.type}: ${x.decision}`))}
-      ${listSec('prerequisites', 'Prerequisites', 'One per line as <i>Type: prerequisite</i> (Licensing, Access, Software, Hardware, Network or Other). Becomes the Prerequisites table in the LLD.',
+      ${listSec('prerequisites', 'Prerequisites', 'Taken from the SoW\u2019s dependencies (and any technical items in its prerequisites). One per line as <i>Type: prerequisite</i> (Licensing, Access, Software, Hardware, Network or Other). Becomes the Prerequisites table in the LLD.',
                 (d.prerequisites || []).map(x => `${x.type}: ${x.prerequisite}`))}
 
       <div class="sow-sec"><div class="sow-sec-title">Suggested Building Blocks</div>
@@ -7540,7 +7544,8 @@ function lldFinalise(docXml, ctx) {
   // The Reference column auto-numbers (DD1., DD2. ...) from the template's list style.
   if (dd) fillTable(dd, ctx.decisions.map(d => ['', d[0], d[1]]));
 
-  // 5b. Prerequisites from the Statement of Work: a section after Design
+  // 5b. Design prerequisites, built from the Statement of Work's technical
+  //     dependencies (a SoW's own prerequisites are commercial: signed SoW, PO): a section after Design
   //     Decisions with the same table layout, referenced PR1, PR2 ...
   const prereqs = (ctx.sow?.prerequisites || []).filter(x => x && x[1]);
   if (prereqs.length) {
