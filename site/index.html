@@ -1096,6 +1096,8 @@ body[data-activetab="defender"] .pcard.selected .pcheck{background:var(--cdw-red
 .sow-opt{font-size:10px;font-weight:500;color:var(--dim);text-transform:uppercase;letter-spacing:.4px;margin-left:6px}
 .sow-box-text{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:2px}
 .sow-box-actions{display:flex;gap:6px;flex-shrink:0}
+.sow-prog{height:4px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:8px}
+.sow-prog-fill{height:100%;width:0%;background:linear-gradient(90deg,#6d28d9,#7c3aed);transition:width .4s cubic-bezier(.4,0,.2,1)}
 .sow-dialog{max-width:860px!important;width:94%!important;max-height:88vh;overflow-y:auto;padding:26px 28px!important;text-align:left}
 .sow-dialog h3{text-align:left!important}
 .sow-dialog .sow-lead{font-size:12px;color:var(--muted);margin:0 0 14px;line-height:1.55;text-align:left!important}
@@ -1279,7 +1281,8 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
         <div class="sow-box" id="sow-box">
           <div class="sow-box-main">
             <div class="sow-box-title">Start from the Statement of Work <span class="sow-opt">optional</span></div>
-            <div class="sow-box-text" id="sow-status">Upload the SoW (Word or PDF) to fill in these details, the project background, scope, dependencies and assumptions, and to suggest the policies to select. You review everything before it is used.</div>
+            <div class="sow-box-text" id="sow-status">Upload the SoW (Word or PDF) to fill in these details, the project background, prerequisites and design decisions, and to suggest the policies to select. You review it before it is used.</div>
+            <div class="sow-prog" id="sow-prog" style="display:none"><div class="sow-prog-fill" id="sow-prog-fill"></div></div>
           </div>
           <div class="sow-box-actions">
             <button class="btn btn-ghost btn-sm" id="sow-review-btn" style="display:none" onclick="sowOpenReview()">Review</button>
@@ -1738,7 +1741,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.16.0',
+  version: '3.17.0',
   date:    '2026-09-17'
 };
 
@@ -1959,11 +1962,46 @@ const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.mi
 const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 let sowDraft = null;                    // last AI extraction, before or after review
 
-function sowSetBusy(text) {
+// Progress: a bar in the SoW box plus a fill on the button, as for LLD export.
+// While an AI call is running the bar creeps towards the next milestone, so it
+// keeps moving during the 20-40 seconds the analysis takes.
+let sowProgTimer = null;
+function sowProgress(pct, label) {
   const box = document.getElementById('sow-box');
-  box.classList.toggle('busy', !!text);
-  if (text) document.getElementById('sow-status').textContent = text;
-  document.getElementById('sow-upload-btn').disabled = !!text;
+  const bar = document.getElementById('sow-prog');
+  const fill = document.getElementById('sow-prog-fill');
+  const btn = document.getElementById('sow-upload-btn');
+  clearInterval(sowProgTimer); sowProgTimer = null;
+  if (pct === null) {
+    box.classList.remove('busy');
+    bar.style.display = 'none'; fill.style.width = '0%';
+    btn.disabled = false; btn.classList.remove('generating');
+    btn.textContent = docMeta.sow ? 'Replace' : 'Upload SoW';
+    return;
+  }
+  box.classList.add('busy');
+  bar.style.display = '';
+  fill.style.width = pct + '%';
+  if (!btn.classList.contains('generating')) {
+    btn.disabled = true; btn.classList.add('generating');
+    btn.innerHTML = '<div class="btn-doc-progress" id="sow-btn-fill"></div>Analysing\u2026';
+  }
+  const bfill = document.getElementById('sow-btn-fill');
+  if (bfill) bfill.style.width = pct + '%';
+  if (label) document.getElementById('sow-status').textContent = label;
+}
+// Creep from the current value towards `to` while waiting on the AI.
+function sowCreep(to) {
+  clearInterval(sowProgTimer);
+  sowProgTimer = setInterval(() => {
+    const fill = document.getElementById('sow-prog-fill');
+    const cur = parseFloat(fill.style.width) || 0;
+    const next = cur + Math.max(0.15, (to - cur) * 0.04);
+    if (next >= to) { clearInterval(sowProgTimer); return; }
+    fill.style.width = next + '%';
+    const bfill = document.getElementById('sow-btn-fill');
+    if (bfill) bfill.style.width = next + '%';
+  }, 400);
 }
 
 function sowRenderStatus() {
@@ -1973,23 +2011,22 @@ function sowRenderStatus() {
   box.classList.toggle('loaded', !!sow);
   document.getElementById('sow-review-btn').style.display = sowDraft ? '' : 'none';
   document.getElementById('sow-remove-btn').style.display = sow ? '' : 'none';
-  document.getElementById('sow-upload-btn').textContent = sow ? 'Replace' : 'Upload SoW';
+  const upBtn = document.getElementById('sow-upload-btn');
+  if (!upBtn.classList.contains('generating')) upBtn.textContent = sow ? 'Replace' : 'Upload SoW';
   if (!sow && sowDraft) {
     document.getElementById('sow-status').textContent = `${sowDraft.fileName} has been read. Review it to use the details.`;
     return;
   }
   if (!sow) {
     document.getElementById('sow-status').textContent = 'Upload the SoW (Word or PDF) to fill in these details, the project background, ' +
-      'scope, dependencies and assumptions, and to suggest the policies to select. You review everything before it is used.';
+      'prerequisites and design decisions, and to suggest the policies to select. You review it before it is used.';
     return;
   }
   const n = a => (a || []).length;
   const parts = [
     n(sow.background) && 'background',
-    n(sow.inScope) + n(sow.outOfScope) && `${n(sow.inScope) + n(sow.outOfScope)} scope items`,
-    n(sow.dependencies) && `${n(sow.dependencies)} ${n(sow.dependencies) === 1 ? 'dependency' : 'dependencies'}`,
-    n(sow.assumptions) && `${n(sow.assumptions)} ${n(sow.assumptions) === 1 ? 'assumption' : 'assumptions'}`,
     n(sow.decisions) && `${n(sow.decisions)} design ${n(sow.decisions) === 1 ? 'decision' : 'decisions'}`,
+    n(sow.prerequisites) && `${n(sow.prerequisites)} ${n(sow.prerequisites) === 1 ? 'prerequisite' : 'prerequisites'}`,
     sow.blockCount && `${sow.blockCount} policies to select`,
   ].filter(Boolean);
   document.getElementById('sow-status').textContent =
@@ -2009,23 +2046,26 @@ async function sowFileChosen(input) {
   input.value = '';
   if (!file) return;
   try {
-    sowSetBusy(`Reading ${file.name}\u2026`);
+    sowProgress(5, `Reading ${file.name}\u2026`);
     let text = await sowReadFile(file);
     text = text.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
     if (text.length < 200) throw new Error('No readable text found. If it is a scanned PDF, upload the Word version.');
     const truncated = text.length > SOW_MAX_CHARS;
     if (truncated) text = text.slice(0, SOW_MAX_CHARS);
-    sowSetBusy(`Analysing ${file.name} with AI\u2026 this takes about 30 seconds`);
+    sowProgress(15, `Reading the project details from ${file.name}\u2026`);
     if (!mgCatalog) await loadCatalog(true);
+    sowProgress(20, `Analysing ${file.name}: project details, prerequisites, decisions and policies\u2026 about 30 seconds`);
     const draft = await sowExtract(text);
     draft.fileName = file.name;
     draft.truncated = truncated;
     sowDraft = draft;
-    sowSetBusy(null);
+    sowProgress(100, 'Analysis complete');
+    await new Promise(r => setTimeout(r, 400));
+    sowProgress(null);
     sowRenderStatus();
     sowOpenReview();
   } catch (e) {
-    sowSetBusy(null);
+    sowProgress(null);
     sowRenderStatus();
     console.warn('[SoW]', e);
     showToast(`Could not use the Statement of Work: ${e.message}`, 'err');
@@ -2150,14 +2190,19 @@ Return a JSON object:
   "customer": "customer organisation name as written in the SoW, or empty",
   "opportunityNumber": "opportunity / OPP reference, or empty",
   "projectName": "short project or opportunity name, or empty",
-  "background": ["1-3 paragraphs for the LLD Background section, written in the third person ('<customer> has engaged CDW to...'), covering the business context and objectives"],
+  "background": ["1-3 paragraphs for the LLD Background section, written in the third person ('<customer> has engaged CDW to...'), covering the business context, the objectives and, at a high level, what the project covers"],
+  "prerequisites": [{"type": "Licensing | Access | Software | Hardware | Network | Other", "prerequisite": "a technical prerequisite for the work"}],
   "inScope": ["in-scope items relevant to the technical design"],
   "outOfScope": ["explicitly out-of-scope items"],
   "dependencies": ["dependencies on the customer or third parties"],
   "assumptions": ["assumptions"],
   "constraints": ["constraints: timescales, licensing, change windows, regulatory"]
 }
-At most 12 items per list. Leave a list empty if the SoW does not cover it.`;
+At most 12 items per list. Leave a list empty if the SoW does not cover it.
+"prerequisites" holds ONLY technical prerequisites the SoW lists or plainly requires: licences, the access the CDW
+consultant needs to the customer's tenant or systems (roles, accounts), minimum software or OS versions, hardware,
+network or connectivity requirements. Leave out commercial, scheduling and people dependencies (for example
+nominating a pilot group or providing a project manager). At most 10.`;
 
   const designPrompt = `${doc}
 
@@ -2171,20 +2216,35 @@ Return a JSON object:
   "gaps": ["SoW requirements that none of the goals cover"]
 }
 Decisions: at most 6, only ones the SoW actually states (for example licensing, platforms in scope, approach to rollout).
-Goals: only where the SoW clearly calls for that outcome; pick the option that matches the platform and strictness described.`;
+Goals: only where the SoW clearly calls for that outcome; pick the option that matches the platform and strictness described.
+Never pick a goal or option for anything the SoW puts out of scope (for example a platform it excludes).`;
 
+  // Two calls in parallel keep each well inside the 45-second API timeout.
+  let done = 0;
+  const tick = r => { done++; sowProgress(done === 1 ? 60 : 92, null); if (done === 1) sowCreep(88); return r; };
+  sowCreep(55);
   const [facts, design] = await Promise.all([
-    sowAsk(SOW_SYSTEM, factsPrompt, 1800),
-    sowAsk(SOW_SYSTEM, designPrompt, 1200),
+    sowAsk(SOW_SYSTEM, factsPrompt, 2000).then(tick),
+    sowAsk(SOW_SYSTEM, designPrompt, 1200).then(tick),
   ]);
   const list = (a, max = 12) => (Array.isArray(a) ? a : []).map(x => String(x || '').trim()).filter(Boolean).slice(0, max);
   const str = x => (typeof x === 'string' ? x.trim() : '');
   const goalIds = new Set(goals.map(g => g.id));
+  // Belt and braces for "out of scope": drop options for a platform the SoW excludes
+  // and does not also include.
+  const outText = list(facts.outOfScope).join(' '), inText = list(facts.inScope).join(' ');
+  const PLATFORM_RX = { Windows: /windows/i, macOS: /mac\s?os|\bmacs?\b/i, Mobile: /\bios\b|android|mobile|phones?/i };
+  const excluded = p => PLATFORM_RX[p] && PLATFORM_RX[p].test(outText) && !PLATFORM_RX[p].test(inText);
+  const PREREQ_TYPES = ['Licensing', 'Access', 'Software', 'Hardware', 'Network', 'Other'];
   return {
     customer: str(facts.customer), opportunityNumber: str(facts.opportunityNumber), projectName: str(facts.projectName),
     background: list(facts.background, 3),
     inScope: list(facts.inScope), outOfScope: list(facts.outOfScope), dependencies: list(facts.dependencies),
     assumptions: list(facts.assumptions), constraints: list(facts.constraints),
+    prerequisites: (Array.isArray(facts.prerequisites) ? facts.prerequisites : [])
+      .filter(x => x && str(x.prerequisite)).slice(0, 10)
+      .map(x => ({ type: PREREQ_TYPES.find(t => t.toLowerCase() === str(x.type).toLowerCase()) || 'Other',
+                   prerequisite: str(x.prerequisite) })),
     decisions: (Array.isArray(design.decisions) ? design.decisions : [])
       .filter(d => d && str(d.decision)).slice(0, 6)
       .map(d => ({ type: ['Technical', 'Scope', 'Commercial'].includes(str(d.type)) ? str(d.type) : 'Technical',
@@ -2195,7 +2255,8 @@ Goals: only where the SoW clearly calls for that outcome; pick the option that m
         const goal = bbGoal(g.goal);
         const idx = Math.max(0, (goal.options || []).findIndex(o => o.label === g.option));
         return { goal: g.goal, option: idx, reason: str(g.reason), evidence: str(g.evidence), selected: true };
-      }),
+      })
+      .filter(g => !excluded(bbGoal(g.goal)?.options?.[g.option]?.platform)),
     gaps: list(design.gaps, 8),
   };
 }
@@ -2236,7 +2297,8 @@ function sowOpenReview() {
     <div class="confirm-dialog sow-dialog" role="dialog" aria-label="Review the Statement of Work">
       <h3>Review: ${htmlEsc(d.fileName)}</h3>
       <p class="sow-lead">Check and edit what was taken from the Statement of Work. Only what you keep here goes into the
-      LLD and the policy selection.${d.truncated ? ' <b>The document was long, so only the first part was read.</b>' : ''}</p>
+      LLD and the policy selection. Scope, assumptions and constraints are used in the background only, to guide the
+      wording and the policy suggestions.${d.truncated ? ' <b>The document was long, so only the first part was read.</b>' : ''}</p>
 
       ${(d.customer || d.opportunityNumber || d.projectName) ? `<div class="sow-sec"><div class="sow-sec-title">Engagement details</div>
         ${metaRow('customer', 'Customer name', d.customer, cur.customer)}
@@ -2247,11 +2309,10 @@ function sowOpenReview() {
         <textarea id="sow-background" rows="5">${htmlEsc((d.background || []).join('\n\n'))}</textarea>
         <div class="sow-hint">Goes under Introduction. Separate paragraphs with a blank line.</div></div>
 
-      <div class="sow-grid2">${listSec('inScope', 'In scope')}${listSec('outOfScope', 'Out of scope')}</div>
-      <div class="sow-grid2">${listSec('dependencies', 'Dependencies')}${listSec('assumptions', 'Assumptions')}</div>
-      ${listSec('constraints', 'Constraints')}
       ${listSec('decisions', 'Design decisions from the SoW', 'One per line as <i>Type: decision</i> (Technical, Scope or Commercial). Added to the Design Decisions table.',
                 (d.decisions || []).map(x => `${x.type}: ${x.decision}`))}
+      ${listSec('prerequisites', 'Prerequisites', 'One per line as <i>Type: prerequisite</i> (Licensing, Access, Software, Hardware, Network or Other). Becomes the Prerequisites table in the LLD.',
+                (d.prerequisites || []).map(x => `${x.type}: ${x.prerequisite}`))}
 
       <div class="sow-sec"><div class="sow-sec-title">Suggested Building Blocks</div>
         ${goalsHtml || '<div class="sow-hint">No Building Block clearly matched the SoW. Select policies in the grid as usual.</div>'}
@@ -2283,7 +2344,12 @@ function sowApply(root) {
 
   // Keep what the consultant edited, so a second review starts from it.
   d.background = val('sow-background').split(/\n\s*\n/).map(x => x.replace(/\s+/g, ' ').trim()).filter(Boolean);
-  ['inScope', 'outOfScope', 'dependencies', 'assumptions', 'constraints'].forEach(k => { d[k] = items('sow-' + k); });
+  const PREREQ_TYPES = ['Licensing', 'Access', 'Software', 'Hardware', 'Network', 'Other'];
+  d.prerequisites = items('sow-prerequisites').map(line => {
+    const m = /^([A-Za-z]+)\s*[:\-\u2013]\s*(.+)$/.exec(line);
+    const t = m && PREREQ_TYPES.find(x => x.toLowerCase() === m[1].toLowerCase());
+    return t ? { type: t, prerequisite: m[2].trim() } : { type: 'Other', prerequisite: line };
+  });
   d.decisions = items('sow-decisions').map(line => {
     const m = /^(Technical|Scope|Commercial)\s*[:\-\u2013]\s*(.+)$/i.exec(line);
     return m ? { type: m[1][0].toUpperCase() + m[1].slice(1).toLowerCase(), decision: m[2].trim() } : { type: 'Technical', decision: line };
@@ -2304,6 +2370,7 @@ function sowApply(root) {
     background: d.background, inScope: d.inScope, outOfScope: d.outOfScope,
     dependencies: d.dependencies, assumptions: d.assumptions, constraints: d.constraints,
     decisions: d.decisions.map(x => [x.type, x.decision]),
+    prerequisites: d.prerequisites.map(x => [x.type, x.prerequisite]),
     blockCount: ids.size,
   };
   sowRenderStatus();
@@ -6759,6 +6826,18 @@ const AI_FUNCTION_URL = '/api/generate-rationale';
 
 function toggleAiConfig() { /* URL is hardcoded — nothing to show/hide */ }
 
+// Project context from the Statement of Work, so rationale can tie a policy to
+// the customer's stated objectives where that is natural. Empty without a SoW.
+function sowContext() {
+  const sow = docMeta.sow;
+  if (!sow) return '';
+  const bg = (sow.background || []).join(' ').slice(0, 500);
+  const scope = (sow.inScope || []).join('; ').slice(0, 300);
+  const out = (sow.outOfScope || []).join('; ').slice(0, 200);
+  return `Project context (relate the rationale to it only where natural; do not quote it): ${bg}` +
+    (scope ? ` In scope: ${scope}.` : '') + (out ? ` Out of scope: ${out}.` : '') + '\n';
+}
+
 async function generateRationale(policyName, description, settingsRows, includeRationale, customerName = '') {
   const url = AI_FUNCTION_URL;
   const orgName = customerName || 'the customer';
@@ -6791,7 +6870,7 @@ ${includeRationale ? `2. "rationale": a 2-sentence British English rationale par
 
 Policy name: ${policyName}
 ${description ? `Description: ${description}\n` : ''}
-Keys needing human-readable names: ${nameKeys.slice(0, 25).join(', ')}
+${sowContext()}Keys needing human-readable names: ${nameKeys.slice(0, 25).join(', ')}
 
 Settings (raw key: value):
 ${settingsSummary}${moreLine}
@@ -7400,34 +7479,9 @@ function lldFinalise(docXml, ctx) {
     const r = el('r'), t = el('t'); t.textContent = text; r.appendChild(t); p.appendChild(r);
     return p;
   }
-  function listTable(prefix, header, items) {
-    const model = kids(body, 'tbl').find(t => {
-      const h = headerOf(t); return h.length === 2 && h[0].toLowerCase() === 'acronym';
-    });
-    if (!model || kids(model, 'tr').length < 2) {
-      return items.map(x => para('\u2022 ' + x));
-    }
-    const tbl = model.cloneNode(true);
-    const hdr = kids(tbl, 'tr')[0];
-    kids(hdr, 'tc').forEach((tc, i) => setCellText(tc, i === 0 ? 'Ref' : header));
-    fillTable(tbl, items.map((x, i) => [`${prefix}${i + 1}`, x]));
-    return [tbl, para('')];
-  }
   function sowNodes(sow) {
-    if (!sow) return [];
-    const out = [];
-    if ((sow.background || []).length) { out.push(heading('Background', 2)); sow.background.forEach(t => out.push(para(t))); }
-    const lists = [
-      ['In Scope', 'IS', 'In scope', sow.inScope], ['Out of Scope', 'OS', 'Out of scope', sow.outOfScope],
-      ['Dependencies', 'DEP', 'Dependency', sow.dependencies], ['Assumptions', 'AS', 'Assumption', sow.assumptions],
-      ['Constraints', 'CON', 'Constraint', sow.constraints],
-    ];
-    lists.forEach(([title, prefix, header, items]) => {
-      if (!(items || []).length) return;
-      out.push(heading(title, 2));
-      out.push(...listTable(prefix, header, items));
-    });
-    return out;
+    if (!sow || !(sow.background || []).length) return [];
+    return [heading('Background', 2), ...sow.background.map(t => para(t))];
   }
 
   // ── Table helpers ──
@@ -7485,6 +7539,30 @@ function lldFinalise(docXml, ctx) {
   const dd = findTable(['Reference', 'Type', 'Description']);
   // The Reference column auto-numbers (DD1., DD2. ...) from the template's list style.
   if (dd) fillTable(dd, ctx.decisions.map(d => ['', d[0], d[1]]));
+
+  // 5b. Prerequisites from the Statement of Work: a section after Design
+  //     Decisions with the same table layout, referenced PR1, PR2 ...
+  const prereqs = (ctx.sow?.prerequisites || []).filter(x => x && x[1]);
+  if (prereqs.length) {
+    const nodes = [heading('Prerequisites', 1)];
+    if (dd) {
+      const tbl = dd.cloneNode(true);
+      fillTable(tbl, prereqs.map((x, i) => [`PR${i + 1}`, x[0], x[1]]));
+      // The template numbers the Reference column (DD1., DD2.); these carry their own reference.
+      kids(tbl, 'tr').slice(1).forEach(tr => {
+        const p = kids(kids(tr, 'tc')[0] || tr, 'p')[0];
+        const pPr = p && kids(p, 'pPr')[0];
+        if (pPr) [...kids(pPr, 'numPr'), ...kids(pPr, 'pStyle')].forEach(n => pPr.removeChild(n));
+      });
+      nodes.push(tbl);
+    } else {
+      prereqs.forEach((x, i) => nodes.push(para(`PR${i + 1}  ${x[0]}: ${x[1]}`)));
+    }
+    let anchor = dd;
+    if (!anchor) anchor = kids(body, 'p').find(n => headingLevel(n) === 1 && /^design decisions$/i.test(textOf(n).trim()));
+    const ref = anchor ? anchor.nextSibling : null;
+    nodes.forEach(n => body.insertBefore(n, ref));
+  }
 
   // 6. Referenced documents for the technologies in this design.
   const refs = findTable(['Title', 'Description', 'Path/URL/Location']);
