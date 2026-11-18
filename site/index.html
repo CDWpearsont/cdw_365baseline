@@ -1741,7 +1741,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.17.3',
+  version: '3.18.0',
   date:    '2026-09-17'
 };
 
@@ -5892,7 +5892,7 @@ function extractSettings(json, cat) {
       if (v === null || v === undefined) continue;
       if (typeof v === 'object' && !Array.isArray(v)) continue;
       const val = Array.isArray(v) ? v.join(', ') : String(v);
-      settings.push({ key: humanizeName(k), rawKey: k, value: humanizeValue(val) });
+      settings.push({ key: humanizeName(k), rawKey: k, value: humanizeValue(val), ptr: (k in json) ? k : '@ap.' + k });
     }
 
   } else if (cat === 'EnrolmentRestrictions') {
@@ -5909,7 +5909,7 @@ function extractSettings(json, cat) {
         for (const [sk, sv] of Object.entries(v)) {
           if (sv === null || sv === undefined) continue;
           const val = Array.isArray(sv) ? (sv.length === 0 ? 'None' : sv.join(', ')) : String(sv);
-          settings.push({ key: humanizeName(sk), rawKey: sk, value: humanizeValue(val) });
+          settings.push({ key: humanizeName(sk), rawKey: sk, value: humanizeValue(val), ptr: k + '.' + sk });
         }
         continue;
       }
@@ -6083,6 +6083,13 @@ function extractSettings(json, cat) {
     // (Exchange, Defender for Cloud Apps) have no settings array.
     extractGenericSettings(json, settings);
   }
+  // Every row gets a pointer back to its source in the policy JSON, so an
+  // edited LLD can be applied to the policy at deployment.
+  const seen = {};
+  settings.forEach(r => {
+    if (r.def) { const n = seen[r.def] = (seen[r.def] || 0) + 1; r.ptr = `sc:${r.def}#${n}`; }
+    else if (!r.ptr && r.rawKey && r.key !== '\u2500\u2500\u2500') r.ptr = (cat === 'ConditionalAccess' ? 'ca:' : '') + r.rawKey;
+  });
   return settings;
 }
 
@@ -6094,19 +6101,20 @@ const GENERIC_SKIP = new Set(['displayName', 'description', 'name', 'id', 'versi
 function extractGenericSettings(json, settings) {
   // Runner objects keep their cmdlet parameters (and any rule) under `parameters`.
   if (json.parameters && typeof json.parameters === 'object') {
-    flattenSettings(json.parameters, '', settings, 0);
-    if (json.rule?.parameters) flattenSettings(json.rule.parameters, 'Rule', settings, 0);
+    flattenSettings(json.parameters, '', settings, 0, 'parameters');
+    if (json.rule?.parameters) flattenSettings(json.rule.parameters, 'Rule', settings, 0, 'rule.parameters');
     return;
   }
   // Directory settings: [{ name, value }]
   if (Array.isArray(json.values) && json.values.every(v => v && 'name' in v && 'value' in v)) {
-    json.values.forEach(v => settings.push({ key: humanizeName(v.name), rawKey: v.name, value: humanizeValue(String(v.value ?? '')) || 'Not set' }));
+    json.values.forEach(v => settings.push({ key: humanizeName(v.name), rawKey: v.name, value: humanizeValue(String(v.value ?? '')) || 'Not set', ptr: 'values:' + v.name }));
     return;
   }
   flattenSettings(json, '', settings, 0);
 }
-function flattenSettings(obj, prefix, settings, depth) {
+function flattenSettings(obj, prefix, settings, depth, path = '') {
   for (const [k, v] of Object.entries(obj || {})) {
+    const ptr = path ? path + '.' + k : k;
     if (depth === 0 && GENERIC_SKIP.has(k)) continue;
     if (k.startsWith('@odata') || v === null || v === undefined) continue;
     const label = (prefix ? prefix + ' \u203a ' : '') + humanizeName(k);
@@ -6120,16 +6128,16 @@ function flattenSettings(obj, prefix, settings, depth) {
       };
       const objs = v.filter(x => x && typeof x === 'object');
       if (objs.length && objs.every(x => 'query' in x) && objs.every(reviewer)) {
-        settings.push({ key: label, rawKey: k, value: objs.map(reviewer).join(', ') });
+        settings.push({ key: label, rawKey: k, value: objs.map(reviewer).join(', '), ptr });
         continue;
       }
       const val = v.length === 0 ? 'None'
         : v.map(x => (x && typeof x === 'object') ? Object.values(x).filter(y => y !== null && typeof y !== 'object').join(' / ') : String(x)).join(', ');
-      settings.push({ key: label, rawKey: k, value: humanizeValue(val) });
+      settings.push({ key: label, rawKey: k, value: humanizeValue(val), ptr });
     } else if (typeof v === 'object') {
-      if (depth < 3) flattenSettings(v, label, settings, depth + 1);
+      if (depth < 3) flattenSettings(v, label, settings, depth + 1, ptr);
     } else {
-      settings.push({ key: label, rawKey: k, value: humanizeValue(String(v)) });
+      settings.push({ key: label, rawKey: k, value: humanizeValue(String(v)), ptr });
     }
   }
 }
@@ -6183,7 +6191,7 @@ function extractSettingInstance(si, settings, depth) {
     } else {
       val = 'Configured';
     }
-    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: optionName(cv) || humanizeChoice(val) });
+    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, def: defId, value: optionName(cv) || humanizeChoice(val) });
 
     // Choice settings can have children (dependent settings)
     if (si.choiceSettingValue.children && Array.isArray(si.choiceSettingValue.children)) {
@@ -6194,19 +6202,19 @@ function extractSettingInstance(si, settings, depth) {
 
   } else if (si.simpleSettingValue) {
     const val = String(si.simpleSettingValue.value ?? si.simpleSettingValue);
-    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: humanizeValue(val) });
+    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, def: defId, value: humanizeValue(val) });
 
   } else if (si.simpleSettingCollectionValue) {
     const arr = Array.isArray(si.simpleSettingCollectionValue) ? si.simpleSettingCollectionValue : [si.simpleSettingCollectionValue];
     const val = arr.map(x => typeof x === 'object' ? x.value : x).join(', ');
-    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: humanizeValue(val) });
+    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, def: defId, value: humanizeValue(val) });
 
   } else if (si.groupSettingCollectionValue) {
     // Expand group setting collections — each element has children
     const groups = Array.isArray(si.groupSettingCollectionValue) ? si.groupSettingCollectionValue : [si.groupSettingCollectionValue];
     // If there's a meaningful name, show it as a section header
     if (shortName && groups.length > 0) {
-      settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: '' });
+      settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, def: defId, value: '' });
     }
     for (let gi = 0; gi < groups.length; gi++) {
       const group = groups[gi];
@@ -6224,7 +6232,7 @@ function extractSettingInstance(si, settings, depth) {
   } else if (si.groupSettingValue) {
     // Single group setting (not collection)
     if (shortName) {
-      settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: '' });
+      settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, def: defId, value: '' });
     }
     const gv = si.groupSettingValue;
     if (gv && gv.children && Array.isArray(gv.children)) {
@@ -6239,10 +6247,10 @@ function extractSettingInstance(si, settings, depth) {
       const v = c.value || c;
       return optionName(v) || (typeof v === 'string' ? humanizeChoice(v.split('_').pop()) : 'Configured');
     });
-    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: vals.join(', ') });
+    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, def: defId, value: vals.join(', ') });
 
   } else {
-    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, value: 'Configured' });
+    settings.push({ key: formatSettingName(shortName, depth), rawKey: shortName, def: defId, value: 'Configured' });
   }
 }
 
@@ -6816,6 +6824,18 @@ const LLD_CA_STATE = { enabled: 'On', disabled: 'Off', enabledForReportingButNot
 const lldMap = (list, map) => list.map(x => map[x] || LLD_ROLES[x] || LLD_APPS[x] || LLD_PLATFORMS[String(x).toLowerCase()] || humanizeValue(String(x))).join(', ');
 const lldCap = x => String(x).charAt(0).toUpperCase() + String(x).slice(1);
 
+// The rows of a policy's settings table, as written to the LLD: [label, value, pointer].
+// The same rows go into the LLD record, so an edited LLD can be compared with them.
+function lldTableRows(policyName, description, platform, settingsRows) {
+  const rows = [['Name', policyName, 'name']];
+  const d = lldTidyDescription(description);
+  if (d) rows.push(['Description', d, 'description']);
+  const pl = lldPlatformLabel(platform);
+  if (pl) rows.push(['Platform', pl, 'platform']);
+  for (const r of settingsRows) rows.push([r.key, lldTidyValue(r.value), r.ptr || '']);
+  return rows;
+}
+
 function buildPolicyTableXml(policyName, description, platform, settingsRows, showAssignments = false) {
   let rows = '';
 
@@ -6850,13 +6870,8 @@ function buildPolicyTableXml(policyName, description, platform, settingsRows, sh
 
   // ── Settings ──
   rows += dividerRow('Setting', 'Value');
-  rows += dataRow('Name', policyName);
-  description = lldTidyDescription(description);
-  platform = lldPlatformLabel(platform);
-  if (description) rows += dataRow('Description', description);
-  if (platform)    rows += dataRow('Platform', platform);
-  for (const { key, value } of settingsRows) {
-    rows += dataRow(key, lldTidyValue(value));
+  for (const [label, value] of lldTableRows(policyName, description, platform, settingsRows)) {
+    rows += dataRow(label, value);
   }
 
   // ── Assignments ──
@@ -7746,6 +7761,84 @@ function lldContext(policyJsons, meta, dateStr) {
   return { date: dateStr, author: meta.author, introduction, decisions, references, glossary, sow, links: [] };
 }
 
+// ── LLD record ──────────────────────────────────────────────────
+// A custom XML part inside the .docx. Word keeps it through editing; it is not
+// shown in the document, printed, or carried into a PDF. It holds only policy
+// identifiers and the values as exported, so the signed-off .docx can be
+// imported in Deploy mode and compared with what was exported.
+const LLD_RECORD_NS = 'urn:cdw:lld-record:1';
+
+async function sha256Hex(text) {
+  try {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+  } catch { return null; }
+}
+
+// The commit the policies were read from, so the same versions can be
+// deployed later. Falls back to the catalog's build commit.
+async function lldSourceCommit() {
+  try {
+    const r = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits/${REPO_BRANCH}`,
+                          { headers: { Accept: 'application/vnd.github.sha' } });
+    if (r.ok) { const sha = (await r.text()).trim(); if (/^[0-9a-f]{40}$/.test(sha)) return sha; }
+  } catch { /* offline or rate limited */ }
+  return mgCatalog?.sourceCommit || null;
+}
+
+async function lldBuildRecord(policyJsons) {
+  return {
+    schema: LLD_RECORD_NS, version: 1, createdAt: new Date().toISOString(),
+    source: { owner: REPO_OWNER, repo: REPO_NAME, branch: REPO_BRANCH, commit: await lldSourceCommit() },
+    engagement: { customer: docMeta.customer, oppNumber: docMeta.oppNumber, oppName: docMeta.oppName, docVersion: '0.1' },
+    policies: policyJsons.filter(p => p._heading).map(p => ({
+      id: mgLookup(p)?.id || null,
+      file: p.file || (p.folder ? `${p.folder}/${p.name}.json` : null),
+      wl: p.wl, cat: p.cat, name: p.name,
+      heading: p._heading,
+      hash: p._hash || null,
+      rows: p._docRows || [],
+    })),
+  };
+}
+
+async function lldWriteRecord(zip, record) {
+  const NO_DIRS = { createFolders: false };   // Office packages have no folder entries
+  const used = zip.file(/^customXml\/item\d+\.xml$/).map(f => +/item(\d+)\.xml$/.exec(f.name)[1]);
+  const n = (used.length ? Math.max(...used) : 0) + 1;
+  const guid = (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16))).toUpperCase();
+  zip.file(`customXml/item${n}.xml`,
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<lldRecord xmlns="${LLD_RECORD_NS}">${JSON.stringify(record).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</lldRecord>`, NO_DIRS);
+  zip.file(`customXml/itemProps${n}.xml`,
+    `<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<ds:datastoreItem ds:itemID="{${guid}}" xmlns:ds="http://schemas.openxmlformats.org/officeDocument/2006/customXml"><ds:schemaRefs><ds:schemaRef ds:uri="${LLD_RECORD_NS}"/></ds:schemaRefs></ds:datastoreItem>`, NO_DIRS);
+  zip.file(`customXml/_rels/item${n}.xml.rels`,
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXmlProps" Target="itemProps${n}.xml"/></Relationships>`, NO_DIRS);
+  const relsPath = 'word/_rels/document.xml.rels';
+  let rels = await zip.file(relsPath).async('string');
+  rels = rels.replace('</Relationships>',
+    `<Relationship Id="rIdLldRecord" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/customXml" Target="../customXml/item${n}.xml"/></Relationships>`);
+  zip.file(relsPath, rels);
+  let ct = await zip.file('[Content_Types].xml').async('string');
+  if (!ct.includes(`/customXml/itemProps${n}.xml`)) {
+    ct = ct.replace('</Types>', `<Override PartName="/customXml/itemProps${n}.xml" ContentType="application/vnd.openxmlformats-officedocument.customXmlProperties+xml"/></Types>`);
+  }
+  if (!/<Default Extension="xml"/.test(ct)) ct = ct.replace('<Override ', '<Default Extension="xml" ContentType="application/xml"/><Override ');
+  zip.file('[Content_Types].xml', ct);
+}
+
+// Reads the record back from a .docx (null for LLDs exported before records existed).
+async function lldReadRecord(zip) {
+  for (const f of zip.file(/^customXml\/item\d+\.xml$/)) {
+    const xml = await f.async('string');
+    if (!xml.includes(LLD_RECORD_NS)) continue;
+    const doc = new DOMParser().parseFromString(xml, 'application/xml');
+    const el = doc.getElementsByTagNameNS(LLD_RECORD_NS, 'lldRecord')[0];
+    if (!el) continue;
+    try { return JSON.parse(el.textContent); } catch { return null; }
+  }
+  return null;
+}
+
 // Tells Word to refresh the table of contents (and other fields) on open.
 function lldSettingsXml(settingsXml) {
   if (/<w:updateFields\b/.test(settingsXml)) return settingsXml;
@@ -7851,9 +7944,10 @@ async function generateDocument() {
       try {
         const r = await fetch(`${p.raw_url}?t=${Date.now()}`);
         if (!r.ok) throw new Error(`${r.status}`);
-        const json = await r.json();
+        const text = (await r.text()).replace(/^\uFEFF/, '');
+        const json = JSON.parse(text);
         setProgress(1 + (++fetched), null);
-        return { ...p, json };
+        return { ...p, json, _hash: await sha256Hex(text) };
       } catch(e) {
         showToast(`Failed to fetch ${p.displayName}: ${e.message}`, 'warn');
         return null;
@@ -8019,6 +8113,8 @@ async function generateDocument() {
           }
 
           designXml += buildPolicyTableXml(policyName, description, platform, settingsRows, wl === 'intune');
+          p._heading = deployName;
+          p._docRows = lldTableRows(policyName, description, platform, settingsRows);
         }
       }
     }
@@ -8187,6 +8283,13 @@ async function generateDocument() {
     if (settingsFile) zip.file('word/settings.xml', lldSettingsXml(await settingsFile.async('string')));
     const relsFile = zip.file('word/_rels/document.xml.rels');
     if (relsFile && lldCtx?.links?.length) zip.file('word/_rels/document.xml.rels', lldRelsXml(await relsFile.async('string'), lldCtx.links));
+    // The LLD record: which policies, at which library version, with which
+    // values, so the signed-off LLD can be imported for deployment later.
+    try {
+      await lldWriteRecord(zip, await lldBuildRecord(policyJsons));
+    } catch (e) {
+      console.warn('[LLD] Record not written (non-fatal):', e);
+    }
     const outBlob = await zip.generateAsync({
       type: 'blob',
       compression: 'DEFLATE',
