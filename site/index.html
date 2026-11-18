@@ -1476,10 +1476,6 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
         </div>
         <details class="wiz-more">
           <summary>Sign-off details (optional)</summary>
-          <div class="wiz-field">
-            <label for="wiz-contact">Customer signatory</label>
-            <input type="text" id="wiz-contact" placeholder="e.g. Jane Smith, IT Director" autocomplete="off"/>
-          </div>
           <div class="wiz-row">
             <div class="wiz-field">
               <label for="wiz-companyno">Registered company number</label>
@@ -1954,7 +1950,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.12.0',
+  version: '3.13.0',
   date:    '2026-09-17'
 };
 
@@ -1964,7 +1960,7 @@ const TEMPLATE_URL  = 'templates/LLD.docx';
 const TEMPLATE_NAME = 'LLD.docx';
 
 // Engagement details captured by the doc-mode wizard
-let docMeta = { customer: '', oppNumber: '', oppName: '', author: '', contact: '', companyNo: '', address: '', templateSource: null };
+let docMeta = { customer: '', oppNumber: '', oppName: '', author: '', companyNo: '', address: '', templateSource: null };
 
 // Customer, opportunity number and name are required before an LLD can be exported.
 function docMetaComplete() {
@@ -2024,7 +2020,6 @@ function openDocWizard() {
   document.getElementById('wiz-oppnum').value   = docMeta.oppNumber;
   document.getElementById('wiz-oppname').value  = docMeta.oppName;
   document.getElementById('wiz-author').value   = docMeta.author || savedAuthor() || account?.name || '';
-  document.getElementById('wiz-contact').value   = docMeta.contact;
   document.getElementById('wiz-companyno').value = docMeta.companyNo;
   document.getElementById('wiz-address').value   = docMeta.address;
   validateDocWizard();
@@ -2137,7 +2132,6 @@ function submitDocWizard() {
   docMeta.oppNumber = document.getElementById('wiz-oppnum').value.trim();
   docMeta.oppName   = document.getElementById('wiz-oppname').value.trim();
   docMeta.author    = document.getElementById('wiz-author').value.trim();
-  docMeta.contact   = document.getElementById('wiz-contact').value.trim();
   docMeta.companyNo = document.getElementById('wiz-companyno').value.trim();
   docMeta.address   = document.getElementById('wiz-address').value.trim();
   try { localStorage.setItem('cdwLldAuthor', docMeta.author); } catch { /* storage unavailable */ }
@@ -6101,7 +6095,7 @@ function extractSettings(json, cat) {
     add('Block user retry of device setup on failure',              'blockDeviceSetupRetryByUser',            yn(json.blockDeviceSetupRetryByUser));
     add('Ignore non-blocking app failures during technician phase', 'allowNonBlockingAppInstallation',        yn(json.allowNonBlockingAppInstallation));
     add('Disable user status tracking after first user',            'disableUserStatusTrackingAfterFirstUser',yn(json.disableUserStatusTrackingAfterFirstUser));
-    add('Blocking apps',                                            'selectedMobileAppIds',                   'Not defined in baseline — selected per customer');
+    add('Blocking apps',                                            'selectedMobileAppIds',                   'Agreed during the design workshop');
 
   } else if (cat === 'AppProtectionPolicies') {
     // MAM App Protection policies are flat JSON — iterate top-level scalar/array fields.
@@ -6127,63 +6121,61 @@ function extractSettings(json, cat) {
     const ca = json;
 
     // State
-    if (ca.state) settings.push({ key: 'Policy State', rawKey: 'state', value: humanizeValue(ca.state) });
+    if (ca.state) settings.push({ key: 'Policy State', rawKey: 'state', value: LLD_CA_STATE[ca.state] || humanizeValue(ca.state) });
 
     // ── Conditions ──────────────────────────────────────────────
     const cond = ca.conditions || {};
+    const add = (key, rawKey, list, map = {}) => { if (list && list.length) settings.push({ key, rawKey, value: lldMap(list, map) }); };
 
     // Users
     const users = cond.users || {};
-    const incUsers = users.includeUsers || [];
-    const excUsers = users.excludeUsers || [];
-    const incGroups = users.includeGroups || [];
-    const excGroups = users.excludeGroups || [];
-    const incRoles  = users.includeRoles  || [];
-    if (incUsers.length)  settings.push({ key: 'Include Users',  rawKey: 'includeUsers',  value: incUsers.join(', ') });
-    if (excUsers.length)  settings.push({ key: 'Exclude Users',  rawKey: 'excludeUsers',  value: excUsers.join(', ') });
-    if (incGroups.length) settings.push({ key: 'Include Groups', rawKey: 'includeGroups', value: incGroups.join(', ') });
-    if (excGroups.length) settings.push({ key: 'Exclude Groups', rawKey: 'excludeGroups', value: excGroups.join(', ') });
-    if (incRoles.length)  settings.push({ key: 'Include Roles',  rawKey: 'includeRoles',  value: incRoles.join(', ') });
+    add('Include Users',  'includeUsers',  users.includeUsers,  LLD_CA_USERS);
+    add('Exclude Users',  'excludeUsers',  users.excludeUsers,  LLD_CA_USERS);
+    add('Include Groups', 'includeGroups', users.includeGroups);
+    add('Exclude Groups', 'excludeGroups', users.excludeGroups);
+    const GUEST_TYPES = { internalGuest: 'Local guest users', b2bCollaborationGuest: 'B2B collaboration guest users',
+      b2bCollaborationMember: 'B2B collaboration member users', b2bDirectConnectUser: 'B2B direct connect users',
+      otherExternalUser: 'Other external users', serviceProvider: 'Service provider users' };
+    const guestList = g => g && g.guestOrExternalUserTypes ? String(g.guestOrExternalUserTypes).split(',').map(x => GUEST_TYPES[x.trim()] || x.trim()).join(', ') : '';
+    if (guestList(users.includeGuestsOrExternalUsers)) settings.push({ key: 'Include Guests or External Users', rawKey: 'includeGuestsOrExternalUsers', value: guestList(users.includeGuestsOrExternalUsers) });
+    if (guestList(users.excludeGuestsOrExternalUsers)) settings.push({ key: 'Exclude Guests or External Users', rawKey: 'excludeGuestsOrExternalUsers', value: guestList(users.excludeGuestsOrExternalUsers) });
+    add('Include Roles',  'includeRoles',  users.includeRoles);
+    add('Exclude Roles',  'excludeRoles',  users.excludeRoles);
 
-    // Applications
+    // Target resources
     const apps = cond.applications || {};
-    const incApps = apps.includeApplications || [];
-    const excApps = apps.excludeApplications || [];
-    if (incApps.length) settings.push({ key: 'Include Applications', rawKey: 'includeApplications', value: incApps.join(', ') });
-    if (excApps.length) settings.push({ key: 'Exclude Applications', rawKey: 'excludeApplications', value: excApps.join(', ') });
+    add('Include Resources', 'includeApplications', apps.includeApplications, LLD_APPS);
+    add('Exclude Resources', 'excludeApplications', apps.excludeApplications, LLD_APPS);
+    if ((apps.includeUserActions || []).length) settings.push({ key: 'User Actions', rawKey: 'includeUserActions',
+      value: apps.includeUserActions.map(a => ({ 'urn:user:registersecurityinfo': 'Register security information',
+        'urn:user:registerdevice': 'Register or join devices' }[a] || a)).join(', ') });
 
     // Platforms
     const plat = cond.platforms || {};
-    const incPlat = plat.includePlatforms || [];
-    const excPlat = plat.excludePlatforms || [];
-    if (incPlat.length) settings.push({ key: 'Include Platforms', rawKey: 'includePlatforms', value: incPlat.join(', ') });
-    if (excPlat.length) settings.push({ key: 'Exclude Platforms', rawKey: 'excludePlatforms', value: excPlat.join(', ') });
+    add('Include Platforms', 'includePlatforms', plat.includePlatforms, LLD_PLATFORMS);
+    add('Exclude Platforms', 'excludePlatforms', plat.excludePlatforms, LLD_PLATFORMS);
 
     // Client app types
-    const clientApps = cond.clientAppTypes || [];
-    if (clientApps.length) settings.push({ key: 'Client App Types', rawKey: 'clientAppTypes', value: clientApps.join(', ') });
+    add('Client App Types', 'clientAppTypes', cond.clientAppTypes, LLD_CA_CLIENTS);
 
     // Sign-in / user risk
-    const signInRisk = cond.signInRiskLevels || [];
-    const userRisk   = cond.userRiskLevels   || [];
-    if (signInRisk.length) settings.push({ key: 'Sign-In Risk Levels', rawKey: 'signInRiskLevels', value: signInRisk.join(', ') });
-    if (userRisk.length)   settings.push({ key: 'User Risk Levels',    rawKey: 'userRiskLevels',   value: userRisk.join(', ')   });
+    if ((cond.signInRiskLevels || []).length) settings.push({ key: 'Sign-In Risk Levels', rawKey: 'signInRiskLevels', value: cond.signInRiskLevels.map(lldCap).join(', ') });
+    if ((cond.userRiskLevels || []).length)   settings.push({ key: 'User Risk Levels',    rawKey: 'userRiskLevels',   value: cond.userRiskLevels.map(lldCap).join(', ') });
 
     // Locations
     const locs = cond.locations || {};
-    const incLocs = locs.includeLocations || [];
-    const excLocs = locs.excludeLocations || [];
-    if (incLocs.length) settings.push({ key: 'Include Locations', rawKey: 'includeLocations', value: incLocs.join(', ') });
-    if (excLocs.length) settings.push({ key: 'Exclude Locations', rawKey: 'excludeLocations', value: excLocs.join(', ') });
+    add('Include Locations', 'includeLocations', locs.includeLocations, LLD_CA_LOCATIONS);
+    add('Exclude Locations', 'excludeLocations', locs.excludeLocations, LLD_CA_LOCATIONS);
 
     // ── Grant Controls ───────────────────────────────────────────
     const grant = ca.grantControls || null;
     if (grant) {
       const builtIn = grant.builtInControls || [];
-      const op      = grant.operator || '';
       if (builtIn.length) {
+        const names = builtIn.map(c => LLD_CA_GRANTS[c] || humanizeValue(c));
         settings.push({ key: 'Grant Controls', rawKey: 'builtInControls',
-          value: builtIn.join(` ${op} `) });
+          value: names.length === 1 ? names[0]
+            : (grant.operator === 'AND' ? 'Require all of: ' : 'Require one of: ') + names.join('; ') });
       }
       const authStrength = grant.authenticationStrength;
       if (authStrength && authStrength.displayName) {
@@ -6191,7 +6183,7 @@ function extractSettings(json, cat) {
           value: authStrength.displayName });
       }
     } else {
-      settings.push({ key: 'Grant Controls', rawKey: 'grantControls', value: 'Block Access' });
+      settings.push({ key: 'Grant Controls', rawKey: 'grantControls', value: 'Block access' });
     }
 
     // ── Session Controls ─────────────────────────────────────────
@@ -6199,17 +6191,18 @@ function extractSettings(json, cat) {
     if (sess.signInFrequency?.isEnabled) {
       const sf = sess.signInFrequency;
       settings.push({ key: 'Sign-In Frequency', rawKey: 'signInFrequency',
-        value: `${sf.value} ${sf.type} (${sf.frequencyInterval})` });
+        value: sf.frequencyInterval === 'everyTime' ? 'Every time'
+          : `${sf.value} ${sf.type === 'days' ? (sf.value === 1 ? 'day' : 'days') : (sf.value === 1 ? 'hour' : 'hours')}` });
     }
     if (sess.persistentBrowser?.isEnabled) {
       settings.push({ key: 'Persistent Browser Session', rawKey: 'persistentBrowser',
-        value: humanizeValue(sess.persistentBrowser.mode) });
+        value: { always: 'Always persistent', never: 'Never persistent' }[sess.persistentBrowser.mode] || humanizeValue(sess.persistentBrowser.mode) });
     }
     if (sess.applicationEnforcedRestrictions?.isEnabled) {
       settings.push({ key: 'App Enforced Restrictions', rawKey: 'applicationEnforcedRestrictions', value: 'Enabled' });
     }
     if (sess.cloudAppSecurity?.isEnabled) {
-      settings.push({ key: 'Cloud App Security', rawKey: 'cloudAppSecurity',
+      settings.push({ key: 'Conditional Access App Control', rawKey: 'cloudAppSecurity',
         value: humanizeValue(sess.cloudAppSecurity.cloudAppSecurityType || 'Enabled') });
     }
 
@@ -6385,6 +6378,7 @@ function friendlySettingName(defId) {
   const allSegs = defId.split('_');
   const lastSeg = allSegs[allSegs.length - 1] || defId;
   const lowerLast = lastSeg.toLowerCase();
+  if (/_userrights_/i.test(defId) && LLD_USER_RIGHTS[lowerLast]) return LLD_USER_RIGHTS[lowerLast];
   if (SETTING_NAME_LOOKUP[lowerLast]) return SETTING_NAME_LOOKUP[lowerLast];
 
   // Strip common Graph/Intune prefixes
@@ -6842,6 +6836,102 @@ function xmlEsc(str) {
 let _paraCounter = 0x10000100;
 function pid() { return (_paraCounter++).toString(16).toUpperCase().padStart(8,'0'); }
 
+// ── LLD value clean-up ──────────────────────────────────────────
+// Readable names for values Graph stores as IDs or enum strings.
+const LLD_PLATFORMS = { windows10: 'Windows 10 and later', windows: 'Windows', macos: 'macOS', ios: 'iOS/iPadOS',
+  android: 'Android', androidenterprise: 'Android Enterprise', androidforwork: 'Android Enterprise', linux: 'Linux',
+  all: 'All platforms', windowsphone: 'Windows Phone' };
+function lldPlatformLabel(platform) {
+  return String(platform || '').split(/[,\s]+/).filter(Boolean)
+    .map(x => LLD_PLATFORMS[x.toLowerCase()] || x).join(', ');
+}
+// Well-known Windows SIDs used in User Rights Assignment settings.
+const LLD_SIDS = {
+  'S-1-1-0': 'Everyone', 'S-1-5-6': 'Service', 'S-1-5-11': 'Authenticated Users', 'S-1-5-19': 'Local Service',
+  'S-1-5-20': 'Network Service', 'S-1-5-113': 'Local account', 'S-1-5-114': 'Local account and member of Administrators group',
+  'S-1-5-32-544': 'Administrators', 'S-1-5-32-545': 'Users', 'S-1-5-32-546': 'Guests', 'S-1-5-32-547': 'Power Users',
+  'S-1-5-32-551': 'Backup Operators', 'S-1-5-32-555': 'Remote Desktop Users', 'S-1-5-32-559': 'Performance Log Users',
+  'S-1-5-32-568': 'IIS_IUSRS', 'S-1-5-32-578': 'Hyper-V Administrators', 'S-1-5-83-0': 'Virtual Machines',
+  'S-1-5-90-0': 'Window Manager Group',
+  'S-1-5-99-216390572-1995538116-3857911515-2404958512-2623887229': 'RESTRICTED SERVICES\\PrintSpoolerService',
+  'S-1-5-80-3139157870-2983391045-3678747466-658725712-1809340420': 'NT SERVICE\\WdiServiceHost',
+};
+function lldTidyValue(value) {
+  const v = String(value ?? '');
+  if (/^<!\[CDATA\[\s*\]\]>$/.test(v.trim())) return 'No one';
+  if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(\s*,\s*[0-9a-f-]{36})*$/i.test(v.trim()))
+    return v.split(/\s*,\s*/).map(g => LLD_ROLES[g] || LLD_APPS[g] || g).join(', ');
+  if (/\*?S-1-\d/.test(v)) {
+    return v.split(/\s*,\s*/).map(x => { const sid = x.replace(/^\*/, ''); return LLD_SIDS[sid] || x; }).join(', ');
+  }
+  return v;
+}
+// Policy descriptions are written for the library; drop the internal prefix.
+function lldTidyDescription(desc) {
+  const d = String(desc || '').replace(/^CDW\s+(CIS\s+L[12]\s+)?baseline\s+/i, '');
+  return d ? d.charAt(0).toUpperCase() + d.slice(1) : d;
+}
+// Settings Catalog User Rights (CSP names) as shown in Local Security Policy.
+const LLD_USER_RIGHTS = {
+  accesscredentialmanagerastrustedcaller: 'Access Credential Manager as a trusted caller',
+  accessfromnetwork: 'Access this computer from the network', actaspartoftheoperatingsystem: 'Act as part of the operating system',
+  allowlocallogon: 'Allow log on locally', backupfilesanddirectories: 'Back up files and directories',
+  changesystemtime: 'Change the system time', changetimezone: 'Change the time zone',
+  createglobalobjects: 'Create global objects', createpagefile: 'Create a pagefile',
+  createpermanentsharedobjects: 'Create permanent shared objects', createsymboliclinks: 'Create symbolic links',
+  createtoken: 'Create a token object', debugprograms: 'Debug programs',
+  denyaccessfromnetwork: 'Deny access to this computer from the network', denylocallogon: 'Deny log on locally',
+  denylogonasbatchjob: 'Deny log on as a batch job', denylogonasservice: 'Deny log on as a service',
+  denyremotedesktopserviceslogon: 'Deny log on through Remote Desktop Services',
+  enabledelegation: 'Enable computer and user accounts to be trusted for delegation',
+  generatesecurityaudits: 'Generate security audits', impersonateclient: 'Impersonate a client after authentication',
+  increaseschedulingpriority: 'Increase scheduling priority', loadunloaddevicedrivers: 'Load and unload device drivers',
+  lockmemory: 'Lock pages in memory', logonasbatchjob: 'Log on as a batch job', logonasservice: 'Log on as a service',
+  manageauditingandsecuritylog: 'Manage auditing and security log', managevolume: 'Perform volume maintenance tasks',
+  modifyfirmwareenvironment: 'Modify firmware environment values', modifyobjectlabel: 'Modify an object label',
+  profilesingleprocess: 'Profile single process', profilesystemperformance: 'Profile system performance',
+  remoteshutdown: 'Force shutdown from a remote system', replaceprocessleveltoken: 'Replace a process level token',
+  restorefilesanddirectories: 'Restore files and directories', shutdownthesystem: 'Shut down the system',
+  takeownership: 'Take ownership of files or other objects', bypasstraversechecking: 'Bypass traverse checking',
+  increaseprocessworkingset: 'Increase a process working set', adjustmemoryquotasforprocess: 'Adjust memory quotas for a process',
+};
+// Conditional Access: directory role templates and first-party apps.
+const LLD_ROLES = {
+  '62e90394-69f5-4237-9190-012177145e10': 'Global Administrator', '194ae4cb-b126-40b2-bd5b-6091b380977d': 'Security Administrator',
+  'f28a1f50-f6e7-4571-818b-6a12f2af6b6c': 'SharePoint Administrator', '29232cdf-9323-42fd-ade2-1d097af3e4de': 'Exchange Administrator',
+  'b1be1c3e-b65d-4f19-8427-f6fa0d97feb9': 'Conditional Access Administrator', '729827e3-9c14-49f7-bb1b-9608f156bbb8': 'Helpdesk Administrator',
+  'b0f54661-2d74-4c50-afa3-1ec803f12efe': 'Billing Administrator', 'fe930be7-5e62-47db-91af-98c3a49a38b1': 'User Administrator',
+  'c4e39bd9-1100-46d3-8c65-fb160da0071f': 'Authentication Administrator', '9b895d92-2cd3-44c7-9d02-a6ac2d5ea5c3': 'Application Administrator',
+  '158c047a-c907-4556-b7ef-446551a6b5f7': 'Cloud Application Administrator', '966707d0-3269-4727-9be2-8c3a10f19b9d': 'Password Administrator',
+  '7be44c8a-adaf-4e2a-84d6-ab2649e08a13': 'Privileged Authentication Administrator', 'e8611ab8-c189-46e8-94e1-60213ab1f814': 'Privileged Role Administrator',
+  '3a2c62db-5318-420d-8d74-23affee5d9d5': 'Intune Administrator', '69091246-20e8-4a56-aa4d-066075b2a7a8': 'Teams Administrator',
+  '17315797-102d-40b4-93e0-432062caca18': 'Compliance Administrator', 'f2ef992c-3afb-46b9-b7cf-a126ee74c451': 'Global Reader',
+  '5d6b6bb7-de71-4623-b4af-96380a352509': 'Security Reader', '5f2222b1-57c3-48ba-8ad5-d4759f1fde6f': 'Security Operator',
+  'fdd7a751-b60b-444a-984c-02652fe8fa1c': 'Groups Administrator', '892c5842-a9a6-463a-8041-72aa08ca3cf6': 'Cloud Device Administrator',
+  '11648597-926c-4cf3-9c36-bcebb0ba8dcc': 'Power Platform Administrator', '0526716b-113d-4c15-b2c8-68e3c22b9f80': 'Authentication Policy Administrator',
+  // Guest user role IDs (authorization policy)
+  '2af84b1e-32c8-42b7-82bc-daa82404023b': 'Restricted Guest User', '10dae51f-b6af-4016-8d66-8c2a99b929b3': 'Guest User',
+  'a0b1b346-4d3e-4e8b-98f8-753987be4970': 'User',
+};
+const LLD_APPS = {
+  'All': 'All resources', 'None': 'None', 'Office365': 'Office 365', 'MicrosoftAdminPortals': 'Microsoft Admin Portals',
+  '797f4846-ba00-4fd7-ba43-dac1f8f63013': 'Windows Azure Service Management API',
+  '01cb2876-7ebd-4aa4-9cc9-d28bd4d359a9': 'Device Registration Service',
+  '2793995e-0a7d-40d7-bd35-6968ba142197': 'My Apps',
+  '0000000a-0000-0000-c000-000000000000': 'Microsoft Intune', 'd4ebce55-015a-49b5-a083-c84d1797ae8c': 'Microsoft Intune Enrollment',
+  '00000003-0000-0000-c000-000000000000': 'Microsoft Graph',
+};
+const LLD_CA_USERS = { All: 'All users', None: 'None', GuestsOrExternalUsers: 'Guests or external users' };
+const LLD_CA_CLIENTS = { all: 'All client apps', browser: 'Browser', mobileAppsAndDesktopClients: 'Mobile apps and desktop clients',
+  exchangeActiveSync: 'Exchange ActiveSync clients', other: 'Other clients' };
+const LLD_CA_GRANTS = { mfa: 'Require multifactor authentication', compliantDevice: 'Require device to be marked as compliant',
+  domainJoinedDevice: 'Require Microsoft Entra hybrid joined device', approvedApplication: 'Require approved client app',
+  compliantApplication: 'Require app protection policy', passwordChange: 'Require password change', block: 'Block access' };
+const LLD_CA_LOCATIONS = { All: 'Any location', AllTrusted: 'All trusted locations' };
+const LLD_CA_STATE = { enabled: 'On', disabled: 'Off', enabledForReportingButNotEnforced: 'Report-only' };
+const lldMap = (list, map) => list.map(x => map[x] || LLD_ROLES[x] || LLD_APPS[x] || LLD_PLATFORMS[String(x).toLowerCase()] || humanizeValue(String(x))).join(', ');
+const lldCap = x => String(x).charAt(0).toUpperCase() + String(x).slice(1);
+
 function buildPolicyTableXml(policyName, description, platform, settingsRows, showAssignments = false) {
   let rows = '';
 
@@ -6850,9 +6940,9 @@ function buildPolicyTableXml(policyName, description, platform, settingsRows, sh
   const dataRow = (label, value = '') =>
     `<w:tr w:rsidR="00AA0001" w14:paraId="${pid()}" w14:textId="${pid()}">` +
     `<w:tc><w:tcPr><w:tcW w:w="4680" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>` +
-    `<w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:r><w:t>${xmlEsc(label)}</w:t></w:r></w:p></w:tc>` +
+    `<w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:pPr><w:jc w:val="left"/></w:pPr><w:r><w:t>${xmlEsc(label)}</w:t></w:r></w:p></w:tc>` +
     `<w:tc><w:tcPr><w:tcW w:w="4680" w:type="dxa"/><w:vAlign w:val="top"/></w:tcPr>` +
-    `<w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:r><w:t>${xmlEsc(value)}</w:t></w:r></w:p></w:tc>` +
+    `<w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:pPr><w:jc w:val="left"/></w:pPr><w:r><w:t>${xmlEsc(value)}</w:t></w:r></w:p></w:tc>` +
     `</w:tr>`;
 
   // Dark grey divider — matches firstRow style: fill=7F7F7F, white non-bold text
@@ -6877,10 +6967,12 @@ function buildPolicyTableXml(policyName, description, platform, settingsRows, sh
   // ── Settings ──
   rows += dividerRow('Setting', 'Value');
   rows += dataRow('Name', policyName);
+  description = lldTidyDescription(description);
+  platform = lldPlatformLabel(platform);
   if (description) rows += dataRow('Description', description);
   if (platform)    rows += dataRow('Platform', platform);
   for (const { key, value } of settingsRows) {
-    rows += dataRow(key, value);
+    rows += dataRow(key, lldTidyValue(value));
   }
 
   // ── Assignments ──
@@ -7427,7 +7519,7 @@ function buildTerminologyTableXml(terms) {
   const headerRow = `<w:tr w:rsidR="00AA0001" w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidTr="006932E2"><w:trPr><w:trHeight w:val="300"/></w:trPr><w:tc><w:tcPr><w:cnfStyle w:val="001000000000" w:firstRow="0" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:oddVBand="0" w:evenVBand="0" w:oddHBand="0" w:evenHBand="0" w:firstRowFirstColumn="0" w:firstRowLastColumn="0" w:lastRowFirstColumn="0" w:lastRowLastColumn="0"/><w:tcW w:w="1202" w:type="pct"/></w:tcPr><w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:r><w:t>Acronym</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="3798" w:type="pct"/></w:tcPr><w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:r><w:t>Meaning</w:t></w:r></w:p></w:tc></w:tr>`;
 
   const dataRows = terms.map(({ acronym, meaning }) =>
-    `<w:tr w:rsidR="00AA0001" w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidTr="006932E2"><w:trPr><w:trHeight w:val="300"/></w:trPr><w:tc><w:tcPr><w:cnfStyle w:val="001000000000" w:firstRow="0" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:oddVBand="0" w:evenVBand="0" w:oddHBand="0" w:evenHBand="0" w:firstRowFirstColumn="0" w:firstRowLastColumn="0" w:lastRowFirstColumn="0" w:lastRowLastColumn="0"/><w:tcW w:w="1202" w:type="pct"/><w:hideMark/></w:tcPr><w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:pPr><w:spacing w:line="259" w:lineRule="auto"/></w:pPr><w:r><w:t>${xmlEsc(acronym)}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="3798" w:type="pct"/><w:hideMark/></w:tcPr><w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:pPr><w:spacing w:line="259" w:lineRule="auto"/></w:pPr><w:r><w:t>${xmlEsc(meaning)}</w:t></w:r></w:p></w:tc></w:tr>`
+    `<w:tr w:rsidR="00AA0001" w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidTr="006932E2"><w:trPr><w:trHeight w:val="300"/></w:trPr><w:tc><w:tcPr><w:cnfStyle w:val="001000000000" w:firstRow="0" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:oddVBand="0" w:evenVBand="0" w:oddHBand="0" w:evenHBand="0" w:firstRowFirstColumn="0" w:firstRowLastColumn="0" w:lastRowFirstColumn="0" w:lastRowLastColumn="0"/><w:tcW w:w="1202" w:type="pct"/><w:hideMark/></w:tcPr><w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:pPr><w:spacing w:line="259" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:t>${xmlEsc(acronym)}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW w:w="3798" w:type="pct"/><w:hideMark/></w:tcPr><w:p w14:paraId="${pid()}" w14:textId="${pid()}" w:rsidR="00AA0001" w:rsidRDefault="00AA0001"><w:pPr><w:spacing w:line="259" w:lineRule="auto"/><w:jc w:val="left"/></w:pPr><w:r><w:t>${xmlEsc(meaning)}</w:t></w:r></w:p></w:tc></w:tr>`
   ).join('');
 
   return `<w:tbl><w:tblPr><w:tblStyle w:val="Style1"/><w:tblW w:w="5000" w:type="pct"/><w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr><w:tblGrid><w:gridCol w:w="2514"/><w:gridCol w:w="7942"/></w:tblGrid>${headerRow}${dataRows}</w:tbl>`;
@@ -7579,7 +7671,7 @@ function lldFinalise(docXml, ctx) {
 
   // 3. Document Control: a real first revision, and an approval row to complete.
   const rev = findTable(['Version', 'Date', 'Author', 'Description']);
-  if (rev) fillTable(rev, [['0.1', ctx.date, ctx.author || '', 'Initial draft generated by the CDW 365 Baseline tool']]);
+  if (rev) fillTable(rev, [['0.1', ctx.date, ctx.author || '', 'First draft']]);
   const appr = findTable(['Approver', 'Title', 'Approval Type', 'Document Version']);
   if (appr) fillTable(appr, [['', '', 'Technical', '0.1']]);
 
@@ -7617,6 +7709,34 @@ function lldFinalise(docXml, ctx) {
   const terms = findTable(['Acronym', 'Meaning']);
   if (terms && /Virtual Network/i.test(textOf(terms))) fillTable(terms, ctx.glossary);
 
+  // 8. Table text is left-aligned, apart from header rows. Sign-off pages keep
+  //    the template's form layout.
+  const PPR_AFTER_JC = ['textDirection','textAlignment','textboxTightWrap','outlineLvl','divId','cnfStyle','rPr','sectPr','pPrChange'];
+  const isHeaderRow = (tr, i) => i === 0 ||
+    tr.getElementsByTagNameNS(W_NS, 'tblHeader').length > 0 ||
+    [...tr.getElementsByTagNameNS(W_NS, 'shd')].some(sh => /^[0-9A-F]{6}$/i.test(sh.getAttribute('w:fill') || '') && !/^F{6}$/i.test(sh.getAttribute('w:fill')));
+  const leftAlign = p => {
+    let pPr = kids(p, 'pPr')[0];
+    if (!pPr) pPr = p.insertBefore(el('pPr'), p.firstChild);
+    kids(pPr, 'jc').forEach(j => pPr.removeChild(j));
+    const jc = el('jc'); jc.setAttribute('w:val', 'left');
+    const after = kids(pPr).find(c => PPR_AFTER_JC.includes(c.localName));
+    pPr.insertBefore(jc, after || null);
+    // Numbered cells (DD1., DD2. ...) take the list indent; start them at the cell edge.
+    if (kids(pPr, 'numPr').length && !kids(pPr, 'ind').length) {
+      const ind = el('ind'); ind.setAttribute('w:left', '0'); ind.setAttribute('w:firstLine', '0');
+      pPr.insertBefore(ind, jc);
+    }
+  };
+  for (const n of kids(body)) {
+    if (headingLevel(n) === 1 && /sign off|approval to proceed/i.test(textOf(n))) break;
+    if (n.localName !== 'tbl') continue;
+    kids(n, 'tr').forEach((tr, i) => {
+      if (isHeaderRow(tr, i)) return;
+      kids(tr, 'tc').forEach(tc => kids(tc, 'p').forEach(leftAlign));
+    });
+  }
+
   return new XMLSerializer().serializeToString(doc);
 }
 
@@ -7631,34 +7751,28 @@ function lldContext(policyJsons, meta, dateStr) {
   const hasIntune = by('intune').length > 0;
   const tenantWide = policyJsons.filter(p => ['AuthorizationPolicy','CrossTenantAccessPolicy','DeviceRegistrationPolicy',
     'AppManagementPolicies','DirectorySettings','TenantSettings','AdminConsentRequestPolicy'].includes(p.cat)).length;
-  const runner = policyJsons.filter(p => p.deployVia === 'powershell').length;
   const customer = meta.customer || 'the customer';
 
   const introduction = [
     `This Low Level Design describes the Microsoft 365 configuration CDW will implement for ${customer}` +
       (meta.oppName ? ` as part of ${meta.oppName}` : '') + (meta.oppNumber ? ` (${meta.oppNumber})` : '') + '.',
     `It covers ${policyJsons.length} ${policyJsons.length === 1 ? 'policy' : 'policies'} across ${list(wlNames)}, ` +
-      `taken from the CDW 365 Baseline: a maintained library of Microsoft 365 security and management configuration ` +
       `aligned to CIS benchmarks and Microsoft's Zero Trust guidance.`,
     `The Design section lists each policy with its purpose and settings, as they will be configured in ${customer}'s tenant.`,
   ];
 
-  const decisions = [
-    ['Technical', `The configuration is based on the CDW 365 Baseline: ${policyJsons.length} policies across ${list(wlNames)}.`],
-  ];
-  if (cisL1 || cisL2) decisions.push(['Technical',
-    `${[cisL1 ? `${cisL1} ${cisL1 === 1 ? 'policy aligns' : 'policies align'} with CIS Level 1` : '',
-        cisL2 ? `${cisL2} with CIS Level 2` : ''].filter(Boolean).join(' and ')} benchmark recommendations.` +
-    (cisL2 ? ' Level 2 settings are stricter and can affect usability, so they are piloted before wider rollout.' : '')]);
+  // Kept deliberately short: further decisions come from the design workshop,
+  // the Statement of Work and the proposal.
+  const decisions = [];
   if (hasCA) decisions.push(['Technical',
-    'Conditional Access policies are created switched off, reviewed in report-only mode and then enabled in stages. ' +
-    'An emergency access (break-glass) group is excluded from every policy.']);
+    'Conditional Access policies are introduced in report-only mode and enabled in stages. ' +
+    'Emergency access (break-glass) accounts are excluded from every policy.']);
   if (hasIntune) decisions.push(['Technical',
-    'Intune policies are assigned to a pilot group first and widened once validated.']);
+    'Device policies are assigned to a pilot group first and widened once validated.']);
+  if (cisL2) decisions.push(['Technical',
+    'CIS Level 2 settings are stricter and can affect usability, so they are piloted before wider rollout.']);
   if (tenantWide) decisions.push(['Technical',
-    `${tenantWide} tenant-wide ${tenantWide === 1 ? 'setting replaces' : 'settings replace'} the current tenant configuration when applied; existing values are reviewed with ${customer} first.`]);
-  if (runner) decisions.push(['Technical',
-    `${runner} Exchange Online, Defender or Purview ${runner === 1 ? 'setting is' : 'settings are'} applied with PowerShell as ${runner === 1 ? 'it has' : 'they have'} no Microsoft Graph API.`]);
+    `Tenant-wide settings are reviewed with ${customer} before they are changed.`]);
 
   const references = [];
   if (hasIntune) references.push(['Microsoft Intune documentation', 'Microsoft guidance for the Intune features in this design', 'https://learn.microsoft.com/intune/']);
@@ -7767,7 +7881,7 @@ async function generateDocument() {
       // Sign-off pages: filled when given in the wizard, otherwise left to complete.
       ['[Client Company No]',  docMeta.companyNo || '[Client Company No]'],
       ['[Client Address]',     docMeta.address   || '[Client Address]'],
-      ['[NAME]',               docMeta.contact   || '[NAME]'],
+      ['[NAME]',               docMeta.customer  || '[NAME]'],
     ];
     for (const [token, value] of PLACEHOLDERS) docXml = docXml.split(token).join(xmlEsc(value));
 
