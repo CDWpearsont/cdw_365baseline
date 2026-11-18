@@ -1,20 +1,22 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-18T12:39:19Z",
+  "generated": "2026-11-18T12:41:09Z",
   "count": 262,
   "enrichedCount": 2,
   "entries": [
     {
       "id": "entra.adminconsentrequestpolicy.cdw-baseline-admin-consent-request-policy",
       "file": "EntraConfig/AdminConsentRequestPolicy/CDW_Baseline_AdminConsentRequestPolicy_v1_0.json",
-      "sha": "14580e4259b76d6d",
+      "sha": "9bd03155befc50a3",
       "workload": "entra",
       "category": "AdminConsentRequestPolicy",
       "objectType": "adminConsentRequestPolicy",
       "displayName": "CDW Baseline - Admin Consent Request Policy",
       "baseName": "CDW Baseline - Admin Consent Request Policy",
-      "description": "CDW CIS L1 baseline admin consent workflow. Enables the admin consent workflow so users can request access to apps that require admin consent rather than being blocked silently. Covers CIS 5.1.5.2. NOTE: notifyReviewers and reminders require at least one reviewer in the reviewers array. The reviewers array uses placeholder GUIDs that MUST be replaced with the customer tenant's actual Global Administrator role template ID, group ID, or user ID before deployment.",
-      "platforms": [],
+      "description": "CDW CIS L1 baseline admin consent workflow. Enables the admin consent workflow so users can request access to apps that require admin consent rather than being blocked silently. Covers CIS 5.1.5.2.",
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -31,7 +33,9 @@
       "displayName": "CDW Baseline - Default App Management Policy",
       "baseName": "CDW Baseline - Default App Management Policy",
       "description": "CDW CIS L1 baseline default tenant app management policy. Restricts password lifetime, password creation, and certificate lifetime for application registrations and service principals. Covers CDW 12.2.8, 12.2.9, 12.2.10, 12.2.11.",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -48,7 +52,9 @@
       "displayName": "CDW Baseline - Authorization Policy",
       "baseName": "CDW Baseline - Authorization Policy",
       "description": "CDW CIS L1 baseline tenant authorization policy. Restricts non-admin tenant creation, app consent, guest invitations, and default user permissions. Covers CIS 5.1.2.3, 5.1.2.6, 5.1.5.1, 5.1.6.2, 5.1.6.3, CDW 12.1.5.",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -64,7 +70,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
       "baseName": "CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -78,7 +86,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block",
       "baseName": "CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -92,7 +102,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA",
       "baseName": "CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -106,7 +118,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA",
       "baseName": "CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -120,7 +134,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -134,7 +150,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA",
       "baseName": "CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -148,7 +166,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations",
       "baseName": "CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -162,7 +182,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow",
       "baseName": "CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -176,7 +198,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA",
       "baseName": "CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -190,7 +214,10 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
       "baseName": "CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
-      "platforms": [],
+      "platforms": [
+        "android",
+        "ios"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -204,7 +231,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
       "baseName": "CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -218,7 +247,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW019-Global-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
       "baseName": "CDW019-Global-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -232,7 +263,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA",
       "baseName": "CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -246,7 +279,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
       "baseName": "CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -260,7 +295,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices",
       "baseName": "CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -274,7 +311,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration",
       "baseName": "CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -288,7 +327,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW1003-Developers-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
       "baseName": "CDW1003-Developers-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -302,7 +343,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW1004-Developers-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
       "baseName": "CDW1004-Developers-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -316,7 +359,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW1005-Developers-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW1005-Developers-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -330,7 +375,10 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW1006-Developers-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
       "baseName": "CDW1006-Developers-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
-      "platforms": [],
+      "platforms": [
+        "android",
+        "ios"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -344,7 +392,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW1007-Developers-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
       "baseName": "CDW1007-Developers-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -358,7 +408,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW101-Admins-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
       "baseName": "CDW101-Admins-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -372,7 +424,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW102-Admins-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
       "baseName": "CDW102-Admins-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -386,7 +440,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
       "baseName": "CDW103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -400,7 +456,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW104-Admins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW104-Admins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -414,7 +472,10 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
       "baseName": "CDW106-Admins-DataandAppProtection-AllApps-iOSorAndroid-AppProtection",
-      "platforms": [],
+      "platforms": [
+        "android",
+        "ios"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -428,7 +489,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy",
       "baseName": "CDW107-Admins-DataProtection-AllApps-AnyPlatform-SessionPolicy",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -442,7 +505,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
       "baseName": "CDW108-Admins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -456,7 +521,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW200-Internals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
       "baseName": "CDW200-Internals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -470,7 +537,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW201-Internals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
       "baseName": "CDW201-Internals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -484,7 +553,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW202-Internals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
       "baseName": "CDW202-Internals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -498,7 +569,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW203-Internals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
       "baseName": "CDW203-Internals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -512,7 +585,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW204-Internals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW204-Internals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -526,7 +601,10 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW206-Internals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
       "baseName": "CDW206-Internals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
-      "platforms": [],
+      "platforms": [
+        "android",
+        "ios"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -540,7 +618,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW207-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
       "baseName": "CDW207-Internals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -554,7 +634,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW300-Externals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
       "baseName": "CDW300-Externals-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -568,7 +650,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW301-Externals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
       "baseName": "CDW301-Externals-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -582,7 +666,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW302-Externals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
       "baseName": "CDW302-Externals-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforHighUserRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -596,7 +682,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW303-Externals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
       "baseName": "CDW303-Externals-IdentityProtection-AllApps-AnyPlatform-MFAforHighSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -610,7 +698,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW304-Externals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW304-Externals-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -624,7 +714,10 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW306-Externals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
       "baseName": "CDW306-Externals-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP",
-      "platforms": [],
+      "platforms": [
+        "android",
+        "ios"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -638,7 +731,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW307-Externals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
       "baseName": "CDW307-Externals-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -652,7 +747,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW400-Guests-BaseProtection-AllApps-AnyPlatform-MFA",
       "baseName": "CDW400-Guests-BaseProtection-AllApps-AnyPlatform-MFA",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -666,7 +763,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW401-Guests-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
       "baseName": "CDW401-Guests-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -680,7 +779,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW402-Guests-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
       "baseName": "CDW402-Guests-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -694,7 +795,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW403-Guests-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW403-Guests-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -708,7 +811,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW404-Guests-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAppAccess",
       "baseName": "CDW404-Guests-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAppAccess",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -722,7 +827,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW405-Guests-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
       "baseName": "CDW405-Guests-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -736,7 +843,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW406-Guests-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
       "baseName": "CDW406-Guests-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -750,7 +859,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW500-GuestAdmins-BaseProtection-AllApps-AnyPlatform-MFA",
       "baseName": "CDW500-GuestAdmins-BaseProtection-AllApps-AnyPlatform-MFA",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -764,7 +875,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW501-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
       "baseName": "CDW501-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-TOU-CombinedRegistration",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -778,7 +891,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW502-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
       "baseName": "CDW502-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighUserandSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -792,7 +907,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW503-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW503-GuestAdmins-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -806,7 +923,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW504-GuestAdmins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAdminsAppAccess",
       "baseName": "CDW504-GuestAdmins-AttackSurfaceReduction-AllApps-AnyPlatform-BlockNonGuestAdminsAppAccess",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -820,7 +939,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW505-GuestAdmins-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
       "baseName": "CDW505-GuestAdmins-ComplianceProtection-AllApps-AnyPlatform-RequireTOU",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -834,7 +955,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW506-GuestAdmins-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
       "baseName": "CDW506-GuestAdmins-DataProtection-AllApps-AnyPlatform-SignInSessionPolicy",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -848,7 +971,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW600-Microsoft365ServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
       "baseName": "CDW600-Microsoft365ServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -862,7 +987,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW601-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW601-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -876,7 +1003,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW602-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
       "baseName": "CDW602-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -890,7 +1019,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW603-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
       "baseName": "CDW603-Microsoft365ServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -904,7 +1035,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW604-Microsoft365ServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
       "baseName": "CDW604-Microsoft365ServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -918,7 +1051,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW700-AzureServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
       "baseName": "CDW700-AzureServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -932,7 +1067,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW701-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW701-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -946,7 +1083,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW702-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
       "baseName": "CDW702-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -960,7 +1099,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW703-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
       "baseName": "CDW703-AzureServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -974,7 +1115,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW704-AzureServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
       "baseName": "CDW704-AzureServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -988,7 +1131,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW800-CorpServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
       "baseName": "CDW800-CorpServiceAccounts-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -1002,7 +1147,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW801-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
       "baseName": "CDW801-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -1016,7 +1163,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW802-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
       "baseName": "CDW802-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighUserRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -1030,7 +1179,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW803-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
       "baseName": "CDW803-CorpServiceAccounts-IdentityProtection-AllApps-AnyPlatform-BlockHighSignInRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -1044,7 +1195,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW804-CorpServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365andAzure",
       "baseName": "CDW804-CorpServiceAccounts-AttackSurfaceReduction-O365-AnyPlatform-BlockNonO365andAzure",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -1058,7 +1211,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW900-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
       "baseName": "CDW900-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockUntrustedLocations",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -1072,7 +1227,9 @@
       "objectType": "conditionalAccessPolicy",
       "displayName": "CDW901-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockHighRisk",
       "baseName": "CDW901-WorkloadIdentities-BaseProtection-AllApps-AnyPlatform-BlockHighRisk",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "caState": "disabled"
@@ -1087,7 +1244,9 @@
       "displayName": "CDW Baseline - Cross Tenant Access Policy Default",
       "baseName": "CDW Baseline - Cross Tenant Access Policy Default",
       "description": "CDW CIS L1 baseline cross-tenant access default. Sets default to block all inbound/outbound B2B collaboration except where explicitly configured via Organisational settings. Note this also satisfies CIS 8.2.4 (Teams external trial tenants) when paired with Teams external access policy. After deployment, customer-specific allowlist tenants must be added via Organisational settings.",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -1104,7 +1263,9 @@
       "displayName": "CDW Baseline - Device Registration Policy",
       "baseName": "CDW Baseline - Device Registration Policy",
       "description": "CDW CIS L1 baseline device registration policy. Restricts Entra device join to specific groups, limits devices per user, prevents Global Admin auto-add as local admin, controls local admin assignment during Entra join. Covers CIS 5.1.4.1, 5.1.4.2, 5.1.4.3, 5.1.4.4. NOTE: azureADJoin and azureADRegistration use 'all' by default and require allowedGroups/allowedUsers to be populated with customer-specific group IDs to scope to a subset. Adjust to suit customer requirements.",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -1121,7 +1282,9 @@
       "displayName": "CDW Baseline - Group.Unified",
       "baseName": "CDW Baseline - Group.Unified",
       "description": "CDW CIS L1 baseline directory setting for Microsoft 365 Groups (Group.Unified template). Restricts guest access to groups, blocks guests from being added to groups, restricts who can create M365 groups. Covers CIS 5.1.3.1, 5.1.6.1, related parts of 5.1.6.x.",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -1138,7 +1301,9 @@
       "displayName": "CDW Baseline - Password Rule Settings",
       "baseName": "CDW Baseline - Password Rule Settings",
       "description": "CDW CIS L1 baseline directory setting for password protection (Password Rule Settings template). Enables banned password list and on-prem AD password protection. Covers CIS 5.2.3.2, CIS 5.2.3.3.",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -1154,7 +1319,9 @@
       "objectType": "safeLinks",
       "displayName": "Safe Links excluding email",
       "baseName": "Safe Links excluding email",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "powershell",
       "isDraft": false,
       "flags": [
@@ -1210,7 +1377,9 @@
       "objectType": "azureADWindowsAutopilotDeploymentProfile",
       "displayName": "User Driven Entra PreProv CDW Baseline",
       "baseName": "User Driven Entra PreProv CDW Baseline",
-      "platforms": [],
+      "platforms": [
+        "windows"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -1866,7 +2035,9 @@
       "objectType": "windows10EnrollmentCompletionPageConfiguration",
       "displayName": "ESP CDW Baseline",
       "baseName": "ESP CDW Baseline",
-      "platforms": [],
+      "platforms": [
+        "windows"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
@@ -4664,7 +4835,9 @@
       "objectType": "policies",
       "displayName": "Bulk Download Monitoring",
       "baseName": "Bulk Download Monitoring",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "powershell",
       "isDraft": false,
       "flags": [
@@ -4681,7 +4854,9 @@
       "displayName": "CDW Baseline - SharePoint Tenant Settings",
       "baseName": "CDW Baseline - SharePoint Tenant Settings",
       "description": "CDW CIS L1 baseline SharePoint Online and OneDrive tenant-level settings, applied through Microsoft Graph (admin/sharepoint/settings). External sharing limited to new and existing guests (no Anyone links), guests must sign in with the invited account and can't reshare, legacy auth off, idle session sign-out, comments and newsfeed off. Covers parts of CIS 7.2.1, 7.2.3, 7.2.6, 7.3.2. Default link type, link expiry and guest expiry aren't in Graph and need SharePoint PowerShell (runner).",
-      "platforms": [],
+      "platforms": [
+        "all"
+      ],
       "deployVia": "graph",
       "isDraft": false,
       "flags": [
