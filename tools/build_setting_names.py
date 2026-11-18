@@ -54,12 +54,14 @@ def main():
                 names[lower_defs[sid]] = s['displayName'].strip()
                 path = next((k for k in s.get('keywords') or [] if k.startswith('\\')), '')
                 paths[lower_defs[sid]] = path.rstrip('\\').split('\\')[-1] if path else ''
+            # Every option of a setting the library uses (not only the option it
+            # picks), so an LLD edited to another option can be deployed.
             for o in s.get('options') or []:
                 oid = (o.get('itemId') or '').lower()
-                if oid in lower_opts and o.get('displayName'):
+                if (oid in lower_opts or sid in lower_defs) and o.get('displayName'):
                     name = o['displayName'].strip()
                     # Boolean options read as the rest of the document does.
-                    options[lower_opts[oid]] = {'true': 'Enabled', 'false': 'Disabled'}.get(name.lower(), name)
+                    options[lower_opts.get(oid, o['itemId'])] = {'true': 'Enabled', 'false': 'Disabled'}.get(name.lower(), name)
 
     # ADMX settings repeated per area (e.g. the event log retention setting for
     # Application, Security, Setup and System) share one display name: add the
@@ -75,7 +77,7 @@ def main():
     with open(a.out, 'w', encoding='utf-8', newline='\n') as fh:
         json.dump(out, fh, ensure_ascii=False, separators=(',', ':'))
         fh.write('\n')
-    print(f'{len(names)}/{len(defs)} setting names, {len(options)}/{len(opts)} options -> {a.out}')
+    print(f'{len(names)}/{len(defs)} setting names, {len(options)} options ({len(opts)} used) -> {a.out}')
 
 if __name__ == '__main__':
     main()
