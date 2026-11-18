@@ -1741,7 +1741,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.17.1',
+  version: '3.17.2',
   date:    '2026-09-17'
 };
 
@@ -1957,7 +1957,7 @@ function submitDocWizard() {
 // consultant applies it, and nothing is stored beyond this page session.
 // ═══════════════════════════════════════════════════════════════════
 
-const SOW_MAX_CHARS = 60000;            // ~15k tokens; longer documents are truncated
+const SOW_MAX_CHARS = 40000;            // ~10k tokens after trimming; longer documents are truncated
 const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
 const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 let sowDraft = null;                    // last AI extraction, before or after review
@@ -1966,7 +1966,9 @@ let sowDraft = null;                    // last AI extraction, before or after r
 // While an AI call is running the bar creeps towards the next milestone, so it
 // keeps moving during the 20-40 seconds the analysis takes.
 let sowProgTimer = null;
+let sowActive = false;      // an analysis is running; late answers after a failure are ignored
 function sowProgress(pct, label) {
+  if (pct !== null && !sowActive) return;
   const box = document.getElementById('sow-box');
   const bar = document.getElementById('sow-prog');
   const fill = document.getElementById('sow-prog-fill');
@@ -1993,6 +1995,7 @@ function sowProgress(pct, label) {
 // Creep from the current value towards `to` while waiting on the AI.
 function sowCreep(to) {
   clearInterval(sowProgTimer);
+  if (!sowActive) return;
   sowProgTimer = setInterval(() => {
     const fill = document.getElementById('sow-prog-fill');
     const cur = parseFloat(fill.style.width) || 0;
@@ -2045,10 +2048,11 @@ async function sowFileChosen(input) {
   const file = input.files && input.files[0];
   input.value = '';
   if (!file) return;
+  sowActive = true;
   try {
     sowProgress(5, `Reading ${file.name}\u2026`);
     let text = await sowReadFile(file);
-    text = text.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+    text = sowTrim(text.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n')).trim();
     if (text.length < 200) throw new Error('No readable text found. If it is a scanned PDF, upload the Word version.');
     const truncated = text.length > SOW_MAX_CHARS;
     if (truncated) text = text.slice(0, SOW_MAX_CHARS);
@@ -2061,10 +2065,12 @@ async function sowFileChosen(input) {
     sowDraft = draft;
     sowProgress(100, 'Analysis complete');
     await new Promise(r => setTimeout(r, 400));
+    sowActive = false;
     sowProgress(null);
     sowRenderStatus();
     sowOpenReview();
   } catch (e) {
+    sowActive = false;
     sowProgress(null);
     sowRenderStatus();
     console.warn('[SoW]', e);
@@ -2154,27 +2160,59 @@ async function sowPdfText(buf) {
 
 // ── AI extraction ────────────────────────────────────────────────
 
+// The site's API calls go through Static Web Apps, which gives up on a backend
+// after about 45 seconds ("Backend call failure"). Output length is what makes a
+// call slow, so the SoW is analysed in several small calls rather than one big
+// one, and a call that fails or is throttled is retried once.
 async function sowAsk(system, user, maxTokens) {
-  const resp = await fetch(AI_FUNCTION_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
-                           max_tokens: maxTokens, temperature: 0.1 }),
-  });
-  if (resp.status === 404 || resp.status === 405) throw new Error(`the AI service isn't reachable from this site (HTTP ${resp.status})`);
-  if (!resp.ok) throw new Error(`AI error ${resp.status}: ${(await resp.text()).slice(0, 200)}`);
-  const data = await resp.json();
-  const text = (data?.choices?.[0]?.message?.content || '').trim()
-    .replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
-  const start = text.indexOf('{'), end = text.lastIndexOf('}');
-  if (start < 0 || end <= start) throw new Error('the AI response was not in the expected format');
-  return JSON.parse(text.slice(start, end + 1));
+  for (let attempt = 0; ; attempt++) {
+    const resp = await fetch(AI_FUNCTION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
+                             max_tokens: maxTokens, temperature: 0.1 }),
+    });
+    if (resp.status === 404 || resp.status === 405) throw new Error(`the AI service isn't reachable from this site (HTTP ${resp.status})`);
+    if (!resp.ok) {
+      const body = (await resp.text()).slice(0, 200);
+      if (attempt === 0 && [429, 500, 502, 503, 504].includes(resp.status)) {
+        const wait = Math.min(15, Number(resp.headers.get('retry-after')) || 4);
+        await new Promise(r => setTimeout(r, wait * 1000));
+        continue;
+      }
+      throw new Error(/backend call failure/i.test(body)
+        ? 'the AI took too long to answer (the site allows about 45 seconds). Try again; if it keeps happening, upload a shorter version of the SoW'
+        : `AI error ${resp.status}: ${body}`);
+    }
+    const data = await resp.json();
+    const text = (data?.choices?.[0]?.message?.content || '').trim()
+      .replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+    const start = text.indexOf('{'), end = text.lastIndexOf('}');
+    if (start < 0 || end <= start) throw new Error('the AI response was not in the expected format');
+    return JSON.parse(text.slice(start, end + 1));
+  }
 }
 
 const SOW_SYSTEM = `You extract facts from a CDW Statement of Work (SoW) for a Microsoft 365 project, to seed the
 Low Level Design. Respond ONLY with a JSON object. Use British English. Be faithful to the document: never invent
 scope, dependencies, decisions or names that it does not state. Keep each list item to one concise sentence.
 Do not mention that the text was extracted, summarised or produced by AI.`;
+
+// Commercial and legal sections add length and nothing the design needs.
+const SOW_SKIP_HEADINGS = /terms and conditions|general terms|pricing|price|charges|fees|invoic|payment|rate card|expenses|limitation of liability|liabilit|warrant|signature|sign-?off|acceptance|cancellation|termination|confidentiality|governing law|change control/i;
+function sowTrim(text) {
+  const out = []; let skipLevel = 0;
+  for (const line of text.split('\n')) {
+    const h = /^(#{1,4})\s+(.*)$/.exec(line);
+    if (h) {
+      const level = h[1].length;
+      if (skipLevel && level <= skipLevel) skipLevel = 0;
+      if (!skipLevel && SOW_SKIP_HEADINGS.test(h[2])) { skipLevel = level; continue; }
+    }
+    if (!skipLevel) out.push(line);
+  }
+  return out.join('\n');
+}
 
 async function sowExtract(text) {
   const doc = `--- STATEMENT OF WORK ---\n${text}\n--- END ---`;
@@ -2183,30 +2221,33 @@ async function sowExtract(text) {
     options: (g.options || []).map(o => ({ label: o.label, platform: o.platform, note: o.note })),
   }));
 
-  const factsPrompt = `${doc}
+  const detailsPrompt = `${doc}
 
 Return a JSON object:
 {
   "customer": "customer organisation name as written in the SoW, or empty",
   "opportunityNumber": "opportunity / OPP reference, or empty",
   "projectName": "short project or opportunity name, or empty",
-  "background": ["1-3 paragraphs for the LLD Background section, written in the third person ('<customer> has engaged CDW to...'), covering the business context, the objectives and, at a high level, what the project covers"],
-  "prerequisites": [{"type": "Licensing | Access | Software | Hardware | Network | Other", "prerequisite": "a technical prerequisite for the work"}],
-  "inScope": ["in-scope items relevant to the technical design"],
-  "outOfScope": ["explicitly out-of-scope items"],
-  "dependencies": ["dependencies on the customer or third parties"],
-  "assumptions": ["assumptions"],
-  "constraints": ["constraints: timescales, licensing, change windows, regulatory"]
-}
-At most 12 items per list. Leave a list empty if the SoW does not cover it.
-"prerequisites" are the prerequisites for the DESIGN, built mainly from the SoW's Dependencies section: the
-technical dependencies there become design prerequisites. Also include technical items that appear in the SoW's own
+  "background": ["1-3 short paragraphs for the LLD Background section, written in the third person ('<customer> has engaged CDW to...'), covering the business context, the objectives and, at a high level, what the project covers"]
+}`;
+
+  const prereqPrompt = `${doc}
+
+Return a JSON object:
+{ "prerequisites": [{"type": "Licensing | Access | Software | Hardware | Network | Other", "prerequisite": "one sentence"}] }
+These are the prerequisites for the DESIGN, built mainly from the SoW's Dependencies section: the technical
+dependencies there become design prerequisites. Also include technical items that appear in the SoW's own
 Prerequisites section, as consultants sometimes put technical dependencies there by mistake. Technical means:
 licences, the access the CDW consultant needs to the customer's tenant or systems (roles, accounts), minimum
 software or OS versions, hardware, network or connectivity requirements.
 Leave out the commercial prerequisites of the SoW itself (a signed SoW, a purchase order, payment terms) and
 scheduling or people dependencies (for example nominating a pilot group or providing a project manager).
-Merge duplicates. At most 10.`;
+Merge duplicates. At most 10. Empty array if there are none.`;
+
+  const contextPrompt = `${doc}
+
+Return a JSON object, each list at most 10 short items, empty if the SoW does not cover it:
+{ "inScope": [], "outOfScope": [], "dependencies": [], "assumptions": [], "constraints": [] }`;
 
   const designPrompt = `${doc}
 
@@ -2215,22 +2256,26 @@ ${JSON.stringify(goals)}
 
 Return a JSON object:
 {
-  "decisions": [{"type": "Technical | Scope | Commercial", "decision": "a design decision the SoW states or agrees", "evidence": "short quote from the SoW"}],
-  "goals": [{"goal": "<goal id from the list>", "option": "<option label from that goal>", "reason": "why the SoW calls for it", "evidence": "short quote from the SoW"}],
+  "decisions": [{"type": "Technical | Scope | Commercial", "decision": "a design decision the SoW states or agrees", "evidence": "short quote"}],
+  "goals": [{"goal": "<goal id from the list>", "option": "<option label from that goal>", "reason": "one sentence", "evidence": "short quote"}],
   "gaps": ["SoW requirements that none of the goals cover"]
 }
 Decisions: at most 6, only ones the SoW actually states (for example licensing, platforms in scope, approach to rollout).
 Goals: only where the SoW clearly calls for that outcome; pick the option that matches the platform and strictness described.
-Never pick a goal or option for anything the SoW puts out of scope (for example a platform it excludes).`;
+Never pick a goal or option for anything the SoW puts out of scope (for example a platform it excludes). Gaps: at most 5.`;
 
-  // Two calls in parallel keep each well inside the 45-second API timeout.
+  // Four small calls in parallel; each answer is short, so each stays well
+  // inside the time limit. The scope/context call is optional.
   let done = 0;
-  const tick = r => { done++; sowProgress(done === 1 ? 60 : 92, null); if (done === 1) sowCreep(88); return r; };
-  sowCreep(55);
-  const [facts, design] = await Promise.all([
-    sowAsk(SOW_SYSTEM, factsPrompt, 2000).then(tick),
-    sowAsk(SOW_SYSTEM, designPrompt, 1200).then(tick),
+  const tick = r => { done++; sowProgress(20 + done * 18, null); sowCreep(Math.min(96, 20 + (done + 1) * 18)); return r; };
+  sowCreep(36);
+  const [details, prereq, design, context] = await Promise.all([
+    sowAsk(SOW_SYSTEM, detailsPrompt, 700).then(tick),
+    sowAsk(SOW_SYSTEM, prereqPrompt, 700).then(tick),
+    sowAsk(SOW_SYSTEM, designPrompt, 900).then(tick),
+    sowAsk(SOW_SYSTEM, contextPrompt, 800).then(tick).catch(e => { console.warn('[SoW] context skipped:', e.message); tick(); return {}; }),
   ]);
+  const facts = { ...details, ...prereq, ...context };
   const list = (a, max = 12) => (Array.isArray(a) ? a : []).map(x => String(x || '').trim()).filter(Boolean).slice(0, max);
   const str = x => (typeof x === 'string' ? x.trim() : '');
   const goalIds = new Set(goals.map(g => g.id));
