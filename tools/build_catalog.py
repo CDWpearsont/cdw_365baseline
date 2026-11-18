@@ -340,6 +340,31 @@ def detect_security_domain(body: dict) -> str | None:
     return "Identity Security"
 
 
+# Keys that change without the configuration changing: object ids, timestamps,
+# the version-stamped name, and service-written counters.
+VOLATILE_KEYS = {"id", "createdDateTime", "lastModifiedDateTime", "modifiedDateTime", "version",
+                 "roleScopeTagIds", "@odata.context", "@odata.etag", "settingCount", "creationSource",
+                 "priorityMetaData", "isAssigned", "name", "displayName", "templateId"}
+
+
+def content_hash(body: dict) -> str:
+    """Hash of what the policy configures, ignoring ids, timestamps and the name.
+
+    Enrichment uses this rather than the file hash, so a re-export or a version
+    bump in the name does not mark the enrichment stale; a settings change does.
+    """
+    def clean(node, depth=0):
+        if isinstance(node, dict):
+            return {k: clean(v, depth + 1) for k, v in sorted(node.items())
+                    if not (k in VOLATILE_KEYS and depth == 0) and k not in ("@odata.context", "createdDateTime",
+                                                                             "lastModifiedDateTime")}
+        if isinstance(node, list):
+            return [clean(v, depth + 1) for v in node]
+        return node
+    canon = json.dumps(clean(body), sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return "sha256:" + hashlib.sha256(canon.encode("utf-8")).hexdigest()
+
+
 def file_hash(path: str) -> str:
     h = hashlib.sha256()
     with open(path, "rb") as fh:
@@ -485,6 +510,7 @@ def derive(rel_path: str, abs_path: str) -> dict:
         **rec,
         "settingCount": len(setting_ids),
         "policyHash": file_hash(abs_path),
+        "contentHash": content_hash(body),
         "derivedFrom": source,
         "unresolved": unresolved,
         "confidence": confidence,
@@ -518,7 +544,7 @@ def apply_sidecar(policy: dict, meta: dict) -> dict:
 
     enrichment = meta.get("enrichment") or {}
     if enrichment:
-        stale = enrichment.get("sourceHash") not in (None, policy["policyHash"])
+        stale = enrichment.get("sourceHash") not in (None, policy["policyHash"], policy.get("contentHash"))
         enrichment = {**enrichment, "stale": stale}
     policy["enrichment"] = enrichment or None
     policy["tags"] = meta.get("tags") or []

@@ -4,7 +4,7 @@ Three files, one build step.
 
 | File | Owner | Purpose |
 |---|---|---|
-| `metadata/**/<policy>.json.meta.json` | Human + LLM | Overrides, enrichment, tags. One per policy. |
+| `metadata/**/<policy>.json.meta.json` | AI enrichment workflow, reviewed in a PR | Overrides, enrichment, tags. One per policy. |
 | `bundles.json` | Human | Building Block definitions. |
 | `catalog.json` | Build script | Compiled output. The only file the SPA fetches. |
 
@@ -38,8 +38,8 @@ policy type or framework appears.
 
 - **high** — platform, policy type and scope all came from filename or folder.
 - **medium** — one or more fell back to the body, or an override supplied it.
-- **low** — something is still unresolved. These are the Policy Management
-  "needs attention" queue.
+- **low** — something is still unresolved. The AI enrichment workflow proposes
+  values for these (from the catalog's own vocabulary) in its pull request.
 
 ### Identity
 
@@ -69,18 +69,53 @@ rather than silently merged.
     "generatedAt": "2026-09-03T09:00:00+00:00",
     "sourceHash": "sha256:...",    // policy hash at generation time
     "reviewedBy": null,
-    "reviewedAt": null
+    "reviewedAt": null,
+    "locked": false,               // true = the AI never rewrites this block
+    "taxonomyCheckedHash": "sha256:..."
   },
+  "overrideSources": { "platform": "ai" },   // which overrides the AI proposed
   "notes": "free text, never shown to customers"
 }
 ```
 
-`sourceHash` is the staleness mechanism. When the policy file changes, its hash
-stops matching and the catalog marks that enrichment `stale: true`. That is the
-signal for the enrichment job to regenerate and for Policy Management to flag it.
+`sourceHash` is the staleness mechanism. It is the policy's `contentHash`: a hash
+of what the policy configures, ignoring object ids, timestamps and the
+version-stamped name, so a nightly re-export or a version bump in the name does
+not mark the text stale. When the configuration changes the hash stops matching,
+the catalog marks that enrichment `stale: true`, and the next enrichment run
+redrafts it. (A `sourceHash` equal to the older whole-file `policyHash` is also
+accepted.)
 
-`overrides` accepts any derived attribute key. It is how the Policy Management
-dropdowns persist a correction, and it always wins over derivation.
+### AI enrichment workflow
+
+`.github/workflows/enrich-policies.yml` runs daily (and on demand) and calls
+`tools/enrich_policies.py`, which:
+
+1. builds the catalog and finds policies whose enrichment is missing or stale,
+   plus any with unresolved taxonomy;
+2. sends each one's configuration, with Intune portal setting names, to Azure
+   OpenAI and writes `summary`, `rationale`, `userImpact`, `prerequisites` and
+   `licensing` into the sidecar (customer-facing, British English, no customer
+   or internal names; checked and retried once if it slips);
+3. proposes overrides only for unresolved attributes, only from the catalog's
+   vocabulary;
+4. suggests Building Blocks for policies in no bundle, in the PR description
+   only — `bundles.json` is never edited;
+5. opens one pull request (`ai-enrichment/<base>`). The next run waits until it
+   is merged or closed.
+
+Review the PR, edit any sidecar text in it, and merge. To stop the AI touching a
+sidecar you edited, set `"locked": true` in its `enrichment`; if that policy
+later changes, the PR lists it under "Locked but out of date".
+
+The LLD uses, per policy: `manifest.overlay.json` `lldSummary` if present, else
+this enrichment's `summary` + `rationale`, else an AI rationale at export time.
+
+Secrets: `AZURE_OPENAI_ENDPOINT`, `AZURE_OPENAI_KEY`, `AZURE_OPENAI_DEPLOYMENT`.
+
+`overrides` accepts any derived attribute key and always wins over derivation.
+Edit it in the sidecar (by hand or in the enrichment PR) to correct a derived
+value.
 
 ---
 
@@ -137,8 +172,8 @@ so the tree renders sensibly.
 }
 ```
 
-`taxonomy` is pre-computed so the Policy Management filter dropdowns can be
-populated without scanning the policy array.
+`taxonomy` is pre-computed so consumers (the site, the enrichment script) can
+read the vocabulary without scanning the policy array.
 
 ### Issue types
 
