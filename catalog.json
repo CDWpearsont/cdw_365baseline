@@ -1,21 +1,24 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T12:47:28+00:00",
-  "sourceCommit": "101e4af63c0bd585ffb70d8476e96e3115ef8aed",
+  "generatedAt": "2026-11-19T15:15:54+00:00",
+  "sourceCommit": null,
   "counts": {
-    "policies": 259,
+    "policies": 281,
     "bundles": 35,
-    "issues": 290,
+    "issues": 291,
     "byConfidence": {
-      "medium": 114,
-      "low": 2,
+      "medium": 135,
+      "low": 3,
       "high": 143
     }
   },
   "taxonomy": {
     "workloads": [
+      "Defender",
       "Entra",
-      "Intune"
+      "Exchange Online",
+      "Intune",
+      "SharePoint"
     ],
     "platforms": [
       "Android",
@@ -25,12 +28,20 @@
       "macOS"
     ],
     "policyTypes": [
+      "Anti-Malware",
+      "Anti-Phishing",
+      "Anti-Spam",
       "App Protection",
+      "Cloud Apps Policy",
       "Compliance Policy",
       "Conditional Access",
       "Directory Setting",
       "Endpoint Security",
       "Enrolment Restriction",
+      "Exchange Setting",
+      "Outbound Spam",
+      "Safe Attachments",
+      "Safe Links",
       "Settings Catalog",
       "Tenant Policy",
       "Update Ring"
@@ -50,12 +61,18 @@
     ],
     "areas": [
       "Admin Consent Request Policy",
+      "Anti-Malware",
+      "Anti-Phishing",
+      "Anti-Spam",
       "Apple Intelligence and Siri",
       "Attack Surface Reduction",
       "Authentication",
       "Authorization Policy",
       "BYOD App Protection",
+      "Block Additional Storage Providers in Outlook on the Web",
+      "Block Automatic Forwarding to Remote Domains",
       "Block Personal",
+      "Bulk Download Monitoring",
       "CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas",
       "CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block",
       "CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA",
@@ -140,21 +157,27 @@
       "Device Health and Security",
       "Device Registration Policy",
       "Device Security",
+      "Disable External Calendar Sharing",
+      "Disable SMTP AUTH",
       "Disk Encryption",
       "ESP CDW Baseline",
       "Encryption",
       "Endpoint Privilege Management",
+      "External Sender Tagging",
       "Firewall",
       "Gatekeeper",
       "Group Unified",
       "Internet Explorer Legacy",
       "Local Group Membership",
+      "MailTips",
       "Microsoft Accounts",
       "Microsoft AutoUpdate",
       "Microsoft Edge",
       "Microsoft Office",
       "Microsoft OneDrive",
       "Microsoft Store",
+      "Organisation Auditing and Modern Authentication",
+      "Outbound Spam",
       "Passcode",
       "Password",
       "Password Rule Settings",
@@ -162,6 +185,10 @@
       "Ring 1",
       "Ring 2",
       "Ring 3",
+      "Safe Attachments",
+      "Safe Links",
+      "Safe Links excluding email",
+      "Share Point Tenant Settings",
       "Shared Devices",
       "Software Update",
       "System Configuration",
@@ -790,6 +817,475 @@
     }
   ],
   "policies": [
+    {
+      "id": "defender-cross-platform-cloud-apps-policy-bulk-download-monitoring-tenant",
+      "path": "DefenderCloudApps/Policies/Bulk_Download_Monitoring.json",
+      "fileName": "Bulk_Download_Monitoring.json",
+      "displayName": "Bulk Download Monitoring",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Cloud Apps Policy",
+      "framework": null,
+      "scope": "Tenant",
+      "version": null,
+      "area": "Bulk Download Monitoring",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:d37bcf8e5d98cff6f62e120e95b839e3cc91e6973d507495b18d4e081758a835",
+      "contentHash": "sha256:b8b84f5f8420317117e146643ac62dd4da6a0641cb0d2813ab567db9b57da004",
+      "derivedFrom": {
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdca-monitoring"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-anti-malware-anti-malware-standard-tenant",
+      "path": "DefenderOffice365/AntiMalware/CDW_Baseline_-_Anti-Malware_-_Standard_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Anti-Malware_-_Standard_-_v1_0.json",
+      "displayName": "CDW Baseline - Anti-Malware - Standard - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Anti-Malware",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Anti-Malware",
+      "subArea": "Standard",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:3fd9eb60ca6f39faba987c53d1cb220a1e701991fefbfd29331dffa757eabaf5",
+      "contentHash": "sha256:63cc864ab5f95fd08ff34bbe3e3cae0b039d21620c4341dd13dd81b44c9a84b2",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-standard"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-anti-malware-anti-malware-strict-tenant",
+      "path": "DefenderOffice365/AntiMalware/CDW_Baseline_-_Anti-Malware_-_Strict_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Anti-Malware_-_Strict_-_v1_0.json",
+      "displayName": "CDW Baseline - Anti-Malware - Strict - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Anti-Malware",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Anti-Malware",
+      "subArea": "Strict",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:22342db572cf422b64284e779fc6a5f2e8b3663eee4a60d1efd972024074e60e",
+      "contentHash": "sha256:adfd9f899c67053c164454a25102a2348e5d8994737e502842630160acd56e81",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-strict"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-anti-phishing-anti-phishing-standard-tenant",
+      "path": "DefenderOffice365/AntiPhishing/CDW_Baseline_-_Anti-Phishing_-_Standard_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Anti-Phishing_-_Standard_-_v1_0.json",
+      "displayName": "CDW Baseline - Anti-Phishing - Standard - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Anti-Phishing",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Anti-Phishing",
+      "subArea": "Standard",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:e6d42aa59f6abb720b680bf5492e8ac70dd39df00663c6f45e81545b32ac8fdb",
+      "contentHash": "sha256:da448f8129555afc4e1ebf726e670097c7631997786fb126b744905a805a828f",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-standard"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-anti-phishing-anti-phishing-strict-tenant",
+      "path": "DefenderOffice365/AntiPhishing/CDW_Baseline_-_Anti-Phishing_-_Strict_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Anti-Phishing_-_Strict_-_v1_0.json",
+      "displayName": "CDW Baseline - Anti-Phishing - Strict - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Anti-Phishing",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Anti-Phishing",
+      "subArea": "Strict",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:dd2c74e9b0f832d0b8bc757ecd4d157c19ac2792fdcec739c75563a87e609d51",
+      "contentHash": "sha256:cb884e1a8c4f38c6af13c213b6eaad47bbb018bc7291a16df8c9dc7ffa72b77d",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-strict"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-anti-spam-anti-spam-standard-tenant",
+      "path": "DefenderOffice365/AntiSpam/CDW_Baseline_-_Anti-Spam_-_Standard_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Anti-Spam_-_Standard_-_v1_0.json",
+      "displayName": "CDW Baseline - Anti-Spam - Standard - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Anti-Spam",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Anti-Spam",
+      "subArea": "Standard",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:51ade89cd8ccbbde96582792a1b2c844a4f3b6f47003d205f26b8bdfa7ab6c2e",
+      "contentHash": "sha256:f59095b00bfc4bdfc0d0259fdb53629d89586600bcdd167bb28f46357262caac",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-standard"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-anti-spam-anti-spam-strict-tenant",
+      "path": "DefenderOffice365/AntiSpam/CDW_Baseline_-_Anti-Spam_-_Strict_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Anti-Spam_-_Strict_-_v1_0.json",
+      "displayName": "CDW Baseline - Anti-Spam - Strict - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Anti-Spam",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Anti-Spam",
+      "subArea": "Strict",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:b8fe192bd5576165655e558cdee9c0449c4d251e83cffbc21b945eb43e1ddca9",
+      "contentHash": "sha256:4b3713eb46df3c5aa14312bb213f72aaeda821ef997c991f37190debfdd280a0",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-strict"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
+      "path": "DefenderOffice365/OutboundSpam/CDW_Baseline_-_Outbound_Spam_-_Default_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Outbound_Spam_-_Default_-_v1_0.json",
+      "displayName": "CDW Baseline - Outbound Spam - Default - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Outbound Spam",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Outbound Spam",
+      "subArea": "Default",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:26d0eba13bd1051c3471e21ce495dd47a14874a63e2f1b5a3dc93d45a7cacffd",
+      "contentHash": "sha256:bfedef96e082e19d237e890dd3f6fbbc6fb364384da2bb69b4bd0f1dee4cf345",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-standard",
+        "mdo-strict"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
+      "path": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_SharePoint_OneDrive_and_Teams_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Safe_Attachments_-_SharePoint_OneDrive_and_Teams_-_v1_0.json",
+      "displayName": "CDW Baseline - Safe Attachments - SharePoint, OneDrive and Teams - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Safe Attachments",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Safe Attachments",
+      "subArea": "SharePoint OneDrive and Teams",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:d30dc57c9c46b587a33c6bf6600516e4a53122a3d68b2cc881ff0de1c298d36e",
+      "contentHash": "sha256:429a7ab393e4b01ffac23053f46b020b3296165c817ec1ad1804c6075859694c",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-standard",
+        "mdo-strict",
+        "mdo-collaboration"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-safe-attachments-safe-attachments-standard-tenant",
+      "path": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_Standard_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Safe_Attachments_-_Standard_-_v1_0.json",
+      "displayName": "CDW Baseline - Safe Attachments - Standard - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Safe Attachments",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Safe Attachments",
+      "subArea": "Standard",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:ab2e2c35aff5c8f9115617abed72fef192a104792732af21738b62f2500c2a27",
+      "contentHash": "sha256:441620d8dc16af382d9c6921d0dd36dcf8c77c481dec29c1933675bf1fb01219",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-standard"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-safe-attachments-safe-attachments-strict-tenant",
+      "path": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_Strict_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Safe_Attachments_-_Strict_-_v1_0.json",
+      "displayName": "CDW Baseline - Safe Attachments - Strict - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Safe Attachments",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Safe Attachments",
+      "subArea": "Strict",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:89fabaae22f783912bfdd0aae38567966b68008df613421d530584de26be2884",
+      "contentHash": "sha256:9ee289dd7870ec44e2dfa1b6842af4dc5cdc325fee06113f8f9816691b84e60d",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-strict"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-safe-links-safe-links-standard-tenant",
+      "path": "DefenderOffice365/SafeLinks/CDW_Baseline_-_Safe_Links_-_Standard_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Safe_Links_-_Standard_-_v1_0.json",
+      "displayName": "CDW Baseline - Safe Links - Standard - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Safe Links",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Safe Links",
+      "subArea": "Standard",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:a6ad4f1ab32303ebb7ecaad936c5d878eb95bc3ec82b40150668e84f4f5dfc0e",
+      "contentHash": "sha256:12d7c8bab7ab360f30afa28a7b756724bda514b4e11ed3985eaf502ecd2ed611",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-standard"
+      ]
+    },
+    {
+      "id": "defender-cross-platform-safe-links-safe-links-strict-tenant",
+      "path": "DefenderOffice365/SafeLinks/CDW_Baseline_-_Safe_Links_-_Strict_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_Safe_Links_-_Strict_-_v1_0.json",
+      "displayName": "CDW Baseline - Safe Links - Strict - v1.0",
+      "workload": "Defender",
+      "platform": "Cross-platform",
+      "policyType": "Safe Links",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Safe Links",
+      "subArea": "Strict",
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:97183acea1dc350d1bd40d5b983181812fc1ca83ea232111dae97830f4b3df0d",
+      "contentHash": "sha256:d5a13c908755a3762835922ad6ba9513c18c63ecad8d864428d1177b0aa06f84",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "policyType": "folder",
+        "scope": "inferred",
+        "platform": "inferred",
+        "area": "filename",
+        "subArea": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-strict"
+      ]
+    },
     {
       "id": "entra-cross-platform-tenant-policy-admin-consent-request-policy-tenant",
       "path": "EntraConfig/AdminConsentRequestPolicy/CDW_Baseline_AdminConsentRequestPolicy_v1_0.json",
@@ -3637,6 +4133,304 @@
       "notes": null,
       "bundles": [
         "entra-tenant-config"
+      ]
+    },
+    {
+      "id": "exchange-online-cross-platform-exchange-setting-cis-l1-block-additional-storage-providers-in-outlook-on-the-web-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Block_Additional_Storage_Providers_in_Outlook_on_the_Web_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_CIS_L1_-_Block_Additional_Storage_Providers_in_Outlook_on_the_Web_-_v1_0.json",
+      "displayName": "CDW Baseline - CIS L1 - Block Additional Storage Providers in Outlook on the Web - v1.0",
+      "workload": "Exchange Online",
+      "platform": "Cross-platform",
+      "policyType": "Exchange Setting",
+      "framework": "CIS L1",
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Block Additional Storage Providers in Outlook on the Web",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:7e8098f343d35a7fe57d1f28eea1c02cef1b7717b6b20b736cd819754bb302b3",
+      "contentHash": "sha256:018b58ebd47624bd2c094775856c74b128bae55833a6bfe556dbdb76e73116a5",
+      "derivedFrom": {
+        "framework": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "folder",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "exo-cis-hardening"
+      ]
+    },
+    {
+      "id": "exchange-online-cross-platform-exchange-setting-cis-l1-block-automatic-forwarding-to-remote-domains-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Block_Automatic_Forwarding_to_Remote_Domains_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_CIS_L1_-_Block_Automatic_Forwarding_to_Remote_Domains_-_v1_0.json",
+      "displayName": "CDW Baseline - CIS L1 - Block Automatic Forwarding to Remote Domains - v1.0",
+      "workload": "Exchange Online",
+      "platform": "Cross-platform",
+      "policyType": "Exchange Setting",
+      "framework": "CIS L1",
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Block Automatic Forwarding to Remote Domains",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:b2f58ae7996e91f87cdffce53cffecdb1d8cafd0e10a70c852f2ba9bdcd777ff",
+      "contentHash": "sha256:85008801c2ac766e2bc4268817fad03ec3f15a8ff0710c091b64a3859687ad0d",
+      "derivedFrom": {
+        "framework": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "folder",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "exo-cis-hardening"
+      ]
+    },
+    {
+      "id": "exchange-online-cross-platform-exchange-setting-cis-l1-disable-external-calendar-sharing-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Disable_External_Calendar_Sharing_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_CIS_L1_-_Disable_External_Calendar_Sharing_-_v1_0.json",
+      "displayName": "CDW Baseline - CIS L1 - Disable External Calendar Sharing - v1.0",
+      "workload": "Exchange Online",
+      "platform": "Cross-platform",
+      "policyType": "Exchange Setting",
+      "framework": "CIS L1",
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Disable External Calendar Sharing",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:13d13fdd2e4b66fe00eb14fa17b949593465ce9dd46f53036c5ee72d473a58e4",
+      "contentHash": "sha256:56389019b72ae76a59825e7c4bd1f614129258487e7fb2ceb16b607e5907b723",
+      "derivedFrom": {
+        "framework": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "folder",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "exo-cis-hardening"
+      ]
+    },
+    {
+      "id": "exchange-online-cross-platform-exchange-setting-cis-l1-disable-smtp-auth-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Disable_SMTP_AUTH_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_CIS_L1_-_Disable_SMTP_AUTH_-_v1_0.json",
+      "displayName": "CDW Baseline - CIS L1 - Disable SMTP AUTH - v1.0",
+      "workload": "Exchange Online",
+      "platform": "Cross-platform",
+      "policyType": "Exchange Setting",
+      "framework": "CIS L1",
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Disable SMTP AUTH",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:ea8ef99758a587880f61df58687c840ae06cfe2f04180a38a276039dc4fad45c",
+      "contentHash": "sha256:44c24ff9e1064c2fc5ce892784c1e237e7b5cfbe3950e5e09984ad121eecd711",
+      "derivedFrom": {
+        "framework": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "folder",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "exo-cis-hardening"
+      ]
+    },
+    {
+      "id": "exchange-online-cross-platform-exchange-setting-cis-l1-mailtips-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_MailTips_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_CIS_L1_-_MailTips_-_v1_0.json",
+      "displayName": "CDW Baseline - CIS L1 - MailTips - v1.0",
+      "workload": "Exchange Online",
+      "platform": "Cross-platform",
+      "policyType": "Exchange Setting",
+      "framework": "CIS L1",
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "MailTips",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:27dfa9bfc530eaa2edfcc596aef9be0b916867a5f596527af7bf6af7789fae6f",
+      "contentHash": "sha256:1f400341a4937d5525f3c991e044deb2cfc9323b6e1b0e2490e54389fa986163",
+      "derivedFrom": {
+        "framework": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "folder",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "exo-cis-hardening",
+        "exo-external-awareness"
+      ]
+    },
+    {
+      "id": "exchange-online-cross-platform-exchange-setting-cis-l1-organisation-auditing-and-modern-authentication-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Organisation_Auditing_and_Modern_Authentication_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_CIS_L1_-_Organisation_Auditing_and_Modern_Authentication_-_v1_0.json",
+      "displayName": "CDW Baseline - CIS L1 - Organisation Auditing and Modern Authentication - v1.0",
+      "workload": "Exchange Online",
+      "platform": "Cross-platform",
+      "policyType": "Exchange Setting",
+      "framework": "CIS L1",
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "Organisation Auditing and Modern Authentication",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:2f6ef72099eaed24c9ec88297f3933d4f616d19f85a8379ed40c166356196b57",
+      "contentHash": "sha256:76168ff6f9964b0efa295dd599ec00f7b9bc17462b86a18b2c297f73a1654013",
+      "derivedFrom": {
+        "framework": "filename",
+        "version": "filename",
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "folder",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [
+        "CIS L1"
+      ],
+      "notes": null,
+      "bundles": [
+        "exo-cis-hardening"
+      ]
+    },
+    {
+      "id": "exchange-online-cross-platform-exchange-setting-external-sender-tagging-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_External_Sender_Tagging_-_v1_0.json",
+      "fileName": "CDW_Baseline_-_External_Sender_Tagging_-_v1_0.json",
+      "displayName": "CDW Baseline - External Sender Tagging - v1.0",
+      "workload": "Exchange Online",
+      "platform": "Cross-platform",
+      "policyType": "Exchange Setting",
+      "framework": null,
+      "scope": "Tenant",
+      "version": "1.0",
+      "area": "External Sender Tagging",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:b5873b9266e20c3794cf3b9cdb91762e7aa7d0b56f19f0f6f6d5d542d6794537",
+      "contentHash": "sha256:3312456d49ec867ac41bf308a49af87a5cfdc91c4c37242f272c832994ebb9ac",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "folder",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "exo-external-awareness"
+      ]
+    },
+    {
+      "id": "exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant",
+      "path": "ExchangeOnline/SafeLinks/Safe_Links_excluding_email.json",
+      "fileName": "Safe_Links_excluding_email.json",
+      "displayName": "Safe Links excluding email",
+      "workload": "Exchange Online",
+      "platform": "Cross-platform",
+      "policyType": "Safe Links",
+      "framework": null,
+      "scope": "Tenant",
+      "version": null,
+      "area": "Safe Links excluding email",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:82d791ae53d68322e7a27cd6f24cdbefd8d34acdc455e1a54dec3ce59729dd10",
+      "contentHash": "sha256:78e5ee568812d4fcf851d930225f8d3160ab23f60d06c71c38c12f902e65ece3",
+      "derivedFrom": {
+        "workload": "folder",
+        "platform": "inferred",
+        "policyType": "folder",
+        "scope": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [],
+      "confidence": "medium",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": [
+        "mdo-collaboration"
       ]
     },
     {
@@ -10398,6 +11192,40 @@
       "frameworks": [],
       "notes": null,
       "bundles": []
+    },
+    {
+      "id": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "fileName": "CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "displayName": "CDW Baseline - SharePoint Tenant Settings",
+      "workload": "SharePoint",
+      "platform": "Cross-platform",
+      "policyType": null,
+      "framework": null,
+      "scope": null,
+      "version": "1.0",
+      "area": "Share Point Tenant Settings",
+      "subArea": null,
+      "securityDomain": null,
+      "settingCount": 0,
+      "policyHash": "sha256:39f9164dd8c41280c1094a71a070d6b2f3a75c8afeccfa30caac13d5e19242ec",
+      "contentHash": "sha256:4e4046d43c437975d906e174775007884291259726fba647adabb0ea3c711c8e",
+      "derivedFrom": {
+        "version": "filename",
+        "workload": "folder",
+        "platform": "inferred",
+        "area": "filename"
+      },
+      "unresolved": [
+        "policyType",
+        "scope"
+      ],
+      "confidence": "low",
+      "enrichment": null,
+      "tags": [],
+      "frameworks": [],
+      "notes": null,
+      "bundles": []
     }
   ],
   "bundles": [
@@ -11773,17 +12601,16 @@
         "Microsoft Defender for Office 365 Plan 1 or 2 (included in Microsoft 365 E5 and Business Premium)"
       ],
       "notes": "Users to protect from impersonation (for example executives) are agreed during design and added after deployment. Choose Standard or Strict, not both.",
-      "missing": [
+      "members": [
+        "defender-cross-platform-anti-malware-anti-malware-standard-tenant",
         "defender-cross-platform-anti-phishing-anti-phishing-standard-tenant",
         "defender-cross-platform-anti-spam-anti-spam-standard-tenant",
-        "defender-cross-platform-anti-malware-anti-malware-standard-tenant",
-        "defender-cross-platform-safe-attachments-safe-attachments-standard-tenant",
-        "defender-cross-platform-safe-links-safe-links-standard-tenant",
         "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
-        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant"
+        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-standard-tenant",
+        "defender-cross-platform-safe-links-safe-links-standard-tenant"
       ],
-      "members": [],
-      "memberCount": 0
+      "memberCount": 7
     },
     {
       "id": "mdo-strict",
@@ -11810,17 +12637,16 @@
         "Microsoft Defender for Office 365 Plan 1 or 2 (included in Microsoft 365 E5 and Business Premium)"
       ],
       "notes": "More messages are quarantined than with Standard; agree the quarantine release process with the customer. Choose Standard or Strict, not both.",
-      "missing": [
+      "members": [
+        "defender-cross-platform-anti-malware-anti-malware-strict-tenant",
         "defender-cross-platform-anti-phishing-anti-phishing-strict-tenant",
         "defender-cross-platform-anti-spam-anti-spam-strict-tenant",
-        "defender-cross-platform-anti-malware-anti-malware-strict-tenant",
-        "defender-cross-platform-safe-attachments-safe-attachments-strict-tenant",
-        "defender-cross-platform-safe-links-safe-links-strict-tenant",
         "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
-        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant"
+        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-strict-tenant",
+        "defender-cross-platform-safe-links-safe-links-strict-tenant"
       ],
-      "members": [],
-      "memberCount": 0
+      "memberCount": 7
     },
     {
       "id": "mdo-collaboration",
@@ -11842,12 +12668,11 @@
         "Microsoft Defender for Office 365 Plan 1 or 2"
       ],
       "notes": "Use instead of the email protection blocks where the customer does not want email links rewritten.",
-      "missing": [
+      "members": [
         "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
         "exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant"
       ],
-      "members": [],
-      "memberCount": 0
+      "memberCount": 2
     },
     {
       "id": "mdca-monitoring",
@@ -11868,8 +12693,10 @@
         "Microsoft Defender for Cloud Apps (included in Microsoft 365 E5)"
       ],
       "notes": "Template-based policies are created in the Defender portal; the deployment lists them as manual steps.",
-      "members": [],
-      "memberCount": 0
+      "members": [
+        "defender-cross-platform-cloud-apps-policy-bulk-download-monitoring-tenant"
+      ],
+      "memberCount": 1
     },
     {
       "id": "exo-cis-hardening",
@@ -11892,8 +12719,15 @@
         "Exchange Online (Microsoft 365 E3/E5 or Business Premium)"
       ],
       "notes": "Check for devices and applications that still send mail with SMTP AUTH (for example multifunction printers) before applying; enable it on those mailboxes only.",
-      "members": [],
-      "memberCount": 0
+      "members": [
+        "exchange-online-cross-platform-exchange-setting-cis-l1-block-additional-storage-providers-in-outlook-on-the-web-tenant",
+        "exchange-online-cross-platform-exchange-setting-cis-l1-block-automatic-forwarding-to-remote-domains-tenant",
+        "exchange-online-cross-platform-exchange-setting-cis-l1-disable-external-calendar-sharing-tenant",
+        "exchange-online-cross-platform-exchange-setting-cis-l1-disable-smtp-auth-tenant",
+        "exchange-online-cross-platform-exchange-setting-cis-l1-mailtips-tenant",
+        "exchange-online-cross-platform-exchange-setting-cis-l1-organisation-auditing-and-modern-authentication-tenant"
+      ],
+      "memberCount": 6
     },
     {
       "id": "exo-external-awareness",
@@ -11914,12 +12748,11 @@
         "Exchange Online"
       ],
       "notes": null,
-      "missing": [
-        "exchange-online-cross-platform-exchange-setting-external-sender-tagging-tenant",
-        "exchange-online-cross-platform-exchange-setting-cis-l1-mailtips-tenant"
+      "members": [
+        "exchange-online-cross-platform-exchange-setting-cis-l1-mailtips-tenant",
+        "exchange-online-cross-platform-exchange-setting-external-sender-tagging-tenant"
       ],
-      "members": [],
-      "memberCount": 0
+      "memberCount": 2
     }
   ],
   "conflicts": [
@@ -12212,6 +13045,84 @@
     }
   ],
   "issues": [
+    {
+      "policyId": "defender-cross-platform-cloud-apps-policy-bulk-download-monitoring-tenant",
+      "path": "DefenderCloudApps/Policies/Bulk_Download_Monitoring.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-anti-malware-anti-malware-standard-tenant",
+      "path": "DefenderOffice365/AntiMalware/CDW_Baseline_-_Anti-Malware_-_Standard_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-anti-malware-anti-malware-strict-tenant",
+      "path": "DefenderOffice365/AntiMalware/CDW_Baseline_-_Anti-Malware_-_Strict_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-anti-phishing-anti-phishing-standard-tenant",
+      "path": "DefenderOffice365/AntiPhishing/CDW_Baseline_-_Anti-Phishing_-_Standard_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-anti-phishing-anti-phishing-strict-tenant",
+      "path": "DefenderOffice365/AntiPhishing/CDW_Baseline_-_Anti-Phishing_-_Strict_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-anti-spam-anti-spam-standard-tenant",
+      "path": "DefenderOffice365/AntiSpam/CDW_Baseline_-_Anti-Spam_-_Standard_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-anti-spam-anti-spam-strict-tenant",
+      "path": "DefenderOffice365/AntiSpam/CDW_Baseline_-_Anti-Spam_-_Strict_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
+      "path": "DefenderOffice365/OutboundSpam/CDW_Baseline_-_Outbound_Spam_-_Default_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
+      "path": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_SharePoint_OneDrive_and_Teams_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-safe-attachments-safe-attachments-standard-tenant",
+      "path": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_Standard_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-safe-attachments-safe-attachments-strict-tenant",
+      "path": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_Strict_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-safe-links-safe-links-standard-tenant",
+      "path": "DefenderOffice365/SafeLinks/CDW_Baseline_-_Safe_Links_-_Standard_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "defender-cross-platform-safe-links-safe-links-strict-tenant",
+      "path": "DefenderOffice365/SafeLinks/CDW_Baseline_-_Safe_Links_-_Strict_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
     {
       "policyId": "entra-cross-platform-tenant-policy-admin-consent-request-policy-tenant",
       "path": "EntraConfig/AdminConsentRequestPolicy/CDW_Baseline_AdminConsentRequestPolicy_v1_0.json",
@@ -12689,6 +13600,54 @@
     {
       "policyId": "entra-cross-platform-directory-setting-password-rule-settings-tenant",
       "path": "EntraConfig/DirectorySettings/CDW_Baseline_DirectorySetting_PasswordRuleSettings_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-exchange-setting-cis-l1-block-additional-storage-providers-in-outlook-on-the-web-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Block_Additional_Storage_Providers_in_Outlook_on_the_Web_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-exchange-setting-cis-l1-block-automatic-forwarding-to-remote-domains-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Block_Automatic_Forwarding_to_Remote_Domains_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-exchange-setting-cis-l1-disable-external-calendar-sharing-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Disable_External_Calendar_Sharing_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-exchange-setting-cis-l1-disable-smtp-auth-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Disable_SMTP_AUTH_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-exchange-setting-cis-l1-mailtips-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_MailTips_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-exchange-setting-cis-l1-organisation-auditing-and-modern-authentication-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_CIS_L1_-_Organisation_Auditing_and_Modern_Authentication_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-exchange-setting-external-sender-tagging-tenant",
+      "path": "ExchangeOnline/ExchangeSettings/CDW_Baseline_-_External_Sender_Tagging_-_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
+    },
+    {
+      "policyId": "exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant",
+      "path": "ExchangeOnline/SafeLinks/Safe_Links_excluding_email.json",
       "type": "missingEnrichment",
       "detail": "No enrichment authored"
     },
@@ -13791,148 +14750,22 @@
       "detail": "No enrichment authored"
     },
     {
-      "policyId": "defender-cross-platform-anti-phishing-anti-phishing-standard-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-standard' references unknown policy 'defender-cross-platform-anti-phishing-anti-phishing-standard-tenant'"
+      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "type": "unresolved",
+      "detail": "Could not derive 'policyType'"
     },
     {
-      "policyId": "defender-cross-platform-anti-spam-anti-spam-standard-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-standard' references unknown policy 'defender-cross-platform-anti-spam-anti-spam-standard-tenant'"
+      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "type": "unresolved",
+      "detail": "Could not derive 'scope'"
     },
     {
-      "policyId": "defender-cross-platform-anti-malware-anti-malware-standard-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-standard' references unknown policy 'defender-cross-platform-anti-malware-anti-malware-standard-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-safe-attachments-safe-attachments-standard-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-standard' references unknown policy 'defender-cross-platform-safe-attachments-safe-attachments-standard-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-safe-links-safe-links-standard-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-standard' references unknown policy 'defender-cross-platform-safe-links-safe-links-standard-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-standard' references unknown policy 'defender-cross-platform-outbound-spam-outbound-spam-default-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-standard' references unknown policy 'defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant'"
-    },
-    {
-      "policyId": null,
-      "path": null,
-      "type": "emptyBundle",
-      "detail": "Bundle 'mdo-standard' matched no policies"
-    },
-    {
-      "policyId": "defender-cross-platform-anti-phishing-anti-phishing-strict-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-strict' references unknown policy 'defender-cross-platform-anti-phishing-anti-phishing-strict-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-anti-spam-anti-spam-strict-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-strict' references unknown policy 'defender-cross-platform-anti-spam-anti-spam-strict-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-anti-malware-anti-malware-strict-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-strict' references unknown policy 'defender-cross-platform-anti-malware-anti-malware-strict-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-safe-attachments-safe-attachments-strict-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-strict' references unknown policy 'defender-cross-platform-safe-attachments-safe-attachments-strict-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-safe-links-safe-links-strict-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-strict' references unknown policy 'defender-cross-platform-safe-links-safe-links-strict-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-strict' references unknown policy 'defender-cross-platform-outbound-spam-outbound-spam-default-tenant'"
-    },
-    {
-      "policyId": "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-strict' references unknown policy 'defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant'"
-    },
-    {
-      "policyId": null,
-      "path": null,
-      "type": "emptyBundle",
-      "detail": "Bundle 'mdo-strict' matched no policies"
-    },
-    {
-      "policyId": "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-collaboration' references unknown policy 'defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant'"
-    },
-    {
-      "policyId": "exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'mdo-collaboration' references unknown policy 'exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant'"
-    },
-    {
-      "policyId": null,
-      "path": null,
-      "type": "emptyBundle",
-      "detail": "Bundle 'mdo-collaboration' matched no policies"
-    },
-    {
-      "policyId": null,
-      "path": null,
-      "type": "emptyBundle",
-      "detail": "Bundle 'mdca-monitoring' matched no policies"
-    },
-    {
-      "policyId": null,
-      "path": null,
-      "type": "emptyBundle",
-      "detail": "Bundle 'exo-cis-hardening' matched no policies"
-    },
-    {
-      "policyId": "exchange-online-cross-platform-exchange-setting-external-sender-tagging-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'exo-external-awareness' references unknown policy 'exchange-online-cross-platform-exchange-setting-external-sender-tagging-tenant'"
-    },
-    {
-      "policyId": "exchange-online-cross-platform-exchange-setting-cis-l1-mailtips-tenant",
-      "path": null,
-      "type": "danglingBundleMember",
-      "detail": "Bundle 'exo-external-awareness' references unknown policy 'exchange-online-cross-platform-exchange-setting-cis-l1-mailtips-tenant'"
-    },
-    {
-      "policyId": null,
-      "path": null,
-      "type": "emptyBundle",
-      "detail": "Bundle 'exo-external-awareness' matched no policies"
+      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
+      "type": "missingEnrichment",
+      "detail": "No enrichment authored"
     },
     {
       "policyId": "intune-android-settings-catalog-restrictions-v1-0-test-device",
@@ -13949,6 +14782,12 @@
     {
       "policyId": "intune-ios-settings-catalog-restrictions-v1-0-test-device",
       "path": "IntuneConfig/SettingsCatalog/iOS_-_CDW_Baseline_-_SC_-_Restrictions_-_D_-_v1_0__TEST_.json",
+      "type": "orphan",
+      "detail": "Policy is in no bundle"
+    },
+    {
+      "policyId": "sharepoint-cross-platform-share-point-tenant-settings",
+      "path": "SharePointConfig/TenantSettings/CDW_Baseline_SharePointTenantSettings_v1_0.json",
       "type": "orphan",
       "detail": "Policy is in no bundle"
     }
