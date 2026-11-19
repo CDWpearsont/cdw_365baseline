@@ -1,0 +1,13 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - CIS L1 - MailTips - v1.0",
+  "description": "Turns on MailTips, including the warning when a message goes to external recipients and to large audiences (25 or more).",
+  "type": "OrganizationConfig",
+  "singleton": true,
+  "parameters": {
+    "MailTipsAllTipsEnabled": true,
+    "MailTipsExternalRecipientsTipsEnabled": true,
+    "MailTipsGroupMetricsEnabled": true,
+    "MailTipsLargeAudienceThreshold": 25
+  }
+}

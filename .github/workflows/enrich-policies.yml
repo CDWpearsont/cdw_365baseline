@@ -1,0 +1,90 @@
+name: AI policy enrichment
+
+# Drafts the customer-facing description of each policy (summary, rationale,
+# user impact, prerequisites, licensing) with Azure OpenAI, plus any taxonomy
+# the catalog builder could not derive, and opens a pull request for review.
+# Only policies that are new or whose configuration changed are sent to the AI.
+# Merged text is what the LLD uses, so nobody maintains it by hand.
+#
+# Secrets: AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY, AZURE_OPENAI_DEPLOYMENT
+# Repo setting: Settings > Actions > General > "Allow GitHub Actions to create
+# and approve pull requests" must be on for the PR to be opened.
+
+on:
+  schedule:
+    - cron: '20 6 * * *'   # daily, after the nightly exports and catalog rebuild
+  workflow_dispatch:
+    inputs:
+      max:
+        description: 'Most policies to enrich in this run'
+        default: '40'
+      base:
+        description: 'Branch to enrich and open the PR against'
+        default: 'main'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ai-enrichment
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    env:
+      BASE: ${{ inputs.base || 'main' }}
+      MAX: ${{ inputs.max || '40' }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.base || 'main' }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # One enrichment PR at a time: the next run starts once it is merged or closed.
+      - name: Check for an open enrichment PR
+        id: open
+        run: |
+          n=$(gh pr list --base "$BASE" --head "ai-enrichment/$BASE" --state open --json number --jq 'length')
+          echo "count=$n" >> "$GITHUB_OUTPUT"
+          if [ "$n" != "0" ]; then echo "An enrichment PR is waiting for review; skipping." >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Work to do
+        if: steps.open.outputs.count == '0'
+        run: python tools/enrich_policies.py --root . --dry-run | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Enrich
+        if: steps.open.outputs.count == '0'
+        env:
+          AZURE_OPENAI_ENDPOINT:   ${{ secrets.AZURE_OPENAI_ENDPOINT }}
+          AZURE_OPENAI_KEY:        ${{ secrets.AZURE_OPENAI_KEY }}
+          AZURE_OPENAI_DEPLOYMENT: ${{ secrets.AZURE_OPENAI_DEPLOYMENT }}
+        run: |
+          if [ -z "$AZURE_OPENAI_KEY" ]; then
+            echo "::error::Add the AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY and AZURE_OPENAI_DEPLOYMENT secrets"; exit 1
+          fi
+          python tools/enrich_policies.py --root . --max "$MAX" --report "$RUNNER_TEMP/report.md"
+
+      - name: Open pull request
+        if: steps.open.outputs.count == '0'
+        run: |
+          if [ -z "$(git status --porcelain -- metadata)" ]; then
+            echo "Nothing to enrich." >> "$GITHUB_STEP_SUMMARY"; exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          BRANCH="ai-enrichment/$BASE"
+          git checkout -B "$BRANCH"
+          git add metadata
+          git commit -q -m "AI enrichment: draft policy descriptions for review"
+          git push --force origin "$BRANCH"
+          cat "$RUNNER_TEMP/report.md" >> "$GITHUB_STEP_SUMMARY"
+          gh pr create --base "$BASE" --head "$BRANCH" \
+            --title "AI enrichment: policy descriptions for review ($(date -u '+%d %b %Y'))" \
+            --body-file "$RUNNER_TEMP/report.md" \
+          || echo "::warning::Could not open the PR. Turn on 'Allow GitHub Actions to create and approve pull requests', or open it from the $BRANCH branch."

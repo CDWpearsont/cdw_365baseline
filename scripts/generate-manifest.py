@@ -44,9 +44,10 @@ WORKLOADS = {
     'defenderendpoint':  ('defender',    'graph'),
     'defendercloudapps': ('mdca',        'powershell'),
     'defenderoffice':    ('mdo',         'powershell'),
+    'defenderoffice365': ('mdo',         'powershell'),
     'exchangeonline':    ('exchange',    'powershell'),
     'exchangeconfig':    ('exchange',    'powershell'),
-    'sharepointconfig':  ('sharepoint',  'powershell'),
+    'sharepointconfig':  ('sharepoint',  'graph'),
     'onedriveconfig':    ('onedrive',    'powershell'),
     'teamsconfig':       ('teams',       'powershell'),
     'purviewconfig':     ('purview',     'powershell'),
@@ -147,6 +148,44 @@ def normalise_platforms(raw):
     return out
 
 
+def derive_platforms_from_body(doc, workload):
+    """Platforms for objects with no `platforms` field or name prefix.
+
+    Conditional Access: conditions.platforms.includePlatforms (none or 'all'
+    means every platform). Windows-only Intune objects (Autopilot, ESP) are
+    recognised from @odata.type. Tenant-wide settings apply to every platform.
+    'all' tells the site the object passes any platform filter.
+    """
+    conditions = doc.get("conditions")
+    if isinstance(conditions, dict) and ("grantControls" in doc or "users" in conditions):
+        inc = (conditions.get("platforms") or {}).get("includePlatforms") or []
+        if isinstance(inc, str):
+            inc = [inc]
+        if not inc or any(str(v).lower() == "all" for v in inc):
+            return ["all"]
+        out = []
+        for v in inc:
+            v = str(v).lower()
+            p = ("ios" if v in ("ios", "iphone", "ipad") else "android" if "android" in v
+                 else "windows" if v.startswith("windows") else "macos" if v in ("macos", "mac")
+                 else "linux" if v == "linux" else None)
+            if p and p not in out:
+                out.append(p)
+        return sorted(out) or ["all"]
+    odata = str(doc.get("@odata.type", "")).lower()
+    if "windows" in odata:
+        return ["windows"]
+    if "macos" in odata:
+        return ["macos"]
+    if "ios" in odata:
+        return ["ios"]
+    if "android" in odata:
+        return ["android"]
+    if workload in ("entra", "sharepoint", "exchange", "mdca", "teams", "purview", "onedrive"):
+        return ["all"]
+    return []
+
+
 def derive_object_type(doc, category):
     """Determine the Graph object type from the JSON body, not the folder."""
     if "@odata.type" in doc:
@@ -200,6 +239,8 @@ def build_entry(repo, relpath, workload, category, deploy_via):
             p = PREFIX_PLATFORM.get(m.group(1).lower())
             if p:
                 platforms = [p]
+    if not platforms:
+        platforms = derive_platforms_from_body(doc, workload)
 
     tier = None
     m = CIS_RE.search(display) or CIS_ALT_RE.search(display)

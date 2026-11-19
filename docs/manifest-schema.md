@@ -10,7 +10,7 @@ filenames.
 | File | Written by | Committed | Purpose |
 |---|---|---|---|
 | `manifest.base.json` | GitHub Action | Yes | Everything derivable from the policy JSONs. Never hand-edit. |
-| `manifest.overlay.json` | Consultants, via the Settings page | Yes | Human judgement only. Small. |
+| `manifest.overlay.json` | Edited in GitHub (the site's Settings page was removed in Nov 2026) | Yes | Human judgement only. Small. |
 | `manifest.json` | GitHub Action | Yes | base + overlay merged. **This is what the front end fetches.** |
 
 Editing `manifest.base.json` or `manifest.json` by hand is pointless — the next
@@ -106,9 +106,8 @@ manifest.json committed
         ↓
 front end fetches manifest.json
         ↓
-unenriched entries surface in the Settings page
-        ↓
-AI drafts overlay values → consultant approves → overlay updated
+per-policy prose now comes from the AI enrichment workflow
+(metadata sidecars → catalog.json, reviewed in a PR); see catalog-schema.md
 ```
 
 Pull requests run with `--check`, which fails if the committed manifest is stale

@@ -1,0 +1,10 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - CIS L1 - Disable External Calendar Sharing - v1.0",
+  "description": "Turns off the default sharing policy, so users cannot share calendar details with external people.",
+  "type": "SharingPolicy",
+  "identity": "Default Sharing Policy",
+  "parameters": {
+    "Enabled": false
+  }
+}

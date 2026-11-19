@@ -71,7 +71,13 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-settings-catalog-device-security-local-security-policies-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user"
+        "intune-windows-compliance-policy-defender-for-endpoint-user",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
+        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device",
+        "intune-windows-settings-catalog-copilot-readiness-recall-device",
+        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
+        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user"
       ],
       "order": 30,
       "licensing": [
@@ -103,7 +109,13 @@
         "intune-windows-update-ring-ring-2-uat-device",
         "intune-windows-settings-catalog-device-security-local-security-policies-device",
         "intune-windows-settings-catalog-internet-explorer-legacy-security-device",
-        "intune-windows-compliance-policy-defender-for-endpoint-user"
+        "intune-windows-compliance-policy-defender-for-endpoint-user",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device",
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device",
+        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device",
+        "intune-windows-settings-catalog-copilot-readiness-recall-device",
+        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
+        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user"
       ],
       "order": 35,
       "licensing": [
@@ -266,7 +278,8 @@
       ],
       "rule": {
         "workload": "Intune",
-        "platform": "macOS"
+        "platform": "macOS",
+        "framework": null
       },
       "include": [],
       "exclude": [],
@@ -347,7 +360,7 @@
       "exclude": [],
       "order": 100,
       "prerequisites": [
-        "Two break-glass accounts, excluded from every policy",
+        "Two break-glass accounts in a group, picked or created at the tenant inputs step and excluded from every policy",
         "Named locations marked as trusted (for security info registration)",
         "Check sign-in logs for device code flow use (Teams Rooms, CLI tools) before enabling CDW015"
       ],
@@ -404,7 +417,7 @@
       "exclude": [],
       "order": 120,
       "prerequisites": [
-        "Two break-glass accounts, excluded from every policy",
+        "Two break-glass accounts in a group, picked or created at the tenant inputs step and excluded from every policy",
         "Device compliance policies assigned before CDW016 is enabled",
         "App protection policies assigned before CDW017 is enabled"
       ],
@@ -564,8 +577,8 @@
       "exclude": [],
       "order": 160,
       "prerequisites": [
-        "One security group per persona, assigned to that persona's policies (policies deploy targeting no users)",
-        "Break-glass accounts excluded from every policy",
+        "One security group per persona, picked or created at the tenant inputs step and assigned to that persona's policies",
+        "Break-glass group, excluded from every policy at the tenant inputs step",
         "Named locations for service accounts",
         "Terms of Use objects for CDW401/405/501/505 (the grant is added per tenant)"
       ],
@@ -645,7 +658,7 @@
       "exclude": [],
       "order": 180,
       "prerequisites": [
-        "One group per service account persona",
+        "One group per service account persona, plus the office public IP ranges as a trusted location (both set at the tenant inputs step)",
         "Named locations for each service's source IPs"
       ],
       "licensing": [
@@ -675,6 +688,331 @@
       "licensing": [
         "Microsoft Entra ID P1"
       ]
+    },
+    {
+      "id": "intune-win-epm-support",
+      "name": "Windows - Endpoint Privilege Management (support approval)",
+      "description": "Standard users request elevation from IT for anything not covered by an elevation rule. All elevations are reported.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Privilege Management",
+        "Support approval"
+      ],
+      "include": [
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-support-approval-device"
+      ],
+      "order": 200,
+      "rule": null,
+      "exclude": [],
+      "licensing": [
+        "Microsoft 365 E5 (includes Endpoint Privilege Management), or the Endpoint Privilege Management add-on with Intune Plan 1"
+      ],
+      "prerequisites": [
+        "Remove users from the local Administrators group (the CDW standard Local Administrators policy does this)",
+        "Elevation rules for the customer's line-of-business apps, written from the elevation report after a few weeks of reporting"
+      ],
+      "notes": "Not validated in the CDW reference tenant: the developer tenant can't hold Endpoint Privilege Management licences. Test with a pilot group first."
+    },
+    {
+      "id": "intune-win-epm-user",
+      "name": "Windows - Endpoint Privilege Management (user confirmation)",
+      "description": "Standard users elevate after a business justification and Windows authentication. All elevations are reported. A stepping stone while elevation rules are written.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Privilege Management",
+        "User confirmation"
+      ],
+      "include": [
+        "intune-windows-endpoint-security-endpoint-privilege-management-elevation-settings-user-confirmation-device"
+      ],
+      "order": 201,
+      "rule": null,
+      "exclude": [],
+      "licensing": [
+        "Microsoft 365 E5 (includes Endpoint Privilege Management), or the Endpoint Privilege Management add-on with Intune Plan 1"
+      ],
+      "prerequisites": [
+        "Remove users from the local Administrators group (the CDW standard Local Administrators policy does this)",
+        "Elevation rules for the customer's line-of-business apps, written from the elevation report after a few weeks of reporting"
+      ],
+      "notes": "Not validated in the CDW reference tenant: the developer tenant can't hold Endpoint Privilege Management licences. Test with a pilot group first."
+    },
+    {
+      "id": "intune-win-shared-devices",
+      "name": "Windows - Shared and frontline devices",
+      "description": "Shared PC mode for hot desks, frontline and shift workers: one Entra user at a time, automatic profile clean-up, OneDrive sync, sign-in on wake, fast first sign-in and web sign-in.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Shared Devices",
+        "Shared PC"
+      ],
+      "rule": null,
+      "include": [
+        "intune-windows-settings-catalog-shared-devices-shared-pc-mode-device"
+      ],
+      "exclude": [],
+      "order": 210,
+      "licensing": [
+        "Microsoft Intune",
+        "Windows 11 Pro, Enterprise or Education"
+      ],
+      "prerequisites": [
+        "A device group containing only the shared devices: assign this policy to devices, never to users",
+        "Devices Entra joined (Autopilot recommended); Shared PC mode applies at the next sign-out",
+        "Temporary Access Pass enabled if frontline users sign in with web sign-in"
+      ],
+      "notes": "Shared iPads (Apple Business Manager + automated device enrolment) and Android shared device mode (dedicated device enrolment profile with Entra shared mode) are set up per tenant in Intune and are not in the library."
+    },
+    {
+      "id": "intune-win-copilot-readiness",
+      "name": "Windows - Copilot readiness",
+      "description": "Windows and Edge settings for Microsoft 365 Copilot: the Copilot key opens the work Copilot app, Copilot Chat is available in Edge with page context for work profiles, agentic browsing stays off and Recall stays off until assessed.",
+      "path": [
+        "Intune",
+        "Windows",
+        "Copilot",
+        "Readiness"
+      ],
+      "rule": null,
+      "include": [
+        "intune-windows-settings-catalog-copilot-readiness-recall-device",
+        "intune-windows-settings-catalog-copilot-readiness-copilot-key-user",
+        "intune-windows-settings-catalog-copilot-readiness-microsoft-edge-copilot-user"
+      ],
+      "exclude": [],
+      "order": 220,
+      "licensing": [
+        "Microsoft Intune",
+        "Microsoft 365 Copilot Chat is included for Entra ID users; Microsoft 365 Copilot licences for in-app Copilot and work grounding"
+      ],
+      "prerequisites": [
+        "Microsoft 365 Copilot app deployed (it installs with Microsoft 365 Apps)",
+        "Windows 11 24H2 or later for the Copilot key and Recall settings",
+        "Before licensing Microsoft 365 Copilot: review SharePoint oversharing (site access reviews, sensitivity labels). Restricted SharePoint Search and Purview DLP for Copilot will follow in the PowerShell-based building blocks"
+      ],
+      "notes": "The CDW standard \"Turn off Windows Copilot\" user policy only affects the retired Copilot sidebar and doesn't block the Microsoft 365 Copilot app; Microsoft is deprecating it. Remove it from customers adopting Copilot."
+    },
+    {
+      "id": "intune-macos-cis-l1",
+      "name": "macOS - CIS Level 1",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 1: FileVault, firewall, restrictions, passcode, software updates, power and login window, Apple Intelligence and Siri. Gatekeeper is a separate block so Level 2 can replace it.",
+      "path": [
+        "Intune",
+        "macOS",
+        "Security Baselines",
+        "CIS L1"
+      ],
+      "rule": {
+        "workload": "Intune",
+        "platform": "macOS",
+        "frameworks": "CIS L1"
+      },
+      "include": [],
+      "exclude": [
+        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
+      ],
+      "order": 40,
+      "notes": "Not applied (organisation-specific or disruptive): 2.5.1.1 Activation Lock, 2.7.1 profile removal password (absent is compliant), 2.9.1.7 passcode regex, 2.9.1.13 change password at next auth, 2.11.3.1 system extension overrides (default already off), 2.13.1 profile removal (set on the ADE enrolment profile). Blocking iCloud Drive, AirDrop and Handoff changes how users work: brief the customer before deploying. Full mapping: docs/CIS-macOS-26.md.",
+      "licensing": [
+        "Microsoft Intune"
+      ],
+      "prerequisites": [
+        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
+        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
+        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
+      ]
+    },
+    {
+      "id": "intune-macos-cis-l1-gatekeeper",
+      "name": "macOS - CIS Level 1 Gatekeeper",
+      "description": "Gatekeeper for App Store and identified developer apps, without user override. Replaced by the Level 2 App Store-only policy.",
+      "path": [
+        "Intune",
+        "macOS",
+        "Security Baselines",
+        "CIS L1",
+        "Gatekeeper"
+      ],
+      "rule": null,
+      "include": [
+        "intune-macos-settings-catalog-cis-l1-gatekeeper-app-store-and-identified-developers-device"
+      ],
+      "exclude": [],
+      "order": 41,
+      "licensing": [
+        "Microsoft Intune"
+      ],
+      "prerequisites": [
+        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
+        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
+        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
+      ]
+    },
+    {
+      "id": "intune-macos-cis-l2",
+      "name": "macOS - CIS Level 2",
+      "description": "CIS Apple macOS 26 Tahoe Intune Benchmark v1.0.0 Level 2 additions: App Store-only Gatekeeper and software updates, no content caching, Game Center or password AutoFill, complex passwords. Use with Level 1.",
+      "path": [
+        "Intune",
+        "macOS",
+        "Security Baselines",
+        "CIS L2"
+      ],
+      "rule": {
+        "workload": "Intune",
+        "platform": "macOS",
+        "frameworks": "CIS L2"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 42,
+      "notes": "Not applied: 2.8.29 Touch ID for unlock (set to the customer's policy). App Store-only Gatekeeper means every non-App Store app must be deployed through Intune.",
+      "licensing": [
+        "Microsoft Intune"
+      ],
+      "prerequisites": [
+        "Macs enrolled through Apple Business Manager automated device enrolment (supervised): most restrictions only apply to supervised Macs",
+        "macOS 26 Tahoe (Declarative Device Management passcode, software update and Apple Intelligence settings need macOS 14 or later)",
+        "Defender for Endpoint, Platform SSO, OneDrive and Edge come from the CDW standard macOS policies; CIS does not cover them"
+      ]
+    },
+    {
+      "id": "mdo-standard",
+      "name": "Defender for Office 365 - Standard protection",
+      "description": "Microsoft's recommended Standard settings for anti-phishing (with impersonation protection), anti-spam, anti-malware, Safe Attachments and Safe Links, applied to every accepted domain, plus outbound spam limits with external auto-forwarding off and Safe Attachments for SharePoint, OneDrive and Teams.",
+      "path": [
+        "Defender",
+        "Email and collaboration",
+        "Standard"
+      ],
+      "rule": null,
+      "include": [
+        "defender-cross-platform-anti-phishing-anti-phishing-standard-tenant",
+        "defender-cross-platform-anti-spam-anti-spam-standard-tenant",
+        "defender-cross-platform-anti-malware-anti-malware-standard-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-standard-tenant",
+        "defender-cross-platform-safe-links-safe-links-standard-tenant",
+        "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant"
+      ],
+      "exclude": [],
+      "order": 200,
+      "licensing": [
+        "Microsoft Defender for Office 365 Plan 1 or 2 (included in Microsoft 365 E5 and Business Premium)"
+      ],
+      "notes": "Users to protect from impersonation (for example executives) are agreed during design and added after deployment. Choose Standard or Strict, not both."
+    },
+    {
+      "id": "mdo-strict",
+      "name": "Defender for Office 365 - Strict protection",
+      "description": "Microsoft's recommended Strict settings: more aggressive phishing threshold, and spam, bulk and spoofed mail quarantined rather than delivered to Junk. For organisations or groups at higher risk.",
+      "path": [
+        "Defender",
+        "Email and collaboration",
+        "Strict"
+      ],
+      "rule": null,
+      "include": [
+        "defender-cross-platform-anti-phishing-anti-phishing-strict-tenant",
+        "defender-cross-platform-anti-spam-anti-spam-strict-tenant",
+        "defender-cross-platform-anti-malware-anti-malware-strict-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-strict-tenant",
+        "defender-cross-platform-safe-links-safe-links-strict-tenant",
+        "defender-cross-platform-outbound-spam-outbound-spam-default-tenant",
+        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant"
+      ],
+      "exclude": [],
+      "order": 210,
+      "licensing": [
+        "Microsoft Defender for Office 365 Plan 1 or 2 (included in Microsoft 365 E5 and Business Premium)"
+      ],
+      "notes": "More messages are quarantined than with Standard; agree the quarantine release process with the customer. Choose Standard or Strict, not both."
+    },
+    {
+      "id": "mdo-collaboration",
+      "name": "Defender for Office 365 - Files and Teams",
+      "description": "Safe Attachments for SharePoint, OneDrive and Teams with Safe Documents, and Safe Links at time of click in Teams and Office apps without rewriting email links.",
+      "path": [
+        "Defender",
+        "Email and collaboration",
+        "Files and Teams"
+      ],
+      "rule": null,
+      "include": [
+        "defender-cross-platform-safe-attachments-safe-attachments-sharepoint-onedrive-and-teams-tenant",
+        "exchange-online-cross-platform-safe-links-safe-links-excluding-email-tenant"
+      ],
+      "exclude": [],
+      "order": 220,
+      "licensing": [
+        "Microsoft Defender for Office 365 Plan 1 or 2"
+      ],
+      "notes": "Use instead of the email protection blocks where the customer does not want email links rewritten."
+    },
+    {
+      "id": "mdca-monitoring",
+      "name": "Defender for Cloud Apps - Activity monitoring",
+      "description": "Alerts on unusual activity in cloud apps, starting with bulk downloads by a single user.",
+      "path": [
+        "Defender",
+        "Cloud apps"
+      ],
+      "rule": {
+        "workload": "Defender",
+        "policyType": "Cloud Apps Policy"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 230,
+      "licensing": [
+        "Microsoft Defender for Cloud Apps (included in Microsoft 365 E5)"
+      ],
+      "notes": "Template-based policies are created in the Defender portal; the deployment lists them as manual steps."
+    },
+    {
+      "id": "exo-cis-hardening",
+      "name": "Exchange Online - CIS Level 1 hardening",
+      "description": "CIS Microsoft 365 Foundations Level 1 settings for Exchange Online: SMTP AUTH off, mailbox auditing and modern authentication on, no automatic forwarding to remote domains, no external calendar sharing, no third-party storage in Outlook on the web, and MailTips.",
+      "path": [
+        "Exchange Online",
+        "Hardening",
+        "CIS L1"
+      ],
+      "rule": {
+        "workload": "Exchange Online",
+        "policyType": "Exchange Setting",
+        "framework": "CIS L1"
+      },
+      "include": [],
+      "exclude": [],
+      "order": 300,
+      "licensing": [
+        "Exchange Online (Microsoft 365 E3/E5 or Business Premium)"
+      ],
+      "notes": "Check for devices and applications that still send mail with SMTP AUTH (for example multifunction printers) before applying; enable it on those mailboxes only."
+    },
+    {
+      "id": "exo-external-awareness",
+      "name": "Exchange Online - External sender awareness",
+      "description": "External tag on messages from outside the organisation and MailTips warnings when writing to external recipients or large audiences.",
+      "path": [
+        "Exchange Online",
+        "User awareness"
+      ],
+      "rule": null,
+      "include": [
+        "exchange-online-cross-platform-exchange-setting-external-sender-tagging-tenant",
+        "exchange-online-cross-platform-exchange-setting-cis-l1-mailtips-tenant"
+      ],
+      "exclude": [],
+      "order": 310,
+      "licensing": [
+        "Exchange Online"
+      ],
+      "notes": null
     }
   ],
   "goals": [
@@ -708,6 +1046,24 @@
           "note": "CDW standard",
           "bundles": [
             "intune-macos-cdw-standard"
+          ]
+        },
+        {
+          "platform": "macOS",
+          "label": "macOS (CIS)",
+          "note": "CIS Level 1",
+          "bundles": [
+            "intune-macos-cis-l1",
+            "intune-macos-cis-l1-gatekeeper"
+          ]
+        },
+        {
+          "platform": "macOS",
+          "label": "macOS (CIS strict)",
+          "note": "CIS Level 1 + Level 2",
+          "bundles": [
+            "intune-macos-cis-l1",
+            "intune-macos-cis-l2"
           ]
         }
       ]
@@ -985,6 +1341,158 @@
           ]
         }
       ]
+    },
+    {
+      "id": "least-privilege",
+      "tower": "Intune",
+      "icon": "key",
+      "title": "Remove local admin rights",
+      "outcome": "Users work as standard users and elevate through Endpoint Privilege Management, with every elevation reported.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "IT approves each request",
+          "bundles": [
+            "intune-win-epm-support"
+          ]
+        },
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11 (self-service)",
+          "note": "Users justify and re-authenticate",
+          "bundles": [
+            "intune-win-epm-user"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frontline",
+      "tower": "Intune",
+      "icon": "device",
+      "title": "Set up shared and frontline devices",
+      "outcome": "Shared Windows devices for hot desks and shift workers: one user at a time, profiles cleaned up automatically, quick first sign-in.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "Shared PC mode",
+          "bundles": [
+            "intune-win-shared-devices"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "copilot-ready",
+      "tower": "Intune",
+      "icon": "rocket",
+      "title": "Prepare devices for Microsoft 365 Copilot",
+      "outcome": "Users reach work Copilot from the Copilot key and Edge, with agentic features and Recall held back until assessed.",
+      "options": [
+        {
+          "platform": "Windows",
+          "label": "Windows 10/11",
+          "note": "Windows and Edge",
+          "bundles": [
+            "intune-win-copilot-readiness"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "email-threat-protection",
+      "tower": "Defender",
+      "icon": "shield",
+      "title": "Protect email from phishing and malware",
+      "outcome": "Anti-phishing with impersonation protection, anti-spam, anti-malware, Safe Attachments and Safe Links for every mailbox, to Microsoft's recommended settings.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "Standard",
+          "note": "Microsoft recommended",
+          "bundles": [
+            "mdo-standard"
+          ]
+        },
+        {
+          "platform": "Cross-platform",
+          "label": "Strict",
+          "note": "Higher-risk organisations",
+          "bundles": [
+            "mdo-strict"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collaboration-protection",
+      "tower": "Defender",
+      "icon": "layers",
+      "title": "Protect files and Teams",
+      "outcome": "Malicious files in SharePoint, OneDrive and Teams are detected and locked, and links in Teams and Office apps are checked when clicked.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "Files and Teams",
+          "note": "Without email link rewriting",
+          "bundles": [
+            "mdo-collaboration"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cloud-app-monitoring",
+      "tower": "Defender",
+      "icon": "target",
+      "title": "Monitor cloud app activity",
+      "outcome": "Alerts on unusual activity in cloud apps, such as a user downloading large amounts of data.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "Activity alerts",
+          "note": "Defender for Cloud Apps",
+          "bundles": [
+            "mdca-monitoring"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exchange-hardening",
+      "tower": "Exchange Online",
+      "icon": "mail",
+      "title": "Lock down Exchange Online",
+      "outcome": "Legacy SMTP authentication off, auditing on, no automatic forwarding or external calendar sharing, aligned to the CIS Microsoft 365 Foundations benchmark.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "CIS Level 1",
+          "note": "CIS Microsoft 365 Foundations",
+          "bundles": [
+            "exo-cis-hardening"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "external-awareness",
+      "tower": "Exchange Online",
+      "icon": "building",
+      "title": "Help users spot external mail",
+      "outcome": "Messages from outside the organisation are tagged External, and users are warned before writing to external recipients or large audiences.",
+      "options": [
+        {
+          "platform": "Cross-platform",
+          "label": "External tagging and MailTips",
+          "note": "",
+          "bundles": [
+            "exo-external-awareness"
+          ]
+        }
+      ]
     }
   ],
   "towers": [
@@ -1004,7 +1512,7 @@
       "id": "Defender",
       "name": "Microsoft Defender",
       "icon": "shield",
-      "blurb": "Endpoint and Office threat protection"
+      "blurb": "Email, collaboration and cloud app protection (endpoint protection is in Intune)"
     },
     {
       "id": "Purview",
@@ -1096,6 +1604,26 @@
         },
         {
           "goal": "risk",
+          "platform": "Cross-platform"
+        }
+      ]
+    },
+    {
+      "id": "secure-email",
+      "icon": "mail",
+      "title": "Secure email",
+      "outcome": "Defender for Office 365 protection at Microsoft's Standard settings, Exchange Online hardened to CIS Level 1, and external sender awareness.",
+      "includes": [
+        {
+          "goal": "email-threat-protection",
+          "platform": "Cross-platform"
+        },
+        {
+          "goal": "exchange-hardening",
+          "platform": "Cross-platform"
+        },
+        {
+          "goal": "external-awareness",
           "platform": "Cross-platform"
         }
       ]

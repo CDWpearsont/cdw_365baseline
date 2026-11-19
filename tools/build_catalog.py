@@ -69,6 +69,18 @@ POLICY_TYPE_TOKENS = {
     "DirectorySetting": "Directory Setting",
 }
 
+# Folder -> policy type for workloads applied by the PowerShell runner.
+PATH_POLICY_TYPE = {
+    "SafeLinks": "Safe Links",
+    "SafeAttachments": "Safe Attachments",
+    "AntiPhishing": "Anti-Phishing",
+    "AntiSpam": "Anti-Spam",
+    "AntiMalware": "Anti-Malware",
+    "OutboundSpam": "Outbound Spam",
+    "ExchangeSettings": "Exchange Setting",
+    "DefenderCloudApps": "Cloud Apps Policy",
+}
+
 # Where a policy type has an unambiguous scope, the filename need not say so.
 DEFAULT_SCOPE_BY_TYPE = {
     "Conditional Access": "User",
@@ -109,6 +121,9 @@ FOLDER_WORKLOAD = {
     "EntraConfig": "Entra",
     "DefenderConfig": "Defender",
     "ExchangeConfig": "Exchange Online",
+    "ExchangeOnline": "Exchange Online",
+    "DefenderCloudApps": "Defender",
+    "DefenderOffice365": "Defender",
     "SharePointConfig": "SharePoint",
     "TeamsConfig": "Teams",
     "PurviewConfig": "Purview",
@@ -330,6 +345,31 @@ def detect_security_domain(body: dict) -> str | None:
     return "Identity Security"
 
 
+# Keys that change without the configuration changing: object ids, timestamps,
+# the version-stamped name, and service-written counters.
+VOLATILE_KEYS = {"id", "createdDateTime", "lastModifiedDateTime", "modifiedDateTime", "version",
+                 "roleScopeTagIds", "@odata.context", "@odata.etag", "settingCount", "creationSource",
+                 "priorityMetaData", "isAssigned", "name", "displayName", "templateId"}
+
+
+def content_hash(body: dict) -> str:
+    """Hash of what the policy configures, ignoring ids, timestamps and the name.
+
+    Enrichment uses this rather than the file hash, so a re-export or a version
+    bump in the name does not mark the enrichment stale; a settings change does.
+    """
+    def clean(node, depth=0):
+        if isinstance(node, dict):
+            return {k: clean(v, depth + 1) for k, v in sorted(node.items())
+                    if not (k in VOLATILE_KEYS and depth == 0) and k not in ("@odata.context", "createdDateTime",
+                                                                             "lastModifiedDateTime")}
+        if isinstance(node, list):
+            return [clean(v, depth + 1) for v in node]
+        return node
+    canon = json.dumps(clean(body), sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return "sha256:" + hashlib.sha256(canon.encode("utf-8")).hexdigest()
+
+
 def file_hash(path: str) -> str:
     h = hashlib.sha256()
     with open(path, "rb") as fh:
@@ -421,6 +461,17 @@ def derive(rel_path: str, abs_path: str) -> dict:
         elif rec["policyType"] in DEFAULT_SCOPE_BY_TYPE:
             rec["scope"], source["scope"] = DEFAULT_SCOPE_BY_TYPE[rec["policyType"]], "inferred"
 
+    # PowerShell-runner workloads have no Graph body hints; the folder names the type.
+    if not rec["policyType"]:
+        for part, ptype in PATH_POLICY_TYPE.items():
+            if f"/{part}/" in "/" + rel_path.replace("\\", "/"):
+                rec["policyType"], source["policyType"] = ptype, "folder"
+                if not rec["scope"]:
+                    rec["scope"], source["scope"] = "Tenant", "inferred"
+                if not rec["platform"]:
+                    rec["platform"], source["platform"] = "Cross-platform", "inferred"
+                break
+
     if not rec["policyType"] and rec["workload"] == "Entra":
         rec["policyType"], source["policyType"] = "Tenant Policy", "inferred"
         if not rec["scope"]:
@@ -464,6 +515,7 @@ def derive(rel_path: str, abs_path: str) -> dict:
         **rec,
         "settingCount": len(setting_ids),
         "policyHash": file_hash(abs_path),
+        "contentHash": content_hash(body),
         "derivedFrom": source,
         "unresolved": unresolved,
         "confidence": confidence,
@@ -497,7 +549,7 @@ def apply_sidecar(policy: dict, meta: dict) -> dict:
 
     enrichment = meta.get("enrichment") or {}
     if enrichment:
-        stale = enrichment.get("sourceHash") not in (None, policy["policyHash"])
+        stale = enrichment.get("sourceHash") not in (None, policy["policyHash"], policy.get("contentHash"))
         enrichment = {**enrichment, "stale": stale}
     policy["enrichment"] = enrichment or None
     policy["tags"] = meta.get("tags") or []
@@ -558,6 +610,12 @@ def resolve_bundles(policies: list[dict], bundles: list[dict]) -> list[dict]:
 # Build
 # --------------------------------------------------------------------------
 
+# Every top-level folder that holds library policies. Workflows call this script
+# without --policy-dirs so the list lives in one place, on the branch being built
+# (a workflow file on main can't drop folders that only exist on test).
+POLICY_DIRS = ["IntuneConfig", "EntraConfig", "SharePointConfig", "ExchangeOnline", "DefenderCloudApps", "DefenderOffice365"]
+
+
 def discover(root: str, policy_dirs: list[str], metadata_dir: str) -> list[str]:
     found = []
     search_roots = [os.path.join(root, d) for d in policy_dirs] if policy_dirs else [root]
@@ -576,6 +634,12 @@ def discover(root: str, policy_dirs: list[str], metadata_dir: str) -> list[str]:
 def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: str) -> dict:
     issues: list[dict] = []
     rel_paths = discover(root, policy_dirs, metadata_dir)
+    # Policies that can't be held in the reference tenant (see library-only.json).
+    library_only = set()
+    lo_path = os.path.join(root, "library-only.json")
+    if os.path.exists(lo_path):
+        with open(lo_path, encoding="utf-8-sig") as fh:
+            library_only = {f["path"] for f in json.load(fh).get("files", [])}
 
     policies = []
     for rel in rel_paths:
@@ -586,6 +650,8 @@ def build(root: str, policy_dirs: list[str], metadata_dir: str, bundles_file: st
             continue
         policy = derive(rel, abs_path)
         policy = apply_sidecar(policy, load_sidecar(sidecar_path(root, rel, metadata_dir)))
+        if rel.replace("\\", "/") in library_only:
+            policy["libraryOnly"] = True
         policies.append(policy)
 
     # Identity collisions would silently merge two distinct policies.
@@ -759,8 +825,8 @@ def main() -> int:
     ap.add_argument("--out", default="catalog.json", help="Output path, relative to root")
     ap.add_argument("--metadata-dir", default="metadata", help="Sidecar metadata tree")
     ap.add_argument("--bundles", default="bundles.json", help="Bundle definitions, relative to root")
-    ap.add_argument("--policy-dirs", nargs="*", default=[],
-                    help="Restrict discovery to these top-level folders")
+    ap.add_argument("--policy-dirs", nargs="*", default=POLICY_DIRS,
+                    help="Top-level policy folders (default: POLICY_DIRS, the single list every workflow uses)")
     ap.add_argument("--report", action="store_true", help="Print a summary instead of writing")
     ap.add_argument("--fail-on", nargs="*", default=[],
                     help="Issue types that should exit non-zero, e.g. duplicateId unreadable")

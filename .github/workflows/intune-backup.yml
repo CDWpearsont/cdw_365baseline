@@ -106,7 +106,14 @@ jobs:
             function Clean-FolderForCDW {
               param([string]$FolderPath, [string[]]$CurrentPolicyNames)
               if (-not (Test-Path $FolderPath)) { return }
+              # Library-only policies can't exist in the reference tenant (licensing), so keep them.
+              $libraryOnly = @()
+              if (Test-Path ./library-only.json) {
+                $libraryOnly = @((Get-Content ./library-only.json -Raw | ConvertFrom-Json).files | ForEach-Object { $_.path })
+              }
               Get-ChildItem -Path $FolderPath -File -Filter "*.json" | ForEach-Object {
+                $rel = [IO.Path]::GetRelativePath((Get-Location).Path, $_.FullName) -replace '\\', '/'
+                if ($libraryOnly -contains $rel) { return }
                 if ($CurrentPolicyNames -notcontains $_.BaseName) {
                   Write-Output "Removing obsolete: $($_.Name)"
                   Remove-Item $_.FullName -Force
@@ -440,6 +447,45 @@ jobs:
               Clean-FolderForCDW -FolderPath $mamPath -CurrentPolicyNames $allMAMNames
               Write-Output "Exported $totalMAM MAM app protection policies"
             } catch { Write-Warning "MAM App Protection export failed: $($_.Exception.Message)" }
+
+            # Windows feature update profiles
+            try {
+              $fuPath = "$backupRoot/FeatureUpdates"
+              New-Item -Path $fuPath -ItemType Directory -Force | Out-Null
+              $fuResponse = Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/beta/deviceManagement/windowsFeatureUpdateProfiles" -ErrorAction Stop
+              $fuPolicies = $fuResponse.value | Where-Object { $_.displayName -like "*CDW Baseline*" }
+              $fuNames = @()
+              foreach ($policy in $fuPolicies) {
+                $safeName = $policy.displayName -replace '[^a-zA-Z0-9-]', '_'
+                $fuNames += $safeName
+                foreach ($f in @('id','createdDateTime','lastModifiedDateTime','roleScopeTagIds','endOfSupportDate',
+                                 'deployableContentDisplayName','@odata.context')) { $policy.Remove($f) }
+                $policy | ConvertTo-Json -Depth 20 | Out-File "$fuPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (Feature update): $($policy.displayName)"
+              }
+              Clean-FolderForCDW -FolderPath $fuPath -CurrentPolicyNames $fuNames
+            } catch { Write-Warning "Feature update export failed: $($_.Exception.Message)" }
+
+            # App configuration policies for managed apps (MAM), with their target apps
+            try {
+              $acPath = "$backupRoot/AppConfigurationPolicies"
+              New-Item -Path $acPath -ItemType Directory -Force | Out-Null
+              $acUri = "https://graph.microsoft.com/beta/deviceAppManagement/targetedManagedAppConfigurations"
+              $acResponse = Invoke-MgGraphRequest -Method GET -Uri $acUri -ErrorAction Stop
+              $acPolicies = $acResponse.value | Where-Object { $_.displayName -like "*CDW Baseline*" }
+              $acNames = @()
+              foreach ($policy in $acPolicies) {
+                $safeName = $policy.displayName -replace '[^a-zA-Z0-9-]', '_'
+                $acNames += $safeName
+                $apps = (Invoke-MgGraphRequest -Method GET -Uri "$acUri/$($policy.id)/apps" -ErrorAction SilentlyContinue).value
+                foreach ($f in @('id','createdDateTime','lastModifiedDateTime','version','roleScopeTagIds',
+                                 'deployedAppCount','isAssigned','@odata.context')) { $policy.Remove($f) }
+                $policy['apps'] = @($apps | ForEach-Object { $_.Remove('id'); $_.Remove('version'); $_ })
+                $policy | ConvertTo-Json -Depth 20 | Out-File "$acPath/$safeName.json" -Encoding UTF8
+                Write-Output "Exported (App configuration): $($policy.displayName)"
+              }
+              Clean-FolderForCDW -FolderPath $acPath -CurrentPolicyNames $acNames
+            } catch { Write-Warning "App configuration export failed: $($_.Exception.Message)" }
 
             # Git commit & push
             git config --global user.name "CDW Baseline Bot"

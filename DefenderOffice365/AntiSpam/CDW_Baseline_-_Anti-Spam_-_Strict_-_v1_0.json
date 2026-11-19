@@ -1,0 +1,36 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - Anti-Spam - Strict - v1.0",
+  "description": "Microsoft recommended Strict inbound anti-spam settings: bulk threshold 5, phishing and high-confidence spam quarantined, spam and bulk quarantined, 30-day quarantine retention and zero-hour auto purge.",
+  "type": "HostedContentFilterPolicy",
+  "identity": "CDW Baseline - Anti-Spam - Strict",
+  "parameters": {
+    "BulkThreshold": 5,
+    "MarkAsSpamBulkMail": "On",
+    "SpamAction": "Quarantine",
+    "SpamQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "HighConfidenceSpamAction": "Quarantine",
+    "HighConfidenceSpamQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "PhishSpamAction": "Quarantine",
+    "PhishQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "HighConfidencePhishAction": "Quarantine",
+    "HighConfidencePhishQuarantineTag": "AdminOnlyAccessPolicy",
+    "BulkSpamAction": "Quarantine",
+    "BulkQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+    "QuarantineRetentionPeriod": 30,
+    "InlineSafetyTipsEnabled": true,
+    "PhishZapEnabled": true,
+    "SpamZapEnabled": true
+  },
+  "rule": {
+    "type": "HostedContentFilterRule",
+    "identity": "CDW Baseline - Anti-Spam - Strict",
+    "parameters": {
+      "HostedContentFilterPolicy": "CDW Baseline - Anti-Spam - Strict",
+      "RecipientDomainIs": [
+        "{{acceptedDomains}}"
+      ],
+      "Priority": 0
+    }
+  }
+}

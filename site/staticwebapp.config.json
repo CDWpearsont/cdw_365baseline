@@ -16,6 +16,8 @@
     { "route": "/.auth/login/twitter", "statusCode": 404 },
     { "route": "/.auth/*", "allowedRoles": ["anonymous", "authenticated"] },
     { "route": "/auth-redirect.html", "allowedRoles": ["anonymous", "authenticated"] },
+    { "route": "/",           "allowedRoles": ["authenticated"], "headers": { "Cache-Control": "no-cache" } },
+    { "route": "/index.html", "allowedRoles": ["authenticated"], "headers": { "Cache-Control": "no-cache" } },
     { "route": "/*", "allowedRoles": ["authenticated"] }
   ],
 

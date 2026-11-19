@@ -1,0 +1,10 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - CIS L1 - Block Additional Storage Providers in Outlook on the Web - v1.0",
+  "description": "Stops users opening or attaching files from third-party storage (such as personal cloud drives) in Outlook on the web.",
+  "type": "OwaMailboxPolicy",
+  "identity": "OwaMailboxPolicy-Default",
+  "parameters": {
+    "AdditionalStorageProvidersAvailable": false
+  }
+}

@@ -71,7 +71,7 @@ jobs:
         if: steps.merge.outputs.changed == 'true'
         shell: bash
         run: |
-          python3 tools/build_catalog.py --root . --policy-dirs IntuneConfig EntraConfig SharePointConfig ExchangeOnline DefenderCloudApps DefenderOffice365 --out catalog.json
+          python3 tools/build_catalog.py --root . --out catalog.json
           python3 scripts/generate-manifest.py --repo .
           git add catalog.json manifest.json manifest.base.json
           git diff --cached --quiet || git commit -q -m "chore: rebuild catalog and manifest after sync [skip ci]"

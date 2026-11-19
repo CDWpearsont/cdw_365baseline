@@ -1,0 +1,10 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - External Sender Tagging - v1.0",
+  "description": "Shows an External tag on messages from outside the organisation in Outlook, so users can spot external and spoofed senders.",
+  "type": "ExternalInOutlook",
+  "singleton": true,
+  "parameters": {
+    "Enabled": true
+  }
+}

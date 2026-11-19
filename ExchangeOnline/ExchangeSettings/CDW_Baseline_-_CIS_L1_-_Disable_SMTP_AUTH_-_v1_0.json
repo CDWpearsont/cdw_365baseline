@@ -1,0 +1,10 @@
+{
+  "workload": "exo",
+  "displayName": "CDW Baseline - CIS L1 - Disable SMTP AUTH - v1.0",
+  "description": "Turns off SMTP client authentication (basic authentication submission) for the organisation. Devices or applications that still need it are enabled per mailbox.",
+  "type": "TransportConfig",
+  "singleton": true,
+  "parameters": {
+    "SmtpClientAuthenticationDisabled": true
+  }
+}
