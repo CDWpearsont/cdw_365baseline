@@ -1770,7 +1770,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.20.0',
+  version: '3.21.0',
   date:    '2026-09-17'
 };
 
@@ -4756,11 +4756,41 @@ async function lldApplyEdit(json, cat, e) {
   if (ptr.startsWith('values:')) {
     const item = (json.values || []).find(v => v.name === ptr.slice(7));
     if (!item) return 'setting not found';
+    const vrow = extractSettings(JSON.parse(JSON.stringify(json)), cat).find(r => r.ptr === ptr);
+    if (vrow && vrow.vmap) {
+      const hit = Object.entries(vrow.vmap).find(([, d]) => lldKey(d) === lldKey(e.to));
+      if (!hit) return `expected ${[...new Set(Object.values(vrow.vmap))].join(' or ')}`;
+      item.value = /^(true|false)$/i.test(String(item.value)) ? String(hit[0]).toLowerCase() : hit[0]; return true;
+    }
     item.value = String(lldScalar(String(item.value), e.to)); return true;
   }
 
   // Flat policies: compliance, device configuration, app protection,
   // enrolment, Autopilot / ESP, tenant-wide objects.
+  if (ptr.includes('#')) return 'this setting needs to be changed by hand';
+  // Rows shown with portal values (Block / Allow, Require, minutes...) map back
+  // through the row's own value map.
+  const shownRow = extractSettings(JSON.parse(JSON.stringify(json)), cat).find(r => r.ptr === ptr);
+  if (shownRow && (shownRow.vmap || shownRow.unit)) {
+    let p2 = ptr.startsWith('@ap.') ? ((json.additionalProperties ? 'additionalProperties' : 'AdditionalProperties') + '.' + ptr.slice(4)) : ptr;
+    if (ptr.startsWith('parameters.') || ptr.startsWith('rule.')) p2 = ptr;
+    const loc2 = lldPath(json, p2, false);
+    if (!loc2 || !(loc2.key in loc2.parent)) return 'setting not found';
+    const orig = loc2.parent[loc2.key];
+    if (shownRow.unit && /^\d[\d, ]*$/.test(String(e.to).trim())) {
+      loc2.parent[loc2.key] = pnIso(parseInt(String(e.to).replace(/[, ]/g, ''), 10), shownRow.unit); return true;
+    }
+    const hit = shownRow.vmap && Object.entries(shownRow.vmap).find(([, d]) => lldKey(d) === lldKey(e.to));
+    if (!hit) {
+      // LLDs exported before portal names showed raw values (Enabled / Disabled, PT30M).
+      if (typeof orig === 'string' && shownRow.vmap) return `expected ${[...new Set(Object.values(shownRow.vmap))].join(' or ')}`;
+      try { loc2.parent[loc2.key] = lldScalar(orig, e.to); return true; }
+      catch { return shownRow.vmap ? `expected ${[...new Set(Object.values(shownRow.vmap))].join(' or ')}` : 'expected a number'; }
+    }
+    const raw = hit[0];
+    loc2.parent[loc2.key] = typeof orig === 'boolean' ? raw === 'true' : typeof orig === 'number' ? Number(raw) : raw;
+    return true;
+  }
   let path = ptr.startsWith('@ap.') ? null : ptr;
   if (ptr.startsWith('@ap.')) {
     const ap = json.additionalProperties ? 'additionalProperties' : json.AdditionalProperties ? 'AdditionalProperties' : null;
@@ -6523,9 +6553,620 @@ const SETTING_NAME_LOOKUP = {
   disablednsserverslookupordering: 'Disabled DNS servers lookup ordering',
 };
 
+// ═══════════════════════════════════════════════════════════════════
+// PORTAL NAMES
+// The LLD names every setting the way the admin centre does, so a reader can
+// find it in the tenant. Settings Catalog names come from the catalog itself;
+// these tables cover the other policy types. Sources: Microsoft Learn setting
+// references for each admin centre (Intune, Entra, SharePoint, Defender).
+// A row's vmap (stored value → portal value) lets an edited LLD be applied back.
+// Settings with no admin-centre control keep their API / PowerShell name.
+// ═══════════════════════════════════════════════════════════════════
+const PN_REQUIRE = { true: 'Require', false: 'Not configured' };
+const PN_BLOCK = { true: 'Block', false: 'Allow' };
+const PN_BLOCKED_NC = { true: 'Block', false: 'Not configured' };
+const PN_YESNO = { true: 'Yes', false: 'No' };
+const PN_ONOFF = { true: 'On', false: 'Off' };
+const PN_SELECTED = { true: 'Selected', false: 'Not selected' };
+const PN_REQ_NOT = { true: 'Require', false: 'Not required' };
+const PN_TF = { true: 'True', false: 'False' };   // API / PowerShell-only settings keep their raw values
+
+// ISO 8601 durations (PT30M, PT12H, P30D) as minutes or days.
+function pnDuration(iso, unit) {
+  const m = /^P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/.exec(String(iso || ''));
+  if (!m) return null;
+  const mins = (+m[1] || 0) * 1440 + (+m[2] || 0) * 60 + (+m[3] || 0) + Math.round((+m[4] || 0) / 60);
+  return unit === 'days' ? Math.round(mins / 1440) : mins;
+}
+const pnIso = (n, unit) => unit === 'days' ? `P${n}D` : `PT${n}M`;
+
+function pnPush(settings, key, rawKey, display, extra = {}) {
+  if (display === undefined || display === null || display === '') return;
+  settings.push({ key, rawKey, value: String(display), ptr: extra.ptr || rawKey, ...(extra.vmap ? { vmap: extra.vmap } : {}), ...(extra.unit ? { unit: extra.unit } : {}) });
+}
+// A value through its map, or tidied when the map has no entry.
+const pnShow = (v, vmap) => (vmap && String(v) in vmap) ? vmap[String(v)] : humanizeValue(Array.isArray(v) ? v.join(', ') : String(v));
+const pnList = (arr, map) => (arr || []).map(x => (map && map[x]) || humanizeValue(String(x))).join(', ');
+
+// ── App protection (iOS / Android) ───────────────────────────────────
+const PN_APP_ACTION = { block: 'Block access', wipe: 'Wipe data', warn: 'Warn', blockWhenSettingIsSupported: 'Block access on supported devices' };
+const PN_APP_LOCATIONS = { oneDriveForBusiness: 'OneDrive for Business', sharePoint: 'SharePoint', box: 'Box', localStorage: 'Local Storage',
+  photoLibrary: 'Photo Library', iManage: 'iManage', egnyte: 'Egnyte', camera: 'Camera' };
+function extractAppProtection(json, settings) {
+  const ios = 'faceIdBlocked' in json || 'appDataEncryptionType' in json || 'exemptedAppProtocols' in json;
+  const used = new Set(['@odata.type', '@odata.context', 'id', 'createdDateTime', 'lastModifiedDateTime', 'version', 'displayName',
+    'description', 'roleScopeTagIds', 'assignments', 'apps', 'deployedAppCount', 'isAssigned', 'exemptedAppProtocols', 'exemptedAppPackages',
+    'exemptedUniversalLinks', 'managedUniversalLinks', 'allowedIosDeviceModels', 'allowedAndroidDeviceModels', 'allowedAndroidDeviceManufacturers']);
+  const add = (key, raw, vmap, extra = {}) => { used.add(raw); if (raw in json && json[raw] !== null) pnPush(settings, key, raw, pnShow(json[raw], vmap), { vmap, ...extra }); };
+  const dur = (key, raw, unit) => { used.add(raw); const n = pnDuration(json[raw], unit); if (n !== null) pnPush(settings, key, raw, n, { unit }); };
+  const j = json;
+
+  // Apps
+  add('Target policy to', 'appGroupType', { allApps: 'All apps', allMicrosoftApps: 'All Microsoft apps', allCoreMicrosoftApps: 'Core Microsoft apps', selectedPublicApps: 'Selected apps' });
+  used.add('targetedAppManagementLevels');
+  if (j.targetedAppManagementLevels) {
+    const all = j.targetedAppManagementLevels === 'unspecified';
+    pnPush(settings, 'Target to apps on all device types', 'targetedAppManagementLevels', all ? 'Yes' : 'No');
+    if (!all) pnPush(settings, 'Device types', 'targetedAppManagementLevels#types', pnList(String(j.targetedAppManagementLevels).split(','),
+      { unmanaged: 'Unmanaged', mdm: 'Managed', androidEnterprise: 'Android Enterprise', androidEnterpriseDedicatedDevicesWithAzureAdSharedMode: 'Android Enterprise dedicated devices with Microsoft Entra shared mode', androidOpenSourceProjectUserAssociated: 'Android Open Source Project user-associated devices', androidOpenSourceProjectUserless: 'Android Open Source Project userless devices' }), { ptr: 'targetedAppManagementLevels#types' });
+  }
+
+  // Data protection › Data transfer
+  add(ios ? 'Backup org data to iTunes and iCloud backups' : 'Backup org data to Android backup services', 'dataBackupBlocked', PN_BLOCK);
+  used.add('allowedOutboundDataTransferDestinations'); used.add('filterOpenInToOnlyManagedApps'); used.add('disableProtectionOfManagedOutboundOpenInData');
+  {
+    const SEND = { allApps: 'All Apps', managedApps: 'Policy managed apps', none: 'None' };
+    let v = SEND[j.allowedOutboundDataTransferDestinations], vmap = SEND;
+    if (ios && j.allowedOutboundDataTransferDestinations === 'managedApps') {
+      if (j.disableProtectionOfManagedOutboundOpenInData) { v = 'Policy managed apps with OS sharing'; vmap = null; }
+      else if (j.filterOpenInToOnlyManagedApps) { v = 'Policy managed apps with Open-In/Share filtering'; vmap = null; }
+    }
+    pnPush(settings, 'Send org data to other apps', 'allowedOutboundDataTransferDestinations', v || pnShow(j.allowedOutboundDataTransferDestinations), { vmap });
+  }
+  add('Save copies of org data', 'saveAsBlocked', PN_BLOCK);
+  used.add('allowedDataStorageLocations');
+  if (j.saveAsBlocked) pnPush(settings, 'Allow user to save copies to selected services', 'allowedDataStorageLocations', pnList(j.allowedDataStorageLocations, PN_APP_LOCATIONS) || 'None selected');
+  add(ios ? 'Transfer telecommunication data to' : 'Transfer telecommunications data to', 'dialerRestrictionLevel',
+    { none: 'None, do not transfer this data between apps', customApp: ios ? 'A specific dialer app' : 'A specific dialer app', managedApps: 'Any policy-managed dialer app', allApps: 'Any dialer app' });
+  ['customDialerAppProtocol', 'customDialerAppPackageId', 'customDialerAppDisplayName'].forEach(k => used.add(k));
+  if (j.dialerRestrictionLevel === 'customApp') {
+    if (ios) add('Dialer App URL Scheme', 'customDialerAppProtocol');
+    else { add('Dialer App Package ID', 'customDialerAppPackageId'); add('Dialer App Name', 'customDialerAppDisplayName'); }
+  }
+  add('Transfer messaging data to', 'protectedMessagingRedirectAppType',
+    { anyApp: 'Any messaging app', anyManagedApp: 'Any policy-managed messaging app', specificApps: 'A specific messaging app', blocked: 'None, do not transfer this data between apps' });
+  ['messagingRedirectAppUrlScheme', 'messagingRedirectAppPackageId', 'messagingRedirectAppDisplayName'].forEach(k => used.add(k));
+  if (j.protectedMessagingRedirectAppType === 'specificApps') {
+    if (ios) add('Messaging App URL Scheme', 'messagingRedirectAppUrlScheme');
+    else { add('Messaging App Package ID', 'messagingRedirectAppPackageId'); add('Messaging App Name', 'messagingRedirectAppDisplayName'); }
+  }
+  used.add('allowedInboundDataTransferSources'); used.add('protectInboundDataFromUnknownSources');
+  {
+    const RECV = { allApps: 'All Apps', managedApps: 'Policy managed apps', none: 'None' };
+    const all = ios && j.allowedInboundDataTransferSources === 'allApps' && j.protectInboundDataFromUnknownSources;
+    pnPush(settings, 'Receive data from other apps', 'allowedInboundDataTransferSources', all ? 'All apps with incoming Org data' : pnShow(j.allowedInboundDataTransferSources, RECV), { vmap: all ? null : RECV });
+  }
+  add('Open data into Org documents', 'blockDataIngestionIntoOrganizationDocuments', PN_BLOCK);
+  used.add('allowedDataIngestionLocations');
+  if (j.blockDataIngestionIntoOrganizationDocuments) pnPush(settings, 'Allow users to open data from selected services', 'allowedDataIngestionLocations', pnList(j.allowedDataIngestionLocations, PN_APP_LOCATIONS) || 'None selected');
+  add('Restrict cut, copy and paste between other apps', 'allowedOutboundClipboardSharingLevel',
+    { blocked: 'Blocked', managedApps: 'Policy managed apps', managedAppsWithPasteIn: 'Policy managed with paste in', allApps: 'Any app' });
+  add('Cut and copy character limit for any app', 'allowedOutboundClipboardSharingExceptionLength');
+  if (ios) add('Third party keyboards', 'thirdPartyKeyboardsBlocked', PN_BLOCK);
+  else {
+    used.add('fingerprintBlocked');   // superseded by biometricAuthenticationBlocked on Android
+    add('Screen capture and Google Assistant', 'screenCaptureBlocked', PN_BLOCK);
+    add('Approved keyboards', 'keyboardsRestricted', PN_REQ_NOT);
+    used.add('approvedKeyboards');
+    if (j.keyboardsRestricted) pnPush(settings, 'Select keyboards to approve', 'approvedKeyboards', (j.approvedKeyboards || []).map(k => k.value || k.name || k).join(', '));
+  }
+
+  // Data protection › Encryption
+  if (ios) add('Encrypt org data', 'appDataEncryptionType', { whenDeviceLocked: 'Require', useDeviceSettings: 'Not required' });
+  else {
+    add('Encrypt org data', 'encryptAppData', PN_REQ_NOT);
+    add('Encrypt org data on enrolled devices', 'disableAppEncryptionIfDeviceEncryptionIsEnabled', { true: 'Not required', false: 'Require' });
+  }
+
+  // Data protection › Functionality
+  add('Sync policy managed app data with native apps or add-ins', 'contactSyncBlocked', PN_BLOCK);
+  add('Printing org data', 'printBlocked', PN_BLOCK);
+  ['managedBrowserToOpenLinksRequired', 'managedBrowser', 'customBrowserProtocol', 'customBrowserPackageId', 'customBrowserDisplayName'].forEach(k => used.add(k));
+  {
+    const v = !j.managedBrowserToOpenLinksRequired ? 'Any app' : j.managedBrowser === 'microsoftEdge' ? 'Microsoft Edge' : 'Unmanaged browser';
+    pnPush(settings, 'Restrict web content transfer with other apps', 'managedBrowser', v);
+    if (v === 'Unmanaged browser') {
+      if (ios) add('Unmanaged Browser Protocol', 'customBrowserProtocol');
+      else { add('Unmanaged Browser ID', 'customBrowserPackageId'); add('Unmanaged Browser Name', 'customBrowserDisplayName'); }
+    }
+  }
+  add('Org data notifications', 'notificationRestriction', { allow: 'Allow', blockOrganizationalData: 'Block org data', block: 'Block' });
+  if (ios) {
+    const STATE = { notConfigured: 'Allow', blocked: 'Block' };
+    add('Genmoji', 'genmojiConfigurationState', STATE);
+    add('Screen capture', 'screenCaptureConfigurationState', STATE);
+    add('Writing Tools', 'writingToolsConfigurationState', STATE);
+  } else {
+    used.add('connectToVpnOnLaunch');
+    if (j.connectToVpnOnLaunch) add('Start Microsoft Tunnel connection on app-launch', 'connectToVpnOnLaunch', PN_YESNO);
+  }
+
+  // Access requirements
+  add('PIN for access', 'pinRequired', PN_REQ_NOT);
+  if (j.pinRequired) {
+    add('PIN type', 'pinCharacterSet', { numeric: 'Numeric', alphanumericAndSymbol: 'Passcode' });
+    add('Simple PIN', 'simplePinBlocked', PN_BLOCK);
+    add('Select minimum PIN length', 'minimumPinLength');
+    if (ios) add('Touch ID instead of PIN for access (iOS 8+)', 'fingerprintBlocked', PN_BLOCK);
+    else add('Biometrics instead of PIN for access', 'biometricAuthenticationBlocked', PN_BLOCK);
+    used.add('pinRequiredInsteadOfBiometricTimeout');
+    const t = pnDuration(j.pinRequiredInsteadOfBiometricTimeout, 'minutes');
+    pnPush(settings, ios ? 'Override Touch ID with PIN after timeout' : 'Override biometric with PIN after timeout', 'pinRequiredInsteadOfBiometricTimeout', t ? 'Require' : 'Not required', { ptr: 'pinRequiredInsteadOfBiometricTimeout#on' });
+    if (t) dur('Timeout (minutes of inactivity)', 'pinRequiredInsteadOfBiometricTimeout', 'minutes');
+    if (ios) add('Face ID instead of PIN for access (iOS 11+)', 'faceIdBlocked', PN_BLOCK);
+    else {
+      add('Class 3 biometrics (Android 9.0+)', 'requireClass3Biometrics', PN_REQ_NOT);
+      used.add('requirePinAfterBiometricChange');
+      if (j.requireClass3Biometrics) add('Override biometrics with PIN after biometric updates', 'requirePinAfterBiometricChange', PN_REQ_NOT);
+    }
+    used.add('periodBeforePinReset');
+    const reset = pnDuration(j.periodBeforePinReset, 'days');
+    pnPush(settings, 'PIN reset after number of days', 'periodBeforePinReset', reset ? 'Yes' : 'No', { ptr: 'periodBeforePinReset#on' });
+    if (reset) dur('Number of days', 'periodBeforePinReset', 'days');
+    add('Select number of previous PIN values to maintain', 'previousPinBlockCount');
+    add('App PIN when device PIN is set', 'disableAppPinIfDevicePinIsSet', ios ? { true: 'Disable', false: 'Enable' } : { true: 'Not required', false: 'Require' });
+  }
+  add('Work or school account credentials for access', 'organizationalCredentialsRequired', PN_REQ_NOT);
+  dur('Recheck the access requirements after (minutes of inactivity)', 'periodOnlineBeforeAccessCheck', 'minutes');
+
+  // Conditional launch: "<setting> › <action>" rows, as the portal's table reads.
+  const pair = (setting, valueKey, actionKey, actions = PN_APP_ACTION) => {
+    used.add(valueKey); used.add(actionKey);
+    const v = j[valueKey];
+    if (v === null || v === undefined || v === '' || v === 0 || v === '0000-00-00' || (Array.isArray(v) && !v.length)) return;
+    pnPush(settings, setting, valueKey, Array.isArray(v) ? v.join('; ') : v);
+    if (j[actionKey]) pnPush(settings, `${setting} › Action`, actionKey, pnShow(j[actionKey], actions), { vmap: actions });
+  };
+  const tiers = (setting, warn, block, wipe) => [[warn, 'Warn'], [block, 'Block access'], [wipe, 'Wipe data']].forEach(([k, a]) => {
+    used.add(k); const v = j[k];
+    if (v !== null && v !== undefined && v !== '' && v !== 0 && v !== '0000-00-00') pnPush(settings, `${setting} › ${a}`, k, v);
+  });
+  pair('Max PIN attempts', 'maximumPinRetries', 'appActionIfMaximumPinRetriesExceeded', { block: 'Reset PIN', wipe: 'Wipe data' });
+  dur('Offline grace period › Block access (minutes)', 'periodOfflineBeforeAccessCheck', 'minutes');
+  dur('Offline grace period › Wipe data (days)', 'periodOfflineBeforeWipeIsEnforced', 'days');
+  used.add('appActionIfUnableToAuthenticateUser');
+  if (j.appActionIfUnableToAuthenticateUser) add('Disabled account', 'appActionIfUnableToAuthenticateUser', PN_APP_ACTION);
+  tiers('Min app version', 'minimumWarningAppVersion', 'minimumRequiredAppVersion', 'minimumWipeAppVersion');
+  if (ios) tiers('Min SDK version', 'minimumWarningSdkVersion', 'minimumRequiredSdkVersion', 'minimumWipeSdkVersion');
+  used.add('appActionIfAccountIsClockedOut'); used.add('gracePeriodToBlockAppsDuringOffClockHours');
+  if (j.appActionIfAccountIsClockedOut) add('Non-working time', 'appActionIfAccountIsClockedOut', PN_APP_ACTION);
+  tiers('Min OS version', 'minimumWarningOsVersion', 'minimumRequiredOsVersion', 'minimumWipeOsVersion');
+  tiers('Max OS version', 'maximumWarningOsVersion', 'maximumRequiredOsVersion', 'maximumWipeOsVersion');
+  const ALLOW_SPEC = { block: 'Allow specified (Block non-specified)', wipe: 'Allow specified (Wipe non-specified)' };
+  if (ios) pair('Device model(s)', 'allowedIosDeviceModels', 'appActionIfIosDeviceModelNotAllowed', ALLOW_SPEC);
+  else {
+    tiers('Min patch version', 'minimumWarningPatchVersion', 'minimumRequiredPatchVersion', 'minimumWipePatchVersion');
+    pair('Device manufacturer(s)', 'allowedAndroidDeviceManufacturers', 'appActionIfAndroidDeviceManufacturerNotAllowed', ALLOW_SPEC);
+    pair('Device model(s)', 'allowedAndroidDeviceModels', 'appActionIfAndroidDeviceModelNotAllowed', ALLOW_SPEC);
+    used.add('requiredAndroidSafetyNetDeviceAttestationType'); used.add('appActionIfAndroidSafetyNetDeviceAttestationFailed');
+    if (j.requiredAndroidSafetyNetDeviceAttestationType && j.requiredAndroidSafetyNetDeviceAttestationType !== 'none') {
+      add('Play integrity verdict', 'requiredAndroidSafetyNetDeviceAttestationType', { basicIntegrity: 'Basic integrity', basicIntegrityAndDeviceCertification: 'Basic integrity and device integrity' });
+      add('Play integrity verdict › Action', 'appActionIfAndroidSafetyNetDeviceAttestationFailed', PN_APP_ACTION);
+      add('Required SafetyNet evaluation type', 'requiredAndroidSafetyNetEvaluationType', { basic: 'Basic key', hardwareBacked: 'Hardware-backed key' });
+    }
+    used.add('requiredAndroidSafetyNetEvaluationType');
+    used.add('requiredAndroidSafetyNetAppsVerificationType'); used.add('appActionIfAndroidSafetyNetAppsVerificationFailed');
+    if (j.requiredAndroidSafetyNetAppsVerificationType === 'enabled') add('Require threat scan on apps', 'appActionIfAndroidSafetyNetAppsVerificationFailed', PN_APP_ACTION);
+    ['deviceLockRequired', 'appActionIfDeviceLockNotSet', 'appActionIfDevicePasscodeComplexityLessThanLow', 'appActionIfDevicePasscodeComplexityLessThanMedium', 'appActionIfDevicePasscodeComplexityLessThanHigh'].forEach(k => used.add(k));
+    if (j.deviceLockRequired) {
+      const lvl = j.appActionIfDevicePasscodeComplexityLessThanHigh ? ['High Complexity', 'appActionIfDevicePasscodeComplexityLessThanHigh']
+        : j.appActionIfDevicePasscodeComplexityLessThanMedium ? ['Medium Complexity', 'appActionIfDevicePasscodeComplexityLessThanMedium']
+        : j.appActionIfDevicePasscodeComplexityLessThanLow ? ['Low Complexity', 'appActionIfDevicePasscodeComplexityLessThanLow'] : ['Low Complexity', 'appActionIfDeviceLockNotSet'];
+      pnPush(settings, 'Require device lock', 'deviceLockRequired', lvl[0], { ptr: 'deviceLockRequired#level' });
+      add('Require device lock › Action', lvl[1], PN_APP_ACTION);
+    }
+    tiers('Min Company Portal version', 'minimumWarningCompanyPortalVersion', 'minimumRequiredCompanyPortalVersion', 'minimumWipeCompanyPortalVersion');
+    tiers('Max Company Portal version age (days)', 'warnAfterCompanyPortalUpdateDeferralInDays', 'blockAfterCompanyPortalUpdateDeferralInDays', 'wipeAfterCompanyPortalUpdateDeferralInDays');
+    used.add('appActionIfSamsungKnoxAttestationRequired');
+    if (j.appActionIfSamsungKnoxAttestationRequired) add('Samsung Knox device attestation', 'appActionIfSamsungKnoxAttestationRequired', PN_APP_ACTION);
+  }
+  used.add('maximumAllowedDeviceThreatLevel'); used.add('mobileThreatDefenseRemediationAction'); used.add('mobileThreatDefensePartnerPriority');
+  if (j.maximumAllowedDeviceThreatLevel && j.maximumAllowedDeviceThreatLevel !== 'notConfigured') {
+    add('Max allowed device threat level', 'maximumAllowedDeviceThreatLevel', { secured: 'Secured', low: 'Low', medium: 'Medium', high: 'High' });
+    add('Max allowed device threat level › Action', 'mobileThreatDefenseRemediationAction', PN_APP_ACTION);
+  }
+
+  // Anything left that's set but has no admin-centre control keeps its API name.
+  ['deviceComplianceRequired', 'appActionIfDeviceComplianceRequired', 'purviewContentEvaluationRequired', 'allowWidgetContentSync',
+   'fingerprintAndBiometricEnabled', 'appActionIfDeveloperOptionsEnabled'].forEach(k => {
+    used.add(k);
+    const v = j[k];
+    if (v === true || (typeof v === 'string' && !/^(notRequired|notConfigured|block)$/.test(v))) pnPush(settings, k, k, pnShow(v));
+  });
+  for (const [k, v] of Object.entries(j)) {
+    if (used.has(k) || v === null || v === '' || (Array.isArray(v) && (!v.length || typeof v[0] === 'object')) || (typeof v === 'object' && !Array.isArray(v))) continue;
+    pnPush(settings, k, k, pnShow(v));
+  }
+}
+
+// ── Compliance (Windows, macOS) ──────────────────────────────────────
+// Only configured settings, as the portal's summary shows them.
+const PN_COMPLIANCE = {
+  '#microsoft.graph.windows10CompliancePolicy': [
+    ['bitLockerEnabled', 'Require BitLocker', PN_REQUIRE],
+    ['secureBootEnabled', 'Require Secure Boot to be enabled on the device', PN_REQUIRE],
+    ['codeIntegrityEnabled', 'Require code integrity', PN_REQUIRE],
+    ['osMinimumVersion', 'Minimum OS version'],
+    ['osMaximumVersion', 'Maximum OS version'],
+    ['mobileOsMinimumVersion', 'Minimum OS required for mobile devices'],
+    ['mobileOsMaximumVersion', 'Maximum OS required for mobile devices'],
+    ['configurationManagerComplianceRequired', 'Require device compliance from Configuration Manager', PN_REQUIRE],
+    ['passwordRequired', 'Require a password to unlock mobile devices', PN_REQUIRE],
+    ['passwordBlockSimple', 'Simple passwords', PN_BLOCKED_NC, 'passwordRequired'],
+    ['passwordRequiredType', 'Password type', { deviceDefault: 'Device default', numeric: 'Numeric', alphanumeric: 'Alphanumeric' }, 'passwordRequired'],
+    ['passwordMinimumCharacterSetCount', 'Password complexity', null, 'passwordRequired'],
+    ['passwordMinimumLength', 'Minimum password length', null, 'passwordRequired'],
+    ['passwordMinutesOfInactivityBeforeLock', 'Maximum minutes of inactivity before password is required', null, 'passwordRequired'],
+    ['passwordExpirationDays', 'Password expiration (days)', null, 'passwordRequired'],
+    ['passwordPreviousPasswordBlockCount', 'Number of previous passwords to prevent reuse', null, 'passwordRequired'],
+    ['passwordRequiredToUnlockFromIdle', 'Require password when device returns from idle state (Mobile and Holographic)', PN_REQUIRE],
+    ['storageRequireEncryption', 'Encryption of data storage on a device', PN_REQUIRE],
+    ['activeFirewallRequired', 'Firewall', PN_REQUIRE],
+    ['tpmRequired', 'Trusted Platform Module (TPM)', PN_REQUIRE],
+    ['antivirusRequired', 'Antivirus', PN_REQUIRE],
+    ['antiSpywareRequired', 'Antispyware', PN_REQUIRE],
+    ['defenderEnabled', 'Microsoft Defender Antimalware', PN_REQUIRE],
+    ['defenderVersion', 'Microsoft Defender Antimalware minimum version'],
+    ['signatureOutOfDate', 'Microsoft Defender Antimalware security intelligence up-to-date', PN_REQUIRE],
+    ['rtpEnabled', 'Real-time protection', PN_REQUIRE],
+    ['deviceThreatProtectionRequiredSecurityLevel', 'Require the device to be at or under the machine risk score', { secured: 'Clear', low: 'Low', medium: 'Medium', high: 'High' }, 'deviceThreatProtectionEnabled'],
+  ],
+  '#microsoft.graph.macOSCompliancePolicy': [
+    ['systemIntegrityProtectionEnabled', 'Require a system integrity protection', PN_REQUIRE],
+    ['osMinimumVersion', 'Minimum OS version'],
+    ['osMaximumVersion', 'Maximum OS version'],
+    ['osMinimumBuildVersion', 'Minimum OS build version'],
+    ['osMaximumBuildVersion', 'Maximum OS build version'],
+    ['passwordRequired', 'Require a password to unlock devices', PN_REQUIRE],
+    ['passwordBlockSimple', 'Simple passwords', PN_BLOCKED_NC, 'passwordRequired'],
+    ['passwordMinimumLength', 'Minimum password length', null, 'passwordRequired'],
+    ['passwordRequiredType', 'Password type', { deviceDefault: 'Device default', numeric: 'Numeric', alphanumeric: 'Alphanumeric' }, 'passwordRequired'],
+    ['passwordMinimumCharacterSetCount', 'Number of non-alphanumeric characters in password', null, 'passwordRequired'],
+    ['passwordMinutesOfInactivityBeforeLock', 'Maximum minutes of inactivity before password is required', null, 'passwordRequired'],
+    ['passwordExpirationDays', 'Password expiration (days)', null, 'passwordRequired'],
+    ['passwordPreviousPasswordBlockCount', 'Number of previous passwords to prevent reuse', null, 'passwordRequired'],
+    ['storageRequireEncryption', 'Require encryption of data storage on device', PN_REQUIRE],
+    ['firewallEnabled', 'Firewall', { true: 'Enable', false: 'Not configured' }],
+    ['firewallBlockAllIncoming', 'Incoming connections', PN_BLOCKED_NC, 'firewallEnabled'],
+    ['firewallEnableStealthMode', 'Stealth Mode', { true: 'Enable', false: 'Not configured' }, 'firewallEnabled'],
+    ['gatekeeperAllowedAppSource', 'Allow apps downloaded from these locations', { macAppStore: 'Mac App Store', macAppStoreAndIdentifiedDevelopers: 'Mac App Store and identified developers', anywhere: 'Anywhere' }],
+  ],
+};
+function extractCompliance(json, settings) {
+  const ap = json.AdditionalProperties || json.additionalProperties || {};
+  const m = { ...ap, ...json };
+  const spec = PN_COMPLIANCE[m['@odata.type']];
+  if (!spec) return false;
+  const ptr = k => (k in json) ? k : '@ap.' + k;
+  const unset = v => v === null || v === undefined || v === '' || v === false || v === 'notConfigured' || v === 'unavailable' || v === 'notSet' || v === 0;
+  const done = new Set();
+  for (const [k, label, vmap, needs] of spec) {
+    done.add(k);
+    if (needs && !m[needs]) continue;
+    if (unset(m[k])) continue;
+    pnPush(settings, label, k, pnShow(m[k], vmap), { ptr: ptr(k), vmap });
+  }
+  // Set, but not in the admin centre: keep the API name.
+  const SKIP = new Set(['@odata.type', 'displayName', 'description', 'id', 'version', 'createdDateTime', 'lastModifiedDateTime', 'roleScopeTagIds',
+    'assignments', 'scheduledActionsForRule', 'AdditionalProperties', 'additionalProperties', 'deviceThreatProtectionEnabled', 'deviceCompliancePolicyScript']);
+  for (const [k, v] of Object.entries(m)) {
+    if (done.has(k) || SKIP.has(k) || unset(v) || typeof v === 'object') continue;
+    pnPush(settings, k, k, pnShow(v), { ptr: ptr(k) });
+  }
+  return true;
+}
+
+// ── Windows update rings ─────────────────────────────────────────────
+function extractUpdateRing(json, settings) {
+  const ap = json.AdditionalProperties || json.additionalProperties || {};
+  const m = { ...ap, ...json };
+  if (m['@odata.type'] !== '#microsoft.graph.windowsUpdateForBusinessConfiguration') return false;
+  const ptr = k => (k in json) ? k : '@ap.' + k;
+  const add = (label, k, vmap) => { if (m[k] !== null && m[k] !== undefined) pnPush(settings, label, k, pnShow(m[k], vmap), { ptr: ptr(k), vmap }); };
+  add('Microsoft product updates', 'microsoftUpdateServiceAllowed', { true: 'Allow', false: 'Block' });
+  add('Windows drivers', 'driversExcluded', { true: 'Block', false: 'Allow' });
+  add('Quality update deferral period (days)', 'qualityUpdatesDeferralPeriodInDays');
+  add('Feature update deferral period (days)', 'featureUpdatesDeferralPeriodInDays');
+  add('Upgrade Windows 10 devices to Latest Windows 11 release', 'allowWindows11Upgrade', PN_YESNO);
+  add('Set feature update uninstall period (2 - 60 days)', 'featureUpdatesRollbackWindowInDays');
+  add('Enable pre-release builds', 'prereleaseFeatures', { userDefined: 'Not configured', settingsOnly: 'Not configured', settingsAndExperimentations: 'Not configured', notAllowed: 'Not configured' });
+  if (m.businessReadyUpdatesOnly && !/^(userDefined|all|businessReadyOnly)$/.test(m.businessReadyUpdatesOnly))
+    add('Select pre-release channel', 'businessReadyUpdatesOnly', { windowsInsiderBuildFast: 'Dev Channel', windowsInsiderBuildSlow: 'Beta Channel', windowsInsiderBuildRelease: 'Windows Insider - Release Preview' });
+  add('Automatic update behavior', 'automaticUpdateMode', { userDefined: 'Reset to default', notifyDownload: 'Notify download',
+    autoInstallAtMaintenanceTime: 'Auto install at maintenance time', autoInstallAndRebootAtMaintenanceTime: 'Auto install and restart at maintenance time',
+    autoInstallAndRebootAtScheduledTime: 'Auto install and restart at a scheduled time', autoInstallAndRebootWithoutEndUserControl: 'Auto install and reboot without end-user control',
+    windowsDefault: 'Reset to default' });
+  add('Restart checks', 'skipChecksBeforeRestart', { true: 'Skip', false: 'Allow' });
+  add('Option to pause Windows updates', 'userPauseAccess', { enabled: 'Enable', disabled: 'Disable' });
+  add('Option to check for Windows updates', 'userWindowsUpdateScanAccess', { enabled: 'Enable', disabled: 'Disable' });
+  add('Change notification update level', 'updateNotificationLevel', { notConfigured: 'Not configured', defaultNotifications: 'Use the default Windows Update notifications',
+    restartWarningsOnly: 'Turn off all notifications, excluding restart warnings', disableAllNotifications: 'Turn off all notifications, including restart warnings' });
+  add('Deadline for feature updates', 'deadlineForFeatureUpdatesInDays');
+  add('Deadline for quality updates', 'deadlineForQualityUpdatesInDays');
+  add('Grace period', 'deadlineGracePeriodInDays');
+  add('Auto reboot before deadline', 'postponeRebootUntilAfterDeadline', { true: 'No', false: 'Yes' });
+  return true;
+}
+
+// ── Enrolment restrictions ───────────────────────────────────────────
+function extractEnrolmentRestriction(json, settings) {
+  const PLAT = { ios: 'iOS/iPadOS', android: 'Android device administrator', androidForWork: 'Android Enterprise (work profile)', windows: 'Windows (MDM)', mac: 'macOS', macOS: 'macOS' };
+  if (json.platformType) pnPush(settings, 'Type', 'platformType', PLAT[json.platformType] || humanizeValue(json.platformType), { ptr: 'platformType#label' });
+  const r = json.platformRestriction || {};
+  const p = k => 'platformRestriction.' + k;
+  const ALLOW = { true: 'Block', false: 'Allow' };
+  if ('platformBlocked' in r) pnPush(settings, 'Platform', 'platformBlocked', pnShow(r.platformBlocked, ALLOW), { ptr: p('platformBlocked'), vmap: ALLOW });
+  if (r.osMinimumVersion) pnPush(settings, 'Versions › Min', 'osMinimumVersion', r.osMinimumVersion, { ptr: p('osMinimumVersion') });
+  if (r.osMaximumVersion) pnPush(settings, 'Versions › Max', 'osMaximumVersion', r.osMaximumVersion, { ptr: p('osMaximumVersion') });
+  if ('personalDeviceEnrollmentBlocked' in r) pnPush(settings, 'Personally owned devices', 'personalDeviceEnrollmentBlocked', pnShow(r.personalDeviceEnrollmentBlocked, ALLOW), { ptr: p('personalDeviceEnrollmentBlocked'), vmap: ALLOW });
+  if ((r.blockedManufacturers || []).length) pnPush(settings, 'Blocked manufacturers', 'blockedManufacturers', r.blockedManufacturers.join(', '), { ptr: p('blockedManufacturers') });
+  if (json.platformType === 'windows' && 'isServerEnrollmentBlocked' in r) pnPush(settings, 'isServerEnrollmentBlocked', 'isServerEnrollmentBlocked', pnShow(r.isServerEnrollmentBlocked, PN_YESNO), { ptr: p('isServerEnrollmentBlocked'), vmap: PN_YESNO });
+}
+
+// ── Entra ID tenant settings ─────────────────────────────────────────
+const PN_GUEST_ROLE = { 'a0b1b346-4d3e-4e8b-98f8-753987be4970': 'Guest users have the same access as members (most inclusive)',
+  '10dae51f-b6af-4016-8d66-8c2a99b929b3': 'Guest users have limited access to properties and memberships of directory objects',
+  '2af84b1e-32c8-42b7-82bc-daa82404023b': 'Guest user access is restricted to properties and memberships of their own directory objects (most restrictive)' };
+const PN_INVITES = { everyone: 'Anyone in the organization can invite guest users including guests and non-admins (most inclusive)',
+  adminsGuestInvitersAndAllMembers: 'Member users and users assigned to specific admin roles can invite guest users including guests with member permissions',
+  adminsAndGuestInviters: 'Only users assigned to specific admin roles can invite guest users',
+  none: 'No one in the organization can invite guest users including admins (most restrictive)' };
+const PN_USER_CONSENT = { '': 'Do not allow user consent',
+  'ManagePermissionGrantsForSelf.microsoft-user-default-low': 'Allow user consent for apps from verified publishers, for selected permissions (Recommended)',
+  'ManagePermissionGrantsForSelf.microsoft-user-default-legacy': 'Allow user consent for apps' };
+function extractAuthorizationPolicy(json, settings) {
+  const d = json.defaultUserRolePermissions || {};
+  const dp = k => 'defaultUserRolePermissions.' + k;
+  const NO_YES = { true: 'No', false: 'Yes' };
+  // User settings / Groups / Devices / Consent
+  if ('allowedToCreateApps' in d) pnPush(settings, 'Users can register applications', 'allowedToCreateApps', pnShow(d.allowedToCreateApps, PN_YESNO), { ptr: dp('allowedToCreateApps'), vmap: PN_YESNO });
+  if ('allowedToCreateTenants' in d) pnPush(settings, 'Restrict non-admin users from creating tenants', 'allowedToCreateTenants', pnShow(d.allowedToCreateTenants, NO_YES), { ptr: dp('allowedToCreateTenants'), vmap: NO_YES });
+  if ('allowedToCreateSecurityGroups' in d) pnPush(settings, 'Users can create security groups in Azure portals, API or PowerShell', 'allowedToCreateSecurityGroups', pnShow(d.allowedToCreateSecurityGroups, PN_YESNO), { ptr: dp('allowedToCreateSecurityGroups'), vmap: PN_YESNO });
+  if ('allowedToReadBitlockerKeysForOwnedDevice' in d) pnPush(settings, 'Restrict users from recovering the BitLocker key(s) for their owned devices', 'allowedToReadBitlockerKeysForOwnedDevice', pnShow(d.allowedToReadBitlockerKeysForOwnedDevice, NO_YES), { ptr: dp('allowedToReadBitlockerKeysForOwnedDevice'), vmap: NO_YES });
+  if (Array.isArray(d.permissionGrantPoliciesAssigned)) {
+    const own = d.permissionGrantPoliciesAssigned.filter(x => /^ManagePermissionGrantsForSelf\./.test(x));
+    pnPush(settings, 'User consent for applications', 'permissionGrantPoliciesAssigned', own.length ? own.map(x => PN_USER_CONSENT[x] || x).join(', ') : PN_USER_CONSENT[''], { ptr: dp('permissionGrantPoliciesAssigned') });
+  }
+  // External collaboration settings
+  if (json.guestUserRoleId) pnPush(settings, 'Guest user access', 'guestUserRoleId', PN_GUEST_ROLE[json.guestUserRoleId] || json.guestUserRoleId, { vmap: PN_GUEST_ROLE });
+  if (json.allowInvitesFrom) pnPush(settings, 'Guest invite settings', 'allowInvitesFrom', pnShow(json.allowInvitesFrom, PN_INVITES), { vmap: PN_INVITES });
+  // No admin-centre control: API names.
+  if ('allowedToReadOtherUsers' in d) pnPush(settings, 'defaultUserRolePermissions.allowedToReadOtherUsers', 'allowedToReadOtherUsers', pnShow(d.allowedToReadOtherUsers, PN_TF), { ptr: dp('allowedToReadOtherUsers'), vmap: PN_TF });
+  ['allowedToSignUpEmailBasedSubscriptions', 'allowedToUseSSPR', 'allowEmailVerifiedUsersToJoinOrganization', 'allowUserConsentForRiskyApps', 'blockMsolPowerShell']
+    .forEach(k => { if (k in json) pnPush(settings, k, k, pnShow(json[k], PN_TF), { vmap: PN_TF }); });
+}
+
+function extractCrossTenantDefault(json, settings) {
+  const ACCESS = { allowed: 'Allow access', blocked: 'Block access' };
+  const sections = [
+    ['b2bCollaborationInbound', 'Inbound access settings › B2B collaboration', 'External users and groups', 'Applications'],
+    ['b2bCollaborationOutbound', 'Outbound access settings › B2B collaboration', 'Users and groups', 'External applications'],
+    ['b2bDirectConnectInbound', 'Inbound access settings › B2B direct connect', 'External users and groups', 'Applications'],
+    ['b2bDirectConnectOutbound', 'Outbound access settings › B2B direct connect', 'Users and groups', 'External applications'],
+  ];
+  for (const [k, title, users, apps] of sections) {
+    const s = json[k]; if (!s) continue;
+    for (const [part, label] of [['usersAndGroups', users], ['applications', apps]]) {
+      const v = s[part]; if (!v) continue;
+      const all = (v.targets || []).every(t => /^All(Users|Applications)$/.test(t.target));
+      pnPush(settings, `${title} › ${label}`, 'accessType', `${ACCESS[v.accessType] || v.accessType}${all ? (part === 'applications' ? ' (all applications)' : ' (all users and groups)') : ' (selected)'}`, { ptr: `${k}.${part}.accessType` });
+    }
+  }
+  const t = json.inboundTrust || {};
+  const CHK = { true: 'Selected', false: 'Not selected' };
+  if ('isMfaAccepted' in t) pnPush(settings, 'Inbound access settings › Trust settings › Trust multifactor authentication from Microsoft Entra tenants', 'isMfaAccepted', pnShow(t.isMfaAccepted, CHK), { ptr: 'inboundTrust.isMfaAccepted', vmap: CHK });
+  if ('isCompliantDeviceAccepted' in t) pnPush(settings, 'Inbound access settings › Trust settings › Trust compliant devices', 'isCompliantDeviceAccepted', pnShow(t.isCompliantDeviceAccepted, CHK), { ptr: 'inboundTrust.isCompliantDeviceAccepted', vmap: CHK });
+  if ('isHybridAzureADJoinedDeviceAccepted' in t) pnPush(settings, 'Inbound access settings › Trust settings › Trust Microsoft Entra hybrid joined devices', 'isHybridAzureADJoinedDeviceAccepted', pnShow(t.isHybridAzureADJoinedDeviceAccepted, CHK), { ptr: 'inboundTrust.isHybridAzureADJoinedDeviceAccepted', vmap: CHK });
+  const a = json.automaticUserConsentSettings || {};
+  if ('inboundAllowed' in a) pnPush(settings, 'Inbound access settings › Trust settings › Automatically redeem invitations with the tenant', 'inboundAllowed', pnShow(a.inboundAllowed, CHK), { ptr: 'automaticUserConsentSettings.inboundAllowed', vmap: CHK });
+  if ('outboundAllowed' in a) pnPush(settings, 'Outbound access settings › Trust settings › Automatically redeem invitations with the tenant', 'outboundAllowed', pnShow(a.outboundAllowed, CHK), { ptr: 'automaticUserConsentSettings.outboundAllowed', vmap: CHK });
+}
+
+function extractDeviceRegistration(json, settings) {
+  const scope = m => {
+    if (!m) return null;
+    const t = m['@odata.type'] || '';
+    if (/allDeviceRegistrationMembership/.test(t)) return 'All';
+    if (/noDeviceRegistrationMembership/.test(t)) return 'None';
+    const n = (m.users || []).length + (m.groups || []).length;
+    return n ? `Selected (${n})` : 'Selected (agreed during the design workshop)';
+  };
+  pnPush(settings, 'Users may join devices to Microsoft Entra', 'allowedToJoin', scope(json.azureADJoin?.allowedToJoin), { ptr: 'azureADJoin.allowedToJoin' });
+  pnPush(settings, 'Users may register their devices with Microsoft Entra', 'allowedToRegister', scope(json.azureADRegistration?.allowedToRegister), { ptr: 'azureADRegistration.allowedToRegister' });
+  const MFA = { required: 'Yes', notRequired: 'No' };
+  if (json.multiFactorAuthConfiguration) pnPush(settings, 'Require Multifactor Authentication to register or join devices with Microsoft Entra', 'multiFactorAuthConfiguration', pnShow(json.multiFactorAuthConfiguration, MFA), { vmap: MFA });
+  if (json.userDeviceQuota !== undefined) pnPush(settings, 'Maximum number of devices per user', 'userDeviceQuota', json.userDeviceQuota);
+  const la = json.azureADJoin?.localAdmins || {};
+  if ('enableGlobalAdmins' in la) pnPush(settings, 'Global administrator role is added as local administrator on the device during Microsoft Entra join (Preview)', 'enableGlobalAdmins', pnShow(la.enableGlobalAdmins, PN_YESNO), { ptr: 'azureADJoin.localAdmins.enableGlobalAdmins', vmap: PN_YESNO });
+  if (la.registeringUsers) pnPush(settings, 'Registering user is added as local administrator on the device during Microsoft Entra join (Preview)', 'registeringUsers', scope(la.registeringUsers), { ptr: 'azureADJoin.localAdmins.registeringUsers' });
+  if (json.localAdminPassword && 'isEnabled' in json.localAdminPassword) pnPush(settings, 'Enable Microsoft Entra Local Administrator Password Solution (LAPS)', 'isEnabled', pnShow(json.localAdminPassword.isEnabled, PN_YESNO), { ptr: 'localAdminPassword.isEnabled', vmap: PN_YESNO });
+}
+
+function extractAdminConsent(json, settings) {
+  if ('isEnabled' in json) pnPush(settings, 'Users can request admin consent to apps they are unable to consent to', 'isEnabled', pnShow(json.isEnabled, PN_YESNO), { vmap: PN_YESNO });
+  if (Array.isArray(json.reviewers)) {
+    const tmp = []; flattenSettings({ reviewers: json.reviewers }, '', tmp, 1);
+    pnPush(settings, 'Who can review admin consent requests', 'reviewers', tmp[0]?.value || 'None', { ptr: 'reviewers' });
+  }
+  if ('notifyReviewers' in json) pnPush(settings, 'Selected users will receive email notifications for requests', 'notifyReviewers', pnShow(json.notifyReviewers, PN_YESNO), { vmap: PN_YESNO });
+  if ('remindersEnabled' in json) pnPush(settings, 'Selected users will receive request expiration reminders', 'remindersEnabled', pnShow(json.remindersEnabled, PN_YESNO), { vmap: PN_YESNO });
+  if ('requestDurationInDays' in json) pnPush(settings, 'Consent request expires after (days)', 'requestDurationInDays', json.requestDurationInDays);
+}
+
+// Directory settings (Group.Unified, Password Rule Settings): admin-centre names
+// where there is one, the setting's own name where it's PowerShell / API only.
+const PN_DIRECTORY = {
+  EnableGroupCreation: ['Users can create Microsoft 365 groups in Azure portals, API or PowerShell', { true: 'Yes', false: 'No' }],
+  AllowToAddGuests: ['Let group owners add people outside your organization to Microsoft 365 Groups as guests', { true: 'Selected', false: 'Not selected' }],
+  AllowGuestsToAccessGroups: ['Let guest group members access group content', { true: 'Selected', false: 'Not selected' }],
+  PrefixSuffixNamingRequirement: ['Group naming policy'],
+  CustomBlockedWordsList: ['Blocked words'],
+  EnableBannedPasswordCheck: ['Enforce custom list', { true: 'Yes', false: 'No' }],
+  BannedPasswordList: ['Custom banned password list'],
+  EnableBannedPasswordCheckOnPremises: ['Enable password protection on Windows Server Active Directory', { true: 'Yes', false: 'No' }],
+  BannedPasswordCheckOnPremisesMode: ['Mode', { Enforce: 'Enforced', Audit: 'Audit' }],
+  LockoutThreshold: ['Lockout threshold'],
+  LockoutDurationInSeconds: ['Lockout duration in seconds'],
+};
+
+// ── SharePoint and OneDrive (SharePoint admin centre) ────────────────
+const PN_SHAREPOINT = {
+  sharingCapability: ['External sharing › SharePoint', { disabled: 'Only people in your organization', existingExternalUserSharingOnly: 'Existing guests',
+    externalUserSharingOnly: 'New and existing guests', externalUserAndGuestSharing: 'Anyone' }],
+  sharingDomainRestrictionMode: ['Limit external sharing by domain', { none: 'Not selected', allowList: 'Allow only specific domains', blockList: 'Block specific domains' }],
+  isResharingByExternalUsersEnabled: ['Allow guests to share items they don’t own', PN_SELECTED],
+  isRequireAcceptingUserToMatchInvitedUserEnabled: ['Guests must sign in using the same account to which sharing invitations are sent', PN_SELECTED],
+  'idleSessionSignOut.isEnabled': ['Idle session sign-out › Sign out inactive users automatically', PN_ONOFF],
+  'idleSessionSignOut.warnAfterInSeconds': ['Idle session sign-out › Give users a warning before signing them out (seconds)'],
+  'idleSessionSignOut.signOutAfterInSeconds': ['Idle session sign-out › Sign out users after (seconds)'],
+  isLegacyAuthProtocolsEnabled: ['Apps that don’t use modern authentication', { true: 'Allow access', false: 'Block access' }],
+  isSiteCreationEnabled: ['Users can create SharePoint sites', PN_SELECTED],
+  isSitePagesCreationEnabled: ['Allow users to create modern pages', PN_SELECTED],
+  isCommentingOnSitePagesEnabled: ['Allow commenting on modern pages', PN_SELECTED],
+  isSyncButtonHiddenOnPersonalSite: ['Show the Sync button on the OneDrive website', { true: 'Not selected', false: 'Selected' }],
+  isUnmanagedSyncAppForTenantRestricted: ['Allow syncing only on computers joined to specific domains', PN_SELECTED],
+  allowedDomainGuidsForSyncApp: ['Allow syncing only on computers joined to specific domains › Domain GUIDs'],
+  excludedFileExtensionsForSyncApp: ['Block upload of specific file types'],
+  deletedUserPersonalSiteRetentionPeriodInDays: ['Days to retain files in OneDrive after a user account is marked for deletion'],
+  personalSiteDefaultStorageLimitInMB: ['Default storage limit (MB)'],
+};
+
+// ── Exchange Online / Defender for Office 365 / Defender for Cloud Apps ─
+// Defender portal names from Microsoft's recommended-settings reference.
+// Exchange settings with no admin-centre control keep their PowerShell name.
+const PN_ACTIONS_MDO = { MoveToJmf: 'Move the message to the recipients’ Junk Email folders', Quarantine: 'Quarantine the message', Reject: 'Reject the message',
+  NoAction: 'Don’t apply any action', Delete: 'Delete the message before it’s delivered', Redirect: 'Redirect the message to other email addresses' };
+const PN_ACTIONS_SPAM = { MoveToJmf: 'Move message to Junk Email folder', Quarantine: 'Quarantine message', AddXHeader: 'Add X-header', ModifySubject: 'Prepend subject line with text',
+  Redirect: 'Redirect message to email address', Delete: 'Delete message', NoAction: 'No action' };
+const PN_RUNNER = {
+  // anti-malware
+  EnableFileFilter: ['Enable the common attachments filter', PN_SELECTED],
+  FileTypeAction: ['When these file types are found', { Reject: 'Reject the message with a non-delivery report (NDR)', Quarantine: 'Quarantine the message' }],
+  ZapEnabled: ['Enable zero-hour auto purge for malware', PN_SELECTED],
+  EnableInternalSenderAdminNotifications: ['Notify an admin about undelivered messages from internal senders', PN_SELECTED],
+  EnableExternalSenderAdminNotifications: ['Notify an admin about undelivered messages from external senders', PN_SELECTED],
+  // anti-spam
+  BulkThreshold: ['Bulk email threshold'],
+  MarkAsSpamBulkMail: ['MarkAsSpamBulkMail'],
+  SpamAction: ['Spam', PN_ACTIONS_SPAM],
+  SpamQuarantineTag: ['Spam › Quarantine policy'],
+  HighConfidenceSpamAction: ['High confidence spam', PN_ACTIONS_SPAM],
+  HighConfidenceSpamQuarantineTag: ['High confidence spam › Quarantine policy'],
+  PhishSpamAction: ['Phishing', PN_ACTIONS_SPAM],
+  PhishQuarantineTag: ['Phishing › Quarantine policy'],
+  HighConfidencePhishAction: ['High confidence phishing', PN_ACTIONS_SPAM],
+  HighConfidencePhishQuarantineTag: ['High confidence phishing › Quarantine policy'],
+  BulkSpamAction: ['Bulk compliant level (BCL) met or exceeded', PN_ACTIONS_SPAM],
+  BulkQuarantineTag: ['Bulk compliant level (BCL) met or exceeded › Quarantine policy'],
+  QuarantineRetentionPeriod: ['Retain spam in quarantine for this many days'],
+  InlineSafetyTipsEnabled: ['Enable spam safety tips', PN_SELECTED],
+  PhishZapEnabled: ['Enable zero-hour auto purge (ZAP) for phishing messages', PN_SELECTED],
+  SpamZapEnabled: ['Enable ZAP for spam messages', PN_SELECTED],
+  // outbound spam
+  RecipientLimitExternalPerHour: ['Set an external message limit'],
+  RecipientLimitInternalPerHour: ['Set an internal message limit'],
+  RecipientLimitPerDay: ['Set a daily message limit'],
+  ActionWhenThresholdReached: ['Restriction placed on users who reach the message limit', { BlockUserForToday: 'Restrict the user from sending mail until the following day',
+    BlockUser: 'Restrict the user from sending mail', Alert: 'No action, alert only' }],
+  AutoForwardingMode: ['Automatic forwarding rules', { Automatic: 'Automatic - System-controlled', Off: 'Off - Forwarding is disabled', On: 'On - Forwarding is enabled' }],
+  // anti-phishing
+  PhishThresholdLevel: ['Phishing email threshold', { 1: '1 - Standard', 2: '2 - Aggressive', 3: '3 - More aggressive', 4: '4 - Most aggressive' }],
+  EnableTargetedUserProtection: ['Enable users to protect', PN_SELECTED],
+  EnableOrganizationDomainsProtection: ['Include domains I own', PN_SELECTED],
+  EnableTargetedDomainsProtection: ['Include custom domains', PN_SELECTED],
+  EnableMailboxIntelligence: ['Enable mailbox intelligence', PN_SELECTED],
+  EnableMailboxIntelligenceProtection: ['Enable intelligence for impersonation protection', PN_SELECTED],
+  TargetedUserProtectionAction: ['If a message is detected as user impersonation', PN_ACTIONS_MDO],
+  TargetedUserQuarantineTag: ['User impersonation › Quarantine policy'],
+  TargetedDomainProtectionAction: ['If a message is detected as domain impersonation', PN_ACTIONS_MDO],
+  TargetedDomainQuarantineTag: ['Domain impersonation › Quarantine policy'],
+  MailboxIntelligenceProtectionAction: ['If mailbox intelligence detects an impersonated user', PN_ACTIONS_MDO],
+  MailboxIntelligenceQuarantineTag: ['Mailbox intelligence impersonation › Quarantine policy'],
+  EnableSimilarUsersSafetyTips: ['Show user impersonation safety tip', PN_SELECTED],
+  EnableSimilarDomainsSafetyTips: ['Show domain impersonation safety tip', PN_SELECTED],
+  EnableUnusualCharactersSafetyTips: ['Show user impersonation unusual characters safety tip', PN_SELECTED],
+  EnableSpoofIntelligence: ['Enable spoof intelligence', PN_SELECTED],
+  HonorDmarcPolicy: ['Honor DMARC record policy when the message is detected as spoof', PN_SELECTED],
+  DmarcQuarantineAction: ['If the message is detected as spoof and DMARC Policy is set as p=quarantine', PN_ACTIONS_MDO],
+  DmarcRejectAction: ['If the message is detected as spoof and DMARC Policy is set as p=reject', PN_ACTIONS_MDO],
+  AuthenticationFailAction: ['If the message is detected as spoof by spoof intelligence', PN_ACTIONS_MDO],
+  SpoofQuarantineTag: ['Spoof › Quarantine policy'],
+  EnableFirstContactSafetyTips: ['Show first contact safety tip', PN_SELECTED],
+  EnableUnauthenticatedSender: ['Show (?) for unauthenticated senders for spoof', PN_SELECTED],
+  EnableViaTag: ['Show "via" tag', PN_SELECTED],
+  // Safe Attachments
+  EnableATPForSPOTeamsODB: ['Turn on Defender for Office 365 for SharePoint, OneDrive, and Microsoft Teams', PN_ONOFF],
+  EnableSafeDocs: ['Turn on Safe Documents for Office clients', PN_ONOFF],
+  AllowSafeDocsOpen: ['Allow people to click through Protected View even if Safe Documents identified the file as malicious', PN_ONOFF],
+  Redirect: ['Enable redirect', PN_SELECTED],
+  EnableBlockingEncryptedAttachments: ['Block unscanned attachments', PN_SELECTED],
+  // Safe Links
+  EnableSafeLinksForEmail: ['On: Safe Links checks a list of known, malicious links when users click links in email. URLs are rewritten by default.', PN_SELECTED],
+  EnableForInternalSenders: ['Apply Safe Links to email messages sent within the organization', PN_SELECTED],
+  ScanUrls: ['Apply real-time URL scanning for suspicious links and links that point to files', PN_SELECTED],
+  DeliverMessageAfterScan: ['Wait for URL scanning to complete before delivering the message', PN_SELECTED],
+  DisableUrlRewrite: ['Do not rewrite URLs, do checks via Safe Links API only', PN_SELECTED],
+  EnableSafeLinksForTeams: ['On: Safe Links checks a list of known, malicious links when users click links in Microsoft Teams. URLs are not rewritten.', PN_SELECTED],
+  EnableSafeLinksForOffice: ['On: Safe Links checks a list of known, malicious links when users click links in Microsoft Office apps. URLs are not rewritten.', PN_SELECTED],
+  TrackClicks: ['Track user clicks', PN_SELECTED],
+  AllowClickThrough: ['Let users click through to the original URL', PN_SELECTED],
+  EnableOrganizationBranding: ['Display the organization branding on notification and warning pages', PN_SELECTED],
+  // Defender for Cloud Apps
+  severity: ['Policy severity', { low: 'Low', medium: 'Medium', high: 'High' }],
+  category: ['Category', { threatDetection: 'Threat detection', DLP: 'DLP', accessControl: 'Access control', compliance: 'Compliance', configurationControl: 'Configuration control', sharingControl: 'Sharing control', usage: 'Cloud discovery' }],
+  dailyAlertLimit: ['Daily alert limit'],
+  // Exchange: remote domains (Exchange admin centre)
+  AutoForwardEnabled: ['Allow automatic forwarding', PN_SELECTED],
+};
+// Per object type, where one parameter means different things.
+const PN_RUNNER_BY_TYPE = {
+  'MalwareFilterPolicy': { QuarantineTag: ['Quarantine policy'] },
+  'SafeAttachmentPolicy': { QuarantineTag: ['Quarantine policy'], Action: ['Safe Attachments unknown malware response', { Block: 'Block', Allow: 'Monitor', DynamicDelivery: 'Dynamic Delivery' }],
+    Enable: ['Safe Attachments unknown malware response › Enabled', { true: 'On', false: 'Off' }] },
+  'AntiPhishPolicy': { Enabled: ['Policy status', PN_ONOFF] },
+};
+function extractRunner(json, settings) {
+  const type = json.type || '';
+  const per = PN_RUNNER_BY_TYPE[type] || {};
+  const params = json.parameters || {};
+  if (type === 'SafeAttachmentPolicy' && 'Action' in params) {
+    const RESP = { Block: 'Block', Allow: 'Monitor', DynamicDelivery: 'Dynamic Delivery' };
+    pnPush(settings, 'Safe Attachments unknown malware response', 'Action', params.Enable === false ? 'Off' : (RESP[params.Action] || params.Action), { ptr: 'parameters.Action', vmap: RESP });
+  }
+  for (const [k, v] of Object.entries(params)) {
+    if (type === 'SafeAttachmentPolicy' && (k === 'Action' || k === 'Enable')) continue;
+    if (k === 'Name' || k === 'name' || k === 'description' || k === 'AdminDisplayName' || v === null || v === undefined) continue;
+    const def = per[k] || PN_RUNNER[k];
+    const label = def ? def[0] : k;           // no portal name: the PowerShell parameter itself
+    const vmap = def && def[1];
+    const vm = vmap || (typeof v === 'boolean' ? PN_TF : null);
+    const val = Array.isArray(v) ? (v.length ? v.join(', ') : 'None') : (vm && String(v) in vm) ? vm[String(v)] : String(v);
+    pnPush(settings, label, k, lldTidyValue(val), { ptr: 'parameters.' + k, vmap: vm });
+  }
+  const rp = json.rule?.parameters;
+  if (rp) {
+    if (rp.RecipientDomainIs) pnPush(settings, 'Users, groups, and domains › Domains', 'RecipientDomainIs', lldTidyValue(rp.RecipientDomainIs.join(', ')), { ptr: 'rule.parameters.RecipientDomainIs' });
+    if (rp.SentTo) pnPush(settings, 'Users, groups, and domains › Users', 'SentTo', rp.SentTo.join(', '), { ptr: 'rule.parameters.SentTo' });
+    if (rp.SentToMemberOf) pnPush(settings, 'Users, groups, and domains › Groups', 'SentToMemberOf', rp.SentToMemberOf.join(', '), { ptr: 'rule.parameters.SentToMemberOf' });
+    if (rp.Priority !== undefined) pnPush(settings, 'Priority', 'Priority', rp.Priority, { ptr: 'rule.parameters.Priority' });
+  }
+}
+
 function extractSettings(json, cat) {
   const settings = [];
-  if (cat === 'CompliancePolicies' || cat === 'DeviceConfigurations') {
+  if ((cat === 'CompliancePolicies' && extractCompliance(json, settings)) || (cat === 'DeviceConfigurations' && extractUpdateRing(json, settings))) {
+    // portal names
+  } else if (cat === 'CompliancePolicies' || cat === 'DeviceConfigurations') {
     const ap = json.AdditionalProperties || json.additionalProperties || {};
     const merged = { ...ap, ...json };
     const SKIP = new Set(['@odata.type','@odata.context','id','createdDateTime','lastModifiedDateTime',
@@ -6542,6 +7183,8 @@ function extractSettings(json, cat) {
       settings.push({ key: humanizeName(k), rawKey: k, value: humanizeValue(val), ptr: (k in json) ? k : '@ap.' + k });
     }
 
+  } else if (cat === 'EnrolmentRestrictions' && json.platformRestriction) {
+    extractEnrolmentRestriction(json, settings);
   } else if (cat === 'EnrolmentRestrictions') {
     // Enrolment Restrictions are flat JSON with a nested platformRestriction object.
     const ER_SKIP = new Set([
@@ -6612,6 +7255,8 @@ function extractSettings(json, cat) {
     add('Blocking apps',                                            'selectedMobileAppIds',                   'Agreed during the design workshop');
 
   } else if (cat === 'AppProtectionPolicies') {
+    extractAppProtection(json, settings);
+  } else if (cat === 'AppProtectionPoliciesLegacy') {
     // MAM App Protection policies are flat JSON — iterate top-level scalar/array fields.
     const MAM_SKIP = new Set([
       '@odata.type','@odata.context','id','createdDateTime','lastModifiedDateTime','version',
@@ -6635,7 +7280,7 @@ function extractSettings(json, cat) {
     const ca = json;
 
     // State
-    if (ca.state) settings.push({ key: 'Policy State', rawKey: 'state', value: LLD_CA_STATE[ca.state] || humanizeValue(ca.state) });
+    if (ca.state) settings.push({ key: 'Enable policy', rawKey: 'state', value: LLD_CA_STATE[ca.state] || humanizeValue(ca.state) });
 
     // ── Conditions ──────────────────────────────────────────────
     const cond = ca.conditions || {};
@@ -6643,43 +7288,46 @@ function extractSettings(json, cat) {
 
     // Users
     const users = cond.users || {};
-    add('Include Users',  'includeUsers',  users.includeUsers,  LLD_CA_USERS);
-    add('Exclude Users',  'excludeUsers',  users.excludeUsers,  LLD_CA_USERS);
-    add('Include Groups', 'includeGroups', users.includeGroups);
-    add('Exclude Groups', 'excludeGroups', users.excludeGroups);
+    // "None" is only the placeholder when roles, groups or guests are included instead.
+    if (!(users.includeUsers || []).every(u => u === 'None') || !((users.includeRoles || []).length || (users.includeGroups || []).length || users.includeGuestsOrExternalUsers))
+      add('Users \u203a Include',  'includeUsers',  users.includeUsers,  LLD_CA_USERS);
+    add('Users \u203a Exclude',  'excludeUsers',  users.excludeUsers,  LLD_CA_USERS);
+    add('Users \u203a Include \u203a Users and groups', 'includeGroups', users.includeGroups);
+    add('Users \u203a Exclude \u203a Users and groups', 'excludeGroups', users.excludeGroups);
     const GUEST_TYPES = { internalGuest: 'Local guest users', b2bCollaborationGuest: 'B2B collaboration guest users',
       b2bCollaborationMember: 'B2B collaboration member users', b2bDirectConnectUser: 'B2B direct connect users',
       otherExternalUser: 'Other external users', serviceProvider: 'Service provider users' };
     const guestList = g => g && g.guestOrExternalUserTypes ? String(g.guestOrExternalUserTypes).split(',').map(x => GUEST_TYPES[x.trim()] || x.trim()).join(', ') : '';
-    if (guestList(users.includeGuestsOrExternalUsers)) settings.push({ key: 'Include Guests or External Users', rawKey: 'includeGuestsOrExternalUsers', value: guestList(users.includeGuestsOrExternalUsers) });
-    if (guestList(users.excludeGuestsOrExternalUsers)) settings.push({ key: 'Exclude Guests or External Users', rawKey: 'excludeGuestsOrExternalUsers', value: guestList(users.excludeGuestsOrExternalUsers) });
-    add('Include Roles',  'includeRoles',  users.includeRoles);
-    add('Exclude Roles',  'excludeRoles',  users.excludeRoles);
+    if (guestList(users.includeGuestsOrExternalUsers)) settings.push({ key: 'Users \u203a Include \u203a Guest or external users', rawKey: 'includeGuestsOrExternalUsers', value: guestList(users.includeGuestsOrExternalUsers) });
+    if (guestList(users.excludeGuestsOrExternalUsers)) settings.push({ key: 'Users \u203a Exclude \u203a Guest or external users', rawKey: 'excludeGuestsOrExternalUsers', value: guestList(users.excludeGuestsOrExternalUsers) });
+    add('Users \u203a Include \u203a Directory roles',  'includeRoles',  users.includeRoles);
+    add('Users \u203a Exclude \u203a Directory roles',  'excludeRoles',  users.excludeRoles);
 
     // Target resources
     const apps = cond.applications || {};
-    add('Include Resources', 'includeApplications', apps.includeApplications, LLD_APPS);
-    add('Exclude Resources', 'excludeApplications', apps.excludeApplications, LLD_APPS);
-    if ((apps.includeUserActions || []).length) settings.push({ key: 'User Actions', rawKey: 'includeUserActions',
+    add('Target resources \u203a Include', 'includeApplications', apps.includeApplications, LLD_APPS);
+    add('Target resources \u203a Exclude', 'excludeApplications', apps.excludeApplications, LLD_APPS);
+    if ((apps.includeUserActions || []).length) settings.push({ key: 'Target resources \u203a User actions', rawKey: 'includeUserActions',
       value: apps.includeUserActions.map(a => ({ 'urn:user:registersecurityinfo': 'Register security information',
         'urn:user:registerdevice': 'Register or join devices' }[a] || a)).join(', ') });
 
     // Platforms
     const plat = cond.platforms || {};
-    add('Include Platforms', 'includePlatforms', plat.includePlatforms, LLD_PLATFORMS);
-    add('Exclude Platforms', 'excludePlatforms', plat.excludePlatforms, LLD_PLATFORMS);
+    add('Conditions \u203a Device platforms \u203a Include', 'includePlatforms', plat.includePlatforms, LLD_PLATFORMS);
+    add('Conditions \u203a Device platforms \u203a Exclude', 'excludePlatforms', plat.excludePlatforms, LLD_PLATFORMS);
 
     // Client app types
-    add('Client App Types', 'clientAppTypes', cond.clientAppTypes, LLD_CA_CLIENTS);
+    // "All client apps" is the unconfigured condition in the portal.
+    if (!(cond.clientAppTypes || []).every(c => c === 'all')) add('Conditions \u203a Client apps', 'clientAppTypes', cond.clientAppTypes, LLD_CA_CLIENTS);
 
     // Sign-in / user risk
-    if ((cond.signInRiskLevels || []).length) settings.push({ key: 'Sign-In Risk Levels', rawKey: 'signInRiskLevels', value: cond.signInRiskLevels.map(lldCap).join(', ') });
-    if ((cond.userRiskLevels || []).length)   settings.push({ key: 'User Risk Levels',    rawKey: 'userRiskLevels',   value: cond.userRiskLevels.map(lldCap).join(', ') });
+    if ((cond.signInRiskLevels || []).length) settings.push({ key: 'Conditions \u203a Sign-in risk', rawKey: 'signInRiskLevels', value: cond.signInRiskLevels.map(lldCap).join(', ') });
+    if ((cond.userRiskLevels || []).length)   settings.push({ key: 'Conditions \u203a User risk',    rawKey: 'userRiskLevels',   value: cond.userRiskLevels.map(lldCap).join(', ') });
 
     // Locations
     const locs = cond.locations || {};
-    add('Include Locations', 'includeLocations', locs.includeLocations, LLD_CA_LOCATIONS);
-    add('Exclude Locations', 'excludeLocations', locs.excludeLocations, LLD_CA_LOCATIONS);
+    add('Network \u203a Include', 'includeLocations', locs.includeLocations, LLD_CA_LOCATIONS);
+    add('Network \u203a Exclude', 'excludeLocations', locs.excludeLocations, LLD_CA_LOCATIONS);
 
     // ── Grant Controls ───────────────────────────────────────────
     const grant = ca.grantControls || null;
@@ -6687,36 +7335,36 @@ function extractSettings(json, cat) {
       const builtIn = grant.builtInControls || [];
       if (builtIn.length) {
         const names = builtIn.map(c => LLD_CA_GRANTS[c] || humanizeValue(c));
-        settings.push({ key: 'Grant Controls', rawKey: 'builtInControls',
+        settings.push({ key: 'Grant', rawKey: 'builtInControls',
           value: names.length === 1 ? names[0]
             : (grant.operator === 'AND' ? 'Require all of: ' : 'Require one of: ') + names.join('; ') });
       }
       const authStrength = grant.authenticationStrength;
       if (authStrength && authStrength.displayName) {
-        settings.push({ key: 'Authentication Strength', rawKey: 'authenticationStrength',
+        settings.push({ key: 'Grant \u203a Require authentication strength', rawKey: 'authenticationStrength',
           value: authStrength.displayName });
       }
     } else {
-      settings.push({ key: 'Grant Controls', rawKey: 'grantControls', value: 'Block access' });
+      settings.push({ key: 'Grant', rawKey: 'grantControls', value: 'Block access' });
     }
 
     // ── Session Controls ─────────────────────────────────────────
     const sess = ca.sessionControls || {};
     if (sess.signInFrequency?.isEnabled) {
       const sf = sess.signInFrequency;
-      settings.push({ key: 'Sign-In Frequency', rawKey: 'signInFrequency',
+      settings.push({ key: 'Session \u203a Sign-in frequency', rawKey: 'signInFrequency',
         value: sf.frequencyInterval === 'everyTime' ? 'Every time'
           : `${sf.value} ${sf.type === 'days' ? (sf.value === 1 ? 'day' : 'days') : (sf.value === 1 ? 'hour' : 'hours')}` });
     }
     if (sess.persistentBrowser?.isEnabled) {
-      settings.push({ key: 'Persistent Browser Session', rawKey: 'persistentBrowser',
+      settings.push({ key: 'Session \u203a Persistent browser session', rawKey: 'persistentBrowser',
         value: { always: 'Always persistent', never: 'Never persistent' }[sess.persistentBrowser.mode] || humanizeValue(sess.persistentBrowser.mode) });
     }
     if (sess.applicationEnforcedRestrictions?.isEnabled) {
-      settings.push({ key: 'App Enforced Restrictions', rawKey: 'applicationEnforcedRestrictions', value: 'Enabled' });
+      settings.push({ key: 'Session \u203a Use app enforced restrictions', rawKey: 'applicationEnforcedRestrictions', value: 'Selected' });
     }
     if (sess.cloudAppSecurity?.isEnabled) {
-      settings.push({ key: 'Conditional Access App Control', rawKey: 'cloudAppSecurity',
+      settings.push({ key: 'Session \u203a Use Conditional Access App Control', rawKey: 'cloudAppSecurity',
         value: humanizeValue(sess.cloudAppSecurity.cloudAppSecurityType || 'Enabled') });
     }
 
@@ -6725,10 +7373,19 @@ function extractSettings(json, cat) {
       const si = s.settingInstance || s;
       extractSettingInstance(si, settings, 0);
     }
+  } else if (cat === 'AuthorizationPolicy') {
+    extractAuthorizationPolicy(json, settings);
+  } else if (cat === 'CrossTenantAccessPolicy') {
+    extractCrossTenantDefault(json, settings);
+  } else if (cat === 'DeviceRegistrationPolicy') {
+    extractDeviceRegistration(json, settings);
+  } else if (cat === 'AdminConsentRequestPolicy') {
+    extractAdminConsent(json, settings);
+  } else if (json.parameters && typeof json.parameters === 'object') {
+    extractRunner(json, settings);
   } else {
-    // Tenant-wide settings (Entra, SharePoint) and PowerShell-runner objects
-    // (Exchange, Defender for Cloud Apps) have no settings array.
-    extractGenericSettings(json, settings);
+    // Tenant-wide settings (Entra, SharePoint) have no settings array.
+    extractGenericSettings(json, settings, cat);
   }
   // Every row gets a pointer back to its source in the policy JSON, so an
   // edited LLD can be applied to the policy at deployment.
@@ -6745,19 +7402,34 @@ function extractSettings(json, cat) {
 const GENERIC_SKIP = new Set(['displayName', 'description', 'name', 'id', 'version', '_comment', '_notes',
   'workload', 'type', 'identity', 'apiCreatable', 'isServiceDefault', 'templateId', 'createdDateTime',
   'lastModifiedDateTime', 'modifiedDateTime', 'roleScopeTagIds', 'assignments']);
-function extractGenericSettings(json, settings) {
-  // Runner objects keep their cmdlet parameters (and any rule) under `parameters`.
-  if (json.parameters && typeof json.parameters === 'object') {
-    flattenSettings(json.parameters, '', settings, 0, 'parameters');
-    if (json.rule?.parameters) flattenSettings(json.rule.parameters, 'Rule', settings, 0, 'rule.parameters');
-    return;
-  }
-  // Directory settings: [{ name, value }]
+function extractGenericSettings(json, settings, cat) {
+  // Directory settings: [{ name, value }]. Admin-centre names where there is one,
+  // otherwise the setting's own name.
   if (Array.isArray(json.values) && json.values.every(v => v && 'name' in v && 'value' in v)) {
-    json.values.forEach(v => settings.push({ key: humanizeName(v.name), rawKey: v.name, value: humanizeValue(String(v.value ?? '')) || 'Not set', ptr: 'values:' + v.name }));
+    json.values.forEach(v => {
+      const def = PN_DIRECTORY[v.name];
+      const raw = String(v.value ?? '');
+      const vmap = def && def[1] ? Object.fromEntries(Object.entries(def[1]).map(([k, d]) => [k.charAt(0).toUpperCase() + k.slice(1), d]).concat(Object.entries(def[1]))) : null;
+      const shown = raw === '' ? 'Not set' : vmap && raw in vmap ? vmap[raw] : (/^(true|false)$/i.test(raw) ? (raw.toLowerCase() === 'true' ? 'True' : 'False') : raw);
+      settings.push({ key: def ? def[0] : v.name, rawKey: v.name, value: shown, ptr: 'values:' + v.name, ...(vmap ? { vmap } : {}) });
+    });
     return;
   }
-  flattenSettings(json, '', settings, 0);
+  // SharePoint admin centre names; anything else keeps its API name.
+  const portal = cat === 'TenantSettings' ? PN_SHAREPOINT : {};
+  const tmp = [];
+  flattenSettings(json, '', tmp, 0);
+  tmp.forEach(r => {
+    const def = portal[r.ptr];
+    const raw = lldPath(json, r.ptr, false);
+    const v = raw && raw.parent ? raw.parent[raw.key] : undefined;
+    if (def) {
+      const vmap = def[1];
+      settings.push({ ...r, key: def[0], value: vmap && String(v) in vmap ? vmap[String(v)] : r.value, ...(vmap ? { vmap } : {}) });
+    } else {
+      settings.push({ ...r, key: r.ptr, value: typeof v === 'boolean' ? PN_TF[String(v)] : r.value, ...(typeof v === 'boolean' ? { vmap: PN_TF } : {}) });
+    }
+  });
 }
 function flattenSettings(obj, prefix, settings, depth, path = '') {
   for (const [k, v] of Object.entries(obj || {})) {
@@ -7454,7 +8126,7 @@ const LLD_ROLES = {
   'a0b1b346-4d3e-4e8b-98f8-753987be4970': 'User',
 };
 const LLD_APPS = {
-  'All': 'All resources', 'None': 'None', 'Office365': 'Office 365', 'MicrosoftAdminPortals': 'Microsoft Admin Portals',
+  'All': 'All resources (formerly \u2018All cloud apps\u2019)', 'None': 'None', 'Office365': 'Office 365', 'MicrosoftAdminPortals': 'Microsoft Admin Portals',
   '797f4846-ba00-4fd7-ba43-dac1f8f63013': 'Windows Azure Service Management API',
   '01cb2876-7ebd-4aa4-9cc9-d28bd4d359a9': 'Device Registration Service',
   '2793995e-0a7d-40d7-bd35-6968ba142197': 'My Apps',
@@ -7467,7 +8139,7 @@ const LLD_CA_CLIENTS = { all: 'All client apps', browser: 'Browser', mobileAppsA
 const LLD_CA_GRANTS = { mfa: 'Require multifactor authentication', compliantDevice: 'Require device to be marked as compliant',
   domainJoinedDevice: 'Require Microsoft Entra hybrid joined device', approvedApplication: 'Require approved client app',
   compliantApplication: 'Require app protection policy', passwordChange: 'Require password change', block: 'Block access' };
-const LLD_CA_LOCATIONS = { All: 'Any location', AllTrusted: 'All trusted locations' };
+const LLD_CA_LOCATIONS = { All: 'Any network or location', AllTrusted: 'All trusted networks and locations' };
 const LLD_CA_STATE = { enabled: 'On', disabled: 'Off', enabledForReportingButNotEnforced: 'Report-only' };
 const lldMap = (list, map) => list.map(x => map[x] || LLD_ROLES[x] || LLD_APPS[x] || LLD_PLATFORMS[String(x).toLowerCase()] || humanizeValue(String(x))).join(', ');
 const lldCap = x => String(x).charAt(0).toUpperCase() + String(x).slice(1);

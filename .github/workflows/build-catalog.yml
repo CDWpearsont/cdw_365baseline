@@ -58,7 +58,8 @@ jobs:
         run: |
           if git fetch --quiet --depth 1 origin settings-catalog; then
             git show FETCH_HEAD:settings.ndjson > "$RUNNER_TEMP/settings.ndjson"
-            python tools/build_setting_names.py --catalog "$RUNNER_TEMP/settings.ndjson" --policies IntuneConfig --out site/setting-names.json
+            git show FETCH_HEAD:categories.ndjson > "$RUNNER_TEMP/categories.ndjson" || true
+            python tools/build_setting_names.py --catalog "$RUNNER_TEMP/settings.ndjson" --categories "$RUNNER_TEMP/categories.ndjson" --policies IntuneConfig --out site/setting-names.json
           else
             echo "settings-catalog branch not found; keeping site/setting-names.json"
           fi
