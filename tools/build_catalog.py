@@ -610,6 +610,12 @@ def resolve_bundles(policies: list[dict], bundles: list[dict]) -> list[dict]:
 # Build
 # --------------------------------------------------------------------------
 
+# Every top-level folder that holds library policies. Workflows call this script
+# without --policy-dirs so the list lives in one place, on the branch being built
+# (a workflow file on main can't drop folders that only exist on test).
+POLICY_DIRS = ["IntuneConfig", "EntraConfig", "SharePointConfig", "ExchangeOnline", "DefenderCloudApps", "DefenderOffice365"]
+
+
 def discover(root: str, policy_dirs: list[str], metadata_dir: str) -> list[str]:
     found = []
     search_roots = [os.path.join(root, d) for d in policy_dirs] if policy_dirs else [root]
@@ -819,8 +825,8 @@ def main() -> int:
     ap.add_argument("--out", default="catalog.json", help="Output path, relative to root")
     ap.add_argument("--metadata-dir", default="metadata", help="Sidecar metadata tree")
     ap.add_argument("--bundles", default="bundles.json", help="Bundle definitions, relative to root")
-    ap.add_argument("--policy-dirs", nargs="*", default=[],
-                    help="Restrict discovery to these top-level folders")
+    ap.add_argument("--policy-dirs", nargs="*", default=POLICY_DIRS,
+                    help="Top-level policy folders (default: POLICY_DIRS, the single list every workflow uses)")
     ap.add_argument("--report", action="store_true", help="Print a summary instead of writing")
     ap.add_argument("--fail-on", nargs="*", default=[],
                     help="Issue types that should exit non-zero, e.g. duplicateId unreadable")
