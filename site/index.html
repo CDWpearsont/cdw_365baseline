@@ -1770,7 +1770,7 @@ body[data-appmode="document"] [id$="-selnew"]{display:none !important}
 // is obvious at a glance which site you are looking at.
 const BUILD = {
   env:     'test',        // 'dev' | 'test' | 'prod'
-  version: '3.21.0',
+  version: '3.21.1',
   date:    '2026-09-17'
 };
 
@@ -4758,7 +4758,7 @@ async function lldApplyEdit(json, cat, e) {
     if (!item) return 'setting not found';
     const vrow = extractSettings(JSON.parse(JSON.stringify(json)), cat).find(r => r.ptr === ptr);
     if (vrow && vrow.vmap) {
-      const hit = Object.entries(vrow.vmap).find(([, d]) => lldKey(d) === lldKey(e.to));
+      const hit = pnMatch(vrow.vmap, e.to);
       if (!hit) return `expected ${[...new Set(Object.values(vrow.vmap))].join(' or ')}`;
       item.value = /^(true|false)$/i.test(String(item.value)) ? String(hit[0]).toLowerCase() : hit[0]; return true;
     }
@@ -4780,12 +4780,16 @@ async function lldApplyEdit(json, cat, e) {
     if (shownRow.unit && /^\d[\d, ]*$/.test(String(e.to).trim())) {
       loc2.parent[loc2.key] = pnIso(parseInt(String(e.to).replace(/[, ]/g, ''), 10), shownRow.unit); return true;
     }
-    const hit = shownRow.vmap && Object.entries(shownRow.vmap).find(([, d]) => lldKey(d) === lldKey(e.to));
+    const hit = shownRow.vmap && pnMatch(shownRow.vmap, e.to);
     if (!hit) {
-      // LLDs exported before portal names showed raw values (Enabled / Disabled, PT30M).
-      if (typeof orig === 'string' && shownRow.vmap) return `expected ${[...new Set(Object.values(shownRow.vmap))].join(' or ')}`;
+      const expected = shownRow.vmap ? `expected ${[...new Set(Object.values(shownRow.vmap))].join(' or ')}` : 'expected a number';
+      // Only LLDs exported before portal names (raw Enabled / Disabled, PT30M) are
+      // read the old way: a value from a current LLD that doesn't match is an error,
+      // never a guess (for some settings "Required" means false).
+      const legacy = e.from !== undefined && !(shownRow.vmap && pnMatch(shownRow.vmap, e.from)) && !(shownRow.unit && /^\d+$/.test(String(e.from).trim()));
+      if (!legacy || (typeof orig === 'string' && shownRow.vmap)) return expected;
       try { loc2.parent[loc2.key] = lldScalar(orig, e.to); return true; }
-      catch { return shownRow.vmap ? `expected ${[...new Set(Object.values(shownRow.vmap))].join(' or ')}` : 'expected a number'; }
+      catch { return expected; }
     }
     const raw = hit[0];
     loc2.parent[loc2.key] = typeof orig === 'boolean' ? raw === 'true' : typeof orig === 'number' ? Number(raw) : raw;
@@ -6579,6 +6583,10 @@ function pnDuration(iso, unit) {
   return unit === 'days' ? Math.round(mins / 1440) : mins;
 }
 const pnIso = (n, unit) => unit === 'days' ? `P${n}D` : `PT${n}M`;
+// A value typed into an edited LLD, matched to a row's portal values. Tolerates
+// the usual variations: Required / Require, Enabled / Enable, Blocked / Block.
+const pnNorm = v => lldKey(v).replace(/\b(requir|enabl|disabl|allow|block|select)(e|ed|d)?\b/g, '$1');
+const pnMatch = (vmap, v) => Object.entries(vmap || {}).find(([, d]) => pnNorm(d) === pnNorm(v)) || null;
 
 function pnPush(settings, key, rawKey, display, extra = {}) {
   if (display === undefined || display === null || display === '') return;
