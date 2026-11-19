@@ -53,7 +53,7 @@ jobs:
             # Policy JSON on main is the reference tenant's own export, so it wins.
             # This is the normal path once a policy authored on test is deployed
             # and exported back.
-            for f in $(git diff --name-only --diff-filter=U -- IntuneConfig EntraConfig); do
+            for f in $(git diff --name-only --diff-filter=U -- IntuneConfig EntraConfig SharePointConfig ExchangeOnline DefenderCloudApps DefenderOffice365); do
               if git cat-file -e "origin/main:$f" 2>/dev/null; then
                 git checkout --theirs -- "$f" && git add -- "$f"
               fi
@@ -71,7 +71,7 @@ jobs:
         if: steps.merge.outputs.changed == 'true'
         shell: bash
         run: |
-          python3 tools/build_catalog.py --root . --policy-dirs IntuneConfig EntraConfig --out catalog.json
+          python3 tools/build_catalog.py --root . --policy-dirs IntuneConfig EntraConfig SharePointConfig ExchangeOnline DefenderCloudApps DefenderOffice365 --out catalog.json
           python3 scripts/generate-manifest.py --repo .
           git add catalog.json manifest.json manifest.base.json
           git diff --cached --quiet || git commit -q -m "chore: rebuild catalog and manifest after sync [skip ci]"
