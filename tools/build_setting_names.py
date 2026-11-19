@@ -6,7 +6,7 @@ Source: settings.ndjson from the settings-catalog branch (weekly snapshot of
 the reference tenant). Used by the LLD so setting names and choice values read
 as they do in the Intune portal.
 
-    python tools/build_setting_names.py --catalog settings.ndjson --out site/setting-names.json
+    python tools/build_setting_names.py --catalog settings.ndjson --categories categories.ndjson --out site/setting-names.json
 """
 import argparse, glob, json, os
 
@@ -25,6 +25,7 @@ def walk(node, defs, opts):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--catalog', required=True)
+    ap.add_argument('--categories', help='categories.ndjson: names the top-level group of a profile (e.g. macOS payloads) as the portal does')
     ap.add_argument('--policies', default='IntuneConfig')
     ap.add_argument('--out', default='site/setting-names.json')
     a = ap.parse_args()
@@ -38,8 +39,15 @@ def main():
     lower_defs = {d.lower(): d for d in defs}
     lower_opts = {o.lower(): o for o in opts}
 
-    # Synthetic group wrappers have no useful name; the site's own naming is kept.
+    # Synthetic group wrappers ("Top Level Setting Group Collection") are shown
+    # in the portal under their category's name.
     SKIP = {'Top Level Setting Group Collection'}
+    cats = {}
+    if a.categories and os.path.exists(a.categories):
+        with open(a.categories, encoding='utf-8') as fh:
+            for line in fh:
+                if line.strip():
+                    c = json.loads(line); cats[c['id']] = c.get('displayName') or ''
     names, paths, options = {}, {}, {}
     with open(a.catalog, encoding='utf-8') as fh:
         for line in fh:
@@ -50,7 +58,13 @@ def main():
             # catalog (the portal shows the list under its parent setting).
             if sid in lower_defs and not s.get('displayName') and s.get('options'):
                 names[lower_defs[sid]] = 'Option'
-            if sid in lower_defs and s.get('displayName') and s['displayName'].strip() not in SKIP:
+            # Declarative (DDM) wrappers are named after the payload identifier
+            # (com.apple.configuration...); the portal shows the category.
+            dn = (s.get('displayName') or '').strip()
+            wrapper = dn in SKIP or dn.startswith('com.apple.')
+            if sid in lower_defs and wrapper and cats.get(s.get('categoryId')):
+                names[lower_defs[sid]] = cats[s['categoryId']].strip()
+            elif sid in lower_defs and dn and dn not in SKIP:
                 names[lower_defs[sid]] = s['displayName'].strip()
                 path = next((k for k in s.get('keywords') or [] if k.startswith('\\')), '')
                 paths[lower_defs[sid]] = path.rstrip('\\').split('\\')[-1] if path else ''
@@ -59,9 +73,8 @@ def main():
             for o in s.get('options') or []:
                 oid = (o.get('itemId') or '').lower()
                 if (oid in lower_opts or sid in lower_defs) and o.get('displayName'):
-                    name = o['displayName'].strip()
-                    # Boolean options read as the rest of the document does.
-                    options[lower_opts.get(oid, o['itemId'])] = {'true': 'Enabled', 'false': 'Disabled'}.get(name.lower(), name)
+                    # Exactly as the portal shows the option (True / False included).
+                    options[lower_opts.get(oid, o['itemId'])] = o['displayName'].strip()
 
     # ADMX settings repeated per area (e.g. the event log retention setting for
     # Application, Security, Setup and System) share one display name: add the
