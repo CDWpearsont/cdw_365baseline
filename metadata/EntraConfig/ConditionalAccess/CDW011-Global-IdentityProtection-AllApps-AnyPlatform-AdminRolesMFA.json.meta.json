@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW011-Global-IdentityProtection-AllApps-AnyPlatform-AdminRolesMFA.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to enforce multi-factor authentication (MFA) for all administrative roles across all applications and platforms.",
+    "rationale": "Ensures that administrative accounts are protected with strong authentication methods, minimising the risk of unauthorised access to critical organisational resources.",
+    "userImpact": "No visible change for users unless they are assigned administrative roles, in which case they will be required to complete MFA during sign-in.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:eaa3518fc2473ef1a97cb30a1b2e74cca97b22d4c1d26a0d06e58118b55f14ff",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:eaa3518fc2473ef1a97cb30a1b2e74cca97b22d4c1d26a0d06e58118b55f14ff"
+  }
+}

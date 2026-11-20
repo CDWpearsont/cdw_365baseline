@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW016-Global-BaseProtection-AllApps-AnyPlatform-CompliantorHybridorMFA.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to require multi-factor authentication, a compliant device, or a domain-joined device for all users accessing any application on any platform, but the policy is currently disabled.",
+    "rationale": "This policy enhances security by ensuring that only authorised users with secure devices or additional authentication can access organisational resources, reducing the risk of unauthorised access.",
+    "userImpact": "No visible change for users as the policy is currently disabled.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:ef8e3d51b20f3bd1c659508763a094fb332149da461f794ba303144446516d4c",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:ef8e3d51b20f3bd1c659508763a094fb332149da461f794ba303144446516d4c"
+  }
+}

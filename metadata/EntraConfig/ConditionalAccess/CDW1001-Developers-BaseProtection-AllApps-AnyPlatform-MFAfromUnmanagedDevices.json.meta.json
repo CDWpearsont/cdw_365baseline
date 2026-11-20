@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW1001-Developers-BaseProtection-AllApps-AnyPlatform-MFAfromUnmanagedDevices.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to require multi-factor authentication (MFA) for all applications when accessed from unmanaged devices, but the policy is currently disabled.",
+    "rationale": "Organisations deploy this policy to enhance security by ensuring that access to organisational applications from unmanaged devices is protected with an additional layer of authentication, minimising the risk of unauthorised access.",
+    "userImpact": "No visible change for users as the policy is currently disabled.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:4418680e64d1a11afe7e1f6890c8a538fb959f3700f4ca932d8abbc7b8827aad",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:4418680e64d1a11afe7e1f6890c8a538fb959f3700f4ca932d8abbc7b8827aad"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW010-Global-BaseProtection-AllApps-AnyPlatform-MFA.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to enforce Multi-Factor Authentication (MFA) for all users and applications across all platforms, ensuring strong authentication methods are used.",
+    "rationale": "Enhances organisational security by requiring MFA, which mitigates the risk of unauthorised access due to compromised credentials. This policy ensures that all users authenticate using secure, multi-factor methods.",
+    "userImpact": "No visible change for users while the policy is disabled.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:0cbbca259152cf07a63a746c9de99ba5309c5d9d3bc0e7ae41b84db18eaef6f9",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:0cbbca259152cf07a63a746c9de99ba5309c5d9d3bc0e7ae41b84db18eaef6f9"
+  }
+}

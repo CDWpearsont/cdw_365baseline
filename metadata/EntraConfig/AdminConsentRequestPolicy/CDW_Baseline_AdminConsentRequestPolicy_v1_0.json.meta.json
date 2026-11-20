@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/AdminConsentRequestPolicy/CDW_Baseline_AdminConsentRequestPolicy_v1_0.json",
+  "enrichment": {
+    "summary": "Enables the admin consent workflow, allowing users to request access to applications requiring admin consent instead of being silently blocked.",
+    "rationale": "This policy ensures that users can request access to necessary applications while maintaining administrative oversight, minimising disruptions to productivity and enhancing security by controlling app permissions.",
+    "userImpact": "Users can submit requests for admin consent when attempting to access restricted applications.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [
+      "Configured reviewers for admin consent requests"
+    ],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:e0201a8a060dcebd7ff08855ed0e696560934a92aa625e07a1d8b63a19f45468",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:e0201a8a060dcebd7ff08855ed0e696560934a92aa625e07a1d8b63a19f45468"
+  }
+}

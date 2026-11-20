@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW002-Global-AttackSurfaceReduction-VariousApps-AnyPlatform-Block.json",
+  "enrichment": {
+    "summary": "Blocks access to all applications for all client app types when the policy is enabled.",
+    "rationale": "Ensures that organisations can restrict access to applications as part of their security posture to minimise potential attack surfaces.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:2f76de681f96af9ccf01f60cc72d770c3d937d02e079c5d2bb71e1c264e3ed61",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:2f76de681f96af9ccf01f60cc72d770c3d937d02e079c5d2bb71e1c264e3ed61"
+  }
+}

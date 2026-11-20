@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW100-Admins-BaseProtection-AllApps-AnyPlatform-CompliantandPhishingResistantMFA.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to enforce access only for compliant devices and require phishing-resistant multi-factor authentication methods for all applications.",
+    "rationale": "Ensures that only secure, compliant devices can access organisational resources and minimises the risk of credential theft through the use of phishing-resistant authentication methods.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [
+      "Devices enrolled in Intune",
+      "Phishing-resistant authentication methods configured (e.g., FIDO2, Windows Hello for Business)"
+    ],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:66fedc5d85d0d7879aaef3fbea42f4f0a2302bdb69ac909267434344573b57cf",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:66fedc5d85d0d7879aaef3fbea42f4f0a2302bdb69ac909267434344573b57cf"
+  }
+}

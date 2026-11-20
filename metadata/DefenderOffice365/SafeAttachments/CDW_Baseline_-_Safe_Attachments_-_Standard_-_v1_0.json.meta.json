@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_Standard_-_v1_0.json",
+  "enrichment": {
+    "summary": "Configures Safe Attachments to scan email attachments for malicious content, blocking and quarantining harmful files for administrator review only.",
+    "rationale": "Helps protect the organisation from malware and phishing attacks by ensuring potentially harmful attachments are identified and prevented from reaching users' inboxes.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Defender for Office 365 Plan 1 (Microsoft 365 E5)",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:441620d8dc16af382d9c6921d0dd36dcf8c77c481dec29c1933675bf1fb01219",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:441620d8dc16af382d9c6921d0dd36dcf8c77c481dec29c1933675bf1fb01219"
+  }
+}

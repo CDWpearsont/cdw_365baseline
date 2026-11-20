@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "DefenderOffice365/AntiPhishing/CDW_Baseline_-_Anti-Phishing_-_Standard_-_v1_0.json",
+  "enrichment": {
+    "summary": "Configures anti-phishing protections in Defender for Office 365 with aggressive detection thresholds, spoof intelligence honouring DMARC, impersonation protection for organisational domains, and safety tips to minimise phishing risks.",
+    "rationale": "Deploying this policy helps organisations protect against phishing attacks by enhancing detection capabilities, preventing domain and user impersonation, and providing users with safety tips to identify suspicious emails.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Defender for Office 365 Plan 1 (Microsoft 365 E5)",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:da448f8129555afc4e1ebf726e670097c7631997786fb126b744905a805a828f",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:da448f8129555afc4e1ebf726e670097c7631997786fb126b744905a805a828f"
+  }
+}

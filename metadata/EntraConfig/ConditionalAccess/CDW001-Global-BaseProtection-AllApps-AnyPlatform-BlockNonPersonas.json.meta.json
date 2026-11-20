@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW001-Global-BaseProtection-AllApps-AnyPlatform-BlockNonPersonas.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to block access to all applications for non-personal accounts, but the policy is currently disabled.",
+    "rationale": "Organisations may deploy this policy to prepare for future restrictions on non-personal accounts accessing organisational resources, ensuring tighter security controls when activated.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:3dab951d217723838b0b1eec47a65d365f6de73673f082361b8f01a33b3d98d1",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:3dab951d217723838b0b1eec47a65d365f6de73673f082361b8f01a33b3d98d1"
+  }
+}

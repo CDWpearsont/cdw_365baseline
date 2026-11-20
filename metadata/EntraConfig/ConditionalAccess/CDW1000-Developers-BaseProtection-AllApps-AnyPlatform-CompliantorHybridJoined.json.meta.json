@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW1000-Developers-BaseProtection-AllApps-AnyPlatform-CompliantorHybridJoined.json",
+  "enrichment": {
+    "summary": "Configures a disabled Conditional Access policy that targets all applications and platforms except Android and iOS, requiring devices to be compliant or hybrid Azure AD joined.",
+    "rationale": "This policy can be used to enforce device compliance or hybrid Azure AD join for accessing organisational resources, ensuring only secure and managed devices are permitted access.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:6a6e13450dd140b67cad37e4be092707540d25a5d7d7e1b4dabc251fad0190ac",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:6a6e13450dd140b67cad37e4be092707540d25a5d7d7e1b4dabc251fad0190ac"
+  }
+}

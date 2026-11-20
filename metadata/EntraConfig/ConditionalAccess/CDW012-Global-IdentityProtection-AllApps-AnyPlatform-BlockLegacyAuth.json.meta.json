@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW012-Global-IdentityProtection-AllApps-AnyPlatform-BlockLegacyAuth.json",
+  "enrichment": {
+    "summary": "Blocks legacy authentication methods for all users and applications across all platforms to enhance security.",
+    "rationale": "Legacy authentication methods lack modern security features such as multi-factor authentication (MFA), making them more vulnerable to attacks. Blocking these methods helps minimise the risk of unauthorised access.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:8aaa4bbd079c3f6c80bf1e1e1769ec1aac9fcd070c12027ddf5cd2c46e34a78f",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:8aaa4bbd079c3f6c80bf1e1e1769ec1aac9fcd070c12027ddf5cd2c46e34a78f"
+  }
+}

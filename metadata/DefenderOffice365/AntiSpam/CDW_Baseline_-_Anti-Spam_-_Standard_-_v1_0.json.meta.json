@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "DefenderOffice365/AntiSpam/CDW_Baseline_-_Anti-Spam_-_Standard_-_v1_0.json",
+  "enrichment": {
+    "summary": "Configures standard inbound anti-spam settings to quarantine phishing and high-confidence spam, move spam and bulk emails to Junk Email, and enable zero-hour auto purge for enhanced email security.",
+    "rationale": "Helps organisations minimise the risk of phishing attacks, reduce exposure to spam, and maintain a cleaner email environment by applying Microsoft-recommended anti-spam settings.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Defender for Office 365 Plan 1 (Microsoft 365 E5)",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:f59095b00bfc4bdfc0d0259fdb53629d89586600bcdd167bb28f46357262caac",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:f59095b00bfc4bdfc0d0259fdb53629d89586600bcdd167bb28f46357262caac"
+  }
+}

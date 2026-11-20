@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "DefenderOffice365/OutboundSpam/CDW_Baseline_-_Outbound_Spam_-_Default_-_v1_0.json",
+  "enrichment": {
+    "summary": "Configures outbound spam protection by enforcing recipient limits and disabling automatic forwarding to external addresses to minimise spam risks.",
+    "rationale": "Helps prevent compromised accounts from being used to send large volumes of spam or unauthorised emails, protecting the organisation's reputation and reducing the risk of being blacklisted.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft 365 E3/E5",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:bfedef96e082e19d237e890dd3f6fbbc6fb364384da2bb69b4bd0f1dee4cf345",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:bfedef96e082e19d237e890dd3f6fbbc6fb364384da2bb69b4bd0f1dee4cf345"
+  }
+}

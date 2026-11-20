@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "DefenderCloudApps/Policies/Bulk_Download_Monitoring.json",
+  "enrichment": {
+    "summary": "Monitors and alerts on bulk data downloads by a single user to detect potential data exfiltration or misuse.",
+    "rationale": "Helps organisations identify and respond to unusual or unauthorised bulk data download activities, minimising the risk of data breaches or insider threats.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Defender for Cloud Apps",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:b8b84f5f8420317117e146643ac62dd4da6a0641cb0d2813ab567db9b57da004",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:b8b84f5f8420317117e146643ac62dd4da6a0641cb0d2813ab567db9b57da004"
+  }
+}

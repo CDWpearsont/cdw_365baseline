@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "DefenderOffice365/SafeLinks/CDW_Baseline_-_Safe_Links_-_Standard_-_v1_0.json",
+  "enrichment": {
+    "summary": "Configures Safe Links to scan and verify URLs in emails, Teams messages, and Office applications at the time of click, blocking access to malicious sites.",
+    "rationale": "Protects users from phishing attacks and malicious links by ensuring URLs are scanned and verified before access, minimising the risk of security breaches.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Defender for Office 365 Plan 1 (Microsoft 365 E5)",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:12d7c8bab7ab360f30afa28a7b756724bda514b4e11ed3985eaf502ecd2ed611",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:12d7c8bab7ab360f30afa28a7b756724bda514b4e11ed3985eaf502ecd2ed611"
+  }
+}
