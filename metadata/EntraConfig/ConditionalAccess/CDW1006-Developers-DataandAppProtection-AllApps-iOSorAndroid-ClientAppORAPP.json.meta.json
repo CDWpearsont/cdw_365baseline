@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW1006-Developers-DataandAppProtection-AllApps-iOSorAndroid-ClientAppORAPP.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to require compliant applications for accessing all apps on iOS and Android devices, but the policy is currently disabled.",
+    "rationale": "Ensures that only compliant applications are used to access organisational resources on mobile devices, minimising the risk of data leakage or unauthorised access.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:30fb21a0d55739631a666f557d9c19ab172ab1dbc8095d28afb03e57bc94bff2",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:30fb21a0d55739631a666f557d9c19ab172ab1dbc8095d28afb03e57bc94bff2"
+  }
+}

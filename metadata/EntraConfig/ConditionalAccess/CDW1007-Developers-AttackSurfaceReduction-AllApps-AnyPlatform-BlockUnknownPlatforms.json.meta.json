@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW1007-Developers-AttackSurfaceReduction-AllApps-AnyPlatform-BlockUnknownPlatforms.json",
+  "enrichment": {
+    "summary": "Blocks access to all applications from unknown platforms to minimise potential security risks.",
+    "rationale": "This policy helps organisations prevent unauthorised access from unverified or unsupported platforms, reducing the attack surface and protecting sensitive data.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:5862f158a7948c2ec81dfaee3b76e7aa9a9d75762435734c8d093eee7d0585ca",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:5862f158a7948c2ec81dfaee3b76e7aa9a9d75762435734c8d093eee7d0585ca"
+  }
+}

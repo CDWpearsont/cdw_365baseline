@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "DefenderOffice365/SafeAttachments/CDW_Baseline_-_Safe_Attachments_-_SharePoint_OneDrive_and_Teams_-_v1_0.json",
+  "enrichment": {
+    "summary": "Enables Defender for Office 365 to scan files in SharePoint, OneDrive and Microsoft Teams, and activates Safe Documents to detect and block malicious files where they are stored or opened.",
+    "rationale": "Protects organisational data by ensuring that files stored or shared within collaboration platforms are scanned for threats, minimising the risk of malware spreading through shared documents.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Defender for Office 365 Plan 1 (Microsoft 365 E5)",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:429a7ab393e4b01ffac23053f46b020b3296165c817ec1ad1804c6075859694c",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:429a7ab393e4b01ffac23053f46b020b3296165c817ec1ad1804c6075859694c"
+  }
+}

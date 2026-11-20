@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW103-Admins-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to require multi-factor authentication (MFA) for all applications on any platform when sign-in risk is medium or high.",
+    "rationale": "Helps organisations minimise the risk of unauthorised access by enforcing stronger authentication for potentially compromised sign-ins.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:8bb3289b1bba27f07e0a4aac8839b70463d10f6af74c574299a82fff9f3e63d3",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:8bb3289b1bba27f07e0a4aac8839b70463d10f6af74c574299a82fff9f3e63d3"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW017-Global-DataandAppProtection-AllApps-iOSorAndroid-AppProtection.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to ensure that only compliant applications on iOS and Android devices can access organisational data and applications.",
+    "rationale": "Helps protect organisational data by restricting access to approved applications on mobile devices, minimising the risk of data leakage or unauthorised access.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [
+      "Devices enrolled in Intune",
+      "Conditional Access policies configured"
+    ],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:236d1f999bec394588da3b6860a4217c6921c91fd3512f1d0e211c2ab8920505",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:236d1f999bec394588da3b6860a4217c6921c91fd3512f1d0e211c2ab8920505"
+  }
+}

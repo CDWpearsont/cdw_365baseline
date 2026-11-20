@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW014-Global-IdentityProtection-RegisterSecurityInfo-AnyPlatform-MFAoutsideTrustedLocations.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to require multi-factor authentication (MFA) when users register security information from untrusted locations.",
+    "rationale": "Enhances security by ensuring that sensitive actions, such as registering security information, are protected with MFA when performed outside trusted locations. This minimises the risk of unauthorised access or credential compromise.",
+    "userImpact": "Users registering security information from untrusted locations will be prompted for multi-factor authentication.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:4e280f533cba83fa2c20f005b41a617b3c0ff05a3510b549cb8b89457e521b53",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:4e280f533cba83fa2c20f005b41a617b3c0ff05a3510b549cb8b89457e521b53"
+  }
+}

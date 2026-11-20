@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/AuthorizationPolicy/CDW_Baseline_AuthorizationPolicy_v1_0.json",
+  "enrichment": {
+    "summary": "Restricts tenant-level permissions by limiting non-admin tenant creation, app consent, guest invitations, and default user permissions to enhance security and control over organisational resources.",
+    "rationale": "This policy minimises the risk of unauthorised access, data leakage, and misconfiguration by ensuring that only authorised administrators can perform sensitive actions such as tenant creation, app consent, and guest invitations.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:e748101d6eeda637cc1b144ee86b84423cce0cf5bc201e07087050371e54f5ff",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:e748101d6eeda637cc1b144ee86b84423cce0cf5bc201e07087050371e54f5ff"
+  }
+}

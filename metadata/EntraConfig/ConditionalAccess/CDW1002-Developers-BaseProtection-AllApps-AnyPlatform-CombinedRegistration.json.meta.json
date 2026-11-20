@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW1002-Developers-BaseProtection-AllApps-AnyPlatform-CombinedRegistration.json",
+  "enrichment": {
+    "summary": "Disables a Conditional Access policy that would enforce specific device compliance or domain join requirements for users registering security information across all applications and platforms.",
+    "rationale": "This policy is disabled to ensure that users can register their security information without being restricted by device compliance or domain join requirements, which could otherwise hinder the registration process.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:7793ab377fb16a737ee16ad9753ce46a0d3a1f69f078177ce626c39569eee38a",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:7793ab377fb16a737ee16ad9753ce46a0d3a1f69f078177ce626c39569eee38a"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/AppManagementPolicies/CDW_Baseline_DefaultAppManagementPolicy_v1_0.json",
+  "enrichment": {
+    "summary": "Configures restrictions on password and certificate lifetimes for application registrations and service principals to enhance security and minimise risks associated with long-lived credentials.",
+    "rationale": "This policy ensures that credentials used by applications and service principals are rotated regularly, reducing the risk of compromise due to outdated or weak credentials. It aligns with best practices for credential management and helps protect organisational resources.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:149e73adffc10569cd03f1b0aa2d66c706c32835fdb80d6397a8e9dad3b39be5",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:149e73adffc10569cd03f1b0aa2d66c706c32835fdb80d6397a8e9dad3b39be5"
+  }
+}

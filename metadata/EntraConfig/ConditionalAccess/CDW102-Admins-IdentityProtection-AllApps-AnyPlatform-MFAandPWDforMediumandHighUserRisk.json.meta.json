@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW102-Admins-IdentityProtection-AllApps-AnyPlatform-MFAandPWDforMediumandHighUserRisk.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to enforce multi-factor authentication (MFA) and password change for users with medium or high identity risk across all applications and platforms.",
+    "rationale": "Helps organisations mitigate potential security threats by requiring additional authentication steps and password updates for users identified as having elevated identity risk.",
+    "userImpact": "No visible change for users as the policy is currently disabled.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:7254832571bd656d63a4a65011a602ab31b43fc2095dae6a24a91c308a26f753",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:7254832571bd656d63a4a65011a602ab31b43fc2095dae6a24a91c308a26f753"
+  }
+}

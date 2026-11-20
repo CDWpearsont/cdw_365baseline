@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW101-Admins-IdentityProtection-AllApps-AnyPlatform-CombinedRegistration.json",
+  "enrichment": {
+    "summary": "Disables a Conditional Access policy that targets all applications and platforms for combined security information registration.",
+    "rationale": "Ensures that the policy is not active, which may be necessary during testing, troubleshooting, or if the organisation has not yet implemented this requirement.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:e50b2762c5127d4737a5cdc891125d629080e43098385b8f6b31a03ea515fd39",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:e50b2762c5127d4737a5cdc891125d629080e43098385b8f6b31a03ea515fd39"
+  }
+}

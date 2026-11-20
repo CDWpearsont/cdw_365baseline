@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW013-Global-BaseProtection-AzureManagement-AnyPlatform-MFA.json",
+  "enrichment": {
+    "summary": "Configures a Conditional Access policy to enforce multi-factor authentication (MFA) for all users accessing Azure Management services across all platforms.",
+    "rationale": "Ensures that access to Azure Management services is protected with strong authentication methods, minimising the risk of unauthorised access and enhancing organisational security.",
+    "userImpact": "Users will be required to complete multi-factor authentication when accessing Azure Management services.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:2f0624cc99b8501d239e95105a0533d45b01e42538fab89701a8008ccb523afe",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:2f0624cc99b8501d239e95105a0533d45b01e42538fab89701a8008ccb523afe"
+  }
+}

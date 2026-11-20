@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW015-Global-AttackSurfaceReduction-AllApps-AnyPlatform-BlockDeviceCodeFlow.json",
+  "enrichment": {
+    "summary": "Blocks the use of the device code flow for authentication across all applications except those explicitly excluded.",
+    "rationale": "Prevents the use of the device code flow, which can be exploited in certain attack scenarios, to minimise the organisation's attack surface.",
+    "userImpact": "No visible change for users.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:1c37cfb3607eddbb2f580d505081686a80263501ed1e50fb4237eb09fd138b46",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:1c37cfb3607eddbb2f580d505081686a80263501ed1e50fb4237eb09fd138b46"
+  }
+}

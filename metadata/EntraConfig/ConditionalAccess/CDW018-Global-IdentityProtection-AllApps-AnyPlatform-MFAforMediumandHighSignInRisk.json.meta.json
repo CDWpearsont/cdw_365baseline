@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "EntraConfig/ConditionalAccess/CDW018-Global-IdentityProtection-AllApps-AnyPlatform-MFAforMediumandHighSignInRisk.json",
+  "enrichment": {
+    "summary": "Enforces multi-factor authentication (MFA) for all users on any platform when medium or high sign-in risk is detected, ensuring secure access to all applications.",
+    "rationale": "This policy helps organisations minimise the risk of unauthorised access by requiring additional authentication steps when suspicious or risky sign-in behaviour is identified.",
+    "userImpact": "Users may be prompted to complete MFA if their sign-in is flagged as medium or high risk.",
+    "licensing": "Microsoft Entra ID P1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:dd02283405285405842a747c2cd6a153ff5691e016a0417804b0353a81106d8d",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:dd02283405285405842a747c2cd6a153ff5691e016a0417804b0353a81106d8d"
+  }
+}

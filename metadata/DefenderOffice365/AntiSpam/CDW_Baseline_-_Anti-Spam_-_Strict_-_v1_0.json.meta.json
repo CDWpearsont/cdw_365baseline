@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "policyPath": "DefenderOffice365/AntiSpam/CDW_Baseline_-_Anti-Spam_-_Strict_-_v1_0.json",
+  "enrichment": {
+    "summary": "Configures strict inbound anti-spam settings to quarantine phishing, high-confidence spam, spam, and bulk emails, with a 30-day quarantine retention and zero-hour auto purge enabled.",
+    "rationale": "Helps organisations minimise the risk of phishing attacks and spam by applying stringent filtering policies, ensuring potentially harmful or unwanted emails are quarantined for review.",
+    "userImpact": "Users may notice fewer spam or phishing emails in their inbox and can access quarantined emails if needed.",
+    "licensing": "Microsoft Defender for Office 365 Plan 1",
+    "prerequisites": [],
+    "generatedBy": "gpt-4o",
+    "generatedAt": "2026-11-20T15:37:28+00:00",
+    "sourceHash": "sha256:4b3713eb46df3c5aa14312bb213f72aaeda821ef997c991f37190debfdd280a0",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "locked": false,
+    "taxonomyCheckedHash": "sha256:4b3713eb46df3c5aa14312bb213f72aaeda821ef997c991f37190debfdd280a0"
+  }
+}
