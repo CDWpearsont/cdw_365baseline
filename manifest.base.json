@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-11-22T12:16:36Z",
+  "generated": "2026-11-23T14:00:46Z",
   "count": 265,
   "entries": [
     {
@@ -1476,7 +1476,7 @@
     {
       "id": "intune.appprotectionpolicies.android-cdw-baseline-mam-byod-app-protection",
       "file": "IntuneConfig/AppProtectionPolicies/Android_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
-      "sha": "1cf26293240cf976",
+      "sha": "b4e645c14256d2e6",
       "workload": "intune",
       "category": "AppProtectionPolicies",
       "objectType": "appProtectionPolicies",
@@ -1496,7 +1496,7 @@
     {
       "id": "intune.appprotectionpolicies.ios-cdw-baseline-mam-byod-app-protection",
       "file": "IntuneConfig/AppProtectionPolicies/iOS_-_CDW_Baseline_-_MAM_-_BYOD_App_Protection_-_v1_1.json",
-      "sha": "7d948ede1b775e30",
+      "sha": "8330af6487b8585c",
       "workload": "intune",
       "category": "AppProtectionPolicies",
       "objectType": "appProtectionPolicies",
@@ -1516,7 +1516,7 @@
     {
       "id": "intune.autopilotprofiles.user-driven-entra-preprov-cdw-baseline",
       "file": "IntuneConfig/AutopilotProfiles/User_Driven_Entra_PreProv_CDW_Baseline.json",
-      "sha": "2e9e51c2f8ed1680",
+      "sha": "31fc23cf5595e46a",
       "workload": "intune",
       "category": "AutopilotProfiles",
       "objectType": "azureADWindowsAutopilotDeploymentProfile",
@@ -1534,7 +1534,7 @@
     {
       "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-device-health",
       "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v1_0.json",
-      "sha": "5cca8454ae91260e",
+      "sha": "4a8e953c1141c7dc",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "macOSCompliancePolicy",
@@ -1551,7 +1551,7 @@
     {
       "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-device-security",
       "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Device_Security_-_v1_0.json",
-      "sha": "e34dc01479e0956c",
+      "sha": "26800b42411a5557",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "macOSCompliancePolicy",
@@ -1568,7 +1568,7 @@
     {
       "id": "intune.compliancepolicies.macos-cdw-baseline-compliance-u-password",
       "file": "IntuneConfig/CompliancePolicies/MacOS_-_CDW_Baseline_-_Compliance_-_U_-_Password_-_v1_0.json",
-      "sha": "8684c15ef8f97d79",
+      "sha": "4af97cbed7a2d5dc",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "macOSCompliancePolicy",
@@ -1585,7 +1585,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-cis-l1-u-device-health-and-security",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_CIS_L1_-_U_-_Device_Health_and_Security_-_v5_0_0.json",
-      "sha": "42979be2ef5bfb97",
+      "sha": "40ba5d52f3a2a3b3",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1604,7 +1604,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-defender-for-endpoint",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Defender_for_Endpoint_-_v3_1.json",
-      "sha": "dba0750505c12ccd",
+      "sha": "cde8b555cc3e8281",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1621,7 +1621,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-device-health",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Device_Health_-_v3_1.json",
-      "sha": "c9286e68cf3a1e19",
+      "sha": "a21d0a5912b22ec9",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1638,7 +1638,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-device-security",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Device_Security_-_v3_1.json",
-      "sha": "e8fff3dd9f84ef36",
+      "sha": "926c8259774553a6",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1655,7 +1655,7 @@
     {
       "id": "intune.compliancepolicies.win-cdw-baseline-compliance-u-password",
       "file": "IntuneConfig/CompliancePolicies/Win_-_CDW_Baseline_-_Compliance_-_U_-_Password_-_v3_1.json",
-      "sha": "9b4c44b9eb52dcb7",
+      "sha": "fc2cc453048b46d2",
       "workload": "intune",
       "category": "CompliancePolicies",
       "objectType": "windows10CompliancePolicy",
@@ -1672,7 +1672,7 @@
     {
       "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-1-pilot",
       "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_1_-_Pilot_-_v3_0.json",
-      "sha": "a3b25b5d36364983",
+      "sha": "f5b5d08c1941214b",
       "workload": "intune",
       "category": "DeviceConfigurations",
       "objectType": "windowsUpdateForBusinessConfiguration",
@@ -1692,7 +1692,7 @@
     {
       "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-2-uat",
       "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_2_-_UAT_-_v3_0.json",
-      "sha": "7455b1c4b3b02a71",
+      "sha": "95da4d5319ffe2d4",
       "workload": "intune",
       "category": "DeviceConfigurations",
       "objectType": "windowsUpdateForBusinessConfiguration",
@@ -1712,7 +1712,7 @@
     {
       "id": "intune.deviceconfigurations.win-cdw-baseline-wufb-ring-3-production",
       "file": "IntuneConfig/DeviceConfigurations/Win_-_CDW_Baseline_-_WUfB_-_Ring_3_-_Production_-_v3_0.json",
-      "sha": "650d531019c35de7",
+      "sha": "2ec6f1cc8abd1ef0",
       "workload": "intune",
       "category": "DeviceConfigurations",
       "objectType": "windowsUpdateForBusinessConfiguration",
@@ -2109,7 +2109,7 @@
     {
       "id": "intune.enrolmentrestrictions.android-cdw-baseline-enrolment-restriction-block-personal",
       "file": "IntuneConfig/EnrolmentRestrictions/Android_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
-      "sha": "6257f2cb5573c489",
+      "sha": "3c6538f2ad330ddf",
       "workload": "intune",
       "category": "EnrolmentRestrictions",
       "objectType": "deviceEnrollmentPlatformRestrictionConfiguration",
@@ -2129,7 +2129,7 @@
     {
       "id": "intune.enrolmentrestrictions.ios-cdw-baseline-enrolment-restriction-block-personal",
       "file": "IntuneConfig/EnrolmentRestrictions/iOS_-_CDW_Baseline_-_Enrolment_Restriction_-_Block_Personal_-_v1_0.json",
-      "sha": "a10e8bc1f62e29bb",
+      "sha": "0c0a8b4fead6a1a7",
       "workload": "intune",
       "category": "EnrolmentRestrictions",
       "objectType": "deviceEnrollmentPlatformRestrictionConfiguration",
@@ -2149,7 +2149,7 @@
     {
       "id": "intune.enrolmentstatuspage.esp-cdw-baseline",
       "file": "IntuneConfig/EnrolmentStatusPage/ESP_CDW_Baseline.json",
-      "sha": "6ac50d3eb02cc474",
+      "sha": "64611e885fc1a656",
       "workload": "intune",
       "category": "EnrolmentStatusPage",
       "objectType": "windows10EnrollmentCompletionPageConfiguration",
