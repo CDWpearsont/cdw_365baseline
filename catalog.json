@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-23T14:01:07+00:00",
-  "sourceCommit": "6fe764dc92451efe368f36fc220cd2327f17dc46",
+  "generatedAt": "2026-11-24T14:32:45+00:00",
+  "sourceCommit": "ecef74199d30ec9b6179e3a4bab9adcc3ade34b1",
   "counts": {
     "policies": 265,
     "bundles": 35,
@@ -4441,7 +4441,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:b4e645c14256d2e6095006f461a578d7bb5991dad060452637e43466fe3f8b4a",
+      "policyHash": "sha256:9a3663a7bb8841f85fc045d6db5d93d931b48dad2382d782d559cd46b1053017",
       "contentHash": "sha256:1667546a637ef45d53f192e085b81a6da2d125f4df92d3322fa2f14f6a047ab6",
       "derivedFrom": {
         "platform": "filename",
@@ -4476,7 +4476,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:8330af6487b8585c6cc65c49df83cfd360a2ceac7bb3a07c65f9f21946f72ca1",
+      "policyHash": "sha256:1e20199d60349a19eca9f5ecc1d71356e9467af344dc00cdf430007db6d58ef4",
       "contentHash": "sha256:8f80f798aa06914c6f1bb434e79b4a495d46c47929cc75355e238c92bcc364c8",
       "derivedFrom": {
         "platform": "filename",
@@ -4511,7 +4511,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:31fc23cf5595e46abdf7b65402f96a94514f6e2a0761af8db205960d8335b84b",
+      "policyHash": "sha256:c8a17137b6e9c61e3fda3edb097a67f5611209b023fd8b919fd065eba74bfffc",
       "contentHash": "sha256:b3f7490712f72f61014d415a95bb7dc04f298e6c7f6db5f3cb35a81674c3f1ab",
       "derivedFrom": {
         "workload": "folder",
@@ -4546,7 +4546,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:4a8e953c1141c7dc2ecc67f86d3aea2c64a7b4e907da99cedb586641ef9937a6",
+      "policyHash": "sha256:ac1c543ab9be7e17a19103a0d405f96361b6cd81c70d9f1b19854831b1d1c9ca",
       "contentHash": "sha256:fb903e91793d69bdd6cb5837bcbe734a1d2ac227727b193868027ecbc98a2ae9",
       "derivedFrom": {
         "platform": "filename",
@@ -4582,7 +4582,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:26800b42411a55577982702f97aad45d5005307dd231c4dcf08a89aca16b988a",
+      "policyHash": "sha256:f3bb8b2329e3549bce9d604345b1e0160ffbc71431791a6c2d29db3eb797c6ae",
       "contentHash": "sha256:cce5f32f3c54db33ce544aafa284d78f98e6d1873aedb5373a3c52972be3d9c8",
       "derivedFrom": {
         "platform": "filename",
@@ -4618,7 +4618,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:4af97cbed7a2d5dc471161f39c7b0bead3c9ca1c9fb4320f48d65f8b21fc17a2",
+      "policyHash": "sha256:5d3cea2422c48316ade6d3692897323a01d2b8abe1c2b61983af37dbfb17ff04",
       "contentHash": "sha256:82a43e7e30d57582862a27d3fdbf81f4c3727af80db8fae2d96fbdb70963580e",
       "derivedFrom": {
         "platform": "filename",
@@ -4654,7 +4654,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:40ba5d52f3a2a3b3ce5634d150f8899232fa62d1e99a8900eb08861719212d02",
+      "policyHash": "sha256:13f48ef94979cd04ecf307e6a3caee3a39bd6302407b573c9306c1db4b7f8a8d",
       "contentHash": "sha256:6e2abd4642c65af76f1d1d3f4bb1c1e7da05c06d16175bc80bd24d9e990f3bcd",
       "derivedFrom": {
         "platform": "filename",
@@ -4693,7 +4693,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:cde8b555cc3e828193d5106941f6aae449b1266c2f928f3b6a78b6f0850cdbe4",
+      "policyHash": "sha256:80806a69ec9b1c53401093c64b0941d00e6219eade273c1d4d7b979866ec89f7",
       "contentHash": "sha256:fa8d7626fb2a7ee9751cec3b88ab59a57e452650427b3eb39f2251f85e0afd00",
       "derivedFrom": {
         "platform": "filename",
@@ -4728,7 +4728,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:a21d0a5912b22ec9c3cdaa5bfbc9e482968697e08b67f2c65a12300053be9593",
+      "policyHash": "sha256:53b817f567117f99074108ef6c1982f232a9d38586b7b566694843d84809778a",
       "contentHash": "sha256:4cfa02e24b15cc8db1fb756e7a47435a07367c53829dfff59c7137fe937466bc",
       "derivedFrom": {
         "platform": "filename",
@@ -4765,7 +4765,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:926c8259774553a64665e44bf83cebbd0e975918b3cffc171b732e4304ed414e",
+      "policyHash": "sha256:ad486067df6fdb4b2b3bb452074b143a59df13513092565cf76ccc2ff6da60b8",
       "contentHash": "sha256:fa8d7626fb2a7ee9751cec3b88ab59a57e452650427b3eb39f2251f85e0afd00",
       "derivedFrom": {
         "platform": "filename",
@@ -4802,7 +4802,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:fc2cc453048b46d2ebd902668013eb85176d5c49463d0509d40e5208dd8bf26b",
+      "policyHash": "sha256:cdf67ea88d7adb4944ab4bdaf79d91fc66a4c90eb60a277f8908e1f1f0100eca",
       "contentHash": "sha256:059aa5fd3bd693c83a516368d7e81eff8f83c3f6ee9b4a23aae79bb4698c4467",
       "derivedFrom": {
         "platform": "filename",
@@ -4839,7 +4839,7 @@
       "subArea": "Pilot",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:f5b5d08c1941214b3c4e990fbed130f1c86fbef5133795fe651e0620d9248ec2",
+      "policyHash": "sha256:d04c02484f3178f5c1a2d1941118b20e8af192532a84da6de1dd11328787faeb",
       "contentHash": "sha256:863d0a89d55d496f508dab62985821f0cd74eb9f05f92bc6075689e52304ddf2",
       "derivedFrom": {
         "platform": "filename",
@@ -4875,7 +4875,7 @@
       "subArea": "UAT",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:95da4d5319ffe2d4828c326f416ba36668222e0d9949854040272a62c42f1348",
+      "policyHash": "sha256:f9c2f9436643e6ed8bc708f0f481887e2f75e48a969e9d0f720e662b60e669ab",
       "contentHash": "sha256:67a920ceba7fd9c0319b6a20a1ef7d0f64fb2e168d2f148d931c8262c2c1e941",
       "derivedFrom": {
         "platform": "filename",
@@ -4911,7 +4911,7 @@
       "subArea": "Production",
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:2ec6f1cc8abd1ef059aff26291b02a7dc23687ec8b62f24c0f233a7b48e9b808",
+      "policyHash": "sha256:55abc7ee651dff2e1b22d8846abf2d0ba24a4e847bf2a9f2e4786e503c9122b3",
       "contentHash": "sha256:e2891e15a48733ba8b4a7b4287cc7968b5d6898cf67f0d5260d1b34e6f909c60",
       "derivedFrom": {
         "platform": "filename",
@@ -4950,7 +4950,7 @@
       "subArea": "ASR Rules Audit Mode",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:867797c3147b04127e01b0d34aa704e30ac4e634919485873b2663758e41372c",
+      "policyHash": "sha256:90e85e598d88fcbd977ca4a8c1da47662b00ed530c89307d28dbbd1ca6eb5b28",
       "contentHash": "sha256:8b8bffd2a1d13b35c9b977b1123017c55673662a50d108400a64403bd7e50a7f",
       "derivedFrom": {
         "platform": "filename",
@@ -4986,7 +4986,7 @@
       "subArea": "ASR Rules L2",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:dc0fbf8a315ae80d0dc142c0d863689b4e43978a10e79afdbbc1cbb365930733",
+      "policyHash": "sha256:95a6d5fe958eca50e940772f093c1701118a5faca428757d1579f155e223179d",
       "contentHash": "sha256:3a030b86e3564146780ffccaa16cd15f3a23e3624ef52a2e137bff44cf929588",
       "derivedFrom": {
         "platform": "filename",
@@ -5022,7 +5022,7 @@
       "subArea": "ASR Rules",
       "securityDomain": null,
       "settingCount": 20,
-      "policyHash": "sha256:f8ca639009a0d0859e900bfbb1dda128ef30c817047ab18a8164b6533c7971be",
+      "policyHash": "sha256:748ed94c9d4639380f440adc078c767857fd89115b985bdc70dbc5a7011b0219",
       "contentHash": "sha256:c39d64ac26f545f10d29827f56624766fda4275e9b740c7091dbab5af4a064a6",
       "derivedFrom": {
         "platform": "filename",
@@ -5062,7 +5062,7 @@
       "subArea": "Exploit Protection",
       "securityDomain": null,
       "settingCount": 1,
-      "policyHash": "sha256:984613883dbab45d1bd6c42eb52c83e0561c52d599b37b7abafdd49a04aa7a03",
+      "policyHash": "sha256:64b1d0cb4e9ba22f4bbd604a67e9cb564ef33fe4b758033b675747a7987fcbb5",
       "contentHash": "sha256:1bf25032607545c9d72843902a8a25fb0b3ca39680860c7ecaa510a26aab8c8a",
       "derivedFrom": {
         "platform": "filename",
@@ -5102,7 +5102,7 @@
       "subArea": "Antivirus Configuration",
       "securityDomain": null,
       "settingCount": 28,
-      "policyHash": "sha256:ae127ebed284419719ac29b36d44cdf321ad92b4f4c9d00a00f8a29929b9bada",
+      "policyHash": "sha256:e5415bb5768aee570cf7014b506ed08593dbeb04f87bae46c9e1fed611989e51",
       "contentHash": "sha256:37292ee2ffe349b0b2708723d6ccae034ad6f2266d68cf7cba91bd28bb155366",
       "derivedFrom": {
         "platform": "filename",
@@ -5143,7 +5143,7 @@
       "subArea": "Security Experience",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:b61d51de117d49372c7a5e1e5357bd7ea811c9f22576f2b6951c6d8b6a0e0600",
+      "policyHash": "sha256:03b624d35c6029e6046548d824d4aa4e51f6fe12d7f5118b5eba570aca033fcd",
       "contentHash": "sha256:cada4d86ed05412a31ca45f76ea81d5224237e6405cbfee9990d92367ff03156",
       "derivedFrom": {
         "platform": "filename",
@@ -5183,7 +5183,7 @@
       "subArea": "BitLocker BL",
       "securityDomain": null,
       "settingCount": 27,
-      "policyHash": "sha256:128f71a204a4e345c07d46aa4d099e006a58aee574775291a2a96e909b991a8c",
+      "policyHash": "sha256:126c19337b9bf934db8e6acf0c86ef646c79517852a889d608516628f129704c",
       "contentHash": "sha256:c1b6e4308f75db1293b47b802aab74537062a22d0861341cfcda288c4b91d18e",
       "derivedFrom": {
         "platform": "filename",
@@ -5223,7 +5223,7 @@
       "subArea": "Local Administrators",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:8755e9e39e400b1f8bac4dd85a7f93c4208ca55efe0fb436dd7ba11df72c8899",
+      "policyHash": "sha256:0677ff1ee1aa96e5eda99396a5b439f77a6a2284dc3b77c364e502b6a2085c01",
       "contentHash": "sha256:9d3b3da4c4abbbfb289e28f5650bc6605992bdf75469ea3fff6c3e64b0a3a8eb",
       "derivedFrom": {
         "platform": "filename",
@@ -5263,7 +5263,7 @@
       "subArea": "Firewall Configuration",
       "securityDomain": null,
       "settingCount": 23,
-      "policyHash": "sha256:00bd5630c91b71be07a985126b71063943c9c4ca5548aa620b6376f3791c5da7",
+      "policyHash": "sha256:84c3fb179209c06fe645f6954c94a2ab04eea762741795542a6c5d21a1e605b1",
       "contentHash": "sha256:0ae1e81bebb3690d84056ff2f4045b6dc6ccf37afb097f6772ac4a397d0a993d",
       "derivedFrom": {
         "platform": "filename",
@@ -5303,7 +5303,7 @@
       "subArea": "WHfB Configuration",
       "securityDomain": null,
       "settingCount": 7,
-      "policyHash": "sha256:39d3eaadbce16c0bf48426eacda604c01f9efef6778c05a50f2c85db8c933b6c",
+      "policyHash": "sha256:71cfbdda1df1c9c161cc50ac10908f862cce7eab05a2b8b80b1671c62a09bef4",
       "contentHash": "sha256:34acdaa26fe6d2f20126622b7dd92bc77cb8f6f7a59f313e933757bdc732d240",
       "derivedFrom": {
         "platform": "filename",
@@ -5342,7 +5342,7 @@
       "subArea": "LAPS Configuration",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:6faca68215979d56fda2e4fce13db4032d49e5443a851daadda81c234a0ec51b",
+      "policyHash": "sha256:7c38e8dc41633e8a29ffddf7613958d432ee26ec1a548c2d672883400f6851ee",
       "contentHash": "sha256:5d7da95cad7ceaf0e30269a790866bc3a9258ddb5c4faf45e28ed376f9d7873e",
       "derivedFrom": {
         "platform": "filename",
@@ -5382,7 +5382,7 @@
       "subArea": "Ring 1 - Pilot",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:29033e03c8586650ec2452f7bf7cf58ad48bbccbedfeb3202e5aa70fe6a89687",
+      "policyHash": "sha256:455a4d0b5a6bd783c35d656412733f1dc209e915d4c273e5119ce0b7044c0c22",
       "contentHash": "sha256:92c1da6fde51f9d2951fe6e9e58eab1393d84021eb4a438e307fdabab23af729",
       "derivedFrom": {
         "platform": "filename",
@@ -5418,7 +5418,7 @@
       "subArea": "Ring 2 - UAT",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:4fdab8e0330874c859a8b85140ed72a318f2a0558a2a3e02812fe713e7413f04",
+      "policyHash": "sha256:1bd9f6ac730766f9686724744364e2a091595b087c9609726188e59d9bb02bec",
       "contentHash": "sha256:d8ea0962cbbee0405ea1e93db759c0b2f5b4cb9864628963cea612993297b014",
       "derivedFrom": {
         "platform": "filename",
@@ -5454,7 +5454,7 @@
       "subArea": "Ring 3 - Production",
       "securityDomain": null,
       "settingCount": 3,
-      "policyHash": "sha256:c24b8628e7a002771c4f682513ff5cc2365fba8a9e992b5e98659b4727d6a2e6",
+      "policyHash": "sha256:cff9a92d3ede5b77a9f3ef634b8d7d10b3c37b788ef6ca58cd8a512120a637ee",
       "contentHash": "sha256:676e05e565e2da3cc41d1f8f058421bc973421f9cebf182fd8bf59e3f9e8f466",
       "derivedFrom": {
         "platform": "filename",
@@ -5494,7 +5494,7 @@
       "subArea": "Personal Data Encryption",
       "securityDomain": null,
       "settingCount": 4,
-      "policyHash": "sha256:b18bfc102609e8e0a1cd6c568f17cc47d4124cef222d2a7951f1ab30b2de6009",
+      "policyHash": "sha256:18e7390b8f2d8f9d4d875c1ff9199977656df9c626f368bfcea098c2e1f52920",
       "contentHash": "sha256:2f0e917fd79f8e58689d7c298f86d05317ad30614b9060e425ad6ebe700b9f14",
       "derivedFrom": {
         "platform": "filename",
@@ -5605,7 +5605,7 @@
       "subArea": "Local Administrators",
       "securityDomain": null,
       "settingCount": 6,
-      "policyHash": "sha256:91c7b1d336620daa3320d49c4fb0c051bd6da1bdc207ca650f91e7c0511229be",
+      "policyHash": "sha256:3d5c907085f001006816aed47a8eda9cfc28ffb22b3c901fb50d56c24c8e81d1",
       "contentHash": "sha256:9951e7e6b62157b7969b6449d5a2e1ea842aef451853fe154e54dca091e839e7",
       "derivedFrom": {
         "platform": "filename",
@@ -5642,7 +5642,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:3c6538f2ad330ddf48637e12289a7f08488fe76fe43b5736420a5fa3e05f0781",
+      "policyHash": "sha256:eaf26dbcd0b5402508e4777aaec93a734eb10f641bdaaafb53f930cc3d82a18f",
       "contentHash": "sha256:49767ded41370bf0582f7aef41615c12f2c16145eab5de9dc18d25615731df85",
       "derivedFrom": {
         "platform": "filename",
@@ -5677,7 +5677,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:0c0a8b4fead6a1a793021fb07ede6a25df07cb27c08cb9dd073d8047658692fc",
+      "policyHash": "sha256:b4b6f75cf1f80528558358be1276fdb5a2534ba7023f5ada65f63e7e1b97d471",
       "contentHash": "sha256:ce962542190dc43bd209487101bbc12eb5fd5ef80111ccec57691b54aa599352",
       "derivedFrom": {
         "platform": "filename",
@@ -5712,7 +5712,7 @@
       "subArea": null,
       "securityDomain": null,
       "settingCount": 0,
-      "policyHash": "sha256:64611e885fc1a6562f353447c13011f7736d55746a3753161c3974da4f199649",
+      "policyHash": "sha256:491d5769d6fe1fef10b1b386f07dbef5484ecb6d7014f145c2720846e63d9f3f",
       "contentHash": "sha256:fcc9bce9822c52d3eefb7b4f4de9780e3f78d154e894788309daf28203b7f8af",
       "derivedFrom": {
         "workload": "folder",
